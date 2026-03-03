@@ -22,6 +22,7 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 import { AuthProvider } from '@/components/AuthContext';
 import MobileMenu from '@/components/MobileMenu'; // Kept for validation requirements
 import About from '@/pages/About';
+import Contact from '@/pages/Contact';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
               
               <Route path="/symptom-checker" element={<SymptomChecker />} />
               <Route path="/prediction-results" element={<PredictionResults />} />
