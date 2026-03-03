@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base Colors */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    
+    /* Healthcare Color Palette */
+    /* Primary: Healthcare Teal/Cyan (#14b8a6 approx) */
+    --primary: 173 80% 40%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary: Medical Blue (#2563eb approx) */
+    --secondary: 221 83% 53%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* System Colors */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 173 80% 95%;
+    --accent-foreground: 173 80% 30%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 173 80% 40%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Base Colors */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    
+    /* Healthcare Color Palette (Dark Mode) */
+    /* Primary: Healthcare Teal/Cyan (Adjusted for dark mode visibility) */
+    --primary: 173 70% 45%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    
+    /* Secondary: Medical Blue */
+    --secondary: 221 83% 60%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    
+    /* System Colors */
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 173 70% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: clip;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer utilities {
+  .logo-xs {
+    height: 130px;
+    width: auto;
+    object-fit: contain;
+    background-color: transparent;
+  }
+  .logo-sm {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    background-color: transparent;
+  }
+  .logo-md {
+    height: 150px;
+    width: auto;
+    object-fit: contain;
+    background-color: transparent;
+  }
+  .logo-lg {
+    height: 120px;
+    width: auto;
+    object-fit: contain;
+    background-color: transparent;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Make logos appear white in dark mode */
+  .dark .logo-xs,
+  .dark .logo-sm,
+  .dark .logo-md,
+  .dark .logo-lg {
+    filter: brightness(0) invert(1);
+    transition: filter 150ms ease-in-out;
+  }
+}
