@@ -108,7 +108,7 @@ const HomePage = () => {
           {/* Background Image: Professional Healthcare Image */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-            style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1685995833594-8c35ffa8ccb0)' }}
+            style={{ backgroundImage: 'url(/public/hero.jpeg)' }}
           >
             {/* Subtle dark overlay for text readability */}
             <div className="absolute inset-0 bg-black/40"></div>

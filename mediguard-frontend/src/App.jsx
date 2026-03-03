@@ -44,7 +44,6 @@ function App() {
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
               
               <Route path="/symptom-checker" element={<SymptomChecker />} />
               <Route path="/prediction-results" element={<PredictionResults />} />
