@@ -38,7 +38,7 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
     { name: 'Home', path: '/', icon: Home },
     { name: 'Symptom Checker', path: '/symptom-checker', icon: Activity },
     { name: 'Disease Library', path: '/disease-library', icon: BookOpen },
-    { name: 'Chat AI', path: '/chat-ai', icon: Bot },
+    { name: 'MediGuard AI', path: '/chat-ai', icon: Bot },
     { name: 'Trends Dashboard', path: '/trends', icon: TrendingUp },
   ];
 
@@ -71,7 +71,7 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
               <img 
                 src="/mediguard.png" 
                 alt="MediGuard Logo" 
-                className="h-8 w-auto"
+                className="logo-sm"
               />
               <button 
                 onClick={onClose}
@@ -86,13 +86,13 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
             <div className="flex-1 flex flex-col bg-white dark:bg-gray-900">
               {/* Main Navigation */}
               <div className="py-6 px-3">
-                <div className="space-y-2">
+                <div className="space-y-1">
                   {baseNavLinks.map((link) => (
                     <Link
                       key={link.path}
                       to={link.path}
                       onClick={onClose}
-                      className={`flex items-center gap-3 px-4 py-4 rounded-lg text-base font-medium transition-colors ${
+                      className={`flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-colors last:mb-4 ${
                         isActive(link.path)
                           ? 'bg-primary/10 text-primary'
                           : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -111,14 +111,14 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
 
               {/* Bottom Section */}
               <div className="mt-auto border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="p-3 space-y-2">
+                <div className="p-3 space-y-2 pb-6">
                   {/* Conditional Auth & Theme Links */}
                   {isLoggedIn ? (
                     <>
                       <Link
                         to="/history"
                         onClick={onClose}
-                        className={`flex items-center gap-3 px-4 py-4 rounded-lg text-base font-medium transition-colors ${
+                        className={`flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-colors last:mb-4 ${
                           isActive('/history')
                             ? 'bg-primary/10 text-primary'
                             : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -134,7 +134,7 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                       
                       <button
                         onClick={toggleTheme}
-                        className="w-full flex items-center gap-3 px-4 py-4 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left"
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left last:mb-4"
                       >
                         {isDark ? (
                           <Sun className="w-5 h-5 text-gray-500 dark:text-gray-400" />
@@ -146,7 +146,7 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                       
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-4 rounded-lg text-base font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left"
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left last:mb-4"
                       >
                         <LogOut className="w-5 h-5" />
                         Logout
@@ -157,7 +157,7 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                       <Link
                         to="/login"
                         onClick={onClose}
-                        className="flex items-center gap-3 px-4 py-4 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors last:mb-4"
                       >
                         <LogIn className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                         Login
@@ -166,7 +166,7 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                       <Link
                         to="/signup"
                         onClick={onClose}
-                        className="flex items-center gap-3 px-4 py-4 rounded-lg text-base font-medium bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors last:mb-4"
                       >
                         <UserPlus className="w-5 h-5" />
                         Register
@@ -176,7 +176,7 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                       
                       <button
                         onClick={toggleTheme}
-                        className="w-full flex items-center gap-3 px-4 py-4 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left"
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left last:mb-4"
                       >
                         {isDark ? (
                           <Sun className="w-5 h-5 text-gray-500 dark:text-gray-400" />

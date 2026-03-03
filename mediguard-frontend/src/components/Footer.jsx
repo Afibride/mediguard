@@ -5,10 +5,11 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 const Footer = () => {
   const quickLinks = [
     { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
     { name: 'Symptom Checker', path: '/symptom-checker' },
     { name: 'Disease Library', path: '/disease-library' },
     { name: 'Trends Dashboard', path: '/trends' },
-    { name: 'Chat AI', path: '/chat-ai' },
+    { name: 'MediGuard AI', path: '/chat-ai' },
   ];
 
   return (

@@ -60,7 +60,7 @@ const Header = () => {
     { name: 'Home', path: '/' },
     { name: 'Symptom Checker', path: '/symptom-checker' },
     { name: 'Disease Library', path: '/disease-library' },
-    { name: 'Chat AI', path: '/chat-ai' },
+    { name: 'MediGuard AI', path: '/chat-ai' },
     { name: 'Trends Dashboard', path: '/trends' },
   ];
 

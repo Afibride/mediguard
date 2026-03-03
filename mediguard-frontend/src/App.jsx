@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import ScrollToTop from '@/components/ScrollToTop';
@@ -22,6 +21,7 @@ import PrivacyPage from '@/pages/PrivacyPage';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { AuthProvider } from '@/components/AuthContext';
 import MobileMenu from '@/components/MobileMenu'; // Kept for validation requirements
+import About from '@/pages/About';
 
 function App() {
   return (
@@ -42,6 +42,7 @@ function App() {
               <Route path="/reset-password" element={<ResetPasswordPage />} />
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/about" element={<About />} />
               
               <Route path="/symptom-checker" element={<SymptomChecker />} />
               <Route path="/prediction-results" element={<PredictionResults />} />

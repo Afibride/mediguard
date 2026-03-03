@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope } from 'lucide-react';
+import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -143,6 +142,7 @@ const HomePage = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                {/* Get Started Button */}
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/symptom-checker">
                     <Button size="lg" className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-xl transition-all border border-transparent">
@@ -152,6 +152,21 @@ const HomePage = () => {
                   </Link>
                 </motion.div>
                 
+                {/* Try MediGuard AI Button - NEW */}
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link to="/chat-ai">
+                    <Button 
+                      size="lg" 
+                      className="text-lg px-8 py-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-xl transition-all border border-white/20 backdrop-blur-sm"
+                    >
+                      <Bot className="mr-2 h-5 w-5" />
+                      Try MediGuard AI
+                      <MessageCircle className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                </motion.div>
+                
+                {/* Learn More Button */}
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/disease-library">
                     <Button size="lg" variant="outline" className="text-lg px-8 py-6 bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-sm font-semibold shadow-xl transition-all">
@@ -160,8 +175,40 @@ const HomePage = () => {
                   </Link>
                 </motion.div>
               </div>
+
+              {/* Quick Access Badges - Optional */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="flex flex-wrap items-center justify-center gap-3 mt-8"
+              >
+                <span className="text-sm text-white/80">Try our AI assistant:</span>
+                <Link to="/chat-ai">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white hover:bg-white/30 transition-colors">
+                    <Bot className="h-3 w-3" /> Ask about symptoms
+                  </span>
+                </Link>
+                <Link to="/chat-ai">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white hover:bg-white/30 transition-colors">
+                    <MessageCircle className="h-3 w-3" /> Get health advice
+                  </span>
+                </Link>
+              </motion.div>
             </motion.div>
           </div>
+
+          {/* Scroll Indicator */}
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1, repeat: Infinity, repeatType: "reverse" }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/80"
+          >
+            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+              <div className="w-1 h-2 bg-white/60 rounded-full mt-2"></div>
+            </div>
+          </motion.div>
         </section>
 
         {/* Trust Indicators */}
@@ -278,6 +325,32 @@ const HomePage = () => {
                   </Card>
                 </motion.div>
               ))}
+            </motion.div>
+
+            {/* AI Assistant CTA */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-16 text-center"
+            >
+              <div className="inline-flex items-center gap-4 p-6 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl border border-primary/20">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Bot className="h-8 w-8 text-primary" />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-2xl font-bold mb-2">Have questions? Talk to our AI assistant</h3>
+                  <p className="text-muted-foreground mb-3">
+                    Get instant answers about symptoms, diseases, and health recommendations
+                  </p>
+                  <Link to="/chat-ai">
+                    <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      Start AI Chat
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
