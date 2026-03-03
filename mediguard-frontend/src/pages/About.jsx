@@ -354,7 +354,7 @@ const About = () => {
                     className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300 shadow-lg text-base md:text-lg px-8 py-6"
                   >
                     <Mail className="mr-2 h-5 w-5" />
-                    Contact Us
+                    Support Us
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>

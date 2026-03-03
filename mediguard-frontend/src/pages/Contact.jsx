@@ -136,9 +136,6 @@ const Contact = () => {
     },
     {
       icon: Phone,
-      title: "Emergency",
-      description: "For urgent medical needs",
-      details: ["Emergency: +237 654 710 698"],
       action: "Call Now",
       href: "tel:+237654710698",
       bgColor: "bg-red-100 dark:bg-red-900/20",
