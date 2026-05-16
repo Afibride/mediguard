@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
-from app.data import DISEASES
 from app.db.models import Disease
 from app.db.session import get_db
 
@@ -49,8 +48,5 @@ def list_diseases(
 def disease_detail(slug: str, db: Session = Depends(get_db)):
     disease = db.query(Disease).filter(Disease.slug == slug).first()
     if not disease:
-        fallback = next((d for d in DISEASES if d["slug"] == slug or d["id"] == slug), None)
-        if not fallback:
-            raise HTTPException(status_code=404, detail="Disease not found")
-        return fallback
+        raise HTTPException(status_code=404, detail="Disease not found")
     return serialize_disease(disease)

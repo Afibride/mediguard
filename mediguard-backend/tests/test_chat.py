@@ -33,24 +33,32 @@ def test_chat_handles_greetings_and_help_without_sources():
     assert greeting.json()["sources"] == []
 
 
-def test_chat_can_check_reported_symptoms():
+def test_chat_asks_questions_before_symptom_results():
     response = client.post("/chat", json={"query": "I have fever and chills and headache. What could this be?"})
-    assert response.status_code == 200
-    data = response.json()
-    assert data["mode"] == "symptom_check"
-    assert "Malaria" in data["answer"]
-    assert "predictions" in data
-    assert data["predictions"]
-    assert set(["Fever", "Chills", "Headache"]).issubset(set(data["symptoms"]))
-    assert data["follow_up_questions"]
-
-
-def test_chat_asks_followup_for_single_symptom():
-    response = client.post("/chat", json={"query": "I have fever"})
     assert response.status_code == 200
     data = response.json()
     assert data["mode"] == "symptom_follow_up"
     assert data["predictions"] == []
+    assert set(["Fever", "Chills", "Headache"]).issubset(set(data["symptoms"]))
+    assert data["follow_up_questions"]
+
+
+def test_chat_returns_results_after_followup_answer():
+    response = client.post(
+        "/chat",
+        json={
+            "query": "It started 3 days ago, it is moderate, and I also have sweating.",
+            "history": [
+                {"role": "user", "content": "I have fever and chills and headache. What could this be?"},
+                {"role": "assistant", "content": "Before I show possible matches, I need a little more information. Please answer the follow-up questions below."},
+            ],
+        },
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["mode"] == "symptom_check"
+    assert data["predictions"]
+    assert "Malaria" in data["answer"]
     assert data["follow_up_questions"]
 
 

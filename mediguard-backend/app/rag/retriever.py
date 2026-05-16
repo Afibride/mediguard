@@ -13,6 +13,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from app.data import DISEASES, SYMPTOMS
+from app.db.models import Disease
+from app.db.session import SessionLocal
 from app.ml.predictor import DiseasePredictor
 from app.rag.embeddings import embed_text
 
@@ -21,8 +23,9 @@ load_dotenv()
 DISCLAIMER = (
     "This information is from the Gale Encyclopedia of Medicine and is provided "
     "for educational purposes only. It is not a substitute for professional "
-    "medical advice, diagnosis, or treatment. Always consult a qualified "
-    "healthcare professional for any health concerns."
+    "medical advice, diagnosis, or treatment. MediGuard's automated results can "
+    "sometimes be incomplete or faulty, so always consult a qualified healthcare "
+    "professional for any health concerns."
 )
 
 PREGNANCY_WARNING_SIGNS = [
@@ -197,7 +200,9 @@ def _symptom_answer(query: str, chunks: list[dict], disease: dict | None) -> dic
         "answer": (
             f"Common symptoms linked with {disease['name']} include {', '.join(symptoms)}. "
             "Symptoms can vary from person to person, and this is not a diagnosis. "
-            "Please seek care from a qualified healthcare professional if symptoms are severe, persistent, or worsening."
+            "What you can do now: rest, drink fluids, monitor the symptoms, avoid taking prescription medicines without a clinician, "
+            "and seek care quickly if symptoms are severe, persistent, or worsening. MediGuard results can sometimes be faulty, "
+            "so use this as guidance only."
         ),
         "sources": sources or [disease["name"]],
         "disclaimer": DISCLAIMER,
@@ -209,6 +214,36 @@ def _get_predictor() -> DiseasePredictor:
     if _predictor is None:
         _predictor = DiseasePredictor()
     return _predictor
+
+
+def _enrich_predictions_from_database(predictions: list[dict]) -> list[dict]:
+    db = SessionLocal()
+    try:
+        rows = db.query(Disease).all()
+        by_name = {row.name.lower(): row for row in rows}
+        by_slug = {row.slug.lower(): row for row in rows}
+        enriched = []
+        for item in predictions:
+            key = (item.get("disease") or item.get("name") or "").lower()
+            slug = (item.get("slug") or "").lower()
+            disease = by_name.get(key) or by_slug.get(slug)
+            if disease:
+                item = {
+                    **item,
+                    "id": disease.slug,
+                    "slug": disease.slug,
+                    "name": disease.name,
+                    "disease": disease.name,
+                    "category": disease.category,
+                    "severity": disease.severity,
+                    "description": disease.description,
+                    "symptoms": disease.symptoms or item.get("symptoms", []),
+                    "database_source": "diseases",
+                }
+            enriched.append(item)
+        return enriched
+    finally:
+        db.close()
 
 
 def _extract_reported_symptoms(query: str) -> list[str]:
@@ -263,8 +298,55 @@ def _symptom_follow_up_questions(symptoms: list[str], is_pregnant: bool = False)
     return questions[:5]
 
 
-def _symptom_check_response(query: str, is_pregnant: bool = False, pregnancy_weeks: int | None = None) -> dict | None:
-    reported_symptoms = _extract_reported_symptoms(query)
+def _first_aid_guidance(symptoms: list[str], is_pregnant: bool = False) -> list[str]:
+    symptom_text = " ".join(symptom.lower() for symptom in symptoms)
+    guidance = [
+        "Rest and avoid strenuous activity while you monitor the symptoms.",
+        "Drink safe fluids; use oral rehydration solution if there is diarrhea, vomiting, or signs of dehydration.",
+        "Check temperature when possible and keep notes on when symptoms started, severity, and anything that makes them better or worse.",
+        "Do not start antibiotics, antimalarials, or strong pain medicines without advice from a qualified clinician.",
+    ]
+    if any(term in symptom_text for term in ["fever", "chills", "headache", "sweating"]):
+        guidance.append("For fever, keep cool, hydrate, and arrange testing or clinical review if it persists or is high.")
+    if any(term in symptom_text for term in ["diarrhea", "vomiting", "abdominal pain"]):
+        guidance.append("For diarrhea or vomiting, prioritize rehydration and seek care urgently for blood in stool, severe weakness, or inability to keep fluids down.")
+    if any(term in symptom_text for term in ["shortness of breath", "chest pain", "wheezing"]):
+        guidance.append("Shortness of breath, chest pain, or severe wheezing needs urgent medical attention.")
+    if is_pregnant:
+        guidance.append("Because pregnancy is involved, contact an antenatal clinic or maternity unit promptly, especially with bleeding, fever, severe pain, headache, swelling, vision changes, or reduced fetal movement.")
+    return guidance[:6]
+
+
+def _history_requested_followup(chat_history: list[dict] | None) -> bool:
+    if not chat_history:
+        return False
+    assistant_messages = [
+        (message.get("content") or "").lower()
+        for message in chat_history[-4:]
+        if message.get("role") == "assistant"
+    ]
+    return any("follow-up" in message or "need a little more information" in message for message in assistant_messages)
+
+
+def _recent_user_symptom_context(query: str, chat_history: list[dict] | None) -> str:
+    user_parts = [
+        message.get("content", "")
+        for message in (chat_history or [])[-4:]
+        if message.get("role") == "user"
+    ]
+    user_parts.append(query)
+    return " ".join(user_parts)
+
+
+def _symptom_check_response(
+    query: str,
+    is_pregnant: bool = False,
+    pregnancy_weeks: int | None = None,
+    chat_history: list[dict] | None = None,
+) -> dict | None:
+    followup_already_asked = _history_requested_followup(chat_history)
+    symptom_context = _recent_user_symptom_context(query, chat_history) if followup_already_asked else query
+    reported_symptoms = _extract_reported_symptoms(symptom_context)
     pregnancy_followup = _pregnancy_followup_response(query, reported_symptoms, is_pregnant, pregnancy_weeks)
     if pregnancy_followup:
         return pregnancy_followup
@@ -275,13 +357,13 @@ def _symptom_check_response(query: str, is_pregnant: bool = False, pregnancy_wee
     pregnancy_context = bool(is_pregnant or _mentions_pregnancy(query))
     follow_up_questions = _symptom_follow_up_questions(reported_symptoms, pregnancy_context)
 
-    if len(reported_symptoms) == 1:
-        symptom = reported_symptoms[0]
+    if not followup_already_asked:
+        symptom_text = ", ".join(reported_symptoms) if reported_symptoms else "your symptom"
         return {
             "answer": (
-                f"I found one symptom in your message: {symptom}. "
-                "One symptom is not enough for a reliable symptom check, so I need a little more information first. "
-                "Please answer the follow-up questions below, or add any other symptoms you are feeling."
+                f"I found this in your message: {symptom_text}. "
+                "Before I show possible matches, I need a little more information so the response is safer and more useful. "
+                "Please answer the follow-up questions below."
             ),
             "sources": [],
             "disclaimer": DISCLAIMER,
@@ -290,9 +372,10 @@ def _symptom_check_response(query: str, is_pregnant: bool = False, pregnancy_wee
             "mode": "symptom_follow_up",
             "pregnancy_context": pregnancy_context,
             "follow_up_questions": follow_up_questions,
+            "data_source": "database",
         }
 
-    predictions = _get_predictor().predict(reported_symptoms)
+    predictions = _enrich_predictions_from_database(_get_predictor().predict(reported_symptoms))
     if not predictions:
         return {
             "answer": (
@@ -306,6 +389,7 @@ def _symptom_check_response(query: str, is_pregnant: bool = False, pregnancy_wee
             "mode": "symptom_check",
             "pregnancy_context": pregnancy_context,
             "follow_up_questions": follow_up_questions,
+            "data_source": "database",
         }
 
     lines = [
@@ -315,8 +399,12 @@ def _symptom_check_response(query: str, is_pregnant: bool = False, pregnancy_wee
     for index, prediction in enumerate(predictions[:5], start=1):
         lines.append(f"{index}. {prediction['disease']} - {prediction['probability']}% match")
     lines.append(
-        "This is not a diagnosis. If symptoms are severe, persistent, or worsening, please seek care from a qualified healthcare professional."
+        "This is not a diagnosis. Automated results can sometimes be incomplete or faulty, so treat this as guidance only."
     )
+    lines.append("First aid / what you can do now:")
+    for item in _first_aid_guidance(reported_symptoms, pregnancy_context):
+        lines.append(f"- {item}")
+    lines.append("Seek urgent care if symptoms are severe, persistent, worsening, or involve breathing difficulty, chest pain, confusion, fainting, severe dehydration, bleeding, or pregnancy warning signs.")
     if is_pregnant or _mentions_pregnancy(query):
         lines.append(
             "Pregnancy context noted: please arrange prompt antenatal or clinical assessment, especially for fever, abdominal pain, bleeding, severe headache, vision changes, swelling, shortness of breath, or reduced fetal movement."
@@ -331,6 +419,7 @@ def _symptom_check_response(query: str, is_pregnant: bool = False, pregnancy_wee
         "mode": "symptom_check",
         "pregnancy_context": pregnancy_context,
         "follow_up_questions": follow_up_questions,
+        "data_source": "database",
     }
 
 
@@ -398,6 +487,7 @@ def _local_retrieve(query: str, top_k: int = 5, filter_disease: str | None = Non
                 "disease": disease,
                 "source": chunk.get("source", "Gale Encyclopedia of Medicine"),
                 "score": score,
+                "retrieval_source": "local_fallback",
             })
     return sorted(matches, key=lambda item: item["score"], reverse=True)[:top_k]
 
@@ -420,6 +510,7 @@ def retrieve(query: str, top_k: int = 5, filter_disease: str | None = None) -> l
             "disease": match["metadata"]["disease"],
             "source": match["metadata"].get("source", "Gale Encyclopedia of Medicine"),
             "score": round(match["score"], 4),
+            "retrieval_source": "pinecone",
         }
         for match in results["matches"]
     ]
@@ -433,7 +524,8 @@ def _extractive_answer(query: str, chunks: list[dict]) -> str:
         summary += "."
     return (
         f"Based on the encyclopedia passages I found, {summary} "
-        "Please use this as educational guidance only and consult a qualified healthcare professional for personal symptoms."
+        "For first aid, rest, drink safe fluids, monitor symptoms, and seek urgent care for severe, worsening, or persistent symptoms. "
+        "MediGuard results can sometimes be faulty, so use this as educational guidance only and consult a qualified healthcare professional for personal symptoms."
     )
 
 
@@ -449,22 +541,30 @@ def generate_answer(
     if conversational:
         return conversational
 
-    symptom_check = _symptom_check_response(query, is_pregnant=is_pregnant, pregnancy_weeks=pregnancy_weeks)
+    symptom_check = _symptom_check_response(
+        query,
+        is_pregnant=is_pregnant,
+        pregnancy_weeks=pregnancy_weeks,
+        chat_history=chat_history,
+    )
     if symptom_check:
         return symptom_check
 
     detected_disease = _detect_disease(query)
     effective_filter = filter_disease or (detected_disease["name"] if detected_disease else None)
     chunks = retrieve(query, top_k=5, filter_disease=effective_filter)
+    data_source = chunks[0].get("retrieval_source", "unknown") if chunks else "none"
     if not chunks:
         return {
             "answer": "I could not find relevant encyclopedia information for that question. Please try rephrasing or consult a healthcare professional.",
             "sources": [],
             "disclaimer": DISCLAIMER,
+            "data_source": data_source,
         }
 
     symptom_response = _symptom_answer(query, chunks, detected_disease)
     if symptom_response:
+        symptom_response["data_source"] = data_source
         return symptom_response
 
     context = "\n\n---\n\n".join(f"[Source: {c['disease']} - {c['source']}]\n{c['text']}" for c in chunks)
@@ -477,7 +577,8 @@ def generate_answer(
             "content": (
                 "You are MediGuard's health assistant for Bamenda, Cameroon. "
                 "Answer clearly using only the context below. Never diagnose or prescribe medication. "
-                "Always recommend professional care for personal symptoms. If the user is pregnant or asks about pregnancy, "
+                "When relevant, include simple first aid or self-care steps such as rest, fluids, monitoring symptoms, and urgent-care red flags. "
+                "Tell users that automated results can sometimes be incomplete or faulty. Always recommend professional care for personal symptoms. If the user is pregnant or asks about pregnancy, "
                 "ask concise follow-up questions about gestational age, severity, onset, bleeding, abdominal pain, fever, "
                 "headache, vision changes, swelling, shortness of breath, and fetal movement before giving non-urgent guidance.\n\n"
                 f"User context: gender={gender or 'not provided'}, pregnant={is_pregnant}, pregnancy_weeks={pregnancy_weeks or 'not provided'}.\n\n"
@@ -506,4 +607,4 @@ def generate_answer(
             seen.add(disease)
             sources.append(disease)
 
-    return {"answer": answer, "sources": sources, "disclaimer": DISCLAIMER}
+    return {"answer": answer, "sources": sources, "disclaimer": DISCLAIMER, "data_source": data_source}

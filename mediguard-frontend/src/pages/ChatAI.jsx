@@ -185,20 +185,47 @@ const ChatAI = () => {
       }));
       const pregnancyContext = pregnancyContextFromText(textToSend);
       const res = await sendChatMessage(textToSend, history, null, pregnancyContext);
+      const fullAnswer = res.data.answer || '';
       const aiMsgObj = {
         role: 'assistant',
-        content: res.data.answer,
+        content: '',
         sources: res.data.sources,
         disclaimer: res.data.disclaimer,
         followUpQuestions: res.data.follow_up_questions || [],
         id: 'msg_ai_' + Date.now(),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
+      setIsTyping(false);
       const finalMessages = [...updatedMessages, aiMsgObj];
       setMessages(finalMessages);
+
+      let typed = '';
+      const chunkSize = fullAnswer.length > 500 ? 5 : 2;
+      await new Promise((resolve) => {
+        const interval = window.setInterval(() => {
+          typed = fullAnswer.slice(0, typed.length + chunkSize);
+          const typedMessages = finalMessages.map((message) => (
+            message.id === aiMsgObj.id ? { ...message, content: typed } : message
+          ));
+          setMessages(typedMessages);
+          setChats(prev => prev.map(chat => (
+            chat.id === currentChatId
+              ? { ...chat, messages: typedMessages, preview: typed.substring(0, 30) + (typed.length >= 30 ? '...' : '') }
+              : chat
+          )));
+          if (typed.length >= fullAnswer.length) {
+            window.clearInterval(interval);
+            resolve();
+          }
+        }, 35);
+      });
+
+      const completedAiMsgObj = { ...aiMsgObj, content: fullAnswer };
+      const completedMessages = [...updatedMessages, completedAiMsgObj];
+      setMessages(completedMessages);
       setChats(prev => prev.map(chat => (
         chat.id === currentChatId
-          ? { ...chat, messages: finalMessages, preview: res.data.answer.substring(0, 30) + '...' }
+          ? { ...chat, messages: completedMessages, preview: fullAnswer.substring(0, 30) + '...' }
           : chat
       )));
       if (user) {
@@ -206,7 +233,7 @@ const ChatAI = () => {
         saveChatHistory({
           title,
           message: textToSend,
-          response: res.data.answer,
+          response: fullAnswer,
           sources: res.data.sources || [],
           mode: res.data.mode || null,
           pregnancy_context: res.data.pregnancy_context || pregnancyContext.is_pregnant,
@@ -562,14 +589,12 @@ const ChatAI = () => {
                         {message.role === 'assistant' && Array.isArray(message.followUpQuestions) && message.followUpQuestions.length > 0 && (
                           <div className="mt-2 flex flex-wrap gap-2">
                             {message.followUpQuestions.map((question) => (
-                              <button
+                              <span
                                 key={question}
-                                type="button"
-                                onClick={() => handleSend(question)}
-                                className="rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-left text-[11px] sm:text-xs font-medium text-primary hover:bg-primary/10"
+                                className="rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-left text-[11px] sm:text-xs font-medium text-primary"
                               >
                                 {question}
-                              </button>
+                              </span>
                             ))}
                           </div>
                         )}

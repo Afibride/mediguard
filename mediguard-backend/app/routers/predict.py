@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.db.models import PredictionLog
+from app.db.models import Disease
 from app.db.session import get_db
 from app.ml.predictor import DiseasePredictor
 from app.schemas.predict import SymptomInput
@@ -11,6 +12,32 @@ router = APIRouter()
 predictor = DiseasePredictor()
 
 
+def enrich_predictions_from_database(results: list[dict], db: Session) -> list[dict]:
+    rows = db.query(Disease).all()
+    by_name = {row.name.lower(): row for row in rows}
+    by_slug = {row.slug.lower(): row for row in rows}
+    enriched = []
+    for item in results:
+        key = (item.get("disease") or item.get("name") or "").lower()
+        slug = (item.get("slug") or "").lower()
+        disease = by_name.get(key) or by_slug.get(slug)
+        if disease:
+            item = {
+                **item,
+                "id": disease.slug,
+                "slug": disease.slug,
+                "name": disease.name,
+                "disease": disease.name,
+                "category": disease.category,
+                "severity": disease.severity,
+                "description": disease.description,
+                "symptoms": disease.symptoms or item.get("symptoms", []),
+                "database_source": "diseases",
+            }
+        enriched.append(item)
+    return enriched
+
+
 @router.get("/symptoms")
 def list_symptoms():
     return {"symptoms": predictor.symptoms}
@@ -18,7 +45,7 @@ def list_symptoms():
 
 @router.post("/predict")
 def predict(body: SymptomInput, db: Session = Depends(get_db), user=Depends(optional_user)):
-    results = predictor.predict(body.symptoms)
+    results = enrich_predictions_from_database(predictor.predict(body.symptoms), db)
     pregnancy_note = None
     if body.is_pregnant:
         pregnancy_note = (
