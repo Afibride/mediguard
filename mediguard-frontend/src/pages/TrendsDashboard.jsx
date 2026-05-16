@@ -1,15 +1,25 @@
 
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { TrendingUp, Users, Activity, AlertCircle, ShieldCheck } from 'lucide-react';
+import { TrendingUp, Users, Activity, AlertCircle, ShieldCheck, MapPinned, Database } from 'lucide-react';
 import { diseases } from '@/data/diseases';
+import { getAnalyticsSummary, getDiseases, getHeatmap, getTopDiseases, getTrends } from '@/services/api';
 
 const TrendsDashboard = () => {
+  const [diseaseRows, setDiseaseRows] = useState(diseases);
+  const [summary, setSummary] = useState({
+    total_predictions: 0,
+    top_disease: 'No predictions yet',
+    active_this_week: 0,
+    diseases_tracked: diseases.length,
+    region: 'Bamenda',
+  });
+
   const categoryCounts = {};
-  diseases.forEach(d => {
+  diseaseRows.forEach(d => {
     categoryCounts[d.category] = (categoryCounts[d.category] || 0) + 1;
   });
 
@@ -45,6 +55,49 @@ const TrendsDashboard = () => {
     { month: 'Nov', malaria: 50, typhoid: 30, respiratory: 55, cholera: 10 },
     { month: 'Dec', malaria: 45, typhoid: 25, respiratory: 65, cholera: 5 },
   ];
+  const [apiDiseaseData, setApiDiseaseData] = useState(diseaseData);
+  const [apiTrendRows, setApiTrendRows] = useState([]);
+  const [heatmapRows, setHeatmapRows] = useState([]);
+
+  useEffect(() => {
+    getAnalyticsSummary()
+      .then((res) => setSummary(res.data))
+      .catch(() => {});
+
+    getDiseases()
+      .then((res) => {
+        if (Array.isArray(res.data)) setDiseaseRows(res.data);
+      })
+      .catch(() => setDiseaseRows(diseases));
+
+    getTopDiseases()
+      .then((res) => {
+        setApiDiseaseData(res.data.map((item) => ({
+          name: item.name || item.disease,
+          cases: item.cases || item.count,
+        })));
+      })
+      .catch(() => setApiDiseaseData(diseaseData));
+
+    getTrends()
+      .then((res) => setApiTrendRows(res.data))
+      .catch(() => setApiTrendRows([]));
+
+    getHeatmap()
+      .then((res) => setHeatmapRows(Array.isArray(res.data) ? res.data : []))
+      .catch(() => setHeatmapRows([]));
+  }, []);
+
+  const trendChartData = useMemo(() => {
+    if (!apiTrendRows.length) return seasonalData;
+    const byWeek = {};
+    apiTrendRows.forEach((row) => {
+      const key = row.week;
+      byWeek[key] = byWeek[key] || { month: key };
+      byWeek[key][row.disease] = row.count;
+    });
+    return Object.values(byWeek);
+  }, [apiTrendRows]);
 
   const ageGroupData = [
     { age: '0-10', cases: 380 },
@@ -61,35 +114,52 @@ const TrendsDashboard = () => {
   const insights = [
     {
       title: 'Total Screenings',
-      value: '3,250',
-      change: '+18% this month',
+      value: summary.total_predictions.toLocaleString(),
+      change: 'Recorded symptom predictions',
       icon: Users,
       color: 'text-blue-600',
     },
     {
-      title: 'Current Alert',
-      value: 'Malaria Peak',
-      change: 'Due to rainy season',
+      title: 'Top Disease',
+      value: summary.top_disease,
+      change: 'Most frequent top prediction',
       icon: AlertCircle,
       color: 'text-red-600',
     },
     {
-      title: 'Most Screened',
-      value: 'Fever & Cough',
-      change: 'Top reported symptoms',
+      title: 'Active This Week',
+      value: summary.active_this_week.toLocaleString(),
+      change: 'Predictions in last 7 days',
       icon: Activity,
       color: 'text-orange-600',
     },
     {
       title: 'System Coverage',
-      value: '25+ Diseases',
-      change: 'Expanded AI Database',
+      value: `${summary.diseases_tracked} Diseases`,
+      change: `Serving ${summary.region}`,
       icon: ShieldCheck,
       color: 'text-green-600',
     },
   ];
 
-  const commonInBamenda = diseases.filter(d => d.commonInBamenda).slice(0, 8);
+  const commonInBamenda = diseaseRows.filter(d => d.featured || d.commonInBamenda).slice(0, 8);
+  const dashboardNotes = [
+    {
+      title: 'Top diseases',
+      text: 'Counts come from saved symptom predictions. Each screening contributes the model top match to the aggregate.',
+      icon: Database,
+    },
+    {
+      title: 'Seasonal trends',
+      text: 'The backend groups predictions by week. If no live records exist yet, the page shows documented seasonal sample patterns.',
+      icon: TrendingUp,
+    },
+    {
+      title: 'Heatmap',
+      text: 'Regional rows show where prediction activity is concentrated. The current configured region is Bamenda.',
+      icon: MapPinned,
+    },
+  ];
 
   return (
     <>
@@ -98,51 +168,51 @@ const TrendsDashboard = () => {
         <meta name="description" content="Explore community health trends, disease patterns, and health statistics in Bamenda." />
       </Helmet>
 
-      <div className="min-h-screen bg-muted/30 py-12">
+      <div className="min-h-screen medical-page py-8 sm:py-12">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-8 flex flex-col items-center">
             <div className="mb-4">
               <img 
-                src="/public/mediguard.png" 
+                src="/mediguard.png" 
                 alt="MediGuard Logo" 
                 className="logo-sm"
               />
             </div>
-            <h1 className="text-4xl font-bold mb-4">Community Health Trends</h1>
-            <p className="text-lg text-muted-foreground">
-              Data-driven insights from MediGuard Bamenda
+            <h1 className="text-3xl sm:text-4xl font-bold mb-4">Community Health Trends</h1>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl">
+              Data-driven insights from MediGuard Bamenda screenings, disease records, and model outputs.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-4 gap-2 sm:gap-4 lg:gap-6 mb-8">
             {insights.map((insight, index) => (
-              <Card key={index}>
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
+              <Card key={index} className="medical-panel">
+                <CardHeader className="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-1 pb-1 sm:pb-2 p-2 sm:p-6">
+                  <CardTitle className="text-[10px] sm:text-sm font-medium text-muted-foreground text-center sm:text-left leading-tight">
                     {insight.title}
                   </CardTitle>
-                  <insight.icon className={`h-4 w-4 ${insight.color}`} />
+                  <insight.icon className={`h-4 w-4 ${insight.color} flex-shrink-0`} />
                 </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{insight.value}</div>
-                  <p className="text-xs text-muted-foreground mt-1">{insight.change}</p>
+                <CardContent className="p-2 pt-0 sm:p-6 sm:pt-0 text-center sm:text-left">
+                  <div className="text-xs sm:text-2xl font-bold truncate">{insight.value}</div>
+                  <p className="hidden sm:block text-xs text-muted-foreground mt-1">{insight.change}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <Card>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-8">
+            <Card className="medical-panel">
               <CardHeader>
                 <CardTitle>Top 10 Screened Diseases</CardTitle>
-                <CardDescription>Number of mock AI matches by disease type</CardDescription>
+                <CardDescription>Aggregate top predictions saved by the backend</CardDescription>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={diseaseData} layout="vertical" margin={{ left: 20 }}>
+                  <BarChart data={apiDiseaseData} layout="vertical" margin={{ left: 8, right: 8 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis type="number" />
-                    <YAxis dataKey="name" type="category" width={80} />
+                    <YAxis dataKey="name" type="category" width={90} tick={{ fontSize: 12 }} />
                     <Tooltip />
                     <Bar dataKey="cases" fill="hsl(188 91% 37%)" radius={[0, 4, 4, 0]} />
                   </BarChart>
@@ -150,7 +220,7 @@ const TrendsDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="medical-panel">
               <CardHeader>
                 <CardTitle>Disease Categories</CardTitle>
                 <CardDescription>Breakdown by infection/condition type</CardDescription>
@@ -178,31 +248,39 @@ const TrendsDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="lg:col-span-2">
+            <Card className="lg:col-span-2 medical-panel">
               <CardHeader>
                 <CardTitle>Seasonal Disease Trends</CardTitle>
                 <CardDescription>Monthly disease patterns highlighting rainy vs dry season impacts</CardDescription>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={seasonalData}>
+                  <LineChart data={trendChartData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month" />
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="malaria" name="Malaria" stroke="hsl(0 72% 60%)" strokeWidth={3} dot={false} />
-                    <Line type="monotone" dataKey="respiratory" name="Respiratory" stroke="hsl(188 91% 37%)" strokeWidth={2} />
-                    <Line type="monotone" dataKey="typhoid" name="Typhoid" stroke="hsl(38 92% 50%)" strokeWidth={2} />
-                    <Line type="monotone" dataKey="cholera" name="Cholera" stroke="hsl(280 80% 50%)" strokeWidth={2} strokeDasharray="5 5" />
+                    {apiTrendRows.length ? (
+                      [...new Set(apiTrendRows.map((row) => row.disease))].slice(0, 4).map((disease, index) => (
+                        <Line key={disease} type="monotone" dataKey={disease} name={disease} stroke={COLORS[index % COLORS.length]} strokeWidth={2} />
+                      ))
+                    ) : (
+                      <>
+                        <Line type="monotone" dataKey="malaria" name="Malaria" stroke="hsl(0 72% 60%)" strokeWidth={3} dot={false} />
+                        <Line type="monotone" dataKey="respiratory" name="Respiratory" stroke="hsl(188 91% 37%)" strokeWidth={2} />
+                        <Line type="monotone" dataKey="typhoid" name="Typhoid" stroke="hsl(38 92% 50%)" strokeWidth={2} />
+                        <Line type="monotone" dataKey="cholera" name="Cholera" stroke="hsl(280 80% 50%)" strokeWidth={2} strokeDasharray="5 5" />
+                      </>
+                    )}
                   </LineChart>
                 </ResponsiveContainer>
               </CardContent>
             </Card>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <Card className="lg:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+            <Card className="lg:col-span-2 medical-panel">
               <CardHeader>
                 <CardTitle>Age Group Distribution</CardTitle>
                 <CardDescription>Cases by age group across all screenings</CardDescription>
@@ -220,7 +298,7 @@ const TrendsDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="medical-panel">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <AlertCircle className="h-5 w-5 text-orange-500" />
@@ -245,6 +323,45 @@ const TrendsDashboard = () => {
               </CardContent>
             </Card>
           </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mt-8">
+            {dashboardNotes.map((note) => (
+              <Card key={note.title} className="medical-panel">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <note.icon className="h-5 w-5 text-primary" />
+                    {note.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{note.text}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {heatmapRows.length > 0 && (
+            <Card className="medical-panel mt-8">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MapPinned className="h-5 w-5 text-primary" />
+                  Regional Heatmap Data
+                </CardTitle>
+                <CardDescription>Backend heatmap rows used for public health monitoring</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {heatmapRows.map((row) => (
+                    <div key={`${row.region}-${row.disease}`} className="rounded-lg border bg-background p-4">
+                      <p className="font-semibold">{row.region}</p>
+                      <p className="text-sm text-muted-foreground">{row.disease}</p>
+                      <p className="text-2xl font-bold text-primary mt-2">{row.count}</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </>

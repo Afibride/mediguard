@@ -143,7 +143,7 @@ const About = () => {
                 <div className="relative">
                   <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl"></div>
                   <img 
-                    src="/public/mediguard.png" 
+                    src="/mediguard.png" 
                     alt="MediGuard Logo" 
                     className="relative logo-lg mx-auto drop-shadow-2xl" 
                   />
@@ -188,18 +188,18 @@ const About = () => {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16 md:mb-24"
+              className="grid grid-cols-4 gap-2 md:gap-6 mb-16 md:mb-24"
             >
               {impactMetrics.map((metric, index) => (
                 <motion.div key={index} variants={itemVariants}>
-                  <Card className="text-center p-4 md:p-6 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm">
-                    <div className="flex justify-center mb-3">
-                      <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                        <metric.icon className="h-6 w-6 md:h-7 md:w-7 text-primary" />
+                  <Card className="text-center p-2 md:p-6 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl bg-card/50 backdrop-blur-sm min-h-[112px] md:min-h-0">
+                    <div className="flex justify-center mb-2 md:mb-3">
+                      <div className="w-8 h-8 md:w-14 md:h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                        <metric.icon className="h-4 w-4 md:h-7 md:w-7 text-primary" />
                       </div>
                     </div>
-                    <div className="text-xl md:text-2xl font-bold text-foreground mb-1">{metric.number}</div>
-                    <div className="text-xs md:text-sm font-medium text-primary mb-1">{metric.label}</div>
+                    <div className="text-sm md:text-2xl font-bold text-foreground mb-1 truncate">{metric.number}</div>
+                    <div className="text-[10px] md:text-sm font-medium text-primary mb-1 leading-tight">{metric.label}</div>
                     <div className="text-xs text-muted-foreground hidden md:block">{metric.description}</div>
                   </Card>
                 </motion.div>

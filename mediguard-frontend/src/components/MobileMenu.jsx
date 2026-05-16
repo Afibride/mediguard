@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Moon, Sun, History, LogOut, Home, Activity, BookOpen, Bot, TrendingUp, LogIn, UserPlus } from 'lucide-react';
+import { X, Moon, Sun, History, LogOut, Home, Activity, BookOpen, Bot, TrendingUp, LogIn, UserPlus, User } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 
 const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
@@ -115,6 +115,23 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                   {/* Conditional Auth & Theme Links */}
                   {isLoggedIn ? (
                     <>
+                      <Link
+                        to="/profile"
+                        onClick={onClose}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-colors last:mb-4 ${
+                          isActive('/profile')
+                            ? 'bg-primary/10 text-primary'
+                            : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        }`}
+                      >
+                        <User className={`w-5 h-5 ${
+                          isActive('/profile') 
+                            ? 'text-primary' 
+                            : 'text-gray-500 dark:text-gray-400'
+                        }`} />
+                        Profile
+                      </Link>
+
                       <Link
                         to="/history"
                         onClick={onClose}

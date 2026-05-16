@@ -1,0 +1,509 @@
+"""
+MediGuard RAG pipeline.
+
+Uses Pinecone + OpenAI when configured, and falls back to local encyclopedia
+chunks so the backend remains usable before the one-time Pinecone ingest runs.
+"""
+
+import json
+import os
+import re
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+from app.data import DISEASES, SYMPTOMS
+from app.ml.predictor import DiseasePredictor
+from app.rag.embeddings import embed_text
+
+load_dotenv()
+
+DISCLAIMER = (
+    "This information is from the Gale Encyclopedia of Medicine and is provided "
+    "for educational purposes only. It is not a substitute for professional "
+    "medical advice, diagnosis, or treatment. Always consult a qualified "
+    "healthcare professional for any health concerns."
+)
+
+PREGNANCY_WARNING_SIGNS = [
+    "vaginal bleeding",
+    "severe abdominal pain",
+    "severe headache",
+    "vision changes",
+    "blurred vision",
+    "swelling",
+    "face swelling",
+    "reduced fetal movement",
+    "fainting",
+    "chest pain",
+    "shortness of breath",
+    "fever",
+]
+
+PREGNANCY_TERMS = [
+    "pregnant",
+    "pregnancy",
+    "expecting",
+    "antenatal",
+    "prenatal",
+    "trimester",
+]
+
+CHUNKS_FILE = Path(__file__).resolve().parents[2] / "data_pipeline" / "mediguard_rag_chunks.json"
+
+_pinecone_index = None
+_pinecone_dimension = None
+_embedding_model = None
+_openai_client = None
+_local_chunks = None
+_predictor = None
+
+GREETING_PATTERNS = [
+    r"^\s*(hi|hello|hey|good morning|good afternoon|good evening)\s*[!.?]*\s*$",
+    r"^\s*how are you\s*[?.!]*\s*$",
+    r"^\s*(can|could)\s+you\s+help\s+me\s*[?.!]*\s*$",
+    r"^\s*(help|what can you do)\s*[?.!]*\s*$",
+]
+
+THANKS_PATTERNS = [
+    r"^\s*(thanks|thank you|thank u|appreciate it|much appreciated)\s*[!.?]*\s*$",
+    r"^\s*(thanks|thank you)\s+(a lot|so much|very much)\s*[!.?]*\s*$",
+]
+
+
+def _conversational_response(query: str) -> dict | None:
+    text = query.strip().lower()
+    if not text:
+        return {
+            "answer": "I am here. Ask me about symptoms, diseases, prevention, or when to seek care.",
+            "sources": [],
+            "disclaimer": DISCLAIMER,
+        }
+    if any(re.match(pattern, text) for pattern in GREETING_PATTERNS):
+        if "how are you" in text:
+            answer = (
+                "I am doing well and ready to help. I can explain symptoms, prevention, and general health information "
+                "from MediGuard's encyclopedia knowledge base. Tell me what you would like to understand."
+            )
+        elif "help" in text or "what can you do" in text:
+            answer = (
+                "Yes, I can help. You can ask about symptoms, common conditions in Bamenda, prevention, treatment overview, "
+                "or when to see a doctor. I can also explain your symptom-checker result in plain language."
+            )
+        else:
+            answer = (
+                "Hello, welcome to MediGuard. I can help with health education questions about symptoms, diseases, "
+                "prevention, and when to seek professional care."
+            )
+        return {"answer": answer, "sources": [], "disclaimer": DISCLAIMER}
+    if any(re.match(pattern, text) for pattern in THANKS_PATTERNS):
+        return {
+            "answer": (
+                "You are welcome. I am here whenever you want to check symptoms, understand a condition, "
+                "or learn prevention steps from the MediGuard knowledge base."
+            ),
+            "sources": [],
+            "disclaimer": DISCLAIMER,
+        }
+    return None
+
+
+def _mentions_pregnancy(query: str) -> bool:
+    text = query.lower()
+    return any(term in text for term in PREGNANCY_TERMS)
+
+
+def _pregnancy_warning_matches(query: str, symptoms: list[str]) -> list[str]:
+    text = f"{query.lower()} {' '.join(symptom.lower() for symptom in symptoms)}"
+    return [sign for sign in PREGNANCY_WARNING_SIGNS if sign in text]
+
+
+def _pregnancy_followup_response(query: str, symptoms: list[str], is_pregnant: bool, pregnancy_weeks: int | None) -> dict | None:
+    pregnancy_context = is_pregnant or _mentions_pregnancy(query)
+    if not pregnancy_context:
+        return None
+
+    warning_matches = _pregnancy_warning_matches(query, symptoms)
+    if warning_matches:
+        return {
+            "answer": (
+                "Because pregnancy is involved and you mentioned "
+                f"{', '.join(warning_matches)}, please seek urgent care from a maternity unit, clinic, or qualified healthcare professional now. "
+                "These can be warning signs in pregnancy. If you can, tell me how many weeks pregnant you are, when the symptom started, "
+                "whether it is worsening, and whether there is fever, bleeding, severe pain, vision change, or reduced fetal movement."
+            ),
+            "sources": [],
+            "disclaimer": DISCLAIMER,
+            "mode": "pregnancy_triage",
+            "pregnancy_context": True,
+            "follow_up_questions": [
+                "How many weeks pregnant are you?",
+                "When did the symptom start, and is it getting worse?",
+                "Is there bleeding, severe pain, fever, vision change, or reduced fetal movement?",
+            ],
+        }
+
+    if len(symptoms) < 2:
+        weeks_text = f" I noted you are around {pregnancy_weeks} weeks pregnant." if pregnancy_weeks else ""
+        return {
+            "answer": (
+                f"I can help, but pregnancy symptoms need a little more detail before I give a useful response.{weeks_text} "
+                "Please tell me: how many weeks pregnant you are, your main symptom, when it started, how severe it is, "
+                "and whether you have bleeding, abdominal pain, fever, headache, vision changes, swelling, dizziness, "
+                "shortness of breath, or reduced fetal movement."
+            ),
+            "sources": [],
+            "disclaimer": DISCLAIMER,
+            "mode": "pregnancy_follow_up",
+            "pregnancy_context": True,
+            "follow_up_questions": [
+                "How many weeks pregnant are you?",
+                "What exact symptoms are you feeling?",
+                "Any bleeding, severe pain, fever, vision changes, swelling, or reduced fetal movement?",
+            ],
+        }
+    return None
+
+
+def _detect_disease(query: str) -> dict | None:
+    text = query.lower()
+    candidates = sorted(DISEASES, key=lambda item: len(item["name"]), reverse=True)
+    for disease in candidates:
+        names = {disease["name"].lower(), disease["slug"].replace("-", " ").lower()}
+        if any(name and name in text for name in names):
+            return disease
+    return None
+
+
+def _is_symptom_question(query: str) -> bool:
+    text = query.lower()
+    return any(term in text for term in ["symptom", "sign", "feel like", "present with"])
+
+
+def _symptom_answer(query: str, chunks: list[dict], disease: dict | None) -> dict | None:
+    if not disease or not _is_symptom_question(query):
+        return None
+    symptoms = disease.get("symptoms") or []
+    if not symptoms:
+        return None
+    sources = []
+    seen = set()
+    for chunk in chunks:
+        name = chunk["disease"]
+        if name not in seen:
+            seen.add(name)
+            sources.append(name)
+    return {
+        "answer": (
+            f"Common symptoms linked with {disease['name']} include {', '.join(symptoms)}. "
+            "Symptoms can vary from person to person, and this is not a diagnosis. "
+            "Please seek care from a qualified healthcare professional if symptoms are severe, persistent, or worsening."
+        ),
+        "sources": sources or [disease["name"]],
+        "disclaimer": DISCLAIMER,
+    }
+
+
+def _get_predictor() -> DiseasePredictor:
+    global _predictor
+    if _predictor is None:
+        _predictor = DiseasePredictor()
+    return _predictor
+
+
+def _extract_reported_symptoms(query: str) -> list[str]:
+    text = f" {query.lower()} "
+    # Normalize common connectors and punctuation so phrases such as
+    # "fever and chills", "fever,chills", or "cough plus chest pain" match
+    # the ordered symptom vocabulary consistently.
+    text = re.sub(r"[,+/&]", " and ", text)
+    text = re.sub(r"\b(with|plus|also|alongside|together with)\b", " and ", text)
+    matches = []
+    for symptom in sorted(SYMPTOMS, key=len, reverse=True):
+        normalized = symptom.lower().replace("_", " ")
+        pattern = rf"(?<![a-z]){re.escape(normalized)}(?![a-z])"
+        if re.search(pattern, text) and symptom not in matches:
+            matches.append(symptom)
+    return matches
+
+
+def _is_symptom_check_request(query: str, symptoms: list[str]) -> bool:
+    text = query.lower()
+    intent_terms = [
+        "i have",
+        "i am having",
+        "i'm having",
+        "my symptoms",
+        "check my symptoms",
+        "what could this be",
+        "what might this be",
+        "predict",
+        "diagnose",
+        "assessment",
+        "symptom checker",
+    ]
+    return len(symptoms) >= 2 or (bool(symptoms) and any(term in text for term in intent_terms))
+
+
+def _symptom_follow_up_questions(symptoms: list[str], is_pregnant: bool = False) -> list[str]:
+    questions = [
+        "How long have you had these symptoms?",
+        "Are they mild, moderate, or severe?",
+        "Do you have any other symptoms, such as fever, vomiting, diarrhea, chest pain, rash, dizziness, or trouble breathing?",
+    ]
+    symptom_set = {symptom.lower() for symptom in symptoms}
+    if any(term in symptom_set for term in ["fever", "high fever", "prolonged fever", "sudden high fever"]):
+        questions.append("What is your temperature, and does the fever come with chills or sweating?")
+    if any(term in symptom_set for term in ["cough", "chronic cough", "shortness of breath", "chest pain"]):
+        questions.append("Is there chest pain, wheezing, fast breathing, or coughing up blood?")
+    if any(term in symptom_set for term in ["diarrhea", "vomiting", "abdominal pain", "nausea"]):
+        questions.append("Are you able to drink fluids, and is there blood in stool or signs of dehydration?")
+    if is_pregnant:
+        questions.append("How many weeks pregnant are you, and is there bleeding, severe pain, vision change, swelling, or reduced fetal movement?")
+    return questions[:5]
+
+
+def _symptom_check_response(query: str, is_pregnant: bool = False, pregnancy_weeks: int | None = None) -> dict | None:
+    reported_symptoms = _extract_reported_symptoms(query)
+    pregnancy_followup = _pregnancy_followup_response(query, reported_symptoms, is_pregnant, pregnancy_weeks)
+    if pregnancy_followup:
+        return pregnancy_followup
+
+    if not _is_symptom_check_request(query, reported_symptoms):
+        return None
+
+    pregnancy_context = bool(is_pregnant or _mentions_pregnancy(query))
+    follow_up_questions = _symptom_follow_up_questions(reported_symptoms, pregnancy_context)
+
+    if len(reported_symptoms) == 1:
+        symptom = reported_symptoms[0]
+        return {
+            "answer": (
+                f"I found one symptom in your message: {symptom}. "
+                "One symptom is not enough for a reliable symptom check, so I need a little more information first. "
+                "Please answer the follow-up questions below, or add any other symptoms you are feeling."
+            ),
+            "sources": [],
+            "disclaimer": DISCLAIMER,
+            "symptoms": reported_symptoms,
+            "predictions": [],
+            "mode": "symptom_follow_up",
+            "pregnancy_context": pregnancy_context,
+            "follow_up_questions": follow_up_questions,
+        }
+
+    predictions = _get_predictor().predict(reported_symptoms)
+    if not predictions:
+        return {
+            "answer": (
+                f"I found these symptoms in your message: {', '.join(reported_symptoms)}. "
+                "I could not produce a confident match from the current model. Please answer a few follow-up questions or use the full symptom checker."
+            ),
+            "sources": [],
+            "disclaimer": DISCLAIMER,
+            "symptoms": reported_symptoms,
+            "predictions": [],
+            "mode": "symptom_check",
+            "pregnancy_context": pregnancy_context,
+            "follow_up_questions": follow_up_questions,
+        }
+
+    lines = [
+        f"I found these symptoms in your message: {', '.join(reported_symptoms)}.",
+        "Here are the top possible matches from the MediGuard symptom model:",
+    ]
+    for index, prediction in enumerate(predictions[:5], start=1):
+        lines.append(f"{index}. {prediction['disease']} - {prediction['probability']}% match")
+    lines.append(
+        "This is not a diagnosis. If symptoms are severe, persistent, or worsening, please seek care from a qualified healthcare professional."
+    )
+    if is_pregnant or _mentions_pregnancy(query):
+        lines.append(
+            "Pregnancy context noted: please arrange prompt antenatal or clinical assessment, especially for fever, abdominal pain, bleeding, severe headache, vision changes, swelling, shortness of breath, or reduced fetal movement."
+        )
+    lines.append("To refine this, please answer the follow-up questions shown below.")
+    return {
+        "answer": "\n".join(lines),
+        "sources": [prediction["disease"] for prediction in predictions[:3]],
+        "disclaimer": DISCLAIMER,
+        "symptoms": reported_symptoms,
+        "predictions": predictions,
+        "mode": "symptom_check",
+        "pregnancy_context": pregnancy_context,
+        "follow_up_questions": follow_up_questions,
+    }
+
+
+def _optional_imports():
+    try:
+        from openai import OpenAI
+        from pinecone import Pinecone
+    except ImportError:
+        return None, None
+    return OpenAI, Pinecone
+
+
+def _load_local_chunks() -> list[dict]:
+    global _local_chunks
+    if _local_chunks is None:
+        _local_chunks = json.loads(CHUNKS_FILE.read_text(encoding="utf-8"))
+    return _local_chunks
+
+
+def _get_index():
+    global _pinecone_index, _pinecone_dimension
+    OpenAI, Pinecone = _optional_imports()
+    if Pinecone is None or not os.environ.get("PINECONE_API_KEY"):
+        return None
+    if _pinecone_index is None:
+        try:
+            pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
+            index_name = os.environ.get("PINECONE_INDEX", "mediguard-health-knowledge")
+            description = pc.describe_index(index_name)
+            _pinecone_dimension = getattr(description, "dimension", None)
+            _pinecone_index = pc.Index(index_name)
+        except Exception:
+            return None
+    return _pinecone_index
+
+
+def _get_embedder():
+    global _embedding_model
+    return None
+
+
+def _get_llm():
+    global _openai_client
+    OpenAI, Pinecone = _optional_imports()
+    if OpenAI is None or not os.environ.get("OPENAI_API_KEY"):
+        return None
+    if _openai_client is None:
+        _openai_client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    return _openai_client
+
+
+def _local_retrieve(query: str, top_k: int = 5, filter_disease: str | None = None) -> list[dict]:
+    terms = {term.strip(".,?!:;()[]").lower() for term in query.split() if len(term) > 2}
+    matches = []
+    for chunk in _load_local_chunks():
+        disease = chunk.get("disease", "")
+        if filter_disease and disease.lower() != filter_disease.lower():
+            continue
+        text = chunk.get("text", "")
+        haystack = f"{disease} {chunk.get('section', '')} {text}".lower()
+        score = sum(1 for term in terms if term in haystack)
+        if score:
+            matches.append({
+                "text": text,
+                "disease": disease,
+                "source": chunk.get("source", "Gale Encyclopedia of Medicine"),
+                "score": score,
+            })
+    return sorted(matches, key=lambda item: item["score"], reverse=True)[:top_k]
+
+
+def retrieve(query: str, top_k: int = 5, filter_disease: str | None = None) -> list[dict]:
+    index = _get_index()
+    if index is None:
+        return _local_retrieve(query, top_k=top_k, filter_disease=filter_disease)
+
+    query_vector = embed_text(query, dim=_pinecone_dimension or 384)
+    pinecone_filter = {"disease": {"$eq": filter_disease}} if filter_disease else None
+    try:
+        results = index.query(vector=query_vector, top_k=top_k, include_metadata=True, filter=pinecone_filter)
+    except Exception:
+        return _local_retrieve(query, top_k=top_k, filter_disease=filter_disease)
+
+    return [
+        {
+            "text": match["metadata"]["text"],
+            "disease": match["metadata"]["disease"],
+            "source": match["metadata"].get("source", "Gale Encyclopedia of Medicine"),
+            "score": round(match["score"], 4),
+        }
+        for match in results["matches"]
+    ]
+
+
+def _extractive_answer(query: str, chunks: list[dict]) -> str:
+    source_text = " ".join(chunk["text"] for chunk in chunks[:3])
+    sentences = [part.strip() for part in source_text.replace("\n", " ").split(".") if part.strip()]
+    summary = ". ".join(sentences[:5])
+    if summary:
+        summary += "."
+    return (
+        f"Based on the encyclopedia passages I found, {summary} "
+        "Please use this as educational guidance only and consult a qualified healthcare professional for personal symptoms."
+    )
+
+
+def generate_answer(
+    query: str,
+    filter_disease: str | None = None,
+    chat_history: list[dict] | None = None,
+    gender: str | None = None,
+    is_pregnant: bool = False,
+    pregnancy_weeks: int | None = None,
+) -> dict:
+    conversational = _conversational_response(query)
+    if conversational:
+        return conversational
+
+    symptom_check = _symptom_check_response(query, is_pregnant=is_pregnant, pregnancy_weeks=pregnancy_weeks)
+    if symptom_check:
+        return symptom_check
+
+    detected_disease = _detect_disease(query)
+    effective_filter = filter_disease or (detected_disease["name"] if detected_disease else None)
+    chunks = retrieve(query, top_k=5, filter_disease=effective_filter)
+    if not chunks:
+        return {
+            "answer": "I could not find relevant encyclopedia information for that question. Please try rephrasing or consult a healthcare professional.",
+            "sources": [],
+            "disclaimer": DISCLAIMER,
+        }
+
+    symptom_response = _symptom_answer(query, chunks, detected_disease)
+    if symptom_response:
+        return symptom_response
+
+    context = "\n\n---\n\n".join(f"[Source: {c['disease']} - {c['source']}]\n{c['text']}" for c in chunks)
+    llm = _get_llm()
+    if llm is None:
+        answer = _extractive_answer(query, chunks)
+    else:
+        messages = [{
+            "role": "system",
+            "content": (
+                "You are MediGuard's health assistant for Bamenda, Cameroon. "
+                "Answer clearly using only the context below. Never diagnose or prescribe medication. "
+                "Always recommend professional care for personal symptoms. If the user is pregnant or asks about pregnancy, "
+                "ask concise follow-up questions about gestational age, severity, onset, bleeding, abdominal pain, fever, "
+                "headache, vision changes, swelling, shortness of breath, and fetal movement before giving non-urgent guidance.\n\n"
+                f"User context: gender={gender or 'not provided'}, pregnant={is_pregnant}, pregnancy_weeks={pregnancy_weeks or 'not provided'}.\n\n"
+                f"Context from the Gale Encyclopedia of Medicine:\n{context}"
+            ),
+        }]
+        if chat_history:
+            messages.extend(chat_history[-6:])
+        messages.append({"role": "user", "content": query})
+        try:
+            response = llm.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=messages,
+                max_tokens=600,
+                temperature=0.3,
+            )
+            answer = response.choices[0].message.content
+        except Exception:
+            answer = _extractive_answer(query, chunks)
+
+    sources = []
+    seen = set()
+    for chunk in chunks:
+        disease = chunk["disease"]
+        if disease not in seen:
+            seen.add(disease)
+            sources.append(disease)
+
+    return {"answer": answer, "sources": sources, "disclaimer": DISCLAIMER}

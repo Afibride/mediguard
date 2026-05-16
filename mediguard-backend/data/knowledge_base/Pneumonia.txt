@@ -1,0 +1,1115 @@
+DISEASE: Pneumonia
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+drugs to control myositis if they are unable to tolerate
+corticosteroids or if the corticosteroids are not accom-
+plishing the desired degree of treatment. Immunosup-
+pressant drugs may also be used in conjunction with
+corticosteroids so that lower doses of corticosteroids
+can be used. Immunosuppressant drugs include
+azathioprine, methotrexate, cyclosporine, tacrolimus,
+etanercept, and mycophenolate mofetil.
+Intravenous immunoglobulin (IVIg) appears to
+aid in improving muscle strength in many persons
+with myositis, particularly those with DM. It may be
+less effective in PM, and its role in treating IBM
+requires more study, although it has been shown to
+help some patients with IBM if they are diagnosed
+early. Immunoglobulins are normal proteins in the
+blood that attack anything foreign in the body, such
+as viruses and bacteria. IVIg is made from donated
+blood plasma from people with normal immune sys-
+tems. Side effects from the the use of IVIg include
+headache and flu-like symptoms.
+Topical cream or ointment forms of some of the
+medicines, such as prednisone and tacrolimus, can be
+used to heal and soothe the rash associated with DM.
+Non-steriodal anti-inflammatory drugs (NSAIDS)
+such asaspirin or ibuprofen can be used for pain relief.
+Calcinosis can be treated with prednisone, plaquenil
+(also called hydroxychloroquine), intravenous immu-
+noglobin (IVIG), cyclosporine, and methotrexate.
+After drug treatment results in improvement, the
+affected person begins a program of regular stretching
+exercises to maintain range of motion in the weakened
+arms and legs. Physical therapy may be used to pre-
+vent permanent muscle shortening. Whirlpool baths,
+heat, and gentle massages may also provide relief.
+Adequate rest is necessary, and affected persons
+should take frequent breaks throughout the day and
+limit their activity.
+Patients with throat problems should be evaluated
+by a speech therapist who can evaluate the swallowing-
+related problems and make recommendations regard-
+ing diet changes and safe swallowing techniques.
+Before a woman with myositis becomes pregnant,
+she should discuss the medicines that she is taking with
+her health care provider and evaluate the possible risks
+that she and the baby face if she does become preg-
+nant. Many of the drugs used in the treatment of
+myositis may be harmful to the fetus or to a breast-
+fed baby.
+It is recommended that a doctor experienced in
+the treatment of myositis, assisted by a rheumatolo-
+gist, dermatologist, or neurologist, be consulted.
+Oftentimes a patient may have to be treated at a
+major medical center, where the disease has been
+seen and treated before.
+Alternative treatment
+Various supplements may be used in conjunction
+with traditional treatment to offset side effects of con-
+ventional drug treatment. The use of these suppple-
+ments should be approved by the primary health care
+provider.
+Immunosuppressant drugs such as methotroxate
+and cyclophosphamide increase the risk of infection,
+so a healthy well-balanced diet is required.
+Methotroxate impairs the body’s ability to absorb
+folic acid, so foods high in folic acid, such as leafy
+green vegetables, fruits, and folate-fortified breads
+and cereals are recommended. The use of folate sup-
+plements may also be recommended by the health care
+provider. Vitamins C and E can be used to help with
+the pain and infections associated with calcinosis.
+Corticosteroids may have multiple side effects
+when taken for long periods of time at high doses.
+Calcium and Vitamin D are recommended to lower
+the risk ofosteoporosis, a common side effect of pre-
+dnisone use.Hypertension and fluid retention may be
+controlled by a diet low in salt. Steroid-induced dia-
+betes (hyperglycemia) can be aided by a diet low in
+sugar and other simple carbohydrates. Proteinuria, in
+which the body breaks down protein faster than nor-
+mal, may mean that more protein should be included
+in the diet.
+Weight gain associated with the use of corticoster-
+oids can be managed by the use of the DASH (Dietary
+Approach to Stop Hypertension) diet, which is high in
+fruits, vegetables, dietary fiber, and low-fat dairy pro-
+ducts. Information concerning this diet, developed by
+the National Institutes of Health, can be found at
+[www.nhlbi.nih.gov/health/public/heart/hbp/dash/].
+Weight gain can overtax weakened muscles and
+should be avoided if possible.
+Prognosis
+The progression of PM and DM varies from per-
+son to person, but the lifespan of an affected person is
+not usually significantly affected. DM responds more
+favorably to therapy than PM. Overall, many patients
+do improve and have a functional recovery. About
+half of the patients recover and can discontinue treat-
+ment within 5 years of beginning treatment. In chil-
+dren the chances of a cure are better than in adults,
+although some children do suffer a relapse. Of the
+remaining 50%, about 20% will still have the active
+Myositis
+disease and will require ongoing treatment, while up to
+30% may have some remaining muscle weakness.
+However, IBM is disabling, and most patients will
+require the use of an assistive device such as a cane,
+walker, or wheel chair. The older the patient is when
+contracting IBM, the more rapidly the disease
+progresses.
+Prevention
+There is no known way to prevent myositis.
+Resources
+BOOKS
+Kilpatrick, James R. (Compiler).Coping with a Myositis
+Disease. Written by Myositis Patients Telling Their
+Personal Story of Dealing with this Muscle Disease.
+Athens, TX: Kilpatrick Publishing Company, 2000.
+Icon Health Publications.Myositis: A Medical Dictionary,
+Bibliography, and Annotated Research Guide to Internet
+Resources. San Diego, CA: Icon Health Publications,
+2004.
+Icon Health Publications.The Official Patient’s Sourcebook
+on Dermatomyositis: A Revised and Updated Directory
+for the Internet Age.San Diego, CA: Icon Health
+Publications, 2002.
+Icon Health Publications.The Official Patient’s Sourcebook
+on Inclusion Body Myositis: A Revised and Updated
+Directory for the Internet Age.San Diego, CA: Icon
+Health Publications, 2002.
+ORGANIZATIONS
+Muscular Dystrophy Association - USA, National
+Headquarters. 3300 E. Sunrise Drive, Tucson, AZ
+85718. Telephone: (800) 572-1717. Web site:
+www.mdausa.org/
+Myositis Support Group.205 Laurel Road, Athens, TX
+75751. Telephone: (903) 675-6825. Fax: (903) 675-6823.
+Web site: www.myositissupportgroup.org/
+The Myositis Association (TMA).1233 20th St. NW, Suite
+402Washington, DC 20036. Telephone: (202) 887-0082;
+Fax: (202) 466-8940; Web site: www.myositis.org/
+OTHER
+Progressive Management.21st Century Complete Medical
+Guide to Myositis, including Dermatomyositis and
+Polymyositis, Authoritative Government Documents,
+Clinical References, and Practical Information for
+Patients and Physicians.(CD-ROM). Washington, DC:
+Progressive Management, 2004.
+Judith Sims
+Myositis see Myopathies
+Myotonia atrophica see Myotonic dystrophy
+Myotonic dystrophy
+Definition
+Myotonic dystrophy is a progressive disease in
+which the muscles are weak and are slow to relax
+after contraction.
+Description
+Myotonic dystrophy (DM), also called dystrophia
+myotonica, myotonia atrophica, or Steinert’s disease,
+is a common form ofmuscular dystrophy.D Mi sa n
+inherited disease, affecting males and females approxi-
+mately equally. About 30,000 people in the United
+States are affected. Symptoms may appear at any
+time from infancy to adulthood. DM causes general
+weakness, usually beginning in the muscles of the
+hands, feet, neck, or face. It slowly progresses to
+involve other muscle groups, including the heart.
+DM affects a wide variety of other organ systems as
+well.
+A severe form of DM, congenital myotonic dys-
+trophy or Thomsen’s disease, may appear in newborns
+of mothers who have DM. Congenital means that the
+condition is present from birth. The incidence of con-
+genital myotonic dystrophy is thought to be about
+1:20,000.
+DM occurs in about 1 per 7,000–8,000 people and
+has been described in people from all over the world.
+Causes and symptoms
+The most common type of DM is called DM1 and
+is caused by a mutation in a gene called myotonic
+KEY TERMS
+Coxsackievirus— Enterovirus causing a disease
+resembling poliomyelitis but without paralysis
+Dysphagia— Medical term for any difficulty, dis-
+comfort or pain when swallowing
+Limb-girdle muscular dystrophy— An autosomal
+recessive form of muscular dystrophy that appears
+anywhere from late childhood to middle age and is
+characterized by progressive muscular weakness
+beginning either in the shoulder or pelvic girdle;
+the disease usually progresses slowly with cardio-
+pulmonary complications in the later stages
+2562 Myotonic dystrophy
+dystrophy protein kinase (DMPK). The DMPK gene
+is located on chromosome 19q. When there is a muta-
+tion in this gene, a person develops DM1. The specific
+mutation that causes DM1 is called a trinucleotide
+repeat expansion.
+Some families with symptoms of DM do not have
+a mutation in the DMPK gene. As of early 2001,
+scientists have found that the DM in many of these
+families is caused by a mutation in a gene on chromo-
+some 3. These families are said to have DM2.
+Congenital myotonic dystrophy has been linked
+to a region on chromosome 7 that contains a muscle
+chloride channel gene.
+Trinucleotide repeats
+In the DMPK gene, there is a section of the genetic
+code called a CTG repeat. The letters stand for three
+nucleotides (complex organic molecules) known as
+cytosine, thymine, and guanine, and are repeated a
+certain number of times. In people who have DM1,
+this sequence of nucleotides is repeated too many
+times—more than the normal number of 37 times—
+and thus this section of the gene is too big. This
+enlarged section of the gene is called a trinucleotide
+repeat expansion.
+People who have repeat numbers in the normal
+range will not develop DM1 and cannot pass it to their
+children. Having more than 50 repeats causes DM1.
+People who have 38–49 repeats have a premutation
+and will not develop DM1, but can pass DM1 onto
+their children. Having repeats numbers greater than
+1000 causes congenital myotonic dystrophy.
+In general, the more repeats in the affected range
+that someone has, the earlier the age of onset of symp-
+toms and the more severe the symptoms. However,
+this is a general rule. It is not possible to look at a
+person’s repeat number and predict at what age they
+will begin to have symptoms or how their condition
+will progress.
+Exactly how the trinucleotide repeat expansion
+causes myotonia, the inability to relax muscles, is not
+yet understood. The disease somehow blocks the flow
+of electrical impulses across the muscle cell membrane.
+Without proper flow of charged particles, the muscle
+cannot return to its relaxed state after it has
+contracted.
+Since 2001 it has been discovered that DM2 is
+caused by a CCTG (cytosine-cytosine-thymine-gua-
+nine) expansion on chromosome 3 at locus 3q21, but
+as of 2004 it is not known how this repeat affects
+muscle cell function.
+Anticipation
+Sometimes when a person who has repeat num-
+bers in the affected or premutation range has children,
+the expansion grows larger. This is called anticipation.
+A larger expansion can result in an earlier age of onset
+in children than in their affected parent. Anticipation
+happens more often when a mother passes DM1 onto
+her children then when it is passed from the father.
+Occasionally repeat sizes stay the same or even get
+smaller when they are passed to a person’s children.
+Inheritance
+DM is inherited through autosomal dominant
+inheritance. This means that equal numbers of males
+and females are affected. It also means that only one
+gene in the pair needs to have the mutation in order for
+a person to be affected. Since a person only passes one
+copy of each gene onto their children, there is a 50% or
+one in two chance that a person who has DM will pass
+it onto each of their children. This percentage is not
+changed by results of other pregnancies. A person with
+a premutation also has a 50%, or one in two, chance of
+passing the altered gene on to each of their children.
+However, whether or not their children will develop
+DM1 depends on whether the trinucleotide repeat
+becomes further expanded. A person who has repeat
+numbers in the normal range cannot pass DM1 onto
+their children.
+There is a range in the severity of symptoms in
+DM and not everyone will have all of the symptoms
+listed here.
+Myotonic dystrophy causes weakness and delayed
+muscle relaxation called myotonia. Symptoms of DM
+include facial weakness and a slack jaw, drooping eye-
+lids calledptosis, and muscle wasting in the forearms
+and calves. A person with DM has difficulty relaxing
+his or her grasp, especially in the cold. DM affects the
+heart muscle, causing irregularities in the heartbeat. It
+also affects the muscles of the digestive system, causing
+constipation and other digestive problems. DM may
+cause cataracts, retinal degeneration, low IQ, frontal
+balding, skin disorders, atrophy of the testicles, and
+diabetes. It can also cause sleep apnea—a condition in
+which normal breathing is interrupted during sleep.
+DM increases the need for sleep and decreases motiva-
+tion. Severe disabilities do not set in until about 20
+years after symptoms begin. Most people with myo-
+tonic dystrophy maintain the ability to walk, even late
+in life.
+A severe form of DM, congenital myotonic dys-
+trophy, may appear in newborns of mothers who have
+DM1. Congenital myotonic dystrophy is marked by
+Myotonic dystrophy
+severe weakness, poor sucking and swallowing
+responses, respiratory difficulty, delayed motor devel-
+opment, and mental retardation. Death in infancy is
+common in this type.
+Some people who have a trinucleotide repeat
+expansion in their DMPK gene do not have symptoms
+or have very mild symptoms that go unnoticed. It is
+not unusual for a woman to be diagnosed with DM
+after she has an infant with congenital myotonic
+dystrophy.
+Predictive testing
+It is possible to test someone who is at risk for
+developing DM1 before they are showing symptoms
+to see whether they inherited an expanded trinucleo-
+tide repeat. This is called predictive testing. Predictive
+testing cannot determine the age of onset that some-
+one will begin to have symptoms, or the course of the
+disease.
+Diagnosis
+Diagnosis of DM is not difficult once the disease is
+considered. However, the true problem may be
+masked because symptoms can begin at any age, can
+be mild or severe, and can occur with a wide variety of
+associated complaints. Diagnosis of DM begins with a
+careful medical history and a thorough physical exam
+to determine the distribution of symptoms and to rule
+out other causes. A family history of DM or unex-
+plained weakness helps to establish the diagnosis.
+A definitive diagnosis of DM1 is done bygenetic
+testing, usually by taking a small amount of blood.
+The DNA in the blood cells is examined and the
+number of repeats in the DMPK gene is determined.
+Various other tests may be done to help establish the
+diagnosis, but only rarely would other testing be
+needed. An electromyogram (EMG) is a test is used
+to examine the response of the muscles to stimulation.
+Characteristic changes are seen in DM that helps dis-
+tinguish it from other muscle diseases. Removing a
+small piece of muscle tissue for microscopic examina-
+tion is called a muscle biopsy. DM is marked by char-
+acteristic changes in the structure of muscle cells that
+can be seen on a muscle biopsy. An electrocardiogram
+could be performed to detect characteristic abnormal-
+ities in heart rhythm associated with DM. These symp-
+toms often appear later in the course of the disease.
+Prenatal testing
+Testing a pregnancy to determine whether an
+unborn child is affected is possible if genetic testing
+in a family has identified a DMPK mutation. This can
+be done at 10–12 weeks gestation by a procedure called
+chorionic villus sampling(CVS) that involves removing
+a tiny piece of the placenta and analyzing DNA from
+its cells. It can also be done byamniocentesis after 14
+weeks gestation by removing a small amount of the
+amniotic fluid surrounding the baby and analyzing the
+cells in the fluid. Each of these procedures has a small
+risk of miscarriage associated with it and those who
+are interested in learning more should check with their
+doctor or genetic counselor.
+There is also another procedure called preimplan-
+tation diagnosis that allows a couple to have a child
+that is unaffected with the genetic condition in their
+family. This procedure is experimental and not widely
+available. Those interested in learning more about this
+procedure should check with their doctor or genetic
+counselor.
+A group of researchers in Houston, Texas,
+reported in 2004 that they have successfully developed
+a technique for detecting the CCTG expansion that
+causes DM2 and estimating the size of the repeat
+expansion.
+Treatment
+Myotonic dystrophy cannot be cured, and no
+treatment can delay its progression. As of the early
+2000s there is no standardized treatment for these
+disorders because the precise reasons for muscle weak-
+ness are not yet fully understood. However, many of
+the symptoms can be treated. Physical therapy can
+help preserve or increase strength and flexibility in
+muscles. Ankle and wrist braces can be used to sup-
+port weakened limbs. Occupational therapy is used to
+develop tools and techniques to compensate for loss of
+strength and dexterity. A speech-language pathologist
+can provide retraining for weakness in the muscles
+controlling speech and swallowing.
+Irregularities in the heartbeat may be treated with
+medication or a pacemaker. A yearly electrocardio-
+gram is usually recommended to monitor the heart-
+beat. Diabetes mellitus in DM is treated in the same
+way that it is in the general population. A high-fiber
+diet can help prevent constipation.Sleep apneamay be
+treated with surgical procedures to open the airways
+or with nighttime ventilation. Treatment of sleep
+apnea may reduce drowsiness. Lens replacement sur-
+gery is available when cataracts develop. Pregnant
+woman should be followed by an obstetrician familiar
+with the particular problems of DM because compli-
+cations can occur during pregnancy, labor and
+delivery.
+2564 Myotonic dystrophy
+Wearing a medical bracelet is advisable. Some
+emergency medications may have dangerous effects
+on the heart rhythm in a person with DM. Adverse
+reactions togeneral anesthesiamay also occur.
+Prognosis
+The course of myotonic dystrophy varies. When
+symptoms appear earlier in life, disability tends to
+become more severe. Occasionally people with DM
+may require a wheelchair later in life. Children with
+congenital DM usually require special educational
+programs and physical and occupational therapy.
+For both types of DM, respiratory infections pose a
+danger when weakness becomes severe.
+Resources
+BOOKS
+Beers, Mark H., MD, and Robert Berkow, MD, editors.
+‘‘Myotonic Disorders.’’ Section 14, Chapter 184. InThe
+Merck Manual of Diagnosis and Therapy.Whitehouse
+Station, NJ: Merck Research Laboratories, 2004.
+PERIODICALS
+International Myotonic Dystrophy Consortium (IMDC).
+‘‘New Nomenclature and DNA Testing Guidelines for
+Myotonic Dystrophy Type 1 (DM1).’’Neurology 54
+(2000): 1218–1221.
+Meola, G., and V. Sansone. ‘‘Treatment in Myotonia and
+Periodic Paralysis.’’Revue neurologique (Paris)160,
+no. 5, Part 2 (May 2004: S55–S69.
+Meola, Giovanni. ‘‘Myotonic Dystrophies.’’Current
+Opinion in Neurology13 (2000): 519–525.
+Ranum, L. P., and J. W. Day. ‘‘Myotonic dystrophy: RNA
+Pathogenesis Comes into Focus.’’American Journal of
+Human Genetics74 (May 2004): 793–804.
+Sallinen, R., A. Vihola, L. L. Bachinski, et al. ‘‘New
+Methods for Molecular Diagnosis and Demonstration
+of the (CCTG)n Mutation in Myotonic Dystrophy
+Type 2 (DM2).’’Neuromuscular Disorders14 (April
+2004): 274–283.
+ORGANIZATIONS
+Muscular Dystrophy Association. 3300 East Sunrise Dr.,
+Tucson, AZ 85718. (520) 529-2000 or (800) 572-1717.
+<http://www.mdausa.org> .
+OTHER
+Gene Clinics. <http://www.geneclinics.org> .
+Myotonic Dystrophy Website. <http://www.umd
+.necker.fr/myotonic_dystrophy.html> .
+NCBI Genes and Disease Web Page. <http://
+www.ncbi.nlm.nih.gov/disease/Myotonic.html> .
+Karen M. Krajewski, M.S., C.G.C.
+Rebecca J. Frey, Ph.D.
+Myringotomy and ear tubes
+Definition
+Myringotomy is a surgical procedure in which a
+small incision is made in the eardrum (the tympanic
+membrane), usually in both ears. The word comes
+from myringa, modern Latin for drum membrane,
+and tom/C22e, Greek for cutting. It is also called myringo-
+centesis, tympanotomy, tympanostomy, orparacent-
+esis of the tympanic membrane. Fluid in the middle ear
+can be sucked out through the incision.
+Ear tubes, or tympanostomy tubes, are small tubes,
+open at both ends, that are inserted into the incisions in
+the eardrums during myringotomy. They come in var-
+ious shapes and sizes and are made of plastic, metal, or
+both. They are left in place until they fall out by them-
+selves or until they are removed by a doctor.
+Purpose
+Myringotomy with the insertion of ear tubes is an
+optional treatment for inflammation of the middle ear
+with fluid collection (effusion), also called glue ear, that
+KEY TERMS
+Electrocardiogram (ECG, EKG)— A test that uses
+electrodes attached to the chest with an adhesive
+gel to transmit the electrical impulses of the heart
+muscle to a recording device.
+Electromyography (EMG)— A test that uses electro-
+des to record the electrical activity of muscle. The
+information gathered is used to diagnose neuro-
+muscular disorders.
+Muscular dystrophy— A group of inherited dis-
+eases characterized by progressive wasting of the
+muscles.
+Nucleotide— Any of a group of organic molecules
+that link together to form the building blocks of
+DNA or RNA.
+Sleep apnea— Temporary cessation of breathing
+while sleeping.
+Trinucleotide repeat expansion— A sequence of
+three nucleotides that is repeated too many times
+in a section of a gene.
+Myringotomy and ear tubes
+lasts more than three months (chronicotitis mediawith
+effusion) and does not respond to drug treatment. It is
+the recommended treatment if the condition lasts four
+to six months. Effusion is the collection of fluid that
+escapes from blood vessels or the lymphatic system. In
+this case, the fluid collects in the middle ear.
+Initially, acute inflammation of the middle ear with
+effusion is treated with one or two courses ofantibiotics.
+Antihistamines and decongestants have been used, but
+they have not been proven effective unless there is also
+hay fever or some other allergic inflammation that
+contributes to the problem. Myringotomy with or with-
+out the insertion of ear tubes is NOT recommended for
+initial treatment of otherwise healthy children with
+middle ear inflammation with effusion.
+In about 10% of children, the effusion lasts for
+three months or longer, when the disease is considered
+chronic. In children with chronic disease, systemic
+steroids may help, but the evidence is not clear, and
+there are risks.
+When medical treatment does not stop the effu-
+sion after three months in a child who is one to three
+years old, is otherwise healthy, and hashearing lossin
+both ears, myringotomy with insertion of ear tubes
+becomes an option. If the effusion lasts for four to
+six months, myringotomy with insertion of ear tubes is
+recommended.
+The purpose of myringotomy is to relieve symp-
+toms, to restore hearing, to take a sample of the fluid
+to examine in the laboratory in order to identify any
+microorganisms present, or to insert ear tubes.
+Ear tubes can be inserted into the incision during
+myringotomy and left there. The eardrum heals around
+them, securing them in place. They usually fall out on
+their own in 6-12 months or are removed by a doctor.
+While they are in place, they keep the incision
+from closing, keeping a channel open between the
+middle ear and the outer ear. This allows fresh air to
+reach the middle ear, allowing fluid to drain out, and
+preventing pressure from building up in the middle
+ear. The patient’s hearing returns to normal immedi-
+ately and the risk of recurrence diminishes.
+Parents often report that children talk better, hear
+better, are less irritable, sleep better, and behave better
+after myringotomy with the insertion of ear tubes.
+Description
+The procedure is usually done in an ambulatory
+surgical unit undergeneral anesthesia, although some
+physicians do it in the office withsedation and local
+anesthesia, especially in older children. The ear is
+washed, a small incision made in the eardrum, the
+fluid sucked out, a tube inserted, and the ear packed
+with cotton to control bleeding.
+There has been an effort to design ear tubes that
+are easier to insert or to remove, and to design tubes
+that stay in place longer. Therefore, ear tubes come in
+various shapes and sizes.
+Preparation
+The child may not have food or water for four to
+six hours before anesthesia. Antibiotics are usually not
+needed.
+Aftercare
+Use of antimicrobial drops is controversial. Water
+should be kept out of the ear canal until the eardrum is
+intact. A doctor should be notified if the tubes fall out.
+Risks
+The risks include:
+/C15Cutting the outer ear
+/C15Formation at the myringotomy site of granular
+nodes due to inflammation
+/C15Formation of a mass of skin cells and cholesterol in
+the middle ear that can grow and damage surround-
+ing bone (cholesteatoma)
+/C15Permanent perforation of the eardrum.
+The risk of persistent discharge from the ear (otor-
+rhea) is 13%.
+If the procedure is repeated, structural changes in
+the eardrum can occur, such as loss of tone (flaccidity),
+shrinkage or retraction, or hardening of a spot on the
+eardrum (typmanosclerosis). The risk of hardening is
+51%; its effects on hearing are not known, but they are
+probably insignificant.
+It is possible that the incision will not heal prop-
+erly, leaving a permanent hole in the eardrum, which
+can cause some hearing loss and increases the risk of
+infection.
+It is also possible that the ear tube will move
+inward and get trapped in the middle ear, rather than
+move out into the external ear, where it either falls out
+on its own or can be retrieved by a doctor. The exact
+incidence of tubes moving inward is not known, but it
+could increase the risk of further episodes of middle-
+ear inflammation, inflammation of the eardrum or the
+part of the skull directly behind the ear, formation of a
+2566 Myringotomy and ear tubes
+mass in the middle ear, or infection due to the presence
+of a foreign body.
+The surgery may not be a permanent cure. As
+many as 30% of children undergoing myringotomy
+with insertion of ear tubes need to undergo another
+procedure within five years.
+The other risks include those associated with seda-
+tives or general anesthesia.
+An additional element of post-operative care is
+the recommendation by many doctors that the child
+use ear plugs to keep water out of the ear during
+bathing or swimming, to reduce the risk of infection
+and discharge.
+Resources
+BOOKS
+Lim, David J., et al., editors.Recent Advances in Otitis Media:
+Proceedings of the Sixth International Symposium, June
+4-8, 1995, Marriott Harbot Beach, Ft. Lauderdale,
+Florida. Hamilton, Ontario: B. C. Decker Inc., 1996.
+Mary Zoll, PhD
+Myxedema see Hypothyroidism
+Ear drum
+Eustachian tube
+Tube
+The insertion of ear tubes in the eardrum helps to alleviate chronic middle ear infections.(Illustration by Argosy, Inc.)
+KEY TERMS
+Acute otitis media— Inflammation of the middle
+ear with signs of infection lasting less than three
+months.
+Chronic otitis media— Inflammation of the middle
+ear with signs of infection lasting three months or
+longer.
+Effusion— The escape of fluid from blood vessels or
+the lymphatic system and its collection in a cavity,
+in this case, the middle ear.
+Middle ear— The cavity or space between the ear-
+drum and the inner ear. It includes the eardrum, the
+three little bones (hammer, anvil, and stirrup) that
+transmit sound to the inner ear, and the eustachian
+tube, which connects the inner ear to the nasophar-
+ynx (the back of the nose).
+Tympanic membrane— The eardrum. A thin disc of
+tissue that separates the outer ear from the middle
+ear.
+Tympanostomy tube— Ear tube. A small tube made
+of metal or plastic that is inserted during myringot-
+omy to ventilate the middle ear.
+Myringotomy and ear tubes
+Myxoma
+Definition
+A myxoma is a rare, usually noncancerous, pri-
+mary tumor (a new growth of tissue) of the heart. It is
+the most common of all benign heart tumors.
+Description
+Myxoma is an intracardiac tumor; it is found
+inside the heart. Seventy five percent of all myxomas
+are found in the left atrium, and almost all other
+myxomas are found in the right atrium. It is very
+rare for a myxoma to be found in either of the ven-
+tricles. The tumor takes one of two general shapes: a
+round, firm mass, or an irregular shaped, soft, gelati-
+nous mass. They are attached to the endocardium, the
+inside lining of the heart. The cells that make up the
+tumor are spindle-shaped cells and are embedded in a
+matrix rich in mucopolysaccharides (a group of car-
+bohydrates). Myxomas may contain calcium, which
+shows up on x rays. The tumor gets its blood supply
+from capillaries that bring blood from the heart to the
+tumor. Thrombi (blood clots) may be attached to the
+outside of the myxoma.
+There are three major syndromes linked to myx-
+omas: embolic events, obstruction of blood flow, and
+constitutional syndromes. Embolic events happen
+when fragments of the tumor, or the thrombi attached
+to the outside of the tumor, are released and enter the
+blood stream. Gelatinous myxomas are more likely to
+embolize than the more firm form of this tumor.
+Myxomas may also obstruct blood flow in the
+heart, usually at a heart valve. The mitral valve is the
+heart valve most commonly affected. Blood flow
+restrictions can lead to pulmonary congestion and
+heart valve disease. Embolization can lead to severe
+consequences. In cases of left atrial myxoma, 40-50%
+of patients experience embolization. Emboli usually
+end up in the brain, kidneys, and extremities.
+The third syndrome linked to myxomas are called
+constitutional syndromes, nonspecific symptoms
+caused by the myxoma.
+Causes and symptoms
+There is no known causative agent for myxoma.
+The main symptoms, if any, produced by myxoma are
+generic and not specific. These includefever, weight
+loss, anemia, elevated white blood cell (WBC) count,
+decreased platelet countand Raynaud’s phenomenon.
+Most patients with myxoma are between 30-60 years
+of age.
+Diagnosis
+Diagnosis is made following a suspicion that a
+myxoma might be present, and can usually be con-
+firmed by echocardiogram
+Treatment
+Surgery is used to remove the tumor. Myxomas
+can regrow if they are not completely removed. The
+survival rate for this operation is excellent.
+Prognosis
+Successful removal of the tumor rids the patient of
+this disease. Emboli from a myxoma may survive in
+other areas of the body. However, there is no evidence
+that myxoma is truly metastatic (able to transfer dis-
+ease from one area to another), causing tumors in
+other areas of the body.
+Resources
+OTHER
+‘‘Myxoma, Intracardiac.’’OMIM Home Page, Online
+Mendelian Inheritance in Man.<http://
+www.ncbi.nlm.nih.gov/Omim> .
+John T. Lohr, PhD
+KEY TERMS
+Embolus— A piece of tissue, blood clot, etc. that
+travels through the blood system and can lodge in
+smaller blood vessels anywhere in the body.
+Metastasis— The spread of a cancer or infectious
+agent from the site of origin to other areas of the
+body.
+Raynaud’s phenomenon— Intermittant ischemia
+(deficient blood flow) of the fingers or toes, some-
+times also affecting the ears and nose.
+2568 Myxoma
+N
+Nail infections see Onychomycosis
+Nail-patella syndrome
+Definition
+Nail-patella syndrome, is a genetic disease of the
+connective tissue that produces defects in the finger-
+nails, knee caps, and kidneys.
+Description
+Nail-patella syndrome is also known as Fong
+Disease, Hereditary Onycho-Osteodysplasia (H.O.O.D.),
+Iliac Horn Disease, and Turner-Kieser syndrome.
+Patients who have nail-patella syndrome may show a
+variety of physical defects. The hallmark features
+of this syndrome are poorly developed fingernails, toe-
+nails, and patellae (kneecaps). Other common abnorm-
+alities include elbow deformities, abnormally shaped
+pelvis bone (hip bone), and kidney (renal) disease.
+Less common medical findings include defects of
+the upper lip, the roof of the mouth, and unusual
+skeletal abnormalities. Skeletal abnormalities may
+include poorly developed scapulae (shoulder blades),
+sideways bent fingers (clinodactyly), clubfoot, scolio-
+sis, and unusual neck bones. There are also other
+effects, such as thickening of the basement membrane
+in the skin and of the tiny clusters of capillaries
+(glomeruli) in the kidney. Scientists have recognized
+an association between nail-patella syndrome and
+colon cancer. Nail-patella syndrome is associated
+with open-angle glaucoma, which, if untreated, may
+lead to blindness. Patients may also havecataracts,
+drooping eyelids (ptosis), or corneal problems such as
+glaucoma.
+People with nail-patella syndrome may display
+only a few or many of the recognized signs of this
+disease. Symptoms vary widely from person to person.
+Signs even vary within a single family with multiple
+affected members.
+The incidence of nail-patella syndrome is approxi-
+mately one in 50,000 births. This disorder affects
+males and females equally. It is found throughout the
+world and occurs in all ethnic groups. The strongest
+risk factor for nail-patella syndrome is a family history
+of the disease.
+Causes and symptoms
+Nail-patella syndrome has been recognized as an
+inherited disorder for over 100 years. It is caused by
+mutations in a gene known as LIM Homeobox
+Transcription Factor 1-Beta (LMX1B), located on
+the long arm of chromosome 9.
+The LMX1B gene codes for a protein that is
+important in organizing embryonic limb development.
+Mutations in this gene have been detected in many
+unrelated people with nail-patella syndrome.
+Scientists have also been able to interrupt this gene in
+mice to produce defects similar to those seen in human
+nail-patella syndrome.
+Nail-patella syndrome is inherited in an autoso-
+mal dominant manner. This means that possession of
+only one copy of the defective gene is enough to cause
+disease. When a parent has nail-patella syndrome each
+of their children has a 50% chance to inherit the dis-
+ease-causing mutation.
+A new mutation causing nail-patella syndrome
+can also occur, causing disease in a person with no
+family history. This is called a sporadic occurrence and
+accounts for approximately 20% of cases of nail-
+patella syndrome. The children of a person with spora-
+dic nail-patella syndrome are also at a 50% risk of
+developing signs of the disorder.
+Medical signs of nail-patella syndrome vary
+widely between patients. Some patients with this
+disorder do not display symptoms. These patients are
+discovered to have the nail-patella syndrome only
+when genetic studies trace their family history.
+Scientists are now working to learn what causes dif-
+ferent people to display such different symptoms of
+nail-patella syndrome.
+The most obvious sign associated with nail-patella
+syndrome is absent, poorly developed, or unusual fin-
+gernails. Fingernail abnormalities are found in over
+80% of patients with this disorder. Abnormalities may
+be found in one or more fingernails. Only rarely are all
+fingernails affected. This disease most commonly
+affects the fingernails of the thumbs and index fingers.
+The pinky fingernail is least likely to be affected.
+Fingernails may be small and concave with pitting,
+ridges, splits, and/or discoloration. Toenails are less
+often affected. The lunulae, or light-colored crescent
+moons, at the base of the fingernail bed next to the
+cuticle are sometimes triangularly-shaped in people
+with nail-patella syndrome.
+Kneecap abnormalities are the second most com-
+mon sign associated with this disorder. Either or both
+kneecaps may be missing or poorly formed. If present,
+kneecaps are likely to be dislocated. The knees of
+people with nail-patella syndrome may have a square
+appearance. Besides the kneecap, other support struc-
+tures including bones, ligaments, and tendons may
+also be malformed. These support structures stabilize
+the knee, therefore patients with some leg malforma-
+tions may have difficulty in walking.
+The hip bones of approximately 80% of patients
+with nail-patella syndrome have unusual bony
+projections called posterior iliac horns. These bony
+projections, or spurs, are internal and not obvious
+unless they are detected on x ray. This unusual pelvic
+anatomy is not associated with any other disease.
+Kidney diseasei sp r e s e n ti na tl e a s t3 0 %o fp e o p l e
+with nail-patella syndrome. Biopsy shows lesions that
+resemble those of inflammation of the clusters of capil-
+laries in the kidneys (glomerulonephritis), but without
+any infection present. Kidney failure is the most dan-
+gerous consequence of nail-patella syndrome. It occurs
+in about 30% of patients who have kidney involvement.
+An early sign of kidney involvement is the presence of
+protein or blood in the urine (chronic, benign protei-
+nuria and hematuria.) Kidney involvement is progres-
+sive, so early diagnosis and treatment of renal disease
+is important. Kidney disease has been reported in
+children with nail-patella syndrome, but renal involve-
+ment more commonly develops during adulthood.
+Various skeletal symptoms may occur. Patients
+with nail-patella syndrome may not be able to fully
+straighten their arms at the elbow. This may create a
+webbed appearance at the elbow joint. Patients may
+have sideways bent fingers, poorly developed shoulder
+blades, clubfoot, hip dislocation, unusual neck bones,
+or scoliosis.
+Eye problems may be present and vary from
+person to person. Nail-patella syndrome is associated
+with open angle glaucoma. Open angle glaucoma
+is caused by fluid blocked into the front chamber of
+the eye. This blocked fluid builds increasing pressure
+into the eye. If untreated, this increased pressure
+may lead to permanent damage of the optic nerve
+and irreversible blindness. Some patients with nail-
+patella syndrome have ptosis, or drooping eyelids.
+Nail-patella syndrome has also been associated
+with abnormalities of the cornea, cataracts, andastig-
+matism. Additionally, the irises of the eye may be multi-
+colored, possibly displaying a clover-shaped pattern of
+color.
+Diagnosis
+As of early 2001,genetic testing for nail-patella
+syndrome is available only through research institu-
+tions that are working to further characterize this
+disorder. Genetic testing cannot predict which signs
+of the disease will develop. Nor can genetic testing
+predict the severity of disease symptoms. Improved
+genetic testing for nail-patella syndrome is anticipated
+in the future.
+Diagnosis of this disease is most often made on
+visual medical clues such as the characteristic abnorm-
+alities of the fingernails and kneecaps. Diagnosis is
+confirmed by x-ray images of the affected bones and,
+when indicated, kidney biopsy. The bony pelvic spurs
+found in 80% of patients with nail-patella syndrome
+are not associated with any other disease.
+Prenatal diagnosis for nail-patella syndrome by
+third-trimester ultrasound was documented in 1998.
+Prenatal diagnosis via genetic testing of cells obtained
+by chorionic villus sampling was reported the same
+year. As of 2001, prenatal genetic testing for nail-
+patella syndrome is not yet widely available. There is
+controversy surrounding the use of prenatal testing for
+such a variable disorder. Prenatal testing cannot pre-
+dict the extent of an individual’s disease.
+Treatment
+Treatment is usually not necessary. Treatment,
+when required, depends on each patient’s specific
+symptoms. Severe kidney disease is treated with dia-
+lysis or a kidney transplant. Patients receiving kidney
+2570 Nail-patella syndrome
+transplants do not develop nail-patella type renal
+complications in their new kidney.
+A wheelchair may be required if walking becomes
+painful due to bone, tendon, ligament, or muscle
+defects. Orthopedic surgerymay be necessary for con-
+genital clubfoot deformity. Manipulation or surgery
+may be required to correct hip dislocation. Cataracts
+are also surgically treated. Medical treatment at early
+signs of glaucoma prevents progression of the disease
+to blindness.
+Genetic counselingis offered to persons who have
+the disease. Parents with this disease have a 50% chance
+of passing it to each of their children. As of 2001,
+current genetic testing technology cannot predict the
+severity or scope of an individual’s symptoms.
+Because many possible manifestations of nail-
+patella syndrome exist, patients are advised to pursue
+extra medical care including regular urinalysis and
+special eye exams. Children with nail-patella syndrome
+should be screened for scoliosis.
+Prognosis
+Survival among patients with nail-patella syn-
+drome is not decreased unless a they exhibit renal
+complications. It is estimated that 8% of individuals
+with nail-patella syndrome who come to medical
+attention eventually die of kidney disease.
+Resources
+BOOKS
+Berkow, R., M. H. Beers, A. J. Fletcher, and R. M. Bogin.
+The Merck Manual of Medical Information - Home
+Edition. McGraw-Hill, 2004.
+OTHER
+Gene Clinics.<http://www.geneclinics.org> .
+OMIM—Online Mendelian Inheritance in Man.
+<http://www3.ncbi.nlm.nih.gov/Omim> .
+John T. Lohr, PhD
+Judy C. Hawkins, MS
+Nail removal
+Definition
+Nail removal is a form of treatment that is some-
+times necessary following traumatic injuries or recur-
+rent infections in the area of the nail. There are
+nonsurgical as well as surgical methods of nail removal.
+Purpose
+Nails are removed only when necessary to allow
+the skin beneath the nail (the nail bed) to heal or in
+some cases, to remove a nail that has been partially
+pulled out in an accident. In the case of toenails, it is
+occasionally necessary to remove the nail of the large
+toe due to a chronic condition caused by badly fitted
+shoes. In general, however, doctors prefer to try other
+forms of treatment before removing the nail.
+Depending on the cause, nail disorders are usually
+treated with oral medications; applying medicated
+gels or creams directly to the skin around the nail;
+avoiding substances that irritate the nail folds; surgical
+lancing of abscesses around the nail; or injectingcorti-
+costeroids under the nail fold.
+The most common causes of nail disorders include:
+/C15Trauma. The nails can be damaged by nail biting,
+using the fingernails as tools, and incorrect use of
+nail files and manicure scissors as well as by accidents
+and sports injuries.
+/C15Infections. These include fungal infections under the
+nails, bacterial infections of cuts or breaks in the nail
+folds, or infections of the nails themselves caused by
+Candida albicans. Inflammation of the nail folds is
+called paronychia.
+/C15Exposure to harsh detergents, industrial chemicals,
+hot water, and other irritants. People who work as
+dishwashers are especially vulnerable to separation
+of the nail itself from the nail bed (onycholysis).
+/C15Systemic diseases and disorders. These include
+psoriasis, anemia, and certain congenital disorders.
+KEY TERMS
+Chorionic villus sampling (CVS)— A procedure
+used for prenatal diagnosis at 10–12 weeks gesta-
+tion. Under ultrasound guidance a needle is
+inserted either through the mother’s vagina or
+abdominal wall and a sample of cells is collected
+from around the early embryo. These cells are then
+tested for chromosome abnormalities or other
+genetic diseases.
+Glomeruli— Tiny clusters of capillaries in the kidney.
+Hematuria— The presence of blood in the urine.
+Patella— The kneecap.
+Proteinuria— Excess protein in the urine.
+Nail removal
+/C15Allergic reactions to nail polish, polish remover, or
+the glue used to attach false nails.
+Precautions
+In the case of infections, it is necessary to distin-
+guish between fungal, bacterial, and candidal infections
+before removing the nail. Cultures can usually be
+obtained from pus or tissue fluid from the affected nail.
+Description
+Surgical nail removal
+If necessary, the surgeon can remove the nail at its
+base with an instrument called a needlepoint scalpel.
+In a few cases, the nail may need to be pulled out
+(avulsed) from its matrix.
+Nonsurgical nail removal
+Nails can be removed by applying a mixture of
+40% urea, 20% anhydrous lanolin, 5% white wax,
+25% white petroleum jelly, and silica gel type H.
+Preparation
+For nonsurgical nail removal, the nail fold is
+treated with tincture of benzoin and covered with
+adhesive tape. The nail itself is thickly coated with
+the urea mixture, followed by a layer of plastic film
+and adhesive tape. The mixture is left on the nail for
+five to 10 days, after which the nail itself can be
+removed.
+Aftercare
+Aftercare of surgical removal is similar to the care
+of any minor surgical procedure. Aftercare of the urea
+paste method includes applying medication for the
+specific infection that is being treated.
+Nail body
+Lunula
+Nail root
+Hyponychium
+Phalanx (bone)
+Cuticle
+The physiology of the human fingernail. The most common causes of nail disorders include trauma, infections, exposure to
+harsh detergents, hot water and other irritants, systemic diseases and disorders, and allergic reactions to nail polish, nail polish
+remover, and nail glue. (Illustration by Electronic Illustrators Group.)
+KEY TERMS
+Avulse— To pull or tear away forcibly. In some
+cases, a surgeon must remove a nail by avulsing it
+from its matrix.
+Matrix— The tissue at the base of the nail, from
+which the nail grows.
+Nail bed— The layer of tissue underneath the nail.
+Onycholysis— The separation of a nail from its
+underlying bed. Onycholysis is a common symp-
+tom of candidal infections of the nail or of exposure
+to harsh chemicals and detergents.
+Paronychia— Inflammation of the folds of skin that
+surround a nail.
+2572 Nail removal
+Risks
+Risks from either procedure are minimal.
+Normal results
+Normal results include the successful removal of
+the infected or damaged nail.
+Resources
+BOOKS
+Baden, Howard P. ‘‘Diseases of the Nails.’’ InConn’s
+Current Therapy, 1996, edited by Robert E. Rakel.
+Philadelphia: W. B. Saunders Co., 1996.
+Rebecca J. Frey, PhD
+Nalidixic acid see Urinary anti-infectives
+Narcissistic personality disorder see
+Personality disorders
+Narcolepsy
+Definition
+Narcolepsy is a disorder marked by excessive
+daytime sleepiness, uncontrollable sleep attacks, and
+cataplexy (a sudden loss of muscle tone, usually lasting
+up to half an hour).
+Description
+Narcolepsy is the second-leading cause of exces-
+sive daytime sleepiness (after obstructive sleep apnea).
+Persistent sleepiness and sleep attacks are the hall-
+marks of this condition. The sleepiness has been com-
+pared to the feeling of trying to stay awake after not
+sleeping for two or three days.
+People with narcolepsy fall asleep suddenly—
+anywhere, at any time, maybe even in the middle of
+a conversation. These sleep attacks can last from a
+few seconds to more than an hour. Depending on
+where they occur, they may be mildly inconvenient
+or even dangerous to the individual. Some people
+continue to function outwardly during the sleep
+episodes, such as talking or putting things away.
+But when they wake up, they have no memory of
+the event.
+Narcolepsy is related to the deep, dreaming
+part of sleep known as rapid eye movement (REM)
+sleep. Normally when people fall asleep, they
+experience 90 minutes of non-REM sleep, which is
+then followed by REM sleep. People with narcolepsy,
+however, enter REM sleep immediately. In addition,
+REM sleep occurs inappropriately throughout
+the day.
+There has been debate over the incidence of nar-
+colepsy. It is thought to affect between one in every
+1,000 to 2,000 Americans. The known prevalence in
+other countries varies, from one in 600 in Japan to one
+in 500,000 in Israel. Reasons for these differences are
+not clear.
+Causes and symptoms
+In 1999 researchers identified the gene that causes
+narcolepsy. The gene allows cells in the hypothalamus
+(the part of the brain that regulates sleep behavior) to
+receive messages from other cells. When this gene is
+abnormal, cells cannot communicate properly, and
+abnormal sleeping patterns develop.
+The disorder sometimes runs in families, but most
+people with narcolepsy have no relatives with the
+disorder. Researchers believe that the inheritance of
+narcolepsy is similar to that of heart disease. In heart
+disease, several genes play a role in being susceptible to
+the disorder, but it usually does not develop without
+an environmental trigger of some sort.
+While the symptoms of narcolepsy usually appear
+during the teens or 20s, the disease may not be diag-
+nosed for many years. Most often, the first symptom is
+an overwhelming feeling of fatigue. After several
+months or years, cataplexy and other symptoms
+appear.
+Cataplexy is the most dramatic symptom of nar-
+colepsy. It affects 75% of people with the disorder.
+During attacks, the knees buckle and the neck muscles
+go slack. In extreme cases, the person may become
+paralyzed and fall to the floor. This loss of muscle
+tone is temporary, lasting from a few seconds to half
+an hour, but frightening. The attacks can occur at any
+time but are often triggered by strong emotions, such
+as anger, joy, or surprise.
+Other symptoms of narcolepsy include:
+/C15sleep attacks: short, uncontrollable sleep episodes
+throughout the day
+/C15sleep paralysis: a frightening inability to move
+shortly after awakening or dozing off
+/C15auditory or visualhallucinations: intense, sometimes
+terrifying experiences at the beginning or end of a
+sleep period
+Narcolepsy

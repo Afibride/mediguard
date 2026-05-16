@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { AlertCircle, ArrowLeft, MessageCircle, RefreshCw, Info, HeartPulse, Activity, Stethoscope, Clock, ShieldAlert, Save, Brain, ChevronDown, CheckCircle2, Pill, AlertTriangle, Baby, User, Heart, HelpCircle, Thermometer, Scale } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/components/AuthContext';
+import DisclaimerBanner from '@/components/DisclaimerBanner';
 
 const PredictionResults = () => {
   const location = useLocation();
@@ -22,8 +23,11 @@ const PredictionResults = () => {
   const gender = location.state?.gender || 'Not specified';
   const age = location.state?.age || 'Not specified';
   const isPregnant = location.state?.isPregnant || false;
+  const pregnancyWeeks = location.state?.pregnancyWeeks || 'Not specified';
   const predictions = location.state?.predictions || [];
   const analysisNote = location.state?.analysisNote || null;
+  const apiDisclaimer = location.state?.disclaimer || null;
+  const pregnancyNote = location.state?.pregnancyNote || null;
   
   const [expandedId, setExpandedId] = useState(predictions[0]?.id || null);
   const [showAllConditions, setShowAllConditions] = useState(false);
@@ -57,6 +61,7 @@ const PredictionResults = () => {
       gender: gender,
       age: age,
       isPregnant: isPregnant,
+      pregnancyWeeks: pregnancyWeeks,
       results: predictions,
       created_at: new Date().toISOString()
     };
@@ -145,7 +150,7 @@ const PredictionResults = () => {
               )}
               {isPregnant && (
                 <Badge variant="outline" className="bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300 border-pink-200">
-                  <Baby className="h-3 w-3 mr-1" /> Pregnant
+                  <Baby className="h-3 w-3 mr-1" /> Pregnant{pregnancyWeeks !== 'Not specified' ? ` - ${pregnancyWeeks} weeks` : ''}
                 </Badge>
               )}
               {duration !== 'Not specified' && (
@@ -184,30 +189,45 @@ const PredictionResults = () => {
                 <p className="text-sm text-blue-800 dark:text-blue-300">{analysisNote}</p>
               </motion.div>
             )}
+            {pregnancyNote && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-4 p-4 bg-pink-50 dark:bg-pink-950/30 rounded-lg border border-pink-200 dark:border-pink-800 flex items-start gap-3 text-left"
+              >
+                <Baby className="h-5 w-5 text-pink-600 dark:text-pink-400 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-pink-800 dark:text-pink-300">{pregnancyNote}</p>
+              </motion.div>
+            )}
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="mb-6">
+            <DisclaimerBanner variant="warning" />
+            {apiDisclaimer && <p className="text-xs text-muted-foreground mt-2 text-center">{apiDisclaimer}</p>}
           </motion.div>
 
           {/* Results Summary */}
-          <motion.div variants={itemVariants} className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <motion.div variants={itemVariants} className="mb-6 grid grid-cols-3 gap-2 sm:gap-4">
             <Card className="bg-gradient-to-br from-primary/5 to-transparent">
-              <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-primary">{predictions.length}</div>
-                <p className="text-sm text-muted-foreground">Possible Conditions</p>
+              <CardContent className="p-2.5 sm:p-4 text-center min-h-[86px] sm:min-h-0 flex flex-col justify-center">
+                <div className="text-lg sm:text-2xl font-bold text-primary">{predictions.length}</div>
+                <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">Possible Conditions</p>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-yellow-500/5 to-transparent">
-              <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-yellow-600">
+              <CardContent className="p-2.5 sm:p-4 text-center min-h-[86px] sm:min-h-0 flex flex-col justify-center">
+                <div className="text-lg sm:text-2xl font-bold text-yellow-600">
                   {predictions.filter(p => p.severity === 'High').length}
                 </div>
-                <p className="text-sm text-muted-foreground">High Severity</p>
+                <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">High Severity</p>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-green-500/5 to-transparent">
-              <CardContent className="p-4 text-center">
-                <div className="text-2xl font-bold text-green-600">
+              <CardContent className="p-2.5 sm:p-4 text-center min-h-[86px] sm:min-h-0 flex flex-col justify-center">
+                <div className="text-lg sm:text-2xl font-bold text-green-600">
                   {Math.max(...predictions.map(p => p.confidence))}%
                 </div>
-                <p className="text-sm text-muted-foreground">Top Match</p>
+                <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">Top Match</p>
               </CardContent>
             </Card>
           </motion.div>

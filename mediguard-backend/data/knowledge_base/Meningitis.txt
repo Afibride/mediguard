@@ -1,0 +1,1124 @@
+DISEASE: Meningitis
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+J
+Japanese encephalitis
+Definition
+Japanese encephalitis is an infection of the brain
+caused by a virus. The virus is transmitted to humans
+by mosquitoes.
+Description
+The virus that causes Japanese encephalitis is
+called an arbovirus, which is an arthropod-borne
+virus. Mosquitoes are a type of arthropod.
+Mosquitoes in a number of regions carry this virus
+and are responsible for passing it along to humans.
+Many of these areas are in Asia, including Japan,
+Korea, China, India, Thailand, Indonesia, Malaysia,
+Vietnam, Taiwan, and the Philippines. Areas where
+the disease-causing arbovirus is always present are
+referred to as being endemic for the disease. In such
+areas, blood tests will reveal that more than 70% of all
+adults have been infected at some point with the
+arbovirus.
+Because the virus that causes Japanese encephali-
+tis is carried by mosquitoes, the number of people
+infected increases during those seasons when mosqui-
+toes are abundant. This tends to be in the warmest,
+rainiest months. In addition to humans, other animals
+like wild birds, pigs, and horses are susceptible to
+infection with this arbovirus. Because the specific
+type of mosquito carrying the Japanese encephalitis
+arbovirus frequently breeds in rice paddies, the disease
+is considered to be primarily a rural problem.
+Causes and symptoms
+The virus is transferred to a human when an
+infected mosquito sucks that person’s blood. Once in
+the body, the virus travels to various glands where it
+multiplies. The virus can then enter the bloodstream.
+Ultimately, the virus settles in the brain, where it
+causes serious problems.
+Japanese encephalitis begins with fever, severe
+headache, nausea, andvomiting. As the tissue covering
+the brain and spinal cord (the meninges) becomes
+infected and swollen, the patient will develop a stiff
+and painful neck. By day two or three, the patient
+begins to suffer the effects of swelling in the brain.
+These effects include:
+/C15Problems with balance and coordination
+/C15Paralysis of some muscle groups
+/C15Tremors
+/C15Seizures
+/C15Lapses in consciousness
+/C15A stiff, mask-like appearance of the face.
+The patient becomes dehydrated and loses weight.
+If the patient survives the illness, the fever will decrease
+by about day seven and the symptoms will begin to
+improve by about day 14. Other patients will continue
+to have extremely high fevers and their symptoms will
+get worse. In these cases,coma and thendeath occur in
+7-14 days. Many patients who recover have permanent
+disabilities due to brain damage.
+Diagnosis
+Most diagnostic techniques for Japanese encepha-
+litis do not yield results very quickly. The diagnosis is
+made primarily on the basis of the patient’s symptoms
+and the knowledge of the kinds of illnesses endemic to
+a particular geographic region.
+Immunofluorescence tests, where special viral mar-
+kers react with human antibodies that have been
+tagged with a fluorescent chemical, are used to verify
+the disease. However, these results tend to be unavail-
+able until week two of the infection. Other tests involve
+comparing the presence and quantity of particular
+antibodies in the blood or spinal fluid during week one
+with those present during week two of the illness.
+Treatment
+There are no treatments available to stop or slow
+the progression of Japanese encephalitis. Only the
+symptoms of each patient can be treated. Fluids are
+given to decreasedehydrationand medications are given
+to decrease fever andpain. Medications are available to
+attempt to decrease brain swelling. Patients in a coma
+may require mechanical assistance with breathing.
+Prognosis
+While the majority of people infected with arbo-
+virus never become sick, those who develop Japanese
+encephalitis become very ill. Some outbreaks have a
+50% death rate. A variety of long-term problems may
+haunt those who recover from the illness. These pro-
+blems include:
+/C15Movement difficulties where the arms, legs, or body
+jerks or writhes involuntarily
+/C15Shaking
+/C15Paralysis
+/C15Inability to control emotions
+/C15Loss of mental abilities
+/C15Mental disturbances, includingschizophrenia (which
+may affect as many as 75% of Japanese encephalitis
+survivors).
+Young children are most likely to have serious,
+long-term problems after an infection.
+Prevention
+A three-dose vaccine is available for Japanese
+encephalitis and is commonly given to young children
+in areas where the disease is endemic. Travelers to
+these regions can also receive the vaccine.
+Controlling the mosquito population with insecti-
+cides is another preventive measure. Visitors to
+regions with high rates of Japanese encephalitis should
+take precautions (like using mosquito repellents and
+sleeping under a bed net) to avoid contact with
+mosquitoes.
+Resources
+ORGANIZATIONS
+Centers for Disease Control and Prevention. 1600 Clifton
+Rd., NE, Atlanta, GA 30333. (800) 311-3435, (404)
+639-3311. <http://www.cdc.gov> .
+Rosalyn Carson-DeWitt, MD
+Jaundice
+Definition
+Jaundice is a condition in which a person’s skin
+and the whites of the eyes are discolored yellow due to
+an increased level of bile pigments in the blood result-
+ing from liver disease. Jaundice is sometimes called
+icterus, from a Greek word for the condition.
+Description
+In order to understand jaundice, it is useful to
+know about the role of the liver in producing bile.
+The most important function of the liver is the proces-
+sing of chemical waste products like cholesterol and
+excreting them into the intestines as bile. The liver is
+the premier chemical factory in the body—most
+incoming and outgoing chemicals pass through it. It
+is the first stop for all nutrients, toxins, and drugs
+absorbed by the digestive tract. The liver also collects
+chemicals from the blood for processing. Many of
+these outward-bound chemicals are excreted into the
+bile. One particular substance, bilirubin, is yellow.
+Bilirubin is a product of the breakdown of hemoglo-
+bin, which is the protein inside red blood cells.
+If bilirubin cannot leave the body, it accumulates
+and discolors other tissues. The normal total level
+of bilirubin in blood serum is between 0.2 mg/dL
+and 1.2 mg/dL. When it rises to 3 mg/dL or higher,
+the person’s skin and the whites of the eyes become
+noticeably yellow.
+KEY TERMS
+Antibody— A type of cell made by the immune
+system that has the ability to recognize markers
+(antigens) on the surface of invading organisms,
+like bacteria and viruses.
+Encephalitis— A swelling of the brain, potentially
+causing serious brain damage.
+Endemic— Naturally and consistently present in a
+certain geographical region.
+2084 Jaundice
+Bile is formed in the liver. It then passes into the
+network of hepatic bile ducts, which join to form a
+single tube. A branch of this tube carries bile to the
+gallbladder, where it is stored, concentrated, and
+released on a signal from the stomach. Food entering
+the stomach is the signal that stimulates the gallblad-
+der to release the bile. The tube, which is called the
+common bile duct, continues to the intestines. Before
+the common bile duct reaches the intestines, it is joined
+by another duct from the pancreas. The bile and the
+pancreatic juice enter the intestine through a valve
+called the ampulla of Vater. After entering the intes-
+tine, the bile and pancreatic secretions together help in
+the process of digestion.
+Causes and symptoms
+There are many different causes for jaundice, but
+they can be divided into three categories based on
+where they start–before, in, or after the liver (pre-
+hepatic, hepatic and post-hepatic). When bilirubin
+begins its life cycle, it cannot be dissolved in water.
+The liver changes it so that it is soluble in water. These
+two types of bilirubin are called unconjugated (inso-
+luble) and conjugated (soluble). Blood tests can easily
+distinguish between these two types of bilirubin.
+Hemoglobin and bilirubin formation
+Bilirubin begins as hemoglobin in the blood-form-
+ing organs, primarily the bone marrow. If the produc-
+tion of red blood cells (RBCs) falls below normal, the
+extra hemoglobin finds its way into the bilirubin cycle
+and adds to the pool.
+Once hemoglobin is in the red cells of the blood, it
+circulates for the life span of those cells. The hemoglo-
+bin that is released when the cells die is turned into
+bilirubin. If for any reason the RBCs die at a faster
+rate than usual, bilirubin can accumulate in the blood
+and cause jaundice.
+Hemolytic disorders
+Many disorders speed up the death of red blood
+cells. The process of red blood cell destruction is called
+hemolysis, and the diseases that cause it are called
+hemolytic disorders. If red blood cells are destroyed
+faster than they can be produced, the patient develops
+anemia. Hemolysis can occur in a number of diseases,
+disorders, conditions, and medical procedures:
+/C15Malaria. The malaria parasite develops inside red
+blood cells. When it is mature it breaks the cell
+apart and swims off in the blood. This process hap-
+pens to most of the parasites simultaneously, causing
+the intermittent symptoms of the disease. When
+enough cells burst at once, jaundice may result
+from the large amount of bilirubin formed from the
+hemoglobin in the dead cells. The pigment may reach
+the urine in sufficient quantities to cause ‘‘blackwater
+fever,’’ an often lethal form of malaria.
+/C15Side effects of certain drugs. Some common drugs
+can cause hemolysis as a rare but sudden side effect.
+These medications include some antibiotic and anti-
+tuberculosis medicines; drugs that regulate the heart-
+beat; and levodopa, a drug used to treat Parkinson’s
+disease.
+/C15Certain drugs in combination with a hereditary
+enzyme deficiency known as glucose-6-phosphate
+dehydrogenase (G6PD). G6PD is a deficiency that
+affects more than 200 million people in the world.
+Some of the drugs listed above are more likely to
+cause hemolysis in people with G6PD. Other drugs
+cause hemolysis only in people with this disorder.
+Most important among these drugs are anti-malarial
+medications such as quinine, andvitamins C and K.
+/C15Poisons. Snake and spider venom, certain bacterial
+toxins, copper, and some organic industrial chemi-
+cals directly attack the membranes of red blood cells.
+/C15Artificial heart valves. The inflexible moving parts of
+heart valves damage RBCs as they flutter back and
+forth. This damage is one reason to recommend pig
+valves and valves made of other organic materials.
+/C15Hereditary RBC disorders. There are a number of
+hereditary defects that affect the blood cells. There
+are many genetic mutations that affect the hemoglo-
+bin itself, the best-known of which issickle cell dis-
+ease. Such hereditary disorders as spherocytosis
+weaken the outer membrane of the red cell. There
+are also inherited defects that involve the internal
+chemistry of RBCs.
+/C15Enlargement of the spleen. The spleen is an organ
+that is located near the upper end of the stomach and
+filters the blood. It is supposed to filter out and
+destroy only worn-out RBCs. If it has become
+enlarged, it filters out normal cells as well. Malaria,
+other infections, cancers and leukemias, some of the
+hereditary anemias mentioned above, obstruction of
+blood flow from the spleen–all these and many more
+diseases can enlarge the spleen to the point where it
+removes too many red blood cells.
+/C15Diseases of the small blood vessels. Hemolysis that
+occurs in diseased small blood vessels is called micro-
+angiopathic hemolysis. It results from damage
+caused by rough surfaces on the inside of the capil-
+laries. The RBCs squeeze through capillaries one at a
+Jaundice
+time and can easily be damaged by scraping against
+the vessel walls.
+/C15Immune reactions to RBCs. Several types ofcancer
+and immune system diseases produce antibodies that
+react with RBCs and destroy them. In 75% of cases,
+this reaction occurs all by itself, with no underlying
+disease to account for it.
+/C15Transfusions. If a patient is given an incompatible
+blood type, hemolysis results.
+/C15Kidney failure and other serious diseases. Several
+diseases are characterized by defective blood coagu-
+lation that can destroy red blood cells.
+/C15Erythroblastosis fetalis. Erythroblastosis fetalis is a
+disease of newborns marked by the presence of too
+many immature red blood cells (erythroblasts) in the
+baby’s blood. When a baby’s mother has a different
+blood type, antibodies from the mother may leak
+into the baby’s circulation and destroy blood cells.
+This reaction can produce severe hemolysis and jaun-
+dice in the newborn. Rh factor incompatibility is the
+most common cause.
+/C15High bilirubin levels in newborns. Even in the
+absence of blood type incompatibility, the newborn’s
+bilirubin level may reach threatening levels.
+Normal jaundice in newborns
+Normal newborn jaundice is the result of two
+conditions occurring at the same time–a pre-hepatic
+and a hepatic source of excess bilirubin. First of all, the
+baby at birth immediately begins converting hemoglo-
+bin from a fetal type to an adult type. The fetal type of
+hemoglobin was able to extract oxygen from the lower
+levels of oxygen in the mother’s blood. At birth the
+infant can extract oxygen directly from his or her own
+lungs and does not need the fetal hemoglobin any
+more. So fetal hemoglobin is removed from the system
+and replaced with adult hemoglobin. The resulting
+bilirubin loads the system and places demands on the
+liver to clear it. But the liver is not quite ready for the
+task, so there is a period of a week or so when the liver
+has to catch up. During that time the baby is
+jaundiced.
+Hepatic jaundice
+Liver diseases of all kinds threaten the organ’s
+ability to keep up with bilirubin processing.Starva-
+tion, circulating infections, certain medications, hepa-
+titis, and cirrhosis can all cause hepatic jaundice, as
+can certain hereditary defects of liver chemistry,
+including Gilbert’s syndrome and Crigler-Najjar
+syndrome.
+Post-hepatic jaundice
+Post-hepatic forms of jaundice include the jaun-
+dices caused by failure of soluble bilirubin to reach the
+intestines after it has left the liver. These disorders are
+called obstructive jaundices. The most common cause
+of obstructive jaundice is the presence ofgallstones in
+the ducts of the biliary system. Other causes have to do
+with birth defectsand infections that damage the bile
+ducts; drugs; infections; cancers; and physical injury.
+Some drugs–andpregnancy on rare occasions–simply
+cause the bile in the ducts to stop flowing.
+Symptoms and complications associated with
+jaundice
+Certain chemicals in bile may causeitching when
+too much of them end up in the skin. In newborns,
+insoluble bilirubin may get into the brain and do per-
+manent damage. Long-standing jaundice may upset
+This patient suffers from obstructive jaundice, which is often
+caused by gallstones. (Custom Medical Stock Photo.
+Reproduced by permission.)
+2086 Jaundice
+the balance of chemicals in the bile and cause stones to
+form. Apart from these potential complications and
+the discoloration of skin and eyes, jaundice by itself is
+inoffensive. Other symptoms are determined by the
+disease producing the jaundice.
+Diagnosis
+Physical examination
+In many cases the diagnosis of jaundice is sug-
+gested by the appearance of the patient’s eyes and
+complexion. The doctor will ask the patient to lie flat
+on the examining table in order to feel (palpate) the
+liver and spleen for enlargement and to evaluate any
+abdominal pain. The location and severity of abdom-
+inal pain and the presence or absence offever help the
+doctor to distinguish between hepatic and obstructive
+jaundice.
+Laboratory tests
+Disorders of blood formation can be diagnosed by
+more thorough examination of the blood or the bone
+marrow, where blood is made. Occasionally abone
+marrow biopsyis required, but usually the blood itself
+will reveal the diagnosis. The spleen can be evaluated
+by an ultrasound examination or a nuclear scan if the
+physical examination has not yielded enough
+information.
+Liver disease is usually assessed from blood stu-
+dies alone, but again a biopsy may be necessary to
+clarify less obvious conditions. Aliver biopsy is per-
+formed at the bedside. The doctor uses a thin needle to
+take a tiny core of tissue from the liver. The tissue
+sample is sent to the laboratory for examination
+under a microscope.
+Assessment of jaundice in newborns
+Newborns are more likely to have problems with
+jaundice if:
+/C15They are premature.
+/C15They are Asian or Native Americans.
+/C15They have been bruised during the birth process.
+/C15They have lost too much weight during the first few
+days.
+/C15They are born at high altitude.
+/C15The mother has diabetes.
+/C15Labor had to be induced.
+In 2003, research was continuing to find noninva-
+sive methods to determine bilirubin levels in newborns
+so that physicians did not have to rely on visual exam-
+ination alone to determine which infants should
+receive blood tests. Once these measurements of skin
+pigment can be shown effective and cost-effective in
+clinical practice, they may become more available.
+Another study used this measurement method incor-
+porated into home health visits to monitor babies
+within 24 hours of discharge from the hospital follow-
+ing birth.
+Imaging studies
+Disease in the biliary system can be identified by
+imaging techniques, of which there are many. X rays
+are taken a day after swallowing a contrast agent that
+is secreted into the bile. This study gives functional as
+well as anatomical information. There are several
+ways of injecting contrast dye directly into the bile
+ducts. It can be done through a thin needle pushed
+A newborn baby undergoes phototherapy with visible blue
+light to treat his jaundice. (Photograph by Ron Sutherland,
+Photo Researchers, Inc. Reproduced by permission.)
+Jaundice
+straight into the liver or through a scope passed
+through the stomach that can inject dye into the
+Ampulla of Vater. CT and MRI scans are very useful
+for imaging certain conditions like cancers in and
+around the liver or gallstones in the common bile duct.
+Treatment
+Jaundice in newborns
+Newborns are the only major category of patients
+in whom the jaundice itself requires attention. Because
+the insoluble bilirubin can get into the brain, the amount
+in the blood must not go over certain levels. If there is
+reason to suspect increased hemolysis in the newborn,
+the bilirubin level must be measured repeatedly during
+the first few days of life. If the level of bilirubin shortly
+after birth threatens to go too high, treatment must
+begin immediately. Exchanging most of the baby’s
+blood was the only way to reduce the amount of bilir-
+ubin until a few decades ago. Then it was discovered
+that bright blue light rendered the bilirubin harmless.
+Now jaundiced babies are fitted with eye protection and
+placed under bright fluorescent lights. The light chemi-
+cally alters the bilirubin in the blood as it passes through
+the baby’s skin. In 2003, researchers were testing a new
+drug called Stanate that showed promise in blocking
+bilirubin production. However, debate concerning the
+use of the drug for treatment of only those infants with
+jaundice or as a preventive measure was delaying its
+FDA approval and widespread use.
+Hemolytic disorders
+Hemolytic diseases are treated, if at all, with med-
+ications and blood transfusions, except in the case of a
+large spleen. Surgical removal of the spleen (splenect-
+omy) can sometimes curehemolytic anemia. Drugs that
+cause hemolysis or arrest the flow of bile must be
+stopped immediately.
+Hepatic jaundice
+Most liver diseases have no specific cure, but the
+liver is so robust that it can heal from severe damage
+and regenerate itself from a small remnant of its ori-
+ginal tissue.
+Post-hepatic jaundice
+Obstructive jaundice frequently requires a surgi-
+cal cure. If the original passageways cannot be
+restored, surgeons have several ways to create alter-
+nate routes. A popular technique is to sew an open
+piece of intestine over a bare patch of liver. Tiny bile
+ducts in that part of the liver will begin to discharge
+their bile into the intestine, and pressure from the
+obstructed ducts elsewhere will find release in that
+direction. As the flow increases, the ducts grow to
+accommodate it. Soon all the bile is redirected through
+the open pathways.
+KEY TERMS
+Ampulla of Vater— The widened portion of the
+duct through which the bile and pancreatic juices
+enter the intestine. Ampulla is a Latin word for a
+bottle with a narrow neck that opens into a wide
+body.
+Anemia— A condition in which the blood does not
+contain enough hemoglobin.
+Biliary system/Bile ducts— The gall bladder and
+the system of tubes that carries bile from the liver
+into the intestines.
+Bilirubin— A reddish pigment excreted by the liver
+into the bile as a breakdown product of
+hemoglobin.
+Crigler-Najjar syndrome— A moderate to severe
+form of hereditary jaundice.
+Erythroblastosis fetalis— A disorder of newborn
+infants marked by a high level of immature red
+blood cells (erythroblasts) in the infant’s blood.
+Gilbert’s syndrome— A mild hereditary form of
+jaundice.
+Glucose-6-phosphate dehydrogenase (G6PD) defi-
+ciency— A hereditary disorder that can lead to
+episodes of hemolytic anemia in combination
+with certain medications.
+Hemoglobin— The red chemical in blood cells that
+carries oxygen.
+Hemolysis— The destruction or breakdown of red
+blood cells.
+Hepatic— Refers to the liver.
+Icterus— Another name for jaundice.
+Microangiopathic— Pertaining to disorders of the
+small blood vessels.
+Pancreas— The organ beneath the stomach that
+produces digestive juices, insulin, and other
+hormones.
+Sickle cell disease— A hereditary defect in hemo-
+globin synthesis that changes the shape of red cells
+and makes them more fragile.
+Splenectomy— Surgical removal of the spleen.
+2088 Jaundice
+Prevention
+Erythroblastosis fetalis can be prevented by
+giving an Rh negative mother a gamma globulin solu-
+tion called RhoGAM whenever there is a possibility
+that she is developing antibodies to her baby’s blood.
+G6PD hemolysis can be prevented by testing patients
+before giving them drugs that can cause it. Medication
+side effects can be minimized by early detection and
+immediate cessation of the drug. Malaria can often be
+prevented by certain precautions when traveling in
+tropical or subtropical countries. These precautions
+include staying in after dark; using prophylactic
+drugs such as mefloquine; and protecting sleeping
+quarters with mosquito nets treated with insecticides
+and mosquito repellents. In 2003, new studies showed
+promise for a possible vaccine against malaria. Early
+trials showed thatvaccination combination might sti-
+mulate T-cell activity against malaria, the best type of
+protection that researchers can hope to find. However,
+further studies will have to be done.
+Resources
+PERIODICALS
+Grimm, David. ‘‘Baby Pigment Peril.’’U.S. News &World
+Report July 28, 2003: 39.
+Lawrence, David. ‘‘Combination Malaria Vaccine Shows
+Early Promise in Human Trials.’’The LancetMay 31,
+2003: 1875.
+Morantz, Carrie, and Brian Torrey. ‘‘AHRQ Report on
+Neonatal Jaundice.’’American Family PhysicianJune 1,
+2003: 2417.
+Richmond, Glenn, Melissa Brown, and Patricia Wagstaff.
+‘‘Using a Home Care Model to Monitor Bilirubin
+Levels in Early Discharged Infants.’’Topics in Health
+Information ManagementJanuary–March 2003: 39–43.
+ORGANIZATIONS
+American Liver Foundation. 1425 Pompton Ave., Cedar
+Grove, NJ 07009. (800) 223-0179. <http://www.
+liverfoundation.org> .
+J. Ricker Polsdorfer, MD
+Teresa G. Odle
+Jaw wiring
+Definition
+Jaw wiring, also known as maxillomandibular
+fixation, is a surgical procedure where metal pins and
+wires are anchored into the jaw bones and surround-
+ing tissues to keep the jaw from moving.
+Purpose
+Sports injuries, automobile accidents, falls, or fist-
+fights are a few of the situations where the jaw might
+be fractured or broken. In these cases, jaw wiring may
+be necessary to keep the bones aligned and stable while
+the jaw heals. The presence ofcancer or other diseased
+tissues may make removal and reconstruction of the
+jaw necessary. Wiring the jaws shut has been used in
+the past as a weight loss aid in cases of extremeobesity
+where other treatments had failed, although this pro-
+cedure is rarely used for that purpose today.
+Precautions
+Traumatic injuries to the face can cause damage to
+facial nerves and salivary glands and ducts. These
+injuries can also leavescars that may require addi-
+tional surgery to correct.
+Description
+Jaw wiring surgery can be performed by an oral or
+maxillofacial surgeon (a specially trained dentist), or
+by an otolaryngologist (a doctor specializing in sur-
+geries of the head and neck). The procedure may be
+done in a medical or dental office if the office is staffed
+and equipped to handle this type of surgery. More
+often, this surgery is performed in a hospital or med-
+ical center surgical area. If jaw wiring is required due
+to an injury, the surgeon may set the fracture immedi-
+ately before swelling sets in. It is also possible to wait
+(up to several weeks) until the swelling goes down and
+some of the soft tissue injuries have healed, prior to
+wiring the jaw fracture.
+The surgeon realigns the fractured bones. Every
+effort is made to restore the shape and appearance of
+the original jaw line. If any teeth were damaged, repair
+or replacement may be done at the same time. Small
+incisions may be made through the skin and surround-
+ing tissue so the pins and wires can be set into the
+jawbone to hold the fracture together. To prevent the
+lower jaw from moving during healing, pins and wires
+may be inserted into the top jaw, as well. The upper
+and lower jaws are then wired together in order to
+stabilize the fracture.
+As with other types of bonefractures, the jaw may
+take several weeks to heal. Another type of jawimmo-
+bilization that has been developed more recently, rigid
+fixation uses small metal plates and screws rather than
+pins and wires to secure the jaw bones. The main
+benefit of this technique is that the jaws do not have
+to be wired shut, allowing the patient to return to a
+more normal lifestyle sooner.
+Jaw wiring
+Preparation
+X rays of the fractured area may be taken prior to
+surgery. Depending on the extent of the facial injury or
+condition to be corrected, the patient may receive a
+sedative for relaxation, a local anesthetic drug to
+numb the area, and/or an anesthetic agent to induce
+unconsciousness prior to the surgery.
+Aftercare
+A patient whose jaw has been wired will not be
+able to eat solid foods for several weeks. In order for
+the bone and surrounding tissues to heal, it is impor-
+tant to maintain adequatenutrition. A liquid diet that
+can be consumed through a straw, will be required.
+Soft, precooked foods can be liquefied in a blender,
+however, it may be difficult for the patient to consume
+adequate calories, protein,vitamins, andminerals with
+this type of diet. Liquid diet formulas may be a good
+alternative. The patient will also have to be taught how
+to care for the mouth, teeth, and injured area while the
+wires are in place.
+Risks
+It is possible that scarring may occur due to the
+need to make small incisions in the skin in order to
+insert the wires. With any surgical procedure, there are
+risks associated with the anesthetic drugs used and the
+possibility of infection. If there is a risk that the patient
+may vomit, the jaw wiring may pose achoking hazard.
+It may be recommended that wire cutters be kept
+available in case the wires need to be cut in an emer-
+gency situation.
+Resources
+ORGANIZATIONS
+American Association of Oral & Maxillofacial Surgeons.
+9700 West Bryn Mawr Avenue; Rosemont, IL
+60018-5701; (847) 678-6200.
+American Dental Association. 211 E. Chicago Ave., Chicago,
+IL 60611. (312) 440-2500. <http://www.ada.org> .
+OTHER
+‘‘Know theScoreonFacial SportsInjuries’’The Virtual Hospital
+Page.University of Iowa. <http://www.vh.org> .
+‘‘Topic: Maxillofacial Trauma.’’Connecticut Maxillofacial
+Surgeons Page.<http://www.cmsllc.com/toptrm.html> .
+Altha Roberts Edgren
+JC virus infection see Progressive multifocal
+leukoencephalopathy
+Jejunostomy see Enterostomy
+Jet lag
+Definition
+Jet lag is a condition marked byfatigue, insom-
+nia, and irritability that is caused by air travel
+through changing time zones. It is commonplace: a
+2002 study of internationalbusiness travelers (IBTs)
+found that jet lag was one of the most common
+health problems reported, affecting as many as
+74% of IBTs.
+Description
+Living organisms are accustomed to periods of
+night and day alternating at set intervals. Most of the
+human body’s regulating hormones follow this cycle,
+known as circadian rhythm. The word circadian
+comes from the Latin, circa, meaning about, and
+dies, meaning day. These cycles are not exactly 24
+hours long, hence the ‘‘circa.’’ Each chemical has its
+own cycle of highs and lows, interacting with and
+influencing the other cycles. Body temperature, sleepi-
+ness, thyroid function, growth hormone, metabolic
+processes, adrenal hormones, and the sleep hormone
+melatonin all cycle with daylight. There is a direct
+connection between the retina (where light hits the
+back of the eye) and the part of the brain that controls
+all these hormones. Artificial light has some effect, but
+sunlight has much more.
+When people are without clocks in a compartment
+that is completely closed to sunlight, most of them fall
+into a circadian cycle of about 25 hours. Normally, all
+the regulating chemicals follow one another in order
+like threads in a weaving pattern. Every morning
+the sunlight resets the cycle, stimulating the leading
+KEY TERMS
+Oral and maxillofacial surgeon— A dentist who is
+trained to perform surgery to correct injuries,
+defects, or conditions of the mouth, teeth, jaws,
+and face.
+Otolaryngologist— A doctor who is trained to treat
+injuries, defects, or conditions of the head and
+neck.
+2090 Jet lag
+chemicals and thus compensating for the difference
+between the 24-hour day and the 25-hour innate
+rhythm.
+When traveling through a number of time zones,
+most people reset their rhythms within a few days,
+demonstrating the adaptability of the human species.
+Some people, however, have upset rhythms that last
+indefinitely.
+Causes and symptoms
+Traveling through a few time zones at a time is not
+as disruptive to circadian rhythms as traveling around
+the world can be. The foremost symptom of jet lag is
+altered sleep pattern—sleepiness during the day, and
+insomnia during the night. Jet lag may also include
+indigestion and trouble concentrating. Individuals
+afflicted by jet lag will alternate in and out of a normal
+day-night cycle.
+Treatment
+Current treatments
+In cases of short-term insomnia triggered by jet
+lag, a physician may recommend sleeping pills or
+prescription medication. Such medication should
+only be taken under the guidance of a health care
+professional.
+Investigational treatments
+In 2002, a team from Flanders University
+invented new jet lag sunglasses equipped with a vision
+device that used light to stimulate travelers brains.
+They believed that wearing the glasses before and
+during flights could help the human clock adjust
+more easily to changing time zones. The researchers
+were looking for a commercial partner to help them
+further study the glasses and make them widely avail-
+able. The effectiveness of glasses or other head-
+mounted light devices is still uncertain, however. A
+team of researchers at Columbia University reported
+in the fall of 2002 that the use of a head-mounted light
+visor yielded only modest improvement in the test
+subjects’ symptoms of jet lag.
+A newer medication that is considered investiga-
+tional is a melatonin agonist presently known as LY
+156735. An agonist is a drug that stimulates activity at
+cell receptors that are normally stimulated by such
+naturally occurring substances as melatonin. LY
+156735 was found to speed up the readaptation time
+of volunteer subjects following a simulated 9-hour
+time shift.
+Another new area of research involves the genes
+that encode the proteins governing circadian rhythms.
+It is known as of late 2002 that differences among
+individuals in adaptability to time zone changes are
+to some extent genetically determined. Targeting the
+genes that affect this adaptability may yield new treat-
+ments for jet lag and other disorders of circadian
+rhythm.
+Alternative treatment
+Exposure to bright morning sunlight cures jet lag
+after a few days in most people. A few will have
+prolonged sleep phase difficulties. For these, there is
+a curious treatment that has achieved success. By for-
+cing one’s self into a 27 hour day, complete with the
+appropriate stimulation from bright light, all the
+errant chemical cycles will be able to catch up during
+one week.
+When selecting an international flight, individuals
+should try to arrange an early evening arrival in their
+destination city. When an individual is traveling to a
+destination in the east, he or she can try going to bed
+and waking up a few hours earlier several days before
+their flight. If travel is to the west, going to bed and
+waking up later than usual can help the body start to
+adjust to the upcoming time change. More specific
+recommendations are available as of 2002, tailored
+to whether the person is traveling through six time
+zones, 7–9 zones, or 10 or more.
+The following precautions taken during an inter-
+national flight can help to limit or prevent jet lag:
+/C15Stay hydrated. Drink plenty of water and juices
+to prevent dehydration. Beverages and foods with
+caffeine should be avoided because of their stimulant
+properties. Alcohol should also be avoided.
+/C15Stretch and walk. As much movement as possible
+during a flight helps circulation, which moves nutri-
+ents and waste through the body and aids in
+elimination.
+/C15Stay on time. Set watches and clocks ahead to the
+time in the destination city to start adjusting to the
+change.
+/C15Sleep smart. Draw the shade and sleep during the eve-
+ning hours in the destination city, even if it is still day-
+light outside of the airplane. Earplugs and sleep masks
+may be helpful in blocking noise and light. Many
+airlines provide these items on international flights.
+/C15Dress comfortably. Wear or bring comfortable
+clothes and slippers that will make sleeping during
+the flight easier.
+Jet lag
+Once arriving in their destination city, individuals
+should spend as much time outdoors in the sunlight as
+possible during the day to reset their internal clock and
+lessen the symptoms of jet lag. Bedtime should be
+postponed until at least 10 P.M., with no daytime
+naps. If a daytime nap is absolutely necessary, it
+should be limited to no more than two hours.
+To promote a restful sleeping environment in a
+hotel setting, individuals should request that the hotel
+desk hold all phone calls. Because sleeping in too late
+can also prolong jet lag, an early wake up call should
+be requested if an alarm clock is not available. If the
+hotel room is noisy, a portable white noise machine
+can help to block outside traffic and hallway noises.
+A room air conditioner or fan can serve the same
+purpose. The temperature in the room should also be
+adjusted for sleeping comfort.
+All antioxidants help to decrease the effects of jet
+lag. Extra doses ofvitamins A, C, and E, as well as zinc
+and selenium, two days before and two days after a
+flight help to alleviate jet lag. Melatonin, a hormone
+which helps to regulate circadian rhythms, can also
+help to combat jet lag. Melatonin is available as an
+over-the-counter supplement in most health food
+stores and pharmacies, but no more than 3 mg should
+be used in a 24-hour period.
+If weather prevents an individual from spending
+time in the sunlight, light therapy may be beneficial in
+decreasing jet lag symptoms. Light therapy, orphoto-
+therapy, uses a device called a light box, which con-
+tains a set of fluorescent or incandescent lights in front
+of a reflector. Typically, the patient sits for 30 minutes
+next to a 10,000-lux box (which is about 50 times as
+bright as an ordinary indoor light). Light therapy is
+safe for most people, but those with eye diseases
+should consult a healthcare professional before under-
+going the treatment.
+Prognosis
+Jet lag usually lasts 24–48 hours after travel has
+taken place. In that short time period, the body adjusts
+to the time change, and with enough rest and daytime
+exposure to sunlight, it returns to normal circadian
+rhythm.
+Prevention
+Eating a high protein diet that is low in calories
+before intended travel may help reduce the effects of
+jet lag.
+Resources
+PERIODICALS
+Boulos, Z., M. M. Macchi, M. P. Sturchler, et al. ‘‘Light
+Visor Treatment for Jet Lag After Westward Travel
+Across Six Time Zones.’’Aviation, Space, and
+Environmental Medicine73 (October 2002): 953–963.
+‘‘Jet Lag Sunglasses Help Body Clock Tick.’’Optician
+August 2, 2002: 1.
+Monson, Nancy. ‘‘What Really Works for Jet Lag.’’Shape
+August 2002: 78.
+Nickelsen, T., A. Samel, M. Vejvoda, et al. ‘‘Chronobiotic
+Effects of the Melatonin Agonist LY 156735 Following
+aSimulated9h Time Shift:Resultsofa Placebo-Controlled
+Trial.’’Chronobiology International19 (September 2002):
+915–936.
+Parry, B. L. ‘‘Jet Lag: Minimizing Its Effects with Critically
+Timed Bright Light and Melatonin Administration.’’
+Journal of Molecular Microbiology and Biotechnology4
+(September 2002): 463–466.
+Rogers, H. L., and S. M. Reilly. ‘‘A Survey of the Health
+Experiences of International Business Travelers. Part
+One—Physiological Aspects.’’Journal of the American
+Association of Occupational Health Nurses50 (October
+2002): 449–459.
+Wisor, J. P. ‘‘Disorders of the Circadian Clock: Etiology and
+Possible Therapeutic Targets.’’Current Drug Targets:
+Cns and Neurological Disorders1 (December 2002):
+555–566.
+ORGANIZATIONS
+American Sleep Disorders Association. 1610 14th Street
+NW, Suite 300. Rochester, MN 55901. (507) 287–6006.
+National Sleep Foundation. 1367 Connecticut Avenue NW,
+Suite 200. Washington, DC 20036. (202) 785–2300.
+Paula Anne Ford-Martin
+Rebecca J. Frey, PhD
+KEY TERMS
+Agonist— A medication that has an affinity for and
+stimulates the activity of cell receptors that are
+normally stimulated by naturally occurring sub-
+stances, including melatonin.
+Circadian— Pertaining to biological rhythms
+occurring at approximately 24-hour intervals. Jet
+lag is caused by a disruption of the human body’s
+circadian clock.
+Hormone— A chemical made in one part of the
+body that has an effect on another part.
+Melatonin— A hormone that helps to regulate cir-
+cadian rhythms.
+2092 Jet lag
+Jock itch
+Definition
+Also known asTinea cruris, jock itch is a growth
+of fungus in the warm, moist area of the groin.
+Description
+Although there are many causes of jock itch,
+this term has become synonymous withtinea cruris,
+a common fungal infection that affects the groin
+and inner thighs of men and woman.Tinea is the
+name of the fungus; cruris comes from the Latin
+w o r df o rl e g .J o c ki t c hc a nd e v e l o pw h e nt i g h t
+garments trap moisture and heat. This creates an
+environment in which fungi multiply and flourish.
+Athletes often get jock itch but non-athletic men
+who sweat a lot can also get it. Jock itch occurs
+more commonly in men, but can affect women as
+well. The jock itch fungus may cause a rash on the
+upper and inner thighs, the armpits, and the area
+just underneath the breasts. Many people withtinea
+cruris also have athlete’s foot . Athlete’s foot is
+called tinea pedis.
+Causes & symptoms
+T h er a s ho fj o c ki t c hs t a r t si nt h eg r o i nf o l d
+usually on both sides. If the rash advances, it usually
+advances down the inner thigh. The advancing edge is
+redder and more raised than areas that have been
+infected longer. The advancing edge is usually scaly
+and very easily distinguished or well demarcated. The
+skin within the border turns a reddish-brown and
+loses much of its scale. Jock itch can spread to the
+pubic and genital regions and sometimes to the
+buttocks.
+Jock itch caused byT. rubrumdoes not involve the
+scrotum or penis. If those areas are involved, the most
+likely agent isCandida albicans, the same type of yeast
+that causes vaginal yeast infections.
+Diagnosis
+Often a case of jock itch can be identified based on
+the characteristic description previously described. If
+assessed by a conventional doctor, the area of affected
+skin may be scraped onto a glass slide for definitive
+diagnosis under the microscope. In order to determine
+the exact type of fungus present, a small piece of
+affected skin maybe sent off to the lab for further
+study.
+Treatment
+Typical conventional treatment for jock itch
+involves the use of an anti-fungal cream, spray, or
+powder twice a day for about two weeks. Three com-
+monly used, over-the-counter anti-fungals aremicona-
+zole (Micatin), clotrimazole (Lotrimin) andtolnaftate
+(Tinactin). While the tendency to discontinue treatment
+once itching disappears is common, it is important to
+use the anti-fungal for a full two-week course in order to
+prevent recurrence of the infection.
+Alternative treatment
+Topical treatments include poultices of pepper-
+mint, oregano, or lavender. Tea tree oil, diluted with
+a carrier oil of almond oil, can be applied to the rash
+several times per day. Cedarwood and jasmine oils can
+relieve itching when applied in the same manner.
+Grapefruit seed extract can be taken as a strong solu-
+tion of 15 drops in 1 oz of water.
+Another alternative remedy for jock itch is to
+wash the groin area with the diluted juice of a freshly
+squeezed lemon, which can help dry up the rash.
+A hair dryer on the cool setting can also be used on
+the area after showering to dry it thoroughly. A warm
+bath relieves itching in many patients. The affected
+area should kept clean and dry, and loose-fitting, cot-
+ton underwear is recommended.
+Prognosis
+Treatment for jock itch is quick and usually effec-
+tive, but the condition often comes back. With treat-
+ment, jock itch improves in two or three days and is
+completely gone in three or four weeks. The following
+people should be especially vigilant to prevent the
+problem from returning:
+/C15Athletes
+/C15People with fungal infections that affect other parts
+of the body (such as athlete’s foot)
+KEY TERMS
+Fungus— A single-celled or multi-celled organism
+without chlorophyll that reproduces by spores and
+lives by absorbing nutrients from organic matter.
+Scrotum— The external pouch of skin and muscle
+containing the testes (testicles).
+Vaginal yeast infection— An overgrowth of fungus
+in the vaginal area.
+Jock itch
+/C15People who wear tight clothing
+/C15People with damaged or altered immune systems,
+including people with HIV or AIDS
+Prevention
+The best prevention of jock itch is cleanliness and
+sanitation. This includes keeping the groin area dry,
+wearing loose-fitting rather than tight clothing, wear
+boxer shorts rather than briefs, change sweat-covered
+clothes as soon as possible, showering immediately
+after working out or playing a sport and then applying
+talc, and washing workout clothes or sports uniforms
+after each use.
+Resources
+BOOKS
+Icon Health Publications.Jock Itch—A Medical Dictionary,
+Bibliography, and Annotated Research Guide to Internet
+References San Diego: Icon Health Publications, 2003.
+PERIODICALS
+Grin, Caron. ‘‘Tinea: Diagnostic Clues, Treatment Keys.’’
+Consultant (February 2004): 214-216.
+‘‘Jock Itch.’’Clinical Reference Systems(January 1,
+2004): 1859.
+Schmitt, B. D. ‘‘Jock Itch for Teenagers.’’Clinical Reference
+Systems (January 1, 2004): 1858.
+ORGANIZATIONS
+American Academy of Dermatology. 1350 I St. NW, Suite
+870, Washington, DC 20005. (202) 842-3555. <http://
+www.aad.org> .
+OTHER
+August 5, 2003. National Institutes of Health Medical
+Encyclopedia Jock Itch<http://www.nlm.nih.gov/
+medlineplus/print/ency/article/ooo876.htm> .
+(Accessed March 30, 2005).
+Ken R. Wells,
+Jock itch see Ringworm
+Joint aspiration see Joint fluid analysis
+Joint biopsy
+Definition
+A joint or synovial membrane biopsy refers to a
+procedure where a sample of the joint lining or syno-
+vial membrane is taken.
+Purpose
+A joint biopsy is performed to determine why a
+joint is painful or swollen. It is usually reserved for
+more difficult cases where the diagnosis is not clear.
+The test can be used to diagnose bacterial or fungal
+infections, an abnormal buildup of iron,cancer,o r
+other diseases.
+Precautions
+The procedure must be done under very sterile
+conditions to reduce the risk of infection.
+Description
+The test is performed either in the doctor’s office,
+clinic, or hospital by a surgeon. There are many dif-
+ferent ways to perform this biopsy: through an inci-
+sion in the joint; with a scope inserted in the joint; or,
+more typically, by the insertion of a sharp instrument
+through the skin. The procedure can be taken from
+any joint, but the most common joint requiring biopsy
+is the knee. A sharp instrument (trocar) is pushed into
+the joint space. A needle with an attached syringe is
+inserted into the joint to withdraw fluid for laboratory
+analysis. The surgeon may instill numbing medicine
+into the joint and along the needle track before the
+needle is withdrawn. The trocar and then the biopsy
+needle is inserted and specimens taken. After the speci-
+men is taken, both the trocar and the biopsy needle are
+removed, a bandage is placed over the joint, and the
+samples are sent to pathology for analysis.
+Preparation
+Blood tests will be done to check that blood clots
+properly. A mild sedative may be given before the
+procedure. With the patient lying down, the skin
+over the joint is disinfected and a local anesthetic is
+injected into the skin and tissue just below the skin.
+KEY TERMS
+Joint— The point where two bones meet.
+Pathology— The branch of medicine that looks at
+abnormal changes in cells and tissues which signal
+disease.
+Synovial membrane— Membrane lining a joint.
+Trocar— A sharp pointed tube through which a
+needle can be inserted.
+2094 Joint biopsy
+Aftercare
+The joint will need rest for at least one day.
+Normal activity can resume if there is no increased
+pain or swelling.
+Risks
+There is a chance of joint swelling or tenderness.
+Rarely, bleeding and infection can occur in the joint,
+or the biopsy needle could break off or strike a nerve
+or blood vessel. The risk of infection is higher if the
+patient has an immune deficiency.
+Resources
+BOOKS
+Schumacher, H. Ralph, Jr. ‘‘Synovial Fluid Analysis and
+Synovial Biopsy.’’ InTextbook of Rheumatology, edited
+by William N. Kelley, et al. Philadelphia: W. B.
+Saunders Co., 1997.
+Jeanine Barone, Physiologist
+Joint endoscopy see Arthroscopy
+Joint fluid analysis
+Definition
+Joint fluid analysis, also called synovial fluid ana-
+lysis, or arthrocentesis, is a procedure used to assess
+joint-related abnormalities, such as in the knee or
+elbow.
+Purpose
+The purpose of a joint fluid analysis is to identify
+the cause of swelling in the joints, to relievepain and
+distention from fluid accumulation in the joint, and to
+diagnose certain types of arthritis and inflammatory
+joint diseases. The test is also a method to determine
+whether an infection, either bacterial or fungal, exists
+within the joint.
+Precautions
+Joint fluid analysis should not be performed on
+any patient who is uncooperative, especially if the
+patient cannot or will not keep the joint immobile
+throughout the procedure. Patients with certain infec-
+tions should be excluded from the procedure, particu-
+larly those who have a local infection along the
+proposed needle track. The joint space should be
+accessible. Therefore, a poorly accessible joint space,
+such as in hip aspiration in an obese patient, should
+not be subject to this procedure.
+Description
+The test is also called arthrocentesis, joint tap, and
+closed joint aspiration. Normal synovial fluid is a clear
+or pale-yellow fluid found in small amounts in joints,
+bursae (fluid-filled sac found on points of friction, like
+joints), and tendon sheaths. The procedure is done by
+passing a needle into a joint space and sucking out
+(aspirating) synovial fluid for diagnostic analysis.
+When the sample is sent to the laboratory, the fluid
+is analyzed for color, clarity, quantity, and chemical
+composition. It is also examined microscopically to
+check for the presence of bacteria and other cells.
+The procedure takes about 10 minutes. Prior to
+the procedure, any risks that are involved should be
+explained to the patient. No intravenous pain medica-
+tions or sedatives are required, although the patient
+will be given a local anesthetic.
+The patient is asked to lie on their back and
+remain relaxed. The local anesthetic, typically an
+injection of lidocaine, is then administered. The clin-
+ician is usually seated next to the patient. Then the
+clinician marks exactly where the needle is to enter. As
+the needle enters the joint, a ‘‘pop’’ may be felt or
+heard. This is normal. Correct placement of the needle
+in the joint space is normally painless. At this point,
+the clinician slowly drains some of the fluid into the
+syringe. The needle is then withdrawn and adhesive
+tape is placed over the needle site.
+Preparation
+Glucose, or sugar, in the joint can be a signal of
+arthritis. If the clinician will be doing a glucose test, the
+patient will be asked to fast for 6-12 hours preceding
+the procedure. If not, there is no special preparation
+required for a joint fluid analysis.
+Aftercare
+Some post-procedural pain may be experienced.
+For this reason, the patient should arrange to be dri-
+ven home by someone else. Aftercare of the joints will
+depend on the results of the analysis.
+Risks
+While joint fluid analysis is generally a safe pro-
+cedure, especially when performed on a large, easily
+accessible joint, such as the knee, some risks are
+Joint fluid analysis

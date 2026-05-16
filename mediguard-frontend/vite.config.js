@@ -242,6 +242,13 @@ export default defineConfig({
 	],
 	server: {
 		cors: true,
+		proxy: {
+			'/api': {
+				target: 'http://127.0.0.1:8002',
+				changeOrigin: true,
+				rewrite: (url) => url.replace(/^\/api/, ''),
+			},
+		},
 		headers: {
 			'Cross-Origin-Embedder-Policy': 'credentialless',
 		},

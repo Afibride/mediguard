@@ -1,0 +1,1089 @@
+DISEASE: Measles
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+Transferrin test
+The transferrin test is a direct measurement of
+transferrin–which is also called siderophilin–levels in
+the blood. Some laboratories prefer this measurement
+to the TIBC. The saturation level of the transferrin
+can be calculated by dividing the serum iron level by
+the TIBC.
+Ferritin test
+The ferritin test measures the level of a protein in
+the blood that stores iron for later use by the body.
+Medications that can cause increased ferritin
+levels include dietary iron supplements. In addition,
+some diseases that do not directly affect the body’s
+iron storage can cause artificially high ferritin levels.
+These disorders include infections, late-stage cancers,
+lymphomas, and severe inflammations. Alcoholics
+often have high ferritin levels.
+Preparation
+Patient history
+Before patients are tested for iron, they should be
+checked for any of the following factors:
+/C15Prescription medications that affect iron levels,
+absorption, or storage
+/C15Blood transfusion or radioactive medications within
+the last four days
+/C15Recent extreme stress or sleep deprivation
+/C15Recent eating habits. Test results can be affected by
+eating large amounts of iron-rich foods shortly
+before the blood test.
+Fasting
+Patients scheduled for an iron level, TIBC, or
+transferrin test should fast for 12 hours before the
+blood is drawn. They are allowed to drink water.
+Patients scheduled for a ferritin test do not need to
+fast but they should not have any alcoholic beverages
+before the test.
+Aftercare
+Aftercare consists of routine care of the area
+around the venipuncture.
+Risks
+The primary risk is the possibility of a bruise or
+swelling in the area of the venipuncture. The patient
+can apply moist warm compresses if there is any
+discomfort.
+Normal results
+Iron level test
+Normal serum iron values are as follows:
+/C15Adult males: 75–175 micrograms/dL
+/C15Adult females: 65–165 micrograms/dL
+/C15Children: 50–120 micrograms/dL
+/C15Newborns: 100–250 micrograms/dL.
+TIBC test
+Normal TIBC values are as follows:
+/C15Adult males: 300–400 micrograms/dL
+/C15Adult females: 300–450 micrograms/dL.
+Transferrin test
+Normal transferrin values are as follows:
+/C15Adult males: 200–400 mg/dL
+/C15Adult females: 200–400 mg/dL
+/C15Children: 203–360 mg/dL
+/C15Newborns: 130–275 mg/dL.
+Normal transferrin saturation values are between
+30–40%.
+Ferritin test
+Normal ferritin values are as follows:
+/C15Adult males: 20–300 ng/mL
+/C15Adult females: 20–120 ng/mL
+/C15Children (one month): 200–600 ng/mL
+/C15Children (two to five months): 50–200 ng/mL
+/C15Children (six months to 15 years): 7–140 ng/mL
+/C15Newborns: 25–200 ng/mL.
+Abnormal results
+Iron level test
+Serum iron level isincreased in thalassemia, hemo-
+chromatosis, severe hepatitis,liver disease, lead poison-
+ing, acute leukemia, and kidney disease. It is also
+increased by multiple blood transfusions and intra-
+muscular iron injections.
+Iron tests
+Iron levels above 350–500 micrograms/dL are
+considered toxic; levels over 1000 micrograms/dL
+indicate severe iron poisoning.
+Serum iron level isdecreased in iron deficiency
+anemia, chronic blood loss, chronic diseases (lupus,
+rheumatoid arthritis ), late pregnancy, chronically
+heavy menstrual periods, and thyroid deficiency.
+TIBC test
+The TIBC isincreased in iron deficiency anemia,
+polycythemia vera, pregnancy, blood loss, severe hepa-
+titis, and the use of birth control pills.
+The TIBC is decreased in malnutrition, severe
+burns, hemochromatosis, anemia caused by infections
+and chronic diseases,cirrhosis of the liver, and kidney
+disease.
+Transferrin test
+Transferrin isincreased in iron deficiency anemia,
+pregnancy, hormone replacement therapy(HRT), and
+the use of birth control pills.
+Transferrin isdecreased in protein deficiency, liver
+damage, malnutrition, severe burns, kidney disease,
+chronic infections, and certain genetic disorders.
+Ferritin test
+Ferritin isincreased in liver disease, iron overload
+from hemochromatosis, certain types of anemia, acute
+leukemia, Hodgkin’s disease, breast cancer, thalasse-
+mia, infections, inflammatory diseases, and hemosi-
+derosis. Ferritin levels may be normal or slightly
+above normal in patients with kidney disease.
+Ferritin isdecreased in chronic iron deficiency and
+severe protein depletion.
+Resources
+BOOKS
+Pagana, Kathleen Deska.Mosby’s Manual of Diagnostic and
+Laboratory Tests.St. Louis: Mosby, Inc., 1998.
+Rebecca J. Frey, PhD
+Irregular bite see Malocclusion
+Irritable bowel syndrome
+Definition
+Irritable bowel syndrome (IBS) is a common
+intestinal condition characterized by abdominalpain
+and cramps; changes in bowel movements (diarrhea,
+constipation, or both); gassiness; bloating;nausea; and
+other symptoms. There is no cure for IBS. Much about
+the condition remains unknown or poorly understood;
+however, dietary changes, drugs, and psychological
+treatment are often able to eliminate or substantially
+reduce its symptoms.
+Description
+IBS is the name people use today for a condition
+that was once called–among other things–colitis,
+mucous colitis, spastic colon, nervous colon, spastic
+bowel, and functional bowel disorder. Some of these
+names reflected the now outdated belief that IBS is a
+purely psychological disorder, a product of the
+patient’s imagination. Although modern medicine
+KEY TERMS
+Anemia— A disorder marked by low hemoglobin
+levels in red blood cells, which leads to a defi-
+ciency of oxygen in the blood.
+Ferritin— A protein found in the liver, spleen, and
+bone marrow that stores iron.
+Hemochromatosis— A disorder of iron absorption
+characterized by bronze-colored skin. It can cause
+painful joints, diabetes, and liver damage if the iron
+concentration is not lowered.
+Hemosiderosis— An overload of iron in the body
+resulting from repeated blood transfusions.
+Hemosiderosis occurs most often in patients with
+thalassemia.
+Iron poisoning— A potentially fatal condition
+caused by swallowing large amounts of iron dietary
+supplements. Most cases occur in children who
+have taken adult- strength iron formulas. The symp-
+toms of iron poisoning include vomiting, bloody
+diarrhea, convulsions, low blood pressure, and
+turning blue.
+Plasma— The liquid part of blood.
+Siderophilin— Another name for transferrin.
+Thalassemia— A hereditary form of anemia that
+occurs most frequently in people of Mediterranean
+origin.
+Transferrin— A protein in blood plasma that carries
+iron derived from food intake to the liver, spleen,
+and bone marrow.
+2068 Irritable bowel syndrome
+recognizes thatstress can trigger IBS attacks, medical
+specialists agree that IBS is a genuine physical
+disorder–or group of disorders–with specific identifi-
+able characteristics.
+No one knows for sure how many Americans
+suffer from IBS. Surveys indicate a range of 10–20%,
+with perhaps as many as 30% of Americans experien-
+cing IBS at some point in their lives. IBS normally
+makes its first appearance during young adulthood,
+and in half of all cases symptoms begin before age 35.
+Women with IBS outnumber men by two to one, for
+reasons that are not yet understood. IBS is responsible
+for more time lost from work and school than any
+medical problem other than the common cold.I t
+accounts for a substantial proportion of the patients
+seen by specialists in diseases of the digestive system
+(gastroenterologists). Yet only half–possibly as few as
+15%–of IBS sufferers ever consult a doctor.
+Causes and symptoms
+Symptoms
+The symptoms of IBS tend to rise and fall in inten-
+sity rather than growing steadily worse over time. They
+always include abdominal pain, which may be relieved
+by defecation; diarrhea or constipation; or diarrhea
+alternating with constipation. Other symptoms–which
+vary from person to person–include cramps; gassiness;
+bloating; nausea; a powerful and uncontrollable urge to
+defecate (urgency); passage of a sticky fluid (mucus)
+during bowel movements; or the feeling after finishing
+a bowel movement that the bowels are still not comple-
+tely empty. The accepted diagnostic criteria–known as
+the Rome criteria–require at least three months of con-
+tinuous or recurrent symptoms before IBS can be con-
+firmed. According to Christine B. Dalton and Douglas
+A. Drossman in theAmerican Family Physician,an
+estimated 70% of IBS cases can be described as
+‘‘mild;’’ 25% as ‘‘moderate;’’ and 5% as ‘‘severe.’’ In
+mild cases the symptoms are slight. As a general rule,
+they are not present all the time and do not interfere
+with work and other normal activities. Moderate
+IBS occasionally disrupts normal activities and may
+cause some psychological problems. People with severe
+IBS often find living a normal life impossible and
+experience crippling psychological problems as a result.
+For some the physical pain is constant and intense.
+Causes
+Researchers remain unsure about the cause or
+causes of IBS. It is called a functional disorder
+because it is thought to result from changes in the
+activity of the major part of the large intestine (the
+colon). After food is digested by the stomach and
+small intestine, the undige sted material passes in
+liquid form into the colon, which absorbs water and
+salts. This process may take several days. In a healthy
+person the colon is quiet during most of that period
+except after meals, when its muscles contract in a
+series of wavelike movements called peristalsis.
+Peristalsis helps absorption by bringing the undi-
+gested material into contact with the colon wall. It
+also pushes undigested material that has been con-
+verted into solid or semisolid feces toward the
+rectum, where it remains until defecation. In IBS,
+however, the normal rhythm and intensity of peri-
+stalsis is disrupted. Som etimes there is too little
+peristalsis, which can slow the passage of undigested
+material through the colon and cause constipation.
+Sometimes there is too much, which has the opposite
+effect and causes diarrhea. A Johns Hopkins
+University study found that healthy volunteers
+experienced 6–8 contractions of the colon each day,
+compared with up to 25 contractions a day for volun-
+teers suffering from IBS withd i a r r h e a ,a n da na l m o s t
+complete absence of contractions among constipated
+IBS volunteers. In addition to differences in the
+number of contractions, many of the IBS volunteers
+experienced powerful spasmodic contractions affect-
+ing a larger-than-normal area of the colon–‘‘like
+having a Charlie horse in the gut,’’ according to one
+of the investigators.
+DIET. Some kinds of food and drink appear to
+play a key role in triggering IBS attacks. Food and
+drink that healthy people can ingest without any
+trouble may disrupt peristalsis in IBS patients, which
+probably explains why IBS attacks often occur shortly
+after meals. Chocolate, milk products, caffeine
+(in coffee, tea, colas, and other drinks), and large
+quantities of alcohol are some of the chief culprits.
+Other kinds of food have also been identified as
+problems, however, and the pattern of what can and
+cannot be tolerated is different for each person.
+Characteristically, IBS symptoms rarely occur at
+night and disrupt the patient’s sleep.
+STRESS. Stress is an important factor in IBS
+because of the close nervous system connections
+between the brain and the intestines. Although
+researchers do not yet understand all of the links
+between changes in the nervous system and IBS, they
+point out the similarities between mild digestive upsets
+and IBS. Just as healthy people can feel nauseated or
+have an upset stomach when under stress, people with
+IBS react the same way, but to a greater degree.
+Finally, IBS symptoms sometimes intensify during
+Irritable bowel syndrome
+menstruation, which suggests that female reproduc-
+tive hormones are another trigger.
+Diagnosis
+Diagnosing IBS is a fairly complex task because
+the disorder does not produce changes that can be
+identified during aphysical examinationor by labora-
+tory tests. When IBS is suspected, the doctor (who can
+be either a family doctor or a specialist) needs to
+determine whether the patient’s symptoms satisfy the
+Rome criteria. The doctor must rule out other condi-
+tions that resemble IBS, such asCrohn’s disease and
+ulcerative colitis. These disorders are ruled out by
+questioning the patient about his or her physical and
+mental health (the medical history), performing a
+physical examination, and ordering laboratory tests.
+Normally the patient is asked to provide a stool sam-
+ple that can be tested for blood and intestinal para-
+sites. In some cases x rays or an internal examination
+of the colon using a flexible instrument inserted
+through the anus (a sigmoidoscope or colonoscope)
+is necessary. The doctor also may ask the patient to try
+a lactose-free diet for two or three weeks to see
+whether lactose intoleranceis causing the symptoms.
+Treatment
+Dietary changes, sometimes supplemented by
+drugs or psychotherapy, are considered the key to
+successful treatment. The following approach, offered
+by Dalton and Drossman, is typical of the advice
+found in the medical literature on IBS. The authors
+tie their approach to the severity of the patient’s
+symptoms:
+Mild symptoms
+Dalton and Drossman recommend a low-fat,
+high-fiber diet. Problem-causing substances such as
+lactose, caffeine, beans, cabbage, cucumbers, broccoli,
+fatty foods, alcohol, and medications should be
+identified and avoided. Bran or 15-25 grams a day
+of an over-the-counter psyllium laxative (Metamucil
+or Fiberall) may also help both constipation and diar-
+rhea. The patient can still have milk or milk products if
+lactose intolerance is not a problem. People with irre-
+gular bowel habits–particularly constipated patients–
+may be helped by establishing set times for meals and
+bathroom visits.
+Moderate symptoms
+The advice given by Dalton and Drossman in mild
+cases applies here as well. They also suggest that
+patients keep a diary of symptoms for two or three
+weeks, covering daily activities including meals, and
+emotional responses to events. The doctor can then
+review the diary with the patient to identify possible
+problem areas.
+Although a high-fiber diet remains the standard
+treatment for constipated patients, suchlaxatives as
+lactulose (Chronulac) or sorbitol may be prescribed.
+Loperamide (Imodium) and cholestyramine (Questran)
+are suggested for diarrhea. Abdominal pain after
+meals can be reduced by takingantispasmodic drugs
+such as hyoscyamine (Anaspaz, Cystospaz, or Levsin)
+or dicyclomine (Bemote, Bentyl, or Di-Spaz) before
+eating.
+Dalton and Drossman also suggest psychological
+counseling or behavioral therapy for some patients to
+reduce anxiety and to learn to cope with the pain and
+other symptoms of IBS. Relaxation therapy, hypnosis,
+biofeedback, and cognitive-behavioral therapy are
+examples of behavioral therapy.
+Severe symptoms
+When IBS produces constant pain that interferes
+with everyday life,antidepressant drugs can help by
+blocking pain transmission from the nervous system.
+Dalton and Drossman also underscore the importance
+Normal and diseased (center) colons. Areas of constriction in
+the colon cause constipation, while areas of distention cause
+diarrhea. (John Bavosi/Science Photo Library. Custom Medical
+Stock Photo. Reproduced by permission.)
+2070 Irritable bowel syndrome
+of an ongoing and supportive doctor-patient
+relationship.
+Alternative treatment
+Alternative and mainstream approaches to IBS
+treatment overlap to a certain extent. Like mainstream
+doctors, alternative practitioners advise a high-fiber
+diet to reduce digestive system irritation. They also
+suggest avoiding alcohol, caffeine, and fatty, gassy,
+or spicy foods. Recommended stress management
+techniques include yoga, meditation, hypnosis, bio-
+feedback, andreflexology. Reflexology is a technique
+of foot massage that is thought to relieve diarrhea,
+constipation, and other IBS symptoms.
+Alternative medicine also emphasizes such herbal
+remedies as ginger (Zingiber officinale), buckthorn
+(Rhamnus purshiana), and enteric-coated peppermint
+oil. Enteric coating prevents digestion until the pep-
+permint oil reaches the small intestine, thus avoiding
+irritation of the upper part of the digestive tract.
+Chamomile (Matricaria recutita), valerian (Valeriana
+officinalis), rosemary (Rosemarinus officinalis), lemon
+balm (Melissa officinalis), and other herbs are recom-
+mended for their antispasmodic properties. The list of
+alternative treatments for IBS is in fact quite long. It
+includes aromatherapy, homeopathy, hydrotherapy,
+juice therapy, acupuncture, chiropractic, osteopathy,
+naturopathic medicine, and Chinese traditional herbal
+medicine.
+Prognosis
+IBS is not a life-threatening condition. It does
+not cause intestinal bleeding or inflammation, nor
+does it cause other bowel diseases or cancer.
+Although IBS can last a lifetime, in up to 30% of
+cases the symptoms eventually disappear. Even if the
+symptoms cannot be eliminated, with appropriate
+treatment they can usually be brought under control
+to the point where IBS becomes merely an occasional
+inconvenience. Treatment requires a long-term
+commitment, however; six months or more may be
+needed before the patient notices substantial
+improvement.
+Resources
+ORGANIZATIONS
+International Foundation for Functional Gastrointestinal
+Disorders. P.O. Box 17864, Milwaukee, WI 53217.
+(888) 964-2001. <http://www.iffgd.org> .
+National Digestive Diseases Information Clearinghouse.
+2 Information Way, Bethesda, MD 20892-3570. (800)
+891-5389. <http://www.niddk.nih.gov/health/digest/
+nddic.htm> .
+Howard Baker
+Ischemia
+Definition
+Ischemia is an insufficient supply of blood to an
+organ, usually due to a blocked artery.
+Description
+Myocardial ischemia is an intermediate condition
+in coronary artery diseaseduring which the heart tissue
+is slowly or suddenly starved of oxygen and other
+nutrients. Eventually, the affected heart tissue will
+die. When blood flow is completely blocked to the
+heart, ischemia can lead to aheart attack. Ischemia
+can be silent or symptomatic. According to the
+American Heart Association, up to four million
+Americans may have silent ischemia and be at high
+risk of having a heart attack with no warning.
+KEY TERMS
+Anus— The opening at the lower end of the rectum.
+Crohn’s disease— A disease characterized by
+inflammation of the intestines. Its early symptoms
+may resemble those of IBS.
+Defecation— Passage of feces through the anus.
+Feces— Undigested food and other waste that is
+eliminated through the anus. Feces are also called
+fecal matter or stools.
+Lactose— A sugar found in milk and milk products.
+Some people are lactose i ntolerant, meaning
+they have trouble digesting lactose. Lactose intol-
+erance can produce symptoms resembling those
+of IBS.
+Peristalsis— The periodic waves of muscular con-
+tractions that move food through the intestines
+during the process of digestion.
+Ulcerative colitis— A disease that inflames and
+causes breaks (ulcers) in the colon and rectum,
+which are parts of the large intestine.
+Ischemia
+Symptomatic ischemia is characterized by chest
+pain called angina pectoris. The American Heart
+Association estimates that nearly seven million
+Americans have angina pectoris, usually called
+angina. Angina occurs more frequently in women
+than in men, and in blacks and Hispanics more than
+in whites. It also occurs more frequently as people
+age–25% of women over the age of 85 and 27% of
+men who are 80–84 years old have angina.
+People with angina are at risk of having a heart
+attack. Stable angina occurs during exertion, can be
+quickly relieved by resting or taking nitroglycerine,
+and lasts from three to twenty minutes. Unstable
+angina, which increases the risk of a heart attack,
+occurs more frequently, lasts longer, is more severe,
+and may cause discomfort during rest or light
+exertion.
+Ischemia can also occur in the arteries of the
+brain, where blockages can lead to astroke. About
+80–85% of all strokes are ischemic. Most blockages in
+the cerebral arteries are due to a blood clot, often in
+an artery narrowed by plaque. Sometimes, a blood
+clot in the heart or aorta travels to a cerebral artery.
+A transient ischemic attack(TIA) is a ‘‘mini-stroke’’
+caused by a temporary deficiency of blood supply to
+the brain. It occurs suddenly, lasts a few minutes to
+a few hours, and is a strong warning sign of an
+impending stroke. Ischemia can also effect intestines,
+legs, feet and kidneys. Pain, malfunctions, and damage
+in those areas may result.
+Causes and symptoms
+Ischemia is almost always caused by blockage of
+an artery, usually due to atherosclerotic plaque.
+Myocardial ischemia is also caused by blood clots
+(which tend to form on plaque), artery spasms or
+contractions, or any of these factors combined. Silent
+ischemia is usually caused by emotional or mental
+stress or by exertion, but there are no symptoms.
+Angina is usually caused by increased oxygen demand
+when the heart is working harder than usual, for
+example, duringexercise, or during mental or physical
+stress. According to researchers at Harvard
+University, physical stress is harder on the heart than
+mental stress. A TIA is caused by a blood clot briefly
+blocking a cerebral artery.
+Risk factors
+The risk factors for myocardial ischemia are the
+same as those for coronary artery disease. For TIA,
+coronary artery disease is also a risk factor.
+/C15Heredity. People whose parents have coronary artery
+disease are more likely to develop it. African
+Americans are also at higher risk.
+/C15Sex. Men are more likely to have heart attacks than
+women, and to have them at a younger age.
+/C15Age. Men who are 45 years of age and older and
+women who are 55 years of age and older are con-
+sidered to be at risk.
+/C15Smoking. Smoking increases both the chance of
+developing coronary artery disease and the chance
+of dying from it. Second hand smoke may also
+increase risk.
+/C15High cholesterol. Risk of developing coronary artery
+disease increases as blood cholesterol levels increase.
+When combined with other factors, the risk is even
+greater.
+/C15High blood pressure. High blood pressure makes the
+heart work harder, and with time, weakens it. When
+combined withobesity, smoking, high cholesterol, or
+diabetes, the risk of heart attack or stroke increases
+several times.
+/C15Lack of physical activity. Lack of exercise increases
+the risk of coronary artery disease.
+/C15Diabetes mellitus. The risk of developing coronary
+artery disease is seriously increased for diabetics.
+/C15Obesity. Excess weight increases the strain on the
+heart and increases the risk of developing coronary
+artery disease, even if no other risk factors are pre-
+sent. Obesity increases blood pressure and blood
+cholesterol, and can lead to diabetes.
+/C15Stress and anger. Some scientists believe that
+stress and anger can contribute to the develop-
+ment of coronary artery disease. Stress increases
+the heart rate and blood pressure and can injure
+the lining of the arteries. Angina attacks often
+occur after anger, as do many heart attacks and
+strokes.
+Angina symptoms include:
+/C15A tight, squeezing, heavy, burning, orchoking pain
+that is usually beneath the breastbone—the pain may
+spread to the throat, jaw, or one arm
+/C15A feeling of heaviness or tightness that is not painful
+/C15A feeling similar to gas or indigestion
+/C15Attacks brought on by exertion and relieved by
+rest.
+If the pain or discomfort continues or intensifies,
+immediate medical help should be sought, ideally
+within 30 minutes.
+2072 Ischemia
+TIA symptoms include:
+/C15Sudden weakness, tingling,o r numbness, usually in
+one arm or leg or both the arm and leg on the same
+side of the body, as well as sometimes in the face
+/C15Sudden loss of coordination
+/C15Loss of vision or double vision
+/C15Difficulty speaking
+/C15Vertigo and loss of balance.
+Diagnosis
+Diagnostic tests for myocardial ischemia include:
+resting, exercise, or ambulatory electrocardiograms;
+scintigraphic studies (radioactive heart scans);echo-
+cardiography; coronaryangiography; and, rarely,posi-
+tron emission tomography. Diagnostic tests for TIA
+include physician review of symptoms, computed
+tomography scans (CT scans), carotid artery ultra-
+sound (Doppler ultrasonography), andmagnetic reso-
+nance imaging . Angiography is the best test for
+ischemia of any organ.
+An electrocardiogram (ECG) shows the heart’s
+activity and may reveal a lack of oxygen. Electrodes
+covered with conducting jelly are placed on the
+patient’s chest, arms, and legs. Impulses of the heart’s
+activity are recorded on paper. The test takes about
+10 minutes and is performed in a physician’s office.
+About 25% of patients with angina have normal elec-
+trocardiograms. Another type of electrocardiogram,
+the exercisestress test, measures response to exertion
+when the patient is exercising on a treadmill or a
+stationary bike. It is performed in a physician’s office
+or an exercise laboratory and takes 15 to 30 minutes.
+This test is more accurate than a resting ECG in
+diagnosing ischemia. Sometimes an ambulatory ECG
+is ordered. For this test, the patient wears a portable
+ECG machine called a Holter monitor for 12, 24, or 48
+hours.
+Myocardial perfusion scintigraphy and radionu-
+clide angiography are nuclear studies involving the
+injection of a radioactive material (e.g., thallium)
+which is absorbed by healthy tissue. A gamma scintil-
+lation camera displays and records a series of images
+of the radioactive material’s movement through the
+heart. Both tests are usually performed in a hospital’s
+nuclear medicine department and take about 30 min-
+utes to an hour. A perfusion scan is sometimes per-
+formed at the end of a stress test.
+An echocardiogram uses sound waves to create an
+image of the heart’s chambers and valves. The techni-
+cian applies gel to a handheld transducer then presses
+it against the patient’s chest. The heart’s sound waves
+are converted into an image on a monitor. Performed
+in a cardiology outpatient diagnostic laboratory, the
+test takes 30 minutes to an hour. It can reveal abnorm-
+alities in the heart wall that indicate ischemia, but it
+doesn’t evaluate the coronary arteries directly.
+Coronary angiography is the most accurate diag-
+nostic technique, but it is also the most invasive. It
+shows the heart’s chambers, great vessels, and coron-
+ary arteries by using a contrast solution and x-ray
+technology. A moving picture is recorded of the
+blood flow through the coronary arteries. The patient
+is awake, but sedated, and connected to ECG electro-
+des and an intravenous line. A local anesthetic is
+injected. The cardiologist then inserts a catheter into
+a blood vessel and guides it into the heart. Coronary
+angiography is performed in acardiac catheterization
+laboratory and takes from half an hour to two hours.
+Positron emission tomography (PET) is a non-
+invasive nuclear test used to evaluate the heart tissue.
+A PET scanner traces high-energy gamma rays
+released from radioactive particles to provide three-
+dimensional images of the heart tissue. Performed at a
+hospital, it usually takes from one hour to one hour
+and 45 minutes. PET is very expensive and not widely
+available.
+Computed tomography scans (CT scans) and
+magnetic resonance imaging (MRI) are computerized
+scanning methods. CT scanning uses a thin x-ray beam
+to show three-dimensional views of soft tissues. It is
+performed at a hospital or clinic and takes less than a
+minute. MRI uses a magnetic field to produce clear,
+cross-sectional images of soft tissues. The patient lies
+on a table which slides into a tunnel-like scanner. It is
+usually performed at a hospital and takes about 30
+minutes.
+Treatment
+Angina is treated with drug therapy and surgery.
+Drugs such as nitrates, beta-blockers, and calcium
+channel blockers relieve chest pain, but they cannot
+clear blocked arteries. Aspirin helps prevent blood
+clots. Surgical procedures include percutaneous trans-
+luminal coronary angioplasty and coronary artery
+bypass graft surgery.
+Nitroglycerin is the classic treatment for angina. It
+quickly relieves pain and discomfort by opening the
+coronary arteries and allowing more blood to flow to
+the heart.Beta blockersreduce the amount of oxygen
+required by the heart during stress. Calcium channel
+blockers help keep the arteries open and reduce blood
+Ischemia
+pressure. Aspirin helps prevent blood clots from form-
+ing on plaques.
+Percutaneous transluminal coronary angioplasty
+and coronary artery bypass graft surgery are invasive
+procedures which improve blood flow in the coronary
+arteries. Percutaneous transluminal coronary angio-
+plasty is a non-surgical procedure in which a catheter
+tipped with a balloon is threaded from a blood vessel
+in the thigh into the blocked artery. The balloon is
+inflated, compressing the plaque to enlarge the blood
+vessel and open the blocked artery. The balloon is
+deflated and the catheter is removed. The procedure
+is performed by a cardiologist in a hospital and gen-
+erally requires a two-day stay. Sometimes a metal stent
+is placed in the artery to prevent closing of the artery.
+In coronary artery bypass graft, called bypass
+surgery, a detour is built around the coronary artery
+blockage with a healthy leg vein or chest wall artery.
+The healthy vein or artery then supplies oxygen-rich
+blood to the heart. Bypass surgery is major surgery
+appropriate for patients with blockages in two or three
+major coronary arteries or severely narrowed left main
+coronary arteries, as well as those who have not
+responded to other treatments. It is performed in a
+hospital under general anesthesia using a heart-lung
+machine to support the patient while the healthy vein
+or artery is attached to the coronary artery.
+There are several experimental surgical proce-
+dures: atherectomy, where the surgeon shaves off and
+removes strips of plaque from the blocked artery; laser
+angioplasty, where a catheter with a laser tip is
+inserted to burn or break down the plaque; and inser-
+tion of a metal coil, called a stent, that can be
+implanted permanently to keep a blocked artery
+open. This stenting procedure is becoming more com-
+mon. Another experimental procedure uses a laser to
+drill channels in the heart muscle to increase blood
+supply.
+TIAs are treated by drugs that control high blood
+pressure and reduce the likelihood of blood clots and
+surgery. Aspirin is commonly used and anticoagulants
+are sometimes used to prevent blood clots. In some
+cases, carotidendarterectomy surgery is performed to
+help prevent further TIAs. The procedure involves
+removing arterial plaque from inside blood vessels.
+The use ofchelation therapy, a long-term injection
+by a physician of a cocktail of synthetic amino acid,
+ethylenediaminetetracetric acid, and anticoagulant
+drugs and nutrients, is controversial.
+Alternative treatment
+Ischemia can be life-threatening. Although there
+are alternative treatments for angina, traditional med-
+ical care may be necessary. Prevention of the cause of
+ischemia, primarily atherosclerosis, is primary. This
+becomes even more important for people with a family
+history of heart disease. Dietary modifications, espe-
+cially the reduction or elimination of saturated fats
+(primarily found in meat), are essential. Increased
+fiber (found in fresh fruits and vegetables, grains,
+and beans) can help the body eliminate excessive cho-
+lesterol through the stools. Exercise, particularly aero-
+bic exercise, is essential for circulation health. Not
+smoking will prevent damage from smoke and the
+harmful substances it contains.
+Abana, a mixture of herbs andminerals used in
+Ayurvedic medicine, can reduce the frequency and
+severity of angina attacks. Western herbal medicine
+recommends hawthorn ( Crataegus laevigata or
+C. oxyacantha) to relieve long-term angina, since it
+strengthens the contractility of the heart muscles.
+Nutritional supplements and botanical medicines that
+act as antioxidants, for example,vitamins Ca n dE ,
+selenium, gingko (Gingko biloba), bilberry (Vaccinium
+myrtillus), and hawthorn, can help prevent initial
+arterial injury that can lead to the formation of plaque
+deposits. Cactus (Cactus grandiflorus) is a homeo-
+pathic remedy used for pain relief during an attack.
+Mind/body relaxation techniques such asyoga and
+biofeedback can help control strong emotions and
+stress.
+Prognosis
+In many cases, ischemia can be successfully trea-
+ted, but the underlying disease process of
+This patient’s foot is affected with ischemia. Ischemia occurs
+when there is an insufficient supply of blood to a specific
+organ or tissue. (Photograph by Dr. P. Marazzi, Photo
+Researchers, Inc. Reproduced by permission.)
+2074 Ischemia
+atherosclerosis is usually not ‘‘cured.’’ New diagnostic
+techniques enable doctors to identify ischemia earlier.
+New technologies and surgical procedures can prevent
+angina from leading to a heart attack or TIA from
+resulting in a stroke. The outcome for patients with
+silent ischemia has not been well established.
+Prevention
+A healthy lifestyle, including eating right, getting
+regular exercise, maintaining a healthy weight, not
+smoking, drinking in moderation, not using illegal
+drugs, controlling hypertension, and managing stress
+are practices that can reduce the risk of ischemia pro-
+gressing to a heart attack or stroke.
+A healthy diet includes a variety of foods that are
+low in fat, especially saturated fat; low in cholesterol;
+and high in fiber. Plenty of fruits and vegetables
+should be eaten and sodium should be limited. Fat
+should comprise no more than 30% of total daily
+calories. Cholesterol should be limited to about 300
+mg and sodium to about 2,400 mg per day.
+Moderate aerobic exercise lasting about 30 min-
+utes four or more times per week is recommended for
+maximum heart health, according to the Centers for
+Disease Control and Prevention and the American
+College of Sports Medicine. Three 10-minute exercise
+periods are also beneficial. If any risk factors are pre-
+sent, a physician’s clearance should be obtained before
+starting exercise.
+Maintaining a desirable body weight is also
+important. People who are 20% or more over their
+ideal body weight have an increased risk of developing
+coronary artery disease or stroke.
+Smoking has many adverse effects on the heart
+and arteries, so should be avoided. Heart damage
+caused by smoking can be improved by quitting.
+Several studies have shown that ex-smokers face the
+same risk of heart disease as non-smokers within five
+to ten years of quitting.
+Excessive drinking can increase risk factors for
+heart disease. Modest consumption of alcohol, how-
+ever, can actually protect against coronary artery dis-
+ease. The American Heart Association defines
+moderate consumption as one ounce of alcohol per
+day–roughly one cocktail, one 8-ounce glass of wine,
+or two 12-ounce glasses of beer.
+Commonly used illegal drugs can seriously harm
+the heart and should never be used. Even stimulants
+like ephedra anddecongestants like pseudoephedrine
+can be harmful to patients with hypertension or heart
+disease.
+Treatment should be sought for hypertension.
+High blood pressure can be completely controlled
+through lifestyle changes and medication. Stress,
+which can increase the risk of a heart attack or stroke,
+should also be managed. While it cannot always be
+avoided, it can be controlled.
+Resources
+ORGANIZATIONS
+American Heart Association. 7320 Greenville Ave.
+Dallas, TX 75231. (214) 373-6300. <http://
+www.americanheart.org> .
+National Heart, Lung and Blood Institute. P.O. Box 30105,
+Bethesda, MD 20824-0105. (301) 251-1222. <http://
+www.nhlbi.nih.gov> .
+Texas Heart Institute. Heart Information Service. P.O. Box
+20345, Houston, TX 77225-0345. <http://
+www.tmc.edu/thi> .
+Lori De Milto
+Isocarboxazid see Monoamine oxidase
+inhibitors
+Isolation
+Definition
+Isolation refers to the precautions that are taken
+in the hospital to prevent the spread of an infectious
+KEY TERMS
+Atherosclerosis— A process in which the walls of
+the arteries thicken due to the accumulation of pla-
+que in the blood vessels. Atherosclerosis is the
+cause of most coronary artery disease.
+Coronary artery disease— A narrowing or block-
+age, due to atherosclerosis, of the arteries that pro-
+vide oxygen and nutrients to the heart. When blood
+flow is cut-off, the result is a heart attack.
+Plaque— A deposit of fatty and other substances that
+accumulate in the lining of the artery wall.
+Stroke— A sudden decrease or loss of conscious-
+ness caused by rupture or blockage of a blood vessel
+by a blood clot or hemorrhage in the brain.
+Ischemic strokes are caused by blood clots in a
+cerebral artery.
+Isolation
+agent from an infected or colonized patient to suscep-
+tible persons.
+Purpose
+Isolation practices are designed to minimize the
+transmission of infection in the hospital, using current
+understanding of the way infections can transmit.
+Isolation should be done in a user friendly, well-
+accepted, inexpensive way that interferes as little as
+possible with patient care, minimizes patient discom-
+fort, and avoids unnecessary use.
+Precautions
+The type of precautions used should be viewed as
+a flexible scale that may range from the least to the
+most demanding methods of prevention. These meth-
+ods should always take into account that differences
+exist in the way that diseases are spread. Recognition
+and understanding of these differences will avoid use
+of insufficient or unnecessary interventions.
+Description
+Isolation practices can include placement in a pri-
+vate room or with a select roommate, the use of pro-
+tective barriers such as masks, gowns and gloves, a
+special emphasis on handwashing (which is always
+very important), and special handling of contaminated
+articles. Because of the differences among infectious
+diseases, more than one of these precautions may be
+necessary to prevent spread of some diseases but may
+not be necessary for others.
+The Centers for Disease Control and Prevention
+(CDC) and the Hospital Infection Control Practice
+Advisory Committee (HICPAC) have led the way in
+defining the guidelines for hospital-based infection
+precautions. The most current system recommended
+for use in hospitals consists of two levels of precau-
+tions. The first level is Standard Precautions which
+apply to all patients at all times because signs and
+symptoms of infection are not always obvious and
+therefore may unknowingly pose a risk for a suscep-
+tible person. The second level is known as
+Transmission-Based Precautions which are intended
+for individuals who have a known or suspected infec-
+tion with certain organisms.
+Frequently, patients are admitted to the hospital
+without a definite diagnosis, but with clues to suggest
+an infection. These patients should be isolated with the
+appropriate precautions until a definite diagnosis is
+made.
+Standard Precautions
+Standard Precautions define all the steps that
+should be taken to prevent spread of infection from
+person to person when there is an anticipated contact
+with:
+/C15Blood
+/C15Body fluids
+/C15Secretions, such as phlegm
+/C15Excretions, such as urine and feces (not including
+sweat) whether or not they contain visible blood
+/C15Nonintact skin, such as an open wound
+/C15Mucous membranes, such as the mouth cavity.
+Standard Precautions includes the use of one or
+combinations of the following practices. The level of
+use will always depend on the anticipated contact with
+the patient:
+/C15Handwashing, the most importantinfection control
+method
+/C15Use of latex or other protective gloves
+/C15Masks, eye protection and/or face shield
+/C15Gowns
+/C15Proper handling of soiled patient care equipment
+/C15Proper environmental cleaning
+/C15Minimal handling of soiled linen
+/C15Proper disposal of needles and other sharp equip-
+ment such as scalpels
+/C15Placement in a private room for patients who cannot
+maintain appropriate cleanliness or contain body
+fluids.
+Transmission Based Precautions
+Transmission Based Precautions may be needed
+in addition to Standard Precautions for selected
+patients who are known or suspected to harbor certain
+infections. These precautions are divided into three
+categories that reflect the differences in the way infec-
+tions are transmitted. Some diseases may require more
+than one isolation category.
+AIRBORNE PRECAUTIONS. Airborne Precautions
+prevent diseases that are transmitted by minute particles
+called droplet nuclei or contaminated dust particles.
+These particles, because of their size, can remain sus-
+pended in the air for long periods of time; even after the
+infected person has left the room. Some examples of
+diseases requiring these precautions aretuberculosis,
+measles,a n dchickenpox.
+2076 Isolation
+A patient needing Airborne Precautions should be
+assigned to a private room with special ventilation
+requirements. The door to this room must be closed
+at all possible times. If a patient must move from the
+isolation room to another area of the hospital, the
+patient should be wearing a mask during the trans-
+port. Anyone entering the isolation room to provide
+care to the patient must wear a special mask called a
+respirator.
+DROPLET PRECAUTIONS. Droplet Precautions pre-
+vent the spread of organisms that travel on particles
+much larger than the droplet nuclei. These particles do
+not spend much time suspended in the air, and usually
+do not travel beyond a several foot range from the
+patient. These particles are produced when a patient
+coughs, talks, or sneezes. Examples of disease requir-
+ing droplet precautions are meningococcalmeningitis
+(a serious bacterial infection of the lining of the brain),
+influenza, mumps, and German measles (rubella).
+Patients who require Droplet Precautions should
+be placed in a private room or with a roommate who is
+infected with the same organism. The door to the
+room may remain open. Health care workers will
+need to wear masks within 3 ft of the patient.
+Patients moving about the hospital away from the
+isolation room should wear a mask.
+CONTACT PRECAUTIONS. Contact Precautions
+prevent spread of organisms from an infected patient
+through direct (touching the patient) or indirect
+(touching surfaces or objects that that been in contact
+with the patient) contact. Examples of patients who
+might be placed in Contact Precautions are those
+infected with:
+/C15Antibiotic-resistant bacteria
+/C15Hepatitis A
+/C15Scabies
+/C15Impetigo
+/C15Lice.
+This type of precaution requires the patient to be
+placed in a private room or with a roommate who has
+the same infection. Health care workers should wear
+gloves when entering the room. They should change
+their gloves if they touch material that contains large
+volumes of organisms such as soiled dressings. Prior to
+leaving the room, health care workers should remove
+the gloves and wash their hands with medicated soap.
+In addition, they may need to wear protective gowns if
+there is a chance of contact with potentially infective
+materials such as diarrhea or wound drainage that
+cannot be contained or if there is likely to be extensive
+contact with the patient or environment.
+Patient care items, such as a stethoscope, that are
+used for a patient in Contact Precautions should not
+be shared with other patients unless they are properly
+cleaned and disinfected before reuse. Patients should
+leave the isolation room infrequently.
+Resources
+BOOKS
+Edmond, M. ‘‘Isolation.’’ InA Practical Handbook for
+Hospital Epidemiologists, edited by L. A. Herwaldt and
+M. D. Decker. Thorofare, NJ: Slack Inc., 1998.
+Suzanne M. Lutwick, MPH
+Isoniazid see Antituberculosis drugs
+Isosorbide dinitrate see Antiangina drugs
+Isotretinoin see Antiacne drugs
+Isradipine see Calcium channel blockers
+Itching
+Definition
+Itching is an intense, distracting irritation or tick-
+ling sensation that may be felt all over the skin’s sur-
+face, or confined to just one area. The medical term for
+itching is pruritus.
+Description
+Itching instinctively leads most people to scratch
+the affected area. Different people can tolerate differ-
+ent amounts of itching, and anyone’s threshold of
+KEY TERMS
+Colonized— This occurs when a microorganism is
+found on or in a person without causing a disease.
+Disinfected— Decreased the number of microor-
+ganisms on or in an object.
+Latex— A rubber material which gloves and con-
+doms are made from.
+Phlegm— Another word for sputum; material
+coughed up from a person’s airways.
+Stethoscope— A medical instrument for listening to
+a patient’s heart and lungs.
+Itching
+tolerance can be changed due tostress, emotions, and
+other factors. In general, itching is more severe if the
+skin is warm, and if there are few distractions. This is
+why people tend to notice itching more at night.
+Causes and symptoms
+The biology underlying itching is not fully under-
+stood. It is believed that itching results from the inter-
+actions of several different chemical messengers.
+Although itching andpain sensations were at one time
+thought to be sent along the same nerve pathways,
+researchers reported the discovery in 2003 of itch-spe-
+cific nerve pathways. Nerve endings that are specifically
+sensitive to itching have been named pruriceptors.
+Research into itching has been helped by the
+recent invention of a mechanical device called the
+Matcher, which electrically stimulates the patient’s
+left hand. When the intensity of the stimulation equals
+the intensity of itching that the patient is experiencing
+elsewhere in the body, the patient stops the stimulation
+and the device automatically records the measure-
+ment. The Matcher was found to be sensitive to
+immediate changes in the patient’s perception of itch-
+ing as well as reliable in its measurements.
+Stress and emotional upset can make itching worse,
+no matter what the underlying cause. If emotional pro-
+blems are the primary reason for the itch, the condition
+is known as psychogenic itching. Some people become
+convinced that their itch is caused by a parasite; this
+conviction is often linked to burning sensations in the
+tongue, and may be caused by a major psychiatric
+disorder.
+Generalized itching
+Itching that occurs all over the body may indicate
+a medical condition such as diabetes mellitus, liver
+disease, kidney failure, jaundice, thyroid disorders
+(and rarely,cancer). Blood disorders such as leukemia,
+and lymphatic conditions such asHodgkin’s disease
+may sometimes cause itching as well.
+Some people may develop an itch without a rash
+when they take certain drugs (such asaspirin, codeine,
+cocaine); others may develop an itchy red ‘‘drug rash’’
+or hives because of an allergy to a specific drug. Some
+medications given to cancer patients may also cause
+itching.
+Itching also may be caused when any of the family
+of hookworm larvae penetrate the skin. This includes
+swimmer’s itch and creeping eruption caused by cat or
+dog hookworm, and ground itch caused by the ‘‘true’’
+hookworm.
+Many skin conditions cause an itchy rash. These
+include:
+/C15Atopic dermatitis
+/C15Chickenpox
+/C15Contact dermatitis
+/C15Dermatitis herpetiformis (occasionally)
+/C15Eczema
+/C15Fungus infections (such asathlete’s foot)
+/C15Hives (urticaria)
+/C15Insect bites
+/C15Lice
+/C15Lichen planus
+/C15Neurodermatitis (lichen simplex chronicus)
+/C15Psoriasis (occasionally)
+/C15Scabies.
+On the other hand, itching all over the body can be
+caused by something as simple as bathing too often,
+which removes the skin’s natural oils and may make
+the skin too dry and scaly.
+Localized itching
+Specific itchy areas may occur if a person comes in
+contact with soap, detergents, and wool or other
+rough-textured, scratchy material. Adults who have
+hemorrhoids, anal fissure, or persistentdiarrhea may
+notice itching around the anus (called ‘‘pruritus ani’’).
+In children, itching in this area is most likely due to
+worms.
+Intense itching in the external genitalia in women
+(‘‘pruritus vulvae’’) may be due tocandidiasis, hormo-
+nal changes, or the use of certain spermicides or vagi-
+nal suppositories, ointments, or deodorants.
+It is also common for older people to suffer from
+dry, itchy skin (especially on the back) for no obvious
+reason. Younger people also may notice dry, itchy skin
+in cold weather. Itching is also a common complaint
+during pregnancy.
+Diagnosis
+Itching is a symptom that is quite obvious to its
+victim. Someone who itches all over should seek med-
+ical care. Because itching can be caused by such a wide
+variety of triggers, a complete physical exam and med-
+ical history will help diagnose the underlying problem.
+A variety of blood and stool tests may help determine
+the underlying cause.
+2078 Itching

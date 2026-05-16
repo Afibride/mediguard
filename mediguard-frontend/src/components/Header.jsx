@@ -67,13 +67,13 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-white/95 dark:bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/60 transition-all duration-300">
+    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/82 transition-all duration-300">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         
         {/* Left: Logo */}
         <Link to="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
           <img 
-            src="/public/mediguard.png" 
+            src="/mediguard.png" 
             alt="MediGuard Logo" 
             className="logo-xs"
           />

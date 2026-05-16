@@ -1,0 +1,1219 @@
+DISEASE: Tuberculosis
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+Torsion can be complete, incomplete, or intermittent.
+Spontaneous detorsion, or untwisting, can occur,
+making diagnosis difficult. Testicular torsion arises
+most commonly during adolescence, and is acutely
+painful. Scrotal ultrasound is used to distinguish this
+condition from inflammatory problems, such as epidi-
+dymitis. Testicular torsion is a surgical emergency; it
+should be operated on as soon as possible to avoid
+permanent damage to the testes.
+A scrotal sac with an absent testicle may be the
+result of a congenital anomaly (an abnormality pre-
+sent at birth), where a testicle fails to develop. More
+often, it is due to an undescended testicle. In the fetus,
+the testicles normally develop just outside the abdo-
+men and descend into the scrotum during the seventh
+month. Approximately 3% of full-term baby boys
+have undescended testicles. It is important to distin-
+guish between an undescended testicle and an absent
+testicle, as an undescended testicle has a very high
+probability of developingcancer.
+Ultrasound can be used to locate and evaluate
+masses in the scrotum. Most masses within the testicle
+are malignant or cancerous, and most outside the
+testicle are benign. Primary cancer of the testicles is
+the most common malignancy in men between the ages
+of 15-35. Fluid collections and abnormalities of the
+blood vessels in the scrotum may appear to the physi-
+cian as masses and need evaluation by ultrasound. A
+hydrocele, the most common cause of painless scrotal
+swelling, is a collection of fluid between two layers of
+tissue surrounding the testicle. An abnormal enlarge-
+ment of the veins which drain the testicles is called a
+varicocele. It can cause discomfort and swelling, which
+can be examined by touch (palpated). Varicocele is a
+common cause of male infertility.
+Precautions
+Clear scrotal ultrasound images are difficult to
+obtain if a patient is unable to remain still.
+Description
+The patient lies on his back on an examining table.
+The technologist will usually take a history of the
+problem, then gently palpate the scrotum. A rolled
+towel is placed between the patient’s legs to support
+the scrotum. The penis is lifted up onto the abdomen
+and covered. A gel that enhances sound transmission
+is put directly on the scrotum. The technologist then
+gently places a transducer (an electronic imaging
+device) against the skin. It is moved over the area
+creating images from reflected sound waves, which
+appear on a monitor screen. There is no discomfort
+from the study itself. However, if the scrotum is very
+tender, even the slight pressure involved may be
+painful.
+Normal results
+A normal study would reveal testicles of normal
+size and shape, with no masses.
+Abnormal results
+An abnormal result of an ultrasound of the scro-
+tum may reveal an absent or undescended testicle, an
+inflammation problem, testicular torsion, a fluid col-
+lection, abnormal blood vessels, or a mass.
+Resources
+BOOKS
+Leonhardt, Wayne C. ‘‘Scrotum.’’ InAbdomen and
+Superficial Structures, edited by Diane M. Kawamura,
+2nd ed. Philadelphia: Lippincott, 1997.
+Ellen S. Weber, MSN
+Scrub typhus
+Definition
+Scrub typhus is an infectious disease that is trans-
+mitted to humans from field mice and rats through the
+bite of mites that live on the animals. The main symp-
+toms of the disease arefever, a wound at the site of the
+bite, a spotted rash on the trunk, and swelling of the
+lymph glands.
+Description
+Scrub typhus is caused by Rickettsia tsutsuga-
+mushi, a tiny parasite about the size of bacteria that
+KEY TERMS
+Hydrocele— A collection of fluid between two
+layers of tissue surrounding the testicle; the most
+common cause of painless scrotal swelling.
+Varicocele— An abnormal enlargement of the
+veins which drain the testicles.
+3318 Scrub typhus
+belongs to the family Rickettsiaceae. Under the micro-
+scope, rickettsiae are either rod-like (bacilli) or sphe-
+rical (cocci) in shape. Because they are intracellular
+parasites, they can live only within the cells of other
+animals.
+R. tsutsugamushi lives primarily in mites that
+belong to the speciesLeptotrombidium (Trombicula)
+akamushi and Leptotrombidium deliense. In Japan,
+some cases of scrub typhus have been reportedly trans-
+mitted by mites of the speciesLeptotrombidium scutel-
+lare and Leptotrombidium pallidum. The mites have
+four-stage life cycles: egg, larva, nymph, and adult.
+The larva is the only stage that can transmit the disease
+to humans and other vertebrates.
+The tiny chiggers (mite larvae) attach themselves
+to the skin. During the process of obtaining a meal,
+they may either acquire the infection from the host or
+transmit the rickettsiae to other mammals or humans.
+In regions where scrub typhus is a constant threat, a
+natural cycle ofR. tsutsugamushitransmission occurs
+between mite larvae and small mammals (e.g., field
+mice and rats). Humans enter a cycle of rickettsial
+infection only accidentally.
+Scrub typhus is also known astsutsugamushi dis-
+ease. The name tsutsugamushi is derived from two
+Japanese words: tsutsuga, meaning something small
+and dangerous, and mushi, meaning creature. The
+infection is called scrub typhus because it generally
+occurs after exposure to areas with secondary (scrub)
+vegetation. It has recently been found, however, that
+the disease can also be prevalent in such areas as sandy
+beaches, mountain deserts, and equatorial rain forests.
+Therefore, it has been suggested that the names mite-
+borne typhus, or chigger-borne typhus, are more
+appropriate. Since the disease is limited to eastern
+and southeastern Asia, India, northern Australia and
+the adjacent islands, it is also commonly referred to as
+tropical typhus.
+The seasonal occurrence of scrub typhus varies
+with the climate in different countries. It occurs more
+frequently during the rainy season. Certain areas such
+as forest clearings, riverbanks, and grassy regions pro-
+vide optimal conditions for the infected mites to
+thrive. These small geographic regions are high-risk
+areas for humans and have been called scrub-typhus
+islands.
+Causes and symptoms
+The incubation period of scrub typhus is about 10
+to 12 days after the initial bite. The illness begins
+rather suddenly with shaking chills, fever, severe
+headache, infection of the mucous membrane lining
+the eyes (the conjunctiva), and swelling of the lymph
+nodes (lymphadenopathy). A wound (lesion) is often
+seen at the site of the chigger bite. Bitewounds are
+common in whites but rare in Asians.
+The initial lesion, which is about 1 cm (0.4 in) in
+diameter and flat, eventually becomes elevated and
+filled with fluid. After it ruptures, it becomes covered
+with a black scab (eschar). The patient’s fever rises
+during the first week, generally reaching 40–40.58C
+(104–1058F). About the fifth day of fever, a red
+spotted rash develops on the trunk, often extending
+to the arms and legs. It may either fade away in a few
+days or may become spotted and elevated (maculo-
+papular) and brightly colored.Cough is present during
+the first week of the fever. An infection of the lung
+(pneumonitis) may develop during the second week.
+In severe cases, the patient’s pulse rate increases
+and blood pressure drops. The patient may become
+delirious and lose consciousness. Muscular twitching
+may develop. Enlargement of the spleen is observed.
+Inflammation of the heart muscle (interstitialmyocar-
+ditis) is more common in scrub typhus than in other
+rickettsial diseases. In untreated patients, high fever
+may last for more than two weeks. With specific ther-
+apy, however, the fever breaks within 36 hours. The
+patient’s recovery is prompt and uneventful.
+Diagnosis
+Patient history and physical examination
+Differentiating scrub typhus from other forms of
+typhus as well as from fever, typhoid and meningo-
+coccal infections is often difficult during the first sev-
+eral days before the initial rash appears. The
+geographical location of scrub typhus, the initial sore
+caused by the chigger bite, and the occurrence of spe-
+cific proteins capable of destroying the organism (anti-
+bodies) in the blood, provide helpful clues and are
+useful in establishing the diagnosis.
+Laboratory tests
+Diagnostic procedures involving the actual isola-
+tion of rickettsiae from the blood or other body tissues
+are usually expensive, time-consuming, and hazardous
+to laboratory workers. As a result, several types of
+tests known as serological (immunological) tests are
+used widely to confirm the clinical diagnosis in the
+laboratory.
+Specific antibodies develop in the body in
+response to an infection. The development of antibo-
+dies during the recovery period indicates that an
+Scrub typhus
+immune response is present. The formation of antibo-
+dies is the basic principle of a serological test. Three
+different tests are available to diagnose rickettsial
+infections. The most widely used is the Weil-Felix
+test. This test is based on the fact that some of the
+antibodies that are formed in the body during a rick-
+ettsial infection can react with certain strains (OX-2
+and OX-19) of Proteus bacteria and cause them to
+clump (agglutinate). The clumping is easily seen
+under the microscope. The Weil-Felix test is easy and
+inexpensive to perform, with the result that it is widely
+used. The Weil- Felix test, however, is not very speci-
+fic. In addition, the clumping is not detectable until
+the second week of the illness, which limits the test’s
+usefulness in early diagnosis.
+A second test known as a complement fixation
+(CF) test is based on the principle that if antibodies
+are formed in the body in response to the illness, then
+the antigen and the antibody will form complexes.
+These antigen-antibody complexes have the ability to
+inactivate, or fix, a protein that is found in blood
+serum (serum complement). The serum complement
+fixation can be measured using standardized biochem-
+ical tests and confirms the presence of antibodies. A
+third test known as the fluorescent antibody test uses
+fluorescent tags that are attached to antibodies for
+easy detection. This test has been developed using
+three strains ofRickettsia tsutsugamushiand has pro-
+ven to be the most specific for diagnosis.
+Treatment
+Scrub typhus is treated with antibiotics.
+Chloramphenicol (Chloromycetin, Fenicol) and tetra-
+cycline (Achromycin, Tetracyn) are the drugs of
+choice. They bring about prompt disappearance of
+the fever and dramatic clinical improvement. If the
+antibiotic treatment is discontinued too quickly, espe-
+cially in patients treated within the first few days of the
+fever, relapses may occur. In patients treated in the
+second week of illness, the antibiotics may be stopped
+one to two days after the fever disappears.
+Antibiotics are given intravenously to patients too
+sick to take them by mouth. Patients who are severely
+ill and whose treatment was delayed may be given
+corticosteroids in combination with antibiotics for
+three days.
+Prognosis
+Before the use of antibiotics, the mortality rate for
+scrub typhus varied from 1–60%, depending on the
+geographic area and the rickettsial strain. Recovery
+also took a long time. With modern treatment meth-
+ods, however, deaths are rare and the recovery period
+is short.
+Prevention
+General precautions
+As of early 2004 there are no effective vaccines for
+scrub typhus. In endemic areas, precautions include
+wearing protective clothing. Insect repellents contain-
+ing dibutyl phthalate, benzyl benzoate, diethyl tolua-
+mide, and other substances can be applied to the skin
+and clothing to prevent chigger bites. Clearing of
+vegetation and chemical treatment of the soil may
+help to break up the cycle of transmission from
+chiggers to humans to other chiggers.
+Prophylactic antibiotic dosage
+It has been shown that a single oral dose of chlor-
+amphenicol or tetracycline given every 5 days for a
+total of 35 days, with 5-day nontreatment intervals,
+actually produces active immunity to scrub typhus.
+This procedure is recommended under special circum-
+stances in certain areas where the disease is endemic.
+KEY TERMS
+Agglutinin— An antibody that causes particulate
+antigens such as bacteria or other cells to clump
+together.
+Endemic area— A geographical region where a par-
+ticular disease is prevalent.
+Eschar— A hard crust or scab. In scrub typhus, an
+eschar forms over the initial sore from the chigger
+bite.
+Intracellular parasite— An organism which can
+only feed and live within the cell of a different
+animal.
+Maculopapular rash— A rash characterized by
+raised, spotted lesions.
+Prophylactic dosage— Giving medications to pre-
+vent or protect against diseases.
+Rickettsia— A rod-shaped infectious microorgan-
+ism that can reproduce only inside a living cell.
+Scrub typhus is a rickettsial disease.
+Serological tests— Tests of immune function that
+are performed using the clear yellow liquid part of
+blood.
+3320 Scrub typhus
+Resources
+BOOKS
+Beers, Mark H., MD, and Robert Berkow, MD., editors.
+‘‘Scrub Typhus.’’ Section 13, Chapter 159 InThe Merck
+Manual of Diagnosis and Therapy.Whitehouse Station,
+NJ: Merck Research Laboratories, 2004.
+PERIODICALS
+Cheng, V. C., A. K. Wu, I. F. Hung, et al. ‘‘Clinical
+Deterioration in Community Acquired Infections
+Associated with Lymphocyte Upsurge in
+Immunocompetent Hosts.’’Scandinavian Journal of
+Infectious Diseases36, no. 10 (2004): 743–751.
+Ralph, A., M. Raines, P. Whelan, and B. J. Currie. ‘‘Scrub
+Typhus in the Northern Territory: Exceeding the
+Boundaries of Litchfield National Park.’’
+Communicable Diseases Intelligence28 (February
+2004): 267–269.
+Takahashi, M., H. Misumi, H. Urakami, et al. ‘‘Mite
+Vectors (Acari: Trombiculidae) of Scrub Typhus in a
+New Endemic Area in Northern Kyoto, Japan.’’
+Journal of Medical Entomology41 (January 2004):
+107–114.
+ORGANIZATIONS
+Centers for Disease Control and Prevention. 1600 Clifton
+Rd., NE, Atlanta, GA 30333. (800) 311-3435, (404)
+639-3311. <http://www.cdc.gov> .
+Lata Cherath, PhD
+Rebecca J. Frey, PhD
+Scurvy
+Definition
+Scurvy is a condition caused by a lack of vitamin
+C (ascorbic acid) in the diet. Signs of scurvy include
+tiredness, muscle weakness, joint and muscle aches,
+a rash on the legs, and bleeding gums. In the past,
+scurvy was common among sailors and other people
+deprived of fresh fruits and vegetables for long periods
+of time.
+Description
+Scurvy is very rare in countries where fresh fruits
+and vegetables are readily available and where pro-
+cessed foods have vitamin C added. Vitamin C is an
+important antioxidant vitamin involved in the devel-
+opment of connective tissues, lipid and vitamin meta-
+bolism, biosynthesis of neurotransmitters, immune
+function, and wound healing. It is found in fruits,
+especially citrus fruits like oranges, lemons, and grape-
+fruit, and in green leafy vegetables like broccoli
+and spinach. In adults, it may take several months of
+vitamin C deficiency before symptoms of scurvy
+develop.
+Currently, the recommended dietary allowance
+(RDA) for vitamin C is 50–60 mg/day for adults; 35
+mg/day for infants; 40–45 mg/day for children 1–14;
+70 mg/day duringpregnancy; and 90–95 mg/day dur-
+ing lactation. The body’s need for vitamin C increases
+when a person is under stress, smoking, or taking
+certain medications.
+Causes and symptoms
+A lack of vitamin C in the diet is the primary cause
+of scurvy. This can occur in people on very restricted
+diets, who are under extreme physiological stress (for
+example, during an infection or after an injury), and in
+chronic alcoholics. Infants can develop scurvy if they
+are weaned from breast milk and switched to cow’s
+milk without an additional supplement of vitamin C.
+Babies of mothers who took extremely high doses of
+vitamin C during pregnancy can develop infantile
+scurvy. In children, the deficiency can cause painful
+swelling of the legs along withfever, diarrhea,a n d
+vomiting. In adults, early signs of scurvy include feel-
+ing weak, tired, and achy. The appearance of tiny red
+blood-blisters to larger purplish blotches on the skin of
+the legs is a common symptom. Wound healing may
+be delayed and scars that had healed may start to
+break down. The gums swell and bleed easily, even-
+tually leading to loosened teeth. Muscle and jointpain
+may also occur.
+Diagnosis
+Scurvy is often diagnosed based on the symptoms
+present. A dietary history showing little or no fresh
+fruits or vegetables are eaten may help to diagnose
+vitamin C deficiency. A blood test can also be used
+to check the level of ascorbic acid in the body.
+Treatment
+Adult treatment is usually 300–1,000 mg of ascor-
+bic acid per day. Infants should be treated with 50 mg
+of ascorbic acid up to four times per day.
+Prognosis
+Treatment with vitamin C is usually successful, if
+the deficiency is recognized early enough. Left
+untreated, the condition can causedeath.
+Scurvy
+Prevention
+Eating foods rich in vitamin C every day prevents
+scurvy. A supplement containing the RDA of vitamin
+C will also prevent a deficiency. Infants who are being
+weaned from breast milk to cow’s milk need a supple-
+ment containing vitamin C.
+Resources
+BOOKS
+Stein, Jay H., editor. ‘‘Ascorbic Acid (Vitamin C) Deficiency.’’
+In Internal Medicine.St. Louis: Mosby, 1998.
+Altha Roberts Edgren
+Seafood poisoning see Fish and shellfish
+poisoning
+Seasonal affective disorder
+Definition
+Seasonal affective disorder (SAD) is a form of
+depression most often associated with the lack of day-
+light in extreme northern and southern latitudes from
+the late fall to the early spring.
+Description
+Although researchers are not certain what causes
+seasonal affective disorder, they suspect that it has
+something to do with the hormone melatonin.
+Melatonin is thought to play an active role in regulat-
+ing the ‘‘internal body clock,’’ which dictates when
+humans feel like going to bed at night and getting up
+in the morning. Although seasonal affective disorder is
+most common when light is low, it may occur in the
+spring, and it is then often called reverse SAD.
+Causes and symptoms
+The body produces more melatonin at night than
+during the day, and scientists believe it helps people feel
+sleepy at nighttime. There is also more melatonin in the
+body during winter, when the days are shorter. Some
+researchers believe that excessive melatonin release dur-
+ing winter in people with SAD may account for their
+feelings of drowsiness or depression. One variation on
+this idea is that, during winter, people’s internal clocks
+may become out of sync with the light-dark cycle, lead-
+ing to a long-term disruption in melatonin release.
+Seasonal affective disorder, while not an official
+category of mental illness listed by the American
+Psychiatric Association, is estimated to affect 10 million
+Americans, most of whom are women. Another 25
+million Americans may have a mild form of SAD,
+sometimes called the ‘‘winter blues’’ or ‘‘winter
+blahs.’’ The risk of SAD increases the further from
+the equator a person lives.
+The symptoms of SAD are similar to those of
+other forms of depression. People with SAD may feel
+sad, irritable, or tired, and may find themselves sleep-
+ing too much. They may also lose interest in normal or
+pleasurable activities (including sex), become with-
+drawn, crave carbohydrates, and gain weight.
+Diagnosis
+Doctors usually diagnose seasonal affective disor-
+der based on the patient’s description of symptoms,
+including the time of year they occur.
+An x-ray image of an infant suffering from scurvy.(Photograph
+by Lester V. Bergman, Corbis Images. Reproduced by permission.)
+KEY TERMS
+Ascorbic acid— Another term for vitamin C, a nutri-
+ent found in fresh fruits and vegetables. Good sources
+of vitamin C in the diet are citrus fruits like oranges,
+lemons, limes, and grapefru its, berries, tomatoes,
+green peppers, cabbage, broccoli, and spinach.
+Recommended dietary allowance (RDA)— The
+daily amount of a vitamin the average person
+needs to maintain good health.
+3322 Seasonal affective disorder
+Treatment
+The first-line treatment for seasonal affective
+disorder is light therapy, exposing the patient to bright
+artificial light to compensate for the gloominess of
+winter. Light therapy uses a device called a light box,
+which contains a set of fluorescent or incandescent
+lights in front of a reflector. Typically, the patient
+sits for 30 minutes next to a 10,000-lux box (which is
+about 50 times as bright as ordinary indoor light).
+Light therapy appears to be safe for most people.
+However, it may be harmful for those with eye
+diseases. The most common side effects are vision
+problems such as eye strain, headaches, irritability,
+and insomnia. In addition, hypomania (elevated or
+expansive mood, characterized by hyperactivity and
+inflated self esteem) may occasionally occur.
+Recently, researchers have begun testing whether
+people who do not completely respond to light therapy
+can benefit from tiny doses of the hormone melatonin
+to reset the body’s internal clock. Early results look
+promising, but the potential benefits must be con-
+firmed in larger studies before this type of treatment
+becomes widely accepted.
+Like other types ofmood disorders, seasonal affec-
+tive disorder may also respond to medication and
+psychotherapy. The four different classes of drugs
+used for mood disorders are:
+/C15heterocyclic antidepressants (HCAs), such as ami-
+triptyline (Elavil)
+/C15selective serotonin reuptake inhibitors (SSRIs),
+such as fluoxetine (Prozac), paroxetine (Paxil), and
+sertraline (Zoloft)
+/C15monoamine oxidase inhibitors (MAO inhibitors),
+such as phenelzine sulfate (Nardil) and tranylcypro-
+mine sulfate (Parnate)
+/C15Lithium salts, such as lithium carbonate (Eskalith),
+often used in people with bipolar mood disorders, are
+often useful with SAD patients; many SAD patients
+also suffer from bipolar disorder (excessive mood
+swings; formerly known as manic depression)
+A number of psychotherapy approaches are use-
+ful as well. Interpersonal psychotherapy helps patients
+recognize how their mood disorder and their interper-
+sonal relationships interact. Cognitive-behavioral
+therapy explores how the patient’s view of the world
+may be affecting mood and outlook.
+Prognosis
+Most patients with seasonal affective disorder
+respond to light therapy and/orantidepressant drugs.
+Resources
+ORGANIZATIONS
+American Psychiatric Association. 1400 K Street NW,
+Washington DC 20005. (888) 357-7924. <http://
+www.psych.org> .
+National Depressive and Manic Depressive Association
+(NDMDA). 730 N. Franklin St., Ste. 501, Chicago, IL
+60610. (800) 826-3632. <http://www.ndmda.org> .
+National Institute of Mental Health. Mental Health Public
+Inquiries, 5600 Fishers Lane, Room 15C-05, Rockville,
+MD 20857. (888) 826-9438. <http://
+www.nimh.nih.gov> .
+Robert Scott Dinsmoor
+Seasonal depression see Seasonal affective
+disorder
+Seatworm infection see Enterobiasis
+Seborrheic dermatitis
+Definition
+Seborrheic dermatitis is a common inflammatory
+disease of the skin characterized by scaly lesions
+usually on the scalp, hairline, and face.
+Description
+Seborrheic dermatitis appears as red, inflamed
+skin covered by greasy or dry scales that may be
+white, yellowish, or gray. It can effect the scalp, eye-
+brows, forehead, face, folds around the nose and ears,
+the chest, armpits (axilla), and groin. Dandruff and
+cradle cap are mild forms of seborrheic dermatitis, and
+appear as fine white scales without inflammation.
+KEY TERMS
+Cognitive behavioral therapy— Psychotherapy
+aimed at helping people change their attitudes,
+perceptions, and patterns of thinking.
+Melatonin— A naturally occurring hormone
+involved in regulating the body’s ‘‘internal clock.’’
+Serotonin— A chemical messenger in the brain
+thought to play a role in regulating mood.
+Seborrheic dermatitis
+Causes and symptoms
+The cause of seborrheic dermatitis is unclear,
+though it is has been linked to genetic or environmen-
+tal factors.Pityrosporum ovale, a species of yeast nor-
+mally found in hair follicles, has been proposed as one
+possible causative factor. A high fat diet and alcohol
+ingestion are thought to play some role. Other possible
+risk factors include:
+/C15stress andfatigue
+/C15weather extremes (e. g. hot, humid weather or cold,
+dry weather)
+/C15oily skin
+/C15infrequent shampoos
+/C15obesity
+/C15Parkinson’s disease
+/C15AIDS
+/C15use of drying lotions that contain alcohol
+/C15other skin disorders (for exampleacne, rosacea,o r
+psoriasis)
+Mild forms of the disorder may be asymptomatic.
+Symptoms also disappear and reappear, and vary in
+intensity over time. When scaling is present, it may be
+accompanied by itching that can lead to secondary
+infection.
+Diagnosis
+The diagnosis of seborrheic dermatitis is based on
+assessment of symptoms, accompanied by considera-
+tion of medical history.
+Treatment
+Treatment consists of vigorous shampoos with
+preparations that assist with softening and removing
+the scaly accumulations. For mild cases, a non-
+prescription shampoo with selenium sulfide or zinc
+pyrithione may be used. For more severe problems,
+the doctor may prescribe shampoos containing coal
+tar or scalp creams containing cortisone. The antisebor-
+rheic shampoo should be left on the scalp for approxi-
+mately five minutes before rinsing out. Hydrocortisone
+cream may also be ordered for application to the
+affected areas on the face and body. Application of
+the hydrocortisone should be discontinued when the
+condition clears and restarted with recurrence.
+Prognosis
+This chronic condition may be characterized by
+long periods of inactivity. Symptoms in the acute
+phase can be controlled with appropriate treatment.
+Prevention
+The condition cannot be prevented. The severity
+and frequency of flare-ups may be minimized with
+This young boy is afflicted with seborrheic dermatitis.
+(Custom Medical Stock Photo. Reproduced by permission.)
+KEY TERMS
+Acne— A chronic inflammation of the sebaceous
+glands that manifests as blackheads, whiteheads,
+and/or pustules on the face or trunk.
+Psoriasis— A skin disorder of chronic, itchy scaling
+most commonly at sites of repeated minor trauma
+(e.g. elbows, knees, and skin folds). It affects up to
+2% of the population in Western countries—males
+and females equally.
+Rosacea— A chronic inflammation of the face, with
+associated scattered round nodules and increased
+reactivity of the facial capillaries to heat. It is most
+common in females, aged 30–50 years.
+3324 Seborrheic dermatitis
+frequent shampoos, thorough drying of skin folds
+after bathing, and wearing of loose, ventilating cloth-
+ing. Foods that appear to worsen the condition should
+be avoided.
+Resources
+BOOKS
+Monahan, Frances, and Marianne Neighbors.Medical
+Surgical Nursing: Foundations for Clinical Practice.
+Philadelphia: W. B. Saunders,1998.
+Kathleen D. Wright, RN
+Secobarbital see Barbiturates
+Secondary erythrocytosis see Secondary
+polycythemia
+Secondary polycythemia
+Definition
+Secondary polycythemia is an acquired form of a
+rare disorder characterized by an abnormal increase in
+the number of mature red cells in the blood.
+Secondary polycythemia is also called secondary
+erythrocytosis.
+Description
+Polycythemia means too many red blood cells.
+The resulting excess of red cells thickens the blood
+and impedes its passage through small blood vessels.
+Secondary polycythemia usually affects people
+between the ages of 40 and 60.
+Types of secondary polycythemia
+Known as spurious polycythemia, stress poly-
+cythemia, or Gaisbock’s syndrome, relative polycythe-
+mia is characterized by normal numbers of red blood
+cells but decreased levels of plasma (the fluid part of
+the blood). Overweight, middle-aged white men who
+smoke, have high blood pressure, and are on diuretic
+medicines to remove excess water from their bodies
+may develop Gaisbock’s syndrome.
+In smoker’s polycythemia, the number of red
+blood cells is elevated. Plasma levels are abnormally
+low.
+Causes and symptoms
+Smoking, which impairs red blood cells’ ability to
+deliver oxygen to body tissues, can cause secondary
+polycythemia. So can the following conditions:
+/C15carbon monoxidepoisoning
+/C15chronic heart or lung disease
+/C15hormonal (endocrine) disorders
+/C15exposure to high altitudes
+/C15kidney cysts
+/C15tumors of the brain, liver, or uterus.
+Causes of spurious polycythemia include:
+/C15burns
+/C15diarrhea
+/C15hemoconcentration (higher-than-normal concentra-
+tion of cells and solids in the blood, usually due to
+becoming dehydrated or takingdiuretics)
+/C15stress
+Weakness, headaches, andfatigue are usually the
+first symptoms of secondary polycythemia. Patients
+may feel lightheaded or experienceshortness of breath.
+Visual disturbances associated with this disorder
+include distorted vision, blind spots, and flashes of
+light. The gums and small cuts are likely to bleed,
+and the hands and feet may burn. Extensiveitching
+often occurs after taking a bath or shower.
+Pain in the chest or leg muscles is common. The
+face often becomes ruddy, then turns blue afterexer-
+cise or other exertion. Confusion and ringing in the
+ears (tinnitus) may also occur.
+Diagnosis
+A very important part of diagnosing secondary
+polycythemia is differentiating it from primary poly-
+cythemia (also called polycythemia rubra vera or
+Vaquez’ disease). Unlike secondary polycythemia, pri-
+mary polycythemia cannot be traced to an underlying
+condition such as smoking, high altitude, or chronic
+lung disease.
+Doctors diagnose polycythemia by measuring
+oxygen levels in blood drawn from an artery. A patient
+whose oxygen level is abnormally low probably has
+secondary polycythemia. Erythropoietin may also be
+measured. Levels of this hormone, which stimulates
+the bone marrow to produce red blood cells, may be
+normal or elevated in a patient with secondary poly-
+cythemia. Red blood cell mass is also frequently mea-
+sured in diagnosing the disorder.
+Secondary polycythemia
+Imaging studies are sometimes performed to
+determine whether the spleen and liver are enlarged
+and to detect erythropoietin-producing kidney lesions.
+Other diagnostic procedures include chest x rays and
+an electrocardiogram (EKG).
+Treatment
+Secondary polycythemia is treated primarily by
+treating the underlying condition causing the disorder.
+For example, patients with Gaisbock’s syndrome are
+often taken off diuretics and encouraged to lose
+weight. Lung disorders, such as chronic obstructive
+pulmonary disease (COPD), may cause secondary
+polycythemia; treating the lung disorder generally
+improves the polycythemia.
+Some medications may also be taken to treat
+symptoms caused by polycythemia. For example,anti-
+histamines can alleviate itching, andaspirin can soothe
+burning sensations and bone pain.
+Until the underlying condition is controlled, doc-
+tors use bloodletting (phlebotomy) to reduce the num-
+ber of red blood cells in the patient’s body. In most
+instances, a pint of blood is drained from the patient as
+needed and tolerated, until the hematocrit (the pro-
+portion of red cells in the blood) reaches an acceptable
+level. Chemotherapy is not used to treat secondary
+polycythemia; however, it may be used to treat the
+primary form.
+Prognosis
+Curing or removing the underlying cause of this
+disorder generally eliminates the symptoms.
+Resources
+OTHER
+‘‘Secondary Erythrocytosis.’’The Merck Page.June 3, 1998.
+<http://www.merck.com> .
+Maureen Haggerty
+SED rate see Erythrocyte sedimentation rate
+Sedation
+Definition
+Sedation is the act of calming by administration of
+a sedative. A sedative is a medication that commonly
+induces the nervous system to calm.
+Purpose
+The process of sedation has two primary inten-
+tions. First, sedation is recommended to allow patients
+the ability to tolerate unpleasant diagnostic or surgical
+procedures and to relieve anxiety and discomfort.
+Second, sedation for uncooperative patients may
+expedite and simplify special procedures that require
+little or no movement. Additionally, sedation is often
+desirable to diminish fear associated with operative
+procedures. Sedation is typically used for common
+diagnostic tests that require prolongedimmobilization
+such asmagnetic resonance imaging(MRI) and com-
+puted axial tomography (CAT) scanning. Some cases
+that require sedation may also necessitate the use of
+analgesics to decreasepain associated with a procedure
+or test.
+Precautions
+Benzodiazepines (common sedative medication)
+have a cumulative effect. This means that if the patient
+has not had time to metabolize the previous dose and
+ingests more, then the sedative effect may increase.
+Because of these additive effects, these medications
+taken with other sedatives or alcohol (also a sedative
+hypnotic drug) may increase chances for accidental
+death. In general, most of the medications that induce
+sedation may alter breathing and cardiac stability. In
+patients with preexisting lung and/or heart disease,
+these medications should be monitored closely or not
+prescribed.
+Description
+The future of anesthetic care involves the simulta-
+neous administration of several drugs including IV
+medications and inhaled anesthetics. An extensive
+survey of death in 100,000 cases published in 1988
+revealed that death within seven days was 2.9 times
+greater when one or two anesthetic drugs were used
+than when using three or more medications. As of
+2000 this study is accepted as standard practice and
+multiple IV anesthetics is the preferable recommenda-
+tion for optimal patient care.
+The procedure for sedation is usually explained
+to the patient by an attending clinician. An IV access
+line is set in place for fluid replacement and injection
+of medications. A history is usually taken to assess
+risk and choice of medication. The patient typically
+signs consent forms and the possible side effects
+are explained. The day before the test, the patient
+may be required to maintain specified dietary
+restriction.
+3326 Sedation
+For outpatient surgery there are two types of
+sedation, conscious and unconscious sedation.
+Patients receiving conscious sedation are capable of
+rational responses, and they are able to maintain their
+airway for ventilation. The hallmark of conscious
+sedation is that it does not alter respiratory, cardiac,
+or reflex functions (nerve reflexes from the brain) to
+the level that requires external support for these vital
+functions. Patients receiving conscious sedation are
+cooperative, have stable vital signs (pulse, respiratory
+rate, and temperature), shorter recovery room conva-
+lescence, and lower risk of developing drug-induced
+complications. Unconscious sedation is a controlled
+state of anesthesia, characterized by partial or com-
+plete loss of protective nerve reflexes, including the
+ability to independently breathe and respond to
+commands. The patient is unable to cooperate, has
+labile (fluctuating) vital signs, prolonged recovery
+room convalescence, and higher risk of anesthetic
+complications.
+Preparation
+Usually procedures for conscious sedation do not
+require preoperative or pre-testing orders. Clinical
+situations for unconscious sedation typically involve
+eating and drinking protocols starting the day before
+the procedure.
+The age and physical status of the patient is useful
+in determining sensitivity. A detailed past history,
+especially prior experiences with sedatives and other
+anesthetics is an important part of preparatory assess-
+ment. It is important to determine if there were any
+untoward side effects associated with a previous med-
+ication. Patient positioning is important to prevent
+blood pressure changes or nerve damage associated
+with abnormal position.
+Patients are also monitored for pulse rate, respira-
+tion, blood pressure, and temperature. Additionally,
+the heart is monitored using electrocardiography
+(ECG). Ventilation is assessed using a pulse oximeter.
+This machine is clipped with a special probe on one
+finger and can measure the levels of oxygen and car-
+bon dioxide, which are reliable indicators of respira-
+tory status.
+Aftercare
+The major goal for recovery room monitoring is
+assessment of residual drug effects. Recovery room
+monitoring primarily focuses on heart stability,
+respiratory adequacy and return to previous brain
+functioning.
+Risks
+The original forms of diazepam (Valium, a very
+common sedative) caused irritation of veins and phle-
+bitis. Newer forms of diazepam (Dizac) are chemically
+improved to lower the possibility of vein irritation.
+Age and physical health are important risk factors.
+Preexisting medical conditions such as high blood
+pressure and heart and lung disease may increase the
+chance of developing undesirable side effects.
+Normal results
+Normal or uncomplicated results for sedation
+include alleviation of anxiety and discomfort.
+Coupled with analgesic, patients are usually pain-
+free. The normal progression post procedure or post
+operatively would be to return to baseline brain func-
+tioning, unassisted breathing, and normal heart rate
+and rhythm.
+Abnormal results
+Patients may have excessivenausea and vomiting
+associated with narcotic analgesia (if this is indicated).
+Excessive drowsiness can occur secondary to benzo-
+diazepine-induced sedation. The patient can also
+develop hypoventilation (a decrease in ventilation), air-
+way obstruction, high or low blood pressure, abnormal
+heart rhythms,nausea, vomiting, and shivering.
+Resources
+BOOKS
+Fleisher, Gary R., et al.Textbook of Pediatric Emergency
+Medicine. 4th ed. Lippincott Wlliams &Wilkins, 2000.
+Miller, Ronald D., et al, editors.Anesthesia. 5th ed.
+Churchill Livingstone, Inc., 2000.
+Laith Farid Gulli, M.D.
+Bilal Nasser, M.Sc.
+Sedative-hypnotic drugs see Anti-insomnia
+drugs
+Sedimentation rate see Erythrocyte sedi-
+mentation rate
+KEY TERMS
+Baseline— A return to an original state.
+Diazepam— One of the most commonly used
+sedative-hypnotic medications.
+Sedation
+Seizure disorder
+Definition
+A seizure is a sudden disruption of the brain’s
+normal electrical activity accompanied by altered con-
+sciousness and/or other neurological and behavioral
+manifestations. Epilepsy is a condition characterized
+by recurrent seizures that may include repetitive mus-
+cle jerking called convulsions.
+Description
+There are more than 20 different seizure disorders.
+One in ten Americans will have a seizure at some time,
+and at least 200,000 have at least one seizure a month.
+Epilepsy affects 1–2% of the population of the
+United States. Although epilepsy is as common in
+adults over 60 as in children under 10, 25% of all
+cases develop before the age of five. One in every two
+cases develops before the age of 25. About 125,000
+new cases of epilepsy are diagnosed each year, and a
+significant number of children and adults that have
+not been diagnosed or treated have epilepsy.
+Most seizures are benign, but a seizure that lasts a
+long time can lead to status epilepticus, a life-threatening
+condition characterized by continuous seizures, sus-
+tained loss of consciousness, and respiratory distress.
+Non-convulsive epilepsy can impair physical coordina-
+tion, vision, and other senses. Undiagnosed seizures
+can lead to conditions that are more serious and more
+difficult to manage.
+Types of seizures
+Generalized epileptic seizures occur when electri-
+cal abnormalities exist throughout the brain. A partial
+seizure does not involve the entire brain. A partial
+seizure begins in an area called an epileptic focus, but
+may spread to other parts of the brain and cause a
+generalized seizure. Some people who have epilepsy
+have more than one type of seizure.
+Motor attacks cause parts of the body to jerk
+repeatedly. A motor attack usually lasts less than an
+hour and may last only a few minutes. Sensory seizures
+begin withnumbness or tingling in one area. The sensa-
+tion may move along one side of the body or the back
+before subsiding.
+Visual seizures, which affect the area of the brain
+that controls sight, cause people to see things that are
+not there. Auditory seizures affect the part of the brain
+that controls hearing and cause the patient to imagine
+voices, music, and other sounds. Other types of
+seizures can cause confusion, upset stomach, or emo-
+tional distress.
+GENERALIZED SEIZURES. A generalized tonic-clo-
+nic (grand-mal) seizure begins with a loud cry before
+the person having the seizure loses consciousness and
+falls to the ground. The muscles become rigid for
+about 30 seconds during the tonic phase of the seizure
+and alternately contract and relax during the clonic
+phase, which lasts 30–60 seconds. The skin sometimes
+acquires a bluish tint and the person may bite his
+tongue, lose bowel or bladder control, or have trouble
+breathing.
+A grand mal seizure lasts between two and five
+minutes, and the person may be confused or have
+trouble talking when he regains consciousness (post-
+ictal state). He may complain of head or muscle aches,
+or weakness in his arms or legs before falling into a
+deep sleep.
+PRIMARY GENERALIZED SEIZURES. A primary gen-
+eralized seizure occurs when electrical discharges
+begin in both halves (hemispheres) of the brain at the
+same time. Primary generalized seizures are more
+likely to be major motor attacks than to be absence
+seizures.
+ABSENCE SEIZURES. Absence (petit mal) seizures
+generally begin at about the age of four and stop by
+the time the child becomes an adolescent.
+Absence seizures usually begin with a brief loss of
+consciousness and last between one and 10 seconds. A
+person having a petit mal seizure becomes very quiet
+and may blink, stare blankly, roll his eyes, or move his
+lips. A petit mal seizure lasts 15-20 seconds. When it
+ends, the person who had the seizure resumes whatever
+he was doing before the seizure began. He will not
+remember the seizure and may not realize that any-
+thing unusual has happened. Untreated, petit mal sei-
+zures can recur as many as 100 times a day and may
+progress to grand mal seizures.
+MYOCLONIC SEIZURES. Myoclonic seizures are
+characterized by brief, involuntary spasms of the ton-
+gue or muscles of the face, arms, or legs. Myoclonic
+seizures are most apt to occur when waking after a
+night’s sleep.
+A jacksonian seizure is a partial seizure character-
+ized by tingling, stiffening, or jerking of an arm or leg.
+Loss of consciousness is rare. The seizure may pro-
+gress in characteristic fashion along the limb.
+Limp posture and a brief period of unconscious-
+ness are features of akinetic seizures, which occur in
+young children. Akinetic seizures, which cause the
+child to fall, also are called drop attacks.
+3328 Seizure disorder
+PARTIAL SEIZURES. Simple partial seizures do not
+spread from the focal area where they arise. Symptoms
+are determined by the part of the brain affected. The
+patient usually remains conscious during the seizure
+and can later describe it in detail. In 2003, it was
+reported that people who experience partial seizures
+are twice as likely to have sleep disturbances as people
+their same age and gender.
+COMPLEX PARTIAL SEIZURES. A distinctive smell,
+taste, or other unusual sensation (aura) may signal
+the start of a complex partial seizure.
+Complex partial seizures start as simple partial
+seizures, but move beyond the focal area and cause
+loss of consciousness. Complex partial seizures can
+become major motor seizures. Although a person hav-
+ing a complex partial seizure may not seem to be
+unconscious, he does not know what is happening
+and may behave inappropriately. He will not remem-
+ber the seizure, but may seem confused or intoxicated
+for a few minutes after it ends.
+Causes and symptoms
+The origin of 50-70% of all cases of epilepsy is
+unknown. Epilepsy sometimes is the result of trauma
+at birth. Such causes include insufficient oxygen to the
+brain; head injury; heavy bleeding or incompatibility
+between a woman’s blood and the blood of her new-
+born baby; and infection immediately before, after, or
+at the time of birth.
+Other causes of epilepsy include:
+/C15head trauma resulting from a car accident, gunshot
+wound, or other injury.
+/C15alcoholism
+/C15brain abscess or inflammation of membranes cover-
+ing the brain or spinal cord
+/C15phenylketonuria (PKU, a disease that is present at
+birth, often is characterized by seizures, and can
+result in mental retardation) and other inherited
+disorders
+/C15infectious diseases like measles, mumps,a n d
+diphtheria
+/C15degenerative disease
+/C15lead poisoning, mercury poisoning,carbon monoxide
+poisoning, or ingestion of some other poisonous
+substance
+/C15genetic factors
+Status epilepticus, a condition in which a person
+suffers from continuous seizures and may have trouble
+breathing, can be caused by:
+/C15suddenly discontinuing anti-seizure medication
+/C15hypoxic or metabolic encephalopathy (brain disease
+resulting from lack of oxygen or malfunctioning of
+other physical or chemical processes)
+/C15acute head injury
+/C15blood infection caused by inflammation of the brain
+or the membranes that cover it
+Diagnosis
+Personal and family medical history, description
+of seizure activity, and physical and neurological
+examinations help primary care physicians, neurolo-
+gists, and epileptologists diagnose this disorder.
+Doctors rule out conditions that cause symptoms
+that resemble epilepsy, including small strokes (tran-
+sient ischemic attacks, or TIAs),fainting, (syncope),
+pseudoseizures, and sleep attacks (narcolepsy.)
+Neuropsychological testing uncovers learning or
+memory problems. Neuroimaging provides views of
+brain areas involved in seizure activity.
+The electroencephalogram (EEG) is the main test
+used to diagnose epilepsy. EEGs use electrodes placed
+on or within the skull to record the brain’s electrical
+activity and pinpoint the exact location of abnormal
+discharges.
+This patient’s brain is exposed during surgery in order for
+surgeons to remove the mass responsible for his epilepsy.
+(Custom Medical Stock Photo. Reproduced by permission.)
+Seizure disorder
+The patient may be asked to remain motionless
+during a short-term EEG or to go about his normal
+activities during extended monitoring. Some patients
+are deprived of sleep or exposed to seizure triggers,
+such as rapid, deep breathing (hyperventilation) or
+flashing lights (photic stimulation). In some cases,
+people may be hospitalized for EEG monitorings
+that can last as long as two weeks. Video EEGs also
+document what the patient was doing when the seizure
+occurred and how the seizure changed his behavior.
+Other techniques used to diagnose epilepsy
+include:
+/C15Magnetic resonance imaging (MRI), which provides
+clear, detailed images of the brain. Functional MRI
+(fMRI), performed while the patient does various
+tasks, can measure shifts in electrical intensity and
+blood flow and indicate which brain region each
+activity affects.
+/C15Positron emission tomography (PET) and single
+photon emission tomography (SPECT) monitor
+blood flow and chemical activity in the brain area
+being tested. PET and SPECT are very effective in
+locating the brain region where metabolic changes
+take place between seizures.
+Treatment
+The goal of epilepsy treatment is to eliminate
+seizures or make the symptoms less frequent and less
+severe. Long-term anticonvulsant drug therapy is the
+most common form of epilepsy treatment.
+Medication
+A combination of drugs may be needed to control
+some symptoms, but most patients who have epilepsy
+take one of the following medications:
+/C15Dilantin (phenytoin)
+/C15Tegretol (carbamazepine)
+/C15Barbita (phenobarbital)
+/C15Mysoline (primidone)
+/C15Depakene (valproic acid, sodium valproate)
+/C15Klonopin (clonazepam)
+/C15Zarontin (ethosuximide).
+Dilantin, Tegretol, Barbita, and Mysoline are
+used to manage or control generalized tonic-clonic
+and complex partial seizures. Depakene, Klonopin,
+and Zarontin are prescribed for patients who have
+absence seizures.
+Neurontin (gabapentin), Lamictal (lamotrigine),
+and topiramate (Topamax) are among the medica-
+tions more recently approved in the United States to
+treat adults who have partial seizures or partial and
+grand mal seizures. Another new medication called
+Levetiracetam (Keppra) has been approved and
+shows particularly good results in reducing partial
+seizures among elderly patients with few side effects.
+This is important, because elderly patients often have
+other conditions and must take other medications that
+might interact with seizure medications. In 2003,
+Keppra’s manufacturer was working on a new anti-
+epilectic drug from the same chemical family as
+Keppra that should be more potent and effective.
+Available medications frequently change, and it the
+physician will determine the best treatment for an
+individual patient. A 2003 report found that mono-
+therapy, or using just one medication rather than a
+combination, works better for most patients. The less
+complicated the treatment, the more likely the patient
+will comply and better manager the seizure disorder.
+Even a patient whose seizures are well controlled
+should have regular blood tests to measure levels of
+anti-seizure medication in his system and to check to
+see if the medication is causing any changes in his
+blood or liver. A doctor should be notified if any
+signs of drug toxicity appear, including uncontrolled
+eye movements; sluggishness,dizziness, or hyperactiv-
+ity; inability to see clearly or speak distinctly;nausea
+or vomiting; or sleep problems.
+Status epilepticus requires emergency treatment,
+usually with Valium (Ativan), Dilantin, or Barbita. An
+intravenous dextrose (sugar) solution is given to
+patients whose condition is due to low blood sugar,
+and a vitamin B
+1 preparation is administered intrave-
+nously when status epilepticus results from chronic
+alcohol withdrawal. Because dextrose and thiamine
+are essentially harmless and because delay in treat-
+ment can be disastrous, these medications are given
+routinely, as it is usually difficult to obtain an ade-
+quate history from a patient suffering from status
+epilepticus.
+Intractable seizures are seizures that cannot be
+controlled with medication or without sedation or
+other unacceptable side effects. Surgery may be used
+to eliminate or control intractable seizures.
+Surgery
+Surgery can be used to treat patients whose
+intractable seizures stem from small focal lesions that
+can be removed without endangering the patient,
+changing the patient’s personality, dulling the
+3330 Seizure disorder
+patient’s senses, or reducing the patient’s ability to
+function.
+Each year, as many as 5,000 new patients may
+become suitable candidates for surgery, which most
+often is performed at a comprehensive epilepsy center.
+Potential surgical candidates include patients with:
+/C15partial seizures and secondarily generalized seizures
+(attacks that begin in one area and spread to both
+sides of the brain)
+/C15seizures and childhoodparalysis on one side of the
+body (hemiplegia)
+/C15complex partial seizures originating in the temporal
+lobe (the part of the brain associated with speech,
+hearing, and smell) or other focal seizures.
+(However, the risk of surgery involving the speech
+centers is that the patient will lose speech function.)
+/C15Generalized myoclonic seizures or generalized sei-
+zures featuring temporary paralysis (akinetic) or
+loss of muscle tone (atonal)
+A physical examinationis conducted to verify that
+a patient’s seizures are caused by epilepsy, and surgery
+is not used to treat patients with severe psychiatric
+disturbances or medical problems that raise risk fac-
+tors to unacceptable levels.
+Surgery is never indicated unless:
+/C15the best available anti-seizure medications have failed
+to control the patient’s symptoms satisfactorily
+/C15the origin of the patient’s seizures has been precisely
+located
+/C15there is good reason to believe that surgery will signifi-
+cantly improve the patient’s health and quality of life.
+Every patient considering epilepsy surgery is care-
+fully evaluated by one or more neurologists, neurosur-
+geons, neuropsychologists, and/or social workers. A
+psychiatrist, chaplain, or other spiritual advisor may
+help the patient and his family cope with thestress that
+occurs during and after the selection process.
+TYPES OF SURGERY. Surgical techniques used to
+treat intractable epilepsy include:
+/C15Lesionectomy. Removing the lesion (diseased brain
+tissue) and some surrounding brain tissue is very
+effective in controlling seizures. Lesionectomy is gen-
+erally more successful than surgery performed on
+patients whose seizures are not caused by clearly
+defined lesions, but removing only part of the lesion
+lessens the effectiveness of the procedure.
+/C15Temporal resections. Removing part of the temporal
+lobe and the part of the brain associated with feel-
+ings, memory, and emotions (the hippocampus) pro-
+vides good or excellent seizure control in 75-80% of
+properly selected patients with appropriate types of
+temporal lobe epilepsy. Some patients experience
+post-operative speech and memory problems.
+/C15Extra-temporal resection. This procedure involves
+removing some or all of the frontal lobe, the part of
+the brain directly behind the forehead. The frontal
+lobe helps regulate movement, planning, judgment,
+and personality, and special care must be taken to
+prevent post-operative problems with movement and
+speech. Extra-temporal resection is most successful
+in patients whose seizures are not widespread.
+/C15Hemispherectomy. This method of removing brain
+tissue is restricted to patients with severe epilepsy and
+abnormal discharges that often extend from one side
+of the brain to the other. Hemispherectomies most
+often are performed on infants or young children
+who have had an extensive brain disease or disorder
+since birth or from a very young age.
+/C15Corpus callosotomy. This procedure, an alternative
+to hemispherectomy in patients with congenital
+hemiplegia, removes some or all of the white matter
+that separates the two halves of the brain. Corpus
+callosotomy is performed almost exclusively on chil-
+dren who are frequently injured during falls caused
+This abstract artwork is based on a patient’s description of
+what an epileptic seizure feels like. Epileptic seizures are
+caused by chaotic electrical activity in the brain. They can
+be triggered by a variety of factors, such as illness or stress,
+although the underlying causes is not completely under-
+stood. (Illustration by John Bavosi, Photo Researchers, Inc.
+Reproduced by permission.)
+Seizure disorder

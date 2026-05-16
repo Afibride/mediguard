@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,22 +8,44 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { Search, TrendingUp, AlertTriangle } from 'lucide-react';
+import { Search, TrendingUp, AlertTriangle, BookOpen, Database, ShieldCheck } from 'lucide-react';
 import { diseases } from '@/data/diseases';
+import { getDiseases } from '@/services/api';
 
 const DiseaseLibrary = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('All');
   const [severityFilter, setSeverityFilter] = useState('All');
   const [commonOnly, setCommonOnly] = useState(false);
+  const [diseaseRows, setDiseaseRows] = useState(diseases);
+  const [dataSource, setDataSource] = useState('Local fallback');
 
-  const categories = ['All', ...new Set(diseases.map(d => d.category))];
+  useEffect(() => {
+    getDiseases()
+      .then((res) => {
+        if (Array.isArray(res.data) && res.data.length) {
+          setDiseaseRows(res.data.map((d) => ({
+            ...d,
+            id: d.id || d.slug,
+            commonInBamenda: d.commonInBamenda ?? d.featured,
+            symptoms: d.symptoms || [],
+          })));
+          setDataSource('Backend database');
+        }
+      })
+      .catch(() => {
+        setDiseaseRows(diseases);
+        setDataSource('Local fallback');
+      });
+  }, []);
+
+  const categories = ['All', ...new Set(diseaseRows.map(d => d.category))];
   const severities = ['All', 'Low', 'Medium', 'High'];
 
-  const filteredDiseases = diseases.filter((disease) => {
+  const filteredDiseases = diseaseRows.filter((disease) => {
     const matchesSearch = disease.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           disease.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          disease.symptoms.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
+                          (disease.symptoms || []).some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesCategory = categoryFilter === 'All' || disease.category === categoryFilter;
     const matchesSeverity = severityFilter === 'All' || disease.severity === severityFilter;
     const matchesCommon = !commonOnly || disease.commonInBamenda;
@@ -50,23 +72,43 @@ const DiseaseLibrary = () => {
         <meta name="description" content="Comprehensive library of diseases. Learn about symptoms, prevention, and treatment." />
       </Helmet>
 
-      <div className="min-h-screen bg-muted/30 py-12">
+      <div className="min-h-screen medical-page py-8 sm:py-12">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-8 flex flex-col items-center">
             <div className="mb-4">
               <img 
-                src="/public/mediguard.png" 
+                src="/mediguard.png" 
                 alt="MediGuard Logo" 
                 className="logo-sm"
               />
             </div>
-            <h1 className="text-4xl font-bold mb-4">Disease Library</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Explore comprehensive information about diseases and health conditions
+            <h1 className="text-3xl sm:text-4xl font-bold mb-4">Disease Library</h1>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+              Explore symptoms, causes, prevention, and treatment summaries from the MediGuard knowledge base.
             </p>
           </div>
 
-          <Card className="mb-8">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
+            {[
+              { label: 'Diseases Loaded', value: diseaseRows.length, icon: BookOpen },
+              { label: 'Categories', value: categories.length - 1, icon: Database },
+              { label: 'Common in Bamenda', value: diseaseRows.filter((d) => d.commonInBamenda || d.featured).length, icon: ShieldCheck },
+            ].map((item) => (
+              <Card key={item.label} className="medical-panel">
+                <CardContent className="p-2.5 sm:p-5 flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-4 min-h-[108px] sm:min-h-0">
+                  <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+                    <item.icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </div>
+                  <div className="min-w-0 w-full">
+                    <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">{item.label}</p>
+                    <p className="text-sm sm:text-2xl font-bold truncate">{item.value}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <Card className="mb-8 medical-panel">
             <CardContent className="pt-6">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="relative md:col-span-2">
@@ -76,13 +118,13 @@ const DiseaseLibrary = () => {
                     placeholder="Search by name, symptom, or description..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 text-gray-900 bg-white"
+                    className="pl-10 bg-background"
                   />
                 </div>
                 
                 <div>
                   <select
-                    className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={categoryFilter}
                     onChange={(e) => setCategoryFilter(e.target.value)}
                   >
@@ -92,7 +134,7 @@ const DiseaseLibrary = () => {
 
                 <div>
                   <select
-                    className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={severityFilter}
                     onChange={(e) => setSeverityFilter(e.target.value)}
                   >
@@ -100,7 +142,8 @@ const DiseaseLibrary = () => {
                   </select>
                 </div>
 
-                <div className="md:col-span-4 flex items-center space-x-2">
+                <div className="md:col-span-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
+                  <div className="flex items-center space-x-2">
                   <Checkbox
                     id="common-filter"
                     checked={commonOnly}
@@ -109,6 +152,8 @@ const DiseaseLibrary = () => {
                   <Label htmlFor="common-filter" className="text-sm font-medium cursor-pointer">
                     Show only diseases common in Bamenda
                   </Label>
+                  </div>
+                  <span className="text-xs text-muted-foreground">Data source: {dataSource}</span>
                 </div>
               </div>
             </CardContent>
@@ -117,7 +162,7 @@ const DiseaseLibrary = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredDiseases.map((disease) => (
               <Link key={disease.id} to={`/disease/${disease.id}`}>
-                <Card className="h-full hover:shadow-2xl transition-all duration-300 cursor-pointer border-2 hover:border-primary/50 flex flex-col">
+                <Card className="h-full hover:shadow-xl transition-all duration-300 cursor-pointer medical-panel hover:border-primary/50 flex flex-col">
                   <CardHeader className="flex-1">
                     <div className="flex items-start justify-between mb-2">
                       <div className="px-3 py-1 rounded-full text-sm font-semibold bg-primary/10 text-primary">
@@ -130,6 +175,13 @@ const DiseaseLibrary = () => {
                     <CardDescription className="text-foreground/80">
                       {disease.description}
                     </CardDescription>
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {(disease.symptoms || []).slice(0, 4).map((symptom) => (
+                        <Badge key={symptom} variant="outline" className="text-[11px] bg-muted/50">
+                          {symptom}
+                        </Badge>
+                      ))}
+                    </div>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">

@@ -1,0 +1,936 @@
+DISEASE: Dengue Fever
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+Garcia Julve G., and G. Martinez Villen. ‘‘The Multiple
+Monoblock Toe-to-Hand Transfer in Digital
+Reconstruction. A Report of Ten Cases.’’Journal of
+Hand Surgery29 (June 2004): 222–229.
+ORGANIZATIONS
+International Child Amputee Network. <http://www.amp-
+info.net/childamp.htm>.
+March of Dimes Birth Defects Foundation. 1275
+Mamaroneck Ave., White Plains, NY 10605. (914) 428-
+7100. resourcecenter@modimes.org. <http://
+www.modimes.org>.
+National Organization for Rare Disorders (NORD). 55
+Kenosia Avenue, P. O. Box 1968, Danbury, CT 06813-
+1968. (203) 744-0100 or (800) 999-6673. Fax: (203) 798-
+2291. <http://www.rarediseases.org>.
+Jeffrey P. Larson, RPT
+Rebecca J. Frey, PhD
+Congenital bladder anomalies
+Definition
+The two most common congenital bladder
+abnormalities are exstrophy and congenital diverti-
+cula. An exstrophic bladder is one that is open to the
+outside and turned inside-out, so that its inside is
+visible at birth, protruding from the lower abdomen.
+A diverticulum is an extension of a hollow organ,
+usually shaped like a pouch with a narrow opening.
+Description
+During fetal development, folds enclose tissues
+and organs and eventually fuse at the edges to form
+sealed compartments. Both in the front and the back,
+folds eventually become major body structures. In the
+back, the entire spinal column folds in like a pipe
+wrapped in a pillow. In the front, the entire lower
+urinary system is folded in.
+/C15Exstrophy of the bladder represents a failure of this
+folding process to complete itself, so the organs form
+with more or less of their front side missing and open
+to the outside. At the same time, the front of the
+pelvic bone is widely separated. The abdominal wall
+is open, too. In fact, the defect often extends all the
+way to the penis in the male or splits the clitoris in the
+female.
+/C15A congenital bladder diverticulum represents an area
+of weakness in the bladder wall through which
+extrudes some of the lining of the bladder. (A small
+balloon squeezed in a fist will create a diverticula-like
+effect between the fingers.) Bladder diverticula may
+be multiple, and they often occur at the ureterovesi-
+cal junction–the entrance of the upper urinary system
+into the bladder. In this location, they may cause
+urine to reflux into the ureter and kidney, leading
+to infection and possible kidney damage.
+Causes and symptoms
+As with manybirth defects, the causes are not well
+known. Lack of prenatal care andnutrition has been
+linked to many birth defects, however beyond the
+avoidance of known teratogens (anything that can
+cause a birth defect), there is little prevention possible.
+Exstrophy is rare, occurring in about one in 40,000
+births. Diverticula are more common, but less serious.
+If left untreated, the patient with bladder exstro-
+phy will have no control over urination and is more
+likely to developbladder cancer. Diverticula, particu-
+larly if it causes urine reflux, may lead to chronic
+infection and its subsequent consequences.
+Diagnosis
+A major consideration with congenital abnormal-
+ities is that they tend to be multiple. Further, each one
+is unique in its extent and severity. Exstrophy can
+involve the rectum and large bowel and coexist with
+hernias. The obvious bladder exstrophy seen at birth
+will prompt immediate action and a search for other
+anomalies.
+Diverticula are not visible and will be detected
+only if they cause trouble. They are usually found in
+an examination for the cause of recurring urinary
+infections. X rays of the urinary system or acystoscopy
+(examination with a telescope-like instrument) will
+identify them. Often, the two procedures are done
+together: a urologist will perform the cystoscopy,
+then a radiologist will instill a contrast agent into the
+bladder and take x rays.
+Treatment
+Surgery is necessary and can usually produce suc-
+cessful results. If possible, the surgery must be done
+within 48 hours of birth. Prior to surgery, the exposed
+organs must be protected and all related defects iden-
+tified and managed. Delay in the surgery leads to the
+frequent need to divert the urine into the bowel
+because the partially repaired bladder cannot control
+the flow. After surgery, the likelihood of infection
+requires monitoring.
+Congenital bladder anomalies
+Alternative treatment
+After surgery, ongoing precautions to reduce fre-
+quency of infection may need to be used. Cranberry
+juice has the ability to keep bacteria from adhering to
+the membranes and can help prevent infection whenever
+there is increased risk. There are botanical and homeo-
+pathic treatments available;however, consultation by a
+t r a i n e dp r a c t i t i o n e ri sr e commended before treatment.
+Prognosis
+With immediate surgery, three-quarters of
+patients can be successfully repaired. They will have
+control of their urine and no long-term consequences.
+The rate of infection is greater for those with congeni-
+tal bladder anomalies, since any abnormality in the
+urinary system predisposes it to invasion by bacteria.
+Prevention
+Birth defects often have no precisely identified
+cause, therefore, prevention is limited to general mea-
+sures such as early and continuous prenatal care,
+appropriate nutrition, and a healthy lifestyle.
+Resources
+BOOKS
+Gearhart, John P., and Robert D. Jeffs. ‘‘Exstrophy-
+epispadias Complex and Bladder Anomalies.’’ In
+Campbell’s Urology, edited by Patrick C. Walsh, et al.
+Philadelphia: W. B. Saunders Co., 1998.
+J. Ricker Polsdorfer, MD
+Congenital bladder diverticulum see
+Congenital bladder anomalies
+Congenital brain defects
+Definition
+Congenital brain defects are a group of disorders
+of brain development.
+Description
+Brain development begins shortly after concep-
+tion and continues throughout the growth of a fetus.
+A complex genetic programcoordinates the forma-
+tion, growth, and migrationof billions of neurons, or
+nerve cells, and their development into discrete, inter-
+acting brain regions. Interruption of this program,
+especially early in development, can cause structural
+defects in the brain. In addition, normal brain forma-
+tion requires proper development of the surrounding
+skull, and skull defects may lead to brain malforma-
+tion. Congenital brain defects may be caused by
+inherited genetic defect s, spontaneous mutations
+within the genes of the embryo, or effects on the
+embryo due to the mother’s infection, trauma, or
+drug use.
+Early on in development, a flat strip of tissue
+along the back of the fetus rolls up to form a tube.
+This so-called ‘‘neural tube’’ develops into the spinal
+cord, and at one end, the brain. Closure of the tube is
+required for subsequent development of the tissue
+within. Anencephaly (literally ‘‘without brain’’),
+results when the topmost portion of the tube fails to
+close. Anencephaly is the most common severe mal-
+formation seen in stillborn births. It is about four
+times more common in females than males.
+Anencephaly is sometimes seen to run in families,
+and for parents who have conceived one anencephalic
+fetus, the risk of a second is as high as 5%. Fewer than
+half of babies with anencephaly are born alive, and
+survival beyond the first month is rare.
+Encephalocele is a protrusion of part of the brain
+through a defect in the skull. The most common site
+for encephalocele is along the front-to-back midline of
+the skull, usually at the rear, although frontal
+KEY TERMS
+Congenital— Present at birth.
+Cystoscopy— Examination of the urinary bladder
+with a thin telescope-like instrument.
+Exstrophy— Being turned inside out combined with
+being outside the body.
+Diverticulum— A pouch extending from a hollow
+organ.
+Radiologist— A physician who specializes in creat-
+ing images of the internal organs of the body.
+Teratogen— Any agent that can cause birth defects.
+Ureter— The tube that transports urine from the
+kidney to the bladder.
+Ureterovesical junction— The joining of the ureter
+to the bladder.
+Urologist— A surgeon who specializes in diseases
+of the urinary system.
+976 Congenital brain defects
+encephaloceles are more common among Asians.
+Pressure within the skull pushes out cranial tissue.
+The protective layer over the brain, the meninges,
+grows to cover the protrusion, as does skin in some
+cases. Defects in skull closure are thought to cause
+some cases of encephalocele, while defects in neural
+tube closure may cause others. Encephaloceles may be
+small and contain little or no brain tissue, or may be
+quite large and contain a significant fraction of the
+brain.
+Failure of neural-tube closure below the level of
+the brain prevents full development of the surrounding
+vertebral bones and leads tospina bifida, or a divided
+spinal column. Incomplete closure causes protrusion
+of the spinal cord and meninges, called meningomye-
+locele. Some cases of spina bifida are accompanied by
+another defect at the base of the brain, known as the
+Arnold-Chiari malformation or Chiari II malforma-
+tion. For reasons that are unclear, part of the cerebel-
+lum is displaced downward into the spinal column.
+Symptoms may be present at birth or delayed until
+early childhood.
+The Dandy-Walker malformation is marked by
+incomplete formation, or absence of, the central sec-
+tion of the cerebellum, and the growth of cysts within
+the lowest of the brain’s ventricles. The ventricles are
+fluid-filled cavities within the brain, through which
+cerebrospinal fluid (CSF) normally circulates. The
+cysts may block the exit of the fluid, causinghydro-
+cephalus. Symptoms may be present at birth or
+delayed until early childhood.
+Soon after closure of the neural tube, the brain
+divides into two halves, or hemispheres. Failure of
+division is termed holoprosencephaly (literally
+‘‘whole forebrain’’). Holoprosencephaly is almost
+always accompanied by facial and cranial deformities
+along the midline, includingcleft lip, cleft palate, fused
+eye sockets and a single eye (cyclopia), and deformities
+of the limbs, heart, gastrointestinal tract, and other
+internal organs. Most infants are either stillborn or die
+soon after birth. Survivors suffer from severe neuro-
+logical impairments.
+The normal ridges and valleys of the mature brain
+are formed after cells from the inside of the developing
+brain migrate to the outside and multiply. When these
+cells fail to migrate, the surface remains smooth, a
+condition called lissencephaly (‘‘smooth brain’’).
+Lissencephaly is often associated with facial abnorm-
+alities including a small jaw, a high forehead, a short
+nose, and low-set ears.
+If damaged during growth, especially within the
+first 20 weeks, brain tissue may stop growing, while
+tissue around it continues to form. This causes an
+abnormal cleft or groove to appear on the surface of
+the brain, called schizen cephaly (literally ‘‘split
+brain’’). This cleft should not be confused with the
+normal wrinkled brain surface, nor should the name
+be mistaken for schizophrenia , a mental disorder.
+Generalized destruction of tissue or lack of brain
+development may lead to hydranencephaly, in
+which cerebrospinal fluid fills much of the space
+normally occupied by the brain. Hydranencephaly
+is distinct from hydrocephalus, in which CSF
+accumulates within a normally-formed brain, put-
+ting pressure on it and possibly causing skull
+expansion.
+Excessive brain size is termed megalencephaly
+(literally ‘‘big brain’’). Megalencephaly is defined as
+any brain size above the 98th percentile within the
+population. Some cases are familial, and may be
+entirely benign. Others are due to metabolic or neu-
+rologic disease. The opposite condition, microce-
+phaly, may be caused by failure of the brain to
+develop, or by intrauterine infection, drug toxicity,
+or brain trauma.
+Causes and symptoms
+Causes
+Congenital brain defects may have genetic, infec-
+tious, toxic, or traumatic causes. In most cases, no
+certain cause can be identified.
+GENETIC CAUSES. Some brain defects are caused
+by trisomy, the inclusion of a third copy of a chromo-
+some normally occurring in pairs. Most trisomies
+occur because of improper division of the chromo-
+somes during formation of eggs or sperm. Trisomy of
+chromosome 9 can cause some cases of Dandy-Walker
+and Chiari II malformation. Some cases of holopro-
+sencephaly are caused by trisomy of chromosome 13,
+while others are due to abnormalities in chromosomes
+7 or 18. Individual gene defects, either inherited or
+spontaneous, are responsible for other cases of con-
+genital brain malformations.
+DRUGS. Drugs known to cause congenital brain
+defects when used by the mother during critical devel-
+opmental periods include:
+/C15anticonvulsant drugs
+/C15retinoic acid and tretinoin
+/C15warfarin
+/C15alcohol
+/C15cocaine
+Congenital brain defects
+OTHER. Other causes of congenital brain defects
+include:
+/C15intrauterine infections, including cytomegalovirus,
+rubella, herpes simplex, and varicella zoster
+/C15maternal diabetes mellitus
+/C15maternal phenylketonuria
+/C15fetal trauma
+Symptoms
+Besides the features listed above, symptoms of
+congenital brain defects may include:
+/C15Chiari II malformation: impaired swallowing and
+gag reflex, loss of the breathing reflex, facialparaly-
+sis, uncontrolled eye movements ( nystagmus),
+impaired balance and gait.
+/C15Dandy-Walker malformation: symptoms of hydro-
+cephalus, lack of muscle tone or ‘‘floppiness,’’ sei-
+zures, spasticity, deafness, irritability, visual
+impairment, deterioration of consciousness,
+paralysis.
+/C15Lissencephaly: lack of muscle tone, seizures, devel-
+opmental delay, spasticity,cerebral palsy.
+/C15Hydranencephaly: irritability, spasticity, seizures,
+temperature oscillations.
+/C15Megalencephaly due to neurological or metabolic
+disease: mental retardation, seizures.
+Diagnosis
+Congenital brain defects are diagnosed either from
+directphysical examinationor imaging studies including
+computed tomography scans(CT) and magnetic reso-
+nance imaging (MRI). Electroencephalography (EEG)
+may be used to reveal characteristic abnormalities.
+Prenatal diagnosis of neural tube defects causing
+anencephaly or meningomyelocele is possible through
+ultrasound examination and maternal blood testing
+for alpha-fetoprotein, which is almost always elevated.
+Ultrasound can also be used to diagnose Dandy-
+Walker and Chiari II malformations.Amniocentesis
+may reveal trisomies or other chromosomal
+abnormalities.
+Treatment
+Meningomyelocele may be treated with surgery to
+close the open portion of the spinal cord. Surgery for
+encephalocele is possible only if there is a minimal
+amount of brain tissue protruding. Malformations
+associated with hydrocephalus (Dandy-Walker,
+Chiari II, and some cases of hydranencephaly) may
+be treated by installation of a drainage shunt for cere-
+brospinal fluid. Drugs may be used to treat some
+symptoms of brain defects, including seizures and
+spasticity.
+Prognosis
+Most congenital brain defects carry a very poor
+prognosis. Surgical treatment of meningomyelocele
+and encephalocele may be successful, with lasting neu-
+rological deficiencies, that vary in severity. Early treat-
+ment of hydrocephalus may prevent more severe brain
+damage.
+Prevention
+Some cases of congenital brain defects can be
+prevented with good maternal nutrition, including
+folic acid supplements. Folic acid is a vitamin that
+has been shown to reduce the incidence of neural
+tube defects. Pregnant women should avoid exposure
+to infection, especially during the first trimester.
+Abstention from drugs and alcohol duringpregnancy
+may reduce risk.Genetic counseling is advisable for
+parents who have had one child with anencephaly,
+since the likelihood of having another is increased.
+Resources
+BOOKS
+Fenichel, G. M.Clinical Pediatric Neurology.3rd ed.
+W. B. Saunders Co., 1997.
+Richard Robinson
+Congenital defects see Birth defects
+KEY TERMS
+Amniocentesis— Removal of fluid from the sac sur-
+rounding a fetus for purposes of diagnosis.
+Cerebrospinal fluid— Fluid produced within the
+brain for nutrient transport and structural purposes.
+CSF circulates through the ventricles, open spaces
+within the brain, and drains through the mem-
+branes surrounding the brain.
+Congenital— Defect present at birth.
+Fetus— The unborn human, developing in a
+woman’s uterus, from the eighth week after fertili-
+zation to birth.
+978 Congenital brain defects
+Congenital heart disease
+Definition
+Congenital heart disease, also called congenital
+heart defect, includes a variety of malformations of the
+heart or its major blood vessels that are present at birth.
+Description
+Congenital heart disease occurs when the heart or
+blood vessels near the heart do not develop properly
+before birth. Some infants are born with mild types of
+congenital heart disease, but most need surgery in
+order to survive. Patients who have had surgery are
+likely to experience other cardiac problems later in life.
+Most types of congenital heart disease obstruct the
+flow of blood in the heart or the nearby vessels, or cause
+an abnormal flow of blood through the heart. Rarer
+types of congenital heart disease occur when the new-
+born has only one ventricle, or when the pulmonary
+artery and the aorta come out of the same ventricle, or
+when one side of the heart is not completely formed.
+Patent ductus arteriosus
+Patent ductus arteriosusrefers to the opening of a
+passageway—or temporary blood vessel (ductus)—to
+carry the blood from the heart to the aorta before
+birth, allowing blood to bypass the lungs, which are
+not yet functional. The ductus should close sponta-
+neously in the first few hours or days after birth. When
+it does not close in the newborn, some of the blood
+that should flow through the aorta then returns to the
+lungs. Patent ductus arteriosus is common in prema-
+ture babies, but rare in full-term babies. It also has
+been associated with mothers who had German
+measles (rubella) while pregnant.
+Hypoplastic left heart syndrome
+Hypoplastic left heart syndrome, a condition in
+which the left side of the heart is underdeveloped, is
+rare, but it is the most serious type of congenital heart
+disease. With this syndrome, blood reaches the aorta,
+which pumps blood to the entire body, only from the
+ductus, which then normally closes within a few days
+of birth. In hypoplastic left heart syndrome, the baby
+seems normal at birth, but as the ductus closes, blood
+cannot reach the aorta and circulation fails.
+Obstruction defects
+When heart valves, arteries, or veins are nar-
+rowed, they partly or completely block the flow of
+blood. The most common obstruction defects arepul-
+monary valve stenosis, aortic valve stenosis, andcoarc-
+tation of the aorta. Bicuspid aortic valve and subaortic
+stenosis are less common.
+Stenosis is a narrowing of the valves or arteries. In
+pulmonary stenosis, the pulmonary valve does not
+open properly, forcing the right ventricle to work
+harder. In aortic stenosis, the improperly formed aor-
+tic valve is narrowed. As the left ventricle works
+harder to pump blood through the body, it becomes
+enlarged. In coarctation of the aorta, the aorta is con-
+stricted, reducing the flow of blood to the lower part of
+the body and increasing blood pressure in the upper
+body.
+A bicuspid aortic valve has only two flaps instead
+of three, which can lead to stenosis in adulthood.
+Subaortic stenosis is a narrowing of the left ventricle
+below the aortic valve that limits the flow of blood
+from the left ventricle.
+Septal defects
+When a baby is born with a hole in the septum (the
+wall separating the right and left sides of the heart),
+blood leaks from the left side of the heart to the right,
+or from a higher pressure zone to a lower pressure
+zone. A major leakage can lead to enlargement of the
+heart and failing circulation. The most common types
+of septal defects areatrial septal defect, an opening
+between the two upper heart chambers, andventricular
+septal defect, an opening between the two lower heart
+chambers. Ventricular septal defect accounts for
+about 15% of all cases of congenital heart disease in
+the United States.
+Cyanotic defects
+Heart disorders that cause a decreased, inade-
+quate amount of oxygen in blood pumped to the
+body are called cyanotic defects. Cyanotic defects,
+including truncus arteriosus, total anomalous pul-
+monary venous return,tetralogy of Fallot, transposi-
+tion of the great arteries, and tricuspid atresia, result in
+a blue discoloration of the skin due to low oxygen
+levels. About 10% of cases of congenital heart disease
+in the United States are tetralogy of Fallot, which
+includes four defects. The major defects are a large
+hole between the ventricles, which allows oxygen-poor
+blood to mix with oxygen-rich blood, and narrowing
+at or beneath the pulmonary valve. The other defects
+are an overly muscular right ventricle and an aorta
+that lies over the ventricular hole.
+In transposition (reversal of position) of the great
+arteries, the pulmonary artery and the aorta are
+Congenital heart disease
+reversed, causing oxygen-rich blood to re-circulate to
+the lungs while oxygen-poor blood goes to the rest of
+the body. In tricuspid atresia, the baby lacks a triscu-
+pid valve and blood cannot flow properly from the
+right atrium to the right ventricle.
+Other defects
+Ebstein’s anomaly is a rare congenital syndrome
+that causes malformed tricuspid valve leaflets, which
+allow blood to leak between the right ventricle and the
+right atrium. It also may cause a hole in the wall
+between the left and right atrium. Treatment often
+involves repairing the tricuspid valve. Ebstein’s anom-
+aly may be associated with maternal use of the psy-
+chiatric drug lithium duringpregnancy.
+Brugada syndrome is another rare congenital
+heart defect that appears in adulthood and may
+cause sudden death if untreated. Symptoms, which
+include rapid, uneven heart beat, often appear at
+night. Scientists believe that Brugada syndrome is
+caused by mutations in the gene SCN5A, which
+involves cardiac sodium channels.
+Infants born with DiGeorge sequence can have
+heart defects such as a malformed aortic arch and
+tetralogy of Fallot. Researchers believe DiGeorge
+sequence most often is caused by mutations in genes
+in the region 22q11.
+Marfan syndrome is a connective tissue disorder
+that causes tears in the aorta. Since the disease also
+causes excessive bone growth, most Marfan syndrome
+patients are over six feet tall. In athletes, and others, it
+can lead to sudden death. Researchers believe the
+defect responsible for Marfan’s syndrome is found in
+gene FBN1, on chromosome 15.
+About 32,000 infants are born every year with
+congenital heart disease, which is the most common
+birth defect. About half of these cases require medical
+treatment. More than one million people with heart
+defects are currently living in the United States.
+Causes and symptoms
+In most cases, the causes of congenital heart dis-
+ease are unknown. Genetic and environmental factors
+and lifestyle habits can all be involved. The likelihood
+of having a child with a congenital heart disease
+increases if the mother or father, another child, or
+another relative had congenital heart disease or a
+family history of sudden death. In 2004, researchers
+identified a chromosome deletion that might explain
+some of the genetic causes of certain congenital heart
+diseases.
+Viral infections, such as German measles, can
+produce congenital heart disease. Women with dia-
+betes andphenylketonuria (an inherited liver condition
+also called PKU) also are at higher risk of having
+children with congenital heart defects. Many cases of
+congenital heart disease result from the mother’s
+excessive use of alcohol or taking illegal drugs, such
+as cocaine, while pregnant. The mother’s exposure to
+certain anticonvulsant and dermatologic drugs during
+pregnancy also can cause congenital heart disease.
+There are many genetic conditions, such as Down
+syndrome, which affect multiple organs and can
+cause congenital heart disease.
+Symptoms of congenital heart disease in general
+include: shortness of breath , difficulty feeding in
+infancy, sweating, cyanosis (bluish discoloration of
+the skin), heart murmur, respiratory infections that
+recur excessively, stunted growth, and limbs and mus-
+cles that are underdeveloped.
+Symptoms of specific types of congenital heart
+disease are as follows:
+/C15Patent ductus arteriosus: quick tiring, slow growth,
+susceptibility to pneumonia, rapid breathing. If the
+ductus is small, there are no symptoms.
+/C15Hypoplastic left heart syndrome: ashen color, rapid
+and difficult breathing, inability to eat.
+/C15Obstruction defects: cyanosis (skin that is discolored
+blue), chest pain, tiring easily,dizziness or fainting,
+congestive heart failure, and high blood pressure.
+/C15Septal defects: difficulty breathing, stunted growth.
+Sometimes there are no symptoms.
+/C15Cyanotic defects: cyanosis, sudden rapid breathing
+or unconsciousness, and shortness of breath and
+fainting duringexercise.
+Diagnosis
+Echocardiography and cardiacmagnetic resonance
+imaging (MRI) are used to confirm congenital heart
+disease when it is suggested by the symptoms and
+physical examination. An echocardiograph will display
+an image of the heart that is formed by sound waves. It
+detects valve and other heart problems. Fetal echocar-
+diography is used to diagnose congenital heart disease
+in utero, usually after 20 weeks of pregnancy. Between
+10 and 14 weeks of pregnancy, physicians also may use
+an ultrasound to look for a thickness at the nuchal
+translucency, a pocket of fluid in back of the embryo’s
+neck, which may indicate a cardiac defect in 55% of
+cases. Cardiac MRI, a scanning method that uses
+magnetic fields and radio waves, can help physicians
+980 Congenital heart disease
+evaluate congenital heart disease, but is not always
+necessary. Physicians also may use achest x rayto
+look at the size and location of the heart and lungs, or
+an electrocardiograph (ECG), which measures electri-
+cal impulses to create a graph of the heart beat.
+In children and adults, computed tomography
+(CT) and MRI are the preferred methods to visualize
+congenital heart disease. Contrast may be added to
+enhance the image for the radiologist.
+Treatment
+Congenital heart disease is treated with drugs and/
+or surgery. Drugs used includediuretics, which aid the
+baby in excreting water and salts, and digoxin, which
+strengthens the contraction of the heart, slows the
+heartbeat, and removes fluid from tissues.
+Surgical procedures seek to repair the defect as
+much as possible and restore circulation to as close to
+normal as possible. Sometimes, multiple surgical pro-
+cedures are necessary. Surgical procedures include:
+arterial switch, balloon atrial septostomy,balloon val-
+vuloplasty, Damus-Kaye-Stansel procedure, Fontan
+procedure, pulmonary artery banding, Ross proce-
+dure, shunt procedure, and venous switch or intra-
+atrial baffle.
+Arterial switch, to correct transposition of the
+great arteries, involves connecting the aorta to the
+left ventricle and connecting the pulmonary artery to
+the right ventricle. Balloon atrial septostomy, also
+done to correct transposition of the great arteries,
+enlarges the atrial opening during heart catheteriza-
+tion. Balloon valvuloplasty uses a balloon-tipped
+catheter to open a narrowed heart valve, improving
+the flow of blood in pulmonary stenosis. It is some-
+times used in aortic stenosis. Transposition of the
+great arteries also can be corrected by the Damus-
+Kaye-Stansel procedure, in which the pulmonary
+artery is cut in two and connected to the ascending
+aorta and the farthest section of the right ventricle.
+For tricuspid atresia and pulmonary atresia, the
+Fontan procedure connects the right atrium to the
+pulmonary artery directly or with a conduit, and
+the atrial defect is closed. Pulmonary artery banding,
+narrowing the pulmonary artery with a band to reduce
+blood flow and pressure in the lungs, is used for ven-
+tricular septal defect, atrioventricular canal defect,
+and tricuspid atresia. Later, the band can be removed
+and the defect corrected with open-heart surgery.
+To correct aortic stenosis, the Ross procedure
+grafts the pulmonary artery to the aorta. For tetralogy
+of Fallot, tricuspid atresia, or pulmonary atresia, the
+shunt procedure creates a passage between blood ves-
+sels, sending blood into parts of the body that need it.
+For transposition of the great arteries, venous switch
+creates a tunnel inside the atria to re-direct oxygen-
+rich blood to the right ventricle and aorta and venous
+blood to the left ventricle and pulmonary artery.
+When all other options fail, some patients may
+need a heart transplant. Children with congenital
+heart disease require lifelong monitoring, even after
+successful surgery. The American Heart Association
+recommends regular dental check-ups and the preven-
+tive use ofantibiotics to protect patients from heart
+infections, or endocarditis. However, a 2003 study
+reported that preventive antibiotics are underused in
+people with congenital heart disease. Many patients
+did not understand the risk of endocarditis. Since
+KEY TERMS
+Aorta— The main artery located above the heart
+that pumps oxygenated blood out into the body.
+Many congenital heart defects affect the aorta.
+Congenital— Refers to a disorder that is present at
+birth.
+Cyanotic— Marked by bluish discoloration of the
+skin due to a lack of oxygen in the blood. It is one of
+the types of congenital heart disease.
+Ductus— The blood vessel that joins the pulmonary
+artery and the aorta. When the ductus does not
+close at birth, it causes a type of congenital heart
+disease called patent ductus arteriosus.
+Electrocardiograph (ECG, EKG)— A test used to
+measure electrical impulses coming from the
+heart in order to gain information about its structure
+or function.
+Hypoplastic— Incomplete or underdevelopment
+of a tissue or organ. Hypoplastic left heart syn-
+drome is the most serious type of congenital heart
+disease.
+Neuchal translucency— A pocket of fluid at the
+back of an embryo’s neck visible via ultrasound
+that, when thickened, may indicate the infant will
+be born with a congenital heart defect.
+Septal— Relating to the septum, the thin muscle
+wall dividing the right and left sides of the heart.
+Holes in the septum are called septal defects.
+Stenosis— The constricting or narrowing of an
+opening or passageway.
+Congenital heart disease
+children with congenital heart disease have slower
+growth, nutrition is important. Physicians also may
+limit their athletic activity.
+Prognosis
+The outlook for children with congenital heart
+disease has improved markedly in the past two dec-
+ades. Many types of congenital heart disease that
+would have been fatal now can be treated successfully.
+Because many children with these defects survive into
+adulthood, physicians and patients are reminded that
+the patients will require continued medical observa-
+tion as they mature. Research on diagnosing heart
+defects when the fetus is in the womb may lead to
+future treatment to correct defects before birth.
+Promising new prevention methods and treatments
+include genetic screening and the cultivation of cardiac
+tissue in the laboratory that could be used to repair
+congenital heart defects. As scientists continue to
+advance the study of genetics, they also will better
+understand genetic causes of many congenital heart
+diseases. For example, scientists just discovered a
+potential cause of atrioventricular canal defects in
+the fall of 2003.
+Resources
+BOOKS
+Mayo Clinic Heart Book.New York: William Morrow and
+Company, 2000.
+Wild, C. L., and M. J. Neary.Heart Defects in Children:
+What Every Parent Should Know.Minneapolis:
+Chronimed Publishing, 2000.
+Williams, R. A.The Athlete and Heart Disease.Philadelphia:
+Lippincott Williams & Wilkins, 1999.
+PERIODICALS
+‘‘Adults With Congenital Heart Disease Need Continued
+Medical Observation.’’Cardiovascular WeekAugust
+23, 2004: 23.
+‘‘AEP Underused for Congenital Heart Disease Patients.’’
+Heart Disease WeeklyAugust 31, 2003: 23.
+‘‘Coping with Congenital Heart Disease in Your Baby.’’
+American Family Physician59 (April 1, 1999): 1867.
+‘‘Deletions on Chromosome 1q21.1 Are Related to
+Congenital Heart Disease.’’Heart Disease Weekly
+August 22, 2004: 50.
+Hyett, Jon, et. al. ‘‘Using Fetal Nuchal Translucency to
+Screen for Major Congenital Cardiac Defects at 10-14
+Weeks: Population Based Cohort Study.’’Lancet 318
+(January 1999): 81-85.
+‘‘MRI and CT Can Visualize Congenital Heart Disease.’’
+Medical Devices & Surgical Technology WeekAugust
+22, 2004: 76.
+‘‘New Insight Offered into the Genetics of Congenital Heart
+Disease.’’ Heart Disease WeeklyOctober 12, 2003: 3.
+ORGANIZATIONS
+American Heart Association. 7320 Greenville Ave., Dallas,
+TX 75231-4596. (214) 373-6300 or (800) 242-8721.
+inquire@heart.org. <http://www.americanheart.org>.
+Congenital Heart Disease Information and Resources. 1561
+Clark Dr., Yardley, PA 19067. <http://
+www.tchin.org>.
+Texas Heart Institute Heart Information Service. PO Box
+20345, Houston, TX 77225-0345. (800) 292-2221.
+<http://www.tmc.edu/thi/his.html>.
+Melissa Knopper
+Teresa G. Odle
+Congenital hip dysplasia
+Definition
+A condition of abnormal development of the hip,
+resulting in hip joint instability and potential disloca-
+tion of the thigh bone from the socket in the pelvis.
+This condition has been more recently termed devel-
+opmental hip dysplasia, as it often develops over the
+first few weeks, months, or years of life.
+Description
+Congenital hip dysplasia is a disorder in children
+that is either present at birth or shortly thereafter.
+During gestation, the infant’s hip should be developing
+with the head of the thigh bone (femur) sitting perfectly
+centered in its shallow socket (acetabulum). The acet-
+abulum should cover the head of the femur as if it were
+a ball sitting inside of a cup. In the event of congenital
+hip dysplasia, the development of the acetabulum in an
+infant allows the femoral head to ride upward out of the
+joint socket, especially when weight bearing begins.
+Causes and symptoms
+Clinical studies show a familial tendency toward hip
+dysplasia, with more females affected than males. This
+disorder is found in many cultures around the world.
+However, statistics show that the Native American
+population has a high incidence of hip dislocation. This
+has been documented to be due to the common practice
+of swaddling and using cradleboards for restraining the
+infants. This places the infant’s hips into extreme adduc-
+tion (brought together). The incidence of congenital hip
+dysplasia is also higher in infants born by caesarian and
+breech position births. Evidence also shows a greater
+chance of this hip abnormality in the first born compared
+982 Congenital hip dysplasia
+to the second or third child. Hormonal changes within
+the mother duringpregnancy, resulting in increased liga-
+ment laxity, is thought to possibly cross over to the
+placenta and cause the baby to have lax ligaments
+while still in the womb. Other symptoms of complete
+dislocation include a shortening of the leg and limited
+ability to abduct the leg.
+Diagnosis
+Because the abnormalities of this hip problem
+often vary, a thoroughphysical examinationis neces-
+sary for an accurate diagnosis of congenital hip dys-
+plasia. The hip disorder can be diagnosed by moving
+the hip to determine if the head of the femur is moving
+in and out of the hip joint. One specific method, called
+the Ortolani test, begins with each of the examiner’s
+hands around the infant’s knees, with the second and
+third fingers pointing down the child’s thigh. With the
+legs abducted (moved apart), the examiner may be
+able to discern a distinct clicking sound with motion.
+If symptoms are present with a noted increase in
+abduction, the test is considered positive for hip joint
+instability. It is important to note this test is only valid
+a few weeks after birth.
+The Barlow method is another test performed with
+the infant’s hip brought together with knees in full bent
+position. The examiner’s middle finger is placed over
+the outside of the hipbone while the thumb is placed on
+the inner side of the knee. The hip is abducted to where
+it can be felt if the hip is sliding out and then back in the
+joint. In older babies, if there is a lack of range of
+motion in one hip or even both hips, it is possible that
+the movement is blocked because the hip has dislocated
+and the muscles have contracted in that position. Also
+in older infants, hip dislocation is evident if one leg
+looks shorter than the other.
+X-ray films can be helpful in detecting abnormal
+findings of the hip joint. X rays may also be helpful in
+finding the proper positioning of the hip joint for
+treatments of casting. Ultrasound has been noted as
+a safe and effective tool for the diagnosis of congenital
+hip dysplasia. Ultrasound has advantages over x rays,
+as several positions are noted during the ultrasound
+procedure. This is in contrast to only one position
+observed during the x ray.
+Treatment
+The objective of treatment is to replace the head of
+the femur into the acetabulum and, by applying constant
+pressure, to enlarge and deepen the socket. In the past,
+stabilization was achieved by placing rolled cotton
+diapers or a pillow between the thighs, thereby keeping
+the knees in a frog like position. More recently, the
+Pavlik harness and von Rosen splint are commonly
+used in infants up to the age of six months. A stiff shell
+cast may be used, which achieves the same purpose,
+spreading the legs apart and forcing the head of the
+femur into the acetabulum. In some cases, in older chil-
+dren between six to 18 months, surgery may be necessary
+to reposition the joint. Also at this age, the use of closed
+manipulation may be applied successfully, by moving
+the leg around manually to replace joint. Operations are
+not only performed to reduce the dislocation of the hip,
+but also to repair a defect in the acetabulum. A cast is
+applied after the operation to hold the head of the femur
+in the correct position. The use of a hometraction
+program is now more common. However, after the age
+of eight years, surgical procedures are primarily done for
+painreduction measures only. Total hip surgeries may be
+inevitable later in adulthood.
+Alternative treatment
+Nonsurgical treatments include exercise pro-
+grams, orthosis (a force system, often involving
+braces), and medications. A physical therapist may
+develop a program that includes strengthening,
+range-of-motion exercises, pain control, and func-
+tional activities.Chiropractic medicine may be helpful,
+especially the procedures of closed manipulations, to
+reduce the dislocated hip joint.
+Prognosis
+Unless corrected soon after birth, abnormal stres-
+ses cause malformation of the developing femur, with
+a characteristic limp or waddling gait. If cases of con-
+genital hip dysplasia go untreated, the child will have
+difficulty walking, which could result in life-long pain.
+In addition, if this condition goes untreated, the
+abnormal hip positioning will force the acetabulum
+to locate to another position to accommodate the
+displaced femur.
+KEY TERMS
+Acetabulum— The large cup-shaped cavity at the
+junction of pelvis and femur or thigh bone.
+Orthosis— A force system designed to control or
+correct or compensate for a bone deformity,
+deforming forces, or forces absent from the body.
+Congenital hip dysplasia
+Prevention
+Prevention includes proper prenatal care to deter-
+mine the position of the baby in the womb. This may
+be helpful in preparing for possible breech births asso-
+ciated with hip problems. Avoiding excessive and pro-
+longed infant hip adduction may help prevent strain
+on the hip joints. Early diagnosis remains an impor-
+tant part of prevention of congenital hip dysplasia.
+Resources
+ORGANIZATIONS
+March of Dimes Birth Defects Foundation. 1275
+Mamaroneck Ave., White Plains, NY 10605. (914)
+428-7100. resourcecenter@modimes.org. <http://
+www.modimes.org>.
+Jeffrey P. Larson, RPT
+Congenital lobar emphysema
+Definition
+Congenital lobaremphysema is a chronic disease
+that causes respiratory distress in infants.
+Description
+Congenital lobar emphysema, also called infantile
+lobar emphysema, is a respiratory disease that occurs
+in infants when air enters the lungs but cannot leave
+easily. The lungs become over-inflated, causing
+respiratory function to decrease and air to leak out
+into the space around the lungs.
+Half of the cases of congenital lobar emphysema
+occur in the first four weeks of life, and three-quarters
+occur in infants less than six months old. Congenital
+lobar emphysema is more common in boys than in
+girls.
+Each person has two lungs, right and left. The
+right lung is divided into three sections, called lobes,
+and the left lung into two lobes. Congenital lobar
+emphysema usually affects only one lobe, and this is
+usually an upper lobe. It occurs most frequently in the
+left upper lobe, followed by the right middle lobe.
+Causes and symptoms
+The cause of congenital lobar emphysema often
+cannot be identified. The airway may be obstructed or
+the infant’s lungs may not have developed properly.
+Congenital lobar emphysema is almost never of
+genetic origin.
+Symptoms of congenital lobar emphysema
+include:
+/C15shortness of breath
+/C15wheezing
+/C15lips and fingernail beds that have a bluish tinge
+Diagnosis
+Congenital lobar emphysema is usually identified
+within the first two weeks of the infant’s life. It is
+diagnosed by respiratory symptoms and a chest
+x ray, which shows the over-inflation of the affected
+lobe and may show a blocked air passage.
+Treatment
+For infants with no, mild, or intermittent symp-
+toms, no treatment is necessary. For more serious
+cases of congenital lobar emphysema, surgery is
+necessary, usually a lobectomy to remove the affected
+lung lobe.
+Alternative treatment
+Alternative treatments that may be helpful for
+congenital lobar emphysema are aimed at supporting
+and strengthening the patient’s respiratory function.
+Vitamin and mineral supplementation may be recom-
+mended as may herbal remedies such as lobelia
+(Lobelia inflata) that strengthen the lungs and enhance
+their elasticity. Homeopathic constitutional care may
+also be beneficial for this condition.
+Prognosis
+Surgery for congenital lobar emphysema has
+excellent results.
+KEY TERMS
+Congenital— A disease or condition that is present
+at birth.
+Emphysema— A condition in which the air sacs in
+the lungs become overinflated, causing a decrease
+in respiratory function.
+Lobar— Relating to a lobe, a rounded projecting
+part of the lungs.
+984 Congenital lobar emphysema

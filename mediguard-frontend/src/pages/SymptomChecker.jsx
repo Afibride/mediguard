@@ -12,6 +12,8 @@ import { AlertCircle, Loader2, Search, Thermometer, Clock, Activity, Baby, User,
 import { useToast } from '@/hooks/use-toast';
 import { getAllSymptoms, diseases as diseaseDB } from '@/data/diseases';
 import { useAuth } from '@/components/AuthContext';
+import { getSymptoms, predictDisease } from '@/services/api';
+import DisclaimerBanner from '@/components/DisclaimerBanner';
 
 const SymptomChecker = () => {
   const navigate = useNavigate();
@@ -24,12 +26,24 @@ const SymptomChecker = () => {
     severity: '',
     gender: '',
     age: '',
-    isPregnant: false
+    isPregnant: false,
+    pregnancyWeeks: ''
   });
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [showPregnancyOption, setShowPregnancyOption] = useState(false);
+  const [allSymptoms, setAllSymptoms] = useState(getAllSymptoms());
 
-  const allSymptoms = useMemo(() => getAllSymptoms(), []);
+  useEffect(() => {
+    getSymptoms()
+      .then((res) => {
+        if (Array.isArray(res.data.symptoms) && res.data.symptoms.length) {
+          setAllSymptoms(res.data.symptoms);
+        }
+      })
+      .catch(() => {
+        setAllSymptoms(getAllSymptoms());
+      });
+  }, []);
 
   // Show pregnancy option when gender is female
   useEffect(() => {
@@ -37,7 +51,7 @@ const SymptomChecker = () => {
       setShowPregnancyOption(true);
     } else {
       setShowPregnancyOption(false);
-      setFormData(prev => ({ ...prev, isPregnant: false }));
+      setFormData(prev => ({ ...prev, isPregnant: false, pregnancyWeeks: '' }));
     }
   }, [formData.gender]);
 
@@ -180,7 +194,7 @@ const SymptomChecker = () => {
       .slice(0, 7); // Show top 7 matches for better options
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (selectedSymptoms.length === 0) {
@@ -194,11 +208,46 @@ const SymptomChecker = () => {
 
     setLoading(true);
 
-    // Simulate processing
-    setTimeout(() => {
+    try {
+      const res = await predictDisease(selectedSymptoms, {
+        gender: formData.gender || null,
+        is_pregnant: formData.isPregnant,
+        pregnancy_weeks: formData.pregnancyWeeks ? Number(formData.pregnancyWeeks) : null,
+      });
+      const apiPredictions = (res.data.predictions || []).map((item) => ({
+        ...item,
+        id: item.id || item.slug || item.disease?.toLowerCase().replace(/\s+/g, '-'),
+        name: item.name || item.disease,
+        confidence: item.confidence ?? item.probability ?? 0,
+        description: item.description || 'Disease information is available in the disease library.',
+        symptoms: item.symptoms || selectedSymptoms,
+        severity: item.severity || 'Medium',
+        matchCount: item.matchCount || selectedSymptoms.length,
+        whenToSeeDoctorUrgency: item.severity === 'High' ? 'red' : 'yellow',
+        whenToSeeDoctorText: 'Please consult a qualified healthcare professional for proper assessment.',
+      }));
+
+      navigate('/prediction-results', {
+        state: {
+          symptoms: selectedSymptoms,
+          duration: formData.duration || 'Not specified',
+          severity: formData.severity || 'Not specified',
+          gender: formData.gender || 'Not specified',
+          age: formData.age || 'Not specified',
+          isPregnant: formData.isPregnant,
+          pregnancyWeeks: formData.pregnancyWeeks || 'Not specified',
+          predictions: apiPredictions,
+          disclaimer: res.data.disclaimer,
+          pregnancyNote: res.data.pregnancy_note,
+        },
+      });
+    } catch (error) {
+      toast({
+        title: 'Backend unavailable',
+        description: 'Using local symptom matching while the API is offline.',
+      });
       const results = generatePredictionsLocal(selectedSymptoms);
 
-      // Add note for single symptom cases
       const analysisNote = selectedSymptoms.length === 1 
         ? "You've reported only one symptom. Some conditions may present with a single symptom, especially stress-related issues. Consider if you've noticed any other changes in your health."
         : null;
@@ -211,11 +260,14 @@ const SymptomChecker = () => {
           gender: formData.gender || 'Not specified',
           age: formData.age || 'Not specified',
           isPregnant: formData.isPregnant,
+          pregnancyWeeks: formData.pregnancyWeeks || 'Not specified',
           predictions: results,
           analysisNote
         },
       });
-    }, 1500);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const filteredSymptoms = allSymptoms.filter(s => 
@@ -257,6 +309,8 @@ const SymptomChecker = () => {
               Select the symptoms you are currently experiencing to receive a comprehensive AI-powered diagnosis assessment.
             </p>
           </motion.div>
+
+          <DisclaimerBanner variant="warning" className="mb-6" />
 
           <form onSubmit={handleSubmit}>
             
@@ -320,22 +374,35 @@ const SymptomChecker = () => {
 
                     {/* Pregnancy Option (conditional) */}
                     {showPregnancyOption && (
-                      <div className="md:col-span-2 flex items-center space-x-2 p-4 bg-primary/5 rounded-lg border border-primary/20">
-                        <Checkbox
-                          id="isPregnant"
-                          name="isPregnant"
-                          checked={formData.isPregnant}
-                          onCheckedChange={(checked) => 
-                            setFormData(prev => ({ ...prev, isPregnant: checked }))
-                          }
+                      <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-[1fr_180px] gap-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id="isPregnant"
+                            name="isPregnant"
+                            checked={formData.isPregnant}
+                            onCheckedChange={(checked) => 
+                              setFormData(prev => ({ ...prev, isPregnant: checked, pregnancyWeeks: checked ? prev.pregnancyWeeks : '' }))
+                            }
+                          />
+                          <Label htmlFor="isPregnant" className="flex items-center gap-2 cursor-pointer">
+                            <Baby className="h-4 w-4 text-primary" />
+                            <span className="font-medium">I am currently pregnant</span>
+                          </Label>
+                        </div>
+                        <Input
+                          name="pregnancyWeeks"
+                          type="number"
+                          min="1"
+                          max="42"
+                          value={formData.pregnancyWeeks}
+                          onChange={handleInputChange}
+                          disabled={!formData.isPregnant}
+                          placeholder="Weeks"
+                          className="h-10"
                         />
-                        <Label htmlFor="isPregnant" className="flex items-center gap-2 cursor-pointer">
-                          <Baby className="h-4 w-4 text-primary" />
-                          <span className="font-medium">I am currently pregnant</span>
-                          <span className="text-sm text-muted-foreground">
-                            (This helps us provide pregnancy-safe recommendations)
-                          </span>
-                        </Label>
+                        <p className="sm:col-span-2 text-sm text-muted-foreground">
+                          Pregnancy can change symptom urgency. MediGuard will flag warning signs and recommend antenatal care when needed.
+                        </p>
                       </div>
                     )}
 

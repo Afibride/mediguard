@@ -1,0 +1,941 @@
+DISEASE: Dysentery
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+/C15BSE injected into monkeys produces a disease very
+similar to vCJD
+/C15BSE and vCJD produce the same brain lesions after
+the same incubation period when injected into
+laboratory mice
+/C15brain proteins isolated from vCJD victims, but not
+from the other forms of CJD, share similar molecular
+characteristics with brain proteins of animals that
+died from BSE
+Researchers now treat the BSE-vCJD connection
+as solidly established.
+Assuming that BSE is the source, the question that
+has loomed from the beginning has been how many
+people will eventually be affected. Epidemiological
+models once placed estimates at tens of thousands,
+but in 2003, scientists predicted a quicker end to the
+epidemic and have substantially lowered the numbers
+expected to contract the disease. The exact incubation
+period of vCJD in humans is about 10 to 20 years or
+longer, so it is more difficult to predict the number of
+cases. Researchers know that some people are more
+susceptible to vCJD, including young people age 10 to
+20 years old.
+Causes and symptoms
+Causes
+It is clear that Creutzfeldt-Jakob disease is caused
+by an infectious agent, but it is not yet clear what type
+of agent that is. Originally assumed to be a virus,
+evidence is accumulating that, instead, CJD is caused
+by a protein called a prion (PREE-on, for ‘‘proteinac-
+eous infectious particle’’) transmitted from victim to
+victim. The other spongiform encephalopathies also
+are hypothesized to be due to prion infection.
+If this hypothesis is proven true, it would repre-
+sent one of the most radical new ideas in biology since
+the discovery of deoxyribonucleic acid (DNA). All
+infectious diseases, in fact all life, use nucleic acids—
+DNA or ribonucleic acid (RNA)—to code the instruc-
+tions needed for reproduction. Inactivation of the
+nucleic acids destroys the capacity to reproduce.
+However, when these same measures are applied to
+infected tissue from spongiform encephalopathy vic-
+tims, infectivity is not destroyed. Furthermore, purifi-
+cation of infected tissue to concentrate the infectious
+fraction yields protein, not nucleic acid. While it
+remains possible that some highly stable nucleic acid
+remains hidden within the purified protein, this is see-
+mingly less and less likely as further experiments are
+done. The ‘‘prion hypothesis,’’ as it is called, is now
+widely accepted, at least provisionally, by most
+researchers in the field. The most vocal proponent of
+the hypothesis, Stanley Prusiner, was awarded the
+Nobel Prize in 1997 for his work in the prion diseases.
+A prion is an altered form of a normal brain
+protein. The normal protein has a helical shape along
+part of its length. In the prion form, a sheet structure
+replaces the helix. According to the hypothesis, when
+the normal form interacts with the prion form, some of
+its helical part is converted to a sheet, thus creating a
+new prion capable of transforming other normal
+forms. In this way, the disease process resembles crys-
+tallization more than typical viral infection, in which
+the virus commands the host’s cellular machinery to
+reproduce more of the virus. Build-up of the sheet
+form causes accumulation of abnormal protein
+clumps and degeneration of brain cells, which is
+thought to cause the disease.
+The brain protein affected by the prion, called
+PrP, is part of the membrane of brain cells, but its
+exact function is unknown. Exposure to the infectious
+agent is, of course, still required for disease develop-
+ment. Prion diseases are not contagious in the usual
+sense, and transmission from an infected person to
+another person requires direct inoculation of infec-
+tious material.
+Familial CJD, on the other hand, does not require
+exposure, but develops through the inheritance of
+other, more disruptive mutations in the gene for the
+normal PrP protein. The other two inherited human
+prion diseases, Gerstmann-Straussler-Scheinker dis-
+ease and fatal familial insomnia, involve different
+mutations in the same gene.
+The large majority of CJD cases are sporadic,
+meaning they have no known route of infection or
+genetic link. Causes of sporadic CJD are likely to be
+diverse and may include spontaneous genetic muta-
+tion, spontaneous protein changes, or unrecognized
+exposure to infectious agents. It is highly likely that
+future research will identify more risk factors asso-
+ciated with sporadic CJD.
+Symptoms
+About one in four people with CJD begin their
+illness with weakness, changes in sleep patterns,
+weight loss, or loss of appetite or sexual drive. A
+person with CJD may first complain of visual distur-
+bances, including double vision, blurry vision, or par-
+tial loss of vision. Some visual symptoms are
+secondary to cortical blindness related to death of
+nerve cells in the occipital lobe of the brain responsible
+for vision. This form of visual loss is unusual in that
+patients may be unaware that they are unable to see.
+1054 Creutzfeldt-Jakob disease
+These symptoms may appear weeks to months before
+the onset of dementia.
+The most characteristic symptom of CJD is
+rapidly progressing dementia, or loss of mental func-
+tion. Dementia is marked by:
+/C15memory losses
+/C15impaired abstraction and planning
+/C15language and comprehension disturbances
+/C15poor judgment
+/C15disorientation
+/C15decreased attention and increased restlessness
+/C15personality changes and psychosis
+/C15hallucinations
+Muscle spasms and jerking movements, called
+myoclonus, are also a prominent symptom of CJD.
+Balance and coordination disturbance (ataxia), is
+common in CJD, and is more pronounced in nvCJD.
+Stiffness, difficulty moving, and other features repre-
+senting Parkinson’s disease are seen and can progress
+to akineticmutism, which is a state of being unable to
+speak or move.
+Diagnosis
+CJD is diagnosed by a clinical neurological exam
+and electroencephalography (EEG), which shows
+characteristic spikes called triphasic sharp waves.
+Magnetic resonance imaging (MRI) or computed
+tomography scans (CT) should be done to exclude
+other forms of dementia, and in CJD typically shows
+atrophy or loss of brain tissue. Lumbar puncture, or
+spinal tap, may be done to rule out other causes of
+dementia (as cell count, chemical analysis, and other
+routine tests are normal in CJD) and to identify ele-
+vated levels of marker proteins known as 14-3-3.
+Another marker, neuron-specific enolase, may also
+be increased in CJD. CJD is conclusively diagnosed
+after death by brainautopsy. Scientists are investigat-
+ing whether testing lymphatic tissue such as the tonsil
+may be an early tool in vCJD diagnosis. Additionally,
+recent studies have suggested that other blood tests
+may be useful as well.
+Treatment
+There is no cure for CJD, and no treatment that
+slows the progression of the disease. Drug therapy and
+nursing care are aimed at minimizing psychiatric symp-
+toms and increasing patient comfort. However, the
+rapid progression of CJD frustrates most attempts at
+treatment, since decreasing cognitive function and
+more prominent behavioral symptoms develop so
+quickly. Despite the generally grim prognosis, a few
+CJD patients progress more slowly and live longer
+than the average; for these patients, treatment will be
+more satisfactory. Scientists are investigating whether
+some medicines that can ‘‘break’’ the abnormal protein
+form may be useful and whether a vaccine could help.
+Prognosis
+Creutzfeldt-Jakob disease has proven invariably
+fatal, with death following symptom onset by an aver-
+age of eight months. About 5% of patients live longer
+than two years. Death from vCJD has averaged
+approximately 12 months after onset. However, in
+2003, clinicians reported improvement in a patient
+with vCJD who received a new experimental drug
+called Pentosan.
+Prevention
+There is no known way to prevent sporadic CJD, by
+far the most common type. Not everyone who inherits
+the gene mutation for familial CJD will develop the
+disease, but at present, there is no known way to predict
+who will and who will not succumb. The incidence of
+iatrogenic CJD has fallen with recognition of its sources,
+the development of better screening techniques for
+infected tissue, and the use of sterilization techniques
+for surgical instruments that inactivate prion proteins.
+Fortunately, scientists are making progress. In 2003,
+researchers announced that they had uncovered the
+basis for diagnosing, treating and possibly preventing
+prion diseases such as vCJD. Their research possibly
+could lead to a vaccine and immunotherapy drugs.
+Strategies for prevention of vCJD are a contro-
+versial matter, as they involve a significant sector of
+KEY TERMS
+Autosomal dominant inheritance— A pattern of
+inheritance in which a trait will be expressed if
+the gene is inherited from either parent.
+Encephalopathy— Brain disorder characterized by
+memory impairment and other symptoms.
+Iatrogenic— Caused by a medical procedure.
+Nucleic acids— The cellular molecules DNA and
+RNA that act as coded instructions for the produc-
+tion of proteins and are copied for transmission of
+inherited traits.
+Creutzfeldt-Jakob disease
+the agricultural industry and a central feature of the
+diet in many countries. The infectious potential of
+contaminated meat is unknown, because the ability
+to detect prions within meat is limited. Surveillance
+of North American herds strongly suggests there is no
+BSE here, and strict regulations on imports of
+European livestock make future outbreaks highly
+unlikely. Therefore, avoidance of all meat originating
+in North America, simply on grounds of BSE risk, is a
+personal choice unsupported by current data.
+Resources
+PERIODICALS
+Brown, Paul, et al. ‘‘Ultra-high Pressure Inactivation of
+Prion Infectivity in Processed Meat: A Practical
+Method to Prevent Human Infection.’’Proceedings of
+the National Academy of Sciences of the United States
+May 13, 2003: 6093-6095.
+‘‘GP Sees Patient with vCJD Improve.’’Pulse June 23,
+2003: 12.
+Kaye, Donald. ‘‘FDA Launches New Mad Cow Rules to
+Protect U.S. Food, Feed.’’Clinical Infectious Diseases
+March 15, 2004: 3–5.
+‘‘Large Human Mad Cow Epidemic Unlikely— Scientists.’’
+Clinical Infectious DiseasesApril 15, 2003: i.
+‘‘Report Appears to Confirm Blood-borne Transmission of
+Creutzfeldt-Jakob Disease.’’Blood WeeklyJanuary 8,
+2004: 28.
+‘‘Researchers Discover Possible Diagnosis, Treatment,
+Vaccine.’’ Immunotherapy WeeklyJune 25, 2003: 2.
+‘‘Scientists Predict Swift End to vCJD Epidemic.’’British
+Medical JournalMay 24, 2003: 1104 -1111.
+‘‘U.S. Lawmakers Want Increase in Mad Cow Testing.’’
+Healthcare Purchasing NewsMarch 2004: 85.
+Larry I. Lutwick, MD
+Teresa G. Odle
+Cri du chat syndrome
+Definition
+Cri du chat syndrome occurs when a piece of
+chromosomal material is missing from a particular
+region on chromosome 5. The disorder is also called
+cat cry syndrome or chromosome deletion 5p syn-
+drome. Individuals with this syndrome have unusual
+facial features, poor muscle tone (hypotonia), small
+head size (microcephaly), and mental retardation. A
+classic feature of the syndrome is the cat-like cry
+made by infants with this disorder.
+Description
+Dr. Jerome Lejeune first described cri du chat
+syndrome in 1963. The syndrome is named for the
+cat-like cry made by infants with this genetic disorder.
+Cri du chatmeans ‘‘cat’s cry’’ in French. This unusual
+cry is caused by abnormal development of the larynx
+(organ in the throat responsible for voice production).
+Cri du chat syndrome is also called 5p deletion
+syndrome because it is caused by a deletion, or
+removal, of genetic material from chromosome 5.
+The deletion that causes cri du chat syndrome occurs
+on the short or ‘‘p’’ arm of chromosome 5. This
+deleted genetic material is vital for normal develop-
+ment. Absence of this material results in the features
+associated with cri du chat syndrome.
+A high-pitched mewing cry during infancy is a
+classic feature of cri du chat. Infants with cri du chat
+also typically have low birth weight, slow growth, a
+small head (microcephaly) and poor muscle tone
+(hypotonia). Infants with cri du chat may have con-
+genital heart defects. Individuals with cri du chat syn-
+drome have language difficulties, delayed motor skill
+development, and mental retardation. Behavioral
+problems may also develop as the child matures.
+It has been estimated that cri du chat syndrome
+occurs in one of every 50,000 live births. It accounts
+for 1 in every 500 cases of mental retardation.
+According to the 5p minus Society, approximately
+50–60 children are born with cri du chat syndrome in
+the United States each year. It can occur in all races
+and in both sexes, although there is a slight female
+predominance. The male:female ratio is 3:4.
+Causes and symptoms
+Cri du chat is the result of a chromosome
+abnormality—a deleted piece of chromosomal mate-
+rial on chromosome 5. In about 80% of patients,
+the defective chromosome comes from the father.
+In 90% of patients with cri du chat syndrome, the
+deletion is sporadic. This means that it happens
+randomly and is not hereditary. If a child has cri du
+chat due to a sporadic deletion, the chance the
+parents could have another child with cri du chat is
+1%. In approximately 10% of patients with cri du
+chat, there is a hereditary chromosomal rearrange-
+ment that causes the deletion. If a parent has this
+rearrangement, the risk for them to have a child with
+cri du chat is greater than 1%.
+The severity ofmental retardation in cri du chat
+syndrome is correlated with the extent of deletion of
+delta-catenin, a protein with an important role in
+1056 Cri du chat syndrome
+brain functioning. The more extensive the deletion, the
+more profound the mental dysfunction.
+An abnormal larynx causes the unusual cat-like
+cry made by infants that is a hallmark of the syn-
+drome. As children with cri du chat get older, the
+cat-like cry becomes less noticeable. This feature can
+make the diagnosis more difficult in older patients. In
+addition to the cat-like cry, individuals with cri du chat
+also have unusual facial features. These facial dif-
+ferences can be very subtle or more obvious.
+Microcephaly (small head size) is common. During
+infancy many patients with cri du chat do not gain
+weight or grow normally. Approximately 30% of
+infants with cri du chat have a congenital heart defect.
+Hypotonia (poor muscle tone) is also common, lead-
+ing to problems with eating and slow, but normal
+development. Mental retardation is present in all
+patients with cri du chat, but the degree of mental
+retardation varies among patients.
+Diagnosis
+During infancy, the diagnosis of cri du chat syn-
+drome is strongly suspected if the characteristic cat-
+like cry is heard. If a child has this unusual cry or other
+features seen in cri du chat syndrome, chromosome
+testing should be performed. Chromosome analysis
+provides the definitive diagnosis of cri du chat
+syndrome and can be performed from a blood
+test. Chromosome analysis, also called karyotyping,
+involves staining the chromosomes and examining
+them under a microscope. In some cases the deletion
+of material from chromosome 5 can be easily seen. In
+other cases, further testing must be performed. FISH
+(fluorescence in-situ hybridization) is a special techni-
+que that detects very small deletions. The majority of
+the deletions that cause cri du chat syndrome can be
+identified using the FISH technique.
+Cri du chat syndrome can be detected before birth
+if the mother undergoesamniocentesis testing orchor-
+ionic villus sampling(CVS). This testing would only
+be recommended if the mother or father is known to
+have a chromosome rearrangement, or if they already
+have a child with cri du chat syndrome.
+Treatment
+As of 2004 there is no cure for cri du chat syn-
+drome. Treatment consists of supportive care and
+developmental therapy. Behavioral modification ther-
+apy has been found to be useful to control head-bang-
+ing, hyperactivity, and other behavioral problems that
+emerge during later childhood.
+Prognosis
+Individuals with cri du chat have a 10% mortality
+during infancy due to complications associated with
+congenital heart defects, hypotonia, and feeding diffi-
+culties. Once these problems are controlled, most indi-
+viduals with cri du chat syndrome have a normal
+lifespan. The degree of mental retardation can be
+KEY TERMS
+Amniocentesis— A procedure performed at 16–18
+weeks of pregnancy in which a needle is inserted
+through a woman’s abdomen into her uterus to
+draw out a small sample of the amniotic fluid
+from around the baby. Either the fluid itself or
+cells from the fluid can be used for a variety of
+tests to obtain information about genetic disorders
+and other medical conditions in the fetus.
+Centromere— The centromere is the constricted
+region of a chromosome. It performs certain func-
+tions during cell division.
+Chorionic villus sampling (CVS)— A procedure
+used for prenatal diagnosis at 10–12 weeks gesta-
+tion. Under ultrasound guidance a needle is
+inserted either through the mother’s vagina or
+abdominal wall and a sample of cells is collected
+from around the early embryo. These cells are then
+tested for chromosome abnormalities or other
+genetic diseases.
+Chromosome— A microscopic thread-like struc-
+ture found within each cell of the body and consists
+of a complex of proteins and DNA. Humans have
+46 chromosomes arranged into 23 pairs. Changes
+in either the total number of chromosomes or their
+shape and size (structure) may lead to physical or
+mental abnormalities.
+Congenital— Refers to a disorder that is present at
+birth.
+Deletion— The absence of genetic material that
+is normally found in a chromosome. Often,
+the genetic material is missing due to an error in
+replication of an egg or sperm cell.
+Hypotonia— Reduced or diminished muscle tone.
+Karyotyping— A laboratory procedure in which
+chromosomes are separated from cells, stained
+and arranged so that their structure can be studied
+under the microscope.
+Microcephaly— An abnormally small head.
+Cri du chat syndrome
+severe. However, a recent study suggested that the
+severity is somewhat affected by the amount of ther-
+apy received.
+Resources
+BOOKS
+Beers, Mark H., MD, and Robert Berkow, MD, editors.
+‘‘Chromosomal Abnormalities.’’ Section 19, Chapter
+261 InThe Merck Manual of Diagnosis and Therapy.
+Whitehouse Station, NJ: Merck Research
+Laboratories, 2004.
+Beers, Mark H., MD, and Robert Berkow, MD., editors.
+‘‘Developmental Problems.’’ Section 19, Chapter 262 In
+The Merck Manual of Diagnosis and Therapy.
+Whitehouse Station, NJ: Merck Research
+Laboratories, 2004.
+PERIODICALS
+Chen, Harold, MD. ‘‘Cri-du-chat Syndrome.’’eMedicine
+November 21, 2002. <http://emedicine.com/ped/
+topic504.htm>.
+Israely, I., R. M. Costa, C. W. Xie, et al. ‘‘Deletion
+of the Neuron-Specific Protein Delta-Catenin
+Leads to Severe Cognitive and Synaptic
+Dysfunction.’’ Current Biology14
+(September 21, 2004): 1657–1663.
+Van Buggenhout, G. J. C. M., et al. ‘‘Cri du Chat
+Syndrome: Changing Phenotype in Older Patients.’’
+American Journal of Medical Genetics90 (2000):
+203–215.
+ORGANIZATIONS
+5p- Society. 7108 Katella Ave. #502, Stanton, CA 90680.
+(888) 970-0777. <http://www.fivepminus.org>.
+Alliance of Genetic Support Groups. 4301 Connecticut Ave.
+NW, Suite 404, Washington, DC 20008. (202) 966-5557.
+Fax: (202) 966-8553. <http://
+www.geneticalliance.org>.
+Cri du Chat Society. Dept. of Human Genetics, Box 33,
+MCV Station, Richmond VA 23298. (804) 786-9632.
+Cri du Chat Syndrome Support Group. <http://
+www.cridchat.u-net.com>.
+National Organization for Rare Disorders (NORD). 55
+Kenosia Avenue, P. O. Box 1968, Danbury, CT
+06813-1968. (203) 744-0100. Fax: (203) 798-2291.
+<http://www.rarediseases.org>.
+OTHER
+OMIM—Online Mendelian Inheritance in Man.<http://
+www.ncbi.nlm.nih.gov/Omim/>.
+Holly Ann Ishmael, M.S.
+Rebecca J. Frey, PhD
+Crib death see Sudden infant death
+syndrome
+Crohn’s disease
+Definition
+Crohn’s disease is a type of inflammatory bowel
+disease (IBD), resulting in swelling and dysfunction of
+the intestinal tract.
+Description
+Crohn’s disease involves inflammation of the
+intestine, especially the small intestine. Inflammation
+refers to swelling, redness, and loss of normal func-
+tion. There is evidence that the inflammation is caused
+by various products of the immune system that attack
+the body itself instead of helpfully attacking a foreign
+invader (a virus or bacteria, for example). The inflam-
+mation of Crohn’s disease most commonly affects the
+last part of the ileum (a section of the small intestine),
+and often includes the large intestine (the colon).
+However, inflammation may also occur in other
+areas of the gastrointestinal tract, affecting the
+mouth, esophagus, or stomach. Crohn’s disease differs
+from ulcerative colitis, the other major type of IBD, in
+two important ways:
+/C15The inflammation of Crohn’s disease may be discon-
+tinuous, meaning that areas of involvement in the
+intestine may be separated by normal, unaffected
+segments of intestine. The affected areas are called
+‘‘regional enteritis,’’ while the normal areas are called
+‘‘skip areas.’’
+/C15The inflammation of Crohn’s disease affects all the
+layers of the intestinal wall, while ulcerative colitis
+affects only the lining of the intestine.
+Also, ulcerative colitis does not usually involve the
+small intestine; in rare cases, it involves the terminal
+ileum (so-called ‘‘backwash’’ ileitis).
+In addition to inflammation, Crohn’s disease
+causes ulcerations, or irritated pits in the intestinal
+wall. These pits occur because the inflammation has
+made areas of tissue shed.
+Crohn’s disease may be diagnosed at any age,
+although most diagnoses are made between the ages
+15 to 35. About 0.02–0.04% of the population suffers
+from this disorder, with men and women having an
+equal chance of being stricken. Whites are more fre-
+quently affected than other racial groups, and people
+of Jewish origin are between three and six times more
+likely to suffer from IBD. IBD runs in families; an IBD
+patient has a 20% chance of having other relatives
+who are fellow sufferers.
+1058 Crohn’s disease
+Crohn’s disease is a chronic disorder. While the
+symptoms can be improved, a patient will not be com-
+pletely cured of the underlying disease.
+Causes and symptoms
+The cause of Crohn’s disease is unknown. No
+infectious agent (virus, bacteria, or fungi) has been
+identified as the cause of Crohn’s disease. Still, some
+researchers have theorized that some type of infection
+may have originally been responsible for triggering the
+immune system, resulting in the continuing and out-
+of-control cycle of inflammation that occurs in
+Crohn’s disease. Other evidence for a disorder of the
+immune system includes the high incidence of other
+immune disorders that may occur along with Crohn’s
+disease.
+The first symptoms of Crohn’s disease include
+diarrhea, fever, abdominal pain, inability to eat,
+weight loss, and fatigue. Some patients have severe
+pain that mimicsappendicitis. It is rare, however, for
+patients to notice blood in their bowel movements.
+Because Crohn’s disease severely limits the ability of
+the affected intestine to absorb the nutrients from
+food, a patient with Crohn’s disease can have signs
+of malnutrition, depending on the amount of intestine
+affected and the duration of the disease.
+The combination of severe inflammation, ulcera-
+tion, and scarring that occurs in Crohn’s disease can
+result in serious complications, including obstruction,
+abscess formation, andfistula formation.
+An obstruction is a blockage in the intestine. This
+obstruction prevents the intestinal contents from pas-
+sing beyond the point of the blockage. The intestinal
+contents ‘‘back up,’’ resulting inconstipation, vomit-
+ing, and intense pain. Although rare in Crohn’s dis-
+ease (because of the increased thickness of the
+intestinal wall due to swelling and scarring), a severe
+bowel obstruction can result in an intestinal wall
+perforation (a hole in the intestine). Such a hole in
+the intestinal wall would allow the intestinal
+contents, usually containing bacteria, to enter the
+abdomen. This complication could result in a severe,
+life-threatening infection.
+Abcess formation is the development of a walled-
+off pocket of infection. A patient with an abscess will
+have bouts offever, increased abdominal pain, and
+may have a lump or mass that can be felt through the
+wall of the abdomen.
+Fistula formation is the formation of abnormal
+channels. These channels may connect one area of the
+intestine to another neighboring section of intestine.
+Fistulas may join an area of the intestine to the vagina
+or bladder, or they may drain an area of the intestine
+through the skin. Abscesses and fistulas commonly
+affect the area around the anus and rectum (the very
+last portions of the colon allowing waste to leave the
+body). These abnormal connections allow the bacteria
+that normally live in the intestine to enter other areas
+of the body, causing potentially serious infections.
+Patients suffering from Crohn’s disease also have
+a significant chance of experiencing other disorders.
+Some of these may relate specifically to the intestinal
+disease, and others appear to have some relationship
+to the imbalanced immune system. The faulty absorp-
+tion state of the bowel can result ingallstones and
+kidney stones. Inflamed areas in the abdomen may
+press on the tube that drains urine from the kidney
+to the bladder (the ureter). Ureter compression can
+make urine back up into the kidney, enlarge the ureter
+and kidney, and can potentially lead to kidney
+damage. Patients with Crohn’s disease also frequently
+suffer from:
+/C15arthritis (inflammation of the joints)
+/C15spondylitis (inflammation of the vertebrae, the bones
+of the spine)
+/C15ulcers of the mouth and skin
+/C15painful, red bumps on the skin
+/C15inflammation of several eye areas
+/C15inflammation of the liver, gallbladder, and/or the
+channels (ducts) that carry bile between and within
+the liver, gallbladder, and intestine
+The chance of developingcancer of the intestine is
+greater than normal among patients with Crohn’s dis-
+ease, although this chance is not as high as among
+those patients with ulcerative colitis.
+Diagnosis
+Diagnosis is first suspected based on a patient’s
+symptoms. Blood tests may reveal an increase in
+certain types of white blood cells, an indication that
+some type of inflammation is occurring in the body.
+The blood tests may also reveal anemia and other signs
+of malnutrition due to malabsorption (low blood pro-
+tein; variations in the amount of calcium, potassium,
+and magnesium present in the blood; changes in
+certain markers of liver function). Stool samples may
+be examined to make sure that no infectious agent is
+causing thediarrhea, and to see if the waste contains
+blood.
+During an endoscopic exam, a doctor passes a
+flexible tube with a tiny, fiber-optic camera device
+Crohn’s disease
+through the rectum and into the colon. The doctor can
+then carefully examine the lining of the intestine for
+signs of inflammation and ulceration that might
+suggest Crohn’s disease. A tiny sample (a biopsy) of
+the intestine can also be taken through the endoscope,
+and the tissue will be examined under a microscope for
+evidence of Crohn’s disease.
+X rays can be helpful for diagnosis, and also for
+determining how much of the intestine is involved in
+the disease. For these x rays, the patient must either
+drink a chalky solution containing barium, or receive a
+barium enema(a solution that is administered through
+the rectum). Barium helps to ‘‘light up’’ the intestine,
+allowing more detail to be seen on the resulting x rays.
+While Crohn’s disease and ulcerative colitis are
+similar, they are also very different. Although it can
+be difficult to determine whether a patient has Crohn’s
+disease or ulcerative colitis, it is important to make
+every effort to distinguish between these two diseases.
+Because the long-term complications of the diseases
+are different, treatment will depend on careful diag-
+nosis of the specific IBD present.
+Treatment
+Treatments for Crohn’s disease try to reduce the
+underlying inflammation, the resulting malabsorp-
+tion/malnutrition, the uncomfortable symptoms of
+crampy abdominal pain and diarrhea, and the possible
+complications (obstructions, abscesses, and fistulas).
+Inflammation can be treated with a drug called
+sulfasalazine. Sulfasalazine is made up of two parts.
+One part is related to the sulfaantibiotics; the other
+part is a form of the anti-inflammatory chemical,
+salicylic acid (related toaspirin). Sulfasalazine is not
+well absorbed from the intestine, so it stays mostly
+within the intestine, where it is broken down into its
+components. It is believed that the salicylic acid com-
+ponent actively treats Crohn’s disease by fighting
+inflammation. Some patients do not respond to sul-
+fasalazine, and require steroid medications (such as
+prednisone). Steroids, however, must be used care-
+fully to avoid the complications of these drugs,
+including increased risk of infection and weakening
+of bones (osteoporosis). Some very potent immuno-
+suppressive drugs, which interfere with the products
+of the immune system and can hopefully decrease
+inflammation, may be used for those patients who
+do not improve on steroids.
+A new drug called infliximab (Remicade) appears
+to be a powerful treatment for Crohn’s disease, particu-
+larly for patients who have not responded well to other
+forms of treatment. Infliximab is administered through
+infusion, and consists of a monoclonal antibody that
+interferes with the inflammatory process mediated by
+tumor necrosis factor-alpha (TNF-a). Patients taking
+infliximab seem to be able to decrease their use of steroid
+medications, and require fewer surgical interventions.
+Furthermore, infliximab is the first medication
+approved for treating fistulas. Unfortunately, inflixi-
+mab can only be used on a short-term basis, because
+i t si n t e r f e r e n c ew i t hT N F - aa c t i v i t yc a na l s op r e d i s p o s e
+patients to serious infection. More research is needed to
+try to harness the benefits of infliximab, while avoiding
+the potential complications.
+Serious cases of malabsorption/malnutrition may
+need to be treated by providing nutritional supple-
+ments. These supplements must be in a form that can
+be absorbed from the damaged, inflamed intestine.
+Some patients find that certain foods are hard to
+digest, including milk, large quantities of fiber, and
+A barium x-ray showing the colon of a patient with Crohn’s
+disease where the large and small intestines join (bottom
+left). (Custom Medical Stock Photo. Reproduced by permission.)
+1060 Crohn’s disease
+spicy foods. When patients are suffering from an
+obstruction, or during periods of time when symptoms
+of the disease are at their worst, they may need to
+drink specially formulated, high-calorie liquid supple-
+ments. Those patients who are severely ill may need to
+receive their nutrition through a needle inserted in a
+vein (intravenously), or even by a tiny tube (a catheter)
+inserted directly into a major vein in the chest.
+A number of medications are available to help
+decrease the cramping and pain associated with
+Crohn’s disease. These include loperamide, tincture
+of opium, and codeine. Some fiber preparations
+(methylcellulose or psyllium) may be helpful, although
+some patients do not tolerate them well.
+The first step in treating an obstruction involves
+general attempts to decrease inflammation with
+sulfasalazine, steroids, or immunosuppressive drugs.
+A patient with a severe obstruction will have to stop
+taking all food and drink by mouth, allowing the bowel
+to ‘‘rest.’’ Abscesses and other infections will require
+antibiotics. Surgery may be required to repair an
+obstruction that does not resolve on its own, to remove
+an abscess, or to repair a fistula. Such surgery may
+involve the removal of a section of the intestine. In
+extremely severe cases of Crohn’s disease that do not
+respond to treatment, a patient may need to have the
+entire large intestine removed (an operation called a
+colectomy). In this case, a piece of the remaining small
+intestine is pulled through an opening in the abdomen.
+This bit of intestine is fashioned surgically to allow a
+special bag to be placed over it. This bag catches the
+body’s waste, which no longer can be passed through
+the large intestine and out of the anus. This open-
+ing, which will remain in place for life, is called an
+ileostomy.
+Prognosis
+Crohn’s disease is a life-long illness. The severity
+of the disease can vary, and a patient can experience
+periods of time when the disease is not active and he or
+she is symptom free. However, the complications and
+risks of Crohn’s disease tend to increase over time.
+Well over 60% of all patients with Crohn’s disease
+will require surgery, and about half of these patients
+will require more than one operation over time. About
+5–10% of all Crohn’s patients will die of their disease,
+primarily due to massive infection.
+Rosalyn Carson-DeWitt, MD
+Cromolyn see Antiasthmatic drugs
+Cross-eye see Strabismus
+Cross-gender identification see Gender
+identity disorder
+Croup
+Definition
+Croup is a common childhood ailment. Typically,
+it arises from a viral infection of the larynx (voice box)
+and is associated with mild upper respiratory symp-
+toms such as a runny nose andcough. The key symp-
+tom is a harsh barking cough. Croup is usually not
+KEY TERMS
+Abscess— A walled-off pocket of pus caused by
+infection.
+Endoscope— A medical instrument that can be
+passed into an area of the body (the bladder or intes-
+tine, for example) to allow examination of that area.
+The endoscope usually has a fiber-optic camera that
+allows a greatly magnified image to be shown on a
+television screen viewed by the operator. Many
+endoscopes also allow the operator to retrieve a
+small sample (biopsy) of the area being examined,
+to more closely view the tissue under a microscope.
+Fistule— An abnormal channel that creates an open
+passageway between two structures that do not
+normally connect.
+Gastrointestinal tract— The entire length of the
+digestive system, running from the stomach,
+through the small intestine, large intestine, and
+out the rectum and anus.
+Immune system— The body system responsible for
+producing various cells and chemicals that fight
+infection by viruses, bacteria, fungi, and other for-
+eign invaders. In autoimmune disease, these cells
+and chemicals turn against the body itself.
+Inflammation— The result of the body’s attempts to
+fight off and wall off an area that is infected.
+Inflammation results in the classic signs of redness,
+heat, swelling, and loss of function.
+Obstruction— A blockage.
+Ulceration— A pitted area or break in the continu-
+ity of a surface such as skin or mucous membrane.
+Croup
+serious and most children recover within a few days. In
+a small percentage of cases, a child develops breathing
+difficulties and may need medical attention.
+Description
+At one time, the term croup was primarily asso-
+ciated with diphtheria, a life-threatening respiratory
+infection. Owing to widespread vaccinations,
+diphtheria has become rare in the United States, and
+croup currently refers to a mild viral infection of the
+larynx. Croup is also known as laryngotracheitis, a
+medical term that describes the inflammation of the
+trachea (windpipe) and larynx.
+Parainfluenza viruses are the typical root cause of
+the infection, butinfluenza (flu) and cold viruses may
+sometimes be responsible. All of these viruses are highly
+contagious and easily transmitted between individuals
+via sneezing and coughing. Children between the ages of
+three months and six years are usually affected, with the
+greatest incidence at one to two years of age. Croup can
+occur at any time of the year, but it is most typical
+during early autumn and winter. The characteristic
+harsh barking of a croupy cough can be very distressing,
+but it rarely indicates a serious problem. Most children
+with croup can be treated very effectively at home;
+however, 1–5% may require medical treatment.
+Croup may sometimes be confused with more
+serious conditions, such asepiglottitis or bacterial tra-
+cheitis. These ailments arise from bacterial infection
+and must receive medical treatment.
+Causes and symptoms
+The larynx and trachea may become inflamed or
+swollen from an upper respiratory viral infection. The
+hallmark sign of croup is a harsh, barking cough. This
+cough may be preceded by one to three days of symp-
+toms that resemble a slight cold. A croupy cough is
+often accompanied by a runny nose, hoarseness, and a
+low fever. When the child inhales, there may be a raspy
+or high-pitched noise, calledstridor, owing to the nar-
+rowed airway and accumulated mucus. In the presence
+of stridor, medical attention is required.
+However, the airway rarely narrows so much that
+breathing is impeded. Symptoms usually go away
+completely within a few days. Medical treatment may
+be sought if the child’s symptoms do not respond to
+home treatment.
+Emergency medical treatment is required immedi-
+ately if the child has difficulty breathing, swallowing,
+or talking; develops a high fever (103
+/C14F/39.4 /C14Co r
+more); seems unalert or confused; or has pale or
+blue-tinged skin.
+Diagnosis
+Croup is diagnosed based on the symptoms. If
+symptoms are particularly severe, or do not respond
+to treatment, an x ray of the throat area is done to
+assess the possibility of epiglottitis or other blockage
+of the airway.
+Treatment
+Home treatment is the usual method of managing
+croup symptoms. It is important that the child is kept
+comfortable and calm to the best degree possible,
+because crying can make symptoms seem worse.
+Humid air can help a child with croup feel more com-
+fortable. Recommended methods include sitting in a
+steamy bathroom with the hot water running or using
+a cool-water vaporizer or humidifier. However,
+research in 2004 found that although cool-mist
+therapy at home or in the hospital may add to the
+child’s comfort, it does little to treat the actual
+condition. The child should drink frequently in order
+to stay well hydrated. To treat any fever, the child may
+be given an appropriate dose ofacetaminophen (like
+Tylenol). Antihistamines and decongestants are ineffec-
+tive in treating croup.All children under the age of 18
+should not be given aspirin, as it may causeReye’s
+syndrome, a life-threatening disease of the brain.
+If the child does not respond to home treatment,
+medical treatment at a doctor’s office or an emergency
+room could be necessary. Based on the severity of
+symptoms and the response to treatment, the child
+may need to be admitted to a hospital.
+For immediate symptom relief, epinephrine may be
+administered as an inhaled aerosol. Effects last for up to
+two hours, but there is a possibility that symptoms
+may return. For that reason, the child is kept under
+supervision for three or more hours. Steroids (corticos-
+teroids) such as prednisone may be used to treat croup,
+particularly if the child has stridor when resting.
+Of the 1–5% of children requiring medical treat-
+ment, approximately 1% need respiratory support.
+Such support involves intubation (inserting a tube
+into the trachea) and oxygen administration.
+Alternative treatment
+Botanical/herbal medicines can be helpful in heal-
+ing the cough that is commonly associated with croup.
+Several herbs to consider for cough treatment include
+aniseed ( Pimpinella anisum ), sundew ( Drosera
+1062 Croup
+rotundifolia), thyme ( Thymus vulgaris ), and wild
+cherry bark (Prunus serotina). Homeopathic medicine
+can be very effective in treating cases of croup.
+Choosing the correct remedy (a common choice is
+aconite or monkshood,Aconitum napellus) is always
+the key to the success of this type of treatment.
+Prognosis
+Croup is a temporary condition and children typi-
+cally recover completely within three to six days.
+Children can experience one or more episodes of
+croup during early childhood; however, croup is rarely
+a dangerous condition.
+Prevention
+Croup is caused by highly transmissible viruses
+and is often difficult to impossible to prevent.
+Resources
+PERIODICALS
+Kirn, Timothy F. ‘‘Cool Mist Therapy is Losing Credibility
+for Croup: Steroids or Even Epinephrine May Be
+Needed.’’ Pediatric NewsMarch 2004: 10–11.
+Julia Barrett
+Teresa G. Odle
+Cryoglobulin test
+Definition
+Cryoglobulin is an abnormal blood protein asso-
+ciated with several diseases. Testing for cryoglobulin
+is done when a person has symptoms of this protein
+or is being evaluated for one of the associated
+diseases.
+Purpose
+Cryoglobulin clumps in cold temperatures. This
+physical characteristic causes people with cryoglobu-
+lin to have symptoms during cold weather: blanching,
+numbness,a n dpain in their fingers or toes (Raynaud’s
+phenomenon); bleeding into the skin (purpura); and
+pain in joints (arthralgia). People with these symptoms
+or any other symptoms that appear in cold weather
+should be tested for cryoglobulin.
+Diseases that cause the body to make extra or
+abnormal proteins are often associated with cryoglo-
+bulin. These diseases include cancers involving white
+blood cells, infections, autoimmune disorders,a n d
+rheumatoid diseases.
+This test provides information about the cause of
+symptoms in a person who already has a disease pro-
+cess. It does not diagnose a specific disease or monitor
+the course of a disease.
+Precautions
+This test is not a screening test for disease in a
+person without symptoms.
+Description
+Laboratory testing for cryoglobulin is based on
+the fact that cryoglobulin clumps when cooled and
+dissolves when warmed. The test is done on a person’s
+serum (the yellow liquid part of blood that separates
+from the cells after theblood clots). The serum is kept
+warm from the time drawn until the cells and the
+serum are separated in the laboratory. The serum is
+placed at 33.8
+/C14F( 1/C14C) for one to seven days. If there
+is clumping, cryoglobulins are present. The amount
+of cryoglobulins is determined by measuring the
+amount of clumping. Negative tests are checked
+through seven days.
+Additional testing is done to find out what kind of
+cryoglobulin protein is present. There are three kinds
+of cryoglobulin, each associated with different
+diseases.
+KEY TERMS
+Diphtheria— A serious, frequently fatal, bacterial
+infection that affects the respiratory tract.
+Vaccinations given in childhood have made
+diphtheria very rare in the United States.
+Epiglottitis— A bacterial infection that affects the
+epiglottis. The epiglottis is a flap of tissue that prevents
+food and fluid from entering the trachea. The infec-
+t i o nc a u s e si tt ob e c o m es w ollen, potentially blocking
+the airway. Other symptoms include a high fever,
+nonbarking cough, muffled voice, and an inability
+to swallow properly (possibly indicated by drooling).
+Glucocorticoid— A hormone that helps in diges-
+tion of carbohydrates and reduces inflammation.
+Larynx— Commonly called the voice box, it is the
+area of the trachea that contains the vocal cords.
+Stridor— The medical term used to describe the high-
+pitched or rasping noise made when air is inhaled.
+Trachea— Commonly called the windpipe, it is the
+air pathway that connects the nose and mouth to
+the lungs.
+Cryoglobulin test

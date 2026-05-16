@@ -15,6 +15,8 @@ import {
 import { useAuth } from '@/components/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import SuggestedQuestions from '@/components/SuggestedQuestions';
+import SourceCitation from '@/components/SourceCitation';
+import { saveChatHistory, sendChatMessage } from '@/services/api';
 
 const ChatAI = () => {
   const { user } = useAuth();
@@ -29,6 +31,16 @@ const ChatAI = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [chats, setChats] = useState([]);
   const [currentChatId, setCurrentChatId] = useState(null);
+
+  const pregnancyContextFromText = (text) => {
+    const lower = text.toLowerCase();
+    const pregnant = /\b(pregnant|pregnancy|expecting|antenatal|prenatal|trimester)\b/.test(lower);
+    const weeksMatch = lower.match(/(\d{1,2})\s*(weeks|week|wks|wk)/);
+    return {
+      is_pregnant: pregnant,
+      pregnancy_weeks: weeksMatch ? Number(weeksMatch[1]) : null,
+    };
+  };
 
   // Check screen size for responsive behavior
   useEffect(() => {
@@ -85,7 +97,7 @@ const ChatAI = () => {
       const newChatId = 'chat_' + Date.now();
       const welcomeMessage = {
         role: 'assistant',
-        content: 'Hello! I am your MediGuard AI health assistant. How are you feeling today? Please describe your symptoms.',
+        content: 'Hello! I am your MediGuard AI health assistant. You can greet me, ask a health question, or describe symptoms like "fever and chills and headache" for a symptom check.',
         id: 'msg_' + Date.now(),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
@@ -130,7 +142,7 @@ const ChatAI = () => {
   };
 
   // Handle message sending
-  const handleSend = (textOverride = null, isInitial = false) => {
+  const handleSend = async (textOverride = null, isInitial = false) => {
     const textToSend = textOverride || input;
     if (!textToSend.trim()) return;
 
@@ -165,6 +177,81 @@ const ChatAI = () => {
 
     setInput('');
     setIsTyping(true);
+
+    try {
+      const history = messages.slice(-6).map((message) => ({
+        role: message.role,
+        content: message.content,
+      }));
+      const pregnancyContext = pregnancyContextFromText(textToSend);
+      const res = await sendChatMessage(textToSend, history, null, pregnancyContext);
+      const aiMsgObj = {
+        role: 'assistant',
+        content: res.data.answer,
+        sources: res.data.sources,
+        disclaimer: res.data.disclaimer,
+        followUpQuestions: res.data.follow_up_questions || [],
+        id: 'msg_ai_' + Date.now(),
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      const finalMessages = [...updatedMessages, aiMsgObj];
+      setMessages(finalMessages);
+      setChats(prev => prev.map(chat => (
+        chat.id === currentChatId
+          ? { ...chat, messages: finalMessages, preview: res.data.answer.substring(0, 30) + '...' }
+          : chat
+      )));
+      if (user) {
+        const title = textToSend.length > 48 ? `${textToSend.slice(0, 48)}...` : textToSend;
+        saveChatHistory({
+          title,
+          message: textToSend,
+          response: res.data.answer,
+          sources: res.data.sources || [],
+          mode: res.data.mode || null,
+          pregnancy_context: res.data.pregnancy_context || pregnancyContext.is_pregnant,
+          follow_up_questions: res.data.follow_up_questions || [],
+        }).catch(() => {
+          const key = `chat_history_${user.id}`;
+          const stored = JSON.parse(localStorage.getItem(key) || '[]');
+          localStorage.setItem(key, JSON.stringify([{
+            id: `chat_${Date.now()}`,
+            title,
+            message: textToSend,
+            response: res.data.answer,
+            sources: res.data.sources || [],
+            mode: res.data.mode || null,
+            follow_up_questions: res.data.follow_up_questions || [],
+            created_at: new Date().toISOString(),
+          }, ...stored]));
+        });
+      }
+    } catch (error) {
+      const aiMsgObj = {
+        role: 'assistant',
+        content: isInitial
+          ? "I see you're coming from your diagnosis results. The health assistant is offline right now, but I can still remind you to seek professional care for urgent symptoms."
+          : "I could not reach the MediGuard backend. Please check that the API is running, then try again.",
+        sources: [],
+        id: 'msg_ai_' + Date.now(),
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      const finalMessages = [...updatedMessages, aiMsgObj];
+      setMessages(finalMessages);
+      setChats(prev => prev.map(chat => (
+        chat.id === currentChatId
+          ? { ...chat, messages: finalMessages, preview: aiMsgObj.content.substring(0, 30) + '...' }
+          : chat
+      )));
+      toast({
+        variant: "destructive",
+        title: "Assistant unavailable",
+        description: error.message || "Could not reach the backend.",
+      });
+    } finally {
+      setIsTyping(false);
+    }
+    return;
 
     // Mock AI Processing Delay
     setTimeout(() => {
@@ -283,7 +370,7 @@ const ChatAI = () => {
         <meta name="description" content="Conversational symptom checker and AI health assistant for personalized guidance." />
       </Helmet>
 
-      <div className="h-[calc(100vh-64px)] bg-muted/30 flex overflow-hidden">
+      <div className="h-[calc(100dvh-64px)] min-h-[520px] bg-muted/30 flex overflow-hidden">
         {/* Sidebar */}
         <AnimatePresence mode="wait">
           {isSidebarOpen && (
@@ -306,7 +393,7 @@ const ChatAI = () => {
                 exit={{ x: -300 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                 className={`
-                  ${isMobile ? 'fixed left-0 top-16 bottom-0 z-50' : 'relative'}
+                  ${isMobile ? 'fixed left-0 top-16 bottom-0 z-50 max-w-[86vw]' : 'relative'}
                   w-[280px] bg-background border-r border-border flex flex-col
                 `}
               >
@@ -332,7 +419,7 @@ const ChatAI = () => {
                 <div className="p-3">
                   <Button
                     onClick={createNewChat}
-                    className="w-full bg-primary hover:bg-primary/90 text-white justify-start gap-2"
+                    className="w-full bg-primary hover:bg-primary/90 text-white justify-start gap-2 rounded-lg"
                   >
                     <Plus className="h-4 w-4" />
                     New Chat
@@ -456,9 +543,9 @@ const ChatAI = () => {
                         </div>
                       )}
                       
-                      <div className={`max-w-[85%] sm:max-w-[75%] flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
+                      <div className={`max-w-[88%] sm:max-w-[75%] flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
                         <div
-                          className={`rounded-2xl px-3 py-2 sm:px-5 sm:py-3 shadow-sm text-sm sm:text-[15px] leading-relaxed relative break-words w-full ${
+                          className={`rounded-xl sm:rounded-2xl px-3 py-2 sm:px-5 sm:py-3 shadow-sm text-sm sm:text-[15px] leading-relaxed relative break-words w-full ${
                             message.role === 'user'
                               ? 'bg-secondary text-secondary-foreground rounded-br-sm'
                               : message.content.includes('🚨 EMERGENCY') 
@@ -471,6 +558,21 @@ const ChatAI = () => {
                         <span className="text-[10px] sm:text-[11px] text-muted-foreground mt-1 px-1">
                           {message.timestamp}
                         </span>
+                        {message.role === 'assistant' && <SourceCitation sources={message.sources} />}
+                        {message.role === 'assistant' && Array.isArray(message.followUpQuestions) && message.followUpQuestions.length > 0 && (
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {message.followUpQuestions.map((question) => (
+                              <button
+                                key={question}
+                                type="button"
+                                onClick={() => handleSend(question)}
+                                className="rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-left text-[11px] sm:text-xs font-medium text-primary hover:bg-primary/10"
+                              >
+                                {question}
+                              </button>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                       {message.role === 'user' && (
@@ -511,13 +613,13 @@ const ChatAI = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  className="bg-muted/50 border-input focus-visible:ring-primary h-12 sm:h-14 text-sm sm:text-base rounded-full pl-4 sm:pl-6 pr-12 sm:pr-14 shadow-inner w-full"
+                  className="bg-muted/50 border-input focus-visible:ring-primary h-12 sm:h-14 text-sm sm:text-base rounded-lg pl-4 sm:pl-6 pr-12 sm:pr-14 shadow-inner w-full"
                   disabled={isTyping}
                 />
                 <Button 
                   onClick={() => handleSend()} 
                   disabled={!input.trim() || isTyping}
-                  className="absolute right-1.5 top-1.5 bottom-1.5 rounded-full w-9 h-9 sm:w-11 sm:h-11 p-0 bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform active:scale-95"
+                  className="absolute right-1.5 top-1.5 bottom-1.5 rounded-md w-9 h-9 sm:w-11 sm:h-11 p-0 bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform active:scale-95"
                 >
                   <Send className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>

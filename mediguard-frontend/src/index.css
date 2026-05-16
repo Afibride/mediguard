@@ -7,57 +7,57 @@
 @layer base {
   :root {
     /* Base Colors */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 186 33% 98%;
+    --foreground: 216 45% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 216 45% 12%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
     
     /* Healthcare Color Palette */
     /* Primary: Healthcare Teal/Cyan (#14b8a6 approx) */
-    --primary: 173 80% 40%;
+    --primary: 174 78% 34%;
     --primary-foreground: 0 0% 100%;
     
     /* Secondary: Medical Blue (#2563eb approx) */
-    --secondary: 221 83% 53%;
+    --secondary: 213 83% 46%;
     --secondary-foreground: 0 0% 100%;
     
     /* System Colors */
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 173 80% 95%;
+    --muted: 187 30% 94%;
+    --muted-foreground: 215 18% 42%;
+    --accent: 35 94% 93%;
     --accent-foreground: 173 80% 30%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 173 80% 40%;
+    --border: 190 24% 86%;
+    --input: 190 24% 86%;
+    --ring: 174 78% 34%;
     --radius: 0.5rem;
   }
 
   .dark {
     /* Base Colors */
-    --background: 222.2 84% 4.9%;
+    --background: 214 50% 8%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 214 42% 11%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
     
     /* Healthcare Color Palette (Dark Mode) */
     /* Primary: Healthcare Teal/Cyan (Adjusted for dark mode visibility) */
-    --primary: 173 70% 45%;
+    --primary: 174 68% 48%;
     --primary-foreground: 222.2 47.4% 11.2%;
     
     /* Secondary: Medical Blue */
-    --secondary: 221 83% 60%;
+    --secondary: 209 86% 58%;
     --secondary-foreground: 222.2 47.4% 11.2%;
     
     /* System Colors */
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 35 45% 18%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -105,6 +105,17 @@
     width: auto;
     object-fit: contain;
     background-color: transparent;
+  }
+  .medical-page {
+    background:
+      radial-gradient(circle at top left, hsl(var(--primary) / 0.10), transparent 28rem),
+      linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted) / 0.52));
+  }
+  .medical-panel {
+    @apply border border-border/80 bg-card/95 shadow-sm;
+  }
+  .text-balance {
+    text-wrap: balance;
   }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;

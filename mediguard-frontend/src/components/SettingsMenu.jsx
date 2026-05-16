@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { MoreVertical, Moon, Sun, History, LogOut } from 'lucide-react';
+import { MoreVertical, Moon, Sun, History, LogOut, User } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -73,6 +73,15 @@ const SettingsMenu = () => {
                 {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                 {isDark ? 'Light Mode' : 'Dark Mode'}
               </button>
+
+              <Link
+                to="/profile"
+                onClick={() => setIsOpen(false)}
+                className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-primary/10 hover:text-primary transition-colors flex items-center gap-2"
+              >
+                <User className="w-4 h-4" />
+                Profile
+              </Link>
 
               <Link
                 to="/history"

@@ -1,0 +1,1019 @@
+DISEASE: Typhoid Fever
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+Symptoms
+Septic shock is usually preceded by bacteremia,
+which is marked byfever, malaise, chills, andnausea.
+The first sign of shock is often confusion and
+decreased consciousness. In this beginning stage, the
+extremities are usually warm. Later, they become cool,
+pale, and bluish. Fever may give way to lower than
+normal temperatures later on in sepsis.
+Other symptoms include:
+/C15rapid heartbeat
+/C15shallow, rapid breathing
+/C15decreased urination.
+/C15reddish patches in the skin
+Septic shock may progress to cause ‘‘adult respira-
+tory distress syndrome,’’ in which fluid collects in the
+lungs, and breathing becomes very shallow and
+labored. This condition may lead to ventilatory col-
+lapse, in which the patient can no longer breathe ade-
+quately without assistance.
+Diagnosis
+Diagnosis of septic shock is made by measuring
+blood pressure, heart rate, and respiration rate, as well
+as by a consideration of possible sources of infection.
+Blood pressure may be monitored with a catheter
+device inserted into the pulmonary artery supplying
+the lungs (Swan-Ganz catheter). Blood cultures are
+done to determine the type of bacteria responsible.
+The levels of oxygen, carbon dioxide, and acidity in
+the blood are also monitored to assess changes in
+respiratory function.
+Treatment
+Septic shock is treated initially with a combina-
+tion ofantibiotics and fluid replacement. The antibio-
+tic is chosen based on the bacteria present, although
+two or more types of antibiotics may be used initially
+until the organism is identified. Intravenous fluids,
+either blood or protein solutions, replace the fluid
+lost by leakage. Coagulation and hemorrhage may be
+treated with transfusions of plasma or platelets.
+Dopamine may be given to increase blood pressure
+further if necessary.
+Respiratory distress is treated with mechanical
+ventilation and supplemental oxygen, either using a
+nosepiece or a tube into the trachea through the throat.
+Identification and treatment of the primary infec-
+tion site is important to prevent ongoing proliferation
+of bacteria.
+Prognosis
+Septic shock is most likely to develop in the hos-
+pital, since it follows infections which are likely to be
+the objects of treatment. Because of this, careful mon-
+itoring and early, aggressive therapy can minimize the
+likelihood of progression. Nonetheless, death occurs
+in at least 25% of all cases.
+The likelihood of recovery from septic shock
+depends on may factors, including the degree of
+immunosuppression of the patient, underlying dis-
+ease, promptness of treatment, and type of bacteria
+responsible. Mortality is highest in the very young
+and the elderly, those with persistent or recurrent
+infection, and those with compromised immune
+systems.
+Prevention
+The risk of developing septic shock can be mini-
+mized through treatment of underlying bacterial infec-
+tions, and prompt attention to signs of bacteremia. In
+the hospital, scrupulous aseptic technique on the part
+of medical professionals lowers the risk of introducing
+bacteria into the bloodstream.
+Resources
+OTHER
+The Merck Page. April 13, 1998. <http://
+www.merck.com> .
+Richard Robinson
+Septoplasty
+Definition
+Septoplasty is a surgical procedure to correct the
+shape of the septum of the nose. The nasal septum is
+the separation between the two nostrils. In adults, the
+septum is composed partly of cartilage and partly of
+bone.
+KEY TERMS
+Bacteremia— Invasion of the bloodstream by
+bacteria.
+Septoplasty
+Purpose
+Septoplasty is performed to correct a crooked
+(deviated) or dislocated septum, often as part ofplastic
+surgery of the nose (rhinoplasty). The nasal septum has
+three functions: to support the nose, regulate air flow,
+and support the mucous membranes (mucosa) of the
+nose. Septoplasty is done to correct the shape of the
+nose caused by a deformed septum or correct deregu-
+lated air flow caused by adeviated septum. Septoplasty
+is often needed when the patient is having an operation
+to reduce the size of the nose (reductive rhinoplasty),
+because this operation usually reduces the amount of
+breathing space in the nose.
+Septoplasty may also be done as a follow-up
+procedure following facial trauma, as the nose is
+frequently broken or dislocated by blows to the face
+resulting from automobile accidents, criminal
+assaults, orsports injuries.
+Precautions
+Septoplasty is ordinarily not performed within six
+months of a traumatic injury to the nose.
+Description
+Septoplasties are performed in the hospital with a
+combination of local and intravenous anesthesia. In
+some cases, hypnosis has been successfully used as
+anesthesia. After the patient is anesthetized, the sur-
+geon makes a cut (incision) in the mucous tissue that
+covers the part of the septum that is made of cartilage.
+The tissue is lifted, exposing the cartilage and bony
+part of the septum. Usually, one side of the mucous
+tissue is left intact to provide support during healing.
+Cartilage is cut away as needed.
+As the surgeon cuts away the cartilage, deformi-
+ties tend to straighten themselves out, reducing the
+amount of cartilage that must be cut. Once the carti-
+lage is cut, bony deformities can be corrected. For
+most patients, this is the extent of the surgery required
+to improve breathing through the nose and correct
+deformities. Some patients have bony obstructions at
+the base of the nasal chamber and require further
+surgery. These obstructions include bony spurs and
+ridges that contribute to drying, ulceration, or bleed-
+ing of the mucous tissue that covers the inside of the
+nasal passages. In these cases, the extent of the surgery
+depends on the nature of the deformities that need
+correcting.
+During surgery, the patient’s own cartilage that
+has been removed can be reused to provide support for
+the nose if needed. External septum supports are not
+usually needed. Splints may be needed occasionally to
+support cartilage when extensive cutting has been
+done. External splints can be used to support the
+cartilage for the first few days of healing. Tefla gauze
+is inserted in the nostril to support the flaps and
+cartilage and to absorb any bleeding or mucus.
+A newer option for closing perforations in the
+septum is a button made of Silastic, a compound of
+silicone and rubber.
+Preparation
+Before performing a septoplasty, the surgeon will
+evaluate the difference in airflow between the two
+nostrils. In children, this assessment can be done very
+simply by asking the child to breathe out slowly on a
+small mirror held in front of the nose.
+As with any other operation under general
+anesthesia, patients are evaluated for any physical
+conditions that might complicate surgery and for any
+medications that might affect blood clotting time.
+Aftercare
+Patients with septoplasties are usually sent home
+from the hospital later the same day or the morning
+after the surgery. All dressings inside the nose are
+removed before the patient leaves. Aftercare includes
+a list of detailed instructions for the patient that focus
+on preventing trauma to the nose.
+Risks
+The risks from a septoplasty are similar to those
+from other operations on the face: postoperative
+pain with some bleeding, swelling, bruising, or
+KEY TERMS
+Cartilage— A tough, elastic connective tissue found
+in the joints, outer ear, nose, larynx, and other parts
+of the body.
+Rhinoplasty— Plastic surgery of the nose.
+Septum (plural, septa)— The dividing partition in
+the nose that separates the two nostrils. It is com-
+posed of bone and cartilage.
+Splint— A thin piece of rigid material that is some-
+times used during nasal surgery to hold certain
+structures in place until healing is underway.
+3352 Septoplasty
+discoloration. A few patients may have allergic reac-
+tions to the anesthetics. The operation in itself, how-
+ever, is relatively low-risk in that it does not involve
+major blood vessels or vital organs. Infection is unli-
+kely if proper surgical technique is observed.
+Normal results
+Normal results include improved breathing and
+airflow through the nostrils, and an acceptable out-
+ward shape of the nose.
+Resources
+BOOKS
+Beers, Mark H., MD, and Robert Berkow, MD., editors.
+‘‘Septal Deviation and Perforation.’’ Section 7, Chapter
+86 InThe Merck Manual of Diagnosis and Therapy.
+Whitehouse Station, NJ: Merck Research
+Laboratories, 2004.
+PERIODICALS
+Piatti, G., A. Scotti, and U. Ambrosetti. ‘‘Nasal Ciliary Beat
+after Insertion of Septo-Valvular Splints.’’
+Otolaryngology and Head and Neck Surgery130 (May
+2004): 558–562.
+Wain, H. J. ‘‘Reflections on Hypnotizability and Its Impact
+on Successful Surgical Hypnosis: A Sole Anesthetic for
+Septoplasty.’’ American Journal of Clinical Hypnosis46
+(April 2004): 313–321.
+ORGANIZATIONS
+American Academy of Facial Plastic and Reconstructive
+Surgery (AAFPRS). 310 South Henry Street,
+Alexandria, VA 22314. (703) 299-9291. <http://
+www.facemd.org> .
+American Society of Plastic Surgeons (ASPS). 444 East
+Algonquin Road, Arlington Heights, IL 60005. (847)
+228-9900. <http://www.plasticsurgery.org> .
+John T. Lohr, PhD
+Rebecca J. Frey, PhD
+Septum perforation see Perforated septum
+Serenoa repens see Saw palmetto
+Serotonin boosters see Selective serotonin
+reuptake inhibitors
+Serum albumin test see Protein components
+test
+Serum globulin test see Protein components
+test
+Serum hepatitis see Hepatitis B
+Serum protein electrophoresis see Protein
+electrophoresis
+Serum sickness
+Definition
+Serum sickness is a type of delayed allergic
+response, appearing four to 10 days after exposure to
+some antibiotics or antiserum, the portion of serum
+that contains antibodies, such as gamma globulin,
+which may be given to provide immunization against
+some diseases.
+Description
+Serum sickness is very similar to an allergic reac-
+tion. The patient’s immune system recognizes the
+proteins in the drug or antiserum as foreign proteins,
+and produces its own antibodies to protect against the
+foreign proteins. The newly formed antibodies bind
+with the foreign protein to form immune complexes.
+These immune complexes may enter the walls of blood
+vessels where they set off an inflammatory reaction.
+While other types of allergic reactions may pro-
+duce a rapid response, the serum sickness reaction is
+delayed because it takes time for the body to produce
+antibodies to the new protein.
+Causes and symptoms
+The usual symptoms are severe skin reactions,
+often on the palms of the hands and soles of the feet.
+Fever, sometimes as high as 104o F, is always present
+and usually appears before the skin rash.
+Joint pain may be reported in up to 50% of cases.
+This is usually seen in the larger joints, but occasion-
+ally the finger and toe joints may also be involved.
+Swelling of lymph nodes, particularly around the
+site of the injection, is seen in 10–20% of cases. There
+may also be swelling of the head and neck.
+Urine analysis may show traces of blood and
+protein in the urine.
+Other symptoms may involve the heart and cen-
+tral nervous system. These may include changes in
+vision, and difficulty in movement. Breathing diffi-
+culty may occur.
+Traditionally, antitoxins were the most common
+cause of serum sickness, but those reports date from a
+time when most antitoxins were made from horse
+serum. As many as 16% of the people who received
+antirabies serum derived from horses developed serum
+sickness. The risk of a reaction to antitoxins has
+dropped dramatically since manufacturers have
+Serum sickness
+started using human serum instead of horse serum to
+make their products.
+Although antitoxins are the most common cause
+of serum sickness, a number of drugs have been
+reported to cause a serum sickness reaction. The
+following list is not complete, but indicates some of
+the drugs that have been associated with this type of
+reaction:
+/C15allopurinol (Zyloprim)
+/C15barbiturates
+/C15captopril (Capoten)
+/C15cephalosporin antibiotics
+/C15griseofulvin (Fulvicin, Grifulvin)
+/C15penicillins
+/C15pehnytoin (Dilantin)
+/C15procainamide (Procan SR, Procanbid, Pronestyl-SR)
+/C15quinidine (Quinaglute, Quinidex, Quinora)
+/C15streptokinase (Streptase, Kabikinase)
+/C15sulfonamide antibacterial drugs
+Of cases of serum sickness reported to the United
+States Food and Drug Administration, the drugs most
+commonly associated with the reaction have been the
+cephalosporin antibiotics, including cefaclor (Ceclor)
+and cefalexin (Keflex) and the sulfonamide com-
+bination trimethoprim-sulfamethoxazole (Bactrim,
+Septra.) This does not mean that these are high-risk
+drugs, since these drugs are very widely used, so that
+there are many people exposed to them.
+In addition to these substances, allergenic extracts
+used for testing and immunization, hormones, and
+vaccines have been known to cause serum sickness.
+Diagnosis
+Diagnosis is made by observing the symptoms and
+reviewing the patient’s medical and medication his-
+tory. Although the symptoms of serum sickness may
+be similar to other conditions, patients who present
+with symptoms of serum sickness and who have a
+recent history of exposure to a drug or other product
+which may cause this type of reaction should be
+suspected of having serum sickness.
+Treatment
+The first step in treatment of serum sickness is
+always to discontinue the drug or other substance
+which is suspected of causing the reaction. After that,
+all treatment is symptomatic. Antihistamines, pain
+relievers, and corticosteroids may be given to relieve
+the symptoms. The choice of treatment depends on the
+severity of the reaction.
+Prognosis
+Most serum sickness reactions are mild, and dis-
+appear on their own after one or two weeks as long as
+the cause is removed. Sometimes, symptoms of pain
+and discomfort may continue for several weeks, even
+after all the observable reactions such as skin rash and
+protein in the urine have disappeared. In very rare
+cases, however, there can be severe reactions and per-
+manent damage. In very rare but extreme cases, serum
+sickness can lead toshock, permanent kidney damage,
+and evendeath.
+Prevention
+The most effective method of prevention is simple
+avoidance of antitoxins that may cause serum sick-
+ness. If patients have had a reaction in the past, parti-
+cularly if the reaction was to a commonly used drug,
+KEY TERMS
+Allergy— Altered body reaction, usually hypersen-
+sitivity, as a response to exposure to a specific
+substance.
+Antibody— Any of a large number of proteins that
+are produced after stimulation by an antigen and
+act specifically against the antigen in an immune
+response.
+Antihistamine— A drug that inhibits the actions of
+histamine. Histamine causes dilatation of capil-
+laries, contraction of smooth muscle, and stimula-
+tion of gastric acid secretion.
+Antitoxin— An antibody that is capable of neutra-
+lizing the specific toxin (a specific cause of disease)
+that stimulated its production in the body and is
+produced in animals for medical purposes by injec-
+tion of a toxin or toxoid with the resulting serum
+being used to counteract the toxin in other
+individuals.
+Serum— The clear yellowish fluid that remains
+from blood plasma after fibrinogen, prothrombin,
+and other clotting factors have been removed by
+clot formation—called also blood serum.
+Sulfonamide— A sulfa drug, one of a large group of
+drugs used to treat bacterial infections.
+3354 Serum sickness
+they should be made aware of it, and be advised to
+alert physicians and hospitals in the future. Patients
+who have had particularly severe reactions may be
+advised to wear identification bracelets, or use other
+means to alert health care providers.
+When it is necessary to administer an antitoxin,
+skin tests may be used to identify people who are at
+risk of a reaction. If the situation does not allow
+enough time for skin testing, the antitoxin should be
+given along with an intravenous antihistamine. Other
+drugs, such as epinephrine, which may be needed for
+an emergency, should be available.
+Resources
+BOOKS
+1999 Year Book: Allergy and Clinical Immunology.Saint
+Louis: Mosby, Inc., 1999.
+PERIODICALS
+‘‘Children at Rrisk from Medication Mistakes.’’Houston
+Chronicle May 18, 2001.
+‘‘Drug allergies.’’Pediatrics for Parents18 (2000):1.
+Fielding, Jonathan. ‘‘Our Health; Drug Reactions Differ
+From Side Effects.’’The Los Angeles Times
+February 7, 2000.
+‘‘VA Hospitals Test Smart Cards for Patient Information.’’
+Computerworld May 14, 2001.
+ORGANIZATIONS
+Action Against Allergy (AAA). PO Box 278, Twickenham
+Middlesex, Greater London TW1 4QQ, England.
+American Allergy Association (AAA). 3104 E Camelback,
+Ste. 459 Phoenix, AZ 85016.
+Samuel D. Uretsky, PharmD
+Serum therapy see Gammaglobulin
+Severe acute respiratory
+syndrome (SARS)
+Definition
+Severe acute respiratory syndrome (SARS) is the
+first emergent and highly transmissible viral disease to
+appear during the twenty-first century.
+Description
+Patients with SARS develop flu-likefever, head-
+ache, malaise, drycough and other breathing difficul-
+ties. Many patients developpneumonia, and in 5–10%
+of cases, the pneumonia and other complications are
+severe enough to causedeath. SARS is caused by a
+virus that is transmitted usually from person to per-
+son—predominantly by the aerosolized droplets of
+virus infected material.
+The first known case of SARS was traced to a
+November 2002 case in Guangdong province, China.
+By mid-February 2003, Chinese health officials
+tracked more than 300 cases, including five deaths in
+Guangdong province from what was at the time
+described as an acute respiratory syndrome. Many
+flu-causing viruses have previously originated from
+Guangdong province because of cultural and exotic
+cuisine practices that bring animals, animal parts, and
+humans into close proximity. In such an environment,
+pathogens can more easily genetically mutate and
+make the leap from animal hosts to humans. The
+first cases of SARS showed high rates among
+Guangdong food handlers and chefs.
+Chinese health officials initially remained silent
+about the outbreak, and no special precautions were
+taken to limit travel or prevent the spread of the dis-
+ease. The world health community, therefore, had no
+chance to institute testing,isolation, and quarantine
+measures that might have prevented the subsequent
+global spread of the disease.
+On February 21, Liu Jianlun, a 64-year-old
+Chinese physician from Zhongshan hospital (later
+determined to have been ‘‘super-spreader,’’ a person
+capable of infecting unusually high numbers of
+contacts) traveled to Hong Kong to attend a family
+wedding despite the fact that he had a fever.
+Epidemiologists subsequently determined that,
+Jianlun passed on the SARS virus to other guests at
+the Metropole Hotel where he stayed—including an
+American businessman en route to Hanoi, three
+women from Singapore, two Canadians, and a Hong
+Kong resident. Jianlun’s travel to Hong Kong and the
+subsequent travel of those he infected allowed SARS
+to spread from China to the infected travelers’
+destinations.
+Johnny Chen, the American businessman, grew ill
+in Hanoi, Vietnam, and was admitted to a local hospi-
+tal. Chen infected 20 health care workers at the hospi-
+tal including noted Italian epidemiologist Carlo
+Urbani who worked at the Hanoi World Health
+Organization (WHO) office. Urbani provided medical
+care for Chen and first formally identified SARS as a
+unique disease on February 28, 2003. By early March,
+22 hospital workers in Hanoi were ill with SARS.
+Unaware of the problems in China, Urbani’s
+report drew increased attention among epidemiolo-
+gists when coupled with news reports in mid-March
+Severe acute respiratory syndrome (SARS)
+that Hong Kong health officials had also discovered
+an outbreak of an acute respiratory syndrome among
+health care workers. Unsuspecting hospital workers
+admitted the Hong Kong man infected by Jianlun to a
+general ward at the Prince of Wales Hospital because
+it was assumed he had a typical severe pneumonia—a
+fairly routine admission. The first notice that clini-
+cians were dealing with an unusual illness came—not
+from health notices from China of increasing illnesses
+and deaths due to SARS—but from the observation
+that hospital staff, along with those subsequently
+determined to have been in close proximity to the
+infected persons, began to show signs of illness.
+Eventually, 138 people, including 34 nurses, 20 doc-
+tors, 16 medical students, and 15 other health care
+workers, contracted pneumonia.
+One of the most intriguing aspects of the early
+Hong Kong cases was a cluster of more than 250
+SARS cases that occurred in a cluster of high-rise
+apartment buildings—many housing health care
+workers—that provided evidence of a high rate of
+secondary transmission. Epidemiologists conducted
+extensive investigations to rule out the hypothesis
+that the illnesses were related to some form of local
+contamination (e.g., sewage, bacteria on the ventila-
+tion system, etc.). Rumors began that the illness was
+due to cockroaches or rodents, but no scientific evi-
+dence supported the hypothesis that the disease patho-
+gen was carried by insects or animals.
+Hong Kong authorities then decided that those
+suffering the flu-like symptoms would be given the
+option of self-isolation, with family members allowed
+to remain confined at home or in special camps.
+Compliance checks were conducted by police.
+One of the Canadians infected in Hong Kong,
+Kwan Sui-Chu, return to Toronto, Ontario, and died
+in a Toronto hospital on March 5. As in Hong Kong,
+because there were no alert from China about the
+SARS outbreak, Canadian officials did not initially
+suspect that Sui-Chu had been infected with a highly
+contagious virus, until Sui-Chu’s son and five health
+care workers showed similar symptoms. By mid-April,
+Canada reported more than 130 SARS cases and 15
+fatalities.
+Increasingly faced with reports that provided evi-
+dence of global dissemination, on March 15, 2003, the
+World Health Organization (WHO) took the unusual
+step of issuing a travel warning that described
+SARS is a ‘‘worldwide health threat.’’ WHO officials
+announced that SARS cases, and potential cases, had
+been tracked from China to Singapore, Thailand,
+Vietnam, Indonesia, Philippines, and Canada.
+Although the exact cause of the ‘‘acute respiratory
+syndrome’’ had not, at that time, been determined,
+WHO officials issuance of the precautionary warning
+to travelers bound for Southeast Asia about the poten-
+tial SARS risk served as notice to public health
+officials about the potential dangers of SARS.
+Within days of the first WHO warning, SARS
+cases were reported in United Kingdom, Spain,
+Slovenia, Germany, and in the United States.
+WHO officials were initially encouraged that iso-
+lation procedures and alerts were working to stem the
+spread of SARS, as some countries reporting small
+numbers of cases experienced no further dissemina-
+tion to hospital staff or others in contact with SARS
+victims. However, in some countries, including
+Canada, where SARS cases occurred before WHO
+alerts, SARS continued to spread beyond the bounds
+of isolated patients.
+WHO officials responded by recommending
+increased screening and quarantine measures that
+included mandatory screening of persons returning
+from visits to the most severely affected areas in
+China, Southeast Asia, and Hong Kong.
+In early April 2003, WHO took the controversial
+additional step of recommending against non-essential
+travel to Hong Kong and the Guangdong province of
+China. The recommendation, sought by infectious
+disease specialists, was not controversial within the
+medical community, but caused immediate concern
+regarding the potentially widespread economic impacts.
+Mounting reports of SARS showed a increasing
+global dissemination of the virus. By April 9, the first
+confirmed reports of SARS cases in Africa reached
+WHO headquarters, and eight days later, a confirmed
+case was discovered in India.
+Causes and symptoms
+In mid-April 2003, Canadian scientists at the
+British Columbia Cancer Agency in Vancouver
+announced that they that sequenced the genome of
+the coronavirus most likely to be the cause of SARS.
+Within days, scientists at the Centers for Disease
+Control (CDC) in Atlanta, Georgia, offered a genomic
+map that confirmed more than 99% of the Canadian
+findings.
+Both genetic maps were generated from studies of
+viruses isolated from SARS cases. The particular cor-
+onavirus mapped had a genomic sequence of 29,727
+nucleotides—average for the family of coronavirus
+that typically contain between 29,000-31,000
+nucleotides.
+3356 Severe acute respiratory syndrome (SARS)
+Proof that the coronavirus mapped was the speci-
+fic virus responsible for SARS would eventually come
+from animal testing. Rhesus monkeys were exposed to
+the virus via injection and inhalation and then mon-
+itored to determine whether SARS like symptoms
+developed, and then if sick animals exhibited a histo-
+logical pathology (i.e., an examination of the tissue and
+cellular level pathology) similar to findings in human
+patients. Other tests, including polymerase chain reac-
+tion (PCR) testing helped positively match the specific
+coronavirus present in the lung tissue, blood, and feces
+of infected animals to the exposure virus.
+Identification of a specific pathogen can be a com-
+plex process, and positive identification requires thou-
+sands of tests. All testing is conducted with regard to
+testing Koch’s postulates—the four conditions that
+must be met for an organism to be determined to the
+cause of a disease. First, the organism must be present
+in every case of the disease. Second, the organism must
+be able to be isolated from the host and grown in
+laboratory conditions. Third, the disease must be
+reproduced when the isolated organism is introduced
+into another, healthy host. The fourth postulate
+stipulates that the same organism must be able to be
+recovered and purified from the host that was experi-
+mentally infected.
+Early data indicates that SARS has an incubation
+period range of two to 10 days, with an average incu-
+bation of about four days. Much of the inoculation
+period allows the virus to be both transported and
+spread by an asymptomatic carrier. With air travel,
+asymptotic carriers can travel to anywhere in the
+world. The initial symptoms are non-specific and com-
+mon to the flu. Infected cases then typically spike a
+high fever 100.48F (388C) as they develop a cough,
+shortness of breath, and difficulty breathing. SARS
+often fulminates (reaches it maximum progression) in
+a severe pneumonia that can causerespiratory failure
+and death in about 10% of its victims.
+Diagnosis
+Currently, initial tests include blood cultures,
+Gram stain, chest radiograph, and tests for other
+viral respiratory pathogens such asinfluenza A and
+B. Other serologic techniques are used, and if SARS is
+suspected, samples are forwarded to state/local public
+health departments and/or the CDC for coronavirus
+antibody testing.
+Treatment
+As of May 1, 2003, no therapy was demonstrated
+to have clinical effectiveness against the virus that
+causes SARS, and physicians could offer only suppor-
+tive therapy (e.g. administration of fluids, oxygen,
+ventilation, etc.).
+Prognosis
+By late April/early May 2003, WHO officials had
+confirmed reports of more than 3,000 cases of SARS
+from 18 different countries with 111 deaths attributed
+to the disease (about a 5–10% death rate). United
+States health officials reported 193 cases with no
+deaths. Significantly, all but 20 of the U.S. cases were
+linked to travel to infected areas, and the other 20
+cases were accounted for by secondary transmission
+from infected patients to family members and health
+care workers.
+Information on countries reporting SARS and the
+cumulative total of cases and deaths is updated each
+day on the WHO SARS web site at <http;//
+www.who.int/csr/sarscountry/en/>.
+Prevention
+Until a vaccine is developed, isolation and quar-
+antine remain potent tools in the modern public health
+arsenal. Both procedures seek to control exposure to
+infected individuals or materials. Isolation procedures
+are used with patients with a confirmed illness.
+Quarantine rules and procedures apply to individuals
+who are not currently ill, but are known to have been
+exposed to the illness (e.g., been in the company of a
+infected person or come in contact with infected
+materials).
+Isolation and quarantine both act to restrict
+movement and to slow or stop the spread of disease
+within a community. Depending on the illness,
+patients placed in isolation may be cared for in hospi-
+tals, specialized health care facilities, or in less severe
+cases, at home. Isolation is a standard procedure for
+TB patients. In most cases, isolation is voluntary;
+however, isolation can be compelled by federal, state,
+and some local law.
+States governments within the United States have
+a general authority to set and enforce quarantine con-
+ditions. At the federal level, the Centers for Disease
+Control and Prevention’s (CDC) Division of Global
+Migration and Quarantine is empowered to detain,
+examine, or conditionally release (release with restric-
+tions on movement or with a required treatment pro-
+tocol) individuals suspected of carrying certain listed
+communicable diseases.
+As of April 27, 2003, the CDC in Atlanta recom-
+mended SARS patients be voluntarily isolated, but
+Severe acute respiratory syndrome (SARS)
+had not recommended enforced isolation or quaran-
+tine. Regardless, CDC and other public heath offi-
+cials, including the Surgeon General, sought and
+secured increased powers to deal with SARS. On
+April 4, 2003, U.S. President George W. Bush signed
+Presidential Executive Order 13295 that added SARS
+to a list of quarantinable communicable diseases.
+The order provided health officials with the broader
+powers to seek ‘‘...apprehension, detention, or condi-
+tional release of individuals to prevent the intro-
+duction, transmission, or spread of suspected
+communicable diseases...’’
+Travel advisories issued by WHO should be
+reviewed and people who must travel to areas with
+SARS outbreaks should follow such preventative
+measures as frequent hand washing and avoidance of
+large crowds. Likewise, family members caring for
+suspected and/or confirmed SARS patients should
+wash hands frequently, avoid direct contact with the
+patient’s bodily fluids, and monitor their own possible
+development of symptoms closely.
+Brenda Wilmoth Lerner
+K. Lee Lerner
+Severe combined
+immunodeficiency
+Definition
+Severe combinedimmunodeficiency (SCID) is the
+most serious human immunodeficiency disorder(s). It
+is a group of congenital disorders in which both the
+humoral part of the patient’s immune system and the
+cells involved in immune responses fail to work prop-
+erly. Children with SCID are vulnerable to recurrent
+severe infections, retarded growth, and earlydeath.
+Description
+SCID is thought to affect between one in every
+100,000 persons, and one in every 500,000 infants.
+Several different immune system disorders are cur-
+rently grouped under SCID:
+/C15Swiss-type agammaglobulinemia. This was the first
+type of SCID discovered, in Switzerland in the
+1950s.
+/C15Adenosine deaminase deficiency (ADA). About
+50% of SCID cases are of this type. ADA deficiency
+leads to low levels of B and T cells in the child’s
+immune system.
+/C15Autosomal recessive. About 40% of SCID cases are
+inherited from the parents in an autosomal recessive
+pattern.
+/C15Bare lymphocyte syndrome. In this form of SCID,
+the white blood cells (lymphocytes) in the baby’s
+blood are missing certain proteins. Without these
+proteins, the lymphocytes cannot activate the
+T cells in the immune system.
+/C15SCID with leukopenia. Children with this form of
+SCID are lacking a type of white blood cell called a
+granulocyte.
+In order to understand why SCID is considered
+the most severe immunodeficiency disorder, it is help-
+ful to have an outline of the parts of the human
+immune system. It has three parts: cellular, humoral,
+and nonspecific. The cellular and humoral parts of
+the system are both needed to fight infections–
+they recognize disease agents and attack them. The
+cellular system is composed of many classes of
+T-lymphocytes (white blood cells that detect foreign
+invaders called antigens). The humoral system is
+made up of B cells, which are the only cells in the
+body that make antibodies. In SCID, neither the
+cellular nor the humoral part of the immune system
+is working properly.
+Causes and symptoms
+SCID is an inherited disorder. There are two ways
+in which a developing fetus’ immune system can fail to
+develop normally. In the first type of genetic problem,
+both B and T cells are defective. In the second type,
+only the T cells are abnormal, but their defect affects
+the functioning of the B cells.
+For the first few months of life, a child with SCID
+is protected by antibodies in the mother’s blood. As
+early as three months of age, however, the SCID child
+begins to suffer from mouth infections (thrush),
+chronic diarrhea, otitis media and pulmonary infec-
+tions, including pneumocystis pneumonia. The child
+loses weight, becomes very weak, and eventually dies
+from an opportunistic infection.
+Diagnosis
+SCID is diagnosed by the typing of T and B cells in
+the child’s blood. B cells can be detected by immuno-
+fluorescence tests for surface markers (unique protein-
+s)on the cells. T cells can be identified in tissue sections
+(samples) using enzyme-labeled antibodies.
+3358 Severe combined immunodeficiency
+Treatment
+Patients with SCID can be treated with anti-
+biotics and immune serum to protect them from infec-
+tions, but these treatments cannot cure the disorder.
+Bone marrow transplants are currently regarded
+as one of the few effective standard treatments for
+SCID.
+Investigational treatments
+In 1990, the Food and Drug Administration
+(FDA) approved PEG-ADA, an orphan drug (not
+available in US but available elsewhere), for the treat-
+ment of SCID. PEG-ADA, which is also called
+pegademase bovine, works by replacing the ADA
+deficiency in children with this form of SCID.
+Children who receive weekly injections of PEG-ADA
+appear to have normal immune functions restored.
+Another treatment that is still in the experimental
+stage is gene therapy. In gene therapy, the children
+receive periodic infusions of their own T cells cor-
+rected with a gene for ADA that has been implanted
+in an activated virus.
+Prognosis
+Currently, there is no cure for SCID. Most
+untreated patients die before age two.
+Prevention
+Genetic counselingis recommended for parents of
+a child with SCID.
+Resources
+ORGANIZATIONS
+Immune Deficiency Foundation. 25 W. Chesapeake Ave.,
+Suite 206, Towson, MD 21204. (800) 296-4433.
+<http://www.primaryimmune.org> .
+National Organization for Rare Disorders. P.O. Box 8923,
+New Fairfield, CT 06812-8923. (800) 999-6673.
+<http://www.rarediseases.org> .
+Rebecca J. Frey, PhD
+Sex hormones tests
+Definition
+Sex hormones tests measure levels of the sex hor-
+mones, including estrogen, progesterone, and
+testosterone.
+Purpose
+The sex hormone tests are ordered to determine if
+secretion of these hormones is normal. Estrogen frac-
+tion test is done to evaluate sexual maturity, menstrual
+problems, and fertility problems in females. This test
+may also be used to test for tumors that excrete
+KEY TERMS
+Adenosine deaminase (ADA)— An enzyme that is
+lacking in a specific type of SCID. Children with an
+ADA deficiency have low levels of both B and T
+cells.
+Antigens— A substance that usually causes the for-
+mation of an antibody. A foreign invaders in the
+body.
+Autosomal recessive inheritance— A pattern of
+inheritance of a recessive gene where, among
+other things, both parents may not show symptoms.
+B cell— A type of lymphocyte or white blood cell
+that is derived from precursor cells in the bone
+marrow.
+Congenital— Present at the time of birth. Most
+forms of SCID are hereditary as well as congenital.
+Gene therapy— An experimental treatment for
+SCID that consists of implanting a gene for ADA
+into an activated virus and merging it with some of
+the patient’s own T cells. The corrected T cells are
+infused back into the patient every few months.
+Humoral— Pertaining to or derived from a body
+fluid. The humoral part of the immune system
+includes antibodies and immunoglobulins in
+blood serum.
+Lymphocyte— A type of white blood cell that is
+important in the formation of antibodies.
+Orphan drug— A drug that is known to be useful in
+treatment but lacks sufficient funding for further
+research and development.
+PEG-ADA— An orphan drug that is useful in treat-
+ing SCID related to ADA deficiency.
+T cells— Lymphocytes that originate in the thymus
+gland. T cells regulate the immune system’s
+response to infections. The thymus gland is small
+or underdeveloped in children with SCID.
+Thrush— A disease of the mouth caused by a yeast,
+Candida albicans.
+Sex hormones tests
+estrogen. In pregnant women it aids in determining
+fetal-placental health. Estrogen fraction is also used to
+evaluate males who have enlargement of one or both
+breasts (gynecomastia), or who have feminization syn-
+dromes, where they display female sex characteristics.
+Progesterone assay test is ordered to evaluate
+women who are having difficulty becoming pregnant
+or maintaining apregnancy, and to monitor high-risk
+pregnancies.
+Testosterone levels are ordered to evaluate:
+/C15ambiguous sex characteristics
+/C15precocious puberty
+/C15virilizing syndromes in the female
+/C15infertility in the male
+/C15rare tumors of the ovary and testicle
+Description
+The sex hormones control the development of
+primary and secondary sexual characteristics. They
+regulate the sex-related functions of the body, such
+as the menstrual cycle or the production of eggs or
+sperm. There are three main types of sex hormones:
+/C15the female sex hormones (called the estrogen
+hormones)
+/C15the progesterone hormones (which help the body
+prepare for and maintain pregnancy)
+/C15the male sex hormones, or the androgen hormones
+Female sex hormones are responsible for normal
+menstruation and the development of secondary
+female characteristics. Testosterone is a hormone
+that inducespuberty in the male and maintains male
+secondary sex characteristics. In females, the adrenal
+glands and the ovaries secrete small amounts of
+testosterone.
+Estrogen
+Estrogen is tested to evaluate menstrual status,
+sexual maturity, and gynecomastia (or feminization
+syndromes). It is a tumor marker for patients with
+certain ovarian tumors. E1, a type of estrogen, is the
+most active estrogen in the nonpregnant female.
+E3 (estriol) is the major estrogen in the pregnant
+female. It is produced in the placenta. Excretion of
+estriol increases around the eighth week of gestation
+and continues to rise until shortly before delivery.
+Serial urine and blood studies of this hormone are
+used to assess placental function and fetal normality
+in high-risk pregnancies. Falling values during
+pregnancy suggest fetoplacental deterioration and
+require prompt reassessment of the pregnancy, includ-
+ing the possibility of early delivery.
+Progesterone
+Progesterone is essential for the healthy function-
+ing of the female reproductive system. Produced in the
+ovaries during the second half of the menstrual cycle,
+and by the placenta during pregnancy, small amounts
+of progesterone are also produced in the adrenal
+glands and testes.
+After ovulation, an increase of progesterone
+causes the uterine lining to thicken in preparation for
+the implantation of a fertilized egg. If this event does
+not take place, progesterone and estrogen levels fall,
+resulting in shedding of the uterine lining.
+Progesterone is essential during pregnancy, not
+only ensuring normal functioning of the placenta,
+but passing into the developing baby’s circulation,
+where it is converted in the adrenal glands to corticos-
+teroid hormones.
+Testosterone
+Testosterone is the most important of the male sex
+hormones. It is responsible for stimulating bone and
+muscle growth, and sexual development. It is pro-
+duced by the testes and in very small amounts by the
+ovaries. Most testosterone tests measure total
+testosterone.
+Testosterone stimulates sperm production (sper-
+matogenesis), and influences the development of male
+secondary sex characteristics. Overproduction of tes-
+tosterone caused by testicular, adrenal, orpituitary
+tumors in the young male may result in precocious
+puberty.
+Overproduction of testosterone in females, caused
+by ovarian and adrenal tumors, can result in masculi-
+nization, the symptoms of which include cessation of
+the menstrual cycle (amenorrhea) and excessive
+growth of body hair (hirsutism).
+When reduced levels of testosterone in the male
+indicate underactivity of the testes (hypogonadism),
+testosterone stimulation tests may be ordered.
+Preparation
+The progesterone and testosterone tests require a
+blood sample; it is not necessary for the patient to
+restrict food or fluids before the test. Testosterone
+specimens should be drawn in the morning, as testos-
+terone levels are highest in the early morning hours.
+3360 Sex hormones tests
+The estrogen fraction test can be performed on blood
+and/or urine. It is not necessary for the patient to
+restrict food or fluids for either test. If a 24-hour
+urine test has been requested, the patient should call
+the laboratory for instructions.
+Risks
+Risks for these blood tests are minimal, but may
+include slight bleeding from the puncture site,fainting
+or feeling lightheaded after having blood drawn, or
+blood accumulating under the puncture site
+(hematoma).
+Normal results
+Estrogen levels vary in women, ranging from 24–
+149 picograms per ml of blood. In men, the normal
+range is between 12–34 picograms per ml of blood.
+Progesterone levels vary from less than 150 nano-
+grams per deciliter (ng/dL) of blood to 2,000 nano-
+grams in menstruating women. During pregnancy,
+progesterone levels range from 1,500–20,000 ng/dL
+of blood.
+Testosterone values vary from laboratory to
+laboratory, but can generally be found within the
+following levels:
+/C15Men. 300–1,200 ng/dL
+/C15Women. 30–95 ng/dL
+/C15Prepubertal children. Less than 100 ng/dL (boys),
+less than 40 ng/dL (girls).
+Abnormal results
+Increased levels of estrogen are seen in feminiza-
+tion syndromes:
+/C15when a male begins to develop female secondary sex
+characteristics
+/C15during precocious puberty
+/C15when children develop secondary sexual characteris-
+tics at an abnormally early age
+/C15because of ovarian, testicular, or adrenal tumor
+/C15During normal pregnancy,cirrhosis, and increased
+thyroid levels (hyperthyroidism)
+Decreased levels of estrogen are found in the fol-
+lowing conditions:
+/C15a failing pregnancy
+/C15during menopause
+/C15anorexia nervosa
+/C15primary and secondary hypogonadism
+/C15turner’s syndrome, seen in females with one missing
+X chromosome
+Increased levels of progesterone are seen:
+/C15during ovulation and pregnancy
+/C15with certain types of ovarian cysts
+/C15with a tumor of the ovary known as a
+choriocarcinoma
+Decreased levels of progesterone are seen:
+/C15in toxemia of pregnancy
+/C15with a threatened abortion
+/C15during placental failure
+/C15after fetaldeath
+/C15with amenorrhea
+/C15due to ovarian dysfunction
+Increased levels (male) of testosterone are found
+in:
+/C15sexual precocity
+/C15the viral infection of encephalitis
+/C15tumors involving the adrenal glands
+/C15testicular tumors
+/C15excessive thyroid production (hyperthyroidism)
+/C15testosterone resistance syndromes.
+Decreased levels (male) of testosterone are seen in:
+/C15Klinefelter syndrome
+/C15a chromosomal deficiency
+/C15primary and secondary hypogonadism
+/C15down syndrome
+/C15surgical removal of the testicles
+/C15cirrhosis.
+Increased levels (females) of testosterone are
+found in ovarian and adrenal tumors and in the pre-
+sence of excessive hair growth of unknown cause
+(hirsutism).
+Resources
+BOOKS
+Pagana, Kathleen Deska.Mosby’s Manual of Diagnostic and
+Laboratory Tests.St. Louis: Mosby, Inc., 1998.
+Janis O. Flores
+Sex reassignment surgery see Gender reas-
+signment surgery
+Sex hormones tests

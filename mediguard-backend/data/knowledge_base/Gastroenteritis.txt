@@ -1,0 +1,992 @@
+DISEASE: Gastroenteritis
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+pressure to the skin. Blistering often appears in
+infancy in response to simply being held or handled.
+In rarer forms of the disorder, EB can be life-threa-
+tening. There is no cure for the disorder. Treatment
+focuses on preventing and treating wounds and
+infection.
+Description
+Epidermolysis bullosa has three major forms and
+at least 16 subtypes. The three major forms are EB
+simplex, junctional EB, and dystrophic EB. These
+can range in severity from mild blistering to more
+disfiguring and life-threatening disease. Physicians
+diagnose the form of the disease based on where the
+blister forms in relation to the epidermis (the skin’s
+outermost layer) and the deeper dermis layer.
+The prevalence of epidermolysis varies among
+different populations. A study in Scotland estimated
+the prevalence to be one in 20,400. Researchers in
+other parts of the world estimate the prevalence to be
+one in 100,000. This variance is due to the variability
+of expression. Many cases of epidermolysis bullosa are
+often not accurately diagnosed and thus, are not
+reported.
+Causes and symptoms
+EB can be inherited as the result of a dominant
+genetic abnormality (only one parent carries the
+abnormal gene) or a recessive genetic abnormality
+(both parents carry the abnormal gene).
+EB simplex results from mutations in genes
+responsible for keratin 5 and 14, which are proteins
+that give cells of the epidermis its structure. EB
+simplex is transmitted in an autosomal dominant
+fashion.
+Dystrophic EB is caused by mutations in genes for
+type VII collagen, the protein contained in the fibers
+anchoring the epidermis to the deeper layers of the
+skin. The genetic mutations for junctional EB are
+found in the genes responsible for producing the
+protein Laminin-5. Dystrophic EB is an autosomal
+disorder and will only result if both parents transmit
+an abnormal gene during conception.
+EB simplex, the most common form of EB, is the
+least serious form of the disease. In most affected
+individuals, the blisters are mild and do not scar after
+they heal. Some forms of EB simplex affect just the
+hands and feet. Other forms of EB simplex can lead to
+more widespread blistering, as well as hair loss and
+missing teeth. Recurrent blistering is annoying but not
+life threatening.
+The second, or junctional, form of EB does not
+lead to scarring. However, skin on the areas prone to
+blistering, such as elbows and knees, often shrinks. In
+one variation of junctional EB, called gravis junctional
+EB of Herlitz, the blistering can be so severe that
+affected infants may not survive due to massive
+infection anddehydration.
+The third form of EB, dystrophic EB, varies
+greatly in terms of severity, but more typically affects
+the arms and legs. In one variation, called Hallopeau-
+Siemens EB, repeated blistering and scarring of the
+hands and feet causes the fingers and toes to fuse,
+leaving them dysfunctional and with a mitten-like
+appearance.
+Diagnosis
+Physicians and researchers distinguish between
+the three major subtypes of EB based on which layer
+of the epidermis separates from the deeper dermis
+layer of the skin below. Patients suspected of having
+EB should have a fresh blister biopsied for review.
+This sample of tissue is examined under an electron
+microscope or under a conventional microscope using
+a technique called immunofluorescence, which helps
+to map the underlying structure.
+Knowing that a family member has EB can help
+establish the diagnosis, but it is possible that parents
+or siblings will show no sign of the disease, either
+because it is caused by a new genetic mutation, or
+because the parents are carriers of the recessive trait
+and do not display the disease.
+Treatment
+The most important treatment for EB is daily
+wound care. Because the skin is very fragile, care
+must be taken to be certain that dressing changes do
+not cause further damage. Tape should not be applied
+directly to skin and bandages should be soaked off.
+KEY TERMS
+Collagen— The main supportive protein of carti-
+lage, connective tissue, tendon, skin, and bone.
+Dermis— The layer of skin beneath the epidermis.
+Epidermis— The outermost layer of the skin.
+Keratin— A tough, nonwater-soluble protein found
+in the nails, hair, and the outermost layer of skin.
+Human hair is made up largely of keratin.
+Epidermolysis bullosa
+Infection is a major concern, so a topical antibiotic,
+such as bacitracin, mupirocin, or sulfadiazine, should
+be routinely applied. Among persons with recessive
+dystrophic EB, the anticonvulsant phenytoin is some-
+times effective because it decreases production of an
+enzyme that breaks down collagen.
+Prognosis
+The prognosis of EB varies depending on the
+subtype of the disease. Individuals with EB simplex
+can live long, fulfilling lives. The severity of the junc-
+tional and dystrophic forms of EB can vary greatly.
+Infants affected with some forms of the disease often
+do not survive infancy; other forms can lead to severe
+scarring and disfigurement.
+Resources
+BOOKS
+Fine, Jo-David, et al.Epidermolysis Bullosa:
+Clinical,Epidemiologic, and Laboratory Advances, and
+the Findings of the National Epidermolysis Bullosa
+Registry. Baltimore: Johns Hopkins Univ Press,
+1999.
+Fitzpatrick, Thomas B., Richard A. Johnson, Wolff Klaus,
+and Dick Suurmond.Color Atlas and Synopsis of
+Clinical Dermatology.4th ed. NewYork: McGraw-Hill,
+2000.
+Mallory, S.B.Atlas of Pediatric Dermatology.Pearl River,
+NY: Parthenon, 2001.
+PERIODICALS
+Cotell, S., N. D. Robinson, and L. S. Chan.
+‘‘AutoimmuneBlistering Skin Diseases.’’American
+Journal of Emerging Medicine18, no. 3 (2000): 288–99.
+ORGANIZATIONS
+American Academy of Dermatology. PO Box 4014, 930 N.
+Meacham Rd., Schaumburg, IL 60168-4014. (847) 330-
+0230. Fax: (847) 330-0050. <http://www.aad.org>.
+OTHER
+Dermatology Online Atlas. <http://www.dermis.net/doia/
+diagnose.asp?zugr=d&lang=e&diagnr=757320
+&topic=t>.
+Dystrophic Epidermolysis Bullosa Research Association
+International. <http://debra-international.org/
+index1.htm>.
+Epidermolysis Bullosa Medical Research Foundation.
+<http://www.med.stanford.edu/school/dermatology/
+ebmrf/>.
+Oregon Health Sciences University. <http://
+www.ohsu.edu/cliniweb/C17/C17.800.865.410.html>.
+University of Iowa College of Medicine. <http://
+tray.dermatology.uiowa.edu/EBA-001.htm>.
+L. Fleming Fallon, Jr., MD, PhD, DrPH
+Epididymitis
+Definition
+Epididymitis is inflammation or infection of the
+epididymis. In this long coiled tube attached to the
+upper part of each testicle, sperm mature and are
+stored before ejaculation.
+Description
+Epididymitis is the most common cause ofpain in
+the scrotum. The acute form is usually associated with
+the most severe pain and swelling. If symptoms last for
+more than six weeks after treatment begins, the con-
+dition is considered chronic.
+Epididymitis can occur any time after the onset of
+puberty but is most common between the ages of 18
+and 40. It is especially common among members of the
+military who exercise for extended periods without
+emptying their bladders.
+Factors that increase the risk of developing epidi-
+dymitis include:
+/C15infection of the bladder, kidney, prostate, or urinary
+tract
+/C15other recent illness
+/C15narrowing of the urethra (the tube that drains urine
+from the bladder)
+/C15use of a urethral catheter
+Causes and symptoms
+Although epididymitis can be caused by the same
+organisms that cause some sexually transmitted
+diseases (STDs) or occur after prostate surgery, the
+condition is generally due to pus-generating bacteria
+associated with infections in other parts of the body.
+Epididymitis can also be caused by injury or infec-
+tion of the scrotum or by irritation from urine that has
+accumulated in the vas deferens (the duct through
+which sperm travels after leaving the epididymis).
+Epididymitis is characterized by sudden redness
+and swelling of the scrotum. The affected testicle is
+hard and sore, and the other testicle may feel tender.
+The patient has chills and fever and usually has acute
+urethritis (inflammation of the urethra).
+Enlarged lymph nodes in the groin cause scrotal
+pain that intensifies throughout the day and may
+become so severe that walking normally becomes
+impossible.
+1352 Epididymitis
+Diagnosis
+Laboratory tests used to diagnose epididymitis
+include:
+/C15urinalysis and urine culture
+/C15examination of discharges from the urethra and
+prostate gland
+/C15blood tests to measure white-cell counts
+Treatment
+Because epididymitis that affects both testicles
+can make a man sterile, antibiotic therapy must be
+initiated as soon as symptoms appear. To prevent
+reinfection, medication must be taken exactly as pre-
+scribed, even if the patient’s symptoms disappear or he
+begins to feel better. Over-the-counter anti-inflamma-
+tories can relieve pain but should not be used without
+the approval of a family physician or urologist.
+Bed rest is recommended until symptoms subside,
+and patients are advised to wear athletic supporters
+when they resume normal activities. If pain is severe, a
+local anesthetic like lidocaine (Xylocaine) may be
+injected directly into the spermatic cord.
+Self-care
+A patient who has epididymitis should not drink
+beverages that containcaffeine. To preventconstipa-
+tion, he should use stool softeners or eat plenty of fruit,
+nuts, whole grain cereals, and other foods with laxa-
+tive properties.
+An ice bag wrapped in a towel can reduce pain and
+swelling but should be removed from the inflamed
+area for a few minutes every hour to preventburns.
+Strenuous activity should be avoided until symp-
+toms disappear. Sexual activity should not be resumed
+until a month after symptoms disappear.
+If a second course of treatment doesn’t eradicate
+stubborn symptoms, longterm anti-inflammatory
+therapy may be recommended. In rare instances,
+chronic symptoms require surgery.
+Surgery
+Each of the surgical procedures used to treat
+epididymitis is performed under local anesthesia on
+an outpatient basis. Both of them cause sterility.
+Epididymectomy involves removing the inflamed
+section of the epididymitis through a small incision in
+the scrotum.
+Bilateral vasectomy prevents fluid and sperm from
+passing through the epididymis. This procedure is
+usually performed on men who have chronic epididy-
+mitis or on elderly patients undergoing prostate
+surgery.
+Prognosis
+Pain generally subsides 24–72 hours after treat-
+ment begins. Complete healing may take weeks or
+months.
+Prevention
+Using condoms and not having sex with anyone
+who has an STD can prevent some cases of
+epididymitis.
+Resources
+OTHER
+‘‘Epididymitis.’’ Digital Urology Journal.June 7, 1998.
+<http://www.duj.com/epididymitis.html>.
+Maureen Haggerty
+Epidural abscess see Central nervous system
+infections
+Epidural anesthetic see Anesthesia, local
+Epiglottitis
+Definition
+Epiglottitis is an infection of the epiglottis, which
+can lead to severe airway obstruction.
+Description
+When air is inhaled (inspired), it passes through
+the nose and the nasopharynx or through the mouth
+and the oropharynx. These are both connected to the
+larynx, a tube made of cartilage. The air continues
+down the larynx to the trachea. The trachea then splits
+into two branches, the left and right bronchi (bron-
+chial tubes). These bronchi branch into smaller air
+tubes that run within the lungs, leading to the small
+air sacs of the lungs (alveoli).
+Either food, liquid, or air may be taken in through
+the mouth. While air goes into the larynx and the
+respiratory system, food and liquid are directed into
+the tube leading to the stomach, the esophagus.
+Epiglottitis
+Because food or liquid in the bronchial tubes or lungs
+could cause a blockage or lead to an infection, the
+airway is protected. The epiglottis is a leaf-like piece
+of cartilage extending upwards from the larynx. The
+epiglottis can close down over the larynx when some-
+one is eating or drinking, preventing these food and
+liquids from entering the airway.
+Epiglottitis is an infection and inflammation of
+the epiglottis. Because the epiglottis may swell consid-
+erably, there is a danger that the airway will be blocked
+off by the very structure designed to protect it. Air is
+then unable to reach the lungs. Without intervention,
+epiglottitis has the potential to be fatal.
+Epiglottitis is primarily a disease of two to seven-
+year-old children, although older children and adults
+can also contract it. Boys are twice as likely as girls to
+develop this infection. Because epiglottitis involves
+swelling and infection of tissues, which are all located
+at or above the level of the epiglottis, it is sometimes
+referred to as supraglottitis (supra, meaning above).
+About 25% of all children with this infection also have
+pneumonia.
+Causes and symptoms
+The most common cause of epiglottitis is infection
+with the bacteria calledHaemophilus influenzae type b.
+Other types of bacteria are also occasionally respon-
+sible for this infection, including some types of
+Streptococcus bacteria and the bacteria responsible
+for causingdiphtheria.
+A patient with epiglottitis typically experiences a
+sudden fever, and begins having severe throat and
+neck pain. Because the swollen epiglottis interferes
+significantly with air movement, every breath creates
+a loud, harsh, high-pitched sound referred to as
+stridor. Because the vocal cords are located in the
+larynx just below the area of the epiglottis, the
+swollen epiglottis makes the patient’s voice sound
+muffled and strained. Swallowing becomes difficult,
+and the patient may drool. The patient often leans
+forward and juts out his or her jaw, while struggling
+for breath.
+Epiglottitis strikes suddenly and progresses
+quickly. A child may begin complaining of a sore
+throat, and within a few hours be suffering from extre-
+mely severe airway obstruction.
+Diagnosis
+Diagnosis begins with a high level of suspicion
+that a quickly progressing illness with fever, sore
+throat, and airway obstruction is very likely to be
+epiglottitis. If epiglotti tis is suspected, no efforts
+should be made to look at the throat, or to swab the
+throat in order to obtain a culture for identification
+of the causative organism. These maneuvers may
+cause the larynx to go into spasm (laryngospasm),
+completely closing the airway. These procedures
+should only be performed in a fully-equipped operat-
+ing room, so that if laryngospasm occurs, a breathing
+tube can be immediately placed in order to keep the
+airway open.
+An instrument called a laryngoscope is often used
+in the operating room to view the epiglottis, which will
+appear cherry-red and quite swollen. An x-ray picture
+taken from the side of the neck should also be
+obtained. The swollen epiglottis has a characteristic
+appearance, called the ‘‘thumb sign.’’
+Treatment
+Treatment almost always involves the immediate
+establishment of an artificial airway: inserting a
+breathing tube into the throat (intubation); or making
+a tiny opening toward the base of the neck and putting
+a breathing tube into the trachea (tracheostomy).
+Because the patient’s apparent level of distress may
+not match the actual severity of the situation, and
+because the disease’s progression can be quite surpris-
+ingly rapid, it is preferable to go ahead and place the
+artificial airway, rather than adopting a wait-and-see
+approach.
+Because epiglottitis is caused by a bacteria,anti-
+biotics such as cefotaxime, ceftriaxone, or ampicillin
+with sulbactam should be given through a needle
+placed in a vein (intravenously). This prevents
+the bacteria that are circulating throughout the blood-
+stream from causing infection elsewhere in the body.
+Prognosis
+With treatment (including the establishment of an
+artificial airway), only about 1% of children with
+epiglottitis die. Without the artificial airway, this fig-
+ure jumps to 6%. Most patients recover form the
+infection, and can have the breathing tube removed
+(extubation) within a few days.
+Prevention
+Prevention involves the use of a vaccine against
+H. influenzae type b (called the Hib vaccine). It is
+given to babies at two, four, six, and 15 months.
+Use of this vaccine has made epiglottitis a very rare
+occurrence.
+1354 Epiglottitis
+Resources
+ORGANIZATIONS
+American Academy of Otolaryngology-Head and Neck
+Surgery, Inc. One Prince St., Alexandria VA 22314-
+3357. (703) 836-4444. <http://www.entnet.org>.
+Rosalyn Carson-DeWitt, MD
+Epilepsy see Seizure disorder
+Epinephrine see Bronchodilators
+Episiotomy
+Definition
+An episiotomy is a surgical incision made in the
+area between the vagina and anus (perineum). This is
+done during the last stages of labor and delivery to
+expand the opening of the vagina to prevent tearing
+during the delivery of the baby.
+Purpose
+This procedure is usually done during the delivery
+or birthing process when the vaginal opening does not
+stretch enough to allow the baby to be delivered with-
+out tearing the surrounding tissue.
+Precautions
+Prior to the onset of labor, pregnant women may
+want to discuss the use of episiotomy with their care
+providers. It is possible that, with adequate prepara-
+tion and if the stages of labor and delivery are mana-
+ged with adequate coaching and support, the need for
+an episiotomy may be reduced.
+Description
+An episiotomy is a surgical incision, usually made
+with sterile scissors, in the perineum as the baby’s head
+is being delivered. This procedure may be used if the
+tissue around the vaginal opening begins tearing or
+does not seem to be stretching enough to allow the
+baby to be delivered.
+In most cases, the physician makes a midline inci-
+sion along a straight line from the lowest edge of the
+vaginal opening to toward the anus. In other cases, the
+episiotomy is performed by making a diagonal inci-
+sion across the midline between the vagina and anus.
+This method is used much less often, may be more
+painful, and may require more healing time than the
+midline incision. After the baby is delivered through
+the extended vaginal opening, the incision is closed
+with stitches. A local anesthetic agent may be applied
+or injected to numb the area before it is sewn up
+(sutured).
+Several reasons are cited for performing episio-
+tomies. Some experts believe that an episiotomy
+speeds up the birthing process, making it easier for
+the baby to be delivered. This can be important if there
+is any sign of distress that may harm the mother or
+baby. Because tissues in this area may tear during the
+delivery, another reason for performing an episiotomy
+is that a clean incision is easier to repair than a jagged
+tear and may heal faster. Although the use of episiot-
+omy is sometimes described as protecting the pelvic
+muscles and possibly preventing future problems with
+urinary incontinence, it is not clear that the procedure
+actually helps.
+The use of episiotomy during the birthing process
+is fairly widespread in the United States. Estimates of
+episiotomy use in hospitals range from 65–95% of
+deliveries, depending on how many times the mother
+KEY TERMS
+Epiglottis— A leaf-like piece of cartilage extending
+upwards from the larynx, which can close like a lid
+over the trachea to prevent the airway from receiv-
+ing any food or liquid being swallowed.
+Extubation— Removal of a breathing tube.
+Intubation— Putting a breathing tube into the
+airway.
+Laryngospasm— Spasm of the larynx.
+Larynx— The part of the airway lying between the
+pharynx and the trachea.
+Nasopharynx— The part of the airway into which
+the nose leads.
+Oropharynx— The part of the airway into which
+the mouth leads.
+Supraglottitis— Another term for epiglottitis.
+Trachea— The part of the airway that leads into the
+bronchial tubes.
+Tracheostomy— A procedure in which a small
+opening is made in the neck and into the trachea.
+A breathing tube is then placed through this
+opening.
+Episiotomy
+has given birth previously. This routine use of episiot-
+omy is being reexamined in many hospitals and
+health care settings. However, an episiotomy is always
+necessary during a forceps delivery because of the size
+of the forceps.
+Preparation
+It may be possible to avoid the need for an
+episiotomy. Pregnant women may want to talk with
+their care providers about the use of episiotomy
+during the delivery. Kegel exercises are often recom-
+mended during thepregnancy to help strengthen the
+pelvic floor muscles. Prenatal perineal massage may
+help to stretch and relax the tissue around the vaginal
+opening. During the delivery process, warm com-
+presses can be applied to the area along with the use
+of perineal massage. Coaching and support are also
+important during the delivery process. A slowed,
+controlled pushing during the second stage of labor
+(when the mother gets the urge to push) may allow
+the tissues to stretch rather than tear. Also, an upright
+birthing position (rather than one where the mother is
+lying down) may decrease the need for an episiotomy.
+Aftercare
+The area of the episiotomy may be uncomfortable
+or even painful for several days. Several practices can
+relieve some of thepain. Cold packs can be applied to
+the perineal area to reduce swelling and discomfort.
+Use of the Sitz bath available at the hospital or birth
+center can ease the discomfort, too. This unit circu-
+lates warm water over the area. A squirt bottle with
+water can be used to clean the area after urination or
+defecation rather than wiping with tissue. Also, the
+area should be patted dry rather than wiped.
+Cleansing pads soaked in witch hazel (such as Tucks)
+are very effective for cleaning the area and also feel
+soothing.
+Risks
+Several side effects of episiotomy have been
+reported, including infection, increased pain, pro-
+longed healing time, and increased discomfort once
+sexual intercourse is resumed. There is also the risk
+that the episiotomy incision will be deeper or longer
+than is necessary to permit the birth of the infant.
+There is a risk of increased bleeding.
+Normal results
+In a normal and well managed delivery, an episiot-
+omy may be avoided altogether. If an episiotomy is
+deemed to be necessary, a simple midline incision
+will be made to extend the vaginal opening without
+additional tearing or extensive trauma to the perineal
+area. Although there may be some pain associated with
+the healing of the episiotomy incision, relief can usually
+Injecting local anesthetic Cutting the perineum Closing the incision
+An episiotomy is a surgical incision made in the perineum, the area of tissue between the vaginal opening and the anus, during
+the birthing process. This procedure may be used if the tissue around the vaginal opening begins to tear or is not stretching
+enough to allow the baby to be delivered vaginally. In the United States, the rate of episiotomies being performed is estimated at
+65–95%. (Illustration by Electronic Illustrators Group.)
+1356 Episiotomy
+be provided with mild pain relievers and supportive
+measures, such as the application of cold packs.
+Abnormal results
+An episiotomy incision that is too long or deep
+may extend into the rectum, causing more bleeding
+and an increased risk of infection. Additional tearing
+or tissue damage may occur beyond the episiotomy
+incision, leaving a cut and a tear to be repaired.
+Resources
+OTHER
+Childbirth.org. <http://www.childbirth.org>.
+Altha Roberts Edgren
+Epispadias see Hypospadias and epispadias
+Epistaxis see Nosebleed
+EPS see Electrophysiology study of the heart
+Epstein-Barr virus test
+Definition
+The Epstein-Barr virus test is a blood test, or
+group of tests, to determine the presence or absence
+of antibodies in the blood stream directed against
+proteins of the Epstein-Barr virus, the cause of
+infectious mononucleosis.
+Purpose
+The test is primarily used to detect whether first
+time infection (called primary infection) with the
+Epstein-Barr virus is currently occurring, or has
+occurred within a short period of time. The pattern
+of the antibodies detected can, however, tell if the
+person has never been infected with the Epstein-Barr
+virus, or if the infection occurred in the more distant
+past. These tests are mostly utilized in the diagnosis of
+Epstein-Barr virus-associated infectious mononucleo-
+sis when the more common diagnostic test, the hetero-
+phile antibody, is negative, or in situations where the
+infection is manifesting unusual symptoms. Therefore,
+the tests are often not needed in a situation where a
+doctor believes that a person has mononucleosis and
+the heterophile test (also called the monospot test) is
+positive.
+In addition, Epstein-Barr virus testing is usually
+not needed in the evaluation of a patient who has
+long-lasting fatigue, and may have thechronic fatigue
+syndrome. Initially, it was thought that discovering a
+particular pattern of antibodies to this virus was
+helpful in the diagnosis of chronic fatigue syndrome,
+but this no longer appears to be the case.
+Precautions
+As in any blood test, standard precautions should
+be performed to prevent infection at the site where the
+blood is obtained, and to prevent excess bleeding.
+Normally, the site is cleaned with an antiseptic
+liquid prior to the blood being obtained; a sterile
+non-reusable needle and syringe are used; and, once
+the needle is removed, pressure is placed at the site
+until bleeding has stopped.
+Description
+These tests are more often performed in a consult-
+ing laboratory than at a physician’s office or in a
+hospital laboratory. Like most antibody tests, they
+are performed on serum, the liquid part of the blood
+obtained after the whole blood is allowed to clot in
+a tube. Antibodies can be detected against several
+components of the Epstein-Barr virus (EBV). These
+components are the EBV early antigen (EA), the viral
+capsid antigen (VCA), and the nuclear antigen
+(EBNA). These several antigens are different proteins
+that are produced in the process (stages) of the virus’
+growth.
+KEY TERMS
+Kegel exercises— A series of contractions and
+relaxations of the muscles in the perineal area.
+These exercises are thought to strengthen the pelvic
+floor and may help prevent urinary incontinence in
+women.
+Perineum— The area between the opening of the
+vagina and the anus in a woman, or the area
+between the scrotum and the anus in a man.
+Sitz bath— A shallow tub or bowl, sometimes
+mounted above a toilet, that allows the perineum
+and buttocks to be immersed in circulating water.
+Urinary incontinence— The inability to prevent the
+leakage or discharge of urine. This situation
+becomes more common as people age, and is
+more common in women who have given birth to
+more than one child.
+Epstein-Barr virus test
+At the time of infection with Epstein-Barr virus,
+antibodies to EA are found and usually last for four to
+six months only. This antibody, however, persists
+substantially longer in about 10% of persons who
+have had EBV infection in the more remote past. The
+absence of antibody to EA when other EBV antibodies
+are present strongly suggests that first time infection
+with EBV occurred in the past.
+Antibody to VCA is found both early and late in
+EBV infection. At the time of infection, antibody of
+both the IgM and IgG types are detectable. After four
+to six months, usually, only the IgG antibody against
+VCA can be found.
+Unlike antibodies to EA and VCA, antibody to
+EBNA does not usually develop until recovery from
+first time infection of this virus. Therefore, finding
+detectable amounts of antibody to EBNA during an
+illness which might be caused by EBV makes the
+causal relationship very unlikely.
+Preparation
+The skin area from which the blood sample will be
+obtained is wiped with an antiseptic such as alcohol or
+iodine.
+Aftercare
+The aftercare is similar to that for any blood test.
+Usually, pressure is applied to the area for several
+moments until bleeding stops. If the results are difficult
+to interpret, it may be necessary to re-test later, after
+waiting one to three weeks. The change in the amounts
+of antibody detected between the two tests can be par-
+ticularly useful, at times, in helping to make a diagnosis.
+Risks
+There are no risks over and above those of having
+blood drawn for any other purpose. These tests are
+more expensive than many other blood tests but are
+usually covered by medical insurance.
+Normal results
+The pattern of the three antibodies can be used to
+determine whether the person has not had infection
+with EBV to this point (is susceptible to infection); is
+currently, or recently, infected with EBV for the
+first time; or has had first time infection with EBV
+sometime in the past (more than six months ago).
+If one defines ‘‘normal’’ results as either not
+having EBV in the past, and call that category one;
+or having had it in the past, and call that category
+two. Most young children below the age of five will
+fall into category one, while most adults over the age
+of 20 years will fall into category two.
+The results for susceptibility are:
+/C15antibody to EA = negative
+/C15antibody to VCA (either IgM or IgG) = negative
+/C15antibody to EBNA = negative
+The results for past infection are:
+/C15antibody to EA = negative (90% of time)
+/C15antibody to VCA IgM = negative
+/C15Antibody to VCA IgG = positive
+/C15Antibody to EBNA = Positive.
+It is important to realize that the Epstein-Barr
+virus, like all the human herpes viruses, does not
+totally leave the body after the patient recovers from
+illness. With EBV, the virus will intermittently recur in
+the saliva of people without any symptoms. Such peo-
+ple will have a test pattern of previous infection. It is
+this group of people who can transmit EBV to others
+without themselves being ill.
+Abnormal results
+The results for current or recent infection are:
+/C15antibody to EA = positive
+/C15antibody to VCA IgM = positive
+/C15antibody to VCA IgG = positive
+/C15antibody to EBNA = negative.
+Without the pattern of the three antibodies, it can
+be difficult to be accurate in interpretation. The pre-
+sence of antibody to VCA IgM is the best single test
+for current or recent first time infection.
+Resources
+PERIODICALS
+Henle, G., W. Henle, and C. A. Horowitz. ‘‘Epstein-Barr
+Virus Specific Diagnosis: Tests in Infectious
+Mononucleosis.’’ Human Pathology5 (1997): 551-558.
+Larry I. Lutwick, MD, FACP
+ERCP see Endoscopic retrograde
+cholangiopancreatography
+Erectile disorder see Impotence
+1358 Epstein-Barr virus test
+Erectile dysfunction
+Definition
+Erectile dysfunction (ED), formerly known as
+impotence, is the inability to achieve or maintain an
+erection long enough to engage in sexual intercourse.
+Description
+Under normal circumstances, when a man is
+sexually stimulated, his brain sends a message down
+the spinal cord and into the nerves of the penis. The
+nerve endings in the penis release chemical messengers,
+called neurotransmitters, that signal the arteries that
+supply blood to the corpora cavernosa (the two
+spongy rods of tissue that span the length of the
+penis) to relax and fill with blood. As they expand,
+the corpora cavernosa close off other veins that
+would normally drain blood from the penis. As the
+penis becomes engorged with blood, it enlarges and
+stiffens, causing an erection. Problems with blood
+vessels, nerves, or tissues of the penis can interfere
+with an erection.
+Causes and symptoms
+It is estimated that up to 30 million American
+men frequently suffer from ED and that it strikes up
+to half of all men between the ages of 40 and 70.
+Doctors used to think that most cases of ED were
+psychological in origin, but they now recognize that,
+at least in older men, physical causes may play a
+primary role in 60% or more of all cases. In men
+over the age of 60, the leading cause isatherosclerosis ,
+or narrowing of the arteries, which can restrict the
+flow of blood to the penis. Injury or disease of the
+connective tissue, such as Peyronie’s disease,m a y
+prevent the corpora cavernosa from completely
+expanding. Damage to the nerves of the penis from
+certain types of surgery or neurological conditions,
+such as Parkinson’s disease ormultiple sclerosis,m a y
+also cause ED. Men with diabetes are especially at
+risk for erectile dysfunction because of their high risk
+of both atherosclerosis and a nerve disease called
+diabetic neuropathy.
+Some drugs, including certain types of blood
+pressure medications, antihistamines, tranquilizers
+(especially before intercourse), and antidepressants
+known as selective serotonin reuptake inhibitors
+(SSRIs, including Prozac and Paxil) can interfere
+with erections.Smoking, excessive alcohol consump-
+tion, and illicit drug use may also contribute. In some
+cases, low levels of the male hormone testosterone may
+contribute to erectile failure. Finally, psychological
+factors, such as stress, guilt, or anxiety, may also
+play a role, even when the ED is primarily due to
+organic causes.
+Diagnosis
+When diagnosing the underlying cause of erectile
+dysfunction, the doctor begins by asking the man a
+number of questions about when the problem began,
+whether it only happens with specific sex partners, and
+whether he ever wakes up with an erection. (Men
+whose dysfunction occurs only with certain partners
+or who wake up with erections are more likely to have
+a psychological cause for their ED.) Sometimes, the
+man’s sex partner is also interviewed. In some cases,
+domestic discord may be a factor.
+The doctor also obtains a thorough medical
+history to find out about past pelvic surgery, diabetes,
+cardiovascular disease, kidney disease , and any
+medications the man may be taking. The physical
+examination should include a genital examination,
+hormone tests, and a glucose test for diabetes.
+Sometimes a measurement of blood flow through the
+penis may be taken.
+Treatment
+Years ago, the standard treatment for erectile
+dysfunction was a penile implant or long-term psy-
+chotherapy. Although physical causes are now more
+readily diagnosed and treated, individual or marital
+counseling is still an effective treatment for ED when
+emotional factors play a role.
+There are three prescription medications avail-
+able in the United States to treat the physical causes
+of ED: sildenafil citrate (Viagra), vardenafil
+(Levitra), and tadalafil (Cialis). They help about
+three-fourths of all men who try them in the general
+population. Several studieshave indicated that their
+success rate in diabetic men may be slightly lower,
+averaging around 60–65%. All three pills work by
+enhancing the effects of nitric oxide. This chemical
+relaxes muscles in the penis to allow more blood
+to flow in. These pills do not cause an erection by
+themselves. Sexual stimulation is also required.
+Sildenafil or vardenafil should be taken about an
+hour before sex. Each is effective for roughly four
+hours. Tadalafil lasts for up to 36 hours. Men should
+not have sex more thanonce every 24 hours after
+using these drugs. Before Viagra’s approval in 1998,
+drug treatment of erectile dysfunction was limited to
+alprostadil (prostaglandin [E.sub.1]), either injected
+Erectile dysfunction
+into the penis or inserted as a pellet into the
+urethra. Sales of the three newer ED drugs reached
+$3.4 billion in 2004, according to the research firm
+IMS Health. In 2004, Viagra had about 66% of the
+market share for ED drugs compared to 19% for
+Levitra and 14% for Cialis.
+Viagra
+Sildenafil citrate was or iginally developed in
+1991 as a treatment forangina,o rc h e s tpain.T h e
+drug, marketed under the name Viagra, received
+FDA approval as a treatment for erectile dysfunc-
+tion in March 1998, and since that time it has been
+prescribed for more then 20 million men worldwide.
+It was the first oral medication approved for
+ED treatment. Viagra is a vasodilator, a drug that
+has the effect of dilating the blood vessels. It works
+by improving blood circulation to the penis, and
+by enhancing the effects of nitric oxide, the agent
+that relaxes the smooth muscle of the penis and
+regulates blood vessels during sexual stimulation,
+allowing the penis to become engorged and achieve
+an erection.
+The average recommended dose of Viagra is 50
+mg. It comes in doses of 25 mg., 50 mg., and 100 mg to.
+The medication is taken approximately one hour
+before sexual activity is planned, and may remain
+effective for up to four hours. One drawback is that
+to be effective, it should be taken on an empty
+stomach. Also, high-fat foods can interfere with the
+absorption of Viagra. Viagra does not increase sexual
+desire. Sexual stimulation and arousal are required for
+it to be effective.
+Many insurance plans cover the cost of Viagra,
+provided it is prescribed to treat erectile dysfunction.
+The pills cost approximately $10 each, and insurers
+may limit coverage to a specific number of pills each
+month.
+The primary drawback to Viagra, which works
+about an hour after it is taken, it that the FDA
+cautions men with heart disease or low blood pressure
+to be thoroughly examined by a physician before
+obtaining a prescription. At least 130 men have died
+while taking Viagra. However, the FDA said the
+men—most over the age of 64—died ofheart attack
+or stroke due to health problems exaggerated by
+sexual activity, not the drug itself.
+Levitra
+In early 2003, a second prescription drug to treat
+erectile dysfunction, Levitra, was approved by the
+FDA. Like Viagra, Levitra helps increase blood flow
+to the penis and may help men with ED get and keep
+an erection. Once a man has completed sexual activity,
+blood flow to the penis should decrease and the
+erection should go away. Levitra should be taken
+approximately 60 minutes prior to sexual activity. In
+clinical trials, most patients were able to begin sexual
+activity before that time. A 2004 study showed that
+about 50% of men taking Levitra experienced a firm
+erection within 25 minutes and a small percentage in as
+quickly as 10 minutes. Studies also showed that
+Levitra improved erectile function in men who had
+other health factors, such as diabetes or prostate
+surgery.
+Men taking nitrate drugs, often used to control
+chest pain (also known as angina), should not take
+Levitra. Men who use alpha-blockers, sometimes pre-
+scribed for high blood pressure or prostate problems,
+also should not take Levitra. Such combinations could
+cause blood pressure to drop to an unsafe level.
+Levitra is available in 2.5 mg, 5 mg, 10 mg, and 20
+mg tablets and should be taken no more than once a
+day. The average cost per pill is about $10 and is
+covered by many insurance plans.
+Cialis
+Cialis is the third oral drug prescribed to treat
+erectile dysfunction, approved by the FDA in
+November 2003. Its most notable difference from
+Viagra and Levitra, which work for about four
+hours, is that Cialis works for up to 36 hours. Cialis
+helps increase blood flow in the penis when a man is
+sexually stimulated. It can help men with ED get and
+keep an erection satisfactory for sexual activity. Once
+a man has completed sexual activity, blood flow to his
+penis decreases, and his erection goes away. Cialis is
+clinically proven to improve erectile function in most
+men with ED, including those with mild, moderate or
+severe ED.
+The most common side effects with Cialis are
+headache, upset stomach, back pain, and muscle
+aches. These side effects usually go away after a few
+hours. Patients who get back pain and muscle aches
+usually get it 12 to 24 hours after taking Cialis. Back
+pain and muscle aches usually go away by themselves
+within 48 hours.
+Cialis comes in 5 mg., 10 mg. (the recommended
+starting dose), and 20 mg. tablets. The average cost
+per tablet is about $10 and it is covered by many
+insurance plans. Since the absorption of Cialis is
+not affected by food or high-fat foods, it does not
+need to be taken on an empty stomach. Studies
+1360 Erectile dysfunction
+show that in most men, Cialis begins working in
+about 30 minutes and may be taken up to once per
+day by most patients.
+Priapism, a prolonged erection, is a very rare
+potential side effect of all prescription ED medica-
+tions. Persons taking Viagra, Levitra, or Cialis who
+have a prolonged erection, lasting more than four
+hours, should seek immediate medical attention.
+Priapism can cause damage to the penis potentially
+leading to the permanent inability to have an erection.
+Because sexual activity can stress the heart, men
+who have heart problems should check with their
+physician to see if sexual activity is recommended.
+Erectile dysfunction drugs may trigger temporary
+hypotension (low blood pressure) and is known to
+increase cardiovascular nerve activity, so physicians
+should prescribe them with caution in men with a
+history of heart attack, atherosclerosis (hardening of
+the arteries), angina, arrhythmia, and chronic low
+blood pressure problems. ED drugs are not labeled
+or approved for use by women or children, or by
+men without erectile dysfunction. Anyone experien-
+cing cardiovascular symptoms such as dizziness,
+chest or arm pain, andnausea when participating in
+sexual activity after taking an ED medication should
+stop the encounter. They should also not take any
+ED drug again until they have discussed the episode
+with their healthcare provider. It is recommended
+that men with kidney or liver impairments, and men
+over age 65, start at the lowest possible dosage of ED
+medications.
+Other treatment options
+Although the commercial availability of Viagra,
+Levitra, and Cialis has been useful in many men,pros-
+tate cancerpatients and ED caused by psychological
+problems often require alternative treatment. A com-
+monly used alternative consists of a three-drug injec-
+tion containing alprostadil, papaverine hydrochloride,
+and phentolamine mesylate. Though it is commonly
+referred to as the ‘‘Knoxville formula,’’ apparently for
+the city of its original introduction, a number of
+slightly varying formulas have been in use around
+the country. The three-drug preparation is adminis-
+tered by injection into the corpora cavernosa to induce
+erection.
+Other traditional therapies for ED include
+vacuum pump therapy, injection therapy involving
+injecting a substance into the penis to enhance blood
+flow, and a penile implantation device. In rare cases, if
+narrowed or diseased veins are responsible for ED,
+surgeons may reroute the blood flow into the corpora
+cavernosa or remove leaking vessels.
+In vacuum pump therapy, a man inserts his penis
+into a clear plastic cylinder and uses a pump to force
+air out of the cylinder. This forms a partial vacuum
+around the penis, which helps to draw blood into
+the corpora cavernosa. The man then places a special
+ring over the base of the penis to trap the blood
+inside it. The only side effect with this type of treat-
+ment is occasional bruising if the vacuum is left on
+too long.
+Injection therapy involves injecting a substance
+into the penis to enhance blood flow and cause an
+erection. The FDA approved a drug called alprostadil
+(Caverject) for this purpose in 1995. Alprostadil
+relaxes smooth muscle tissue to enhance blood flow
+into the penis. It must be injected shortly before inter-
+course. Another, similar drug that is sometimes used is
+papaverine. Either drug may sometimes cause painful
+erections or priapism that must be treated with a shot
+of epinephrine. Alprostadil may also be administered
+into the urethral opening of the penis. In MUSE
+(medical urethral system for erection), the man inserts
+a thin tube the width of a spaghetti noodle into his
+urethral opening and presses down on a plunger to
+deliver a tiny pellet containing alprostadil into his
+penis. The drug takes about 10 minutes to work and
+the erection lasts about an hour. The main side effect is
+a sensation of pain and burning in the urethra, which
+can last about five to 15 minutes. The injection process
+itself is often painful
+Implantable penile prosthesesare usually consid-
+ered a last resort for treating erectile dysfunction.
+They are implanted in the corpora cavernosa to
+make the penis rigid without the need for blood flow.
+The semi-rigid type of prosthesis consists of a pair of
+flexible silicone rods that can be bent up or down. This
+type of device has a low failure rate but, unfortunately,
+it causes the penis to always be erect, which can be
+difficult to conceal under clothing.
+The inflatable type of device consists of cylinders
+that are implanted in the corpora cavernosa, a fluid
+reservoir implanted in the abdomen, and a pump
+placed in the scrotum. The man squeezes the pump
+to move fluid into the cylinders and cause them to
+become rigid. (He reverses the process by squeezing
+the pump again.) While these devices allow for inter-
+mittent erections, they have a slightly higher malfunc-
+tion rate than the silicon rods. Men can return to
+sexual activity six to eight weeks after implantation
+surgery. Since implants affect the corpora cavernosa,
+Erectile dysfunction

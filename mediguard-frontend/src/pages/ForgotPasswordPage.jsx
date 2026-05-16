@@ -9,11 +9,13 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Mail, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { forgotPassword } from '@/services/api';
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [resetToken, setResetToken] = useState('');
   const { toast } = useToast();
 
   const handleSubmit = async (e) => {
@@ -21,15 +23,23 @@ const ForgotPasswordPage = () => {
     if (!email) return;
 
     setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const res = await forgotPassword({ email });
+      setResetToken(res.data.reset_token || '');
       setSubmitted(true);
       toast({
         title: "Reset Link Sent",
-        description: "If an account exists with this email, a reset link has been sent.",
+        description: res.data.message || "If an account exists with this email, a reset link has been sent.",
       });
-    }, 1500);
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Reset Failed",
+        description: error.message || "Could not request a password reset.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -50,7 +60,7 @@ const ForgotPasswordPage = () => {
             <CardHeader className="space-y-1 text-center bg-white dark:bg-slate-950 rounded-t-xl">
               <div className="flex justify-center mb-4">
                 <img 
-                  src="/public/mediguard.png" 
+                  src="/mediguard.png" 
                   alt="MediGuard Logo" 
                   className="logo-md"
                 />
@@ -67,6 +77,15 @@ const ForgotPasswordPage = () => {
                     <Mail className="h-8 w-8 mx-auto mb-2" />
                     <p className="text-sm font-medium">Check your email for the reset link.</p>
                   </div>
+                  {resetToken && (
+                    <div className="text-left p-3 rounded-lg border bg-muted/40">
+                      <p className="text-xs font-semibold mb-1">Development reset token</p>
+                      <code className="text-xs break-all">{resetToken}</code>
+                      <Link to={`/reset-password?token=${resetToken}`} className="block text-primary text-sm font-medium mt-2 hover:underline">
+                        Continue to reset password
+                      </Link>
+                    </div>
+                  )}
                   <Button variant="outline" className="w-full" onClick={() => setSubmitted(false)}>
                     Try another email
                   </Button>

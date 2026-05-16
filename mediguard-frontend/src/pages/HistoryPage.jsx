@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Trash2, History, MessageSquare, Activity, Calendar } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 import { useToast } from '@/hooks/use-toast';
+import { deleteChatHistory, deleteHistory, getChatHistory, getHistory } from '@/services/api';
 
 const HistoryPage = () => {
   const { user } = useAuth();
@@ -15,14 +16,42 @@ const HistoryPage = () => {
   const [chatHistory, setChatHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const normalizeCheck = (check) => ({
+    ...check,
+    symptoms: Array.isArray(check.symptoms) ? check.symptoms : [],
+    results: Array.isArray(check.results) ? check.results : (Array.isArray(check.predictions) ? check.predictions : []),
+    created_at: check.created_at || check.timestamp || new Date().toISOString(),
+  });
+
+  const normalizeChat = (chat) => ({
+    ...chat,
+    title: chat.title || 'MediGuard AI Chat',
+    message: chat.message || '',
+    response: chat.response || '',
+    sources: Array.isArray(chat.sources) ? chat.sources : [],
+    follow_up_questions: Array.isArray(chat.follow_up_questions) ? chat.follow_up_questions : [],
+    created_at: chat.created_at || chat.timestamp || new Date().toISOString(),
+  });
+
   useEffect(() => {
-    const loadHistory = () => {
-      const storedChecks = JSON.parse(localStorage.getItem(`symptom_checks_${user?.id}`) || '[]');
-      const storedChats = JSON.parse(localStorage.getItem(`chat_history_${user?.id}`) || '[]');
-      
-      setSymptomChecks(storedChecks);
-      setChatHistory(storedChats);
-      setLoading(false);
+    const loadHistory = async () => {
+      try {
+        const res = await getHistory();
+        setSymptomChecks((Array.isArray(res.data) ? res.data : []).map(normalizeCheck));
+      } catch {
+        const storedChecks = JSON.parse(localStorage.getItem(`symptom_checks_${user?.id}`) || '[]');
+        setSymptomChecks(storedChecks.map(normalizeCheck));
+      }
+
+      try {
+        const res = await getChatHistory();
+        setChatHistory((Array.isArray(res.data) ? res.data : []).map(normalizeChat));
+      } catch {
+        const storedChats = JSON.parse(localStorage.getItem(`chat_history_${user?.id}`) || '[]');
+        setChatHistory(storedChats.map(normalizeChat));
+      } finally {
+        setLoading(false);
+      }
     };
 
     if (user) {
@@ -30,14 +59,24 @@ const HistoryPage = () => {
     }
   }, [user]);
 
-  const handleDeleteCheck = (id) => {
+  const handleDeleteCheck = async (id) => {
+    try {
+      await deleteHistory(id);
+    } catch {
+      // Local fallback records are still removed below.
+    }
     const updated = symptomChecks.filter(check => check.id !== id);
     setSymptomChecks(updated);
     localStorage.setItem(`symptom_checks_${user.id}`, JSON.stringify(updated));
     toast({ title: "Record Deleted", description: "Symptom check removed from history." });
   };
 
-  const handleDeleteChat = (id) => {
+  const handleDeleteChat = async (id) => {
+    try {
+      await deleteChatHistory(id);
+    } catch {
+      // Local fallback records are still removed below.
+    }
     const updated = chatHistory.filter(chat => chat.id !== id);
     setChatHistory(updated);
     localStorage.setItem(`chat_history_${user.id}`, JSON.stringify(updated));
@@ -76,7 +115,7 @@ const HistoryPage = () => {
 
             <div className="hidden sm:block">
               <img 
-                src="/public/mediguard.png" 
+                src="/mediguard.png" 
                 alt="MediGuard Logo" 
                 className="logo-sm"
               />
@@ -124,9 +163,9 @@ const HistoryPage = () => {
                         <div>
                           <span className="text-sm font-semibold block mb-1">Top Predictions:</span>
                           <div className="flex flex-wrap gap-2">
-                            {check.results.slice(0, 3).map(res => (
-                              <Badge key={res.id} variant={res.severity?.toLowerCase() === 'high' ? 'destructive' : 'secondary'}>
-                                {res.name} ({res.confidence}%)
+                            {check.results.slice(0, 3).map((res, index) => (
+                              <Badge key={res.id || res.slug || res.name || res.disease || index} variant={res.severity?.toLowerCase() === 'high' ? 'destructive' : 'secondary'}>
+                                {res.name || res.disease || 'Unknown'} ({res.confidence ?? res.probability ?? 0}%)
                               </Badge>
                             ))}
                           </div>
@@ -173,6 +212,27 @@ const HistoryPage = () => {
                           <span className="font-semibold block mb-1 text-secondary-foreground">MediGuard AI:</span>
                           {chat.response}
                         </div>
+                        {Array.isArray(chat.sources) && chat.sources.length > 0 && (
+                          <div className="flex flex-wrap gap-1">
+                            {chat.sources.map((source) => (
+                              <Badge key={source} variant="outline" className="text-xs">
+                                {source}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                        {chat.follow_up_questions.length > 0 && (
+                          <div>
+                            <span className="text-xs font-semibold text-muted-foreground">Follow-up questions asked:</span>
+                            <div className="mt-1 flex flex-wrap gap-1">
+                              {chat.follow_up_questions.map((question) => (
+                                <Badge key={question} variant="outline" className="text-xs">
+                                  {question}
+                                </Badge>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                         {chat.gender_context && (
                           <div className="text-xs text-muted-foreground mt-2">
                             <span className="font-semibold">Context Info:</span> AI adjusted response based on gender profile ({chat.gender_context}).
