@@ -86,3 +86,21 @@ class ContactMessage(Base):
     subject = Column(String, nullable=False)
     message = Column(Text, nullable=False)
     sent_at = Column(DateTime, default=datetime.utcnow)
+
+
+class PredictionFeedback(Base):
+    """User-submitted feedback on a prediction result.
+
+    Stores whether the top prediction was confirmed correct after a clinical
+    visit, enabling accuracy tracking and future model improvement.
+    """
+    __tablename__ = "prediction_feedback"
+
+    id = Column(Integer, primary_key=True, index=True)
+    prediction_log_id = Column(Integer, ForeignKey("prediction_logs.id"), nullable=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True, index=True)
+    top_predicted = Column(String, nullable=False)
+    was_helpful = Column(Boolean, nullable=False)
+    confirmed_disease = Column(String, nullable=True)   # what the doctor actually said
+    comment = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)

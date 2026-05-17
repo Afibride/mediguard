@@ -16,10 +16,16 @@ def ensure_chat_log_columns() -> None:
     if "chat_logs" not in inspector.get_table_names():
         return
     existing = {column["name"] for column in inspector.get_columns("chat_logs")}
-    additions = {
-        "follow_up_questions": "JSON DEFAULT '[]'",
-        "pregnancy_context": "BOOLEAN DEFAULT 0",
-    }
+    if engine.dialect.name == "postgresql":
+        additions = {
+            "follow_up_questions": "JSON DEFAULT '[]'::json",
+            "pregnancy_context": "BOOLEAN DEFAULT false",
+        }
+    else:
+        additions = {
+            "follow_up_questions": "JSON DEFAULT '[]'",
+            "pregnancy_context": "BOOLEAN DEFAULT 0",
+        }
     with engine.begin() as connection:
         for column, definition in additions.items():
             if column not in existing:

@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Trash2, History, MessageSquare, Activity, Calendar } from 'lucide-react';
+import { Trash2, History, MessageSquare, Activity, Calendar, RefreshCw } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { deleteChatHistory, deleteHistory, getChatHistory, getHistory } from '@/services/api';
@@ -15,9 +15,20 @@ const HistoryPage = () => {
   const [symptomChecks, setSymptomChecks] = useState([]);
   const [chatHistory, setChatHistory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const readLocalArray = (key) => {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || '[]');
+      return Array.isArray(value) ? value : [];
+    } catch {
+      return [];
+    }
+  };
 
   const normalizeCheck = (check) => ({
     ...check,
+    id: check.id ?? check.prediction_log_id ?? `check_${Date.now()}`,
     symptoms: Array.isArray(check.symptoms) ? check.symptoms : [],
     results: Array.isArray(check.results) ? check.results : (Array.isArray(check.predictions) ? check.predictions : []),
     created_at: check.created_at || check.timestamp || new Date().toISOString(),
@@ -33,31 +44,65 @@ const HistoryPage = () => {
     created_at: chat.created_at || chat.timestamp || new Date().toISOString(),
   });
 
-  useEffect(() => {
-    const loadHistory = async () => {
-      try {
-        const res = await getHistory();
-        setSymptomChecks((Array.isArray(res.data) ? res.data : []).map(normalizeCheck));
-      } catch {
-        const storedChecks = JSON.parse(localStorage.getItem(`symptom_checks_${user?.id}`) || '[]');
-        setSymptomChecks(storedChecks.map(normalizeCheck));
-      }
+  const mergeNewest = (remoteItems, localItems, normalize) => {
+    const seen = new Set();
+    return [...remoteItems, ...localItems]
+      .map(normalize)
+      .filter((item) => {
+        const key = `${item.id}-${item.created_at}-${item.message || item.top_disease || ''}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  };
 
-      try {
-        const res = await getChatHistory();
-        setChatHistory((Array.isArray(res.data) ? res.data : []).map(normalizeChat));
-      } catch {
-        const storedChats = JSON.parse(localStorage.getItem(`chat_history_${user?.id}`) || '[]');
-        setChatHistory(storedChats.map(normalizeChat));
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (user) {
-      loadHistory();
+  const loadHistory = useCallback(async (showToast = false) => {
+    if (!user?.id) {
+      setSymptomChecks([]);
+      setChatHistory([]);
+      setLoading(false);
+      return;
     }
-  }, [user]);
+
+    setRefreshing(true);
+    const localChecks = readLocalArray(`symptom_checks_${user.id}`);
+    const localChats = readLocalArray(`chat_history_${user.id}`);
+
+    const [checksResult, chatsResult] = await Promise.allSettled([
+      getHistory(),
+      getChatHistory(),
+    ]);
+
+    const remoteChecks = checksResult.status === 'fulfilled' && Array.isArray(checksResult.value.data)
+      ? checksResult.value.data
+      : [];
+    const remoteChats = chatsResult.status === 'fulfilled' && Array.isArray(chatsResult.value.data)
+      ? chatsResult.value.data
+      : [];
+
+    setSymptomChecks(mergeNewest(remoteChecks, localChecks, normalizeCheck));
+    setChatHistory(mergeNewest(remoteChats, localChats, normalizeChat));
+
+    if (showToast) {
+      if (checksResult.status === 'fulfilled' && chatsResult.status === 'fulfilled') {
+        toast({ title: 'History refreshed', description: 'Latest symptom checks and chats loaded.' });
+      } else {
+        toast({
+          title: 'History partially loaded',
+          description: 'Some online history could not be fetched, so local saved records were shown too.',
+          variant: 'destructive',
+        });
+      }
+    }
+
+    setLoading(false);
+    setRefreshing(false);
+  }, [user?.id, toast]);
+
+  useEffect(() => {
+    loadHistory(false);
+  }, [loadHistory]);
 
   const handleDeleteCheck = async (id) => {
     try {
@@ -67,7 +112,8 @@ const HistoryPage = () => {
     }
     const updated = symptomChecks.filter(check => check.id !== id);
     setSymptomChecks(updated);
-    localStorage.setItem(`symptom_checks_${user.id}`, JSON.stringify(updated));
+    const localOnly = updated.filter(check => String(check.id).startsWith('diagnosis_') || String(check.id).startsWith('check_'));
+    localStorage.setItem(`symptom_checks_${user.id}`, JSON.stringify(localOnly));
     toast({ title: "Record Deleted", description: "Symptom check removed from history." });
   };
 
@@ -79,7 +125,8 @@ const HistoryPage = () => {
     }
     const updated = chatHistory.filter(chat => chat.id !== id);
     setChatHistory(updated);
-    localStorage.setItem(`chat_history_${user.id}`, JSON.stringify(updated));
+    const localOnly = updated.filter(chat => String(chat.id).startsWith('chat_'));
+    localStorage.setItem(`chat_history_${user.id}`, JSON.stringify(localOnly));
     toast({ title: "Record Deleted", description: "Chat conversation removed from history." });
   };
 
@@ -114,11 +161,10 @@ const HistoryPage = () => {
             </div>
 
             <div className="hidden sm:block">
-              <img 
-                src="/mediguard.png" 
-                alt="MediGuard Logo" 
-                className="logo-sm"
-              />
+              <Button variant="outline" onClick={() => loadHistory(true)} disabled={refreshing} className="gap-2">
+                <RefreshCw className={`h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
             </div>
           </div>
 

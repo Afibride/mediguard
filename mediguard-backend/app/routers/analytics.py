@@ -5,7 +5,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.data import DISEASES
-from app.db.models import Disease, PredictionLog
+from app.db.models import Disease, PredictionFeedback, PredictionLog
 from app.db.session import get_db
 
 router = APIRouter()
@@ -70,6 +70,11 @@ def summary(db: Session = Depends(get_db)):
     )
     week_start = datetime.utcnow() - timedelta(days=7)
     active_this_week = db.query(func.count(PredictionLog.id)).filter(PredictionLog.timestamp >= week_start).scalar() or 0
+
+    total_feedback = db.query(func.count(PredictionFeedback.id)).scalar() or 0
+    helpful_feedback = db.query(func.count(PredictionFeedback.id)).filter(PredictionFeedback.was_helpful == True).scalar() or 0  # noqa: E712
+    feedback_accuracy = round((helpful_feedback / total_feedback) * 100, 1) if total_feedback > 0 else None
+
     return {
         "total_predictions": total_predictions,
         "top_disease": top[0] if top else "No predictions yet",
@@ -77,4 +82,6 @@ def summary(db: Session = Depends(get_db)):
         "active_this_week": active_this_week,
         "diseases_tracked": disease_count,
         "region": "Bamenda",
+        "total_feedback": total_feedback,
+        "feedback_accuracy": feedback_accuracy,
     }

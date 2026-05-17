@@ -52,6 +52,22 @@ PREGNANCY_TERMS = [
     "trimester",
 ]
 
+FATIGUE_CONTEXT_TERMS = [
+    "fatigue",
+    "tired",
+    "tiredness",
+    "weak",
+    "weakness",
+    "poor sleep",
+    "lack of sleep",
+    "stress",
+    "overworked",
+    "overwork",
+    "exhausted",
+    "dehydrated",
+    "heavy work",
+]
+
 CHUNKS_FILE = Path(__file__).resolve().parents[2] / "data_pipeline" / "mediguard_rag_chunks.json"
 
 _pinecone_index = None
@@ -114,6 +130,11 @@ def _conversational_response(query: str) -> dict | None:
 def _mentions_pregnancy(query: str) -> bool:
     text = query.lower()
     return any(term in text for term in PREGNANCY_TERMS)
+
+
+def _mentions_fatigue_context(query: str, symptoms: list[str] | None = None) -> bool:
+    text = f"{query.lower()} {' '.join(symptom.lower() for symptom in symptoms or [])}"
+    return any(term in text for term in FATIGUE_CONTEXT_TERMS)
 
 
 def _pregnancy_warning_matches(query: str, symptoms: list[str]) -> list[str]:
@@ -264,6 +285,17 @@ def _extract_reported_symptoms(query: str) -> list[str]:
 
 def _is_symptom_check_request(query: str, symptoms: list[str]) -> bool:
     text = query.lower()
+    general_question_starts = (
+        "what is",
+        "what are",
+        "what does",
+        "define",
+        "explain",
+        "tell me about",
+        "meaning of",
+    )
+    if text.strip().startswith(general_question_starts):
+        return False
     intent_terms = [
         "i have",
         "i am having",
@@ -280,6 +312,21 @@ def _is_symptom_check_request(query: str, symptoms: list[str]) -> bool:
     return len(symptoms) >= 2 or (bool(symptoms) and any(term in text for term in intent_terms))
 
 
+def _is_new_general_question(query: str) -> bool:
+    text = query.lower().strip()
+    general_question_starts = (
+        "what is",
+        "what are",
+        "what does",
+        "define",
+        "explain",
+        "tell me about",
+        "meaning of",
+    )
+    symptom_check_terms = ("what could this be", "what might this be", "check my symptoms", "predict", "diagnose")
+    return text.startswith(general_question_starts) and not any(term in text for term in symptom_check_terms)
+
+
 def _symptom_follow_up_questions(symptoms: list[str], is_pregnant: bool = False) -> list[str]:
     questions = [
         "How long have you had these symptoms?",
@@ -293,6 +340,8 @@ def _symptom_follow_up_questions(symptoms: list[str], is_pregnant: bool = False)
         questions.append("Is there chest pain, wheezing, fast breathing, or coughing up blood?")
     if any(term in symptom_set for term in ["diarrhea", "vomiting", "abdominal pain", "nausea"]):
         questions.append("Are you able to drink fluids, and is there blood in stool or signs of dehydration?")
+    if any(term in symptom_set for term in ["fatigue", "weakness", "body weakness", "dizziness", "headache"]):
+        questions.append("Have you recently had poor sleep, heavy work, stress, missed meals, dehydration, or unusual exertion?")
     if is_pregnant:
         questions.append("How many weeks pregnant are you, and is there bleeding, severe pain, vision change, swelling, or reduced fetal movement?")
     return questions[:5]
@@ -312,6 +361,8 @@ def _first_aid_guidance(symptoms: list[str], is_pregnant: bool = False) -> list[
         guidance.append("For diarrhea or vomiting, prioritize rehydration and seek care urgently for blood in stool, severe weakness, or inability to keep fluids down.")
     if any(term in symptom_text for term in ["shortness of breath", "chest pain", "wheezing"]):
         guidance.append("Shortness of breath, chest pain, or severe wheezing needs urgent medical attention.")
+    if any(term in symptom_text for term in ["fatigue", "weakness", "body weakness", "dizziness", "headache"]):
+        guidance.append("If tiredness may be contributing, rest, rehydrate, eat a light meal if you missed food, and monitor whether symptoms improve.")
     if is_pregnant:
         guidance.append("Because pregnancy is involved, contact an antenatal clinic or maternity unit promptly, especially with bleeding, fever, severe pain, headache, swelling, vision changes, or reduced fetal movement.")
     return guidance[:6]
@@ -345,6 +396,8 @@ def _symptom_check_response(
     chat_history: list[dict] | None = None,
 ) -> dict | None:
     followup_already_asked = _history_requested_followup(chat_history)
+    if followup_already_asked and _is_new_general_question(query):
+        return None
     symptom_context = _recent_user_symptom_context(query, chat_history) if followup_already_asked else query
     reported_symptoms = _extract_reported_symptoms(symptom_context)
     pregnancy_followup = _pregnancy_followup_response(query, reported_symptoms, is_pregnant, pregnancy_weeks)
@@ -355,6 +408,7 @@ def _symptom_check_response(
         return None
 
     pregnancy_context = bool(is_pregnant or _mentions_pregnancy(query))
+    fatigue_context = _mentions_fatigue_context(symptom_context, reported_symptoms)
     follow_up_questions = _symptom_follow_up_questions(reported_symptoms, pregnancy_context)
 
     if not followup_already_asked:
@@ -371,11 +425,15 @@ def _symptom_check_response(
             "predictions": [],
             "mode": "symptom_follow_up",
             "pregnancy_context": pregnancy_context,
+            "fatigue_context": fatigue_context,
             "follow_up_questions": follow_up_questions,
             "data_source": "database",
         }
 
     predictions = _enrich_predictions_from_database(_get_predictor().predict(reported_symptoms))
+    if fatigue_context:
+        for prediction in predictions:
+            prediction["fatigue_context"] = True
     if not predictions:
         return {
             "answer": (
@@ -388,6 +446,7 @@ def _symptom_check_response(
             "predictions": [],
             "mode": "symptom_check",
             "pregnancy_context": pregnancy_context,
+            "fatigue_context": fatigue_context,
             "follow_up_questions": follow_up_questions,
             "data_source": "database",
         }
@@ -409,7 +468,10 @@ def _symptom_check_response(
         lines.append(
             "Pregnancy context noted: please arrange prompt antenatal or clinical assessment, especially for fever, abdominal pain, bleeding, severe headache, vision changes, swelling, shortness of breath, or reduced fetal movement."
         )
-    lines.append("To refine this, please answer the follow-up questions shown below.")
+    if fatigue_context:
+        lines.append(
+            "Fatigue context noted: poor sleep, dehydration, missed meals, stress, or heavy activity can worsen symptoms, but they do not rule out infection or another medical condition."
+        )
     return {
         "answer": "\n".join(lines),
         "sources": [prediction["disease"] for prediction in predictions[:3]],
@@ -418,7 +480,8 @@ def _symptom_check_response(
         "predictions": predictions,
         "mode": "symptom_check",
         "pregnancy_context": pregnancy_context,
-        "follow_up_questions": follow_up_questions,
+        "fatigue_context": fatigue_context,
+        "follow_up_questions": [],
         "data_source": "database",
     }
 
@@ -498,22 +561,42 @@ def retrieve(query: str, top_k: int = 5, filter_disease: str | None = None) -> l
         return _local_retrieve(query, top_k=top_k, filter_disease=filter_disease)
 
     query_vector = embed_text(query, dim=_pinecone_dimension or 384)
-    pinecone_filter = {"disease": {"$eq": filter_disease}} if filter_disease else None
+    # Restrict to encyclopedia RAG chunks — exclude disease_profile and training_example
+    # vectors that were added by the prediction pipeline.
+    pinecone_filter: dict = {"data_type": {"$nin": ["disease_profile", "training_example"]}}
+    if filter_disease:
+        pinecone_filter["disease"] = {"$eq": filter_disease}
+
     try:
-        results = index.query(vector=query_vector, top_k=top_k, include_metadata=True, filter=pinecone_filter)
+        results = index.query(
+            vector=query_vector,
+            top_k=top_k,
+            include_metadata=True,
+            filter=pinecone_filter,
+        )
     except Exception:
         return _local_retrieve(query, top_k=top_k, filter_disease=filter_disease)
 
-    return [
-        {
-            "text": match["metadata"]["text"],
-            "disease": match["metadata"]["disease"],
-            "source": match["metadata"].get("source", "Gale Encyclopedia of Medicine"),
-            "score": round(match["score"], 4),
+    matches = results.matches if hasattr(results, "matches") else results.get("matches", [])
+    chunks = []
+    for match in matches:
+        meta = match.metadata if hasattr(match, "metadata") else match.get("metadata", {})
+        text = meta.get("text", "")
+        if not text:
+            continue  # skip non-encyclopedia vectors that slipped through the filter
+        chunks.append({
+            "text": text,
+            "disease": meta.get("disease", ""),
+            "source": meta.get("source", "Gale Encyclopedia of Medicine"),
+            "score": round(match.score if hasattr(match, "score") else match.get("score", 0), 4),
             "retrieval_source": "pinecone",
-        }
-        for match in results["matches"]
-    ]
+        })
+
+    # Fall back to local keyword search if Pinecone returned nothing useful
+    if not chunks:
+        return _local_retrieve(query, top_k=top_k, filter_disease=filter_disease)
+
+    return chunks
 
 
 def _extractive_answer(query: str, chunks: list[dict]) -> str:

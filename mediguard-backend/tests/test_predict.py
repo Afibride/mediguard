@@ -18,7 +18,9 @@ def test_predict_returns_ranked_predictions():
 def test_symptoms_returns_reference_feature_list():
     response = client.get("/symptoms")
     assert response.status_code == 200
-    assert len(response.json()["symptoms"]) == 117
+    symptoms = response.json()["symptoms"]
+    assert len(symptoms) == 126
+    assert {"Fever", "Chills", "Headache"}.issubset(set(symptoms))
 
 
 def test_predict_includes_pregnancy_context_note():

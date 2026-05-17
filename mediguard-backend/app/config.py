@@ -22,8 +22,11 @@ class Settings(BaseSettings):
     def cors_origins(self) -> List[str]:
         return [origin.strip() for origin in self.frontend_origins.split(",") if origin.strip()]
 
+    @property
+    def active_database_url(self) -> str:
+        return self.database_url
+
 
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
-

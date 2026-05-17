@@ -23,6 +23,7 @@ const ChatAI = () => {
   const { toast } = useToast();
   const location = useLocation();
   const scrollRef = useRef(null);
+  const messagesEndRef = useRef(null);
   
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -31,6 +32,12 @@ const ChatAI = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [chats, setChats] = useState([]);
   const [currentChatId, setCurrentChatId] = useState(null);
+
+  const scrollToLatest = (behavior = 'smooth') => {
+    window.requestAnimationFrame(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior, block: 'end' });
+    });
+  };
 
   const pregnancyContextFromText = (text) => {
     const lower = text.toLowerCase();
@@ -84,9 +91,7 @@ const ChatAI = () => {
 
   // Auto-scroll to latest message
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
+    scrollToLatest(messages.length <= 1 ? 'auto' : 'smooth');
   }, [messages, isTyping]);
 
   // Create a new chat
@@ -208,6 +213,7 @@ const ChatAI = () => {
             message.id === aiMsgObj.id ? { ...message, content: typed } : message
           ));
           setMessages(typedMessages);
+          scrollToLatest('smooth');
           setChats(prev => prev.map(chat => (
             chat.id === currentChatId
               ? { ...chat, messages: typedMessages, preview: typed.substring(0, 30) + (typed.length >= 30 ? '...' : '') }
@@ -621,6 +627,7 @@ const ChatAI = () => {
                     </div>
                   </motion.div>
                 )}
+                <div ref={messagesEndRef} className="h-px" />
               </div>
             </ScrollArea>
 

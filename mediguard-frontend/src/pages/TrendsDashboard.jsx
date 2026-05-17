@@ -140,6 +140,13 @@ const TrendsDashboard = () => {
       icon: ShieldCheck,
       color: 'text-green-600',
     },
+    {
+      title: 'Community Accuracy',
+      value: summary.feedback_accuracy != null ? `${summary.feedback_accuracy}%` : 'No feedback yet',
+      change: summary.total_feedback ? `Based on ${summary.total_feedback} user reports` : 'Submit feedback after a visit',
+      icon: ShieldCheck,
+      color: 'text-emerald-600',
+    },
   ];
 
   const commonInBamenda = diseaseRows.filter(d => d.featured || d.commonInBamenda).slice(0, 8);
@@ -184,7 +191,7 @@ const TrendsDashboard = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-4 gap-2 sm:gap-4 lg:gap-6 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 lg:gap-6 mb-8">
             {insights.map((insight, index) => (
               <Card key={index} className="medical-panel">
                 <CardHeader className="flex flex-col sm:flex-row items-center sm:items-center justify-between gap-1 pb-1 sm:pb-2 p-2 sm:p-6">
@@ -238,7 +245,7 @@ const TrendsDashboard = () => {
                       fill="#8884d8"
                       dataKey="value"
                     >
-                      {categoryData.map((entry, index) => (
+                      {categoryData.map((_entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>

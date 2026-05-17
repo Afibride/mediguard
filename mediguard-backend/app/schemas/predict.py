@@ -6,8 +6,45 @@ class SymptomInput(BaseModel):
     gender: str | None = None
     is_pregnant: bool = False
     pregnancy_weeks: int | None = None
+    fatigue_context: bool = False
+
+
+class FeedbackInput(BaseModel):
+    prediction_log_id: int | None = None
+    top_predicted: str
+    was_helpful: bool
+    confirmed_disease: str | None = None
+    comment: str | None = None
 
 
 class PredictionResponse(BaseModel):
     predictions: list[dict]
     disclaimer: str
+
+
+class NormalizeInput(BaseModel):
+    """Free-text symptom description to normalize into canonical names."""
+    text: str = Field(min_length=1, max_length=500)
+
+
+class NormalizeResponse(BaseModel):
+    matched: list[str]
+    original: str
+
+
+class ClarifyInput(BaseModel):
+    """Request for follow-up clarification questions."""
+    current_symptoms: list[str]
+    top_diseases: list[str] = Field(default_factory=list)
+    already_asked: list[str] = Field(default_factory=list)
+
+
+class ClarifyQuestion(BaseModel):
+    symptom: str
+    question: str
+    helps_distinguish: list[str]
+
+
+class ClarifyResponse(BaseModel):
+    questions: list[ClarifyQuestion]
+    should_ask: bool

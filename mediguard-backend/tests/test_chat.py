@@ -59,7 +59,25 @@ def test_chat_returns_results_after_followup_answer():
     assert data["mode"] == "symptom_check"
     assert data["predictions"]
     assert "Malaria" in data["answer"]
-    assert data["follow_up_questions"]
+    assert data["follow_up_questions"] == []
+
+
+def test_chat_can_answer_new_general_question_after_followup():
+    response = client.post(
+        "/chat",
+        json={
+            "query": "What is fever?",
+            "history": [
+                {"role": "user", "content": "I have fever and chills and headache. What could this be?"},
+                {"role": "assistant", "content": "Before I show possible matches, I need a little more information. Please answer the follow-up questions below."},
+            ],
+        },
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data.get("mode") != "symptom_check"
+    assert data["answer"]
+    assert data["sources"]
 
 
 def test_chat_triages_pregnancy_warning_symptoms():
