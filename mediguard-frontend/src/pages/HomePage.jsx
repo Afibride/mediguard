@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database } from 'lucide-react';
+import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database, TrendingUp, Megaphone, Droplets, HandHeart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { getAnalyticsSummary, getDiseases } from '@/services/api';
+import { getAnalyticsSummary, getDiseases, getOutbreakAlerts, getTopDiseases, getTrends } from '@/services/api';
 
 const HomePage = () => {
   const [featuredDiseases, setFeaturedDiseases] = useState([]);
@@ -14,6 +14,9 @@ const HomePage = () => {
     total_predictions: 0,
     top_disease: 'Malaria',
   });
+  const [topDiseases, setTopDiseases] = useState([]);
+  const [weeklyTrends, setWeeklyTrends] = useState([]);
+  const [outbreakInfo, setOutbreakInfo] = useState({ alerts: [], rainy_season: false, has_alerts: false });
   const trustIndicators = [
     {
       icon: Users,
@@ -87,6 +90,27 @@ const HomePage = () => {
     },
   ];
 
+  const sensitizationTips = [
+    {
+      title: 'Malaria prevention',
+      body: 'Sleep under treated mosquito nets, clear stagnant water, and seek testing early for fever with chills.',
+      icon: Shield,
+      tone: 'text-emerald-700 bg-emerald-50 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-900/50',
+    },
+    {
+      title: 'Safe water habits',
+      body: 'Boil, filter, or treat drinking water. Wash hands before meals and after using the toilet.',
+      icon: Droplets,
+      tone: 'text-sky-700 bg-sky-50 border-sky-200 dark:bg-sky-950/20 dark:border-sky-900/50',
+    },
+    {
+      title: 'Act early',
+      body: 'Persistent fever, breathing difficulty, severe dehydration, bleeding, or pregnancy warning signs need prompt care.',
+      icon: HandHeart,
+      tone: 'text-amber-700 bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:border-amber-900/50',
+    },
+  ];
+
   useEffect(() => {
     getDiseases({ featured: true })
       .then((res) => {
@@ -100,6 +124,18 @@ const HomePage = () => {
 
     getAnalyticsSummary()
       .then((res) => setSummary((current) => ({ ...current, ...res.data })))
+      .catch(() => {});
+
+    getTopDiseases()
+      .then((res) => setTopDiseases(Array.isArray(res.data) ? res.data.slice(0, 3) : []))
+      .catch(() => setTopDiseases([]));
+
+    getTrends()
+      .then((res) => setWeeklyTrends(Array.isArray(res.data) ? res.data.slice(-4) : []))
+      .catch(() => setWeeklyTrends([]));
+
+    getOutbreakAlerts()
+      .then((res) => setOutbreakInfo(res.data || { alerts: [], rainy_season: false, has_alerts: false }))
       .catch(() => {});
   }, []);
 
@@ -279,6 +315,142 @@ const HomePage = () => {
                 </motion.div>
               ))}
             </motion.div>
+          </div>
+        </section>
+
+        {/* Community Trends & Sensitization */}
+        <section className="py-16 sm:py-20 bg-muted/30 border-y">
+          <div className="container mx-auto px-4">
+            <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="rounded-lg border bg-background p-5 sm:p-6 shadow-sm"
+              >
+                <div className="mb-5 flex items-start justify-between gap-4">
+                  <div>
+                    <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                      <TrendingUp className="h-4 w-4" />
+                      Community trends
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-bold">What MediGuard is seeing</h2>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      A quick view from recent screenings and local seasonal risk signals.
+                    </p>
+                  </div>
+                  <Link to="/trends">
+                    <Button variant="outline" size="sm">View dashboard</Button>
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                  <Card>
+                    <CardContent className="p-3 text-center min-h-[94px] flex flex-col justify-center">
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">This week</p>
+                      <p className="text-lg sm:text-2xl font-bold text-primary">{summary.active_this_week || 0}</p>
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">screenings</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-3 text-center min-h-[94px] flex flex-col justify-center">
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">Top report</p>
+                      <p className="text-sm sm:text-lg font-bold truncate">{summary.top_disease || 'No data'}</p>
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">{summary.top_disease_count || 0} cases</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-3 text-center min-h-[94px] flex flex-col justify-center">
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">Risk watch</p>
+                      <p className="text-sm sm:text-lg font-bold truncate">{outbreakInfo.has_alerts ? 'Active' : outbreakInfo.rainy_season ? 'Rainy' : 'Stable'}</p>
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">status</p>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="mt-5 space-y-3">
+                  {(topDiseases.length ? topDiseases : [
+                    { name: 'Malaria', count: 120 },
+                    { name: 'Typhoid Fever', count: 96 },
+                    { name: 'Pneumonia', count: 82 },
+                  ]).map((item, index) => {
+                    const max = Math.max(...(topDiseases.length ? topDiseases : [{ count: 120 }]).map(row => row.count || row.cases || 1));
+                    const count = item.count || item.cases || 0;
+                    return (
+                      <div key={item.name || item.disease || index}>
+                        <div className="mb-1 flex items-center justify-between text-sm">
+                          <span className="font-semibold">{item.name || item.disease}</span>
+                          <span className="text-muted-foreground">{count}</span>
+                        </div>
+                        <div className="h-2 overflow-hidden rounded-full bg-muted">
+                          <motion.div
+                            className="h-full rounded-full bg-primary"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${Math.max(12, (count / max) * 100)}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: index * 0.1 }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {weeklyTrends.length > 0 && (
+                  <p className="mt-4 text-xs text-muted-foreground">
+                    Latest trend point: {weeklyTrends[weeklyTrends.length - 1].disease} had {weeklyTrends[weeklyTrends.length - 1].count} report(s).
+                  </p>
+                )}
+              </motion.div>
+
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="grid gap-4"
+              >
+                <div>
+                  <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-secondary/10 px-3 py-1 text-sm font-semibold text-secondary">
+                    <Megaphone className="h-4 w-4" />
+                    Health sensitization
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-bold">Simple actions that reduce risk</h2>
+                </div>
+
+                {outbreakInfo.has_alerts && (
+                  <Card className="border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/20">
+                    <CardContent className="p-4">
+                      <div className="flex items-start gap-3">
+                        <AlertCircle className="h-5 w-5 text-red-600 mt-0.5" />
+                        <div>
+                          <p className="font-bold text-red-800 dark:text-red-300">Community watch alert</p>
+                          <p className="text-sm text-red-700 dark:text-red-300">
+                            {outbreakInfo.alerts?.[0]?.disease || 'A condition'} is showing increased reports. Follow prevention guidance and seek care early.
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                  {sensitizationTips.map((tip) => (
+                    <motion.div key={tip.title} variants={fadeUpItem}>
+                      <Card className={`h-full border ${tip.tone}`}>
+                        <CardContent className="p-4">
+                          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-background/80">
+                            <tip.icon className="h-5 w-5" />
+                          </div>
+                          <h3 className="font-bold">{tip.title}</h3>
+                          <p className="mt-1 text-sm leading-relaxed">{tip.body}</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 

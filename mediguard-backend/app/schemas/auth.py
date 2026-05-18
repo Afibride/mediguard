@@ -27,3 +27,17 @@ class ResetPasswordRequest(BaseModel):
     token: str
     password: str = Field(min_length=6)
 
+
+class PatchNotificationRequest(BaseModel):
+    notify_emails: bool
+
+
+class UpdateProfileRequest(BaseModel):
+    full_name: str | None = Field(None, min_length=2, max_length=100)
+    email: EmailStr | None = None
+
+
+class ChangePasswordRequest(BaseModel):
+    current_password: str
+    new_password: str = Field(min_length=6)
+

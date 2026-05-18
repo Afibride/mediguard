@@ -96,8 +96,13 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  const updateUser = (updated) => {
+    setUser(updated);
+    localStorage.setItem('mediguard_user', JSON.stringify(updated));
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, loading, updateUser }}>
       {!loading && children}
     </AuthContext.Provider>
   );

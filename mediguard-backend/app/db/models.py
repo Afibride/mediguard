@@ -14,6 +14,7 @@ class User(Base):
     full_name = Column(String, nullable=False)
     hashed_pw = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
+    notify_emails = Column(Boolean, default=True, nullable=False, server_default="true")
     created_at = Column(DateTime, default=datetime.utcnow)
 
     predictions = relationship("PredictionLog", back_populates="user")
@@ -86,6 +87,26 @@ class ContactMessage(Base):
     subject = Column(String, nullable=False)
     message = Column(Text, nullable=False)
     sent_at = Column(DateTime, default=datetime.utcnow)
+
+
+class ChatFeedback(Base):
+    """Per-message rating on an AI chat response.
+
+    Stores the user query, a preview of the AI response, and whether the user
+    found it helpful. Extracted keywords are used for pattern analysis to
+    identify knowledge gaps and improve the system prompt adaptively.
+    """
+    __tablename__ = "chat_feedback"
+
+    id = Column(Integer, primary_key=True, index=True)
+    session_id = Column(String, index=True, nullable=True)   # client-side chat session id
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True, index=True)
+    query = Column(Text, nullable=False)
+    response_preview = Column(Text, nullable=True)           # first ~300 chars of AI reply
+    rating = Column(Boolean, nullable=False)                 # True = helpful, False = not helpful
+    query_keywords = Column(JSON, default=list)              # extracted from query, client-side
+    mode = Column(String, nullable=True)                     # "symptom_check", "general", etc.
+    created_at = Column(DateTime, default=datetime.utcnow, index=True)
 
 
 class PredictionFeedback(Base):

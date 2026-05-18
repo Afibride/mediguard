@@ -15,6 +15,13 @@ class Settings(BaseSettings):
     symptoms_list: str = "data_pipeline/symptoms_list.json"
     embedding_model: str = "all-MiniLM-L6-v2"
     frontend_origins: str = "http://localhost:3000,http://localhost:5173"
+    frontend_url: str = "http://localhost:5173"
+    # SMTP email settings (leave smtp_user/smtp_password empty to disable email)
+    smtp_host: str = "smtp.gmail.com"
+    smtp_port: int = 587
+    smtp_user: str = ""
+    smtp_password: str = ""
+    smtp_from: str = "MediGuard Bamenda <noreply@mediguard.health>"
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

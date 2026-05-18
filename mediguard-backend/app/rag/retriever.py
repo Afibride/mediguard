@@ -8,6 +8,8 @@ chunks so the backend remains usable before the one-time Pinecone ingest runs.
 import json
 import os
 import re
+import time
+from collections import Counter
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -76,6 +78,11 @@ _embedding_model = None
 _openai_client = None
 _local_chunks = None
 _predictor = None
+
+# Cache for weak topics derived from low-rated chat feedback
+_weak_topics_cache: list[str] = []
+_weak_topics_ts: float = 0.0
+_WEAK_CACHE_TTL = 600  # 10 minutes
 
 GREETING_PATTERNS = [
     r"^\s*(hi|hello|hey|good morning|good afternoon|good evening)\s*[!.?]*\s*$",
@@ -486,6 +493,52 @@ def _symptom_check_response(
     }
 
 
+def _load_weak_topics() -> list[str]:
+    global _weak_topics_cache, _weak_topics_ts
+    now = time.time()
+    if now - _weak_topics_ts < _WEAK_CACHE_TTL:
+        return _weak_topics_cache
+    try:
+        from datetime import datetime, timedelta
+        from app.db.models import ChatFeedback
+        cutoff = datetime.utcnow() - timedelta(days=30)
+        db = SessionLocal()
+        try:
+            rows = db.query(ChatFeedback).filter(
+                ChatFeedback.rating == False,  # noqa: E712
+                ChatFeedback.created_at >= cutoff,
+            ).all()
+        finally:
+            db.close()
+        kw_counts: Counter = Counter()
+        for row in rows:
+            for kw in (row.query_keywords or []):
+                kw_counts[kw.lower()] += 1
+        _weak_topics_cache = [kw for kw, cnt in kw_counts.most_common(15) if cnt >= 2]
+    except Exception:
+        pass
+    _weak_topics_ts = now
+    return _weak_topics_cache
+
+
+def _get_weak_topic_note(query: str) -> str:
+    """Return a prompt hint when the query touches topics users previously found unhelpful."""
+    weak = _load_weak_topics()
+    if not weak:
+        return ""
+    text = query.lower()
+    matched = [kw for kw in weak if kw in text]
+    if not matched:
+        return ""
+    topics = ", ".join(matched[:3])
+    return (
+        f"\n\n[IMPROVEMENT NOTE: Users have previously rated responses about '{topics}' as unhelpful. "
+        "Be especially clear, step-by-step, and practical on this topic. "
+        "If the knowledge base lacks detail, explicitly acknowledge the limitation and recommend "
+        "consulting a qualified clinician at a nearby facility.]"
+    )
+
+
 def _optional_imports():
     try:
         from openai import OpenAI
@@ -655,6 +708,7 @@ def generate_answer(
     if llm is None:
         answer = _extractive_answer(query, chunks)
     else:
+        weak_note = _get_weak_topic_note(query)
         messages = [{
             "role": "system",
             "content": (
@@ -666,6 +720,7 @@ def generate_answer(
                 "headache, vision changes, swelling, shortness of breath, and fetal movement before giving non-urgent guidance.\n\n"
                 f"User context: gender={gender or 'not provided'}, pregnant={is_pregnant}, pregnancy_weeks={pregnancy_weeks or 'not provided'}.\n\n"
                 f"Context from the Gale Encyclopedia of Medicine:\n{context}"
+                f"{weak_note}"
             ),
         }]
         if chat_history:

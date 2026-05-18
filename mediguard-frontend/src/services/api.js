@@ -65,6 +65,8 @@ export const login = (data) => request('/auth/login', { method: 'POST', body: JS
 export const forgotPassword = (data) => request('/auth/forgot-password', { method: 'POST', body: JSON.stringify(data) });
 export const resetPassword = (data) => request('/auth/reset-password', { method: 'POST', body: JSON.stringify(data) });
 export const getMe = () => request('/auth/me');
+export const updateProfile = (data) => request('/auth/me', { method: 'PATCH', body: JSON.stringify(data) });
+export const changePassword = (data) => request('/auth/me/change-password', { method: 'POST', body: JSON.stringify(data) });
 
 export const getSymptoms = () => request('/symptoms');
 export const predictDisease = (symptoms, context = {}) =>
@@ -92,5 +94,14 @@ export const getTrends = () => request('/analytics/trends');
 export const getTopDiseases = () => request('/analytics/top-diseases');
 export const getHeatmap = () => request('/analytics/heatmap');
 export const getAnalyticsSummary = () => request('/analytics/summary');
+export const getOutbreakAlerts = () => request('/analytics/outbreak-alerts');
+export const sendOutbreakAlerts = () => request('/analytics/send-outbreak-alerts', { method: 'POST' });
+
+export const updateNotificationPrefs = (data) =>
+  request('/auth/me/notifications', { method: 'PATCH', body: JSON.stringify(data) });
+
+export const submitChatFeedback = (data) =>
+  request('/history/chats/feedback', { method: 'POST', body: JSON.stringify(data) });
+export const getChatInsights = () => request('/analytics/chat-insights');
 
 export const sendContact = (data) => request('/contact', { method: 'POST', body: JSON.stringify(data) });

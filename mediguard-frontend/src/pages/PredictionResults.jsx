@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { AlertCircle, ArrowLeft, MessageCircle, Info, HeartPulse, Activity, Stethoscope, Clock, ShieldAlert, Save, Brain, ChevronDown, CheckCircle2, Pill, AlertTriangle, Baby, User, Heart, HelpCircle, ThumbsUp, ThumbsDown, MapPin, Shield, Microscope } from 'lucide-react';
+import { AlertCircle, ArrowLeft, MessageCircle, Info, HeartPulse, Activity, Stethoscope, Clock, ShieldAlert, Save, Brain, ChevronDown, CheckCircle2, Pill, AlertTriangle, Baby, User, Heart, HelpCircle, ThumbsUp, ThumbsDown, MapPin, Shield, Microscope, Printer, FlaskConical } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/components/AuthContext';
 import DisclaimerBanner from '@/components/DisclaimerBanner';
@@ -17,6 +17,35 @@ const BAMENDA_FACILITIES = [
   { name: 'NAHPI Medical Centre', type: 'University Clinic', address: 'NAHPI Campus, Mankon, Bamenda', phone: '+237 677 000 003' },
   { name: 'Baptist Hospital Bamenda', type: 'Mission Hospital', address: 'Nkwen, Bamenda', phone: '+237 677 000 004' },
 ];
+
+const DISEASE_TESTS = {
+  'Malaria': ['Rapid Diagnostic Test (RDT)', 'Thick/thin blood film microscopy', 'Full Blood Count (FBC)', 'Haemoglobin level'],
+  'Typhoid Fever': ['Widal test', 'Blood culture (gold standard)', 'Stool culture', 'Full Blood Count (FBC)'],
+  'Tuberculosis': ['Sputum smear microscopy (AFB)', 'GeneXpert MTB/RIF', 'Chest X-ray', 'Tuberculin skin test (Mantoux)', 'Full Blood Count'],
+  'HIV AIDS': ['HIV rapid antibody test', 'HIV ELISA / Western blot', 'CD4 count', 'Viral load', 'Full Blood Count'],
+  'Hepatitis B': ['HBsAg test', 'Anti-HBs antibody', 'Liver function tests (LFT)', 'Abdominal ultrasound'],
+  'Hypertension': ['Blood pressure measurement (multiple readings)', 'Urine dipstick (protein)', 'Renal function tests', 'Electrocardiogram (ECG)', 'Fundoscopy'],
+  'Diabetes Mellitus': ['Fasting blood glucose', 'HbA1c (glycated haemoglobin)', 'Random blood glucose', 'Urine glucose & ketones', 'Renal function tests'],
+  'Pneumonia': ['Chest X-ray', 'Full Blood Count', 'Sputum culture & sensitivity', 'Blood culture', 'SpO2 pulse oximetry'],
+  'Cholera': ['Stool culture & sensitivity', 'Stool microscopy', 'Electrolytes (Na, K, Cl)', 'Urea and creatinine'],
+  'Meningitis': ['Lumbar puncture (CSF analysis)', 'Blood culture', 'CT scan brain (if focal neurology)', 'Full Blood Count', 'CRP'],
+  'Dengue Fever': ['NS1 antigen test', 'Dengue IgM / IgG antibody', 'Full Blood Count (platelet count)', 'Liver function tests'],
+  'Sickle Cell Crisis': ['Haemoglobin electrophoresis', 'Full Blood Count', 'Peripheral blood film', 'Sickle solubility test'],
+  'Iron Deficiency Anemia': ['Full Blood Count (FBC)', 'Serum ferritin', 'Serum iron & TIBC', 'Peripheral blood film'],
+  'Cystitis UTI': ['Urine dipstick', 'Urine microscopy, culture & sensitivity (MCS)', 'Full Blood Count'],
+  'Gastroenteritis': ['Stool microscopy & culture', 'Electrolytes', 'Full Blood Count', 'Urea and creatinine'],
+  'Asthma': ['Peak expiratory flow rate (PEFR)', 'Spirometry', 'Chest X-ray', 'Allergy skin prick test', 'Total IgE'],
+  'Peptic Ulcer': ['H. pylori stool antigen / breath test', 'Upper GI endoscopy', 'Stool occult blood test', 'Full Blood Count'],
+  'Chickenpox': ['Clinical diagnosis (usually sufficient)', 'Varicella-zoster IgM / IgG (if uncertain)', 'Full Blood Count'],
+  'Measles': ['Clinical diagnosis', 'Measles IgM antibody test', 'Throat swab PCR'],
+  'COVID-19': ['SARS-CoV-2 rapid antigen test', 'RT-PCR nasal/throat swab', 'Chest X-ray or HRCT', 'SpO2 pulse oximetry', 'Full Blood Count'],
+  'Sepsis': ['Blood culture (×2)', 'Full Blood Count', 'CRP / Procalcitonin', 'Lactate', 'Renal & liver function tests'],
+  'Stroke': ['CT scan brain', 'MRI brain', 'Blood glucose', 'Full Blood Count', 'ECG', 'Carotid ultrasound'],
+  'Heart Failure': ['Echocardiogram', 'ECG', 'Chest X-ray', 'BNP / NT-proBNP', 'Full Blood Count', 'Renal function'],
+  'Schistosomiasis': ['Stool/urine microscopy (ova)', 'Schistosoma serology (ELISA)', 'Full Blood Count', 'Renal/liver function tests'],
+  'Onchocerciasis': ['Skin snip microscopy', 'Mazzotti test', 'Slit-lamp eye exam'],
+  'Filariasis': ['Night blood film (microfilariae)', 'Antigen detection test (ICT card)', 'Ultrasound (filarial dance sign)'],
+};
 
 const PredictionResults = () => {
   const location = useLocation();
@@ -114,6 +143,46 @@ const PredictionResults = () => {
     return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
   };
 
+  const handlePrint = () => {
+    const top = predictions[0];
+    const tests = DISEASE_TESTS[top?.name] || DISEASE_TESTS[top?.disease] || [];
+    const testRows = tests.map(t => `<li style="margin:4px 0;">&#x2022; ${t}</li>`).join('');
+    const symptomList = symptoms.map(s => `<span style="display:inline-block;background:#e8f4ff;border:1px solid #b3d7ff;border-radius:4px;padding:2px 8px;margin:2px;font-size:13px;">${s}</span>`).join(' ');
+    const allPreds = predictions.slice(0, 5).map((p, i) =>
+      `<tr style="background:${i % 2 === 0 ? '#f9f9f9' : '#fff'}">
+        <td style="padding:6px 10px;border:1px solid #ddd;">${i + 1}. ${p.name || p.disease}</td>
+        <td style="padding:6px 10px;border:1px solid #ddd;text-align:center;">${p.confidence}%</td>
+        <td style="padding:6px 10px;border:1px solid #ddd;">${p.severity || '—'}</td>
+      </tr>`
+    ).join('');
+    const html = `<!DOCTYPE html><html><head><title>MediGuard Diagnosis – ${top?.name || 'Results'}</title>
+    <style>body{font-family:Arial,sans-serif;margin:32px;color:#1a1a1a;max-width:800px}
+    h1{color:#2563eb;border-bottom:2px solid #2563eb;padding-bottom:8px}
+    h2{color:#374151;margin-top:24px;font-size:16px}
+    table{border-collapse:collapse;width:100%;margin-top:8px}
+    th{background:#2563eb;color:#fff;padding:8px 10px;text-align:left;border:1px solid #1d4ed8}
+    .footer{margin-top:32px;padding:12px;background:#fef3c7;border:1px solid #fcd34d;border-radius:6px;font-size:12px}
+    @media print{body{margin:16px}.no-print{display:none}}</style></head>
+    <body>
+    <h1>MediGuard – Diagnosis Assessment</h1>
+    <p><strong>Date:</strong> ${new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' })}</p>
+    ${gender !== 'Not specified' ? `<p><strong>Patient:</strong> ${gender}${age !== 'Not specified' ? `, Age ${age}` : ''}${isPregnant ? ', Pregnant' : ''}</p>` : ''}
+    <h2>Reported Symptoms</h2><div>${symptomList}</div>
+    ${duration !== 'Not specified' ? `<p><strong>Duration:</strong> ${duration} &nbsp;|&nbsp; <strong>Severity:</strong> ${severity}</p>` : ''}
+    <h2>Top Predictions</h2>
+    <table><tr><th>Condition</th><th>Confidence</th><th>Severity</th></tr>${allPreds}</table>
+    ${tests.length > 0 ? `<h2>Recommended Laboratory Tests (for ${top?.name || 'top condition'})</h2><ul style="margin:0;padding-left:16px">${testRows}</ul><p style="font-size:12px;color:#555;">Present this list to your doctor or laboratory for confirmation.</p>` : ''}
+    ${top?.treatment ? `<h2>Treatment Note</h2><p>${top.treatment}</p>` : ''}
+    <div class="footer"><strong>IMPORTANT:</strong> This is an AI-generated symptom assessment, NOT a medical diagnosis. Always consult a qualified health professional before starting any treatment. For emergencies, go to Bamenda Regional Hospital immediately.</div>
+    </body></html>`;
+    const w = window.open('', '_blank');
+    if (!w) { toast({ title: 'Popup blocked', description: 'Allow popups for this site to generate the PDF.', variant: 'destructive' }); return; }
+    w.document.write(html);
+    w.document.close();
+    w.focus();
+    setTimeout(() => { w.print(); }, 600);
+  };
+
   const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
   const itemVariants = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
 
@@ -130,13 +199,18 @@ const PredictionResults = () => {
         <motion.div className="container mx-auto px-4 max-w-4xl" variants={containerVariants} initial="hidden" animate="visible">
 
           {/* Header Controls */}
-          <div className="flex flex-wrap justify-between items-center mb-8 gap-4">
+          <div className="flex flex-wrap justify-between items-center mb-8 gap-3">
             <Button variant="outline" onClick={() => navigate('/symptom-checker')} className="hover:bg-muted">
               <ArrowLeft className="mr-2 h-4 w-4" />New Diagnosis
             </Button>
-            <Button onClick={handleSaveDiagnosis} variant="default" className="shadow-md">
-              <Save className="mr-2 h-4 w-4" />{user ? 'Save Diagnosis' : 'Login to Save'}
-            </Button>
+            <div className="flex gap-2 flex-wrap">
+              <Button variant="outline" onClick={handlePrint} className="shadow-sm">
+                <Printer className="mr-2 h-4 w-4" />Download PDF
+              </Button>
+              <Button onClick={handleSaveDiagnosis} variant="default" className="shadow-md">
+                <Save className="mr-2 h-4 w-4" />{user ? 'Save Diagnosis' : 'Login to Save'}
+              </Button>
+            </div>
           </div>
 
           {/* Context Summary */}
@@ -359,6 +433,32 @@ const PredictionResults = () => {
                                 </div>
                               )}
                             </div>
+
+                            {/* Recommended Tests */}
+                            {(() => {
+                              const tests = DISEASE_TESTS[disease.name] || DISEASE_TESTS[disease.disease] || [];
+                              return tests.length > 0 ? (
+                                <motion.div
+                                  initial={{ opacity: 0, y: 8 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  className="p-4 rounded-lg border border-purple-200 bg-purple-50 dark:bg-purple-950/20 dark:border-purple-800"
+                                >
+                                  <h4 className="font-bold flex items-center gap-2 mb-2 text-purple-800 dark:text-purple-300">
+                                    <FlaskConical className="h-4 w-4" />Recommended Tests at the Hospital
+                                  </h4>
+                                  <p className="text-xs text-purple-600 dark:text-purple-400 mb-3">
+                                    Show this list to your doctor or lab technician for confirmation:
+                                  </p>
+                                  <div className="flex flex-wrap gap-2">
+                                    {tests.map((test, i) => (
+                                      <Badge key={i} variant="outline" className="bg-white dark:bg-purple-900/30 border-purple-300 text-purple-800 dark:text-purple-300 text-xs">
+                                        <Microscope className="h-2.5 w-2.5 mr-1" />{test}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              ) : null;
+                            })()}
 
                             {/* Prevention */}
                             {prevention.length > 0 && (

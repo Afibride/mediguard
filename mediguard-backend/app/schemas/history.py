@@ -28,3 +28,12 @@ class ChatHistoryCreate(BaseModel):
 class ChatHistoryItem(ChatHistoryCreate):
     id: int
     created_at: datetime | str
+
+
+class ChatFeedbackInput(BaseModel):
+    session_id: str | None = None
+    query: str
+    response_preview: str | None = None
+    rating: bool
+    query_keywords: list[str] = []
+    mode: str | None = None

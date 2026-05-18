@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.db.models import ChatLog, PredictionLog, User
+from app.db.models import ChatFeedback, ChatLog, PredictionLog, User
 from app.db.session import get_db
-from app.schemas.history import ChatHistoryCreate
-from app.utils.dependencies import get_current_user
+from app.schemas.history import ChatFeedbackInput, ChatHistoryCreate
+from app.utils.dependencies import get_current_user, optional_user
 
 router = APIRouter()
 
@@ -90,3 +90,23 @@ def delete_chat_history(chat_id: int, db: Session = Depends(get_db), user: User 
     db.delete(row)
     db.commit()
     return {"message": "Deleted"}
+
+
+@router.post("/chats/feedback")
+def submit_chat_feedback(
+    body: ChatFeedbackInput,
+    db: Session = Depends(get_db),
+    user: User | None = Depends(optional_user),
+):
+    row = ChatFeedback(
+        session_id=body.session_id,
+        user_id=user.id if user else None,
+        query=body.query,
+        response_preview=body.response_preview,
+        rating=body.rating,
+        query_keywords=body.query_keywords,
+        mode=body.mode,
+    )
+    db.add(row)
+    db.commit()
+    return {"ok": True}
