@@ -1,13 +1,65 @@
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, AlertCircle, Shield, Activity, Stethoscope, TrendingUp, HelpCircle, BookOpen, Pill, ClipboardList } from 'lucide-react';
+import { ArrowLeft, AlertCircle, Shield, Activity, Stethoscope, TrendingUp, HelpCircle, BookOpen, Pill, ClipboardList, ChevronDown } from 'lucide-react';
 import { diseases } from '@/data/diseases';
 import { getDiseaseDetail, getDiseases } from '@/services/api';
+
+const SymptomList = ({ symptoms, descriptions, diseaseName }) => {
+  const [expanded, setExpanded] = useState(null);
+  return (
+    <div className="space-y-2">
+      {symptoms.map((symptom, index) => {
+        const desc = descriptions[symptom];
+        const isOpen = expanded === symptom;
+        return (
+          <div
+            key={index}
+            className={`rounded-lg border transition-colors ${desc ? 'cursor-pointer hover:border-primary/40' : ''} ${isOpen ? 'border-primary/40 bg-primary/5' : 'bg-background'}`}
+            onClick={() => desc && setExpanded(isOpen ? null : symptom)}
+          >
+            <div className="flex items-center justify-between px-4 py-3 gap-3">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="h-2 w-2 rounded-full bg-primary flex-shrink-0" />
+                <span className="font-medium text-sm">{symptom}</span>
+              </div>
+              {desc ? (
+                <ChevronDown className={`h-4 w-4 text-muted-foreground flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+              ) : (
+                <Badge variant="outline" className="text-[10px] flex-shrink-0">General</Badge>
+              )}
+            </div>
+            <AnimatePresence initial={false}>
+              {isOpen && desc && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2, ease: 'easeInOut' }}
+                  className="overflow-hidden"
+                >
+                  <p className="px-4 pb-3 text-sm text-muted-foreground leading-relaxed border-t border-border/50 pt-2">
+                    {desc}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+      {symptoms.some(s => descriptions[s]) && (
+        <p className="text-xs text-muted-foreground pt-1 pl-1">
+          Tap any symptom to see how it specifically appears in {diseaseName}.
+        </p>
+      )}
+    </div>
+  );
+};
 
 const DiseaseDetail = () => {
   const { id } = useParams();
@@ -126,21 +178,18 @@ const DiseaseDetail = () => {
           </Card>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <Card className="medical-panel">
+            <Card className="medical-panel md:col-span-2">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Stethoscope className="h-5 w-5 text-primary" />
-                  Common Symptoms
+                  How Symptoms Appear in {disease.name}
                 </CardTitle>
+                <CardDescription>
+                  Each symptom below describes how it specifically presents in this disease — not just that it exists.
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {disease.symptoms.map((symptom, index) => (
-                    <Badge key={index} variant="outline" className="bg-primary/5 text-sm">
-                      {symptom}
-                    </Badge>
-                  ))}
-                </div>
+                <SymptomList symptoms={disease.symptoms} descriptions={disease.symptom_descriptions || {}} diseaseName={disease.name} />
               </CardContent>
             </Card>
 

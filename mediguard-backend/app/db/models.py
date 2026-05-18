@@ -46,6 +46,7 @@ class Disease(Base):
     treatment = Column(Text, default="")
     prevention = Column(JSON, default=list)
     sections = Column(JSON, default=dict)
+    symptom_descriptions = Column(JSON, default=dict)
     updated_at = Column(DateTime, default=datetime.utcnow)
 
 

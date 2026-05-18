@@ -71,8 +71,12 @@ const ProfilePage = () => {
         return;
       }
       const res = await updateProfile(payload);
-      setProfile(res.data);
-      updateUser(res.data);
+      if (res.data.access_token) {
+        localStorage.setItem('mediguard_token', res.data.access_token);
+      }
+      const { access_token: _tok, ...userData } = res.data;
+      setProfile(userData);
+      updateUser(userData);
       setEditingProfile(false);
       toast({ title: 'Profile updated', description: 'Your details have been saved.' });
     } catch (err) {

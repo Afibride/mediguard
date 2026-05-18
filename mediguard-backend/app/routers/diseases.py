@@ -22,6 +22,7 @@ def serialize_disease(disease: Disease) -> dict:
         "treatment": disease.treatment,
         "prevention": disease.prevention or [],
         "sections": disease.sections or {},
+        "symptom_descriptions": disease.symptom_descriptions or {},
     }
 
 

@@ -241,6 +241,7 @@ export default defineConfig({
 		addTransformIndexHtml
 	],
 	server: {
+		host: true,
 		cors: true,
 		proxy: {
 			'/api': {

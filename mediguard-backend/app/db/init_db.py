@@ -9,6 +9,7 @@ def init_db() -> None:
     Base.metadata.create_all(bind=engine)
     ensure_chat_log_columns()
     ensure_user_columns()
+    ensure_disease_columns()
     seed_diseases()
 
 
@@ -48,6 +49,18 @@ def ensure_user_columns() -> None:
                 connection.execute(text(f"ALTER TABLE users ADD COLUMN {column} {definition}"))
 
 
+def ensure_disease_columns() -> None:
+    inspector = inspect(engine)
+    if "diseases" not in inspector.get_table_names():
+        return
+    existing = {col["name"] for col in inspector.get_columns("diseases")}
+    additions = {"symptom_descriptions": "JSON DEFAULT '{}'"}
+    with engine.begin() as connection:
+        for column, definition in additions.items():
+            if column not in existing:
+                connection.execute(text(f"ALTER TABLE diseases ADD COLUMN {column} {definition}"))
+
+
 def seed_diseases() -> None:
     db = SessionLocal()
     try:
@@ -65,6 +78,7 @@ def seed_diseases() -> None:
                 "treatment": item.get("treatment", ""),
                 "prevention": item.get("prevention", []),
                 "sections": item.get("sections", {}),
+                "symptom_descriptions": item.get("symptom_descriptions", {}),
             }
             if disease:
                 for key, value in payload.items():

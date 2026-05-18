@@ -14,7 +14,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from app.data import DISEASES, SYMPTOMS
+from app.data import DISEASES, SYMPTOM_DESCRIPTIONS, SYMPTOMS
 from app.db.models import Disease
 from app.db.session import SessionLocal
 from app.ml.predictor import DiseasePredictor
@@ -95,6 +95,210 @@ THANKS_PATTERNS = [
     r"^\s*(thanks|thank you|thank u|appreciate it|much appreciated)\s*[!.?]*\s*$",
     r"^\s*(thanks|thank you)\s+(a lot|so much|very much)\s*[!.?]*\s*$",
 ]
+
+
+SYMPTOM_DEFINITIONS: dict[str, str] = {
+    "fever": (
+        "A fever is a temporary rise in body temperature above the normal range of 36–37.5°C (97–99.5°F), "
+        "usually above 38°C (100.4°F). It is the body's natural defence response — an elevated temperature "
+        "makes the environment less hospitable for many bacteria and viruses. Fever often comes with chills, "
+        "sweating, headache, muscle aches, and loss of appetite. Prolonged or very high fever (above 40°C/104°F) "
+        "needs prompt medical attention."
+    ),
+    "rash": (
+        "A rash is any change in the skin's colour, texture, or appearance — it may be flat (macular), "
+        "raised (papular), blistered (vesicular), or pustular. Rashes can be localised to one area or spread "
+        "across the body. They can be itchy, painful, or painless. The exact look of a rash is an important "
+        "diagnostic clue: rashes from different diseases spread and appear differently."
+    ),
+    "cough": (
+        "A cough is a reflex action to clear the airway of mucus, irritants, or foreign material. "
+        "It can be dry (no mucus) or productive (with phlegm). A cough lasting more than 3 weeks is considered "
+        "chronic and warrants evaluation. Key features to note: whether it is dry or wet, whether it produces "
+        "blood-streaked sputum, whether it worsens at night, and whether it is associated with breathing difficulty."
+    ),
+    "headache": (
+        "A headache is pain or discomfort felt in the head, scalp, or neck. It can be throbbing, pressing, "
+        "squeezing, or stabbing in character. Tension headaches are the most common type. When headache occurs "
+        "with fever, stiff neck, sensitivity to light, or confusion, it may signal a serious infection such as "
+        "meningitis and requires urgent care."
+    ),
+    "fatigue": (
+        "Fatigue is a state of persistent tiredness or exhaustion that is not relieved by normal rest. "
+        "It can be physical (muscle weakness, heaviness) or mental (difficulty concentrating, low motivation). "
+        "While lifestyle factors like poor sleep, dehydration, skipped meals, and overwork can cause fatigue, "
+        "it is also a common symptom of infections, anemia, thyroid disorders, and many other conditions."
+    ),
+    "nausea": (
+        "Nausea is an unpleasant queasy feeling in the stomach, often accompanied by the urge to vomit, "
+        "increased saliva, and sweating. It can be triggered by infections (especially gastrointestinal), "
+        "food poisoning, medications, motion sickness, pregnancy, or conditions affecting the inner ear or brain. "
+        "Persistent nausea lasting more than 24 hours should be evaluated."
+    ),
+    "vomiting": (
+        "Vomiting is the forceful expulsion of stomach contents through the mouth. It can be caused by "
+        "infections, food poisoning, medications, motion sickness, appendicitis, or brain conditions. "
+        "Repeated vomiting leads to dehydration and electrolyte imbalance — warning signs include no urination "
+        "for 8+ hours, dry mouth, dizziness, and sunken eyes. Blood in vomit requires immediate medical attention."
+    ),
+    "diarrhea": (
+        "Diarrhea is passing loose or watery stools three or more times in a day. It can be caused by "
+        "bacterial, viral, or parasitic infections, contaminated food or water, or irritable bowel conditions. "
+        "The main danger of diarrhea is dehydration. Seek urgent care for blood in stool, severe abdominal pain, "
+        "high fever, or signs of dehydration (extreme thirst, no urine, sunken eyes, rapid pulse)."
+    ),
+    "chills": (
+        "Chills are episodes of shivering with a feeling of cold, caused by the body's attempt to raise its "
+        "temperature. They often signal the start of a fever as the body fights infection. Chills followed by "
+        "a spiking fever that then 'breaks' with sweating are classic in malaria. Severe chills with no fever "
+        "or very low temperature (hypothermia) also need attention."
+    ),
+    "sweating": (
+        "Sweating is the body's mechanism for cooling down by releasing fluid through sweat glands. "
+        "In illness, drenching sweats often accompany the breaking of a fever. Night sweats (soaking the "
+        "clothes or bedding during sleep) can be a sign of tuberculosis, HIV, lymphoma, or other systemic "
+        "conditions and should be investigated if persistent."
+    ),
+    "abdominal pain": (
+        "Abdominal pain is discomfort or pain in the area between the chest and groin. It can be cramping, "
+        "sharp, dull, or colicky. Causes include gastroenteritis, appendicitis, kidney stones, peptic ulcers, "
+        "and liver or spleen enlargement (common in malaria and typhoid). Severe sudden-onset pain, pain with "
+        "fever and rigid abdomen, or pain with vomiting of blood require urgent care."
+    ),
+    "chest pain": (
+        "Chest pain is any discomfort or pain in the chest area. While benign causes exist (muscle strain, "
+        "acid reflux, costochondritis), chest pain can also signal heart attack, pneumonia, pleuritis, "
+        "pulmonary embolism, or pericarditis. Crushing central chest pain radiating to the arm or jaw, "
+        "or pain with breathlessness, is a medical emergency."
+    ),
+    "shortness of breath": (
+        "Shortness of breath (dyspnea) is the feeling of not getting enough air. It can occur with exertion "
+        "or at rest. Causes include asthma, pneumonia, pleural effusion, anemia, heart failure, and allergic "
+        "reactions. Sudden severe breathlessness — especially with chest pain, blue lips, or rapid heartbeat — "
+        "is a medical emergency requiring immediate care."
+    ),
+    "joint pain": (
+        "Joint pain (arthralgia) is aching, soreness, or stiffness in one or more joints. When accompanied "
+        "by fever and rash it may indicate viral infections like dengue, chikungunya, or rheumatic fever. "
+        "Inflammation with redness and warmth (arthritis) suggests an inflammatory cause. Severe pain in a "
+        "single hot swollen joint may indicate septic arthritis, which is an emergency."
+    ),
+    "muscle pain": (
+        "Muscle pain (myalgia) is aching or soreness in the muscles, often described as a feeling of "
+        "'body aches'. In systemic infections the immune system releases inflammatory chemicals (cytokines) "
+        "that cause widespread muscle discomfort. Severe localised muscle pain, especially with swelling or "
+        "weakness, can indicate a more specific muscle condition."
+    ),
+    "loss of appetite": (
+        "Loss of appetite (anorexia) is a reduced desire to eat. It is a very common non-specific symptom "
+        "that accompanies many infections, as the body redirects energy toward fighting illness. Prolonged "
+        "loss of appetite with unintentional weight loss should be evaluated, as it can also be a sign of "
+        "tuberculosis, liver disease, cancer, or chronic infections."
+    ),
+    "weight loss": (
+        "Unintentional weight loss is losing body weight without trying — generally more than 5% of body "
+        "weight over 6–12 months. It can be caused by infections (tuberculosis, HIV), cancer, diabetes, "
+        "thyroid disease, or severe malnutrition. When combined with night sweats and persistent cough, it "
+        "is a classic warning sign for tuberculosis."
+    ),
+    "sore throat": (
+        "A sore throat is pain, scratchiness, or irritation of the throat that often worsens when "
+        "swallowing. It can be caused by viral infections (common cold, influenza, COVID-19), bacterial "
+        "infections (streptococcal pharyngitis), or environmental irritants. A sore throat with white "
+        "patches, high fever, or swollen lymph nodes may need antibiotic treatment."
+    ),
+    "runny nose": (
+        "A runny nose (rhinorrhea) is excess nasal discharge — it can be clear, white, yellow, or green. "
+        "Clear discharge often indicates a viral infection or allergy; thick coloured discharge may suggest "
+        "a bacterial secondary infection. Runny nose combined with body aches and fever typically points to "
+        "influenza rather than a simple cold."
+    ),
+    "skin lesion": (
+        "A skin lesion is any abnormal area of skin — it can be a sore, ulcer, blister, spot, or growth. "
+        "The type, location, edge, colour, and whether it is painful or painless all help identify the cause. "
+        "Painless skin lesions can be associated with conditions like leprosy or some STIs."
+    ),
+    "swollen lymph nodes": (
+        "Swollen lymph nodes (lymphadenopathy) are enlarged glands that are part of the immune system. "
+        "They swell when fighting an infection nearby. Generalised lymph node swelling (in armpits, neck, "
+        "and groin) combined with fever and weight loss raises concern for HIV, lymphoma, or tuberculosis."
+    ),
+    "jaundice": (
+        "Jaundice is a yellow colouring of the skin and whites of the eyes caused by excess bilirubin in "
+        "the blood. It indicates that the liver is not processing bilirubin normally — due to liver disease "
+        "(hepatitis, cirrhosis), bile duct obstruction, or destruction of red blood cells (haemolytic anaemia "
+        "or severe malaria). New-onset jaundice always warrants prompt medical evaluation."
+    ),
+    "seizure": (
+        "A seizure is a sudden, uncontrolled electrical disturbance in the brain that can cause changes in "
+        "behaviour, movements, feelings, and levels of consciousness. In the context of infection, seizures "
+        "can be triggered by very high fever (febrile seizures, common in young children), meningitis, "
+        "cerebral malaria, or encephalitis. A first seizure or any seizure with persistent loss of "
+        "consciousness requires emergency evaluation."
+    ),
+}
+
+SYMPTOM_DEFINITION_PATTERNS = [
+    re.compile(r"^\s*what\s+(?:is|are)\s+(?:a\s+|an\s+|the\s+)?(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*(?:define|explain)\s+(?:a\s+|an\s+|the\s+)?(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*tell\s+me\s+about\s+(?:a\s+|an\s+|the\s+)?(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*what\s+does\s+(.+?)\s+(?:mean|feel\s+like|look\s+like)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*meaning\s+of\s+(.+?)\s*[?.!]*\s*$", re.I),
+]
+
+
+def _extract_symptom_term(query: str) -> str | None:
+    for pattern in SYMPTOM_DEFINITION_PATTERNS:
+        match = pattern.match(query.strip())
+        if match:
+            return match.group(1).strip().lower()
+    return None
+
+
+def _symptom_definition_response(query: str) -> dict | None:
+    term = _extract_symptom_term(query)
+    if not term:
+        return None
+
+    # Check for an exact or near match in our definitions table
+    definition = SYMPTOM_DEFINITIONS.get(term)
+    if not definition:
+        # Try substring match (e.g. "high fever" → "fever")
+        for key, val in SYMPTOM_DEFINITIONS.items():
+            if key in term or term in key:
+                definition = val
+                term = key
+                break
+
+    if not definition:
+        return None
+
+    # Gather how this symptom appears in specific diseases from SYMPTOM_DESCRIPTIONS
+    disease_examples: list[str] = []
+    for disease_name, desc_map in SYMPTOM_DESCRIPTIONS.items():
+        for sym_key, sym_desc in desc_map.items():
+            if term in sym_key.lower() or sym_key.lower() in term:
+                disease_examples.append(f"• **{disease_name}**: {sym_desc}")
+                break
+    disease_examples = disease_examples[:5]
+
+    answer_parts = [definition]
+    if disease_examples:
+        answer_parts.append(
+            f"\n\nHow **{term}** specifically appears in different diseases:"
+        )
+        answer_parts.extend(disease_examples)
+    answer_parts.append(
+        "\n\nIf you are experiencing this symptom yourself, describe it to a qualified healthcare "
+        "professional or use the MediGuard Symptom Checker for a guided assessment."
+    )
+
+    return {
+        "answer": "\n".join(answer_parts),
+        "sources": list({name for name, desc_map in SYMPTOM_DESCRIPTIONS.items()
+                         for sym_key in desc_map if term in sym_key.lower() or sym_key.lower() in term})[:4],
+        "disclaimer": DISCLAIMER,
+    }
 
 
 def _conversational_response(query: str) -> dict | None:
@@ -676,6 +880,10 @@ def generate_answer(
     conversational = _conversational_response(query)
     if conversational:
         return conversational
+
+    symptom_definition = _symptom_definition_response(query)
+    if symptom_definition:
+        return symptom_definition
 
     symptom_check = _symptom_check_response(
         query,

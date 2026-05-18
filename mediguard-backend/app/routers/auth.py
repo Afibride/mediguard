@@ -156,6 +156,7 @@ def update_profile(
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+    email_changed = False
     if body.full_name is not None:
         user.full_name = body.full_name
     if body.email is not None and body.email != user.email:
@@ -163,9 +164,14 @@ def update_profile(
         if existing:
             raise HTTPException(status_code=409, detail="Email already in use by another account")
         user.email = body.email
+        email_changed = True
+    db.add(user)
     db.commit()
     db.refresh(user)
-    return serialize_user(user)
+    result = serialize_user(user)
+    if email_changed:
+        result["access_token"] = create_access_token(user.email)
+    return result
 
 
 @router.post("/me/change-password")
