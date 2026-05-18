@@ -9,10 +9,10 @@ const SuggestedQuestions = ({ onSelectQuestion }) => {
   const [showRightArrow, setShowRightArrow] = useState(true);
 
   const questions = [
-    "I have a fever and cough",
-    "I'm experiencing stomach pain",
-    "I have a rash",
-    "I'm feeling dizzy and weak"
+    "I have fever and chills and headache",
+    "Can you help me check cough and chest pain?",
+    "What are the symptoms of malaria?",
+    "Thank you"
   ];
 
   const handleScroll = () => {
@@ -61,7 +61,7 @@ const SuggestedQuestions = ({ onSelectQuestion }) => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onSelectQuestion(question)}
-            className="flex-shrink-0 snap-center bg-primary text-primary-foreground px-5 py-3 rounded-xl shadow-sm hover:shadow-md transition-all font-medium text-sm border border-primary/20 hover:bg-primary/90 min-w-[200px] w-[80vw] sm:w-auto text-left"
+            className="flex-shrink-0 snap-center bg-primary text-primary-foreground px-5 py-3 rounded-lg shadow-sm hover:shadow-md transition-all font-medium text-sm border border-primary/20 hover:bg-primary/90 min-w-[220px] w-[78vw] sm:w-auto text-left"
           >
             "{question}"
           </motion.button>

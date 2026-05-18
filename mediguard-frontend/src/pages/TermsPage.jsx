@@ -32,7 +32,7 @@ const TermsPage = () => {
 
               <div className="hidden sm:block">
                 <img 
-                  src="/public/mediguard.png" 
+                  src="/mediguard.png" 
                   alt="MediGuard Logo" 
                   className="logo-sm"
                 />
@@ -47,7 +47,7 @@ const TermsPage = () => {
               <CardContent className="p-8 md:p-12 prose prose-slate dark:prose-invert max-w-none">
                 <div className="sm:hidden mb-6 flex justify-center">
                   <img 
-                    src="/public/mediguard.png" 
+                    src="/mediguard.png" 
                     alt="MediGuard Logo" 
                     className="logo-sm"
                   />

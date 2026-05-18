@@ -1,0 +1,880 @@
+DISEASE: Scabies
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+Alternative treatment
+Patients with peroxisomal disorders, and parti-
+cularly X-ALD, have been treated with a mixture
+of glycerol trioleate-gl ycerol trieucate (4:1 by
+volume), prepared from olive and rapeseed oils,
+and referred to as Lorenzo’s oil (developed by
+parents of a son, Lorenzo, who had X-ALD,
+whose story was documented in the 1992 movie,
+Lorenzo’s Oil), to decrease the levels of VLCFA.
+Other diets that have been tried include dietary
+supplementation with plasmalogen precursors to
+increase plasmalogen levels and with cholic acid
+to normalize bile acids. However, there has been
+only limited success demonstrated with the use of
+these treatments. More research is needed to deter-
+mine the long-term safety and effectiveness of these
+treatment strategies.
+Prognosis
+Peroxisomal disorders range from life-threatening
+to cases in which people may function with some
+degree of mental and motor retardation. As of 2001,
+there was not yet a cure. Enzyme replacement thera-
+pies, including enzyme infusion, transplantation, and
+gene therapy, may hold promise for future advances in
+the treatment of these disorders. Research is being
+conducted to increase scientific understanding of
+these disorders and to find ways to prevent, treat,
+and cure them.
+Prevention
+Unfortunately not enough is yet known about
+these diseases to develop comprehensive strategies
+for prevention. Genetic counseling is recommended
+for known or suspected carriers. As genes are identi-
+fied that result in the disorders,genetic testingis being
+developed to identify carriers, who then can manage
+their reproduction to avoid the possibility of children
+being born with these deficiencies. As the genetic bases
+for the disorders are defined, prenatal diagnosis and
+identification of carriers will be facilitated. For exam-
+ple, for X-ALD, diagnosis can be made from cultured
+skin fibroblasts or amniotic fluid cells. This allows
+prenatal diagnosis and carrier identification in 90%
+of those affected. More recently it has been shown that
+biochemical diagnosis can be performed through
+chorionic villi biopsy, a procedure performed very
+early in the first trimester ofpregnancy.
+Animal models of ZS and X-ADL have been
+developed and are providing researchers with methods
+to define pathogenic mechanisms and to evaluate new
+therapies.
+Resources
+PERIODICALS
+Gallo, S., et al. ‘‘Late Onset MLD With Normal Nerve
+Conduction Associated With Two Novel Missense
+Mutations in the ASA Gene.’’Journal of Neurology,
+Neurosurgery, and PsychiatryApril 2004: 655–658.
+Martinez, Manuela. ‘‘The Fundamental and Practice of
+Docosahexanoic Acid Therapy in Peroxisomal
+Disorders.’’ Current Opinion in Clinical Nutrition and
+Metabolic Care3 (2000): 101–108.
+Martinez, M., E. Vazquez, M. T. Garcia Silva, J. Manzanares,
+J. M. Bertran, F. Castello, and I. Mougan. ‘‘Therapeutic
+Effects of Docosahexanoic Acid in Patients with
+Generalized Peroxisomal Disorders.’’American Journal
+of Clinical Nutrition71 (2000): 376s–385s.
+Moser, Hugo W. ‘‘Molecular Genetics of Peroxisomal
+Disorders.’’ Frontiers in Bioscience5 (March 1, 2001):
+298–306.
+KEY TERMS
+Autosomal recessive inheritance— Two copies of
+an altered gene located on one of the autosomes
+must be present for an individual to be affected with
+the trait or condition determined by that gene:
+/C15an affected individual (homozygote) has two par-
+ents who are unaffected but each parent carries
+the altered gene (heterozygote).
+/C15the risk of two heterozygotes, or carriers, having
+an affected child is 25%, one in four, for each child
+that they have; similarly, there is a three in four
+chance that each child will not be affected.
+/C15males and females are at equal risk for being
+affected.
+/C15two affected individuals usually produce children,
+all of whom are affected as well.
+Autosome— A chromosome not involved in sex
+determination.
+Fontanel— One of the membranous intervals
+between the uncompleted angles of the parietal
+and neighboring bones of a fetal or young skull;
+so called because it exhibits a rhythmical pulsation.
+Metabolic— Relating to the chemical changes in
+living cells.
+Organelle— Specialized structure within a cell,
+which is separated from the rest of the cell by a
+membrane composed of lipids and proteins, where
+chemical and metabolic functions take place.
+Peroxisomal disorders
+Raymond, G. V. ‘‘Peroxisomal Disorders.’’Current Opinion
+in Pediatrics11 (December 1999): 572–576.
+ORGANIZATIONS
+National Institute of Neurological Disorders and Stroke,
+NIH Neurological Institute. P.O. Box 5801 Bethesda,
+MD 20824. (800) 352-9424. <http://www.ninds.nih.-
+gov/index.htm> .
+National Organization for Rare Disorders.P.O. Box 8923,
+New Fairfield, CT 06812- 8923.
+OTHER
+The Peroxisome Website. <http://www.peroxisome.org> .
+Judith Sims
+Teresa G. Odle
+Persantine-thallium heart scan see Thallium
+heart scan
+Personality disorders
+Definition
+Personality disorders are a group of mental distur-
+bances defined by the fourth edition, text revision (2000)
+of the Diagnostic and Statistical Manual of Mental
+Disorders (DSM-IV) as ‘‘enduring pattern[s] of inner
+experience and behavior’’ that are sufficiently rigid and
+deep-seated to bring a person into repeated conflicts
+with his or her social and occupational environment.
+DSM-IV specifies that these dysfunctional patterns
+must be regarded as nonconforming or deviant by the
+person’s culture, and cause significant emotionalpain
+and/ordifficultiesinrelationshipsand occupationalper-
+formance. In addition, the patient usually sees the
+disorder as being consistent with his or her self-image
+(ego-syntonic) and may blame others for his or her
+social, educational, or work-related problems.
+Description
+To meet the diagnosis of personality disorder,
+which is sometimes called character disorder, the
+patient’s problematic behaviors must appear in two
+or more of the following areas:
+/C15perception and interpretation of the self and other
+people
+/C15intensity and duration of feelings and their appropri-
+ateness to situations
+/C15relationships with others
+/C15ability to control impulses
+Personality disorders have their onset in late ado-
+lescence or early adulthood. Doctors rarely give a
+diagnosis of personality disorder to children on the
+grounds that children’s personalities are still in the
+process of formation and may change considerably
+by the time they are in their late teens. In retrospect,
+however, many individuals with personality disorders
+could be judged to have shown evidence of the pro-
+blems in childhood.
+It is difficult to give close estimates of the percen-
+tage of the population that has personality disorders.
+Patients with certain personality disorders, including
+antisocial and borderline disorders, are more likely to
+get into trouble with the law or otherwise attract
+attention than are patients whose disorders chiefly
+affect their capacity for intimacy. On the other hand,
+some patients, such as those with narcissistic or obses-
+sive-compulsive personality disorders, may be out-
+wardly successful because their symptoms are useful
+within their particular occupations. It has, however,
+been estimated that about 15% of the general popula-
+tion of the United States has a personality disorder,
+with higher rates in poor or troubled neighborhoods.
+The rate of personality disorders among patients in
+psychiatric treatment is between 30% and 50%. It is
+possible for patients to have a so-called dual diagnosis;
+for example, they may have more than one personality
+disorder, or a personality disorder together with a
+substance-abuse problem.
+By contrast,DSM-IV classifies personality disor-
+ders into three clusters based on symptom similarities:
+/C15Cluster A (paranoid, schizoid, schizotypal): Patients
+appear odd or eccentric to others.
+/C15Cluster B (antisocial, borderline, histrionic, narcis-
+sistic): Patients appear overly emotional, unstable, or
+self-dramatizing to others.
+/C15Cluster C (avoidant, dependent, obsessive-compul-
+sive): Patients appear tense and anxiety-ridden to
+others.
+The DSM-IV clustering system does not mean
+that all patients can be fitted neatly into one of the
+three clusters. It is possible for patients to have symp-
+toms of more than one personality disorder or to have
+symptoms from different clusters.
+Some psychiatrists maintain that the DSM-IV
+classification is inadequate and should be expanded
+to include three additional categories: passive-aggres-
+sive personality disorder, characterized by a need to
+control or punish others through frustrating them or
+sabotaging plans; cyclothymic personality disorder,
+characterized by intense mood swings alternating
+2862 Personality disorders
+between high spirits and moroseness or gloom; and
+depressive personality disorder, characterized by a
+negative and pessimistic approach to life.
+Since the criteria for personality disorders include
+friction or conflict between the patient and his or her
+social environment, these syndromes are open to rede-
+finition as societies change. Successive editions of
+DSM have tried to be sensitive to cultural differences,
+including changes over time, when defining personal-
+ity disorders. One category that had been proposed for
+DSM-III-R, self-defeating personality disorder, was
+excluded fromDSM-IV on the grounds that its defini-
+tion reflected prejudice against women. DSM-IV
+recommends that doctors take a patient’s background,
+especially recent immigration, into account before
+deciding that he or she has a personality disorder.
+One criticism that has been made of the general cate-
+gory of personality disorder is that it is based on
+Western notions of individual uniqueness. Its applic-
+ability to people from cultures with different defini-
+tions of human personhood is thus open to question.
+Furthermore, even within a culture, it can be difficult
+to define the limits of ‘‘normalcy.’’
+The personality disorders defined byDSM-IV are
+as follows:
+Paranoid
+Patients with paranoid personality disorder are
+characterized by suspiciousness and a belief that others
+are out to harm or cheat them. They have problems
+with intimacy and may join cults or groups with para-
+noid belief systems. Some are litigious, bringing law-
+suits against those they believe have wronged them.
+Although not ordinarily delusional, these patients
+may develop psychotic symptoms under severestress.
+It is estimated that 0.5–2.5% of the general population
+meet the criteria for paranoid personality disorder.
+Schizoid
+Schizoid patients are perceived by others as
+‘‘loners’’ without close family relationships or social
+contacts. Indeed, they are aloof and really do prefer to
+be alone. They may appear cold to others because they
+rarely display strong emotions. They may, however, be
+successful in occupations that do not require personal
+interaction. About 2% of the general population has
+this disorder. It is slightly more common in men than
+in women.
+Schizotypal
+Patients diagnosed as sc hizotypal are often
+considered odd or eccentric because they pay little
+attention to their clothing and sometimes have
+peculiar speech mannerisms. They are socially iso-
+lated and uncomfortable in parties or other social
+gatherings. In addition, people with schizotypal
+personality disorder often have oddities of thought,
+including ‘‘magical’’ beliefs or peculiar ideas (for
+example, a belief in telepathy or UFOs) that are
+outside of their cultural norms. It is thought that
+3% of the general population has schizotypal per-
+sonality disorder. It is slightly more common in
+males. Schizotypal disorder should not be confused
+with schizophrenia , although there is some evidence
+that the disorders are genetically related.
+Antisocial
+Patients with antisocial personality disorder are
+sometimes referred to as sociopaths or psychopaths.
+They are characterized by lying, manipulativeness,
+and a selfish disregard for the rights of others; some
+may act impulsively. People with antisocial personal-
+ity disorder are frequently chemically dependent and
+sexually promiscuous. It is estimated that 3% of males
+in the general population and 1% of females have
+antisocial personality disorder.
+Borderline
+Patients with borderline personality disorder
+(BPD) are highly unstable, with wide mood swings, a
+history of intense but stormy relationships, impulsive
+behavior, and confusion about career goals, personal
+values, or sexual orientation. These often highly con-
+flictual ideas may correspond to an even deeper con-
+fusion about their sense of self (identity). People with
+BPD frequently cut or burn themselves, or threaten or
+attempt suicide. Many of these patients have histories
+of severe childhoodabuse or neglect. About 2% of the
+general population have BPD; 75% of these patients
+are female.
+Histrionic
+Patients diagnosed with this disorder impress
+others as overly emotional, overly dramatic, and hun-
+gry for attention. They may be flirtatious or seductive
+as a way of drawing attention to themselves, yet they
+are emotionally shallow. Histrionic patients often live
+in a romantic fantasy world and are easily bored with
+routine. About 2–3% of the population is thought to
+have this disorder. Although historically the disorder
+has been more associated with womenin clinical set-
+tings, there may be bias toward diagnosing women
+with the histrionic personality disorder.
+Personality disorders
+Narcissistic
+Narcissistic patients are characterized by self-
+importance, a craving for admiration, and exploitative
+attitudes toward others. They have unrealistically
+inflated views of their talents and accomplishments,
+and may become extremely angry if they are criticized
+or outshone by others. Narcissists may be professionally
+successful but rarely have long-lasting intimate relation-
+ships. Fewer than 1% of the population has this disor-
+der; about 75% of those diagnosed with it are male.
+Avoidant
+Patientswith avoidantpersonalitydisorderare fear-
+ful of rejection and shy away from situations or occupa-
+tionsthatmightexposetheirsupposedinadequacy.They
+may reject opportunities to develop close relationships
+because of theirfearsof criticism or humiliation. Patients
+with this personality disorder are often diagnosed with
+dependent personality disorder as well. Many also fit the
+criteria for social phobia. Between 0.5–1.0% of the
+population have avoidant personality disorder.
+Dependent
+Dependent patients are afraid of being on their
+own and typically develop submissive or compliant
+behaviors in order to avoid displeasing people. They
+are afraid to question authority and often ask others
+for guidance or direction. Dependent personality dis-
+order is diagnosed more often in women, but it has
+been suggested that this finding reflects social pres-
+sures on women to conform to gender stereotyping or
+bias on the part of clinicians.
+Obsessive-compulsive
+Patients diagnosed with this disorder are preoccu-
+pied with keeping order, attaining perfection, and
+maintaining mental and interpersonal control. They
+may spend a great deal of time adhering to plans,
+schedules, or rules from which they will not deviate,
+even at the expense of openness, flexibility, and effi-
+ciency. These patients are often unable to relax and
+may become ‘‘workaholics.’’ They may have problems
+in employment as well as in intimate relationships
+because they are very stiff and formal, and insist on
+doing everything their way. About 1% of the popula-
+tion has obsessive-compulsive personality disorder;
+the male/female ratio is about 2:1.
+Causes and symptoms
+Personality disorders are thought to result from a
+bad interface, so to speak, between a child’s
+temperament and character on one hand and his or
+her family environment on the other. Temperament
+can be defined as a person’s innate or biologically
+shaped basic disposition. Human infants vary in
+their sensitivity to light or noise, their level of physical
+activity, their adaptability to schedules, and similar
+traits. Even such traits asshyness or novelty-seeking
+may be at least in part determined by the biology of the
+brain and the genes one inherits.
+Character is defined as the set of attitudes and
+behavior patterns that the individual acquires or learns
+over time. It includes such personal qualities as work
+and study habits, moral convictions, neatness or clean-
+liness, and consideration of others. Since children must
+learn to adapt to their specific families, they may
+develop personality disorders in the course of struggling
+to survive psychologically in disturbed or stressful
+families. For example, nervous or high-strung parents
+might be unhappy with a baby who is very active and
+try to restrain him or her at every opportunity. The
+child might then develop an avoidant personality dis-
+order as the outcome of coping with constant frustra-
+tion and parental disapproval. As another example,
+child abuseis believed to play a role in shaping border-
+line personality disorder. One reason that some thera-
+pists use the term developmental damage instead of
+personality disorder is that it takes the presumed source
+of the person’s problems into account.
+Some patients with personality disorders come
+from families that appear to be stable and healthy. It
+has been suggested that these patients are biologically
+hypersensitive to normal family stress levels. Levels of
+the brain chemical (neurotransmitter) dopamine may
+influence a person’s level of novelty-seeking, and ser-
+otonin levels may influence aggression.
+Other factors that have been cited as affecting chil-
+dren’s personality development are the mass media and
+social or grouphysteria, particularly after the events of
+September 11, 2001. Cases of so-called mass sociogenic
+illness have been identified, in which a group of children
+began to vomit or have other physical symptoms
+brought on in response to an imaginary threat. In two
+such cases, the children were reacting to the suggestion
+that toxic fumes were spreading through their school.
+Some authors believe that overly frequent or age-inap-
+propriate discussions of terrorist attacks orbioterrorism
+maymakechildrenmoresusceptibletosociogenicillness
+as well as other distortions of personality.
+Diagnosis
+Diagnosis of personality disorders is complicated
+by the fact that affected persons rarely seek help until
+2864 Personality disorders
+they are in serious trouble or until their families (or the
+law) pressure them to get treatment. The reason for
+this slowness is that the problematic traits are so dee-
+ply entrenched that they seem normal (ego-syntonic)
+to the patient. Diagnosis of a personality disorder
+depends in part on the patient’s age. Although person-
+ality disorders originate during the childhood years,
+they are considered adult disorders. Some patients, in
+fact, are not diagnosed until late in life because their
+symptoms had been modified by the demands of their
+job or by marriage. After retirement or the spouse’s
+death, however, these patients’ personality disorders
+become fully apparent. In general, however, if the
+onset of the patient’s problem is in mid- or late-life,
+the doctor will rule outsubstance abuseor personality
+change caused by medical or neurological problems
+before considering the diagnosis of a personality dis-
+order. It is unusual for people to develop personality
+disorders ‘‘out of the blue’’ in mid-life.
+There are no tests that can provide a definitive
+diagnosis of personality disorder. Most doctors will
+evaluate a patient on the basis of several sources of
+information collected over a period of time in order to
+determine how long the patient has been having diffi-
+culties, how many areas of life are affected, and how
+severe the dysfunction is. These sources of information
+may include:
+Interviews
+The doctor may schedule two or three interviews
+with the patient, spaced over several weeks or months,
+in order to rule out an adjustment disorder caused by
+job loss,bereavement, or a similar problem. An office
+interview allows the doctor to form an impression of
+the patient’s overall personality as well as obtain infor-
+mation about his or her occupation and family.
+During the interview, the doctor will note the patient’s
+appearance, tone of voice, body language, eye contact,
+and other important non-verbal signals, as well as the
+content of the conversation. In some cases, the doctor
+may contact other people (family members, employ-
+ers, close friends) who know the patient well in order
+to assess the accuracy of the patient’s perception of his
+or her difficulties. It is quite common for people with
+personality disorders to have distorted views of their
+situations or to be unaware of the impact of their
+behavior on others.
+Psychologic testing
+Doctors use psychologic testing to help in the
+diagnosis of a personality disorder. Most of these
+tests require interpretation by a professional with
+specialized training. Doctors usually refer patients to
+a clinical psychologist for this type of test.
+PERSONALITY INVENTORIES. Personality inven-
+tories are tests with true/false or yes/no answers that
+can be used to compare the patient’s scores with those
+of people with known personality distortions. The
+single most commonly used test of this type is the
+Minnesota Multiphasic Personality Inventory, or
+MMPI. Another test that is often used is the Millon
+Clinical Multiaxial Inventory, or MCMI.
+PROJECTIVE TESTS. Projective tests are unstruc-
+tured. Unstructured means that instead of giving one-
+word answers to questions, the patient is asked to talk at
+some length about a picture that the psychologist has
+shown him or her, or to supply an ending for the begin-
+ning of a story. Projective tests allow the clinician to
+assess the patient’s patterns of thinking, fantasies, wor-
+ries or anxieties, moral concerns, values, and habits.
+Common projective tests include the Rorschach, in
+which the patient responds to a set of ten inkblots;
+and the Thematic Apperception Test (TAT), in which
+the patient is shown drawings of people in different
+situations and then tells a story about the picture.
+Treatment
+At one time psychiatrists thought that personality
+disorders did not respond very well to treatment. This
+opinion was derived from the notion that human per-
+sonality is fixed for life once it has been molded in
+childhood, and from the belief among people with
+personality disorders that their own views and beha-
+viors are correct, and that others are the ones at fault.
+More recently, however, doctors have recognized that
+humans can continue to grow and change throughout
+life. Most patients with personality disorders are now
+considered to be treatable, although the degree of
+improvement may vary. The type of treatment recom-
+mended depends on the personality characteristics
+associated with the specific disorder.
+Hospitalization
+Inpatient treatment is rarely required for patients
+with personality disorders, with two major exceptions:
+borderline patients who are threatening suicide or
+suffering from drug or alcohol withdrawal; and
+patients with paranoid personality disorder who are
+having psychotic symptoms.
+Psychotherapy
+Psychoanalytic psychotherapy is suggested for
+patients who can benefit from insight-oriented
+Personality disorders
+treatment. These patients typically include those with
+dependent, obsessive-compulsive, and avoidant per-
+sonality disorders. Doctors usually recommend indi-
+vidual psychotherapy for narcissistic and borderline
+patients, but often refer these patients to therapists
+with specialized training in these disorders.
+Psychotherapeutic treatment for personality disorders
+may take as long as three to five years.
+Insight-oriented approaches are not recom-
+mended for patients with paranoid or antisocial per-
+sonality disorders. These patients are likely to resent
+the therapist and see him or her as trying to control or
+dominate them.
+Supportive therapy is regarded as the most helpful
+form of psychotherapy for patients with schizoid per-
+sonality disorder.
+Cognitive-behavioral therapy
+Cognitive-behavioral approaches are often
+recommended for patients with avoidant or dependent
+personality disorders. Patients in these groups typi-
+cally have mistaken beliefs about their competence or
+likableness. These assumptions can be successfully
+challenged by cognitive-behavioral methods. More
+recently, Aaron Beck and his coworkers have success-
+fully extended their approach to cognitive therapy to
+all ten personality disorders as defined by DSM-IV.
+Group therapy
+Group therapyis frequently useful for patients with
+schizoid or avoidant personality disorders because it
+helps them to break out of their social isolation. It has
+also been recommended for patients with histrionic and
+antisocial personality disorders. These patients tend to
+act out, and pressure from peers in group treatment can
+motivate them to change. Because patients with anti-
+social personality disorder can destabilize groups that
+include people with other disorders, it is usually best if
+these people meet exclusively with others who have
+APD (in homogeneous groups).
+Family therapy
+Family therapy may be suggested for patients
+whose personality disorders cause serious problems
+for members of their families. It is also sometimes
+recommended for borderline patients from overin-
+volved or possessive families.
+Medications
+Medications may be prescribed for patients with
+specific personality disorders. The type of medication
+depends on the disorder. In general, however, patients
+with personality disorders are helped only moderately
+by medications.
+ANTIPSYCHOTIC DRUGS. Antipsychotic drugs, such
+as haloperidol (Haldol), may be given to patients with
+paranoid personality disorder if they are having brief
+psychotic episodes. Patients with borderline or schizo-
+typal personality disorder are sometimes given anti-
+psychotic drugs in low doses; however, the efficacy of
+these drugs in treating personality disorder is less clear
+than in schizophrenia.
+MOOD STABILIZERS. Carbamazepine (Tegretol) is
+a drug that is commonly used to treat seizures, but is
+also helpful for borderline patients with rage outbursts
+and similar behavioral problems. Lithium and valpro-
+ate may also be used as mood stabilizers, especially
+among people with borderline personality disorder.
+ANTIDEPRESSANTS AND ANTI-ANXIETY MEDICAT-
+IONS. Medications in these categories are sometimes
+prescribed for patients with schizoid personality dis-
+order to help them manageanxiety symptoms while
+they are in psychotherapy. Antidepressants are also
+commonly used to treat people with borderline per-
+sonality disorder.
+Treatment with medications is not recommended
+for patients with avoidant, histrionic, dependent, or
+narcissistic personality disorders. The use of potentially
+addictive medications should be avoided in people with
+borderline or antisocial personality disorders. However,
+someavoidantpatientswhoalsohavesocialphobiamay
+benefit from monoamine oxidase inhibitors (MAO inhi-
+bitors), a particular class of antidepressant.
+Prognosis
+The prognosis for recovery depends in part on the
+specific disorder. Although some patients improve as
+they grow older and have positive experiences in life,
+personality disorders are generally life-long distur-
+bances with periods of worsening (exacerbations)
+and periods of improvement (remissions). Others, par-
+ticularly schizoid patients, have better prognoses if
+they are given appropriate treatment. Beck and his
+coworkers estimate that effective cognitive therapy
+with patients with personality disorders takes two to
+three years on average. Patients with paranoid person-
+ality disorder are at some risk for developing delu-
+sional disorders or schizophrenia.
+The personality disorders with the poorest prog-
+noses are the antisocial and the borderline. Borderline
+patients are at high risk for developing substance
+abuse disorders or bulimia. About 80% of
+2866 Personality disorders
+hospitalized borderline patients attempt suicide at
+some point during treatment, and about 5% succeed
+in committing suicide. Borderline patients are also the
+most likely to sue their mental health professional for
+malpractice.
+Prevention
+The most effective preventive strategy for person-
+ality disorders is early identification and treatment of
+children at risk. High-risk groups include abused chil-
+dren, children from troubled families, children with
+close relatives diagnosed with personality disorders,
+children of substance abusers, and children who
+grow up in cults or extremist political groups.
+Resources
+BOOKS
+American Psychiatric Association.Diagnostic and Statistical
+Manual of Mental Disorders.4th ed., revised.
+Washington, D.C.: American Psychiatric Association,
+2000.
+Beck, Aaron T., Arthur Freeman, Denise D. Davis, et al.
+Cognitive Therapy of Personality Disorders.2nd ed.
+New York: The Guilford Press, 2004.
+Beers, Mark H., MD, and Robert Berkow, MD., editors.
+‘‘Personality Disorders.’’ InThe Merck Manual of
+Diagnosis and Therapy.Whitehouse Station, NJ: Merck
+Research Laboratories, 2004.
+PERIODICALS
+Battle, C. L., M. T. Shea, D. M. Johnson, et al. ‘‘Childhood
+Maltreatment Associated with Adult Personality
+Disorders: Findings from the Collaborative
+Longitudinal Personality Disorders Study.’’Journal of
+Personality Disorders18 (April 2004): 193–211.
+Bienenfeld, David, MD. ‘‘Personality Disorders.’’eMedicine
+August 18, 2004. <http://www.emedicine.com/med/
+topic3472.htm> .
+Doyle, C. R., J. Akhtar, R. Mrvos, and E. P. Krenzelok.
+‘‘Mass Sociogenic Illness—Real and Imaginary.’’
+Veterinary and Human Toxicology46 (April 2004):
+93–95.
+Gutheil, T. G. ‘‘Suicide, Suicide Litigation, and Borderline
+Personality Disorder.’’Journal of Personality Disorders
+18 (June 2004): 248–256.
+Jordan, A. ‘‘The Role of Media in Children’s Development:
+An Ecological Perspective.’’Journal of Developmental
+and Behavioral Pediatrics25 (June 2004): 196–206.
+ORGANIZATIONS
+American Academy of Child and Adolescent Psychiatry
+(AACAP). 3615 Wisconsin Avenue, NW, Washington,
+DC 20016-3007. (202) 966-7300. Fax: (202) 966-2891.
+<http://www.aacap.org> .
+American Psychiatric Association (APA). 1400 K Street,
+NW, Washington, DC 20005. <http://
+www.psych.org> .
+National Institute of Mental Health (NIMH). 6001
+Executive Boulevard, Room 8184, MSC 9663,
+Bethesda, MD 20892-9663. (301) 443-4513. <http://
+www.nimh.nih.gov> .
+Rebecca J. Frey, PhD
+Perthes disease see Osteochondroses
+Pertussis see Whooping cough
+KEY TERMS
+Character— An individual’s set of emotional, cog-
+nitive, and behavioral patterns learned and accu-
+mulated over time.
+Character disorder— Another name for personality
+disorder.
+Cognitive therapy— A form of psychotherapy that
+focuses on changing people’s patterns of emotional
+reaction by correcting distorted patterns of thinking
+and perception.
+Developmental damage— A term that some thera-
+pists prefer to personality disorder, on the grounds
+that it is more respectful of the patient’s capacity for
+growth and change.
+Ego-syntonic— Consistent with one’s sense of self,
+as opposed to ego-alien or dystonic (foreign to
+one’s sense of self). Ego-syntonic traits typify
+patients with personality disorders.
+Neuroleptic— Another name for older antipsycho-
+tic medications, such as haloperidol. The term does
+not apply to such newer atypical agents as cloza-
+pine (Clozaril).
+Personality— The organized pattern of behaviors
+and attitudes that makes a human being distinctive.
+Personality is formed by the ongoing interaction of
+temperament, character, and environment.
+Projective tests— Psychological tests that probe
+into personality by obtaining open-ended
+responses to such materials as pictures or stories.
+Projective tests are often used to evaluate patients
+with personality disorders.
+Rorschach test— A well-known projective test that
+requires the patient to describe what he or she sees
+in each of 10 inkblots. It is named for the Swiss
+psychiatrist who invented it.
+Temperament— A person’s natural or genetically
+determined disposition.
+Personality disorders
+Pervasive developmental
+disorders
+Definition
+Pervasive developmental disorders include five
+different conditions: Asperger’s syndrome, autistic
+disorder, childhood disintegrative disorder (CDD),
+pervasive developmental disorder not otherwise speci-
+fied (PDDNOS), and Rett’s syndrome. They are
+grouped together because of the similarities between
+them. The three most common shared problems
+involve communication skills, motor skills, and social
+skills. Since there are no clear diagnostic boundaries
+separating these conditions it is sometimes difficult to
+distinguish one from the other for diagnostic
+purposes.
+Asperger’s syndrome, autistic disorder, and child-
+hood disintegrative disorder are four to five times
+more common in boys, and Rett’s syndrome has
+been diagnosed primarily in girls. All of these disor-
+ders are rare.
+Description
+Asperger’s syndrome
+Children afflicted with Asperger’s syndrome exhi-
+bit difficulties in social relationships and communica-
+tion. They are reluctant to make eye contact, do not
+respond to social or emotional contacts, do not initiate
+play activities with peers, and do not give or receive
+attention or affection. To receive this diagnosis the
+individual must demonstrate normal development of
+language, thinking and coping skills. Due to an
+impaired coordination of muscle movements, they
+appear to be clumsy. They usually become deeply
+involved in very few interests, which tend to occupy
+most of their time and attention.
+Autistic disorder
+Autistic disorder is frequently evident within the
+first year of life, and must be diagnosed before age
+three. It is associated with moderatemental retarda-
+tion in three out of four cases. These children do not
+want to be held, rocked, cuddled or played with. They
+are unresponsive to affection, show no interest in peers
+or adults and have few interests. Other traits include
+avoidance of eye contact, an expressionless face and
+the use of gestures to express needs. Their actions are
+repetitive, routine and restricted. Rocking, hand and
+arm flapping, unusual hand and finger movements,
+and attachment to objects rather than pets and people
+are common. Speech, play, and other behaviors are
+repetitive and without imagination. They tend to be
+overactive, aggressive, and self-injurious. They are
+often highly sensitive to touch, noise, and smells and
+do not like changes in routine.Autism and several
+disorders classified with it have increased significantly
+in recent years so that they now are diagnosed more
+often in children thanspina bifida, cancer,o r Down
+syndrome. This may be due partly to improved recog-
+nition and diagnosis.
+Childhood disintegrative disorder
+Childhood disintegrative disorder is also called
+Heller’s disease and most often develops between two
+and ten years of age. Children with CDD develop
+normally until two to three years of age and then
+begin to disintegrate rapidly. Signs and symptoms
+include deterioration of the ability to use and under-
+stand language to the point where they are unable to
+carry on a conversation. This is accompanied by loss
+of control of the bladder and bowels. Any interest or
+ability to play and engage in social activities is lost.
+The behaviors are nearly identical with those that are
+characteristic of autistic disorder. However, childhood
+disintegrative disorder becomes evident later in life
+and results in developmental regression, or loss of
+previously attained skills, whereas autistic disorder
+can be detected as early as the first month of life and
+results in a failure to progress.
+Pervasive developmental disorder not otherwise
+specified
+The term pervasive developmental disorder not
+otherwise specified (PDDNOS) is also referred to as
+atypical personality development, atypical PDD, or
+atypical autism. Individuals with this disorder share
+some of the same signs and symptoms of autism or
+other conditions under the category of pervasive
+developmental disorders, but do not meet all of the
+criteria for diagnosis for any of the four syndromes
+included in this group of diseases. Because the children
+diagnosed with PDDNOS do not all exhibit the same
+combination of characteristics, it is difficult to do
+research on this disorder, but the limited evidence
+available suggests that patients are seen by medical
+professionals later in life than is the case for autistic
+children, and they are less likely to have intellectual
+deficits.
+Rett’s syndrome
+Rett’s syndrome was first described in 1966 and is
+found almost exclusively in girls. It is a disease in
+2868 Pervasive developmental disorders
+which cells in the brain experience difficulty in com-
+municating with each other. At the same time the
+growth of the head falls behind the growth of the
+body so that these children are usually mentally
+retarded. These conditions are accompanied by defi-
+cits in movement (motor) skills and a loss of interest in
+social activities.
+The course of the illness has been divided into four
+stages. In stage one the child develops normally for six
+to 18 months. In stage two, development slows down
+and stops. Stage three is characterized by a loss of the
+speech and motor skills already acquired. Typically
+this happens between nine months and three years of
+age. Stage four begins with a return to learning that
+will continue across the lifespan, but at a very slow
+rate. Problems with coordination and walking are
+likely to continue and even worsen. Other conditions
+that can occur with Rett’s syndrome are convulsions,
+constipation, breathing problems, impaired circulation
+in the feet and legs, and difficulty chewing or
+swallowing.
+Causes and symptoms
+The causes of these disorders are unknown
+although brain structure abnormalities, genetic muta-
+tion, and alterations in brain function are believed to
+play a role. Still, no single brain abnormality or loca-
+tion has been connected to a cause. In 2004, scientists
+reported finding the gene mutation (on gene MECP2)
+that is present in 80% of people affected with Rett’s
+syndrome. In 2004, comprehensive review of research
+on twins revealed that interactions between multiple
+genes may play a role in the cause of autism. A number
+of neurological conditions, such as convulsions, are
+commonly found to accompany these disorders.
+Diagnosis
+The diagnosis of pervasive developmental disor-
+der is made by medical specialists based on a thorough
+examination of the patient, including observing beha-
+vior and gathering information from parents and care-
+givers. Because many symptoms are common to more
+than one condition, distinctions between conditions
+must be carefully made. The following summary
+describes the distinction between three common
+disorders.
+PDDNOS:
+/C15impairment of two-way social interaction
+/C15Repetitive and predictable behavior patterns and
+activities
+Autism:
+/C15all listed for PDDNOS
+/C15severe impairment in communication
+/C15abnormal social interaction and use of language for
+social communication or imaginative play before age
+of three
+/C15not better accounted for by another psychiatric order
+Asperger’s disorder:
+/C15all listed for PDDNOS
+/C15clinically significant impairment in social, occupa-
+tional, or other areas of functioning
+/C15no general delay in language
+/C15no delay in cognitive development, self-help skills, or
+adaptive behavior
+/C15not better accounted for by another pervasive devel-
+opmental disorder or schizophrenia
+Rett’s syndrome:
+/C15a period of normal development between 6–18
+months
+/C15normal head circumference at birth, followed by a
+slowing of head growth
+/C15retardation
+/C15repetitive hand movements
+CDD:
+/C15normal development for at least two years
+/C15loss of skills in at least two of the following areas:
+language, social skills, bowel or bladder control,
+play, movement skills
+/C15abnormal functioning in at least two of the following
+areas: social interaction, communication, behavior
+patterns
+/C15not better accounted for by another PDD or mental
+illness
+Treatment
+Treatment for children with pervasive develop-
+mental disorders is limited. Those who can be enrolled
+in educational programs will need a highly structured
+learning environment, a teacher-student ratio of not
+more than 1:2, and a high level of parental involve-
+ment that provides consistent care at home.
+Psychotherapy and social skills training can prove
+helpful to some. There is no specific medication avail-
+able for treating the core symptoms of any of these
+disorders, though research is promising. Some psy-
+chiatric medications may be helpful in controlling
+Pervasive developmental disorders

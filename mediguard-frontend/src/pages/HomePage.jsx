@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle } from 'lucide-react';
+import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database, TrendingUp, Megaphone, Droplets, HandHeart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { getAnalyticsSummary, getDiseases, getOutbreakAlerts, getTopDiseases, getTrends } from '@/services/api';
 
 const HomePage = () => {
+  const [featuredDiseases, setFeaturedDiseases] = useState([]);
+  const [summary, setSummary] = useState({
+    diseases_tracked: 19,
+    total_predictions: 0,
+    top_disease: 'Malaria',
+  });
+  const [topDiseases, setTopDiseases] = useState([]);
+  const [weeklyTrends, setWeeklyTrends] = useState([]);
+  const [outbreakInfo, setOutbreakInfo] = useState({ alerts: [], rainy_season: false, has_alerts: false });
   const trustIndicators = [
     {
       icon: Users,
@@ -57,7 +67,7 @@ const HomePage = () => {
     },
   ];
 
-  const featuredDiseases = [
+  const fallbackDiseases = [
     {
       name: 'Malaria',
       description: 'Common mosquito-borne disease prevalent in Bamenda, causing fever, chills, and fatigue.',
@@ -79,6 +89,55 @@ const HomePage = () => {
       color: 'bg-purple-100 text-purple-800',
     },
   ];
+
+  const sensitizationTips = [
+    {
+      title: 'Malaria prevention',
+      body: 'Sleep under treated mosquito nets, clear stagnant water, and seek testing early for fever with chills.',
+      icon: Shield,
+      tone: 'text-emerald-700 bg-emerald-50 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-900/50',
+    },
+    {
+      title: 'Safe water habits',
+      body: 'Boil, filter, or treat drinking water. Wash hands before meals and after using the toilet.',
+      icon: Droplets,
+      tone: 'text-sky-700 bg-sky-50 border-sky-200 dark:bg-sky-950/20 dark:border-sky-900/50',
+    },
+    {
+      title: 'Act early',
+      body: 'Persistent fever, breathing difficulty, severe dehydration, bleeding, or pregnancy warning signs need prompt care.',
+      icon: HandHeart,
+      tone: 'text-amber-700 bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:border-amber-900/50',
+    },
+  ];
+
+  useEffect(() => {
+    getDiseases({ featured: true })
+      .then((res) => {
+        if (Array.isArray(res.data) && res.data.length) {
+          setFeaturedDiseases(res.data.slice(0, 4));
+        } else {
+          setFeaturedDiseases(fallbackDiseases);
+        }
+      })
+      .catch(() => setFeaturedDiseases(fallbackDiseases));
+
+    getAnalyticsSummary()
+      .then((res) => setSummary((current) => ({ ...current, ...res.data })))
+      .catch(() => {});
+
+    getTopDiseases()
+      .then((res) => setTopDiseases(Array.isArray(res.data) ? res.data.slice(0, 3) : []))
+      .catch(() => setTopDiseases([]));
+
+    getTrends()
+      .then((res) => setWeeklyTrends(Array.isArray(res.data) ? res.data.slice(-4) : []))
+      .catch(() => setWeeklyTrends([]));
+
+    getOutbreakAlerts()
+      .then((res) => setOutbreakInfo(res.data || { alerts: [], rainy_season: false, has_alerts: false }))
+      .catch(() => {});
+  }, []);
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -104,11 +163,11 @@ const HomePage = () => {
 
       <div className="min-h-screen flex flex-col">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-12 sm:py-16">
           {/* Background Image: Professional Healthcare Image */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-            style={{ backgroundImage: 'url(/public/hero.jpeg)' }}
+            style={{ backgroundImage: 'url(/hero.jpeg)' }}
           >
             {/* Subtle dark overlay for text readability */}
             <div className="absolute inset-0 bg-black/40"></div>
@@ -119,12 +178,12 @@ const HomePage = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="mb-8"
+              className="mb-4 sm:mb-8"
             >
               <img 
-                src="/public/mediguard.png" 
+                src="/mediguard.png" 
                 alt="MediGuard Logo" 
-                className="logo-lg drop-shadow-2xl brightness-0 invert" 
+                className="h-20 sm:logo-lg w-auto object-contain drop-shadow-2xl brightness-0 invert" 
               />
             </motion.div>
 
@@ -134,18 +193,18 @@ const HomePage = () => {
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
               className="text-center max-w-4xl mx-auto"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg tracking-tight">
-                Smart Diagnosis • Fast Care • Safe Health
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-lg tracking-tight text-balance">
+                Smart Diagnosis - Fast Care - Safe Health
               </h1>
-              <p className="text-lg md:text-xl text-gray-100 mb-10 max-w-2xl mx-auto drop-shadow-md font-medium">
-                AI-powered early disease detection system designed for the Bamenda community. Get instant symptom analysis, disease predictions, and personalized health guidance.
+              <p className="text-sm sm:text-lg md:text-xl text-gray-100 mb-6 sm:mb-8 max-w-2xl mx-auto drop-shadow-md font-medium">
+                AI-powered early disease detection for Bamenda, combining symptom prediction, encyclopedia-grounded chat, disease education, and local trend monitoring.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none mx-auto">
                 {/* Get Started Button */}
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link to="/symptom-checker">
-                    <Button size="lg" className="text-lg px-8 py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-xl transition-all border border-transparent">
+                  <Link to="/symptom-checker" className="block">
+                    <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-xl transition-all border border-transparent">
                       Get Started
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
@@ -154,10 +213,10 @@ const HomePage = () => {
                 
                 {/* Try MediGuard AI Button - NEW */}
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link to="/chat-ai">
+                  <Link to="/chat-ai" className="block">
                     <Button 
                       size="lg" 
-                      className="text-lg px-8 py-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-xl transition-all border border-white/20 backdrop-blur-sm"
+                      className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-secondary hover:bg-secondary/90 text-white font-semibold shadow-xl transition-all border border-white/20 backdrop-blur-sm"
                     >
                       <Bot className="mr-2 h-5 w-5" />
                       Try MediGuard AI
@@ -168,8 +227,8 @@ const HomePage = () => {
                 
                 {/* Learn More Button */}
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link to="/disease-library">
-                    <Button size="lg" variant="outline" className="text-lg px-8 py-6 bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-sm font-semibold shadow-xl transition-all">
+                  <Link to="/disease-library" className="block">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-sm font-semibold shadow-xl transition-all">
                       Learn More
                     </Button>
                   </Link>
@@ -183,15 +242,15 @@ const HomePage = () => {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 className="flex flex-wrap items-center justify-center gap-3 mt-8"
               >
-                <span className="text-sm text-white/80">Try our AI assistant:</span>
+                <span className="text-sm text-white/80">Live MediGuard coverage:</span>
                 <Link to="/chat-ai">
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white hover:bg-white/30 transition-colors">
-                    <Bot className="h-3 w-3" /> Ask about symptoms
+                    <Bot className="h-3 w-3" /> Symptom chat
                   </span>
                 </Link>
-                <Link to="/chat-ai">
+                <Link to="/disease-library">
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white hover:bg-white/30 transition-colors">
-                    <MessageCircle className="h-3 w-3" /> Get health advice
+                    <BookOpen className="h-3 w-3" /> {summary.diseases_tracked} diseases
                   </span>
                 </Link>
               </motion.div>
@@ -212,8 +271,27 @@ const HomePage = () => {
         </section>
 
         {/* Trust Indicators */}
-        <section className="py-20 bg-background">
+        <section className="py-16 sm:py-20 bg-background">
           <div className="container mx-auto px-4">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-10">
+              {[
+                { label: 'Diseases in Library', value: summary.diseases_tracked, icon: BookOpen },
+                { label: 'Recorded Screenings', value: summary.total_predictions, icon: Activity },
+                { label: 'Most Reported', value: summary.top_disease, icon: Database },
+              ].map((item) => (
+                <Card key={item.label} className="medical-panel">
+                  <CardContent className="p-2.5 sm:p-5 flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-4 min-h-[116px] sm:min-h-0">
+                    <div className="h-9 w-9 sm:h-11 sm:w-11 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+                      <item.icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </div>
+                    <div className="min-w-0 w-full">
+                      <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">{item.label}</p>
+                      <p className="text-sm sm:text-xl font-bold truncate">{item.value}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
             <motion.div 
               variants={staggerContainer}
               initial="hidden"
@@ -223,7 +301,7 @@ const HomePage = () => {
             >
               {trustIndicators.map((indicator, index) => (
                 <motion.div key={index} variants={fadeUpItem} whileHover={{ y: -5, transition: { duration: 0.2 } }}>
-                  <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 border-border/50 bg-card">
+                  <Card className="h-full hover:shadow-xl transition-all duration-300 medical-panel">
                     <CardHeader>
                       <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-4 text-primary shadow-sm">
                         <indicator.icon className="h-7 w-7" />
@@ -240,8 +318,144 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* Community Trends & Sensitization */}
+        <section className="py-16 sm:py-20 bg-muted/30 border-y">
+          <div className="container mx-auto px-4">
+            <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="rounded-lg border bg-background p-5 sm:p-6 shadow-sm"
+              >
+                <div className="mb-5 flex items-start justify-between gap-4">
+                  <div>
+                    <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                      <TrendingUp className="h-4 w-4" />
+                      Community trends
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-bold">What MediGuard is seeing</h2>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      A quick view from recent screenings and local seasonal risk signals.
+                    </p>
+                  </div>
+                  <Link to="/trends">
+                    <Button variant="outline" size="sm">View dashboard</Button>
+                  </Link>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                  <Card>
+                    <CardContent className="p-3 text-center min-h-[94px] flex flex-col justify-center">
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">This week</p>
+                      <p className="text-lg sm:text-2xl font-bold text-primary">{summary.active_this_week || 0}</p>
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">screenings</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-3 text-center min-h-[94px] flex flex-col justify-center">
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">Top report</p>
+                      <p className="text-sm sm:text-lg font-bold truncate">{summary.top_disease || 'No data'}</p>
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">{summary.top_disease_count || 0} cases</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-3 text-center min-h-[94px] flex flex-col justify-center">
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">Risk watch</p>
+                      <p className="text-sm sm:text-lg font-bold truncate">{outbreakInfo.has_alerts ? 'Active' : outbreakInfo.rainy_season ? 'Rainy' : 'Stable'}</p>
+                      <p className="text-[10px] sm:text-xs text-muted-foreground">status</p>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="mt-5 space-y-3">
+                  {(topDiseases.length ? topDiseases : [
+                    { name: 'Malaria', count: 120 },
+                    { name: 'Typhoid Fever', count: 96 },
+                    { name: 'Pneumonia', count: 82 },
+                  ]).map((item, index) => {
+                    const max = Math.max(...(topDiseases.length ? topDiseases : [{ count: 120 }]).map(row => row.count || row.cases || 1));
+                    const count = item.count || item.cases || 0;
+                    return (
+                      <div key={item.name || item.disease || index}>
+                        <div className="mb-1 flex items-center justify-between text-sm">
+                          <span className="font-semibold">{item.name || item.disease}</span>
+                          <span className="text-muted-foreground">{count}</span>
+                        </div>
+                        <div className="h-2 overflow-hidden rounded-full bg-muted">
+                          <motion.div
+                            className="h-full rounded-full bg-primary"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${Math.max(12, (count / max) * 100)}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: index * 0.1 }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {weeklyTrends.length > 0 && (
+                  <p className="mt-4 text-xs text-muted-foreground">
+                    Latest trend point: {weeklyTrends[weeklyTrends.length - 1].disease} had {weeklyTrends[weeklyTrends.length - 1].count} report(s).
+                  </p>
+                )}
+              </motion.div>
+
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="grid gap-4"
+              >
+                <div>
+                  <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-secondary/10 px-3 py-1 text-sm font-semibold text-secondary">
+                    <Megaphone className="h-4 w-4" />
+                    Health sensitization
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-bold">Simple actions that reduce risk</h2>
+                </div>
+
+                {outbreakInfo.has_alerts && (
+                  <Card className="border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/20">
+                    <CardContent className="p-4">
+                      <div className="flex items-start gap-3">
+                        <AlertCircle className="h-5 w-5 text-red-600 mt-0.5" />
+                        <div>
+                          <p className="font-bold text-red-800 dark:text-red-300">Community watch alert</p>
+                          <p className="text-sm text-red-700 dark:text-red-300">
+                            {outbreakInfo.alerts?.[0]?.disease || 'A condition'} is showing increased reports. Follow prevention guidance and seek care early.
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                  {sensitizationTips.map((tip) => (
+                    <motion.div key={tip.title} variants={fadeUpItem}>
+                      <Card className={`h-full border ${tip.tone}`}>
+                        <CardContent className="p-4">
+                          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-background/80">
+                            <tip.icon className="h-5 w-5" />
+                          </div>
+                          <h3 className="font-bold">{tip.title}</h3>
+                          <p className="mt-1 text-sm leading-relaxed">{tip.body}</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* How It Works */}
-        <section className="py-24 bg-muted/30 border-y">
+        <section className="py-16 sm:py-24 bg-muted/30 border-y">
           <div className="container mx-auto px-4">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -249,7 +463,7 @@ const HomePage = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold mb-4">How MediGuard Works</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">How MediGuard Works</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Simple, fast, and accurate health screening in just four easy steps
               </p>
@@ -284,7 +498,7 @@ const HomePage = () => {
         </section>
 
         {/* Featured Diseases */}
-        <section className="py-24 bg-background">
+        <section className="py-16 sm:py-24 bg-background">
           <div className="container mx-auto px-4">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -292,7 +506,7 @@ const HomePage = () => {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-4xl font-bold mb-4">Common Diseases in Bamenda</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Common Diseases in Bamenda</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Learn about the most prevalent health conditions in our community
               </p>
@@ -304,21 +518,27 @@ const HomePage = () => {
               viewport={{ once: true }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             >
-              {featuredDiseases.map((disease, index) => (
-                <motion.div key={index} variants={fadeUpItem}>
+              {(featuredDiseases.length ? featuredDiseases : fallbackDiseases).map((disease, index) => (
+                <motion.div key={disease.slug || disease.name || index} variants={fadeUpItem}>
                   <Card className="h-full hover:shadow-xl transition-all duration-300 border border-border hover:border-primary/50 group flex flex-col">
                     <CardHeader>
-                      <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-3 ${disease.color} w-fit`}>
+                      <div className="inline-block px-3 py-1 rounded-full text-sm font-semibold mb-3 bg-primary/10 text-primary w-fit">
                         {disease.name}
                       </div>
+                      <CardTitle className="text-base font-semibold">{disease.category || 'General'} - {disease.severity || 'Medium'}</CardTitle>
                       <CardDescription className="text-foreground/80 text-base leading-relaxed">
                         {disease.description}
                       </CardDescription>
+                      {Array.isArray(disease.symptoms) && (
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                          Key symptoms: {disease.symptoms.slice(0, 4).join(', ')}
+                        </p>
+                      )}
                     </CardHeader>
                     <CardContent className="mt-auto pt-4 border-t border-border/50">
-                      <Link to="/disease-library">
+                      <Link to={`/disease/${disease.slug || disease.id || ''}`}>
                         <Button variant="ghost" className="w-full group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300 font-medium">
-                          Explore Library <ArrowRight className="ml-2 h-4 w-4" />
+                          View Details <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
                       </Link>
                     </CardContent>
@@ -334,7 +554,7 @@ const HomePage = () => {
               viewport={{ once: true }}
               className="mt-16 text-center"
             >
-              <div className="inline-flex items-center gap-4 p-6 bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl border border-primary/20">
+              <div className="flex flex-col sm:flex-row items-center gap-4 p-6 bg-card rounded-lg border border-primary/20 shadow-sm max-w-3xl mx-auto">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
                   <Bot className="h-8 w-8 text-primary" />
                 </div>
@@ -344,7 +564,7 @@ const HomePage = () => {
                     Get instant answers about symptoms, diseases, and health recommendations
                   </p>
                   <Link to="/chat-ai">
-                    <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white">
+                    <Button className="bg-secondary hover:bg-secondary/90 text-white">
                       <MessageCircle className="mr-2 h-4 w-4" />
                       Start AI Chat
                     </Button>

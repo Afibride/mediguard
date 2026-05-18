@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -9,14 +9,21 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { KeyRound, ArrowRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { resetPassword } from '@/services/api';
 
 const ResetPasswordPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [token, setToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  React.useEffect(() => {
+    setToken(searchParams.get('token') || '');
+  }, [searchParams]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,16 +46,32 @@ const ResetPasswordPage = () => {
       return;
     }
 
+    if (!token.trim()) {
+      toast({
+        variant: "destructive",
+        title: "Missing reset token",
+        description: "Use the reset link from your email or paste the token.",
+      });
+      return;
+    }
+
     setLoading(true);
-    
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await resetPassword({ token, password });
       setSuccess(true);
       toast({
         title: "Password Updated",
         description: "Your password has been successfully reset.",
       });
-    }, 1500);
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Reset Failed",
+        description: error.message || "Could not reset your password.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -69,7 +92,7 @@ const ResetPasswordPage = () => {
             <CardHeader className="space-y-1 text-center bg-white dark:bg-slate-950 rounded-t-xl">
               <div className="flex justify-center mb-4">
                 <img 
-                  src="/public/mediguard.png" 
+                  src="/mediguard.png" 
                   alt="MediGuard Logo" 
                   className="logo-md"
                 />
@@ -92,6 +115,17 @@ const ResetPasswordPage = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="token">Reset Token</Label>
+                    <Input
+                      id="token"
+                      type="text"
+                      value={token}
+                      onChange={(e) => setToken(e.target.value)}
+                      required
+                      className="bg-white text-gray-900 dark:bg-slate-900 dark:text-gray-100 focus:ring-primary"
+                    />
+                  </div>
                   <div className="space-y-2">
                     <Label htmlFor="password">New Password</Label>
                     <Input

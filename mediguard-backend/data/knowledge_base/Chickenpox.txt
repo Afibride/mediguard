@@ -1,0 +1,1171 @@
+DISEASE: Chickenpox
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+proven as risk factors for certain cancers can help
+lower one’s risk. For instance, while physicians have
+long known a small increased risk for breast cancer
+was linked to use of HRT, a landmark study released
+in 2003 proved the risk was greater than thought. The
+Women’s Health Initiative found that even relatively
+short-term use of estrogen plus progestin is associated
+with increased risk of breast cancer, diagnosis at a
+more advanced stage of the disease, and a higher
+number of abnormal mammograms. The longer a
+woman used HRT, the more her risk increased.
+Resources
+BOOKS
+Simone, Joseph V. ‘‘Oncology: Introduction.’’ InCecil
+Textbook of Medicine, edited by Russel L. Cecil, et al.
+Philadelphia: W.B. Saunders Company, 2000.
+PERIODICALS
+‘‘HRT Linked to Higher Breast Cancer Risk, Later
+Diagnosis, Abnormal Mammograms.’’Women’s
+Health WeeklyJuly 17, 2003: 2.
+‘‘New Way to Stop Cancer Cell Growth Described.’’Gene
+Therapy WeeklyDecember 12, 2002: 9.
+‘‘Researchers Find New Way to Trigger Self-Destruction of
+Certain Cancer Cells.’’Biotech WeekJuly 16, 2003: 285.
+‘‘Technique Streamlines Search for Anticancer Drugs.’’
+Cancer WeeklyApril 15, 2003: 62.
+‘‘Virus Therapy Attacks Cancer Cells.’’Cancer WeeklyJuly
+29, 2003: 50.
+ORGANIZATIONS
+American Cancer Society . 1599 Clifton Road, N.E. Atlanta,
+GA 30329 (800) 227-2345. <http://www.cancer.org>.
+Cancer Research Institute (National Headquarters). 681,
+Fifth Avenue, New York, NY 10022 (800) 992-2623.
+<http://www.cancerresearch.org>.
+National Cancer Institute. 9000 Rockville Pike, Building 31,
+room 10A16, Bethesda, Maryland, 20892 (800)422-
+6237. <http://wwwicic.nci.nih.gov>.
+Rosalyn Carson-DeWitt, MD
+Teresa G. Odle
+Cancer chemotherapy drugs see
+Anticancer drugs
+Cancer therapy, definitive
+Definition
+Definitive cancer therapy is a treatment plan
+designed to potentially cure cancer using one or a
+combination of interventions including surgery, radia-
+tion, chemical agents, or biological therapies.
+Purpose
+The primary purpose of definitive care is to estab-
+lish a cure and to destruct and remove all cancer cells
+from the infected person.
+Surgery is not only a diagnostic tool, but also used
+for tumor removal. The surgeon usually identifies
+potential candidates for tumor removal and repairs
+intraoperatively (during the operation procedure).
+Surgery can be curative for some stomach, genital/
+urinary, thyroid, breast, skin, and central nervous
+system cancers. The best chance for a surgical cure is
+usually with the first operation. It is essential that the
+cancer surgeon (oncologic surgeon) be experienced in
+the specific procedure.
+Radiation therapy is commonly administered to
+approximately 50% of cancer patients during the
+course of illness. It can be used as the sole method of
+cure for tumors in the mouth and neighboring struc-
+tures in the oral cavity, vagina, prostate, cervix, eso-
+phagus, Hodgkin’s disease, and certain types of cancer
+in the spinal cord and brain. Research and clinical
+trials have demonstrated that combination treatment
+is more effective than radiation therapy alone.
+Chemotherapy is curative for only a small percen-
+tage of cancers. It is most effective forchoriocarci-
+noma, cancer of the testis, some types of lymphomas,
+and cancer of skeletal muscles.
+Biological therapies are a new and promising
+direction for cancer cures. Usually when cancer cells
+grow they manage to derive a blood supply that allows
+passage of nutrients promoting continuation of
+abnormal cancer growth. Research that focuses on
+destroying these blood vessels is called angiogenesis.
+Cutting off the blood supply has been shown to
+destroy tumors, since this stops the flow of essential
+nutrients required for cancer growth. Use of certain
+growth factors also can stimulate self-destructive
+pathways in cancer cells (apoptosis).Gene therapyis
+directed toward inhibiting specific cellular signals that
+promote cancer cell multiplication. The importance of
+gene therapy in coming years will likely increase as
+scientists made progress in 2002 and 2003 are mapping
+the human genes (The Human Genome Project) and
+identifying new ways to fight and perhaps cure cancer.
+By using genetics, they hope to find new ways to
+activate human defenses against tumor cells and
+delay viral attacks on cells. Many trials were underway
+in 2003 that showed great promise. One of these in
+Cancer therapy, definitive
+2003 combined gene therapy and chemotherapy to
+stop breast cancerand its spread (metastasis).
+Precautions
+Surgical resection requires an experienced sur-
+geon, preoperative assessment, imaging studies, and
+delicate operative technique. Care should be taken
+during the procedure to avoid unnecessary tumor
+manipulation, which can cause cancer cells to infiltrate
+adjacent structures. If manipulation is excessive, cells
+can enter nearby areas for future re-growth. Accurate
+isolation of the tumor also can help avoid contamina-
+tion of the surgical area. Early ligation of the blood
+supply to the tumor is an essential component of a
+surgical cure.
+Radiation therapy requires extensive treatment
+planning and imaging. Care must be taken to localize
+the cancer field while attempting to spare destruction
+of normal tissue. This requires image monitoring and
+exact positioning during radiation treatment sessions.
+Chemotherapy usually causes destruction of nor-
+mal cells, and cancer cells can become immune to
+chemical destruction. Side effects and patient toler-
+ance issues typically are anticipated and dosages may
+have to be specifically altered. Very few chemothera-
+peutic agents offer curative responses.
+Biological therapies may cause patient toxicity
+resulting in extensive side effects. This can occur
+since the optimal dose may be exceedingly elevated
+above patient tolerance.
+Description
+Surgery
+Surgical removal of the tumor must be per-
+formed with care and accuracy. The surgeon must
+avoid overmanipulation of the surgical field. Too
+much movement within the area can cause cancer
+cell displacement into surrounding tissue. If this
+occurs and no further treatment is indicated, the
+tumor may grow again. The surgeon also should per-
+form an assessment concerning tissue removal
+around the cancer site. Tissue around the site may
+not by inspection seem cancerous, but adjacent struc-
+tures may have cancer cells and surrounding tissue
+removal is usually part of the operative procedure.
+Pieces of tumor and the surrounding area are ana-
+lyzed microscopically during the operation for cell
+type. An adequate resection (removal of tissue) will
+reveal normal cells in the specimens analyzed from
+areas bordering the cancerous growth. Surgery also
+can help to decrease the tumor bulk and, along with
+other treatment measures, may provide a cure for
+certain cancers. However, surgery is not always the
+best answer. It generally works best on slow-growing
+cancers.
+Not only can surgery be curative for some can-
+cers, but it is an essential diagnostic tool that must be
+assessed intraoperatively since microscopic analysis
+will guide the surgeon concerning tumor and sur-
+rounding tissue removal. These diagnostic proce-
+dures include an aspiration biopsy, which inserts a
+needle to extract (aspirate) fluid contained inside a
+cancerous growth; a needlebiopsy uses a specialized
+needle to obtain a core tissue specimen; an incision
+biopsy removes a section from a large tumor; and an
+excision biopsy removes the entire tumor. The sur-
+geon also can take samples of neighboring lymph
+nodes. Cancer in surrounding lymph nodes is an
+important avenue for distant spread of cancer to
+other areas. If microscopic analysis determines the
+presence of cancer cells inlymph nodes, the surgeon
+may decide to perform a more aggressive surgical
+approach.
+Radiation therapy
+Similar to surgical intervention, radiation therapy
+is a localized treatment. It involves the administration
+of ionizing radiation to a solid tumor location. This
+generates reactive oxygen molecules, causing the
+destruction of DNA in local cells. There are three
+commonly used radiation therapy beams: gamma
+rays from a linear accelerator machine produce a
+focused beam; orthovoltage rays are of less energy,
+thus penetrate less and typically deliver higher doses
+to superficial tissues (efficient for treating skin can-
+cers); and megavoltage rays are high energy producing
+beams that can penetrate deeply situated internal
+organs, while sparing extensive skin damage. Two
+common routes can deliver radiation. Brachytherapy
+delivers radiation to a local area by placing radioactive
+materials within close proximity to the cancerous site.
+Teletherapy delivers radiation to a specific area using
+an external beam machine.
+Chemotherapy
+Curative chemotherapy usually requires multiple
+administrations of the chemical agent. Chemotherapy
+or systemic therapy is administered in the blood and
+circulates through the entire body. The choice of
+chemotherapeutic agents depends on the specific type
+of cancer. Chemotherapy is more commonly used for
+metastatic (malignant cancer which has spread to
+710 Cancer therapy, definitive
+other areas beyond the primary site of cancer growth)
+disease, since very few cancers are cured by systemic
+therapy.
+Biologic therapy
+Biologic therapies primarily function to alter the
+patient’s response to cancer. These treatments are
+mostly investigations and there are numerous
+research protocols studying the effects of biologic
+treatments. These protocols usually have strict
+admission criteria that may exclude potential candi-
+dates who can benefit from treatment. These treat-
+ments tend to stimulate specific immune cells or
+immune chemicals to destroy cancer cells.
+Preparation
+For all treatment modalities imaging studies,
+biopsy, and constant blood analysis is essential before,
+during, and after treatments. Surgical candidates
+should undergo extensive pre-operative evaluation
+with imaging studies, blood chemistry analysis, stabi-
+lized health status, and readiness of staff for any
+potential complications and cell biopsy analysis.
+Patients with other pre-existing chronic disease may
+require intensive post-operative monitoring.
+For radiotherapy, the patient undergoes extensive
+imaging studies. Additional planning strategies
+include beam localization to spare normal tissues,
+calibration of fractionated doses, and specific posi-
+tioning during treatment sessions.
+Patients who receive curative chemotherapy
+should be informed of possible side effects associated
+with the chemotherapeutic agent. Patients should also
+be informed of temporary lifestyle changes and medi-
+cations that may offer some symptomatic relief.
+Patients undergoing biologic therapies are usually
+advised of potential side effects, treatment cycles and
+specific tests for monitoring progress according to the
+specific research protocol.
+Aftercare
+Patients will typically be evaluated by imaging
+studies, blood analysis, physical examination,a n d
+health improvement. These follow-up visits usually
+occur at specific time intervals during the course of
+treatment. Surgical patients may require closer obser-
+vation during the initial post-operative period to avoid
+potential complications.Reconstructive surgerycan be
+considered to improve appearance and restore func-
+tion. Certain surgical procedures (such as flaps and
+microsurgery of blood vessels) can restore new tissues
+to a previous surgery site.
+Risks
+Surgical risks
+Surgical therapy can be both disfiguring and dis-
+abling. Many normal tissues can be adversely affected
+by radiation therapy. Side effects that commonly
+occur shortly after a treatment cycle includenausea,
+vomiting, fatigue, loss of appetite, and bone marrow
+suppression (a decrease in the cells that provide
+defense against infections and those that carry oxygen
+to cells).
+Radiation risks
+Radiation therapy also can cause difficulty swal-
+lowing, oral gum disease, anddry mouth. Additionally,
+radiation therapy can cause damage to local structures
+within the irradiated field.
+Chemotherapy risks
+Chemotherapy commonly causes bone marrow
+suppression. Additionally, cells called platelets—
+important for normal blood clotting—may be signifi-
+cantly lowered, causing patients to bleed. This may be
+problematic enough to limit the treatment course.
+Bone marrow suppression can increase susceptibility
+to infection and also causeinfertility. Patients com-
+monly have bouts ofnausea and vomitingshortly after
+a treatment session. Rapidly multiplying normal cells
+also are affected such as skin cells (causing blistering
+and ulceration) and hair cells causing loss of hair, a
+condition calledalopecia).
+Biologic therapy risks
+Biologic therapies can cause patients to develop
+suppression of cells that help the body fight against
+KEY TERMS
+Bone marrow suppression— A decrease in cells
+responsible for providing immunity, carrying
+oxygen, and those responsible for normal blood
+clotting.
+DNA— The molecule responsible for cell
+multiplication.
+Titrate— To analyze the best end point (for dose)
+for a medication.
+Cancer therapy, definitive
+infection. Administration of certain chemicals that
+have anticancer effects can cause heart damage.
+Injection of killer immune cells (lymphokine-activated
+killer cells) may cause bone marrow suppression, and
+the host may reject the newly introduced cells.
+Resources
+BOOKS
+Abeloff, Martin D., et al.Clinical Oncology.2nd ed.
+Churchill Livingstone, Inc, 2000.
+Goroll, Allan H., et al, editors.Primary Care Medicine.
+4th ed. Lippincott, Williams & Wilkins, 2000.
+PERIODICALS
+‘‘Gene Therapy and Chemotherapy Combine to Stop Breast
+Cancer and its Metastasis.’’Gene Therapy Weekly
+October 30, 2003: 2.
+‘‘Surgery Not Always Best Cancer Treatment Option:
+Weigh Advantages and Disadvantages Before
+Decision.’’ Patient Education ManagementJuly
+2003: 78.
+Wachter, Kerri. ‘‘Gene Therapy Holds Promise for Curing
+Cancer: Four Preliminary Trials.’’Internal Medicine
+News September 15, 2003: 22.
+OTHER
+American Cancer Society.<http://www.cancer.org>.
+National Cancer Institute.<http://cnetdb.nci.nih.gov/
+cancerlit.shtml.>.
+Laith Farid Gulli, M.D.
+Nicole Mallory, M.S.
+Teresa G. Odle
+Cancer therapy, palliative
+Definition
+Palliative cancer therapy is treatment specifically
+directed to help improve the symptoms associated
+with terminal cancer.
+Purpose
+Palliative care is directed to improving symptoms
+associated with incurable cancer. Care can include
+surgery, radiation therapy , chemotherapy, sympto-
+matic treatments resulti ng from cancer, and side
+effects of treatment. The primary objective of pallia-
+tive care is to improve the quality of the remainder of
+a patient’s life. Treatment usually involves a combi-
+nation of modalities (multimodality approach) and
+numerous specialists typically are involved in the
+treatment planning process. Therapeutic planning
+usually involves careful coordination with the treat-
+ment team. The approach to palliative care also
+involves easing psychosocial problems and an
+emphasis on the patient’s family.
+Surgery can be utilized for palliation after careful
+evaluation and planning. The use of surgery in these
+cases may reduce the tumor bulk and help improve
+the quality of life by relieving pain, alleviating
+obstruction, or controlling bleeding. Radiation ther-
+apy for terminal cancer patients can also alleviate
+pain, bleeding, and obstruction of neighboring
+areas. New research in 2003 showed that using a
+combination of radiation therapy bisphosphanates
+helped offer palliative relief to patients with meta-
+static bone disease (metastatic disease is cancer that
+has spread beyond the original site or organ to other
+areas of the body). Chemotherapy may be helpful
+to reduce tumor size and provide some reduction
+to metastatic disease. L ong-term chemotherapy
+patients develop drug resistance, a situation that ren-
+ders chemotherapeutic treatments ineffective. If this
+occurs, patients usually are given a second line med-
+ication or, if admission criteria are met, they may
+p a r t i c i p a t ei na ne x p e r i m e n t a lr e s e a r c hp r o t o c o l .
+Palliative treatments and terminal cancer in combi-
+nation can cause many symptoms that can become
+problematic. These symptoms commonly include
+pain, nausea, vomiting, difficulty in breathing,consti-
+pation, dehydration, agitation, anddelirium. The pal-
+liative treatment-planning goal focuses on reducing
+these symptoms.
+Precautions
+Surgery fortumor removal, biopsy, or size reduc-
+tion is associated with postoperative pain and local
+nerve damage, which may be both severe and difficult
+to alleviate. Chemotherapy and radiation therapy also
+can produce nerve damage and severe pain.
+Additionally, patients with malignant cancer are sus-
+ceptible to infections like herpes,pneumonia, urinary
+tract infections, and woundabscess, all of which can
+cause severe pain. Pain associated with cancer and/or
+treatments can significantly impair the patient’s abil-
+ities to perform daily tasks and hence impair quality of
+life. These complications may negatively impact the
+patient’s psychological well-being.
+Description
+Pain is one of the common symptoms associated
+with cancer. Approximately 75% of terminal cancer
+patients have pain. Pain is a subjective symptom
+712 Cancer therapy, palliative
+and thus it cannot be measured using technological
+approaches. Pain can be assessed using numeric scales
+(from one to 10, one is rated as no pain while 10 is
+severe) or rating specific facial expressions associated
+with various levels of pain. The majority of cancer
+patients experience pain as a result of tumor mass
+that compresses neighboring nerves, bone, or soft tis-
+sues, or from direct nerve injury (neuropathic pain).
+Pain can occur from affected nerves in the ribs, mus-
+cles, and internal structures such as the abdomen
+(cramping type pain associated with obstruction).
+Many patients also experience various types of pain
+as a direct result of follow-up tests, treatments (sur-
+gery, radiation, and chemo–therapy) and diagnostic
+procedures (i.e., biopsy).
+Preparation
+Patients typically are informed that their diagno-
+sis is terminal and treatments are directed to improve
+quality of life an ease suffering for the remaining time.
+Treatment also is aimed to minimize emotional suffer-
+ing associated with pain.
+A careful history is necessary to assess duration,
+severity, and location of pain. Aphysical examination
+may verify the presence of pain. Imaging analysis may
+further confirm the presence of potential causes
+of pain. The World Health Organization (WHO)
+recommends an analgesic ladder. This treatment
+approach provides medication selections based on
+previous analgesic use and severity of pain. The ladder
+starts with the use of non-opioid (non-morphine)
+drugs such asaspirin, acetaminophen, or non-steroidal
+anti-inflammatory medications (NSAIDs) for control
+of mild pain. Chronic pain must be treated with con-
+stant and consistently administered medication(s).
+The ‘‘take as needed’’ approach is not advised.
+Supplemental doses may be recommended in addition
+to the standard dose for circumstances that may wor-
+sen pain. Opioids (i.e., morphine and codeine) are the
+medications of choice for moderate to severe pain.
+Doses are adjusted to produce maximum pain relief
+while minimizing side effects. These medications are
+conveniently administered orally. Administering ster-
+oids can help reducenausea and vomiting. Delirium
+and anxiety may be improved by psychoactive
+medications.
+Aftercare
+Care for palliation is continuous and consistent
+f o rt h er e m a i n d e ro fl i f e .P a t i e n t sw h oh a v el e s st h a n
+six months of life remaining may choose a hospice to
+stop treatment and control pain. Nutritional care is
+an important part of palliative care, since many
+patients suffer malnourishing effects of radiation
+and chemotherapy and those who can maintain plea-
+sure from food should. A proper diet can offset
+effects of the many medications patients on palliative
+care may receive.
+Risks
+Patients taking opioids for pain relief can develop
+tolerance and dependence. Tolerance develops when a
+patient requires increasing amounts of medication to
+produce pain reduction. Dependence shows character-
+istic withdrawal symptoms if medications are abruptly
+stopped. These symptoms can be avoided by tapering
+down doses in the event that these medications should
+be stopped.
+Resources
+BOOKS
+Abeloff, Martin D., et al.Clinical Oncology.2nd ed.
+Churchill Livingstone, Inc, 2000.
+Goroll, Allan H., et al., editors.Primary Care Medicine.
+4th ed. Lippincott, Williams & Wilkins. 2000.
+Washington Manual of Medical Therapeutics.30th ed.
+Washington University School of Medicine,
+Department of Medicine, 2001.
+PERIODICALS
+‘‘Bisphosphanates, Radiation Therapy Can be Used for
+Metastatic Bone Disease.’’Cancer WeeklyOctober 28,
+2003: 112.
+Cimino, James E. ‘‘The Role of Nutrition in Hospice and
+Palliative Care of the Cancer Patient.’’Topics in Clinical
+Nutrition July–September 2003: 154–158.
+Mercadante, S., F. Fulfaro, and A. Casuccio. ‘‘The Impact
+of Home Palliative Care on Symptoms in Advanced
+Cancer Patients.’’Support Care CancerJuly 2000.
+ORGANIZATIONS
+American Cancer Society. <http://www.cancer.org>.
+American Pain Society. <http://www.ampiansoc.org>.
+National Cancer Institute. <http://cnetdb.nci.nih.gov/
+cancerlit.shtml>.
+KEY TERMS
+Opioids— Narcotic pain killing medications.
+World Health Organization (WHO)— An interna-
+tional organization concerned with world health
+and welfare.
+Cancer therapy, palliative
+OTHER
+‘‘Improving Palliative Care for Cancer.’’ Report
+and Booklet. Institute of Medicine, 2001. <http://
+www.nap.edu/catalog/10790/html>.
+Laith Farid Gulli, M.D.
+Nicole Mallory, M.S.
+Teresa G. Odle
+Cancer therapy, supportive
+Definition
+Supportive cancer therapy is the use of medicines
+to counteract unwanted effects of cancer treatment.
+Purpose
+Along with their beneficial effects, many cancer
+treatments produce uncomfortable and sometimes
+harmful side effects. For example, cancer drugs may
+cause nausea or vomiting. They also may destroy red or
+white blood cells, resulting in a low blood count.
+Fortunately, many of these side effects can be relieved
+with other medicines.
+Description
+Different kinds of drugs are used for different
+purposes in supportive cancer therapy. To relievenau-
+sea and vomiting, a physician may prescribe dolasetron
+(Anzemet), granisetron (Kytril) or ondansetron
+(Zofran). Drugs called colony stimulating factors are
+used to help the bone marrow make new white blood
+cells to replace those destroyed by cancer treatment.
+Examples of colony stimulating factors are filgrastim
+(Neupogen) and sargramostim (Leukine). Another
+type of drug, epoetin (Epogen, Procrit), stimulates
+the bone marrow to make new red blood cells and
+help patients overcome anemia. It is a synthetically
+made version of human erythropoietin that is made
+naturally in the body and has the same effect on bone
+marrow.
+Some physicians who treat cancer recommend
+that their patients use marijuana to relieve nausea
+and vomiting. This practiceis controversial for sev-
+eral reasons. Using marijuana, even for medicinal
+purposes, is illegal in most states. Also, most of the
+evidence that marijuana effectively relieves nausea
+and vomiting comes from reports of people who
+have used it, not from carefully designed scientific
+studies called clinical trials. An oral medication
+that contains one of the active ingredients of mari-
+juana is available with a physician’s prescription and
+s o m e t i m e si su s e dt ot r e a tn a u s e aa n dv o m i t i n gi n
+patients undergoing cancer treatment. However, the
+drug, dronabinol (Marinol), takes longer to work
+than smoked marijuana and may be difficult for
+patients with nausea and vomiting to swallow and
+keep down.
+In 1997, the National Institutes of Health issued a
+report calling for more research into medical uses of
+marijuana. The panel of experts who wrote the report
+also recommended that researchers investigate other
+ways of getting the active ingredients of marijuana
+into the body, such as nasal sprays, skin patches and
+inhalers. In 2000, the American Cancer Society funded
+research into a skin patch. A 2003 report said
+that a University of Kentucky researcher had applied
+for a patent for the patch which used synthetic
+cannabinoids.
+Patients who want to use marijuana to relieve side
+effects of cancer treatment should talk to their physi-
+cians and should carefully consider the benefits and
+risks, both medical and legal.
+Recommended dosage
+The recommended dosage depends on the type
+of supportive cancer therapy. The physician who
+prescribed the drug or the pharmacist who filled the
+prescription can recommend the correct dosage.
+Precautions
+Dolasetron, granisetron and ondansetron
+If severe nausea and vomiting occur after taking
+this medicine, patients should check with a physician.
+The use of ondansetron after abdominal surgery
+may cover up symptoms of stomach problems.
+People with liver disease may be more likely to
+have side effects from ondansetron.
+Colony stimulating factors
+Certain cancer drugs reduce the body’s ability to
+fight infections. Although colony stimulating factors
+help restore the body’s natural defenses, the process
+takes time. Getting prompt treatment for infections is
+important, even while taking this medicine. A patient
+should call the physician at the first sign of illness or
+infection, such as asore throat, fever or chills.
+714 Cancer therapy, supportive
+Seeing a physician regularly while taking this
+medicine is important. This will give the physician a
+chance to make sure the medicine is working and to
+check for unwanted side effects.
+People with certain medical conditions may have
+problems if they take colony stimulating factors. In
+people who havekidney disease, liver disease, or con-
+ditions caused by inflammation or immune system
+problems, colony stimulating factors may make these
+problems worse. People with heart disease may be
+more likely to have side effects such as water retention
+and heart rhythm problems when they take these
+drugs. And people with lung disease may be more
+likely to haveshortness of breath. Anyone who has
+any of these medical conditions should check with
+his or her physician before using colony stimulating
+factors.
+Epoetin
+This medicine may cause seizures (convulsions),
+especially in people with a history of seizures. Anyone
+who takes these drugs should not drive, use machines
+or do anything else that might be dangerous if they
+have had a seizure.
+Epoetin helps the body make new red blood cells,
+but it cannot do its job unless there is plenty of iron in
+the body. The physician may recommend taking iron
+supplements or certainvitamins that help get iron into
+the body. Following the physician’s orders to make
+sure the body has enough iron for this medicine makes
+it work. Iron supplements should not be taken unless
+they are prescribed by a physician.
+In studies of laboratory animals, epoetin taken
+during pregnancy caused birth defects , including
+damage to the bones and spine. However, the drug
+has not been reported to cause problems in human
+babies whose mothers take it. Women who are preg-
+nant or who may become pregnant should check
+with their physicians for the most up-to-date informa-
+tion on the safety of taking this medicine during
+pregnancy.
+People with certain medical conditions may have
+problems if they take this medicine. For example, the
+chance of side effects may be greater in people with
+high blood pressure, heart or blood vessel disease or a
+history ofblood clots. Epoetin may not work properly
+in people who have bone problems or sickle cell
+anemia.
+Research continues on the benefits of epoetin as a
+supportive cancer therapy. One 2003 report said new
+research showed doubt as to its effectiveness in treat-
+ing anemia, while other reports confirmed it worked
+well. In mid-2003, a new large clinical trial (CREATE)
+was beginning in England to help determine epoetin’s
+effectiveness.
+Dronabinol
+This medicine contains sesame oil and one of the
+active ingredients of marijuana. Anyone who has had
+allergic or unusual reactions to sesame oil or mari-
+juana products should let his or her physician know
+before taking dronabinol.
+Because dronabinol works on the central nervous
+system, it may add to the effects of alcohol and other
+drugs that slow down the central nervous system.
+Examples of these drugs areantihistamines, cold med-
+icine, allergy medicine, sleep aids, medicine for sei-
+zures, tranquilizers, somepain relievers, and muscle
+relaxants. Dronabinol also may add to the effects of
+anesthetics, including those used for dental proce-
+dures. Anyone taking dronabinol should not drink
+alcohol and should check with his or her physician
+before taking any of the drugs listed above.
+This drug makes some people feel drowsy, dizzy,
+lightheaded or ‘‘high,’’ with a sense of well-being.
+Because of these possible reactions, anyone who
+takes dronabinol should not drive, use machines or
+do anything else that might be dangerous until they
+have found out how the drug affects them. Thedizzi-
+ness and lightheadedness are especially likely when
+getting up after sitting or lying down. Getting up
+gradually and holding onto something for support
+should lessen the problem.
+In laboratory studies, giving high doses of drona-
+binol to pregnant animals increased the risk of the
+unborn baby’sdeath. The medicine’s effects on preg-
+nant women have not been studied. Women who are
+pregnant or who may become pregnant should check
+with their physicians before taking this medicine.
+Dronabinol passes into breast milk and may
+affect nursing babies whose mothers take the medi-
+cine. Women who are breastfeeding their babies
+should check with their physicians before using
+dronabinol.
+Because of its possible mind-altering effects, dro-
+nabinol should be used with care in children and
+older people. Both children and older people should
+be watched carefully when they are taking this
+medicine.
+Using dronabinol may worsen some medical con-
+ditions, including high blood pressure, heart disease,
+bipolar disorderand schizophrenia.
+Cancer therapy, supportive
+General precautions for all types of supportive
+cancer therapy
+Anyone who previously has had unusual reactions
+to drugs used in supportive cancer therapy should
+let his or her physician know before taking the drugs
+again. The physician should also be told about
+any allergies to foods, dyes, preservatives, or other
+substances.
+Side effects
+Dolasetron, granisetron and ondansetron
+The most common minor side effects areheadache,
+dizziness or lightheadedness, drowsiness,dry mouth,
+diarrhea, constipation, abdominal pain or stomach
+cramps and unusual tiredness or weakness. These pro-
+blems usually do not require medical treatment.
+A physician should be notified as soon as possible
+if fever occurs after taking granisetron.
+If any of these symptoms occur after taking
+ondansetron, the patient should check with a physi-
+cian immediately:
+/C15breathing problems orwheezing
+/C15chest pain or tightness in chest
+/C15skin rash,hives or itching
+Colony stimulating factors
+As this medicine starts to work, it may cause mild
+pain in the lower back or hips. This is nothing to worry
+about, and it will usually go away within a few days. If
+the pain is too uncomfortable, the physician may pre-
+scribe a painkiller. A physician needs to know if the
+painkiller does not help.
+Other possible side effects include headache, joint
+or muscle pain, and skin rash or itching. These side
+effects usually go away as the body adjusts to the
+medicine and do not need medical treatment. If they
+continue or interfere with normal activities, a physi-
+cian should be notified.
+Epoetin
+This medicine may cause flu-like symptoms, such
+as muscle aches, bone pain, fever, chills, shivering, and
+sweating, within a few hours after it is taken. These
+symptoms usually go away within 12 hours. If they do
+not, or if they are troubling, a physician should be
+told. Other possible side effects that do not need med-
+ical attention are diarrhea, nausea or vomiting, and
+tiredness or weakness.
+Certain side effects should be brought to a physi-
+cian’s attention as soon as possible. These include
+headache, vision problems, increased blood pressure,
+fast heartbeat, weight gain, and swelling of the face,
+fingers, lower legs, ankles or feet.
+Anyone who has chest pain or seizures after
+taking epoetin should check with a physician
+immediately.
+Dronabinol
+Side effects such as dizziness, drowsiness, confu-
+sion and clumsiness or unsteadiness usually do not
+need medical attention unless they are long-lasting or
+they interfere with normal activities.
+Other side effects or signs of overdose should have
+immediate medical attention. These include:
+/C15fast or pounding heartbeat
+/C15constipation
+/C15trouble urinating
+/C15red eyes
+/C15slurred speech
+/C15mood changes, including depression, nervousness or
+anxiety
+/C15confusion
+/C15forgetfulness
+/C15changes in sight, smell, taste, touch or hearing
+/C15a sense that time is speeding up or slowing down
+/C15hallucinations
+General advice on side effects for all types
+of supportive cancer therapy
+Other side effects are possible with any type of
+supportive cancer therapy. Anyone who has unusual
+symptoms during or after treatment with these drugs
+should get in touch with his or her physician.
+Interactions
+Anyone who has supportive cancer therapy
+should let the physician know all other medicines he
+or she is taking. Some combinations of drugs may
+interact, which may increase or decrease the effects
+of one or both drugs or may increase the risk of side
+effects. Patients should ask their physician if the pos-
+sible interactions can interfere with drug therapy or
+cause harmful effects.
+716 Cancer therapy, supportive
+Resources
+PERIODICALS
+‘‘CREATE Trial Providing Valuable Information on
+Epoetin Treatment for Anemia.’’Hematology Week
+August 25, 2003: 10.
+‘‘Doubts Over Epoetin in Cancer.’’SCRIP World
+Pharmaceutical NewsOctober 24, 2003: 24.
+‘‘Researcher Working on Medical Patch to Deliver
+Marijuana–like Drug.’’Cancer WeeklySeptember 9,
+2003: 126.
+Nancy Ross-Flanigan
+Teresa G. Odle
+Candida albicans infection see Candidiasis
+Candidiasis
+Definition
+Candidiasis is an infection caused by a species of
+the yeastCandida, usuallyCandida albicans.T h i si sa
+common cause of vaginal infections in women. Also,
+Candida may cause mouth infections in people with
+reduced immune function, or in patients taking cer-
+tain antibiotics. Candida can be found in virtually all
+normal people but causes problems in only a fraction.
+In recent years, however, several serious categories of
+candidiasis have become more common, due to over-
+use of antibiotics, the rise ofAIDS, the increase in
+organ transplantations, and the use of invasive
+devices (catheters, artificial joints and valves)—all
+of which increase a patient’s susceptibility to
+infection.
+Description
+Vaginal candidiasis
+Over one million women in the United States
+develop vaginal yeast infections each year. It is not
+life-threatening, but it can be uncomfortable and
+frustrating.
+Oral candidiasis
+This disorder, also known as thrush, causes white,
+curd-like patches in the mouth or throat.
+Deep organ candidiasis
+Also known as invasive candidiasis, deep organ
+candidiasis is a serious systemic infection that can
+affect the esophagus, heart, blood, liver, spleen, kid-
+neys, eyes, and skin. Like vaginal and oral candidiasis,
+it is an opportunistic disease that strikes when a per-
+son’s resistance is lowered, often due to another ill-
+ness. There are many diagnostic categories of
+deep organ candidiasis, depending on the tissues
+involved.
+Causes and symptoms
+Vaginal candidiasis
+Most women with vaginal candidiasis experience
+severe vaginalitching. They also have a discharge that
+often looks like cottage cheese and has a sweet or
+bread-like odor. The vulva and vagina can be red,
+swollen, and painful. Sexual intercourse can also be
+painful.
+KEY TERMS
+Bipolar disorder— A severe mental illness in which
+a person has extreme mood swings, ranging from a
+highly excited state — sometimes with a false sense
+of well-being — to depression
+Bone marrow— Soft tissue that fills the hollow
+centers of bones. Blood cells and platelets (disk-
+shaped bodies in the blood that are important in
+clotting) are produced in the bone marrow.
+Hallucination— A false or distorted perception of
+objects, sounds, or events that seems real.
+Hallucinations usually result from drugs or mental
+disorders.
+Immune system— The body’s natural defenses
+against disease and infection.
+Inflammation— Pain, redness, swelling, and heat
+that usually develop in response to injury or illness.
+Schizophrenia— A severe mental disorder in
+which people lose touch with reality and may
+have illogical thoughts, delusions, hallucinations,
+behavioral problems and other disturbances.
+Sickle cell anemia— An inherited disorder in
+which red blood cells contain an abnormal form
+of hemoglobin, a protein that carries oxygen.
+The abnormal form of hemoglobin causes the red
+cells to become sickle- or crescent-shaped. The
+misshapen cells may clog blood vessels, preventing
+oxygen from reaching tissues and leading to
+pain, blood clots and other problems. Sickle cell
+anemia is most common in people of African des-
+cent and in people from Italy, Greece, India, and
+the Middle East.
+Candidiasis
+Oral candidiasis
+Whitish patches can appear on the tongue, inside
+of the cheeks, or the palate. Oral candidiasis typically
+occurs in people with abnormal immune systems.
+These can include people undergoingchemotherapy
+for cancer, people taking immunosuppressive drugs
+to protect transplanted organs, or people with HIV
+infection.
+Deep organ candidiasis
+Anything that weakens the body’s natural barrier
+against colonizing organisms—including stomach sur-
+gery, burns, nasogastric tubes, and catheters—can pre-
+dispose a person for deep organ candidiasis. Rising
+numbers of AIDS patients, organ transplant recipi-
+ents, and other individuals whose immune systems
+are compromised help account for the dramatic
+increase in deep organ candidiasis in recent years.
+Patients with granulocytopenia (deficiency of white
+blood cells) are particularly at risk for deep organ
+candidiasis.
+Diagnosis
+Often clinical appearance gives a strong sugges-
+tion about the diagnosis. Generally, a clinician will
+take a sample of the vaginal discharge or swab an
+area of oral plaque, and then inspect this material
+under a microscope. Under the microscope, it is pos-
+sible to see characteristic forms of yeasts at various
+stages in the lifecycle.
+Fungal blood cultures should be taken for
+patients suspected of havingdeep organ candidiasis.
+Tissue biopsy may be needed for a definitive
+diagnosis.
+Treatment
+Vaginal candidiasis
+In most cases, vaginal candidiasis can be treated
+successfully with a varietyof over-the-counter anti-
+fungal creams or suppositories. These include
+Monistat, Gyne-Lotrimin, and Mycelex. However,
+infections often recur. If a women has frequent
+RACHEL FULLER BROWN
+(1898–1980)
+Rachel Fuller Brown was born on November 23,
+1898 in Springfield, Massachusetts. Brown was the
+oldest of two children born to Annie (Fuller) and
+George Hamilton Brown. In 1912, her father left their
+family in Missouri and her mother moved the family
+back to Springfield. Brown double majored in history
+and chemistry at Mount Holyoke, receiving her A.B.
+degree in 1920. She also earned her M.A. degree from
+the University of Chicago. Brown began her doctoral
+studies at the University, but she experienced financial
+difficulties and took a job before she received her
+Ph.D. She worked at the Division of Laboratories and
+Research of the New York State Department of Health
+as an assistant chemist for seven years and finally
+returned to Chicago and completed her Ph.D.
+In 1948, Brown and Elizabeth Hazen began
+researching fungal infections found in humans due to
+antibiotic treatments and diseases. Some of the antibio-
+tics they discovered did indeed kill the fungus; how-
+ever, they also killed the test mice. Finally, Hazen
+located a microorganism on a farm in Virginia, and
+Brown’s tests indicated that the microorganism produced
+two antibiotics, one of which proved effective for treat-
+ing fungus and candidiasis in humans. Brown purified
+the antibiotic which was patented under the name nys-
+tatin. In 1954, the antibiotic became available in pill
+form. Brown and Hazen continued their research and
+discovered two other antibiotics. Brown received
+numerous awards individually and with her research
+partner, Elizabeth Hazen. Rachel Brown passed away
+on January 14, 1980.
+This patient’s tongue is infected with candidiasis.
+(Photograph by Edward H. Gill, Custom Medical Stock Photo.
+Reproduced by permission.)
+718 Candidiasis
+recurrences, she should consult her doctor about pre-
+scription drugs such as Vagistat-1, Diflucan, and
+others.
+Oral candidiasis
+This is usually treated with prescription lozenges
+or mouthwashes. Some of the most-used prescriptions
+are nystatin mouthwashes (Nilstat or Nitrostat) and
+clotrimazole lozenges.
+Deep organ candidiasis
+The recent increase in deep organ candidiasis has
+led to the creation of treatment guidelines, including,
+but not limited to, the following: Catheters should be
+removed from patients in whom these devices are still
+present. Antifungal chemotherapy should be started
+to prevent the spread of the disease. Drugs should be
+prescribed based on a patient’s specific history and
+defense status.
+Alternative treatment
+Home remedies for vaginal candidiasis include
+vinegar douches or insertion of a paste made from
+Lactobacillus acidophilus powder into the vagina. In
+theory, these remedies will make the vagina more
+acidic and therefore less hospitable to the growth of
+Candida. Fresh garlic (Allium sativum) is believed to
+have antifungal action, so incorporating it into the diet
+or inserting a gauze-wrapped, peeled garlic clove into
+the vagina may be helpful. The insert should be chan-
+ged twice daily. Some women report success with these
+remedies; they should try a conventional treatment if
+an alternative remedy isn’t effective.
+Prognosis
+Vaginal candidiasis
+Although most cases of vaginal candidiasis are
+cured reliably, these infections can recur. To limit
+recurrences, women may need to take a prescription
+anti-fungal drug such as terconazole (sold as Terazol)
+or take other anti-fungal drugs on a preventive basis.
+Oral candidiasis
+These infections can also recur, sometimes
+because the infectingCandida develops resistance to
+one drug. Therefore, a physician may need to prescribe
+a different drug.
+Deep organ candidiasis
+The prognosis depends on the category of disease
+as well as on the condition of the patient when the
+infection strikes. Patients who are already suffering
+from a serious underlying disease are more susceptible
+to deep organ candidiasis that speads throughout
+the body.
+Prevention
+Because Candida is part of the normal group of
+microorganisms that co-exist with all people, it is
+impossible to avoid contact with it. Good vaginal
+hygiene and goodoral hygienemight reduce problems,
+but they are not guarantees against candidiasis.
+Because hospital-acquired (nosocomial) deep
+organ candidiasis is on the rise, people need to be
+made aware of it. Patients should be sure that catheters
+A transmission electron microscopy (TEM) of Candida
+albicans . (Custom Medical Stock Photo. Reproduced by
+permission.)
+KEY TERMS
+Biopsy— The removal and examination of tissue
+from a live body.
+Colonize— To become established in a host.
+Granulocytopenia— A condition characterized by
+a deficiency of white blood cells.
+Nasogastric— Tube inserted through the nasal pas-
+sages into the stomach.
+Opportunistic— Infection caused by microorgan-
+isms that are usually harmless, but which can
+cause disease when a host’s resistance is lowered.
+Systemic— Afflicting an entire body system or the
+body in general.
+Candidiasis
+are properly maintained and used for the shortest pos-
+sible time length. The frequency, length, and scope of
+courses of antibiotic treatment should also be cut back.
+Resources
+PERIODICALS
+Greenspan, Deborah, and John S. Greenspan.
+‘‘HIV-Related Oral Disease.’’The Lancet348
+(September 14, 1996): 729-734.
+Richard H. Lampert
+Candidosis see Candidiasis
+Canker sores
+Definition
+Canker sores are small sores or ulcers that appear
+inside the mouth. They are painful, self-healing, and
+can recur.
+Description
+Canker sores occur on the inside of the mouth,
+usually on the inside of the lips, cheeks, and/or soft
+palate. They can also occur on the tongue and in the
+throat. Often, several canker sores will appear at
+the same time and may be grouped in clusters.
+Canker sores appear as a whitish, round area with a
+red border. The sores are painful and sensitive to
+touch. The average canker sore is about one-quarter
+inch in size, although they can occasionally be larger.
+Canker sores are not infectious.
+Approximately 20% of the U.S. population is
+affected with recurring canker sores, and more
+women than men get them. Women are more likely
+to have canker sores during their premenstrual period.
+Canker sores are sometimes confused with cold
+sores. Cold sores are caused by herpes simplex virus.
+This disease, also known as oral herpes orfever blis-
+ters, can occur anywhere on the body. Most com-
+monly, herpes infection occurs on the outside of the
+lips and the gums, and much less frequently on the
+inside the mouth. Cold sores are infectious.
+Causes and symptoms
+The exact cause of canker sores is uncertain, how-
+ever, they seem to be related to a localized immune
+reaction. Other proposed causes for this disease are
+trauma to the affected areas from toothbrush scrapes,
+stress, hormones, andfood allergies. Canker sores tend
+to appear in response to stress. The initial symptom is
+a tingling or mildly painfulitching sensation in the area
+where the sore will appear. After one to several days, a
+small red swelling appears. The sore is round, and is a
+whitish color with a grayish colored center. Usually,
+there is a red ring of inflammation surrounding the
+sore. The main symptom ispain. Canker sores can be
+very painful, especially if they are touched repeatedly,
+e.g., by the tongue. They last for one to two weeks.
+Diagnosis
+Canker sores are diagnosed by observation of the
+blister. A distinction between canker sores and cold
+sores must be made because cold sores are infectious
+and the herpes infection can be transmitted to other
+people. The two sores can usually be distinguished
+visually and there are specific diagnostic tests for
+herpes infection.
+Treatment
+Since canker sores heal by themselves, treatment is
+not usually necessary. Pain relief remedies, such as topi-
+cal anesthetics, may be used to reduce the pain of the
+sores. The use of corticosteroid ointments sometimes
+speeds healing. Avoidance of spicy or acidic foods can
+help reduce the pain associated with canker sores.
+Alternative treatment
+Alternative therapies for canker sores are aimed at
+healing existing sores and preventing their recurrence.
+Several herbal remedies, including calendula (Calendula
+officinalis), myrrh (Commiphora molmol), and golden-
+seal (Hydrastis canadensis), may be helpful in the treat-
+ment of existing sores. Compresses soaked in teas made
+KEY TERMS
+Inflammation— A local reaction to tissue injury or
+damage, usually characterized by pain, swelling,
+and redness.
+Sore— A wound, lesion, or ulcer on the skin.
+Ulcer— A site of damage to the skin or mucous
+membrane that is characterized by the formation
+of pus, death of tissue, and is frequently accompa-
+nied by an inflammatory reaction.
+720 Canker sores
+from these herbs are applied directly to the sores. The
+tannic acid in a tea bag can also help dry up the sores
+when the wet tea bag is used as a compress. Taking
+dandelion (Taraxacum officinale) tea or capsules may
+help heal sores and also prevent future outbreaks. Since
+canker sores are often brought on by stress, such stress-
+relieving techniques asmeditation, guided imagery,a n d
+certain acupressure exercises may help prevent canker
+sores or lessen their severity.
+Prognosis
+There is no cure for canker sores. They do not get
+larger or occur more frequently with age.
+Resources
+BOOKS
+Larsen, D. E., editor.Mayo Clinic Family Health Book.
+New York: William Morrow, 1996.
+John T. Lohr, PhD
+Captopril see Angiotensin-converting
+enzyme inhibitors
+Carbamazepine see Anticonvulsant drugs
+Carbidopa see Antiparkinson drugs
+Carbohydrate intolerance
+Definition
+Carbohydrate intolerance is the inability of the
+body to completely process the nutrient carbohydrate
+(a classification that includes sugars and starches) into
+a source of energy for the body, usually because of the
+deficiency of an enzyme needed for digestion.Lactose
+intolerance, the inability to digest the sugar found in
+milk, is widespread and affects up to 70% of the
+world’s adult population.
+Description
+Carbohydrates are the primary source of energy
+and, along with fats and proteins, one of the three
+major nutrients in the human diet. Carbohydrates
+are classified according to their structure based on
+the number of basic sugar, orsaccharide units they
+contain.
+A monosaccharide is the simplest carbohydrate
+and called a simple sugar. Simple sugars include
+glucose (the form in which sugar circulates in the
+blood), fructose (found in fruit and honey), and galac-
+tose (produced by the digestion of milk). These simple
+sugars are important because they can be absorbed by
+the small intestine. Two simple sugars linked together
+make a disaccharide. The disaccharide sugars present
+in the diet are maltose (a product of the digestion of
+starch), sucrose (table sugar), and lactose (the sugar in
+milk). These disaccharides must be broken down by
+enzymes into two simple sugars so that they can be
+absorbed by the intestine. Polysaccharides are much
+more complex carbohydrates made up of many simple
+sugars, the most important of which are glycogen,
+which is stored in the liver, and starch.
+Digestion of sugars
+Digestion of food begins in the mouth, moves on
+to the stomach, and then into the small intestine.
+Along the way, specific enzymes are needed to process
+different types of sugars. An enzyme is a substance
+that acts as a catalyst to produce chemical changes
+without being changed itself. The enzymes lactase,
+maltase, and isomaltase (or sucrase) are needed to
+break down the disaccharides; when one or more is
+inadequate, the result is carbohydrate intolerance.
+Types of intolerance
+Carbohydrate intolerance can be primary or sec-
+ondary. Primary deficiency is caused by an enzyme
+defect present at birth or developed over time.
+The most common is lactose intolerance. Secondary
+deficiencies are caused by a disease or disorder of the
+intestinal tract, and disappear when the disease is
+treated. These include protein deficiency,celiac dis-
+ease, and some intestinal infections.
+Adult lactose intolerance is the most common of
+all enzyme deficiencies, and it is estimated that 30–50
+million Americans have this condition. Some racial
+and ethnic populations are affected more than
+others. Lactose intolerance is found in as many as
+75% of African Americans, Jewish Americans,
+Mexican Americans, and Native Americans, and in
+90% of Asian Americans. Descendants of Northern
+Europeans and some Mediterranean peoples usually
+do not develop the condition. Deficiencies in enzymes
+other than lactase are extremely rare.
+Causes and symptoms
+Enzymes play an important role in breaking down
+carbohydrates into forms that can pass through the
+intestine and be used by the body. Usually they are
+Carbohydrate intolerance

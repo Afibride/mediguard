@@ -1,0 +1,1020 @@
+DISEASE: Cholera
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+can be inherited and present initially without signs or
+symptoms, relatives of a patient with the disease should
+be screened periodically for evidences of the disease.
+Invasive procedures, which involve the use of
+anesthesia, are used to determine the severity of the dis-
+ease. In the radionuclide ventriculogram procedure, a
+low-dose radioactive material is injected into a vein and
+flows to the heart. The heart is photographed with a
+special camera to assess thecontraction and filling of
+the ventricles at rest and with activity.Cardiac catheter-
+ization involves insertion of thin, flexible plastic tubes
+(catheters) into the heart from a blood vessel in the
+groin area. A dye is then injected that can indicate
+blood pressures, blood flow within the heart, and
+blockages in the arteries. Although rarely used, a heart
+muscle biopsy, where the doctor removes a few, tiny
+pieces of the heart for laboratory studies, can aid in
+diagnosing possible infections in the heart or metabolic
+abnormalities. An electrophysiology study is similar to
+heart catheterization. Catheters with fine wires are
+inserted through veins in the groin area into the heart.
+Electrical stimuli applied through the wires can indicate
+abnormal conduction pathways, arrhythmias, effective-
+ness of drugs, and the need for an implanted defibrillator.
+Treatment
+Although there is a long list of possible causes for
+cardiomyopathy, few are directly treatable or curable.
+Therefore, most therapy is directed towards treating
+the effects of the disease on the heart. If cardiomyo-
+pathy is diagnosed at an advanced stage, a critically ill
+patient will require immediate life-saving measures
+such as placement of a breathing tube and administra-
+tion of medicines to improve heart function and blood
+pressure. Once the patient is stabilized, long-term ther-
+apy needs, such as oral medication,pacemakers, sur-
+gery, orheart transplantation, will be identified.
+Initial treatments for cardiomyopathy for patients
+diagnosed in the earlier stages of cardiomyopathy
+include drug therapy to relieve heart failure, to decrease
+oxygen requirements and workload of the heart (by
+relaxing the arteries in the body), and to regulate abnor-
+mal heartbeats. Drugs that help the heart contract
+include digoxin for at-home use and dopamine, dobu-
+tamine, and milrinone for in-hospital use.Diureticshelp
+relieve fluid overloads in heart failure.Vasodilators,
+ACE-inhibitors, andbeta blockersdilate blood vessels
+in the body and lower blood pressure, thus reducing the
+workload for the heart. For patients at risk of develop-
+ing blood clots, anticoagulation medication or blood
+thinners such as heparin or coumadin are prescribed
+along with diuretics such as Lasix and aldactone to
+relieve venous congestion. These drugs may result in
+side effects, so the patient must be carefully monitored
+to prevent complications.
+When drugs are not effective or when arrhythmias
+require regulation, a pacemaker or a defibrillator may
+be implanted surgically into the patient. The proce-
+dures for implanting both devices involves placing a
+small mechanical device under the skin of the chest or
+abdomen with wire leads threaded through veins to
+the heart. A pacemaker is used to monitor and stabi-
+lize slow heartbeats, while a defibrillator (‘‘an emer-
+gency room in the heart’’) detects and treats fast and
+potentially lethal heart rhythms. Since sudden death
+may occur in patients with cardiomyopathy, defibril-
+lators are often recommended for persons who show
+evidence of arrhythmias.
+For heart failure symptoms associated with
+restricted blood flow from the ventricles, septalmyo-
+mectomy, which is considered major heart surgery, is
+sometimes recommended. This procedure involves
+surgical removal of the part of the thickened septal
+muscle that blocks the blood flow. In some cases, the
+mitral valve is replaced with an artificial valve.
+However, the procedure does not prevent sudden
+death due to hear arrhythmias nor does it stop the
+disease from progressing.
+Since cardiomyopathy often becomes progressively
+worse, the heart can reach a state where it no longer
+responds to medication or to surgery. The treatment of
+‘‘last resort’’ is a heart transplant, when the patient
+exhibits severe heart failure symptoms. A transplant
+can cure the symptoms of heart failure, but the surgery
+carries significant risks, such as infection, organ rejec-
+tion, and side effects of required medications.
+There are surgical procedures that can be imple-
+mented to sustain life until a transplant donor
+becomes available. Left Ventricular Assist Device
+(LVAD) provides mechanical circulatory support,
+while Dynamic Cardiomyoplasty is a procedure
+whereby a skeletal-muscular flap, created from a
+patient’s chest muscle, is first taught to contract and
+then is wrapped around the heart to aid in contraction.
+Alternative treatment
+Alternative treatments are directed towards con-
+trol of the effects of heart disease.Exercise,d i e t ,nutri-
+tion, herbal therapies, stress reduction,a n do t h e r
+life style changes (e.g., cessation ofsmoking)c a na l l
+be used to complement conventional treatments.
+Certain herbs such as fox glove (Digitalis purpurea)
+and lily of the valley (Convallaria majalis)c o n t a i n
+736 Cardiomyopathy
+cardiac glycosides that make them particularly potent
+and may cause dangerous side effects. Their use should
+be supervised only be a qualified medical herbalist,
+with the concurrence of the primary conventional
+health care provider. Even the use of less potent herbs
+that improve cardiac function, such as hawthorn
+(Crataegus laevigata), should be approved by the con-
+ventional health care provider and administered under
+the supervision of a medical herbalist.
+Prognosis
+Long-term prognosis can be unpredictable, as
+there can be a wide range of severities and outcomes
+associated with the disease. There is no cure, but some
+symptoms and complications can be managed and
+controlled with medication and implantable devices
+or with a heart transplant.
+Prevention
+Prevention of cardiomyopathy is focused on con-
+trolling risk factors for heart disease, which includes
+maintaining a healthy weight, exercising regularly,
+eating a well-balanced nutritious diet, and avoiding
+or minimizing smoking.
+Resources
+BOOKS
+Dilated Cardiomyopathy: A Medical Dictionary,
+Bibliography, and Annotated Research Guide to
+Internet Resources.San Diego, CA: Icon Health
+Publications, 2004.
+Maron, Barry J., and Salberg, Lisa.Hypertrophic
+Cardiomyopathy: For Patients, Their Families, and
+Interested Physicians.Malden, MA: Futura Media
+Services, 2001.
+Parker, J.M., and Parker, P.M.The Official Patient’s
+Sourcebook on Hypertrophic Cardiomyopathy.San
+Diego, CA: Icon Health Publications, 2002.
+Parker, J.M., and Parker, P.M.The Official Patient’s
+Sourcebook on Dilated Cardiomyopathy.San Diego,
+CA: Icon Health Publications, 2002.
+PERIODICALS
+Ommen, Steve R., and Nishimura, Rick A. ‘‘A Physician’s
+Guide to the Treatment of Hypertrophic
+Cardiomyopathy.’’ HeartViews1(10): 393 - 401.
+<http://www.mayoclinic.org/hypertrophic-
+cardiomyopathy/physiciansguide.html>.
+ORGANIZATIONS
+American Heart Association, National Center, 7272
+Greenville Avenue, Dallas, TX 75231. Telephone: (800)
+242-8721; <http://www.americanheart.org/>.
+Hypertrophic Cardiomyopathy Association, P.O. Box 306
+Hibernia NJ 07842. Telephone: (973) 983-7429;
+<http://www.4hcm.org/>.
+Children’s Cardiomyopathy Foundation, P.O. Box 547,
+Tenafly, New Jersey 07670. Telephone: (201) 227-8852;
+<http://www.childrenscardiomyopathy.org/>.
+OTHER
+Cleveland Clinic Heart Center. <http://www.cleveland-
+clinic.org/heartcenter/pub/guide/disease/hcm.asp>.
+National Heart, Blood, and Lung Institute, National
+Institutes of Health, NHLBI Health Information Center,
+P.O. Box 30105, Bethesda, MD 20824-0105. Telephone:
+(301) 592 8573; <http://www.nhlbi.nih.gov> .
+Heart Center Online. <http:// www.heartcenteronline.com>.
+Judith Sims
+KEY TERMS
+Arrhythmia— An abnormal rhythm or irregularity
+of the heartbeat. The heartbeat may either be too
+fast (tachycardia) or too slow (bradicardia).
+Arrhythmias may cause symptoms such as palpita-
+tion or light-headedness, but many have more ser-
+ious consequences, including sudden death.
+Congestive heart failure— Potentially lethal condi-
+tion in which congestion develops in the lungs that
+is produced by a heart attack, poorly controlled or
+uncontrolled hypertension, or disease processes
+that weaken the heart
+Hypertrophy— Literally means an increase in the
+muscle mass (or weight) of the heart.
+Mitral valve leaflets— The mitral valve is made up
+of two valve leaflets (the anteromedial leaflet and
+the posterolateral leaflet) and a ring around the
+valve, known as the mitral valve annulus. The
+orientation of the two leaflets resembles a bishop’s
+miter, which is where the valve receives its name.
+Myocardium— The muscular wall of the heart
+located between the inner endocardial layer and
+the outer epicardial layer.
+Noninvasive — Refers to tests that generally do not
+invade the integrity of the body, such as echocar-
+diography or electrocardiography. (Cardiac cathe-
+therization, on the other hand, in which catheters
+are introduced through blood vessels into the heart,
+is an example of an invasive test).
+Septum (ventricular septum)— That portion of the
+heart wall that divides the right and left ventricles.
+Ventricles — The two main (lower) pumping cham-
+bers of the heart; the right and left ventricles pump
+blood to the lungs and aorta, respectively.
+Cardiomyopathy
+Cardiopulmonary
+resuscitation (CPR)
+Definition
+Cardiopulmonary resuscitation (CPR) is a proce-
+dure to support and maintain breathing and circula-
+tion for a person who has stopped breathing
+(respiratory arrest) and/or whose heart has stopped
+(cardiac arrest).
+Purpose
+CPR is performed to restore and maintain breath-
+ing and circulation and to provide oxygen and blood
+flow to the heart, brain, and other vital organs. CPR
+should be performed if a person is unconscious and
+not breathing. Respiratory and cardiac arrest can be
+caused by allergic reactions, an ineffective heartbeat,
+asphyxiation, breathing passages that are blocked,
+choking, drowning, drug reactions or overdoses, elec-
+tric shock, exposure to cold, severe shock, or trauma.
+CPR can be performed by trained bystanders or
+healthcare professionals on infants, children, and
+adults. It should always be performed by the person
+on the scene who is most experienced in CPR.
+Precautions
+CPR should never be performed on a healthy
+person because it can cause serious injury to a beating
+heart by interfering with normal heartbeats.
+Description
+CPR is part of the emergency cardiac care system
+designed to save lives. Many deaths can be prevented
+by prompt recognition of the problem and notification
+of the emergency medical system (EMS), followed by
+early CPR,defibrillation (which delivers a brief electric
+shock to the heart in attempt to get the heart to
+beat normally), and advanced cardiac life support
+measures.
+CPR must be performed within four to six min-
+utes after cessation of breathing so as to prevent brain
+damage or death. It is a two-part procedure that
+involves rescue breathing and external chest compres-
+sions. To provide oxygen to a person’s lungs, the
+rescuer administers mouth-to-mouth breaths, then
+helps circulate blood through the heart to vital organs
+by external chest compressions. Mouth-to-mouth
+breathing and external chest compression should be
+performed together, but if the rescuer is not strong
+enough to do both, the external chest compressions
+should be done. This is more effective than no resusci-
+tation attempt, as is CPR that is performed ‘‘poorly.’’
+When performed by a bystander, CPR is designed
+to support and maintain breathing and circulation
+until emergency medical personnel arrive and take
+over. When performed by healthcare personnel, it is
+used in conjunction with other basic and advanced life
+support measures.
+According to the American Heart Association,
+early CPR and defibrillation combined with early
+advanced emergency care can increase survival rates
+for people with a type of abnormal heart beat called
+ventricular fibrillation by as much as 40%. CPR by
+bystanders may prolong life during deadly ventricular
+fibrillation, giving emergency medical service person-
+nel time to arrive.
+However, many CPR attempts are not ultimately
+successful in restoring a person to a good quality of
+life. Often, there is brain damage even if the heart
+starts beating again. CPR is therefore not generally
+recommended for the chronically or terminally ill or
+frail elderly. For these people, it represents a traumatic
+and not a peaceful end of life.
+Each year, CPR helps save thousands of lives in
+the United States. More than five million Americans
+annually receive training in CPR through American
+Heart Association and American Red Cross courses.
+In addition to courses taught by instructors, the
+American Heart Association also has an interactive
+video called Learning System, which is available at
+more than 500 healthcare institutions. Both organiza-
+tions teach CPR the same way, but use different terms.
+These organizations recommend that family members
+or other people who live with people who are at risk
+for respiratory or cardiac arrest be trained in CPR. A
+hand-held device called a CPR Prompt is available to
+walk people trained in CPR through the procedure,
+using American Heart Association guidelines. CPR
+has been practiced for more than 40 years.
+Performing CPR
+The basic procedure for CPR is the same for all
+people, with a few modifications for infants and children
+to account for their smaller size.
+PERFORMING CPR ON AN ADULT. The first step is
+to call the emergency medical system for help by tele-
+phoning 911; then to begin CPR, following these steps:
+/C15The rescuer opens a person’s airway by placing the
+head face up, with the forehead tilted back and the
+chin lifted. The rescuer checks again for breathing
+(three to five seconds), then begins rescue breathing
+738 Cardiopulmonary resuscitation (CPR)
+(mouth-to-mouth artificial respiration), pinching the
+nostrils shut while holding the chin in the other hand.
+The rescuer’s mouth is placed against the uncon-
+scious person’s mouth with the lips making a tight
+seal, then gently exhales for about one to one and a
+half seconds. The rescuer breaks away for a moment
+and then repeats. The person’s head is repositioned
+after each mouth-to-mouth breath.
+/C15After two breaths, the rescuer checks the uncon-
+scious person’s pulse by moving the hand that was
+under the person’s chin to the artery in the neck
+(carotid artery). If the unconscious person has a
+heartbeat, the rescuer continues rescue breathing
+until help arrives or the person begins breathing
+without assistance. If the unconscious person is
+breathing, the rescuer turns the person onto his or
+her side.
+/C15If there is no heartbeat, the rescuer performs chest
+compressions. The rescuer kneels next to the uncon-
+scious person, placing the heel of one hand in the
+spot on the lower chest where the two halves of the
+rib cage come together. The rescuer puts one hand on
+top of the other on the person’s chest and interlocks
+the fingers. The arms are straightened, the rescuer’s
+shoulders are positioned directly above the hands on
+the unconscious person’s chest. The hands are
+pressed down, using only the palms, so that the
+person’s breastbone sinks in about 1½–2 inches.
+The rescuer releases pressure without removing the
+hands, then repeats about 15 times per 10–15 second
+intervals.
+/C15The rescuer tilts the unconscious person’s head and
+returns to rescue breathing for one or two quick
+breaths. Then breathing and chest compressions are
+alternated for one minute before checking for a
+pulse. If the rescuer finds signs of a heartbeat and
+breathing, CPR is stopped. If the unconscious person
+is breathing but has no pulse, the chest compressions
+are continued. If the unconscious person has a pulse
+but is not breathing, rescue breathing is continued.
+/C15For children over the age of eight, the rescuer per-
+forms CPR exactly as for an adult.
+PERFORMING CPR ON AN INFANT OR CHILD UNDER
+THE AGE OF EIGHT. The procedures outlined above are
+followed with these differences:
+/C15The rescuer administers CPR for one minute, then
+calls for help.
+/C15The rescuer makes a seal around the child’s mouth or
+infant’s nose and mouth to give gentle breaths. The
+rescuer delivers 20 rescue breaths per minute, taking
+1½–2 seconds for each breath.
+/C15Chest compressions are given with only one hand for
+a child and with two or three fingers for an infant.
+The breastbone is depressed only 1–1½ inch for a
+child and ½–1 inch for an infant, the rescuer gives at
+least 100 chest compressions per minute.
+New developments in CPR
+Some new ways of performing CPR have been
+tried. Active compression-decompression resuscita-
+tion, abdominal compression done in between chest
+compressions, and chest compression using a pneu-
+matic vest have all been tested but none are currently
+recommended for routine use.
+The active compression-decompression device
+was developed to improve blood flow from the heart,
+but clinical studies have found no significant differ-
+ence in survival between standard and active compres-
+sion-decompression CPR. Interposed abdominal
+counterpulsation, which requires two or more res-
+cuers, one compressing the chest and the other com-
+pressing the abdomen, was developed to improve
+pressure and therefore blood flow. It has been shown
+in a small study to improve survival but more data is
+needed. A pneumatic vest, which circles the chest of an
+unconscious person and compresses it, increases pres-
+sure within the chest during external chest compres-
+sion. The vest has been shown to improve survival in a
+preliminary study but more data is necessary for a full
+assessment.
+Preparation
+If a person suddenly becomes unconscious, a res-
+cuer should call out for help from other bystanders,
+and then determine if the unconscious person is
+responsive by gently shaking the shoulder and shout-
+ing a question. Upon receiving no answer, the rescuer
+should call the emergency medical system. The rescuer
+should check to see whether the unconscious person is
+breathing by kneeling near the person’s shoulders,
+looking at the person’s chest, and placing a cheek
+next to the unconscious person’s mouth. The rescuer
+should look for signs of breathing in the chest and
+abdomen, and listen and feel for signs of breathing
+through the person’s lips. If no signs of breathing are
+present after three to five seconds, CPR should be
+started.
+Aftercare
+Emergency medical care is always necessary
+after successful CPR. Once a person’s breathing
+and heartbeat have been restored, the rescuer should
+Cardiopulmonary resuscitation (CPR)
+Figure B
+Figure C
+Figure D
+Figure E
+Figure A
+Figure F
+CPR in basic life support. Figure A: The victim should be flat on his back and his mouth should be checked for debris. Figure B: If
+the victim is unconscious, open airway, lift neck, and tilt head back. Figure C: If victim is not breathing, begin artificial breathing
+with four quick full breaths. Figure D: Check for carotid pulse. Figure E: If pulse is absent, begin artificial circulation by
+depressing sternum. Figure F: Mouth-to-mouth resuscitation of an infant.(Illustration by Electronic Illustrators Group.)
+740 Cardiopulmonary resuscitation (CPR)
+make the person comfortable and stay there until
+emergency medical personnel arrive. The rescuer
+can continue to reassure the person that help is
+coming and talk positively until professionals arrive
+and take over.
+Risks
+CPR can cause injury to a person’s ribs, liver,
+lungs, and heart. However, these risks must be
+accepted if CPR is necessary to save the person’s life.
+Normal results
+In many cases, successful CPR results in restora-
+tion of consciousness and life. Barring other injuries, a
+revived person usually returns to normal functions
+within a few hours of being revived.
+Abnormal results
+These include injuries incurred during CPR and
+lack of success with CPR. Possible sites for injuries
+include a person’s ribs, liver, lungs, and heart.
+Partially successful CPR may result in brain damage.
+Unsuccessful CPR results in death.
+Resources
+BOOKS
+Alton, Thygerson.First Aid and CPR.4th ed. Sudbury,
+Massachusetts: Jones & Bartlett Pub, 2001.
+Knoop, Kevin J., and Lawrence B. Stack.Atlas of
+Emergency Medicine.2nd ed. New York: McGraw Hill,
+2001.
+National Safety Council.First Aid and CPR for Infants and
+Children. 4th ed. Sudbury, Massachusetts: Jones &
+Bartlett Pub, 2001.
+PERIODICALS
+Davies, N., and D. Gould. ‘‘Updating cardiopulmonary
+resuscitation skills: a study to examine the efficacy of
+self-instruction on nurses’ competence.’’Journal of
+Clinical Nursing9 (2000): 400-410.
+E f t e s t o lT . ,K .S u n d e ,S .O .A a s e ,J .H .H u s o y ,a n d
+P. A. Steen. ‘‘‘Probability of successful defibrillation’
+as a monitor during CPR in out-of-hospital
+cardiac arrested patients.’’Resuscitation 48 (2001):
+245-254.
+Kern, K. B., H. R. Halperin, and J. Field. ‘‘New
+guidelines for cardiopulmonary resuscitation and
+emergency cardiac care: changes in the management
+of cardiac arrest.’’Journal of the American Medical
+Association 285 (2001): 1267-1269.
+Meyer W., and F. Balck. ‘‘Resuscitation decision index: a
+new approach to decision-making in prehospital CPR.’’
+Resuscitation 48 (2001): 255-263.
+ORGANIZATIONS
+American College of Emergency Physicians. P.O. Box
+619911, Dallas, TX 75261-9911. (800) 798-1822 or
+(972) 550-0911. Fax: (972) 580-2816. <http://www.
+acep.org/>. info@acep.org.
+American College of Osteopathic Emergency Physicians.
+142 E. Ontario Street, Suite 550, Chicago, IL 60611.
+(312) 587-3709 or (800) 521-3709. Fax: (312) 587-9951.
+<http://www.acoep.org>.
+American Heart Association, National Center. 7272
+Greenville Avenue, Dallas, TX 75231. (877) 242-4277.
+<http://www.americanheart.org/
+Heart_and_Stroke_A_Z_Guide/heim.html>.
+Heimlich Institute. PO Box 8858, Cincinnati, OH 45208.
+<http://www.heimlichinstitute.org/index.htm>.
+heimlich@iglou.com.
+National Safe Kids Campaign. 1301 Pennsylvania Avenue,
+Suite 1000, Washington, DC 20004-1707. <http://
+pedsccm.wustl.edu/All-Net/english/neurpage/protect/
+drown.htm>.
+OTHER
+American Heart Association. <http://www.cpr-ecc.org/>
+and <http://www.americanheart.org/
+Heart_and_Stroke_A_Z_Guide/cprs.html>.
+Columbia Presbyterian Medical Center. <http://cpmcnet.
+columbia.edu/texts/guide/hmg13_0001.html>.
+Learn CPR. <http://www.learn-cpr.com>.
+National Registry of Cardiopulmonary Resuscitation.
+<http://www.nrcpr.org/>.
+University of Washington School of Medicine. <http://
+depts.washington.edu/learncpr/>.
+L. Fleming Fallon, Jr., MD, DrPH
+KEY TERMS
+Cardiac arrest— Temporary or permanent cessa-
+tion of the heartbeat.
+Cardiopulmonary— Relating to the heart and the
+lungs.
+Defibrillation— A procedure to stop the type of
+irregular heart beat called ventricular fibrillation,
+usually by using electric shock.
+Resuscitation— Bringing a person back to life after
+an apparent death or in cases of impending death.
+Ventricular fibrillation— An irregular heartbeat
+where the heart beats very fast but ineffectively.
+Ventricular fibrillation is fatal if not quickly
+corrected.
+Cardiopulmonary resuscitation (CPR)
+Cardioversion
+Definition
+Cardioversion refers to the process of restoring
+the heart’s normal rhythm by applying a controlled
+electric shock to the exterior of the chest.
+Purpose
+When the heart beats too fast, blood no longer
+circulates effectively in the body. Cardioversion
+is used to stop this abnormal beating so that the
+heart can begin normal rhythm and pump more
+efficiently.
+Precautions
+Not all unusual heart rhythms (calledarrhyth-
+mias) are dangerous or fatal. Atrial fibrillation and
+atrial flutter often revert to normal rhythms without
+the need for cardioversion. Healthcare providers may
+also try to correct the heart rhythm with medication or
+recommend a lifestyle change before trying cardiover-
+sion. However, ventricular tachycardia lasting more
+than 30 seconds and ventricular fibrillation require
+immediate cardioversion.
+Description
+Elective cardioversion is usually scheduled ahead
+of time. After arriving at the hospital, an intravenous
+(IV) catheter will be placed in the arm and oxygen will
+be given through a face mask. A short-acting general
+anesthetic will be administered through the vein.
+During the two or three minutes of anesthesia, the
+doctor will apply two paddles to the exterior of the
+chest and administer the electric shock. It may be
+necessary to give the shock two or three times to
+obtain normal rhythm.
+Preparation
+Medication to thin the blood is usually given for
+at least three weeks before elective cardioversion.
+Food intake should be stopped eight hours before
+the procedure.
+Aftercare
+Medical personnel will monitor the heart rhythm
+for a few hours, after which the patient is usually sent
+home. It is advisable to arrange for transportation
+home, because drowsiness may last several hours.
+The doctor may prescribe anti-arrhythmic medication
+to prevent the abnormal rhythm from returning.
+Risks
+Cardioverters have been in use for many years
+and the risks are few. Those unlikely risks that
+remain include those instances when the device deli-
+vers greater or lesser power than expected or when
+power setting and control knobs are not set correctly.
+Unfortunately, in a number of cases, the heart prefers
+its abnormal rhythm and reverts to it despite
+cardioversion.
+Normal results
+Most cardioversions are successful and, at least
+for a time, restore the normal heart rhythm.
+Resources
+ORGANIZATIONS
+American Heart Association. 7320 Greenville Ave.
+Dallas, TX 75231. (214) 373-6300. <http://
+www.americanheart.org>.
+Dorothy Elinor Stonely
+Carisoprodol see Muscle relaxants
+Carotid artery surgery see Endarterectomy
+Carotid Doppler ultrasound see Doppler
+ultrasonography
+Carotid endarterectomy see Endarterectomy
+KEY TERMS
+Atrial fibrillation— A condition in which the upper
+chamber of the heart quivers instead of pumping in
+an organized way.
+Atrial flutter— A rapid pulsation of the upper
+chamber of the heart that interferes with normal
+function.
+Ventricular fibrillation— A condition in which the
+lower chamber of the heart quivers instead of
+pumping in an organized way.
+Ventricular tachycardia— A rapid heart beat,
+usually over 100 beats per minute.
+742 Cardioversion
+Carotid sinus massage
+Definition
+Carotid sinus massage involves rubbing the large
+part of the arterial wall at the point where the common
+carotid artery, located in the neck, divides into its two
+main branches.
+Purpose
+Sinus, in this case, means an area in a blood vessel
+that is bigger than the rest of the vessel. This is a
+normal dilation of the vessel. Located in the neck
+just below the angle of the jaw, the carotid sinus sits
+above the point where the carotid artery divides into
+its two main branches. Rubbing the carotid sinus sti-
+mulates an area in the artery wall that contains nerve
+endings. These nerves respond to changes in blood
+pressure and are capable of slowing the heart rate.
+The response to this simple procedure often slows a
+rapid heart rate (for example, atrial flutter or atrial
+tachycardia) and can provide important diagnostic
+information to the physician.
+Description
+The patient will be asked to lie down, with the
+neck fully extended and the head turned away from the
+side being massaged. While watching an electrocardio-
+gram monitor, the doctor will gently touch the carotid
+sinus. If there is no change in the heart rate on the
+monitor, the pressure is applied more firmly with a
+gentle rotating motion. After massaging one side of
+the neck, the massage will be repeated on the other
+side. Both sides of the neck are never massaged at the
+same time.
+Preparation
+No special preparation is needed for carotid sinus
+massage.
+Aftercare
+No aftercare is required.
+Risks
+The physician must be sure there is no evidence of
+blockage in the carotid artery before performing the
+procedure. Massage in a blocked area might cause a
+clot to break loose and cause astroke.
+Normal results
+Carotid sinus massage will slow the heart rate
+during episodes of atrial flutter, fibrillation, and
+some tachycardias. It has been known to stop the
+arrhythmia completely. If the procedure is being
+done to help diagnoseangina pectoris, massaging the
+carotid sinus may make the discomfort go away.
+Resources
+BOOKS
+McGood, Michael D., editor.Mayo Clinic Heart Book: The
+Ultimate Guide to Heart Health.New York: William
+Morrow and Co., Inc., 1993.
+Dorothy Elinor Stonely
+Carpal tunnel syndrome
+Definition
+Carpal tunnel syndrome is a disorder caused by
+compression at the wrist of the median nerve supply-
+ing the hand, causingnumbness and tingling.
+Description
+The carpal tunnel is an area in the wrist where the
+bones and ligaments create a small passageway for
+the median nerve. The median nerve is responsible
+KEY TERMS
+Angina pectoris— Chest pain usually caused by a
+lack of oxygen in the heart muscle.
+Arrhythmia— Any deviation from a normal heart
+beat.
+Atrial fibrillation— A condition in which the upper
+chamber of the heart quivers instead of pumping in
+an organized way.
+Atrial flutter— Rapid, inefficient contraction of the
+upper chamber of the heart.
+Carotid artery— One of the major arteries supply-
+ing blood to the head and neck.
+Tachycardia— A rapid heart beat, usually over 100
+beats per minute.
+Carpal tunnel syndrome
+for both sensation and movement in the hand, in
+particular the thumb and first three fingers. When
+the median nerve is compressed, an individual’s hand
+will feel as if it has ‘‘gone to sleep.’’
+Women between the ages of 30 and 60 have the
+highest rates of carpal tunnel syndrome. Research has
+demonstrated that carpal tunnel syndrome is a very
+significant cause of missed work days due topain.I n
+1995, about $270 million was spent on sick days taken
+for pain from repetitive motion injuries.
+Causes and symptoms
+Compression of the median nerve in the wrist can
+occur during a number of different conditions, parti-
+cularly those conditions which lead to changes in
+fluid accumulation throughout the body. Because
+the area of the wrist through which the median
+nerve passes is very narrow, any swelling in the area
+will lead to pressure on the median nerve. This pres-
+sure will ultimately interfere with the nerve’s ability
+to function normally. Pregnancy, obesity,a r t h r i t i s ,
+certain thyroid conditions , diabetes, and certain
+pituitary abnormalities all predispose to carpal tun-
+nel syndrome. Other conditions which increase
+the risk for carpal tunnel syndrome include some
+forms of arthritis and various injuries to the arm
+and wrist (including fractures, sprains,a n ddisloca-
+tions). Furthermore, activities which cause an indivi-
+dual to repeatedly bend the wrist inward toward the
+forearm can predispose to carpal tunnel syndrome.
+Certain jobs which require repeated strong wrist
+motions carry a relatively high risk of carpal tunnel
+syndrome. Injuries of this type are referred to as
+‘‘repetitive motion’’ injuries, and are more frequent
+among secretaries doing a lot of typing, people work-
+ing at computer keyboards or cash registers, factory
+workers, and some musicians.
+Symptoms of carpal tunnel syndrome include
+numbness, burning, tingling, and a prickly pin-like
+sensation over the palm surface of the hand, and
+into the thumb, forefinger, middle finger, and half
+of the ring finger. Some individuals notice a shooting
+pain which goes from the wrist up the arm, or down
+into the hand and fingers. With continued median
+nerve compression, an individual may begin to
+experience muscle weakness, making it difficult to
+open jars and hold objectswith the affected hand.
+Eventually, the muscles of the hand served by the
+median nerve may begin to grow noticeably smaller
+(atrophy), especially the fleshy part of the thumb.
+Untreated, carpal tunnel syndrome may eventually
+result in permanent weakness, loss of sensation, or
+even paralysis of the thumb and fingers of the affected
+hand.
+Diagnosis
+The diagnosis of carpal tunnel syndrome is made
+in part by checking to see whether the patient’s
+symptoms can be brought on by holding his or her
+hand in position with wrist bent for about a minute.
+Wrist x rays are often taken to rule out the possibi-
+lity of a tumor causing pressure on the median nerve.
+A physician examining a patient suspected of having
+carpal tunnel syndrome will perform a variety of
+simple tests to measure muscle strength and sensa-
+tion in the affected hand and arm. Further testing
+might include electromyographic or nerve conduc-
+tion velocity testing to determine the exact severity
+of nerve damage. These tests involve stimulating the
+median nerve with electricity and measuring the
+resulting speed and strength of the muscle response,
+as well as recording speed of nerve transmission
+across the carpal tunnel.
+Carpal tunnel ligament
+Median nerve
+Carpal tunnel ligament (severed)
+Median nerve
+The most severe cases of carpal tunnel syndrome may
+require surgery to decrease the compression of the median
+nerve and restore its normal function. This procedure
+involves severing the ligament that crosses the wrist, thus
+allowing the median nerve more room and decreasing com-
+pression. (Illustration by Electronic Illustrators Group.)
+744 Carpal tunnel syndrome
+Treatment
+Carpal tunnel syndrome is initially treated with
+splints, which support the wrist and prevent it from
+flexing inward into the position which exacerbates med-
+ian nerve compression. Some people get significant
+relief by wearing such splints to sleep at night, while
+others will need to wear the splints all day, especially if
+they are performing jobs which stress the wrist.
+Ibuprofen or other nonsteroidal anti-inflammatory
+drugs may be prescribed to decrease pain and swelling.
+When carpal tunnel syndrome is more advanced, injec-
+tion of steroids into the wrist to decrease inflammation
+may be necessary.
+The most severe cases of carpal tunnel syndrome
+may require surgery to decrease the compression of the
+median nerve and restore its normal function. Such a
+repair involves cutting that ligament which crosses the
+wrist, thus allowing the median nerve more room and
+decreasing compression. This surgery is done almost
+exclusively on an outpatient basis and is often per-
+formed without the patient having to be made uncon-
+scious. Careful injection of numbing medicines (local
+anesthesia) or nerve blocks (the injection of anesthetics
+directly into the nerve) create sufficient numbness to
+allow the surgery to be performed painlessly, without
+the risks associated withgeneral anesthesia. Recovery
+from this type of surgery is usually quick and without
+complications.
+Prognosis
+Without treatment, continued pressure on the
+median nerve puts an individual at risk for permanent
+disability in the affected hand. Most people are able to
+control the symptoms of carpal tunnel syndrome with
+splinting and anti-inflammatory agents. For those
+who go on to require surgery, about 95% will have
+complete cessation of symptoms.
+Prevention
+Prevention is generally aimed at becoming aware
+of the repetitive motions which one must make which
+could put the wrist into a bent position. People who
+must work long hours at a computer keyboard, for
+example, may need to take advantage of recent
+advances in ‘‘ergonomics,’’ which try to position the
+keyboard and computer components in a way that
+increases efficiency and decreases stress. Early use of
+a splint may also be helpful for people whose jobs
+increase the risk of carpal tunnel syndrome.
+Resources
+PERIODICALS
+Seiler, John Gray. ‘‘Carpal Tunnel Syndrome: Update on
+Diagnostic Testing and Treatment Options.’’
+Consultant 37, no. 5 (May 1997): 1233.
+Rosalyn Carson-DeWitt, MD
+Casts see Immobilization
+Cat-bite infection see Animal bite infections
+Cat-scratch disease
+Definition
+Cat-scratch disease is an uncommon infection
+that typically results from a cat’s scratch or bite.
+Most sufferers experience only moderate discomfort
+and find that their symptoms clear up without
+any lasting harm after a few weeks or months.
+Professional medical treatment is rarely needed.
+Description
+Cat-scratch disease (also called cat-scratchfever)
+is caused by theBartonella henselae bacterium, which
+is found in cats around the world and is transmitted
+from cat to cat by fleas. Researchers have discovered
+that large numbers of North American cats carry
+antibodies for the disease (meaning that the cats
+have been infected at some point in their lives).
+Some parts of North America have much higher
+KEY TERMS
+Carpal tunnel— A passageway in the wrist, created
+by the bones and ligaments of the wrist, through
+which the median nerve passes.
+Electromyography— A type of test in which a
+nerve’s function is tested by stimulating a nerve
+with electricity, and then measuring the speed
+and strength of the corresponding muscle’s
+response.
+Median nerve— A nerve which runs through the
+wrist and into the hand. It provides sensation
+and some movement to the hand, the thumb, the
+index finger, the middle finger, and half of the ring
+finger.
+Cat-scratch disease
+rates of cat infection than others, however.Bartonella
+henselae is uncommon or absent in cold climates,
+which fleas have difficulty tolerating, but prevalent
+in warm, humid places such as Memphis, Tennessee,
+where antibodies were found in 71% of the cats
+tested. The bacterium, which remains in a cat’s
+bloodstream for several months after infection,
+seems to be harmless to most cats, and normally an
+infected cat will not display any symptoms. Kittens
+(cats less than one year old) are more likely than adult
+cats to be carrying the infection.
+Bartonella henselae can infect people who are
+scratched or (more rarely) bitten or licked by a cat. It
+cannot be passed from person to person. Although
+cats are popular pets found in about 30% of
+American households, human infection appears to be
+rare. One study estimated that for every 100,000
+Americans there are only 2.5 cases of cat-scratch dis-
+ease each year (2.5/100,000). It is also unusual for
+more than one family member to become ill; a
+Florida investigation discovered multiple cases in
+only 3.5% of the families studied. Children and teen-
+agers appear to be the most likely victims of cat-
+scratch disease, although the possibility exists that
+the disease may be more common among adults than
+previously thought.
+Causes and symptoms
+The first sign of cat-scratch disease may be a small
+blister at the site of a scratch or bite three to 10 days
+after injury. The blister (which sometimes contains
+pus) often looks like an insect bite and is usually
+found on the hands, arms, or head. Within two
+weeks of the blister’s appearance, lymph nodes near
+the site of injury become swollen. Often the infected
+person develops a fever or experiencesfatigue or head-
+aches. The symptoms usually disappear within a
+month, although the lymph nodes may remain swollen
+for several months. Hepatitis,pneumonia, and other
+dangerous complications can arise, but the likelihood
+of cat-scratch disease posing a serious threat to health
+is very small.AIDS patients and other immunocom-
+promised people face the greatest risk of dangerous
+complications.
+Occasionally, the symptoms of cat-scratch disease
+take the form of what is called Parinaud’s oculogland-
+ular syndrome. In such cases, a small sore develops
+on the palpebral conjunctiva (the membrane lining
+the inner eyelid), and is often accompanied bycon-
+junctivitis (inflammation of the membrane) and swol-
+len lymph nodes in front of the ear. Researchers
+suspect that the first step in the development of
+Parinaud’s oculoglandular syndrome occurs when
+Bartonella henselae bacteria pass from a cat’s saliva
+to its fur during grooming. Rubbing one’s eyes after
+handling the cat then transmits the bacteria to the
+conjunctiva.
+Diagnosis
+A family doctor should be called whenever a cat
+scratch or bite fails to heal normally or is followed by a
+persistent fever or other unusual symptoms such as
+long-lasting bone or joint pain. The appearance of
+painful and swollen lymph nodes is another reason
+for consulting a doctor. When cat-scratch disease is
+suspected, the doctor will ask about a history of expo-
+sure to cats and look for evidence of a cat scratch or
+bite and swollen lymph nodes. A blood test for
+Bartonella henselae may be ordered to confirm the
+doctor’s diagnosis.
+Treatment
+For otherwise healthy people, rest and over-the-
+counter medications for reducing fever and discomfort
+(such asacetaminophen) while waiting for the disease
+to run its course are usually all that is necessary.
+Antibiotics are prescribed in some cases, particularly
+when complications occur or the lymph nodes remain
+swollen and painful for more than two or three
+months, but there is no agreement among doctors
+about when and how they should be used. If a lymph
+node becomes very swollen and painful, the family
+doctor may decide to drain it.
+Prognosis
+Most people recover completely from a bout of
+cat-scratch disease. Further attacks are rare.
+Prevention
+Certain common–sense precautions can be taken
+to guard against the disease. Scratches and bites
+should be washed immediately with soap and water,
+and it is never a good idea to rub one’s eyes after
+handling a cat without first washing one’s hands.
+Children should be told not to play with stray cats or
+make cats angry. Immunocompromised people should
+avoid owning kittens, which are more likely than adult
+cats to be infectious. Because cat-scratch disease is
+usually not a life-threatening illness and people tend
+to form strong emotional bonds with their cats, doc-
+tors do not recommend getting rid of a cat suspected of
+carrying the disease.
+746 Cat-scratch disease
+Resources
+PERIODICALS
+Smith, David L. ‘‘Cat-Scratch Disease and Related Clinical
+Syndromes.’’ American Family PhysicianApril 1997:
+1783.
+Howard Baker
+Cat-scratch fever see Cat-scratch disease
+CAT scan see Computed tomography scans
+Cataract surgery
+Definition
+Cataract surgery is a procedure performed to
+remove a cloudy lens from the eye; usually an intra-
+ocular lens is implanted at the same time.
+Purpose
+The purpose of cataract surgery is to restore clear
+vision. It is indicated when cloudy vision due tocatar-
+acts has progressed to such an extent that it interferes
+with normal daily activities. It is one of the most
+commonly performed surgical procedures in the
+world.
+Precautions
+Cataract surgery is not performed on both eyes at
+once. To avoid risking blindness in both eyes in the
+event of infection or other catastrophe, the first eye is
+allowed to heal before the cataract is removed from
+the second eye.
+The presence of cataracts can mask additional eye
+problems, such as retinal damage, that neither doctors
+nor patients are aware of prior to surgery. Since such
+conditions will continue to impair sight after cataract
+removal if they are not identified and treated, the
+eventual outcome of cataract surgery will depend on
+the outcome of other problems.
+In 1997 and 1998, evidence that cataract surgery
+can contribute to the progression of age-relatedmacu-
+lar degeneration (ARMD) was published. ARMD is
+the degeneration of the central part of the retina.
+Accordingly, ARMD patients with cataracts must
+weigh the risks of the loss of central vision, within
+four or five years, against short-term improvement.
+When an ARMD patient chooses cataract surgery,
+the surgeon should shield the retina against bright
+light to protect it from possible light-induced damage
+during surgery and install an intraocular lens capable
+of absorbing ultraviolet and blue light, which seem to
+do the most damage.
+Description
+There are two types of cataract surgery: intracap-
+sular and extracapsular. Intracapsular surgery is the
+removal of both the lens and the thin capsule that
+surround the lens. This type of surgery was common
+before 1980, but has since been displaced by extracap-
+sular surgery. Removal of the capsule requires a large
+incision and doesn’t allow comfortable intraocular
+lens implantation. Thus, people who undergo intra-
+capsular cataract surgery have long recovery periods
+and have to wear very thick glasses.
+Extracapsular cataract surgery is the removal of
+the lens where the capsule is left in place. Each year in
+the United States, over a million cataracts are removed
+this way. Physicians and researchers continue to
+improve cataract surgery methods. Research from
+France in 2003 said that cataract removal and non-
+penetrating glaucoma surgery can be combined in
+glaucoma patients.
+There are two methods for extracapsular cataract
+surgery. The usual technique is phacoemulsification.
+KEY TERMS
+Acetaminophen— A drug for relieving pain and fever.
+AIDS— Acquired immunodeficiency syndrome.
+A disease that attacks the immune system.
+Antibiotics— A category of manufactured sub-
+stances used to combat infection.
+Antibodies— Special substances created by the
+body to combat infection.
+Bacterium— A tiny organism. Some bacteria cause
+disease.
+Hepatitis— A disease that inflames the liver.
+Immune system— A body system that combats
+disease.
+Immunocompromised— Having a damaged imm-
+une system.
+Lymph nodes— Small, kidney-shaped organs that
+filter a fluid called lymph.
+Pneumonia— A disease that inflames the lungs.
+Pus— A thick yellowish or greenish fluid.
+Cataract surgery

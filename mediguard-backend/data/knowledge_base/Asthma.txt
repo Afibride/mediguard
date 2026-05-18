@@ -1,0 +1,1250 @@
+DISEASE: Asthma
+SOURCE: Gale Encyclopedia of Medicine, 3rd Edition
+CONTEXT: Relevant to tropical/sub-Saharan Africa including Cameroon
+============================================================
+
+Anxiety may also be caused by environmental or
+occupational factors. People who must live or work
+around sudden or loud noises, bright or flashing lights,
+chemical vapors, or similar nuisances, which they cannot
+avoid or control, may develop heightened anxiety levels.
+Existential anxiety
+Another factor that shapes human experiences of
+anxiety is knowledge of personal mortality. Humans are
+the only animals that appear to be aware of their limited
+life span. Some researchers think that awareness of
+death influences experiences of anxiety from the time
+that a person is old enough to understand death.
+Symptoms of anxiety
+In order to understand the diagnosis and treat-
+ment of anxiety, it is helpful to have a basic under-
+standing of its symptoms.
+SOMATIC. The somatic or physical symptoms of
+anxiety include headaches,dizziness or lightheaded-
+ness, nausea and/or vomiting, diarrhea, tingling, pale
+complexion, sweating,numbness, difficulty in breath-
+ing, and sensations of tightness in the chest, neck,
+shoulders, or hands. These symptoms are produced
+by the hormonal, muscular, and cardiovascular reac-
+tions involved in the fight-or-flight reaction. Children
+and adolescents withgeneralized anxiety disordershow
+a high percentage of physical complaints.
+BEHAVIORAL. Behavioral symptoms of anxiety
+include pacing, trembling, general restlessness, hyper-
+ventilation, pressured speech, hand wringing, or finger
+tapping.
+COGNITIVE. Cognitive symptoms of anxiety
+include recurrent or obsessive thoughts, feelings of
+doom, morbid or fear-inducing thoughts or ideas,
+and confusion, or inability to concentrate.
+EMOTIONAL. Feeling states associated with anxi-
+ety include tension or nervousness, feeling ‘‘hyper’’ or
+‘‘keyed up,’’ and feelings of unreality, panic, or terror.
+DEFENSE MECHANISMS. In psychoanalytic theory,
+the symptoms of anxiety in humans may arise from or
+activate a number of unconscious defense mechan-
+isms. Because of these defenses, it is possible for a
+person to be anxious without being consciously
+aware of it or appearing anxious to others. These
+psychological defenses include:
+/C15Repression. The person pushes anxious thoughts or
+ideas out of conscious awareness.
+/C15Displacement. Anxiety from one source is attached
+to a different object or event. Phobias are an example
+of the mechanism of displacement in psychoanalytic
+theory.
+/C15Rationalization. The person justifies the anxious
+feelings by saying that any normal person would
+feel anxious in their situation.
+/C15Somatization. The anxiety emerges in the form of
+physical complaints and illnesses, such as recurrent
+headaches, stomach upsets, or muscle and joint pain.
+/C15Delusion formation. The person converts anxious
+feelings into conspiracy theories or similar ideas
+without reality testing. Delusion formation can
+involve groups as well as individuals.
+Other theorists attribute some drugaddictionto the
+desire to relieve symptoms of anxiety. Most addictions,
+they argue, originate in the use of mood-altering sub-
+stances or behaviors to ‘‘medicate’’ anxious feelings.
+Diagnosis
+The diagnosis of anxiety is difficult and complex
+because of the variety of its causes and the highly
+personalized and individualized nature of its symptom
+formation. There are no medical tests that can be used
+to diagnose anxiety by itself. When a doctor examines
+an anxious patient, he or she will first rule out physical
+conditions and diseases that have anxiety as a symp-
+tom. Apart from these exclusions, thephysical exam-
+ination is usually inconclusive. Some anxious patients
+may have their blood pressure or pulse rate affected by
+anxiety, or may look pale or perspire heavily, but
+others may appear physically completely normal.
+The doctor will then take the patient’s medication,
+dietary, and occupational history to see if they are
+taking prescription drugs that might cause anxiety, if
+they are abusing alcohol or mood-altering drugs,
+if they are consuming large amounts of caffeine, or if
+their workplace is noisy or dangerous. In most cases,
+the most important source of diagnostic information is
+the patient’s psychological and social history. The
+doctor may administer a brief psychological test to
+help evaluate the intensity of the patient’s anxiety and
+some of its features. Some tests that are often given
+include the Hamilton Anxiety Scale and the Anxiety
+Disorders Interview Schedule (ADIS). Many doctors
+will check a number of chemical factors in the blood,
+such as the level of thyroid hormone and blood sugar.
+Treatment
+Not all patients with anxiety require treatment,
+but for more severe cases, treatment is recommended.
+Because anxiety often has more than one cause and is
+experienced in highly individual ways, its treatment
+360 Anxiety
+usually requires more than one type of therapy. In
+addition, there is no way to tell in advance how
+patients will respond to a specific drug or therapy.
+Sometimes the doctor will need to try different medi-
+cations or methods of treatment before finding the
+best combination for the particular patient. It usually
+takes about six to eight weeks for the doctor to evalu-
+ate the effectiveness of a treatment regimen.
+Medications
+Medications are often prescribed to relieve the
+physical and psychological symptoms of anxiety.
+Most agents work by counteracting the biochemical
+and muscular changes involved in the fight-or-flight
+reaction. Some work directly on the chemicals in the
+brain that are thought to underlie the anxiety.
+ANXIOLYTICS. Anxiolytics are sometimes called
+tranquilizers. Most anxiolytic drugs are eitherbenzo-
+diazepines or barbiturates. Barbiturates, once com-
+monly used, are now rarely used in clinical practice.
+Barbiturates work by slowing down the transmission
+of nerve impulses from the brain to other parts
+of the body. They include such drugs as phenobarbital
+(Luminal) and pentobarbital (Nembutal). Benzodia-
+zepines work by relaxing the skeletal muscles and
+calming the limbic system. They include such drugs
+as chlordiazepoxide (Librium) and diazepam
+(Valium). Both barbiturates and benzodiazepines are
+potentially habit-forming and may cause withdrawal
+symptoms, but benzodiazepines are far less likely than
+barbiturates to cause physical dependency. Both drugs
+also increase the effects of alcohol and should never be
+taken in combination with it.
+Two other types of anxiolytic medications
+include meprobamate (Equanil), which is now
+rarely used, and buspirone (BuSpar), a new type
+of anxiolytic that appears to work by increasing
+the efficiency of the body’s own emotion-regulating
+brain chemicals. Buspirone has several advantages
+over other anxiolytics. It does not cause depen-
+dence problems, does not interact with alcohol,
+and does not affect the patient’s ability to drive
+or operate machinery. However, buspirone is not
+effective against certain types of anxiety, such as
+panic disorder.
+ANTIDEPRESSANTS AND BETA-BLOCKERS. For some
+anxiety disorders, such as obsessive-compulsive disor-
+der and panic type anxiety, a type of drugs used to treat
+depression, selective serotonin reuptake inhibitors
+(SSRIs; such as Prozac and Paxil), are the treatment
+of choice. A newer drug that has been shown as effec-
+tive as Paxil is called escitalopram oxalate (Lexapro).
+Because anxiety often coexists with symptoms of
+depression, many doctors prescribe antidepressant
+medications for anxious/depressed patients. While
+SSRIs are more common, antidepressants are some-
+times prescribed, including tricyclic antidepressants
+such as imipramine (Tofranil) ormonoamine oxidase
+inhibitors (MAO inhibitors) such as phenelzine
+(Nardil).
+Beta-blockers are medications that work by
+blocking the body’s reaction to the stress hormones
+that are released during the fight-or-flight reaction.
+They include drugs like propranolol (Inderal) or ate-
+nolol (Tenormin). Beta-blockers are sometimes given
+to patients with post-traumatic anxiety symptoms.
+More commonly, the beta-blockers are given to
+patients with a mild form of social phobic anxiety,
+such as fear of public speaking.
+Psychotherapy
+Most patients with anxiety will be given some
+form of psychotherapy along with medications.
+Many patients benefit from insight-oriented therapies,
+which are designed to help them uncover unconscious
+conflicts and defense mechanisms in order to under-
+stand how their symptoms developed. Patients who
+are extremely anxious may benefit from supportive
+psychotherapy, which aims at symptom reduction
+rather than personality restructuring.
+Two newer approaches that work well with
+anxious patients are cognitive-behavioral therapy
+(CBT), and relaxation training. In CBT, the patient
+is taught to identify the thoughts and situations that
+stimulate his or her anxiety, and to view them more
+realistically. In the behavioral part of the program, the
+patient is exposed to the anxiety-provoking object,
+situation, or internal stimulus (like a rapid heart
+beat) in gradual stages until he or she is desensitized
+to it. Relaxation training, which is sometimes called
+anxiety management training, includes breathing exer-
+cises and similar techniques intended to help the
+patient prevent hyperventilation and relieve the mus-
+cle tension associated with the fight-or-flight reaction.
+Both CBT and relaxation training can be used in
+group therapy as well as individual treatment. In addi-
+tion to CBT, support groups are often helpful to
+anxious patients, because they provide a social net-
+work and lessen the embarrassment that often accom-
+panies anxiety symptoms.
+Psychosurgery
+Surgery on the brain is very rarely recommended
+for patients with anxiety; however, some patients with
+severe cases of obsessive-compulsive disorder (OCD)
+Anxiety
+have been helped by an operation on a part of
+the brain that is involved in OCD. Normally, this
+operation is attempted after all other treatments have
+failed.
+Alternative treatment
+Alternative treatments for anxiety cover a variety
+of approaches. Meditation and mindfulness training
+are thought beneficial to patients with phobias and
+panic disorder. Hydrotherapy is useful to some
+anxious patients because it promotes general relaxa-
+tion of the nervous system.Yoga, aikido, t’ai chi, and
+dance therapy help patients work with the physical, as
+well as the emotional, tensions that either promote
+anxiety or are created by the anxiety.
+Homeopathy and traditional Chinese medicine
+approach anxiety as a symptom of a systemic disorder.
+Homeopathic practitioners select a remedy based on
+other associated symptoms and the patient’s general
+constitution. Chinese medicine regards anxiety as a
+blockage of qi, or vital force, inside the patient’s
+body that is most likely to affect the lung and large
+intestine meridian flow. The practitioner of Chinese
+medicine choosesacupuncture point locations and/or
+herbal therapy to move the qi and rebalance the entire
+system in relation to the lung and large intestine.
+Prognosis
+The prognosis for resolution of anxiety depends
+on the specific disorder and a wide variety of factors,
+including the patient’s age, sex, general health, living
+situation, belief system, social support network, and
+responses to different anxiolytic medications and
+forms of therapy.
+Prevention
+Humans have significant control over thoughts,
+and, therefore, may learn ways of preventing anxiety
+by changing irrational ideas and beliefs. Humans
+also have some power over anxiety arising from
+social and environmental conditions. Other forms
+of anxiety, however, are built into the human organ-
+ism and its life cycle, and cannot be prevented or
+eliminated.
+Resources
+PERIODICALS
+‘‘Lexapro Found to be as Effective as Paxil.’’Mental Health
+Weekly Digest(April 12, 2004): 16.
+Masi, Gabriele, et al. ‘‘Generalized Anxiety Disorder in
+Referred Children and Adolescents.’’Journal of the
+American Academy of Child and Adolescent Psychiatry
+(June 2004): 752–761.
+‘‘Patients With Traumatic Bone Injuries Have Unrecognized
+Anxiety.’’Health & Medicine Week(June 28, 2004): 824.
+Rebecca J. Frey, PhD
+Teresa G. Odle
+Anxiety disorders
+Definition
+The anxiety disorders are a group of mental dis-
+turbances characterized by anxiety as a central or core
+symptom. Although anxiety is a commonplace experi-
+ence, not everyone who experiences it has an anxiety
+disorder. Anxiety is associated with a wide range of
+physical illnesses, medication side effects, and other
+psychiatric disorders.
+The revisions of the Diagnostic and Statistical
+Manual of Mental Disorders (DSM)that took place
+after 1980 brought major changes in the classification
+of the anxiety disorders. Prior to 1980, psychiatrists
+classified patients on the basis of a theory that defined
+anxiety as the outcome of unconscious conflicts in the
+patient’s mind. DSM-III (1980), DSM-III-R (1987),
+and DSM-IV (1994) introduced and refined a new
+classification that considered recent discoveries
+about the biochemical and post-traumatic origins
+of some types of anxiety. The present definitions
+are based on the external and reported symptom
+patterns of the disorders rather than on theories
+about their origins.
+Description
+Anxiety disorders are the most common form of
+mental disturbance in the United States population. It is
+estimated that 28 million people suffer from an anxiety
+disorder every year. These disorders are a serious pro-
+blem for the entire society because of their interference
+with patients’ work, schooling, and family life. They
+also contribute to the high rates of alcohol and sub-
+stance abuse in the United States. Anxiety disorders
+are an additional problem for health professionals
+because the physical symptoms of anxiety frequently
+bring people to primary care doctors or emergency
+rooms.
+DSM-IV defines 12 types of anxiety disorders in
+the adult population. They can be grouped under
+seven headings:
+362 Anxiety disorders
+/C15Panic disorders with or withoutagoraphobia. The
+chief characteristic ofpanic disorderis the occurrence
+of panic attacks coupled with fear of their recurrence.
+In clinical settings, agoraphobia is usually not a dis-
+order byitself, but is typically associated with some
+form of panic disorder. Patients with agoraphobia
+are afraid of places or situations in which they might
+have a panic attack and be unable to leave or to find
+help. About 25% of patients with panic disorder
+develop obsessive-compulsive disorder(OCD).
+/C15Phobias. These include specific phobias and social
+phobia. A phobia is an intense irrational fear of a
+specific object or situation that compels the patient
+to avoid it. Some phobias concern activities or
+objects that involve some risk (for example, flying
+or driving) but many are focused on harmless ani-
+mals or other objects. Social phobia involves a fear of
+being humiliated, judged, or scrutinized. It manifests
+itself as a fear of performing certain functions in the
+presence of others, such as public speaking or using
+public lavatories.
+/C15Obsessive-compulsive disorder (OCD). This disorder
+is marked by unwanted, intrusive, persistent
+thoughts or repetitive behaviors that reflect the
+patient’s anxiety or attempts to control it. It affects
+between 2-3% of the population and is much more
+common than was previously thought.
+/C15Stress disorders. These includepost-traumatic stress
+disorder (PTSD) and acute stress disorder. Stress
+disorders are symptomatic reactions to traumatic
+events in the patient’s life.
+/C15Generalized anxiety disorder (GAD). GAD is the
+most commonly diagnosed anxiety disorder and
+occurs most frequently in young adults.
+/C15Anxiety disorders due to known physical causes.
+These include general medical conditions or sub-
+stance abuse.
+/C15Anxiety disorder not otherwise specified. This last
+category is not a separate type of disorder, but is
+included to cover symptoms that do not meet the
+specific DSM-IV criteria for other anxiety disorders.
+All DSM-IV anxiety disorder diagnoses include a
+criterion of severity. The anxiety must be severe
+enough to interfere significantly with the patient’s
+occupational or educational functioning, social activ-
+ities or close relationships, and other customary
+activities.
+The anxiety disorders vary widely in their fre-
+quency of occurrence in the general population, age
+of onset, family patterns, and gender distribution. The
+stress disorders and anxiety disorders caused by
+medical conditions or substance abuse are less age-
+and gender-specific. Whereas OCD affects males and
+females equally, GAD, panic disorder, and specific
+phobias all affect women more frequently than men.
+GAD and panic disorders are more likely to develop in
+young adults, while phobias and OCD can begin in
+childhood.
+Anxiety disorders in children and adolescents
+DSM-IV defines one anxiety disorder as specific
+to children, namely, separation anxiety disorder. This
+disorder is defined as anxiety regarding separation
+from home or family that is excessive or inappropriate
+for the child’s age. In some children, separation anxi-
+ety takes the form of school avoidance.
+Children and adolescents can also be diagnosed
+with panic disorder, phobias, generalized anxiety dis-
+order, and the post-traumatic stress syndromes.
+Causes and symptoms
+The causes of anxiety include a variety of indivi-
+dual and general social factors, and may produce phy-
+sical, cognitive, emotional, or behavioral symptoms.
+The patient’s ethnic or cultural background may also
+influence his or her vulnerability to certain forms of
+anxiety. Genetic factors that lead to biochemical
+abnormalities may also play a role.
+Anxiety in children may be caused by suffering
+from abuse, as well as by the factors that cause anxiety
+in adults.
+KEY TERMS
+Agoraphobia— Abnormal anxiety regarding public
+places or situations from which the patient may
+wish to flee or in which he or she would be helpless
+in the event of a panic attack.
+Compulsion— A repetitive or ritualistic behavior
+that a person performs to reduce anxiety.
+Compulsions often develop as a way of controlling
+or ‘‘undoing’’ obsessive thoughts.
+Obsession— A repetitive or persistent thought,
+idea, or impulse that is perceived as inappropriate
+and distressing.
+Panic attack— A time-limited period of intense fear
+accompanied by physical and cognitive symptoms.
+Panic attacks may be unexpected or triggered by
+specific cues.
+Anxiety disorders
+Diagnosis
+The diagnosis of anxiety disorders is complicated by
+the variety of causes of anxiety and the range of disor-
+ders that may include anxiety as a symptom. Many
+patients who suffer from anxiety disorders have features
+or symptoms of more than one disorder. Patients whose
+anxiety is accounted for by another psychic disorder,
+such as schizophrenia or major depression, are not
+diagnosed with an anxiety disorder. A doctor examining
+an anxious patient will usually begin by ruling out dis-
+eases that are known to cause anxiety and then proceed
+to take the patient’s medication history, in order to
+exclude side effects of prescription drugs. Most doctors
+will ask about caffeine consumption to see if the
+patient’s dietary habits are a factor. The patient’s work
+and family situation will also be discussed. Often, pri-
+mary care physicians will exhaust resources looking for
+medical causes for general patient complaints which
+may indicate a physical illness. In 2004, the Anxiety
+Disorders Association of American published guide-
+l i n e st ob e t t e ra i dp h y s i c i a n si nd i a g n o s i n ga n dm a n a -
+ging generalized anxiety disorder. Laboratory tests for
+blood sugar and thyroid function are also common.
+Diagnostic testing for anxiety
+There are no laboratory tests that can diagnose
+anxiety, although the doctor may order some specific
+tests to rule out disease conditions. Although there is
+no psychiatric test that can provide definite diagnoses
+of anxiety disorders, there are several short-answer
+interviews or symptom inventories that doctors can
+use to evaluate the intensity of a patient’s anxiety
+and some of its associated features. These measures
+include the Hamilton Anxiety Scale and the Anxiety
+Disorders Interview Schedule (ADIS).
+Treatment
+For relatively mild anxiety disorders, psychother-
+apy alone may suffice. In general, doctors prefer to use
+a combination of medications and psychotherapy with
+more severely anxious patients. Most patients respond
+better to a combination of treatment methods than to
+either medications or psychotherapy in isolation.
+Because of the variety of medications and treatment
+approaches that are used to treat anxiety disorders, the
+doctor cannot predict in advance which combination
+will be most helpful to a specific patient. In many cases
+the doctor will need to try a new medication or treat-
+ment over a six- to eight-week period in order to assess
+its effectiveness. Treatment trials do not necessarily
+mean that the patient cannot be helped or that the
+doctor is incompetent.
+Although anxiety disorders are not always easy to
+diagnose, there are several reasons why it is important
+for patients with severe anxiety symptoms to get help.
+Anxiety doesn’t always go away by itself; it often
+progresses to panic attacks, phobias, and episodes of
+depression. Untreated anxiety disorders may even-
+tually lead to a diagnosis of major depression, or
+interfere with the patient’s education or ability to
+keep a job. In addition, many anxious patients develop
+addictions to drugs or alcohol when they try to ‘‘med-
+icate’’ their symptoms. Moreover, since children learn
+ways of coping with anxiety from their parents, adults
+who get help for anxiety disorders are in a better
+position to help their families cope with factors that
+lead to anxiety than those who remain untreated.
+Alternative treatment
+Alternative treatments for anxiety cover a variety
+of approaches. Meditation and mindfulness training
+are thought beneficial to patients with phobias and
+panic disorder. Hydrotherapy is useful to some
+anxious patients because it promotes general relaxa-
+tion of the nervous system.Yoga, aikido, t’ai chi, and
+dance therapy help patients work with the physical, as
+well as the emotional, tensions that either promote
+anxiety or are created by the anxiety.
+Homeopathy and traditional Chinese medicine
+approach anxiety as a symptom of a systemic disorder.
+Homeopathic practitioners select a remedy based on
+other associated symptoms and the patient’s general
+constitution. Chinese medicine regards anxiety as a
+blockage of qi, or vital force, inside the patient’s
+body that is most likely to affect the lung and large
+intestine meridian flow. The practitioner of Chinese
+medicine choosesacupuncture point locations and/or
+herbal therapy to move the qi and rebalance the entire
+system in relation to the lung and large intestine.
+Prognosis
+The prognosis for recovery depends on the speci-
+fic disorder, the severity of the patient’s symptoms, the
+specific causes of the anxiety, and the patient’s degree
+of control over these causes.
+Prevention
+Anxiety is an unavoidable feature of human exis-
+tence. However, humans have some power over their
+reactions to anxiety-provoking events and situations.
+Cognitive therapy and meditation or mindfulness
+training appear to be beneficial in helping people
+lower their long-term anxiety levels.
+364 Anxiety disorders
+Resources
+PERIODICALS
+‘‘Guidelines to Assist Primary Care Physicians in Diagnosing
+GAD.’’ Psychiatric Times( J u l y1 ,2 0 0 4 ) :1 6 .
+Rebecca J. Frey, PhD
+Teresa G. Odle
+Anxiolytics see Antianxiety drugs
+Aortic aneurysm
+Definition
+An aneurysm is an abnormal bulging or swelling
+of a portion of a blood vessel. The aorta, which can
+develop these abnormal bulges, is the large blood
+vessel that carries oxygen-rich blood away from the
+heart to the rest of the body.
+Description
+The aorta carries oxygen-rich blood to the body,
+and is therefore called an artery. Because the aorta is an
+artery, its walls are made of up three layers; a thin inner
+layer, a muscular middle layer (that gives the vessel its
+flexibility under pressure from the filling blood), and a
+fiber-like outer layer that gives the vessel strength to not
+burst when the heart pumps blood to the body.
+Aortic aneurysms occur when a weakness devel-
+ops in part of the wall of the aorta; three basic
+types are usually found. If all three layers of the
+vessel are affected and weakness develops along an
+extended area of the vessel, the weakened area will
+appear as a large, bulging region of blood vessel;
+this is called a fusiform aneurysm. If weakness
+develops between the inner and outer layers of the
+aortic wall, a bulge results as blood from the inter-
+ior of the vessel is pushed around the damaged
+region in the wall and collects between these layers.
+This is called a dissecting aneurysm because one
+layer is ‘‘dissected’’ or separated from another. If
+damage occurs to only the middle (muscular) layer
+of the vessel, a sack-like bulge can form; therefore,
+this is a saccular aneurysm.
+Causes and symptoms
+Aortic aneurysms occur in different portions of
+the aorta, which begins in the chest (at the heart) and
+travels downward through the abdomen. Aneurysms
+found in the region of the aorta within the chest are
+called thoracic aortic aneurysms. Aneurysms that
+occur in the part of the aorta within the abdomen are
+called abdominal aortic aneurysms.
+Thoracic aortic aneurysms do not usually pro-
+duce any noticeable symptoms. However, as the
+aneurysm becomes larger, chest, shoulder, neck,
+lower back, or abdominal pain can result.
+Abdominal aortic aneurysms occur more often in
+men, and these aneurysms can cause pain in the
+lower back, hips, and abdomen. A painful abdomi-
+nal aortic aneurysm usually means that the aneurysm
+could burst very soon.
+Most abdominal aortic aneurysms are caused by
+atherosclerosis, a condition caused when fat (mostly
+cholesterol) carried in the blood builds up in the inner
+wall of the aorta. As more and more fat attaches to the
+aortic wall, the wall itself becomes abnormally weak
+and often results in an aneurysm or bulge.
+An aneurysm in progress. An aneurysm is an abnormal
+bulging or swelling of a portion of a blood vessel. (Custom
+Medical Stock Photo. Reproduced by permission.)
+Surgery being performed to correct aortic aneurysm.(Custom
+Medical Stock Photo. Reproduced by permission.)
+Aortic aneurysm
+Aortic aneurysms are also caused by a breakdown
+of the muscular middle layer of the artery wall, by high
+blood pressure, by direct injury to the chest, and
+although rare, by bacteria that can infect the aorta.
+Diagnosis
+Silent, stable aneurysms are often detected when a
+person has an x ray as part of a routine examination or
+for other medical reasons. Otherwise, when chest,
+abdominal, or back pain is severe, aortic aneurysm is
+suspected and x-ray (radiographic) studies can con-
+firm or rule out that condition.
+Treatment
+Aortic aneurysms are potentially life-threatening
+conditions. Small aneurysms should be monitored for
+their rate of growth and large aneurysms require con-
+sideration for a surgical repair. The most common
+Aortic 
+aneurysm
+Aorta
+Subclavian artery
+Carotid artery
+Heart
+Hepatic artery
+Messentric artery
+Iliac artery
+Renal artery
+Pulmonary artery
+Liver
+Kidney
+Aortic aneurysms occur when a weakness develops in a part of the wall of the aorta. The aorta is the large blood vessel that
+carries oxygen-rich blood away from the heart to the rest of the body.(Illustration by Electronic Illustrators Group.)
+KEY TERMS
+Atherosclerosis— The accumulation of fat on the
+inner wall of an artery. This fat is largely made up
+of cholesterol being carried in the blood.
+Dacron— A synthetic polyester fiber used to surgi-
+cally repair damaged sections of blood vessel walls.366 Aortic aneurysm
+method of surgical repair is to cut out the bulging
+section of artery wall and sew a Dacron fiber material
+into its place in the vessel wall.
+Prognosis
+Only 1-2% of people die from having surgical
+repair of an aortic aneurysm. However, if the aneurysm
+is untreated and eventually ruptures, less than half of
+the people with ruptured aneurysms will survive. The
+challenge for the physician is to decide when or if to do
+the preventive surgery.
+Prevention
+Aneuryms can develop in people with athero-
+sclerosis. High blood pressure can also lead to this
+condition. Although no definite prevention exists, life-
+style and dietary changes that help lower blood pres-
+sure and the amount of fat in the blood stream may
+slow the development of aneurysms.
+Resources
+PERIODICALS
+van der Vleit, J. Adam, and Albert P. M. Boll. ‘‘Abdominal
+AorticAneurysm.’’The Lancet349 (March 22, 1997): 863.
+ORGANIZATIONS
+American Heart Association. 7320 Greenville Ave. Dallas,
+TX 75231. (214) 373-6300. <http://
+www.americanheart.org>.
+National Heart, Lung and Blood Institute. P.O. Box 30105,
+Bethesda, MD 20824-0105. (301) 251-1222. <http://
+www.nhlbi.nih.gov>.
+Dominic De Bellis, PhD
+Aortic dissection
+Definition
+Aortic dissection is a rare, but potentially fatal,
+condition in which blood passes through the inner
+lining and between the layers of the aorta. The dissect-
+ing aorta usually does not burst, but has an abnormal
+second channel within it.
+Description
+A defect in the inner lining of the aorta allows an
+opening or tear to develop. The aorta is the main
+artery of the body and is an area of high blood
+pressure. When a defect develops, blood pressure can
+force the tear to open and allow blood to pass through.
+Since the blood is under pressure, it eventually splits
+(dissecting) the middle layer of the blood vessel, creat-
+ing a new channel for blood. The length of the channel
+grows over time and can result in the closing off of
+connection points to other arteries. This can lead to
+heart attack, strokes, abdominal pain, and nerve
+damage. Blood may leak from the dissection and col-
+lect in the chest an around the heart.
+A second mechanism leading to aortic dissection
+is medial hemorrhage. A medial hemorrhage occurs in
+the middle layer of the blood vessel and spills through
+the inner lining of the aorta wall. This opening then
+allows blood from the aorta to enter the vessel wall
+and begin a dissection. Approximately 2,000 cases of
+aortic dissection occur yearly in the United States.
+Causes and symptoms
+Aortic dissection is caused by a deterioration of
+the inner lining of the aorta. There are a number of
+conditions that predispose a person to develop defects
+of the inner lining, including high blood pressure,
+Marfan’s disease,Ehlers-Danlos syndrome, connective
+tissue diseases, and defects of heart development
+which begin during fetal development. A dissection
+can also occur accidentally following insertion of a
+catheter, trauma, or surgery. The main symptom is sud-
+den, intense pain. The pain can be so intense as to
+immobilize the patient and cause him to fall to the
+ground. The pain is frequently felt in both the chest
+and in the back, between the shoulder blades. The extent
+of the pain isproportional tothe lengthof the dissection.
+Diagnosis
+The pain experienced by the patient is the first
+symptom of aortic dissection and is unique. The pain is
+usually described by the patient as ‘‘tearing, ripping, or
+stabbing.’’ This is in contrastto the pain associated with
+heart attacks. The patient frequently has a reduced or
+absent pulse in the extremities. A murmur may be heard
+if the dissection is close to the heart. An enlarged aorta
+will usually appear in the chest x rays and ultrasound
+KEY TERMS
+Dissection— A cut or divide.
+Hemorrhage— A large discharge of blood, profuse
+bleeding.
+Aortic dissection
+exams of most patients. The use of a blood dye in angio-
+grams and/or CT scans (computed tomography scans)
+will aid in diagnosing and visualizing the dissection.
+Treatment
+Because of the potentially fatal nature of aortic
+dissection, patients are treated immediately. Drugs are
+administered to reduce the blood pressure and heart
+rate. If the dissection is small, drug therapy alone may
+be used. In other cases, surgery is performed. In sur-
+gery, damaged sections of the aorta are removed and a
+synthetic graft is often used to reconstruct the
+damaged vessel.
+Prognosis
+Depending on the nature and extent of the dissec-
+tion, death can occur within a few hours of the start of
+a dissection. Approximately 75% of untreated people
+die within two weeks of the start of a dissection. Of
+those who are treated, 40% survive more than 10
+years. Patients are usually given long term treatment
+with drugs to reduce their blood pressure, even if they
+have had surgery.
+Resources
+BOOKS
+Alexander, R. W., R. C. Schlant, and V. Fuster, editors.The
+Heart. 9th ed. New York: McGraw-Hill, 1998.
+John T. Lohr, PhD
+Aortic incompetence see Aortic valve
+insufficiency
+Aortic regurgitation see Aortic valve
+insufficiency
+Aortic stenosis see Aortic valve stenosis
+Aortic valve insufficiency
+Definition
+The aortic valve separates the left ventricle of the
+heart (the heart’s largest pumping chamber) from the
+aorta, the large artery that carries oxygen-rich blood out
+of the left ventricle to the rest of the body. In aortic valve
+insufficiency, the aortic valve becomes leaky, causing
+blood to flow backwards into the left ventricle.
+Description
+Aortic valve insufficie ncy occurs when this
+valve cannot properly close after blood that is leav-
+ing the heart’s left ventricle enters the aorta. With
+each contraction of the heart more and more blood
+flows back into the left ventricle, causing the ven-
+tricle to become overfilled. This larger-than-normal
+amount of blood that collects in the left ventricle
+puts pressure on the walls of the heart, causing the
+heart muscle to increase in thickness (hypertrophy).
+If this thickening continues, the heart can be per-
+manently damaged.
+Aorticvalveinsufficiencyisalsoknowasaorticvalve
+regurgitation because of the abnormal reversed flow of
+blood leaking through the poorly functioning valve.
+Causes and symptoms
+The faulty working of the aortic valve can be
+caused by a birth defect; by abnormal widening
+of the aorta (which can be caused by very high blood
+pressure and a variety of other less common condi-
+tions); by various diseases that cause large amounts of
+swelling (inflammation) in different areas of the body,
+like rheumatic fever; and, although rarely, by the sexu-
+ally transmitted disease,syphilis.
+Normal
+blood flow
+Diseased valve
+Blood backflow
+A human heart with a diseased valve that doesn’t open and
+close properly, allowing blood to backflow to the heart.
+(Illustration by Argosy, Inc.)
+368 Aortic valve insufficiency
+About 75% of people with aortic valve insuffi-
+ciency are men. Rheumatic (inflammatory) diseases
+have been the main cause of this condition in both
+men and women.
+Aortic valve insufficiency can remain unnoticed
+for 10 to 15 years. In cases of severe insufficiency a
+person may notice a variety of symptoms, including an
+uncomfortable pounding of the heart when lying
+down, a very rapid or hard heart beat (palpitations),
+shortness of breath, chest pain, and if untreated for
+very long times, swelling of the liver, ankles, and belly.
+Diagnosis
+A poorly functioning or insufficient aortic valve
+can be identified when a doctor listens to the heart
+during aphysical examination.A chest x ray,a ne l e c -
+trocardiogram (ECG, an electrical printout of the heart
+beats), as well as an echocardiogram (a test that uses
+sound waves to create an image of the heart and its
+valves), can further evaluate or confirm the condition.
+Treatment
+Aortic insufficiency is usually corrected by having
+the defective valve surgically replaced. However, such
+an operation is done in severe cases. Before the condi-
+tion worsens, certain drugs can be used to help manage
+this condition.
+Drugs that remove water from the body, drugs
+that lower blood pressure, and drugs that help the
+heart beat more effectively can each be used for this
+condition. Reducing the amount of salt in the diet also
+helps lower the amount of fluid the body holds and can
+help the heart to work more efficiently as well.
+In cases of a severely malfunctioning valve that
+has been untreated for a long time, surgery is the
+treatment of choice, especially if the heart is not func-
+tioning normally. Human heart valves can be replaced
+with man-made valves or with valves taken from pig
+hearts.
+Prognosis
+Although drug treatment can help put off the need
+for surgical valve replacement, it is important to
+replace the faulty valve before the heart muscle itself
+is damaged beyond recovery.
+Resources
+PERIODICALS
+Condos Jr., William R. ‘‘Decade-old Heart Drug May Have a
+New Use.’’San Diego Business Journal18 (21 July 1997): 24.
+ORGANIZATIONS
+American Heart Association. 7320 Greenville Ave. Dallas,
+TX 75231. (214) 373-6300. <http://
+www.americanheart.org>.
+National Heart, Lung and Blood Institute. P.O. Box 30105,
+Bethesda, MD 20824-0105. (301) 251-1222. <http://
+www.nhlbi.nih.gov>.
+Dominic De Bellis, PhD
+Aortic valve stenosis
+Definition
+When aortic valve stenosis occurs, the aortic
+valve, located between the aorta and left ventricle of
+the heart, is narrower than normal size.
+Description
+A normal aortic valve, when open, allows the free
+flow of blood from the left ventricle to the aorta. When
+the valve narrows, as it does with stenosis, blood flow
+is impeded. Because it is more difficult for blood
+to flow through the valve, there is increased strain on
+the heart. This can cause the left ventricle to enlarge
+and malfunction, resulting in reduced blood supply to
+the heart muscle and body, as well as fluid build up in
+the lungs.
+Cause and symptoms
+Aortic valve stenosis can occur because of a birth
+defect in the formation of the valve. Calcium deposits
+may form on the valve withaging, causing the valve to
+become stiff and narrow. Stenosis can also occur as a
+result of rheumatic fever. Mild aortic stenosis may
+produce no symptoms at all. The most common symp-
+toms, depending on the severity of the disease, are
+chest pain, blackouts, and difficulty breathing.
+KEY TERMS
+Rheumatic fever— A disease believed to be caused
+by a bacterium named group A streptococcus. This
+bacterium causes a sore ‘‘strep throat’’ and can also
+result in fever. Infection by this bacterium can also
+damage the heart and its valves, but how this takes
+place is not clearly understood.
+Aortic valve stenosis
+Diagnosis
+Using a stethoscope, a physician may hear a mur-
+mur and other abnormal heart sounds. An ECG, also
+called an electrocardiogram, records the electrical
+activity of the heart. This technique andchest x ray
+can show evidence that the left ventricle is enlarged.
+An x ray can also reveal calcium deposits on the valve,
+as well as congestion in the lungs.Echocardiography
+can pick up thickening of the valve, heart size, and
+whether or not the valve is working properly. This is
+a procedure in which high frequency sound waves
+harmlessly bounce off organs in the body. Cardiac
+catheterization, in which a contrast dye is injected in
+an artery using a catheter, is the key tool to confirm
+stenosis and gauge its severity.
+Treatment
+Treatment depends on the symptoms and how
+the heart’s function is affected. The valve can be
+opened without surgery by using a balloon catheter,
+but this is often a temporary solution. The proce-
+dure involves inserting a deflated balloon at the end
+of a catheter through the arteries to the valve.
+Inflating the balloon should widen the valve. In
+severe stenosis, heart valve replacement is recom-
+mended, most often involving open-heart surgery.
+The valve can be replaced with a mechanical valve,
+a valve from a pig, or by moving the patient’s other
+heart valve (pulmonary) into the position of the
+aortic valve and then replacing the pulmonary
+valve with an mechanical one. Anyone with aortic
+stenosis needs to take antibiotics (amoxicillin, ery-
+thromycin, or clindamycin) before dental and some
+other surgical procedures, to prevent a heart valve
+infection.
+Prognosis
+The prognosis for aortic valve stenosis depends on
+the severity of the disease. With surgical repair, the
+disease is curable. Patients suffering mild stenosis can
+usually lead a normal life; a minority of the patients
+progress to severe disease. Anyone with moderate
+stenosis should avoid vigorous physical activity.
+Most of these patients end up suffering some kind of
+coronary heart disease over a 10 year period. Because
+it is a progressive disease, moderate and severe stenosis
+will be treated ultimately with surgery. Severe disease,
+if left untreated, leads to death within 2 to 4 years once
+the symptoms start.
+Prevention
+There is no way to prevent aortic stenosis.
+Resources
+BOOKS
+Bender, Jeffrey R. ‘‘Heart Valve Disease.’’ InYale University
+School of Medicine Heart Book, edited by Barry L.
+Zaret, et al. New York: HearstBooks, 1992.
+A close-up view of a calcified stenosis of the aortic valve.
+(Custom Medical Stock Photo. Reproduced by permission.)
+KEY TERMS
+Aorta— The largest artery in the body, which
+moves blood from the left ventricle to the rest of
+the body.
+ECG— Also called an electrocardiogram, it records
+the electrical activity of the heart.
+Echocardiogram— A procedure in which high fre-
+quency sound waves harmlessly bounce off organs
+in the body providing an image so one can deter-
+mine their structure and function.
+Cardiac catheterization— A procedure in which
+dye is injected through a tube or catheter into an
+artery to more easily observe valves or blood ves-
+sels seen on an x ray.
+Left ventricle— One of the lower chambers of the
+heart, which pumps blood to the aorta.
+Murmur— An abnormal heart sound that can
+reflect a valve dysfunction.
+Rheumatic fever— A bacterial infection that often
+causes heart inflammation.
+Pulmonary valve— The valve located between the
+pulmonary artery and the right ventricle, which
+brings blood to the lungs.
+370 Aortic valve stenosis
+OTHER
+‘‘Aortic Stenosis.’’Ochsner Heart and VascularInstitute.
+<http://www.ochsner.org/pedcard/as.htm>.
+Rahimtoola, Aly. ‘‘Aortic Stenosis.’’Loyola University
+Health System Page.<http://www.luhs.org>.
+Jeanine Barone, Physiologist
+Apgar testing
+Definition
+Apgar testing is the assessment of the newborn
+rating color, heart rate, stimulus response, muscle
+tone, and respirations on a scale of zero to two, for a
+maximum possible score of 10. It is performed twice,
+first at one minute and then again at five minutes after
+birth.
+Purpose
+Apgar scoring was originally developed in the
+1950s by the anesthesiologist Virginia Apgar to assist
+practitioners attending a birth in deciding whether or
+not a newborn was in need of resuscitation. Using a
+scoring method fosters consistency and standardiza-
+tion among different practitioners. A February 2001
+study published in the New England Journal of
+Medicine investigated whether Apgar scoring con-
+tinues to be relevant. Researchers concluded that
+‘‘The Apgar scoring system remains as relevant for
+the prediction of neonatal survival today as it was
+almost 50 years ago.’’
+Description
+The five areas are scored as follows:
+/C15Appearance, or color: 2 if the skin is pink all over; 1
+for acrocyanosis, where the trunk and head are pink,
+but the arms and legs are blue; and 0 if the whole
+body is blue. Newborns with naturally darker skin
+color will not be pink. However, pallor is still notice-
+able, especially in the soles and palms. Color is
+related to the neonate’s ability to oxygenate its
+body and extremities, and is dependent on heart
+rate and respirations. A perfectly healthy newborn
+will often receive a score of 9 because of some blue-
+ness in the hands and feet.
+/C15Pulse (heart rate): 2 for a pulse of 100+ beats per
+minute (bpm); 1 for a pulse below 100 bpm; 0 for no
+pulse. Heart rate is assessed by listening with a
+stethoscope to the newborn’s heart and counting
+the number of beats.
+/C15Grimace, or reflex irritability: 2 if the neonate
+coughs, sneezes, or vigorously cries in response to a
+stimulus (such as the use of nasal suctioning, stroking
+the back to assess for spinal abnormalities, or having
+the foot tapped); 1 for a slight cry or grimace in
+response to the stimulus; 0 for no response.
+/C15Activity, or muscle tone: 2 for vigorous movements
+of arms and legs; 1 for some movement; 0 for no
+movement, limpness.
+/C15Respirations: 2 for visible breathing and crying; 1
+for slow, weak, irregular breathing; 0 for apnea,
+or no breathing. A crying newborn can ade-
+quately oxygenate its lungs. Respirations are best
+assessed by watching the rise and fall of the neo-
+nate’s abdomen, as inf ants are diaphragmatic
+breathers.
+The combined first letters in these five areas spell
+Apgar.
+Preparation
+No preparation is needed to perform the test.
+However, while being born the neonate may receive
+nasal and oral suctioning to remove mucus and
+amniotic fluid. This may be done when the head of
+the newborn is safely out, while the mother rests
+before she continues to push.
+Aftercare
+Since the test is primarily observational in nature,
+no aftercare is needed. However, the test may flag the
+need for immediate intervention or prolonged
+observation.
+Normal results
+The maximum possible score is 10, the minimum
+is zero. It is rare to receive a true 10, as some acrocya-
+nosis in the newborn is considered normal, and there-
+fore not a cause for concern. Most infants score
+between 7 and 10. These infants are expected to have
+an excellent outcome. A score of 4, 5, or 6 requires
+immediate intervention, usually in the form of oxygen
+and respiratory assistance, or perhaps just suctioning
+if breathing has been obstructed by mucus. While
+suctioning is being done, a source of oxygen may be
+placed near, but not over the newborn’s nose and
+mouth. This form of oxygen is referred to asblow-by.
+A score in the 4-6 range indicates that the neonate is
+having some difficulty adapting to extrauterine life.
+Apgar testing
+This may be due to medications given to the mother
+during a difficult labor, or at the very end of labor,
+when these medications have an exaggerated effect on
+the neonate.
+Abnormal results
+With a score of 0-3, the newborn is unresponsive,
+apneic, pale, limp and may not have a pulse.
+Interventions to resuscitate will begin immediately.
+The test is repeated at five minutes after birth and
+both scores are documented. Should the resuscitation
+effort continue into the five-minute time period, inter-
+ventions will not stop in order to perform the test. The
+one-minute score indicates the need for intervention at
+birth. It addresses survival and prevention of birth-
+related complications resulting from inadequate
+oxygen supply. Poor oxygenation may be due to
+inadequate neurological and/or chemical control of
+respiration. The five-minute score appears to have a
+more predictive value for morbidity and normal devel-
+opment, although research studies on this are incon-
+sistent in their conclusions.
+Resources
+BOOKS
+Feinbloom, Richard I.Pregnancy, Birth and the EarlyMonths.
+Cambridge, MA: Perseus Publishing, 2000.
+KEY TERMS
+Acrocyanosis— A slight cyanosis, or blueness of the
+hands and feet of the neonate is considered normal.
+This impaired ability to fully oxygenate the extre-
+mities is due to an immature circulatory system
+which is still in flux.
+Amniotic fluid— The protective bag of fluid that
+surrounds the fetus while growing in the uterus.
+Neonate— A term referring to the newborn infant,
+from birth until one month of age.
+Neonatologist— A physician who specializes in
+problems of newborn infants.
+Pallor— Extreme paleness in the color of the skin.
+D R . V I R G I N I A A P G A R (1909–1974)
+(AP/Wide World Photos. Reproduced by permission.)
+As one of very few female medical students at
+Columbia University College of Physicians and Surgeons
+in New York during the early 1930s and one of the first
+women to graduate from its medical school, Apgar knew
+that her goal of becoming a surgeon would not be
+achieved easily in a male-dominated profession.
+Reluctantly, she switched her medical specialty to anes-
+thesiology, she embraced her new field with typical intel-
+ligence and energy. At this time, anesthesiology was a
+relatively new field, having been left by the doctors
+mostly to the attention of nurses. Apgar realized immedi-
+ately how much in need of scientifically trained personnel
+was this significant part of surgery, and she set out to
+make anesthesiology a separate medical discipline. By
+1937, she had become the fiftieth physician to be certified
+as an anesthesiologist in the United States. The following
+year she was appointed director of anesthesiology at the
+Columbia-Presbyterian Medical Center, becoming the
+first woman to head a department at that institution.
+As the attending anesthesiologist who assisted in the
+delivery of thousands of babies during these years, Apgar
+realized that infants had died from respiratory or circula-
+tory complications that early treatment could have pre-
+vented. Apgar decided to bring her considerable research
+skills to this childbirth dilemma, and her careful study
+resulted in her publication of the Apgar Score System
+in 1952.
+Apgar testing
+Pillitteri, Adele.Maternal & Child Nursing; Care ofthe
+Childbearing and Childrearing Family.3rd ed.
+Philadelphia: Lippincott, 1999.
+PERIODICALS
+Casey, B. M., D. D. McIntire, and K. J. Leveno. ‘‘The
+Continuing Value of Apgar Score for the Assessment of
+Newborn Infants’’.NewEngland Journal of Medicine
+344 (February 15, 2000): 467-71.
+OTHER
+Apgar, Virginia.A Proposal for a New Method of Evaluation
+of the Newborn Infant.<http://www.apgarfamily.com/
+Apgar_Paper.html>.
+The National Childbirth Trust. <http://
+www.nctpregnancyandbabycare.com>.
+PregnancyWeekly.com <http://
+www.pregnancyweekly.com>.
+Esther Csapo Rastegari, RN, BSN, EdM
+Aphasia
+Definition
+Aphasia is condition characterized by either par-
+tial or total loss of the ability to communicate verbally
+or using written words. A person with aphasia may
+have difficulty speaking, reading, writing, recognizing
+the names of objects, or understanding what other
+people have said. Aphasia is caused by a brain injury,
+as may occur during a traumatic accident or when
+the brain is deprived of oxygen during astroke.I t
+may also be caused by abrain tumor, a disease such
+as Alzheimer’s, or an infection, like encephalitis.
+Aphasia may be temporary or permanent. Aphasia
+does not include speech impediments caused by loss
+of muscle control.
+Description
+To understand and use language effectively, an
+individual draws upon word memory–stored informa-
+tion on what certain words mean, how to put them
+together, and how and when to use them properly. For
+a majority of people, these and other language func-
+tions are located in the left side (hemisphere) of the
+brain. Damage to this side of the brain is most com-
+monly linked to the development of aphasia.
+Interestingly, however, left-handed people appear to
+have language areas in both the left and right hemi-
+spheres of the brain and, as a result, may develop
+aphasia from damage to either side of the brain.
+Stroke is the most common cause of aphasia in the
+United States. Approximately 500,000 individuals suf-
+fer strokes each year, and 20% of these individuals
+develop some type of aphasia. Other causes of brain
+damage include head injuries, brain tumors, and infec-
+tion. About half of the people who show signs of apha-
+sia have what is called temporary or transient aphasia
+and recover completely within a few days. An estimated
+one million Americans suffer from some form of per-
+manent aphasia. As yet, no connection between aphasia
+and age, gender, or race has been found.
+Aphasia is sometimes confused with other condi-
+tions that affect speech, such as dysarthria and
+apraxia. These condition affect the muscles used in
+speaking rather than language function itself.
+Dysarthria is a speech disturbance caused by lack of
+control over the muscles used in speaking, perhaps due
+to nerve damage. Speech apraxia is a speech distur-
+bance in which language comprehension and muscle
+control are retained, but the memory of how to use the
+muscles to form words is not.
+Broca's area
+Wernicke's area
+Broca’s aphasia results from damage to the frontal lobe of the
+language-dominant area of the brain. Individuals with
+Broca’s aphasia may become mute or may be able to use
+single-word statements or full sentences, although it may
+require great effort. Wernicke’s aphasia is caused by damage
+to the temporal lobe of the language-dominant area of the
+brain. People with this condition speak in long, uninterrupted
+sentences, but the words used are often unnecessary and
+unintelligible. (Illustration by Electronic Illustrators Group.)
+Aphasia
+Causes and symptoms
+Aphasia can develop after an individual sustains
+a brain injury from a stroke, head trauma, tumor, or
+infection, such as herpes encephalitis. As a result of
+this injury, the pathways for language comprehen-
+sion or production are disrupted or destroyed. For
+most people, this means damage to the left hemi-
+sphere of the brain. (In 95 to 99% of right-handed
+people, language centers are in the left hemisphere,
+and up to 70% of left-handed people also have left-
+hemisphere language dominance.) According to the
+traditional classification scheme, each form of
+aphasia is caused by damage to a different part of
+the left hemisphere of the brain. This damage affects
+one or more of the basic language functions: speech,
+naming (the ability to identify an object, color, or
+other item with an appropriate word or term), repe-
+tition (the ability to repeat words, phrases, and sen-
+tences), hearing comprehension (the ability to
+understand spoken language), reading (the ability
+to understand written words and their meaning),
+and writing (the ability to communicate and record
+events with text).
+The traditional classification scheme includes
+eight types of aphasia:
+/C15Broca’s aphasia, also called motor aphasia, results
+from damage to the front portion or frontal lobe of
+the language-dominant area of the brain. Individuals
+with Broca’s aphasia may be completely unable to
+use speech (mutism) or may be able to use single-
+word statements or even full sentences, though
+these sentences may require a great deal of effort to
+construct. Small words, such as conjunctions (and,
+or, but) and articles (the, an, a), may be omitted,
+leading to a ‘‘telegraph’’ quality in their speech.
+Hearing comprehension is usually not affected, so
+they are able to understand other people’s speech
+and conversation and can follow commands. Often,
+KEY TERMS
+Anomic aphasia— A condition characterized by
+either partial or total loss of the ability to recall the
+names of persons or things as a result of a stroke,
+head injury, brain tumor, or infection.
+Broca’s aphasia—A condition characterized by either
+partial or total loss of the ability to express oneself,
+either through speech or writing. Hearing comprehen-
+sion is not affected. This condition may result from a
+stroke, head injury, brain tumor, or infection.
+Computed tomography (CT)— An imaging techni-
+que that uses cross-sectional x rays of the body to
+create a three-dimensional image of the body’s inter-
+nal structures.
+Conduction aphasia— A condition characterized by
+the inability to repeat words, sentences, or phrases as
+a result of a stroke, head injury, brain tumor, or
+infection.
+Frontal lobe— The largest, most forward-facing part
+of each side or hemisphere of the brain.
+Global aphasia— A condition characterized by either
+partial or total loss of the ability to communicate verb-
+ally or using written words as a result of widespread
+injury to the language areasof the brain. This condition
+may be caused by a stroke, head injury, brain tumor,
+or infection. The exact language abilities affected vary
+depending on the location and extent of injury.
+Hemisphere— One of the two halves or sides-the left
+and the right-of the brain.
+Magnetic resonance imaging (MRI)— An imaging
+technique that uses a large circular magnet and
+radio waves to generate signals from atoms in the
+body. These signals are used to construct images of
+internal structures.
+Subcortical aphasia— A condition characterized by
+either partial or total loss of the ability to commu-
+nicate verbally or using written words as a result of
+damage to non language-dominated areas of the
+brain. This condition may be caused by a stroke,
+head injury, brain tumor, or infection.
+Temporal lobe— The part of each side or hemisphere
+of the brain that is on the side of the head, nearest the
+ears.
+Transcortical aphasia— A condition characterized
+by either partial or total loss of the ability to commu-
+nicate verbally or using written words that does not
+affect an individual’s ability to repeat words,
+phrases, and sentences.
+Wernicke’s aphasia— A condition characterized by
+either partial or total loss of the ability to understand
+what is being said or read. The individual maintains
+the ability to speak, but speech may contain unne-
+cessary or made-up words.
+374 Aphasia

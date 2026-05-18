@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
+import { sendContact } from '@/services/api';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -62,7 +63,7 @@ const Contact = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -76,31 +77,23 @@ const Contact = () => {
     
     setSending(true);
 
-    // Simulate sending (replace with actual API call)
-    setTimeout(() => {
-      // In production, replace with actual email service
-      const subject = encodeURIComponent(`MediGuard Support: ${formData.subject} - ${formData.name}`);
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\n` +
-        `Email: ${formData.email}\n` +
-        `Subject: ${formData.subject}\n\n` +
-        `${formData.message}\n\n` +
-        `---\n` +
-        `Sent from MediGuard Support Form`
-      );
-      
-      // Open default email client
-      window.location.href = `mailto:support@mediguard.cm?subject=${subject}&body=${body}`;
-      
+    try {
+      await sendContact(formData);
       toast({
-        title: "Message Ready!",
-        description: "Your default email client will open to send your message.",
+        title: "Message Sent",
+        description: "Your message has been saved for the MediGuard team.",
         duration: 5000,
       });
-      
       setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Message Not Sent",
+        description: error.message || "Please check that the backend is running.",
+      });
+    } finally {
       setSending(false);
-    }, 1000);
+    }
   };
 
   const supportOptions = [

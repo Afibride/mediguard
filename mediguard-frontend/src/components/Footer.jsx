@@ -21,7 +21,7 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="inline-block">
               <img 
-                src="/public/mediguard.png" 
+                src="/mediguard.png" 
                 alt="MediGuard Logo" 
                 className="logo-sm"
               />

@@ -2,33 +2,97 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { 
-  Send, Bot, User, Loader2, RefreshCw, AlertCircle, 
-  Menu, Plus, MessageSquare, ChevronLeft, Trash2, X,
-  PanelLeftClose, PanelLeftOpen
+import {
+  Send, Bot, User, RefreshCw,
+  Plus, MessageSquare, Trash2, X,
+  PanelLeftClose, PanelLeftOpen, Share2, Clock,
+  ThumbsUp, ThumbsDown
 } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import SuggestedQuestions from '@/components/SuggestedQuestions';
+import SourceCitation from '@/components/SourceCitation';
+import { saveChatHistory, sendChatMessage, submitChatFeedback } from '@/services/api';
 
 const ChatAI = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const location = useLocation();
   const scrollRef = useRef(null);
+  const messagesEndRef = useRef(null);
   
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [chats, setChats] = useState([]);
-  const [currentChatId, setCurrentChatId] = useState(null);
+  const [chats, setChats] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('mg_chats') || '[]'); } catch { return []; }
+  });
+  const [currentChatId, setCurrentChatId] = useState(() => {
+    return localStorage.getItem('mg_current_chat') || null;
+  });
+  const [sharingChatId, setSharingChatId] = useState(null);
+  const [ratings, setRatings] = useState({});
+  const sessionId = useRef('sess_' + Date.now()).current;
+
+  const scrollToLatest = (behavior = 'smooth') => {
+    window.requestAnimationFrame(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior, block: 'end' });
+    });
+  };
+
+  // Persist chats to localStorage
+  useEffect(() => {
+    localStorage.setItem('mg_chats', JSON.stringify(chats));
+  }, [chats]);
+
+  useEffect(() => {
+    if (currentChatId) localStorage.setItem('mg_current_chat', currentChatId);
+  }, [currentChatId]);
+
+  const groupChatsByDate = (chatList) => {
+    const today = new Date().toDateString();
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    const groups = { Today: [], Yesterday: [], Earlier: [] };
+    chatList.forEach(chat => {
+      const d = new Date(chat.createdAt).toDateString();
+      if (d === today) groups.Today.push(chat);
+      else if (d === yesterday) groups.Yesterday.push(chat);
+      else groups.Earlier.push(chat);
+    });
+    return groups;
+  };
+
+  const shareChat = async (chatId) => {
+    const chat = chats.find(c => c.id === chatId);
+    if (!chat) return;
+    setSharingChatId(chatId);
+    const text = `MediGuard AI Chat — ${chat.title}\n${'─'.repeat(40)}\n\n` +
+      chat.messages.map(m => `${m.role === 'user' ? 'You' : 'MediGuard AI'} [${m.timestamp || ''}]:\n${m.content}`).join('\n\n') +
+      `\n\n─────\nShared from MediGuard – Community Health AI, Bamenda`;
+    try {
+      await navigator.clipboard.writeText(text);
+      toast({ title: "Chat copied!", description: "Conversation copied to clipboard." });
+    } catch {
+      toast({ variant: "destructive", title: "Copy failed", description: "Could not access clipboard." });
+    }
+    setTimeout(() => setSharingChatId(null), 1500);
+  };
+
+  const pregnancyContextFromText = (text) => {
+    const lower = text.toLowerCase();
+    const pregnant = /\b(pregnant|pregnancy|expecting|antenatal|prenatal|trimester)\b/.test(lower);
+    const weeksMatch = lower.match(/(\d{1,2})\s*(weeks|week|wks|wk)/);
+    return {
+      is_pregnant: pregnant,
+      pregnancy_weeks: weeksMatch ? Number(weeksMatch[1]) : null,
+    };
+  };
 
   // Check screen size for responsive behavior
   useEffect(() => {
@@ -72,9 +136,7 @@ const ChatAI = () => {
 
   // Auto-scroll to latest message
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
+    scrollToLatest(messages.length <= 1 ? 'auto' : 'smooth');
   }, [messages, isTyping]);
 
   // Create a new chat
@@ -85,7 +147,7 @@ const ChatAI = () => {
       const newChatId = 'chat_' + Date.now();
       const welcomeMessage = {
         role: 'assistant',
-        content: 'Hello! I am your MediGuard AI health assistant. How are you feeling today? Please describe your symptoms.',
+        content: 'Hello! I am your MediGuard AI health assistant. You can greet me, ask a health question, or describe symptoms like "fever and chills and headache" for a symptom check.',
         id: 'msg_' + Date.now(),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
@@ -130,7 +192,7 @@ const ChatAI = () => {
   };
 
   // Handle message sending
-  const handleSend = (textOverride = null, isInitial = false) => {
+  const handleSend = async (textOverride = null, isInitial = false) => {
     const textToSend = textOverride || input;
     if (!textToSend.trim()) return;
 
@@ -166,58 +228,107 @@ const ChatAI = () => {
     setInput('');
     setIsTyping(true);
 
-    // Mock AI Processing Delay
-    setTimeout(() => {
-      let aiResponseContent = "";
-      const lowerText = textToSend.toLowerCase();
-
-      // Mock AI Logic Flow based on keywords
-      if (lowerText.includes('fever') && lowerText.includes('cough')) {
-        aiResponseContent = "I understand you have a fever and a cough. To help me analyze better, could you tell me how many days you've been experiencing these symptoms? Are you also feeling any chest pain or shortness of breath?";
-      } 
-      else if (lowerText.includes('stomach') || lowerText.includes('pain')) {
-        aiResponseContent = "Stomach pain can have various causes. Is the pain sharp or dull? Are you also experiencing nausea, vomiting, or diarrhea?";
-      }
-      else if (lowerText.includes('rash')) {
-        aiResponseContent = "A rash can be a sign of an allergic reaction or an infection. Is the rash itchy, red, or spreading? Have you tried any new foods or medications recently?";
-      }
-      else if (lowerText.includes('emergency') || lowerText.includes('bleeding') || lowerText.includes('breath')) {
-        aiResponseContent = "🚨 EMERGENCY ALERT: Your symptoms suggest a potentially critical condition. Please stop this chat and seek immediate emergency medical care or call local emergency services right away.";
-      }
-      else if (lowerText.includes('days') || lowerText.includes('week') || lowerText.includes('no ')) {
-        aiResponseContent = "Thank you for the additional information. Based on what you've shared, this could be related to a common seasonal infection like Malaria or a Respiratory Infection. I highly recommend using our 'Symptom Checker' for a detailed analysis or visiting a doctor for a proper clinical diagnosis. Ensure you stay hydrated and rest.";
-      }
-      else if (isInitial) {
-        aiResponseContent = "I see you're coming from your diagnosis results. I can help clarify any terms or explain the home care recommendations. What specific part of the diagnosis would you like to discuss?";
-      }
-      else {
-        aiResponseContent = "I hear you. Could you provide a bit more detail about when this started and if you have any other unusual feelings? The more details you provide, the better I can assist.";
-      }
-
-      const aiMsgObj = { 
-        role: 'assistant', 
-        content: aiResponseContent,
+    try {
+      const history = messages.slice(-6).map((message) => ({
+        role: message.role,
+        content: message.content,
+      }));
+      const pregnancyContext = pregnancyContextFromText(textToSend);
+      const res = await sendChatMessage(textToSend, history, null, pregnancyContext);
+      const fullAnswer = res.data.answer || '';
+      const aiMsgObj = {
+        role: 'assistant',
+        content: '',
+        sources: res.data.sources,
+        disclaimer: res.data.disclaimer,
+        followUpQuestions: res.data.follow_up_questions || [],
         id: 'msg_ai_' + Date.now(),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
-
+      setIsTyping(false);
       const finalMessages = [...updatedMessages, aiMsgObj];
       setMessages(finalMessages);
-      
-      // Update chat with AI response
-      setChats(prev => prev.map(chat => {
-        if (chat.id === currentChatId) {
-          return { 
-            ...chat, 
-            messages: finalMessages,
-            preview: aiResponseContent.substring(0, 30) + '...'
-          };
-        }
-        return chat;
-      }));
 
+      let typed = '';
+      const chunkSize = fullAnswer.length > 500 ? 5 : 2;
+      await new Promise((resolve) => {
+        const interval = window.setInterval(() => {
+          typed = fullAnswer.slice(0, typed.length + chunkSize);
+          const typedMessages = finalMessages.map((message) => (
+            message.id === aiMsgObj.id ? { ...message, content: typed } : message
+          ));
+          setMessages(typedMessages);
+          scrollToLatest('smooth');
+          setChats(prev => prev.map(chat => (
+            chat.id === currentChatId
+              ? { ...chat, messages: typedMessages, preview: typed.substring(0, 30) + (typed.length >= 30 ? '...' : '') }
+              : chat
+          )));
+          if (typed.length >= fullAnswer.length) {
+            window.clearInterval(interval);
+            resolve();
+          }
+        }, 35);
+      });
+
+      const completedAiMsgObj = { ...aiMsgObj, content: fullAnswer };
+      const completedMessages = [...updatedMessages, completedAiMsgObj];
+      setMessages(completedMessages);
+      setChats(prev => prev.map(chat => (
+        chat.id === currentChatId
+          ? { ...chat, messages: completedMessages, preview: fullAnswer.substring(0, 30) + '...' }
+          : chat
+      )));
+      if (user) {
+        const title = textToSend.length > 48 ? `${textToSend.slice(0, 48)}...` : textToSend;
+        saveChatHistory({
+          title,
+          message: textToSend,
+          response: fullAnswer,
+          sources: res.data.sources || [],
+          mode: res.data.mode || null,
+          pregnancy_context: res.data.pregnancy_context || pregnancyContext.is_pregnant,
+          follow_up_questions: res.data.follow_up_questions || [],
+        }).catch(() => {
+          const key = `chat_history_${user.id}`;
+          const stored = JSON.parse(localStorage.getItem(key) || '[]');
+          localStorage.setItem(key, JSON.stringify([{
+            id: `chat_${Date.now()}`,
+            title,
+            message: textToSend,
+            response: res.data.answer,
+            sources: res.data.sources || [],
+            mode: res.data.mode || null,
+            follow_up_questions: res.data.follow_up_questions || [],
+            created_at: new Date().toISOString(),
+          }, ...stored]));
+        });
+      }
+    } catch (error) {
+      const aiMsgObj = {
+        role: 'assistant',
+        content: isInitial
+          ? "I see you're coming from your diagnosis results. The health assistant is offline right now, but I can still remind you to seek professional care for urgent symptoms."
+          : "I could not reach the MediGuard backend. Please check that the API is running, then try again.",
+        sources: [],
+        id: 'msg_ai_' + Date.now(),
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      const finalMessages = [...updatedMessages, aiMsgObj];
+      setMessages(finalMessages);
+      setChats(prev => prev.map(chat => (
+        chat.id === currentChatId
+          ? { ...chat, messages: finalMessages, preview: aiMsgObj.content.substring(0, 30) + '...' }
+          : chat
+      )));
+      toast({
+        variant: "destructive",
+        title: "Assistant unavailable",
+        description: error.message || "Could not reach the backend.",
+      });
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const handleSelectQuestion = (question) => {
@@ -276,6 +387,33 @@ const ChatAI = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const extractKeywords = (text) => {
+    const stop = new Set(['the','a','an','is','are','was','were','be','been','being','have','has','had',
+      'do','does','did','will','would','could','should','may','might','can','i','you','my','your',
+      'this','that','it','in','on','at','to','for','of','and','or','but','with','what','how','why',
+      'when','where','who','about','from','by']);
+    return [...new Set(
+      text.toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/)
+        .filter(w => w.length > 3 && !stop.has(w))
+    )].slice(0, 8);
+  };
+
+  const handleRate = async (msg, isHelpful) => {
+    if (ratings[msg.id] !== undefined) return;
+    setRatings(prev => ({ ...prev, [msg.id]: isHelpful }));
+    const prevUserMsg = messages[messages.findIndex(m => m.id === msg.id) - 1];
+    try {
+      await submitChatFeedback({
+        session_id: sessionId,
+        query: prevUserMsg?.content || '',
+        response_preview: msg.content?.slice(0, 300) || '',
+        rating: isHelpful,
+        query_keywords: extractKeywords(prevUserMsg?.content || ''),
+        mode: msg.mode || null,
+      });
+    } catch { /* silent */ }
+  };
+
   return (
     <>
       <Helmet>
@@ -283,7 +421,7 @@ const ChatAI = () => {
         <meta name="description" content="Conversational symptom checker and AI health assistant for personalized guidance." />
       </Helmet>
 
-      <div className="h-[calc(100vh-64px)] bg-muted/30 flex overflow-hidden">
+      <div className="h-[calc(100dvh-64px)] min-h-[520px] bg-muted/30 flex overflow-hidden">
         {/* Sidebar */}
         <AnimatePresence mode="wait">
           {isSidebarOpen && (
@@ -306,7 +444,7 @@ const ChatAI = () => {
                 exit={{ x: -300 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                 className={`
-                  ${isMobile ? 'fixed left-0 top-16 bottom-0 z-50' : 'relative'}
+                  ${isMobile ? 'fixed left-0 top-16 bottom-0 z-50 max-w-[86vw]' : 'relative'}
                   w-[280px] bg-background border-r border-border flex flex-col
                 `}
               >
@@ -332,49 +470,74 @@ const ChatAI = () => {
                 <div className="p-3">
                   <Button
                     onClick={createNewChat}
-                    className="w-full bg-primary hover:bg-primary/90 text-white justify-start gap-2"
+                    className="w-full bg-primary hover:bg-primary/90 text-white justify-start gap-2 rounded-lg"
                   >
                     <Plus className="h-4 w-4" />
                     New Chat
                   </Button>
                 </div>
 
-                {/* Chat List */}
-                <ScrollArea className="flex-1 px-3">
-                  <div className="space-y-2 py-2">
-                    {chats.map((chat) => (
-                      <div
-                        key={chat.id}
-                        className={`
-                          group relative flex items-center gap-3 p-3 rounded-lg cursor-pointer
-                          transition-all duration-200
-                          ${currentChatId === chat.id 
-                            ? 'bg-primary/10 text-primary' 
-                            : 'hover:bg-muted text-foreground'
-                          }
-                        `}
-                        onClick={() => switchChat(chat.id)}
-                      >
-                        <MessageSquare className={`h-4 w-4 flex-shrink-0 ${
-                          currentChatId === chat.id ? 'text-primary' : 'text-muted-foreground'
-                        }`} />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium truncate">{chat.title}</p>
-                          <p className="text-xs text-muted-foreground truncate">{chat.preview}</p>
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            deleteChat(chat.id);
-                          }}
-                        >
-                          <Trash2 className="h-3 w-3 text-destructive" />
-                        </Button>
-                      </div>
-                    ))}
+                {/* Chat List — date grouped */}
+                <ScrollArea className="flex-1 px-2">
+                  <div className="py-2 space-y-1">
+                    {chats.length === 0 ? (
+                      <p className="text-xs text-muted-foreground text-center py-6">No chats yet</p>
+                    ) : (
+                      Object.entries(groupChatsByDate(chats)).map(([label, group]) =>
+                        group.length === 0 ? null : (
+                          <div key={label}>
+                            <div className="flex items-center gap-1.5 px-2 py-1.5">
+                              <Clock className="h-3 w-3 text-muted-foreground/60" />
+                              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">{label}</span>
+                            </div>
+                            {group.map((chat, i) => (
+                              <motion.div
+                                key={chat.id}
+                                initial={{ opacity: 0, x: -12 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.04 }}
+                                className={`group relative flex items-center gap-2 px-2 py-2.5 rounded-lg cursor-pointer transition-all duration-150 ${
+                                  currentChatId === chat.id
+                                    ? 'bg-primary/10 text-primary'
+                                    : 'hover:bg-muted text-foreground'
+                                }`}
+                                onClick={() => switchChat(chat.id)}
+                              >
+                                <MessageSquare className={`h-3.5 w-3.5 flex-shrink-0 ${currentChatId === chat.id ? 'text-primary' : 'text-muted-foreground'}`} />
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-xs font-medium truncate">{chat.title}</p>
+                                  <p className="text-[10px] text-muted-foreground truncate">{chat.preview}</p>
+                                </div>
+                                {/* Action buttons shown on hover */}
+                                <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-5 w-5"
+                                    title="Share chat"
+                                    onClick={(e) => { e.stopPropagation(); shareChat(chat.id); }}
+                                  >
+                                    {sharingChatId === chat.id
+                                      ? <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-[9px] text-green-500 font-bold">OK</motion.span>
+                                      : <Share2 className="h-2.5 w-2.5 text-muted-foreground" />
+                                    }
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-5 w-5"
+                                    title="Delete chat"
+                                    onClick={(e) => { e.stopPropagation(); deleteChat(chat.id); }}
+                                  >
+                                    <Trash2 className="h-2.5 w-2.5 text-destructive" />
+                                  </Button>
+                                </div>
+                              </motion.div>
+                            ))}
+                          </div>
+                        )
+                      )
+                    )}
                   </div>
                 </ScrollArea>
 
@@ -456,9 +619,9 @@ const ChatAI = () => {
                         </div>
                       )}
                       
-                      <div className={`max-w-[85%] sm:max-w-[75%] flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
+                      <div className={`max-w-[88%] sm:max-w-[75%] flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
                         <div
-                          className={`rounded-2xl px-3 py-2 sm:px-5 sm:py-3 shadow-sm text-sm sm:text-[15px] leading-relaxed relative break-words w-full ${
+                          className={`rounded-xl sm:rounded-2xl px-3 py-2 sm:px-5 sm:py-3 shadow-sm text-sm sm:text-[15px] leading-relaxed relative break-words w-full ${
                             message.role === 'user'
                               ? 'bg-secondary text-secondary-foreground rounded-br-sm'
                               : message.content.includes('🚨 EMERGENCY') 
@@ -471,6 +634,61 @@ const ChatAI = () => {
                         <span className="text-[10px] sm:text-[11px] text-muted-foreground mt-1 px-1">
                           {message.timestamp}
                         </span>
+                        {message.role === 'assistant' && <SourceCitation sources={message.sources} />}
+                        {message.role === 'assistant' && message.id !== messages[0]?.id && (
+                          <div className="flex items-center gap-1.5 mt-1.5 px-1">
+                            <span className="text-[10px] text-muted-foreground">Helpful?</span>
+                            <button
+                              onClick={() => handleRate(message, true)}
+                              disabled={ratings[message.id] !== undefined}
+                              className={`p-1 rounded transition-colors ${
+                                ratings[message.id] === true
+                                  ? 'text-green-600'
+                                  : ratings[message.id] !== undefined
+                                    ? 'text-muted-foreground/30'
+                                    : 'text-muted-foreground hover:text-green-600'
+                              }`}
+                              title="Helpful"
+                            >
+                              <ThumbsUp className="h-3 w-3" />
+                            </button>
+                            <button
+                              onClick={() => handleRate(message, false)}
+                              disabled={ratings[message.id] !== undefined}
+                              className={`p-1 rounded transition-colors ${
+                                ratings[message.id] === false
+                                  ? 'text-red-500'
+                                  : ratings[message.id] !== undefined
+                                    ? 'text-muted-foreground/30'
+                                    : 'text-muted-foreground hover:text-red-500'
+                              }`}
+                              title="Not helpful"
+                            >
+                              <ThumbsDown className="h-3 w-3" />
+                            </button>
+                            {ratings[message.id] !== undefined && (
+                              <motion.span
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="text-[10px] text-muted-foreground"
+                              >
+                                {ratings[message.id] ? 'Thanks!' : 'Noted, we\'ll improve.'}
+                              </motion.span>
+                            )}
+                          </div>
+                        )}
+                        {message.role === 'assistant' && Array.isArray(message.followUpQuestions) && message.followUpQuestions.length > 0 && (
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {message.followUpQuestions.map((question) => (
+                              <span
+                                key={question}
+                                className="rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-left text-[11px] sm:text-xs font-medium text-primary"
+                              >
+                                {question}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                       {message.role === 'user' && (
@@ -482,18 +700,25 @@ const ChatAI = () => {
                   ))}
                 </AnimatePresence>
                 
-                {/* Loading Indicator */}
+                {/* Typing Indicator — bouncing dots */}
                 {isTyping && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex gap-2 sm:gap-3 justify-start">
+                  <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="flex gap-2 sm:gap-3 justify-start">
                     <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-sm mt-auto mb-1">
                       <Bot className="h-3 w-3 sm:h-5 sm:w-5 text-primary-foreground" />
                     </div>
-                    <div className="bg-card border shadow-sm rounded-2xl rounded-bl-sm px-3 py-2 sm:px-5 sm:py-4 flex items-center gap-2 sm:gap-3">
-                      <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin text-primary" />
-                      <span className="text-xs sm:text-sm text-muted-foreground font-medium">AI is thinking...</span>
+                    <div className="bg-card border shadow-sm rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
+                      {[0, 1, 2].map(i => (
+                        <motion.span
+                          key={i}
+                          className="w-2 h-2 rounded-full bg-primary/70 block"
+                          animate={{ y: [0, -5, 0] }}
+                          transition={{ duration: 0.55, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
+                        />
+                      ))}
                     </div>
                   </motion.div>
                 )}
+                <div ref={messagesEndRef} className="h-px" />
               </div>
             </ScrollArea>
 
@@ -511,13 +736,13 @@ const ChatAI = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  className="bg-muted/50 border-input focus-visible:ring-primary h-12 sm:h-14 text-sm sm:text-base rounded-full pl-4 sm:pl-6 pr-12 sm:pr-14 shadow-inner w-full"
+                  className="bg-muted/50 border-input focus-visible:ring-primary h-12 sm:h-14 text-sm sm:text-base rounded-lg pl-4 sm:pl-6 pr-12 sm:pr-14 shadow-inner w-full"
                   disabled={isTyping}
                 />
                 <Button 
                   onClick={() => handleSend()} 
                   disabled={!input.trim() || isTyping}
-                  className="absolute right-1.5 top-1.5 bottom-1.5 rounded-full w-9 h-9 sm:w-11 sm:h-11 p-0 bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform active:scale-95"
+                  className="absolute right-1.5 top-1.5 bottom-1.5 rounded-md w-9 h-9 sm:w-11 sm:h-11 p-0 bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform active:scale-95"
                 >
                   <Send className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>

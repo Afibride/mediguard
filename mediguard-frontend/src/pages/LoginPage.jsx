@@ -66,7 +66,7 @@ const LoginPage = () => {
             <CardHeader className="space-y-1 text-center bg-white dark:bg-slate-950 rounded-t-xl">
               <motion.div variants={itemVariants} className="flex justify-center mb-4">
                 <img 
-                  src="/public/mediguard.png" 
+                  src="/mediguard.png" 
                   alt="MediGuard Logo" 
                   className="logo-md"
                 />
