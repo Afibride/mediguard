@@ -24,6 +24,7 @@ import { AuthProvider } from '@/components/AuthContext';
 import MobileMenu from '@/components/MobileMenu'; // Kept for validation requirements
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
+import NearbyFacilitiesPage from '@/pages/NearbyFacilitiesPage';
 
 function AppLayout() {
   const location = useLocation();
@@ -47,6 +48,7 @@ function AppLayout() {
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/about" element={<About />} />
+            <Route path="/nearby-facilities" element={<NearbyFacilitiesPage />} />
             
             <Route path="/symptom-checker" element={<SymptomChecker />} />
             <Route path="/prediction-results" element={<PredictionResults />} />

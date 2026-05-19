@@ -238,6 +238,64 @@ SYMPTOM_DEFINITIONS: dict[str, str] = {
     ),
 }
 
+DISEASE_ALIASES: dict[str, str] = {
+    # Chickenpox variants
+    "chicken pox": "Chickenpox", "chickenpox": "Chickenpox", "varicella": "Chickenpox",
+    # HIV/AIDS
+    "hiv": "HIV AIDS", "aids": "HIV AIDS", "hiv/aids": "HIV AIDS", "hiv aids": "HIV AIDS",
+    # Common cold
+    "cold": "Common Cold",
+    # Shingles
+    "shingles": "Herpes Zoster",
+    # UTI
+    "uti": "Cystitis UTI", "urinary tract infection": "Cystitis UTI", "cystitis": "Cystitis UTI",
+    # Peptic ulcer
+    "peptic ulcer": "Helicobacteriosis PepticUlcer", "stomach ulcer": "Helicobacteriosis PepticUlcer",
+    "h. pylori": "Helicobacteriosis PepticUlcer", "helicobacter": "Helicobacteriosis PepticUlcer",
+    # PID
+    "pid": "Pelvic Inflammatory Disease",
+    # Sickle cell
+    "sickle cell": "Sickle Cell Crisis", "sca": "Sickle Cell Crisis",
+    # Whooping cough
+    "pertussis": "Whooping Cough",
+    # Fungal
+    "tinea": "Skin Fungal Infection", "fungal infection": "Skin Fungal Infection",
+    # Diabetes
+    "diabetes": "Diabetes Mellitus", "type 2 diabetes": "Diabetes Mellitus",
+    # Hypertension
+    "high blood pressure": "Hypertension",
+    # BPH
+    "bph": "Benign Prostatic Hyperplasia", "enlarged prostate": "Benign Prostatic Hyperplasia",
+    # Others
+    "typhoid": "Typhoid Fever", "dengue": "Dengue Fever",
+    "hepatitis a": "Hepatitis A", "hepatitis b": "Hepatitis B",
+    "kidney stone": "Kidney Stones", "renal calculi": "Kidney Stones",
+    "tb": "Tuberculosis",
+    "lockjaw": "Tetanus",
+    "pink eye": "Conjunctivitis",
+    "stomach flu": "Gastroenteritis",
+    "anemia": "Iron Deficiency Anemia",
+    "elephantiasis": "Filariasis",
+    "river blindness": "Onchocerciasis",
+    "blood poisoning": "Septicemia",
+    "boil": "Skin Abscess",
+    "german measles": "Rubella",
+    "anaphylactic shock": "Anaphylaxis",
+    "otitis": "Ear Infection",
+}
+
+# Build lookup by canonical name for fast access
+_DISEASE_BY_NAME: dict[str, dict] = {d["name"]: d for d in DISEASES}
+
+DISEASE_SYMPTOM_QUERY_PATTERNS = [
+    re.compile(r"^\s*symptoms\s+of\s+(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*signs\s+of\s+(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*what\s+are\s+(?:the\s+)?symptoms?\s+(?:of|for)\s+(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*what\s+are\s+(?:the\s+)?signs?\s+(?:of|for)\s+(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*(.+?)\s+symptoms\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*how\s+does\s+(.+?)\s+(?:present|manifest|show|appear)\s*[?.!]*\s*$", re.I),
+]
+
 SYMPTOM_DEFINITION_PATTERNS = [
     re.compile(r"^\s*what\s+(?:is|are)\s+(?:a\s+|an\s+|the\s+)?(.+?)\s*[?.!]*\s*$", re.I),
     re.compile(r"^\s*(?:define|explain)\s+(?:a\s+|an\s+|the\s+)?(.+?)\s*[?.!]*\s*$", re.I),
@@ -301,6 +359,297 @@ def _symptom_definition_response(query: str) -> dict | None:
     }
 
 
+def _resolve_disease_name(term: str) -> dict | None:
+    """Return a DISEASES entry for a user-supplied term, using aliases and fuzzy matching."""
+    term = term.strip().lower()
+    # 1. Alias lookup (longest-key-first to avoid partial hits)
+    for alias in sorted(DISEASE_ALIASES, key=len, reverse=True):
+        if alias in term or term in alias:
+            d = _DISEASE_BY_NAME.get(DISEASE_ALIASES[alias])
+            if d:
+                return d
+    # 2. Direct name / slug match
+    for d in DISEASES:
+        names = {
+            d["name"].lower(),
+            d["slug"].replace("-", " ").lower(),
+            d["name"].lower().replace(" ", ""),
+        }
+        if any(n and len(n) > 2 and (n in term or term in n) for n in names):
+            return d
+    return None
+
+
+def _disease_symptoms_response(query: str) -> dict | None:
+    term = None
+    for pattern in DISEASE_SYMPTOM_QUERY_PATTERNS:
+        match = pattern.match(query.strip())
+        if match:
+            term = match.group(1).strip()
+            break
+    if not term:
+        return None
+
+    disease = _resolve_disease_name(term)
+    if not disease:
+        return None
+
+    symptoms = disease.get("symptoms") or []
+    if not symptoms:
+        return None
+
+    desc_map = SYMPTOM_DESCRIPTIONS.get(disease["name"], {})
+    lines = [f"**{disease['name']}** commonly presents with these symptoms:\n"]
+    for sym in symptoms:
+        sym_lower = sym.lower().replace("_", " ")
+        desc = next(
+            (val for key, val in desc_map.items()
+             if key.lower() == sym_lower or key.lower() in sym_lower or sym_lower in key.lower()),
+            None,
+        )
+        if desc:
+            lines.append(f"• **{sym.replace('_', ' ')}**: {desc}")
+        else:
+            lines.append(f"• {sym.replace('_', ' ')}")
+
+    lines.append(
+        "\n\nThis information is for educational purposes only. "
+        "Always consult a qualified healthcare professional for proper diagnosis and treatment."
+    )
+    return {
+        "answer": "\n".join(lines),
+        "sources": [disease["name"]],
+        "disclaimer": DISCLAIMER,
+    }
+
+
+def _disease_topic_intent(query: str) -> str | None:
+    text = query.lower()
+    if any(term in text for term in ["prevent", "prevention", "avoid", "protect against", "stop getting"]):
+        return "prevention"
+    if any(term in text for term in ["treat", "treatment", "cure", "manage", "medicine", "medication"]):
+        return "treatment"
+    if any(term in text for term in ["cause", "causes", "spread", "transmit", "transmitted", "get infected"]):
+        return "causes"
+    return None
+
+
+def _pinecone_disease_profile(disease_name: str) -> dict | None:
+    index = _get_index()
+    if index is None:
+        return None
+    try:
+        results = index.query(
+            vector=embed_text(disease_name, dim=_pinecone_dimension or 384),
+            top_k=1,
+            include_metadata=True,
+            filter={"data_type": {"$eq": "disease_profile"}, "disease": {"$eq": disease_name}},
+        )
+    except Exception:
+        return None
+    matches = results.matches if hasattr(results, "matches") else results.get("matches", [])
+    if not matches:
+        return None
+    meta = matches[0].metadata if hasattr(matches[0], "metadata") else matches[0].get("metadata", {})
+    return meta or None
+
+
+def _database_disease_profile(disease_name: str) -> dict | None:
+    db = SessionLocal()
+    try:
+        row = db.query(Disease).filter(Disease.name == disease_name).first()
+        if row:
+            return {
+                "disease": row.name,
+                "description": row.description,
+                "causes": row.causes,
+                "treatment": row.treatment,
+                "prevention": row.prevention or [],
+                "source": "database",
+            }
+    finally:
+        db.close()
+    disease = _DISEASE_BY_NAME.get(disease_name)
+    if disease:
+        return {
+            "disease": disease["name"],
+            "description": disease.get("description", ""),
+            "causes": disease.get("causes", ""),
+            "treatment": disease.get("treatment", ""),
+            "prevention": disease.get("prevention", []),
+            "source": "curated",
+        }
+    return None
+
+
+def _disease_topic_response(query: str) -> dict | None:
+    intent = _disease_topic_intent(query)
+    if not intent:
+        return None
+    disease = _detect_disease(query)
+    if not disease:
+        return None
+
+    profile = _pinecone_disease_profile(disease["name"])
+    data_source = "pinecone" if profile else "database"
+    if not profile:
+        profile = _database_disease_profile(disease["name"])
+    if not profile:
+        return None
+
+    name = profile.get("disease") or disease["name"]
+    if intent == "prevention":
+        prevention = profile.get("prevention") or disease.get("prevention") or []
+        if isinstance(prevention, str):
+            prevention = [item.strip() for item in re.split(r"[;\n]", prevention) if item.strip()]
+        lines = [f"To help prevent **{name}**:"]
+        if prevention:
+            lines.extend(f"- {item}" for item in prevention[:6])
+        elif profile.get("description"):
+            lines.append(profile["description"])
+        lines.append("Seek testing or clinical care early if symptoms appear, especially fever, weakness, vomiting, confusion, breathing difficulty, dehydration, or pregnancy warning signs.")
+    elif intent == "treatment":
+        treatment = profile.get("treatment") or disease.get("treatment") or ""
+        lines = [f"Treatment overview for **{name}**:", treatment or "A qualified clinician should assess symptoms and choose appropriate care."]
+        lines.append("Do not start prescription medicines without a qualified clinician. Seek urgent care for severe or worsening symptoms.")
+    else:
+        causes = profile.get("causes") or disease.get("causes") or ""
+        lines = [f"Common causes or spread of **{name}**:", causes or profile.get("description") or "The exact cause depends on the condition and exposure history."]
+        lines.append("Prevention and early care depend on the cause, so seek professional assessment for personal symptoms.")
+
+    lines.append("MediGuard information can sometimes be incomplete or faulty, so use it as education, not a diagnosis.")
+    return {
+        "answer": "\n".join(lines),
+        "sources": [name],
+        "disclaimer": DISCLAIMER,
+        "data_source": data_source,
+    }
+
+
+BAMENDA_FACILITIES_DATA = [
+    {"name": "Bamenda Regional Hospital", "type": "Regional / Government Hospital", "address": "X43V+WH7, Bamenda, Cameroon", "phone": "+237 2 33 36 11 08", "maps": "https://www.google.com/maps/search/?api=1&query=Bamenda+Regional+Hospital+Cameroon"},
+    {"name": "Nkwen Baptist Hospital Bamenda", "type": "CBC Mission Hospital", "address": "Finance Junction, Bamenda II, Mezam Division", "phone": "+237 675 205 729 / +237 683 158 210", "maps": "https://www.google.com/maps/search/?api=1&query=Nkwen+Baptist+Hospital+Bamenda+Cameroon"},
+    {"name": "Mezam Polyclinic", "type": "Private Polyclinic", "address": "Azire / W4XW+G5V, Bamenda, Cameroon", "phone": "+237 6 77 68 48 78 / +237 2 33 36 34 31", "maps": "https://www.google.com/maps/search/?api=1&query=Mezam+Polyclinic+Bamenda+Cameroon"},
+    {"name": "Mbingo Baptist Hospital", "type": "CBC Referral / Teaching Hospital", "address": "Belo Subdivision, North West Region, via Bamenda", "phone": "+237 677 671 621 / +237 676 221 260", "maps": "https://www.google.com/maps/search/?api=1&query=Mbingo+Baptist+Hospital+Cameroon"},
+    {"name": "Banso Baptist Hospital", "type": "CBC Mission Hospital", "address": "P.O. Box 9, Banso / Kumbo, Bui Division", "phone": "+237 677 720 005 / +237 678 479 628", "maps": "https://www.google.com/maps/search/?api=1&query=Banso+Baptist+Hospital+Kumbo+Cameroon"},
+    {"name": "St. Martin de Porres Catholic Mission Hospital", "type": "Catholic Mission Hospital", "address": "Njinikom, North West Region", "phone": "+237 6 65 84 26 16 / +237 6 65 84 26 19", "maps": "https://www.google.com/maps/search/?api=1&query=St+Martin+de+Porres+Catholic+Mission+Hospital+Njinikom+Cameroon"},
+]
+
+FACILITY_TERMS = [
+    "hospital", "clinic", "health facility", "health centre", "health center",
+    "nearest hospital", "nearby hospital", "where to go", "where can i go",
+    "where should i go", "seek care", "get treatment", "see a doctor",
+    "go to hospital", "find a hospital", "find a clinic", "medical facility",
+    "doctor near", "pharmacy near",
+]
+
+
+def _facilities_response(query: str) -> dict | None:
+    text = query.lower()
+    if not any(term in text for term in FACILITY_TERMS):
+        return None
+    lines = [
+        "Here are nearby health facilities in Bamenda where you can seek professional care:\n"
+    ]
+    for f in BAMENDA_FACILITIES_DATA:
+        lines.append(
+            f"• **{f['name']}** ({f['type']})\n"
+            f"  Address: {f['address']}\n"
+            f"  Phone: {f['phone']}\n"
+            f"  Maps: {f['maps']}"
+        )
+    lines.append(
+        "\nFor emergencies, go directly to **Bamenda Regional Hospital** (Hospital Roundabout, Up Station). "
+        "You can also open Google Maps on your phone and search 'hospital near me' for real-time directions."
+    )
+    return {
+        "answer": "\n".join(lines),
+        "sources": ["Bamenda Health Facilities Directory"],
+        "disclaimer": DISCLAIMER,
+    }
+
+
+def _facilities_response(query: str) -> dict | None:
+    text = query.lower()
+    if not any(term in text for term in FACILITY_TERMS):
+        return None
+    lines = [
+        "Here are nearby health facilities connected to MediGuard's Nearby Facilities page:\n"
+    ]
+    for f in BAMENDA_FACILITIES_DATA:
+        lines.append(
+            f"- **{f['name']}** ({f['type']})\n"
+            f"  Address: {f['address']}\n"
+            f"  Phone: {f['phone']}\n"
+            f"  Maps: {f['maps']}"
+        )
+    lines.append(
+        "\nYou can open **Nearby Facilities** inside MediGuard at `/nearby-facilities` to view embedded map previews without leaving the system. "
+        "For emergencies, go to the closest open emergency facility or call local emergency support immediately."
+    )
+    return {
+        "answer": "\n".join(lines),
+        "sources": ["Bamenda Health Facilities Directory"],
+        "disclaimer": DISCLAIMER,
+        "mode": "facilities",
+        "data_source": "platform",
+    }
+
+
+def _platform_response(query: str) -> dict | None:
+    text = query.strip().lower()
+    platform_terms = [
+        "mediguard", "this platform", "the platform", "this app", "the app", "website",
+        "symptom checker", "history", "profile", "trends", "dashboard", "nearby facilities",
+        "facilities page", "disease library", "chat history", "how do i use", "what can i do here",
+    ]
+    if not any(term in text for term in platform_terms):
+        return None
+
+    if any(term in text for term in ["nearby facilities", "hospital", "clinic", "maps", "facility"]):
+        answer = (
+            "Use the **Nearby Facilities** page to see hospitals and clinics with embedded map previews, phone numbers, services, "
+            "and direction links. In MediGuard, open `/nearby-facilities` or use the Facilities link in the navigation."
+        )
+    elif "history" in text or "chat history" in text:
+        answer = (
+            "Your MediGuard history is available from **History** after login. It combines saved symptom screenings and chat records "
+            "so you can review previous checks."
+        )
+    elif "profile" in text or "account" in text:
+        answer = (
+            "Open **Profile** after login to view your account details. The profile page is protected, so you need to be signed in first."
+        )
+    elif "trend" in text or "dashboard" in text:
+        answer = (
+            "The **Trends Dashboard** summarizes recorded screenings, top reported conditions, weekly patterns, and heatmap-style analytics "
+            "from MediGuard usage data."
+        )
+    elif "symptom checker" in text or "diagnosis" in text or "screening" in text:
+        answer = (
+            "Use **Symptom Checker** to select symptoms by category and run a screening. MediGuard may ask follow-up questions, then shows "
+            "possible matches, first-aid guidance, and when to seek care."
+        )
+    elif "disease library" in text or "diseases" in text:
+        answer = (
+            "The **Disease Library** lets you browse disease details, symptoms, causes, treatment overview, and prevention information "
+            "stored in the MediGuard database."
+        )
+    else:
+        answer = (
+            "MediGuard can help you check symptoms, chat with the health assistant, browse disease information, view trends, review history, "
+            "manage your profile, and find nearby health facilities with in-app maps."
+        )
+
+    return {
+        "answer": answer,
+        "sources": ["MediGuard Platform"],
+        "disclaimer": DISCLAIMER,
+        "mode": "platform_help",
+        "data_source": "platform",
+    }
+
+
 def _conversational_response(query: str) -> dict | None:
     text = query.strip().lower()
     if not text:
@@ -318,7 +667,8 @@ def _conversational_response(query: str) -> dict | None:
         elif "help" in text or "what can you do" in text:
             answer = (
                 "Yes, I can help. You can ask about symptoms, common conditions in Bamenda, prevention, treatment overview, "
-                "or when to see a doctor. I can also explain your symptom-checker result in plain language."
+                "or when to see a doctor. I can also explain your symptom-checker result, point you to nearby facilities, "
+                "and answer questions about using MediGuard."
             )
         else:
             answer = (
@@ -402,10 +752,21 @@ def _pregnancy_followup_response(query: str, symptoms: list[str], is_pregnant: b
 
 def _detect_disease(query: str) -> dict | None:
     text = query.lower()
+    # Alias lookup first (handles "chicken pox" → "Chickenpox" etc.)
+    for alias in sorted(DISEASE_ALIASES, key=len, reverse=True):
+        if alias in text:
+            d = _DISEASE_BY_NAME.get(DISEASE_ALIASES[alias])
+            if d:
+                return d
+    # Fallback: name / slug matching
     candidates = sorted(DISEASES, key=lambda item: len(item["name"]), reverse=True)
     for disease in candidates:
-        names = {disease["name"].lower(), disease["slug"].replace("-", " ").lower()}
-        if any(name and name in text for name in names):
+        names = {
+            disease["name"].lower(),
+            disease["slug"].replace("-", " ").lower(),
+            disease["name"].lower().replace(" ", ""),
+        }
+        if any(name and len(name) > 2 and name in text for name in names):
             return disease
     return None
 
@@ -881,9 +1242,25 @@ def generate_answer(
     if conversational:
         return conversational
 
+    facilities = _facilities_response(query)
+    if facilities:
+        return facilities
+
+    platform = _platform_response(query)
+    if platform:
+        return platform
+
     symptom_definition = _symptom_definition_response(query)
     if symptom_definition:
         return symptom_definition
+
+    disease_symptoms = _disease_symptoms_response(query)
+    if disease_symptoms:
+        return disease_symptoms
+
+    disease_topic = _disease_topic_response(query)
+    if disease_topic:
+        return disease_topic
 
     symptom_check = _symptom_check_response(
         query,

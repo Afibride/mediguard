@@ -61,6 +61,7 @@ const Header = () => {
     { name: 'Symptom Checker', path: '/symptom-checker' },
     { name: 'Disease Library', path: '/disease-library' },
     { name: 'MediGuard AI', path: '/chat-ai' },
+    { name: 'Facilities', path: '/nearby-facilities' },
     { name: 'Trends Dashboard', path: '/trends' },
   ];
 
@@ -82,7 +83,7 @@ const Header = () => {
         {isDesktop ? (
           <>
             {/* Center: Desktop Navigation Links */}
-            <nav className="flex items-center justify-center space-x-6">
+            <nav className="flex items-center justify-center space-x-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}

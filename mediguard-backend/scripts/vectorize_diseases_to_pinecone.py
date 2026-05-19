@@ -139,12 +139,19 @@ def build_disease_profile_vectors() -> list[dict]:
         symptoms = d.get("symptoms") or []
         symptom_str = ", ".join(symptoms) if symptoms else "unspecified"
         description = (d.get("description") or "")[:400]
+        causes = d.get("causes", "")
+        treatment = d.get("treatment", "")
+        prevention = d.get("prevention") or []
+        prevention_str = "; ".join(prevention) if isinstance(prevention, list) else str(prevention)
         text = (
             f"Disease: {name}. "
             f"Category: {d.get('category', 'General')}. "
             f"Severity: {d.get('severity', 'Medium')}. "
             f"Symptoms: {symptom_str}. "
-            f"{description}"
+            f"Description: {description}. "
+            f"Causes: {causes}. "
+            f"Treatment: {treatment}. "
+            f"Prevention: {prevention_str}."
         ).strip()
         texts.append(text)
         records.append({
@@ -157,6 +164,10 @@ def build_disease_profile_vectors() -> list[dict]:
                 "severity": d.get("severity", "Medium"),
                 "symptoms": symptoms[:50],
                 "description": description,
+                "causes": causes[:1000],
+                "treatment": treatment[:1000],
+                "prevention": prevention[:20] if isinstance(prevention, list) else prevention_str[:1000],
+                "text": text[:4000],
             },
         })
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Moon, Sun, History, LogOut, Home, Activity, BookOpen, Bot, TrendingUp, LogIn, UserPlus, User } from 'lucide-react';
+import { X, Moon, Sun, History, LogOut, Home, Activity, BookOpen, Bot, TrendingUp, LogIn, UserPlus, User, MapPin } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 
 const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
@@ -39,6 +39,7 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
     { name: 'Symptom Checker', path: '/symptom-checker', icon: Activity },
     { name: 'Disease Library', path: '/disease-library', icon: BookOpen },
     { name: 'MediGuard AI', path: '/chat-ai', icon: Bot },
+    { name: 'Nearby Facilities', path: '/nearby-facilities', icon: MapPin },
     { name: 'Trends Dashboard', path: '/trends', icon: TrendingUp },
   ];
 
