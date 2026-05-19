@@ -5,18 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { AlertCircle, ArrowLeft, MessageCircle, Info, HeartPulse, Activity, Stethoscope, Clock, ShieldAlert, Save, Brain, ChevronDown, CheckCircle2, Pill, AlertTriangle, Baby, User, Heart, HelpCircle, ThumbsUp, ThumbsDown, MapPin, Shield, Microscope, Printer, FlaskConical } from 'lucide-react';
+import { AlertCircle, ArrowLeft, MessageCircle, Info, HeartPulse, Activity, Stethoscope, Clock, ShieldAlert, Save, Brain, ChevronDown, CheckCircle2, Pill, AlertTriangle, Baby, User, Heart, HelpCircle, ThumbsUp, ThumbsDown, Shield, Microscope, Printer, FlaskConical } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/components/AuthContext';
 import DisclaimerBanner from '@/components/DisclaimerBanner';
+import NearbyFacilities from '@/components/NearbyFacilities';
 import { submitFeedback } from '@/services/api';
-
-const BAMENDA_FACILITIES = [
-  { name: 'Bamenda Regional Hospital', type: 'Regional Hospital', address: 'Hospital Roundabout, Bamenda', phone: '+237 677 000 001' },
-  { name: 'Mezam Polyclinic', type: 'Polyclinic', address: 'Commercial Avenue, Bamenda', phone: '+237 677 000 002' },
-  { name: 'NAHPI Medical Centre', type: 'University Clinic', address: 'NAHPI Campus, Mankon, Bamenda', phone: '+237 677 000 003' },
-  { name: 'Baptist Hospital Bamenda', type: 'Mission Hospital', address: 'Nkwen, Bamenda', phone: '+237 677 000 004' },
-];
 
 const DISEASE_TESTS = {
   'Malaria': ['Rapid Diagnostic Test (RDT)', 'Thick/thin blood film microscopy', 'Full Blood Count (FBC)', 'Haemoglobin level'],
@@ -251,7 +245,7 @@ const PredictionResults = () => {
 
             <div className="flex flex-wrap justify-center gap-2 mt-4">
               {symptoms.map(s => (
-                <Badge key={s} variant="secondary" className="bg-background border text-sm py-1">{s}</Badge>
+                <Badge key={s} variant="outline" className="bg-background text-foreground border text-sm py-1">{s}</Badge>
               ))}
             </div>
 
@@ -585,25 +579,7 @@ const PredictionResults = () => {
 
           {/* Bamenda Health Facilities */}
           <motion.div variants={itemVariants} className="mt-10">
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <MapPin className="h-5 w-5 text-primary" />Nearby Health Facilities – Bamenda
-                </CardTitle>
-                <CardDescription>Seek professional medical care at a facility near you</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {BAMENDA_FACILITIES.map((f, i) => (
-                    <div key={i} className="p-3 rounded-lg border bg-muted/30">
-                      <p className="font-semibold text-sm">{f.name}</p>
-                      <p className="text-xs text-muted-foreground">{f.type} · {f.address}</p>
-                      <p className="text-xs text-primary mt-1">{f.phone}</p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <NearbyFacilities />
           </motion.div>
 
           {/* Feedback Section */}

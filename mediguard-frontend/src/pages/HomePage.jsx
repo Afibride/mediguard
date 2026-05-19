@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database, TrendingUp, Megaphone, Droplets, HandHeart } from 'lucide-react';
+import NearbyFacilities from '@/components/NearbyFacilities';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { getAnalyticsSummary, getDiseases, getOutbreakAlerts, getTopDiseases, getTrends } from '@/services/api';
@@ -17,6 +18,7 @@ const HomePage = () => {
   const [topDiseases, setTopDiseases] = useState([]);
   const [weeklyTrends, setWeeklyTrends] = useState([]);
   const [outbreakInfo, setOutbreakInfo] = useState({ alerts: [], rainy_season: false, has_alerts: false });
+  
   const trustIndicators = [
     {
       icon: Users,
@@ -270,10 +272,10 @@ const HomePage = () => {
           </motion.div>
         </section>
 
-        {/* Trust Indicators */}
+        {/* Trust Indicators - 2 columns on mobile, 3 columns on desktop */}
         <section className="py-16 sm:py-20 bg-background">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-10">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 mb-10">
               {[
                 { label: 'Diseases in Library', value: summary.diseases_tracked, icon: BookOpen },
                 { label: 'Recorded Screenings', value: summary.total_predictions, icon: Activity },
@@ -292,12 +294,14 @@ const HomePage = () => {
                 </Card>
               ))}
             </div>
+            
+            {/* Trust Indicators Cards - 2 columns on mobile, 4 on desktop */}
             <motion.div 
               variants={staggerContainer}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
             >
               {trustIndicators.map((indicator, index) => (
                 <motion.div key={index} variants={fadeUpItem} whileHover={{ y: -5, transition: { duration: 0.2 } }}>
@@ -434,7 +438,8 @@ const HomePage = () => {
                   </Card>
                 )}
 
-                <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                {/* Sensitization Tips - 2 columns on mobile, 1 on desktop */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
                   {sensitizationTips.map((tip) => (
                     <motion.div key={tip.title} variants={fadeUpItem}>
                       <Card className={`h-full border ${tip.tone}`}>
@@ -454,7 +459,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* How It Works */}
+        {/* How It Works - 2 columns on mobile, 4 on desktop */}
         <section className="py-16 sm:py-24 bg-muted/30 border-y">
           <div className="container mx-auto px-4">
             <motion.div 
@@ -473,7 +478,7 @@ const HomePage = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative"
             >
               <div className="hidden lg:block absolute top-8 left-[12%] right-[12%] h-1 bg-gradient-to-r from-primary/10 via-primary/40 to-primary/10 rounded-full z-0"></div>
               {howItWorks.map((step, index) => (
@@ -497,7 +502,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Featured Diseases */}
+        {/* Featured Diseases - 2 columns on mobile, 4 on desktop */}
         <section className="py-16 sm:py-24 bg-background">
           <div className="container mx-auto px-4">
             <motion.div 
@@ -516,7 +521,7 @@ const HomePage = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
             >
               {(featuredDiseases.length ? featuredDiseases : fallbackDiseases).map((disease, index) => (
                 <motion.div key={disease.slug || disease.name || index} variants={fadeUpItem}>
@@ -571,6 +576,19 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Nearby Health Facilities - Expanded on desktop/laptop */}
+        <section className="py-16 sm:py-20 bg-muted/30 border-t">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <NearbyFacilities compact={false} />
             </motion.div>
           </div>
         </section>

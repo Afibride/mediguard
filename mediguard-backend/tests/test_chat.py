@@ -33,6 +33,31 @@ def test_chat_handles_greetings_and_help_without_sources():
     assert greeting.json()["sources"] == []
 
 
+def test_chat_answers_malaria_prevention_accurately():
+    response = client.post("/chat", json={"query": "how do i prevent against malaria"})
+    assert response.status_code == 200
+    data = response.json()
+    answer = data["answer"].lower()
+    assert "malaria" in answer
+    assert any(term in answer for term in ["mosquito", "net", "stagnant water", "repellent"])
+    assert "iv solution" not in answer
+    assert "intravenous" not in answer
+    assert data["sources"] == ["Malaria"]
+
+
+def test_chat_answers_facility_and_platform_questions():
+    facilities = client.post("/chat", json={"query": "where can i find nearby hospitals"})
+    platform = client.post("/chat", json={"query": "how do i view my history on this platform"})
+
+    assert facilities.status_code == 200
+    assert platform.status_code == 200
+    assert facilities.json()["mode"] == "facilities"
+    assert "/nearby-facilities" in facilities.json()["answer"]
+    assert "Nkwen Baptist Hospital" in facilities.json()["answer"]
+    assert platform.json()["mode"] == "platform_help"
+    assert "History" in platform.json()["answer"]
+
+
 def test_chat_asks_questions_before_symptom_results():
     response = client.post("/chat", json={"query": "I have fever and chills and headache. What could this be?"})
     assert response.status_code == 200
