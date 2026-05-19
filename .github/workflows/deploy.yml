@@ -22,7 +22,7 @@ jobs:
       - name: Install Frontend Dependencies
         run: |
           cd mediguard-frontend
-          npm ci
+          npm ci  --legacy-peer-deps
 
       - name: Build Frontend Bundle
         run: |
