@@ -1,0 +1,18 @@
+## Pages
+- [- MediGuard Bamenda](/diseasedetail): No description available
+- [About Us — MediGuard Bamenda | AI-Powered Community Health](/about): Learn about MediGuard Bamenda
+- [Chat AI Assistant - MediGuard Bamenda](/chatai): Conversational symptom checker and AI health assistant for personalized guidance.
+- [Create New Password - MediGuard Bamenda](/resetpassword): Set a new password for your MediGuard account.
+- [Diagnosis Results - MediGuard Bamenda](/predictionresults): Comprehensive health diagnosis results and medical guidance.
+- [Disease Library - MediGuard Bamenda](/diseaselibrary): Comprehensive library of diseases. Learn about symptoms, prevention, and treatment.
+- [Forgot Password - MediGuard Bamenda](/forgotpassword): Reset your MediGuard Bamenda account password.
+- [Health Trends Dashboard - MediGuard Bamenda](/trendsdashboard): Community health trends, outbreak alerts, and disease prevention sensitization for Bamenda.
+- [Login - MediGuard Bamenda](/login): Login to your MediGuard account to access personalized health screening tools.
+- [MediGuard Bamenda - Community Health Screening](/home): AI-powered early disease detection system for the Bamenda community. Check symptoms, explore diseases, and get personalized health guidance.
+- [My Health History - MediGuard Bamenda](/history): View your past symptom checks and AI chat conversations.
+- [My Profile - MediGuard Bamenda](/profile): View and edit your MediGuard account profile.
+- [Privacy Policy - MediGuard Bamenda](/privacy): Privacy Policy detailing how MediGuard Bamenda handles your health data.
+- [Sign Up - MediGuard Bamenda](/signup): Create a comprehensive health profile on MediGuard.
+- [Support — MediGuard Bamenda | Get Help & Assistance](/contact): Get support for MediGuard Bamenda. Contact our team for help with symptom checking, account issues, or general inquiries.
+- [Symptom Checker - MediGuard Bamenda](/symptomchecker): AI-powered symptom checker for Bamenda health community.
+- [Terms of Service - MediGuard Bamenda](/terms): Terms of Service and legal agreements for using MediGuard Bamenda.
