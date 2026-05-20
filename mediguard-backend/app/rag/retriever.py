@@ -387,6 +387,15 @@ def _disease_symptoms_response(query: str) -> dict | None:
         if match:
             term = match.group(1).strip()
             break
+
+    # Fuzzy fallback: if no pattern matched, check for "symptom*" anywhere + disease name
+    if not term:
+        text = query.lower()
+        if re.search(r"\bsymptom", text) or re.search(r"\bsign(s)?\b", text) or re.search(r"\bpresent", text):
+            d = _detect_disease(query)
+            if d:
+                term = d["name"]
+
     if not term:
         return None
 
@@ -420,6 +429,86 @@ def _disease_symptoms_response(query: str) -> dict | None:
         "answer": "\n".join(lines),
         "sources": [disease["name"]],
         "disclaimer": DISCLAIMER,
+    }
+
+
+DISEASE_GENERAL_PATTERNS = [
+    re.compile(r"^\s*what\s+is\s+(?:a\s+|an\s+|the\s+)?(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*what\s+are\s+(?:the\s+)?(?:main\s+)?facts?\s+about\s+(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*(?:describe|overview\s+of|explain)\s+(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*(?:tell\s+me\s+(?:more\s+)?about|info(?:rmation)?\s+on|about)\s+(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*(?:define)\s+(.+?)\s*[?.!]*\s*$", re.I),
+]
+
+# Terms that indicate other, more specific handlers should handle it
+_GENERAL_SKIP_TERMS = {
+    "symptom", "sign of", "prevent", "prevention", "treatment", "treat",
+    "cure", "cause", "causes", "spread", "how do i", "how can i",
+}
+
+
+def _disease_general_info_response(query: str) -> dict | None:
+    """Handle 'what is malaria', 'tell me about typhoid', etc. directly from the database."""
+    text = query.lower()
+    # Let more specific handlers deal with symptom/prevention/treatment/cause queries
+    if any(t in text for t in _GENERAL_SKIP_TERMS):
+        return None
+
+    # Extract candidate term from general patterns
+    candidate = None
+    for pat in DISEASE_GENERAL_PATTERNS:
+        m = pat.match(query.strip())
+        if m:
+            candidate = m.group(1).strip()
+            break
+
+    # If no pattern matched, only proceed if the query is short (≤5 words) and contains a disease name
+    if not candidate:
+        if len(query.split()) > 5:
+            return None
+        candidate = query.strip()
+
+    disease = _resolve_disease_name(candidate)
+    if not disease:
+        disease = _detect_disease(query)
+    if not disease:
+        return None
+
+    profile = _database_disease_profile(disease["name"])
+    if not profile:
+        return None
+
+    symptoms = disease.get("symptoms") or []
+    lines = [f"**{disease['name']}**\n"]
+
+    if profile.get("description"):
+        lines.append(profile["description"])
+
+    if symptoms:
+        sym_display = [s.replace("_", " ") for s in symptoms[:8]]
+        lines.append(f"\n**Common Symptoms:** {', '.join(sym_display)}")
+
+    if profile.get("causes"):
+        lines.append(f"\n**Causes/Spread:** {profile['causes']}")
+
+    if profile.get("treatment"):
+        lines.append(f"\n**Treatment Overview:** {profile['treatment']}")
+
+    prevention = profile.get("prevention") or disease.get("prevention") or []
+    if isinstance(prevention, str):
+        prevention = [p.strip() for p in re.split(r"[;\n]", prevention) if p.strip()]
+    if prevention:
+        lines.append(f"\n**Prevention:** {', '.join(prevention[:4])}")
+
+    lines.append(
+        "\n\nThis is for educational purposes only. "
+        "Use the MediGuard Symptom Checker for a guided assessment, and always consult a qualified healthcare professional for personal health concerns."
+    )
+    return {
+        "answer": "\n".join(lines),
+        "sources": [disease["name"]],
+        "disclaimer": DISCLAIMER,
+        "data_source": "database",
     }
 
 
@@ -948,13 +1037,87 @@ def _history_requested_followup(chat_history: list[dict] | None) -> bool:
         for message in chat_history[-4:]
         if message.get("role") == "assistant"
     ]
-    return any("follow-up" in message or "need a little more information" in message for message in assistant_messages)
+    return any(
+        "follow-up" in message
+        or "need a little more information" in message
+        or "i will ask one question at a time" in message
+        or message.startswith("noted.")
+        or "?" in message
+        for message in assistant_messages
+    )
+
+
+# Master list of every possible follow-up question the assistant may ask.
+# Any question asked will appear as a substring in an assistant message.
+_ALL_FOLLOWUP_QUESTIONS = [
+    "How long have you had these symptoms?",
+    "Are they mild, moderate, or severe?",
+    "Do you have any other symptoms, such as fever, vomiting, diarrhea, chest pain, rash, dizziness, or trouble breathing?",
+    "What is your temperature, and does the fever come with chills or sweating?",
+    "Is there chest pain, wheezing, fast breathing, or coughing up blood?",
+    "Are you able to drink fluids, and is there blood in stool or signs of dehydration?",
+    "Have you recently had poor sleep, heavy work, stress, missed meals, dehydration, or unusual exertion?",
+    "How many weeks pregnant are you, and is there bleeding, severe pain, vision change, swelling, or reduced fetal movement?",
+]
+
+
+def _get_asked_question_set(chat_history: list[dict] | None) -> set[str]:
+    """Return the set of follow-up questions already present in assistant messages."""
+    if not chat_history:
+        return set()
+    assistant_text = "\n".join(
+        m.get("content", "") for m in chat_history if m.get("role") == "assistant"
+    ).lower()
+    return {q for q in _ALL_FOLLOWUP_QUESTIONS if q.lower() in assistant_text}
+
+
+def _next_unanswered_question(questions: list[str], asked: set[str]) -> str | None:
+    for q in questions:
+        if q not in asked:
+            return q
+    return None
+
+
+def _answered_followup_count(chat_history: list[dict] | None, questions: list[str]) -> int:
+    asked = _get_asked_question_set(chat_history)
+    return sum(1 for q in questions if q in asked)
+
+
+def _next_followup_response(
+    symptoms: list[str],
+    questions: list[str],
+    asked_count: int,
+    pregnancy_context: bool,
+    fatigue_context: bool,
+) -> dict:
+    next_question = questions[min(asked_count, len(questions) - 1)]
+    symptom_text = ", ".join(symptoms) if symptoms else "your symptoms"
+    if asked_count == 0:
+        answer = (
+            f"I found this in your message: {symptom_text}. "
+            "I will ask one question at a time before showing possible matches.\n\n"
+            f"{next_question}"
+        )
+    else:
+        answer = f"Noted. {next_question}"
+    return {
+        "answer": answer,
+        "sources": [],
+        "disclaimer": DISCLAIMER,
+        "symptoms": symptoms,
+        "predictions": [],
+        "mode": "symptom_follow_up",
+        "pregnancy_context": pregnancy_context,
+        "fatigue_context": fatigue_context,
+        "follow_up_questions": [next_question],
+        "data_source": "database",
+    }
 
 
 def _recent_user_symptom_context(query: str, chat_history: list[dict] | None) -> str:
     user_parts = [
         message.get("content", "")
-        for message in (chat_history or [])[-4:]
+        for message in (chat_history or [])[-10:]
         if message.get("role") == "user"
     ]
     user_parts.append(query)
@@ -983,24 +1146,17 @@ def _symptom_check_response(
     fatigue_context = _mentions_fatigue_context(symptom_context, reported_symptoms)
     follow_up_questions = _symptom_follow_up_questions(reported_symptoms, pregnancy_context)
 
-    if not followup_already_asked:
-        symptom_text = ", ".join(reported_symptoms) if reported_symptoms else "your symptom"
-        return {
-            "answer": (
-                f"I found this in your message: {symptom_text}. "
-                "Before I show possible matches, I need a little more information so the response is safer and more useful. "
-                "Please answer the follow-up questions below."
-            ),
-            "sources": [],
-            "disclaimer": DISCLAIMER,
-            "symptoms": reported_symptoms,
-            "predictions": [],
-            "mode": "symptom_follow_up",
-            "pregnancy_context": pregnancy_context,
-            "fatigue_context": fatigue_context,
-            "follow_up_questions": follow_up_questions,
-            "data_source": "database",
-        }
+    asked_set = _get_asked_question_set(chat_history)
+    next_q = _next_unanswered_question(follow_up_questions, asked_set)
+    if next_q:
+        is_first = not asked_set
+        return _next_followup_response(
+            reported_symptoms,
+            [next_q],
+            0 if is_first else 1,
+            pregnancy_context,
+            fatigue_context,
+        )
 
     predictions = _enrich_predictions_from_database(_get_predictor().predict(reported_symptoms))
     if fatigue_context:
@@ -1257,6 +1413,10 @@ def generate_answer(
     disease_symptoms = _disease_symptoms_response(query)
     if disease_symptoms:
         return disease_symptoms
+
+    disease_info = _disease_general_info_response(query)
+    if disease_info:
+        return disease_info
 
     disease_topic = _disease_topic_response(query)
     if disease_topic:
