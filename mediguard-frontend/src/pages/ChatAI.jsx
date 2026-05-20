@@ -18,6 +18,54 @@ import SuggestedQuestions from '@/components/SuggestedQuestions';
 import SourceCitation from '@/components/SourceCitation';
 import { saveChatHistory, sendChatMessage, submitChatFeedback } from '@/services/api';
 
+// ── Inline markdown renderer ──────────────────────────────────────────────────
+function renderInline(text) {
+  const parts = text.split(/(\*\*[^*\n]+\*\*)/g);
+  return parts.map((part, i) =>
+    part.startsWith('**') && part.endsWith('**')
+      ? <strong key={i} className="font-semibold">{part.slice(2, -2)}</strong>
+      : part
+  );
+}
+
+function MarkdownMessage({ content }) {
+  if (!content) return null;
+  const blocks = content.split(/\n{2,}/);
+  return (
+    <div className="space-y-2">
+      {blocks.map((block, bi) => {
+        const lines = block.split('\n').filter(Boolean);
+        const isList = lines.length > 1 && lines.every(l => /^[•\-]\s/.test(l.trim()));
+        const isSingleBullet = lines.length === 1 && /^[•\-]\s/.test(lines[0].trim());
+
+        if (isList || isSingleBullet) {
+          return (
+            <ul key={bi} className="space-y-1 pl-1">
+              {lines.map((line, li) => (
+                <li key={li} className="flex items-start gap-2">
+                  <span className="text-primary font-bold mt-0.5 shrink-0 text-xs">•</span>
+                  <span className="leading-relaxed">{renderInline(line.replace(/^[•\-]\s*/, ''))}</span>
+                </li>
+              ))}
+            </ul>
+          );
+        }
+
+        return (
+          <p key={bi} className="leading-relaxed">
+            {lines.map((line, li) => (
+              <React.Fragment key={li}>
+                {li > 0 && <br />}
+                {renderInline(line)}
+              </React.Fragment>
+            ))}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 const ChatAI = () => {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -229,7 +277,7 @@ const ChatAI = () => {
     setIsTyping(true);
 
     try {
-      const history = messages.slice(-6).map((message) => ({
+      const history = messages.slice(-20).map((message) => ({
         role: message.role,
         content: message.content,
       }));
@@ -629,7 +677,10 @@ const ChatAI = () => {
                                 : 'bg-card text-foreground border rounded-bl-sm'
                           }`}
                         >
-                          <p className="whitespace-pre-wrap break-words">{message.content}</p>
+                          {message.role === 'assistant'
+                            ? <MarkdownMessage content={message.content} />
+                            : <p className="whitespace-pre-wrap break-words">{message.content}</p>
+                          }
                         </div>
                         <span className="text-[10px] sm:text-[11px] text-muted-foreground mt-1 px-1">
                           {message.timestamp}
@@ -677,9 +728,9 @@ const ChatAI = () => {
                             )}
                           </div>
                         )}
-                        {message.role === 'assistant' && Array.isArray(message.followUpQuestions) && message.followUpQuestions.length > 0 && (
+                        {message.role === 'assistant' && Array.isArray(message.followUpQuestions) && message.followUpQuestions.filter((question) => !message.content?.includes(question)).length > 0 && (
                           <div className="mt-2 flex flex-wrap gap-2">
-                            {message.followUpQuestions.map((question) => (
+                            {message.followUpQuestions.filter((question) => !message.content?.includes(question)).map((question) => (
                               <span
                                 key={question}
                                 className="rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-left text-[11px] sm:text-xs font-medium text-primary"

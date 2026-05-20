@@ -46,12 +46,6 @@ const CATEGORY_META = {
 
 const CATEGORIES = Object.keys(CATEGORIES_MAP);
 
-const checkerTips = [
-  'Pick only what you actually feel today. More is not always better.',
-  'Duration and severity sharpen the scan.',
-  'For pregnancy, fever, bleeding, or severe pain — seek urgent care.',
-  'Type naturally in the text box and we match it for you.',
-];
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
 
@@ -330,7 +324,6 @@ const SymptomChecker = () => {
   const activeCategoryCount = categoryStats.filter(c => c.count > 0).length;
   const scanProgress = Math.min(100, selectedSymptoms.length * 16 + activeCategoryCount * 8 + (formData.duration ? 8 : 0) + (formData.severity ? 8 : 0));
   const scanRank = selectedSymptoms.length >= 6 ? 'Deep scan ready' : selectedSymptoms.length >= 3 ? 'Good signal' : selectedSymptoms.length >= 1 ? 'Signal acquired' : 'Awaiting input';
-  const tipIndex = Math.min(checkerTips.length - 1, Math.floor(selectedSymptoms.length / 2));
 
   // ─── Symptom Tile ──────────────────────────────────────────────────────────
 
@@ -343,7 +336,7 @@ const SymptomChecker = () => {
         whileHover={{ y: -4, scale: 1.04 }}
         whileTap={{ scale: 0.93 }}
         onClick={() => handleSymptomToggle(symptom)}
-        className={`relative cursor-pointer select-none rounded-xl border-2 p-3 min-h-[68px] flex items-center gap-3 transition-colors ${
+        className={`relative cursor-pointer select-none rounded-xl border-2 p-2.5 sm:p-3 min-h-[60px] sm:min-h-[68px] flex items-center gap-2 sm:gap-3 transition-colors ${
           selected
             ? `border-primary bg-primary/10 ring-2 ring-primary/30 shadow-md`
             : 'border-border/60 bg-background hover:border-primary/40 hover:bg-muted/30'
@@ -366,7 +359,7 @@ const SymptomChecker = () => {
             )}
           </AnimatePresence>
         </div>
-        <span className={`flex-1 text-sm font-semibold leading-tight ${selected ? 'text-primary' : 'text-foreground'}`}>
+        <span className={`flex-1 text-xs sm:text-sm font-semibold leading-tight ${selected ? 'text-primary' : 'text-foreground'}`}>
           {symptom}
         </span>
         {selected && (
@@ -476,88 +469,55 @@ const SymptomChecker = () => {
         <div className="container mx-auto px-4 max-w-5xl">
 
           {/* ── Global Header ─────────────────────────────────────────────── */}
-          <div className="mb-6 overflow-hidden rounded-2xl border bg-background shadow-sm">
-            <div className="grid gap-0 lg:grid-cols-[1fr_300px]">
-              <div className="p-5 sm:p-7">
-                <div className="mb-4 flex flex-wrap items-center gap-2">
-                  <Badge className="gap-1.5 bg-primary/10 text-primary hover:bg-primary/10">
-                    <ShieldCheck className="h-3.5 w-3.5" />Guided health scan
+          <div className="mb-5 overflow-hidden rounded-2xl border bg-background shadow-sm">
+            {/* Main title row */}
+            <div className="flex items-center gap-3 p-4 sm:p-5">
+              <motion.div
+                animate={{ rotate: [0, -6, 6, 0], scale: [1, 1.06, 1] }}
+                transition={{ duration: 3, repeat: Infinity, repeatDelay: 1.5 }}
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10"
+              >
+                <Thermometer className="h-6 w-6 text-primary" />
+              </motion.div>
+              <div className="flex-1 min-w-0">
+                <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Symptom Checker</h1>
+                <p className="mt-0.5 text-sm text-muted-foreground leading-snug hidden sm:block">
+                  Move through symptom zones, collect clues, then launch the diagnosis scan.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 flex-wrap justify-end shrink-0">
+                <Badge className="gap-1 bg-primary/10 text-primary hover:bg-primary/10 text-xs">
+                  <ShieldCheck className="h-3 w-3" />Guided
+                </Badge>
+                <motion.div key={scanRank} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}>
+                  <Badge variant="outline" className="gap-1 text-xs">
+                    <Flame className={`h-3 w-3 ${selectedSymptoms.length >= 3 ? 'text-orange-500' : 'text-muted-foreground'}`} />
+                    {scanRank}
                   </Badge>
-                  <motion.div
-                    key={scanRank}
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                  >
-                    <Badge variant="outline" className="gap-1.5">
-                      <Flame className={`h-3.5 w-3.5 ${selectedSymptoms.length >= 3 ? 'text-orange-500' : 'text-muted-foreground'}`} />
-                      {scanRank}
-                    </Badge>
-                  </motion.div>
-                  {selectedSymptoms.length > 0 && (
-                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
-                      <Badge className="gap-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
-                        <Trophy className="h-3 w-3" />{selectedSymptoms.length} clue{selectedSymptoms.length !== 1 ? 's' : ''} locked
-                      </Badge>
-                    </motion.div>
-                  )}
-                </div>
-                <div className="flex items-start gap-4">
-                  <motion.div
-                    animate={{ rotate: [0, -6, 6, 0], scale: [1, 1.06, 1] }}
-                    transition={{ duration: 3, repeat: Infinity, repeatDelay: 1.5 }}
-                    className="hidden h-16 w-16 items-center justify-center rounded-full bg-primary/10 sm:flex shrink-0"
-                  >
-                    <Thermometer className="h-8 w-8 text-primary" />
-                  </motion.div>
-                  <div>
-                    <h1 className="text-3xl font-bold text-foreground sm:text-4xl">Symptom Checker</h1>
-                    <p className="mt-2 max-w-2xl text-base text-muted-foreground">
-                      Move through the symptom zones, collect the clues that match how you feel, then launch the diagnosis scan.
-                    </p>
-                  </div>
-                </div>
+                </motion.div>
               </div>
+            </div>
 
-              {/* Scan charge panel */}
-              <div className="border-t bg-muted/30 p-5 lg:border-l lg:border-t-0 flex flex-col gap-4">
-                <div>
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm font-semibold text-muted-foreground">Scan charge</span>
-                    <motion.span
-                      key={scanProgress}
-                      initial={{ scale: 1.3 }}
-                      animate={{ scale: 1 }}
-                      className="text-sm font-bold text-primary"
-                    >
-                      {scanProgress}%
-                    </motion.span>
-                  </div>
-                  <div className="h-3 overflow-hidden rounded-full bg-muted">
-                    <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70"
-                      initial={false}
-                      animate={{ width: `${scanProgress}%` }}
-                      transition={{ type: 'spring', stiffness: 80, damping: 18 }}
-                    />
-                  </div>
-                </div>
-                <div className="rounded-lg border bg-background p-3">
-                  <div className="mb-1 flex items-center gap-2 text-sm font-semibold">
-                    <Sparkles className="h-4 w-4 text-primary" />Live guide
-                  </div>
-                  <AnimatePresence mode="wait">
-                    <motion.p
-                      key={tipIndex}
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      className="text-sm text-muted-foreground"
-                    >
-                      {checkerTips[tipIndex]}
-                    </motion.p>
-                  </AnimatePresence>
-                </div>
+            {/* Scan charge bar — compact inline strip */}
+            <div className="border-t bg-muted/30 px-4 py-2.5 flex items-center gap-3">
+              <span className="text-xs font-semibold text-muted-foreground shrink-0">Scan charge</span>
+              <div className="flex-1 h-2.5 overflow-hidden rounded-full bg-muted">
+                <motion.div
+                  className="h-full rounded-full bg-gradient-to-r from-primary to-primary/70"
+                  initial={false}
+                  animate={{ width: `${scanProgress}%` }}
+                  transition={{ type: 'spring', stiffness: 80, damping: 18 }}
+                />
               </div>
+              <motion.span key={scanProgress} initial={{ scale: 1.3 }} animate={{ scale: 1 }}
+                className="text-xs font-bold text-primary shrink-0">{scanProgress}%</motion.span>
+              {selectedSymptoms.length > 0 && (
+                <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
+                  <Badge className="gap-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 text-xs shrink-0">
+                    <Trophy className="h-3 w-3" />{selectedSymptoms.length}
+                  </Badge>
+                </motion.div>
+              )}
             </div>
           </div>
 
@@ -780,19 +740,19 @@ const SymptomChecker = () => {
                               exit="exit"
                             >
                               {/* Zone Header */}
-                              <div className={`${meta.bg || 'bg-muted/30'} border-b ${meta.border || 'border-border'} p-5 sm:p-6`}>
-                                <div className="flex items-start justify-between gap-4">
-                                  <div className="flex items-center gap-4">
+                              <div className={`${meta.bg || 'bg-muted/30'} border-b ${meta.border || 'border-border'} p-4 sm:p-5`}>
+                                <div className="flex items-center justify-between gap-3">
+                                  <div className="flex items-center gap-3">
                                     <motion.div
                                       initial={{ rotate: -20, scale: 0.7 }}
                                       animate={{ rotate: 0, scale: 1 }}
                                       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                                      className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border-2 ${meta.border || 'border-border'} ${meta.bg || 'bg-muted/30'} shadow-sm`}
+                                      className={`flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border-2 ${meta.border || 'border-border'} ${meta.bg || 'bg-muted/30'} shadow-sm`}
                                     >
-                                      <ZoneIcon className={`h-7 w-7 ${meta.accent || 'text-primary'}`} />
+                                      <ZoneIcon className={`h-5 w-5 sm:h-7 sm:w-7 ${meta.accent || 'text-primary'}`} />
                                     </motion.div>
                                     <div>
-                                      <div className="flex items-center gap-2 mb-1">
+                                      <div className="flex items-center gap-2 mb-0.5 flex-wrap">
                                         <Badge variant="outline" className="text-xs font-bold bg-background/80">
                                           ZONE {categoryStep + 1}
                                         </Badge>
@@ -804,17 +764,17 @@ const SymptomChecker = () => {
                                           </motion.div>
                                         )}
                                       </div>
-                                      <h2 className={`text-xl font-bold ${meta.accent || 'text-foreground'}`}>{currentCategory}</h2>
-                                      <p className="text-sm text-muted-foreground mt-0.5">{meta.comment}</p>
+                                      <h2 className={`text-base sm:text-xl font-bold ${meta.accent || 'text-foreground'}`}>{currentCategory}</h2>
+                                      <p className="text-xs sm:text-sm text-muted-foreground leading-snug hidden sm:block">{meta.comment}</p>
                                     </div>
                                   </div>
                                 </div>
                               </div>
 
                               {/* Zone Symptom Grid */}
-                              <div className="p-5 sm:p-6 bg-background">
+                              <div className="p-4 sm:p-5 bg-background">
                                 <motion.div
-                                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+                                  className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3"
                                   variants={containerVariants}
                                   initial="hidden"
                                   animate="visible"
@@ -831,23 +791,24 @@ const SymptomChecker = () => {
                               </div>
 
                               {/* Zone Navigation */}
-                              <div className={`flex items-center justify-between gap-3 px-5 sm:px-6 py-4 border-t ${meta.bg || 'bg-muted/20'}`}>
+                              <div className={`flex items-center justify-between gap-2 px-4 sm:px-5 py-3 border-t ${meta.bg || 'bg-muted/20'}`}>
                                 <Button
                                   type="button"
                                   variant="outline"
-                                  className="gap-2"
+                                  size="sm"
+                                  className="gap-1.5 h-10 px-3 sm:px-4"
                                   onClick={goPrevZone}
                                   disabled={categoryStep === 0}
                                 >
-                                  <ChevronLeft className="h-4 w-4" />Back
+                                  <ChevronLeft className="h-4 w-4" /><span className="hidden sm:inline">Back</span>
                                 </Button>
 
                                 <div className="flex items-center gap-1">
                                   {CATEGORIES.map((_, i) => (
                                     <div key={i} className={`h-1.5 rounded-full transition-all duration-300 ${
-                                      i === categoryStep ? 'w-6 bg-primary' :
-                                      categoryStats[i].count > 0 ? 'w-2 bg-primary/50' :
-                                      'w-2 bg-muted-foreground/25'
+                                      i === categoryStep ? 'w-5 bg-primary' :
+                                      categoryStats[i].count > 0 ? 'w-1.5 bg-primary/50' :
+                                      'w-1.5 bg-muted-foreground/25'
                                     }`} />
                                   ))}
                                 </div>
@@ -859,21 +820,22 @@ const SymptomChecker = () => {
                                   >
                                     <Button
                                       type="submit"
+                                      size="sm"
                                       disabled={loading || selectedSymptoms.length === 0}
-                                      className="gap-2 bg-gradient-to-r from-primary to-primary/80 shadow-lg"
+                                      className="gap-1.5 h-10 px-3 sm:px-4 bg-gradient-to-r from-primary to-primary/80 shadow-lg"
                                     >
                                       {loading
-                                        ? <><Loader2 className="h-4 w-4 animate-spin" />Scanning…</>
-                                        : <><Sparkles className="h-4 w-4" />Launch Scan</>
+                                        ? <><Loader2 className="h-4 w-4 animate-spin" /><span className="hidden sm:inline">Scanning…</span></>
+                                        : <><Sparkles className="h-4 w-4" /><span className="hidden sm:inline">Launch Scan</span><span className="sm:hidden">Scan</span></>
                                       }
                                     </Button>
                                   </motion.div>
                                 ) : (
-                                  <Button type="button" onClick={goNextZone} className="gap-2">
+                                  <Button type="button" size="sm" onClick={goNextZone} className="gap-1.5 h-10 px-3 sm:px-4">
                                     {selectedInCurrentZone.length > 0 ? (
-                                      <><Star className="h-4 w-4 fill-current" />Next Zone<ChevronRight className="h-4 w-4" /></>
+                                      <><Star className="h-3.5 w-3.5 fill-current" /><span className="hidden sm:inline">Next Zone</span><span className="sm:hidden">Next</span><ChevronRight className="h-4 w-4" /></>
                                     ) : (
-                                      <><SkipForward className="h-4 w-4" />Skip<ChevronRight className="h-4 w-4" /></>
+                                      <><SkipForward className="h-3.5 w-3.5" /><span className="hidden sm:inline">Skip</span><ChevronRight className="h-4 w-4" /></>
                                     )}
                                   </Button>
                                 )}
