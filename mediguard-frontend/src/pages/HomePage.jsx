@@ -1,12 +1,192 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database, TrendingUp, Megaphone, Droplets, HandHeart } from 'lucide-react';
+import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database, TrendingUp, Megaphone, Droplets, HandHeart, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import NearbyFacilities from '@/components/NearbyFacilities';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { getAnalyticsSummary, getDiseases, getOutbreakAlerts, getTopDiseases, getTrends } from '@/services/api';
+
+// Auto-scroll Carousel Component
+const AutoScrollCarousel = ({ children, items, title, viewAllLink, className = "", cardWidth = 280 }) => {
+  const scrollContainerRef = useRef(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const autoScrollInterval = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const updateArrows = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setShowLeftArrow(scrollLeft > 10);
+      setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 10);
+      const firstItem = scrollContainerRef.current.children[0];
+      if (firstItem) {
+        const itemWidth = firstItem.offsetWidth + 12;
+        setActiveIndex(Math.min(items.length - 1, Math.max(0, Math.round(scrollLeft / itemWidth))));
+      }
+    }
+  };
+
+  const scroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = scrollContainerRef.current.clientWidth * 0.8;
+      const newScrollLeft = direction === 'left' 
+        ? scrollContainerRef.current.scrollLeft - scrollAmount
+        : scrollContainerRef.current.scrollLeft + scrollAmount;
+      
+      scrollContainerRef.current.scrollTo({
+        left: newScrollLeft,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const startAutoScroll = () => {
+    if (autoScrollInterval.current) clearInterval(autoScrollInterval.current);
+    autoScrollInterval.current = setInterval(() => {
+      if (scrollContainerRef.current && isPlaying && items.length > 1) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+        const maxScroll = scrollWidth - clientWidth;
+        
+        if (scrollLeft + clientWidth >= maxScroll - 5) {
+          scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          const itemWidth = scrollContainerRef.current.children[0]?.offsetWidth || clientWidth * 0.8;
+          scrollContainerRef.current.scrollBy({ left: itemWidth + 12, behavior: 'smooth' });
+        }
+      }
+    }, 3500);
+  };
+
+  const stopAutoScroll = () => {
+    if (autoScrollInterval.current) {
+      clearInterval(autoScrollInterval.current);
+      autoScrollInterval.current = null;
+    }
+  };
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', updateArrows);
+      window.addEventListener('resize', updateArrows);
+      updateArrows();
+      startAutoScroll();
+    }
+    return () => {
+      if (container) container.removeEventListener('scroll', updateArrows);
+      window.removeEventListener('resize', updateArrows);
+      stopAutoScroll();
+    };
+  }, [items.length]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      startAutoScroll();
+    } else {
+      stopAutoScroll();
+    }
+  }, [isPlaying]);
+
+  const toggleAutoScroll = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  return (
+    <div className={`relative ${className}`}>
+      <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <div className="flex items-center gap-2">
+          {title && <h3 className="text-base font-semibold">{title}</h3>}
+          {viewAllLink && (
+            <Link to={viewAllLink} className="text-xs text-primary hover:underline hidden sm:block">
+              View all →
+            </Link>
+          )}
+        </div>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={toggleAutoScroll}
+            className="p-1.5 rounded-full bg-muted hover:bg-primary/20 transition-colors"
+            aria-label={isPlaying ? "Pause auto-scroll" : "Play auto-scroll"}
+          >
+            {isPlaying ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
+          </button>
+          <button
+            onClick={() => scroll('left')}
+            className={`p-1.5 rounded-full bg-muted hover:bg-primary/20 transition-colors ${!showLeftArrow && 'opacity-30 cursor-not-allowed'}`}
+            disabled={!showLeftArrow}
+            aria-label="Previous"
+          >
+            <ChevronLeft className="h-3 w-3" />
+          </button>
+          <button
+            onClick={() => scroll('right')}
+            className={`p-1.5 rounded-full bg-muted hover:bg-primary/20 transition-colors ${!showRightArrow && 'opacity-30 cursor-not-allowed'}`}
+            disabled={!showRightArrow}
+            aria-label="Next"
+          >
+            <ChevronRight className="h-3 w-3" />
+          </button>
+        </div>
+      </div>
+      
+      <div
+        ref={scrollContainerRef}
+        className="flex overflow-x-auto gap-3 pb-3 scrollbar-hide snap-x snap-mandatory"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        onMouseEnter={stopAutoScroll}
+        onMouseLeave={startAutoScroll}
+        onTouchStart={stopAutoScroll}
+        onTouchEnd={startAutoScroll}
+      >
+        {children}
+      </div>
+      
+      {viewAllLink && (
+        <div className="mt-2 text-center">
+          <Link to={viewAllLink} className="text-xs text-primary hover:underline inline-flex items-center gap-1">
+            View all {title?.toLowerCase()} <ArrowRight className="h-3 w-3" />
+          </Link>
+        </div>
+      )}
+      
+      {items.length > 1 && (
+        <div className="flex justify-center gap-1 mt-2">
+          {items.map((_, idx) => (
+            <button
+              key={idx}
+              className={`h-1 rounded-full transition-all duration-300 ${
+                idx === activeIndex ? 'w-4 bg-primary' : 'w-1 bg-muted-foreground/30'
+              }`}
+              onClick={() => {
+                if (scrollContainerRef.current) {
+                  const itemWidth = scrollContainerRef.current.children[0]?.offsetWidth || cardWidth;
+                  scrollContainerRef.current.scrollTo({
+                    left: idx * (itemWidth + 12),
+                    behavior: 'smooth'
+                  });
+                  setActiveIndex(idx);
+                }
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Add global styles for hiding scrollbar
+const style = document.createElement('style');
+style.textContent = `
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+`;
+document.head.appendChild(style);
 
 const HomePage = () => {
   const [featuredDiseases, setFeaturedDiseases] = useState([]);
@@ -74,21 +254,41 @@ const HomePage = () => {
       name: 'Malaria',
       description: 'Common mosquito-borne disease prevalent in Bamenda, causing fever, chills, and fatigue.',
       color: 'bg-red-100 text-red-800',
+      slug: 'malaria',
+      id: 'malaria',
+      category: 'Mosquito-borne',
+      severity: 'High',
+      symptoms: ['Fever', 'Chills', 'Headache', 'Fatigue']
     },
     {
       name: 'Typhoid Fever',
       description: 'Bacterial infection transmitted through contaminated food and water, causing high fever.',
       color: 'bg-orange-100 text-orange-800',
+      slug: 'typhoid-fever',
+      id: 'typhoid-fever',
+      category: 'Bacterial',
+      severity: 'High',
+      symptoms: ['Prolonged fever', 'Headache', 'Abdominal pain', 'Constipation']
     },
     {
       name: 'Respiratory Infections',
       description: 'Common infections affecting the airways, often causing cough and breathing difficulties.',
       color: 'bg-blue-100 text-blue-800',
+      slug: 'respiratory-infections',
+      id: 'respiratory-infections',
+      category: 'Respiratory',
+      severity: 'Medium',
+      symptoms: ['Cough', 'Fever', 'Shortness of breath', 'Chest congestion']
     },
     {
       name: 'Cholera',
       description: 'Waterborne disease causing severe diarrhea and dehydration, requiring immediate attention.',
       color: 'bg-purple-100 text-purple-800',
+      slug: 'cholera',
+      id: 'cholera',
+      category: 'Waterborne',
+      severity: 'Critical',
+      symptoms: ['Severe diarrhea', 'Vomiting', 'Dehydration', 'Leg cramps']
     },
   ];
 
@@ -163,15 +363,13 @@ const HomePage = () => {
         <meta name="description" content="AI-powered early disease detection system for the Bamenda community. Check symptoms, explore diseases, and get personalized health guidance." />
       </Helmet>
 
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col overflow-x-hidden">
         {/* Hero Section */}
         <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-12 sm:py-16">
-          {/* Background Image: Professional Healthcare Image */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
             style={{ backgroundImage: 'url(/hero.jpeg)' }}
           >
-            {/* Subtle dark overlay for text readability */}
             <div className="absolute inset-0 bg-black/40"></div>
           </div>
 
@@ -203,7 +401,6 @@ const HomePage = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none mx-auto">
-                {/* Get Started Button */}
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/symptom-checker" className="block">
                     <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-xl transition-all border border-transparent">
@@ -213,7 +410,6 @@ const HomePage = () => {
                   </Link>
                 </motion.div>
                 
-                {/* Try MediGuard AI Button - NEW */}
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/chat-ai" className="block">
                     <Button 
@@ -227,7 +423,6 @@ const HomePage = () => {
                   </Link>
                 </motion.div>
                 
-                {/* Learn More Button */}
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/disease-library" className="block">
                     <Button size="lg" variant="outline" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-sm font-semibold shadow-xl transition-all">
@@ -237,7 +432,6 @@ const HomePage = () => {
                 </motion.div>
               </div>
 
-              {/* Quick Access Badges - Optional */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -259,7 +453,6 @@ const HomePage = () => {
             </motion.div>
           </div>
 
-          {/* Scroll Indicator */}
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -272,36 +465,59 @@ const HomePage = () => {
           </motion.div>
         </section>
 
-        {/* Trust Indicators - 2 columns on mobile, 3 columns on desktop */}
-        <section className="py-16 sm:py-20 bg-background">
+        {/* Trust Indicators - Stats Grid */}
+        <section className="py-12 sm:py-20 bg-background">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 mb-10">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-8 sm:mb-10">
               {[
                 { label: 'Diseases in Library', value: summary.diseases_tracked, icon: BookOpen },
                 { label: 'Recorded Screenings', value: summary.total_predictions, icon: Activity },
                 { label: 'Most Reported', value: summary.top_disease, icon: Database },
               ].map((item) => (
-                <Card key={item.label} className="medical-panel">
-                  <CardContent className="p-2.5 sm:p-5 flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-4 min-h-[116px] sm:min-h-0">
-                    <div className="h-9 w-9 sm:h-11 sm:w-11 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+                <Card key={item.label} className="medical-panel min-w-0 overflow-hidden">
+                  <CardContent className="p-2 sm:p-5 flex flex-col sm:flex-row items-center text-center sm:text-left gap-1.5 sm:gap-4 min-h-[96px] sm:min-h-0">
+                    <div className="h-7 w-7 sm:h-11 sm:w-11 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
                       <item.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <div className="min-w-0 w-full">
                       <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">{item.label}</p>
-                      <p className="text-sm sm:text-xl font-bold truncate">{item.value}</p>
+                      <p className="text-xs sm:text-xl font-bold truncate">{item.value}</p>
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
             
-            {/* Trust Indicators Cards - 2 columns on mobile, 4 on desktop */}
+            {/* Trust Indicators Cards - Row on mobile with auto-scroll */}
+            <AutoScrollCarousel 
+              items={trustIndicators} 
+              title="Why Choose MediGuard"
+              className="block sm:hidden"
+            >
+              {trustIndicators.map((indicator, index) => (
+                <div key={index} className="snap-center w-[260px] flex-shrink-0">
+                  <Card className="h-full hover:shadow-xl transition-all duration-300 medical-panel">
+                    <CardHeader className="pb-2">
+                      <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-2 text-primary shadow-sm">
+                        <indicator.icon className="h-5 w-5" />
+                      </div>
+                      <CardTitle className="text-base">{indicator.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <p className="text-xs text-muted-foreground">{indicator.description}</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </AutoScrollCarousel>
+            
+            {/* Desktop grid layout */}
             <motion.div 
               variants={staggerContainer}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 hidden sm:grid"
             >
               {trustIndicators.map((indicator, index) => (
                 <motion.div key={index} variants={fadeUpItem} whileHover={{ y: -5, transition: { duration: 0.2 } }}>
@@ -323,56 +539,60 @@ const HomePage = () => {
         </section>
 
         {/* Community Trends & Sensitization */}
-        <section className="py-16 sm:py-20 bg-muted/30 border-y">
+        <section className="py-12 sm:py-20 bg-muted/30 border-y">
           <div className="container mx-auto px-4">
-            <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
+            <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[1fr_1.2fr]">
+              
+              {/* What MediGuard is seeing */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="rounded-lg border bg-background p-5 sm:p-6 shadow-sm"
+                className="w-full overflow-hidden rounded-lg border bg-background p-3 shadow-sm sm:p-6"
               >
-                <div className="mb-5 flex items-start justify-between gap-4">
-                  <div>
-                    <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
-                      <TrendingUp className="h-4 w-4" />
+                <div className="mb-4 flex flex-col items-start justify-between gap-3 sm:flex-row sm:gap-4">
+                  <div className="w-full">
+                    <div className="mb-2 inline-flex max-w-full items-center gap-2 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary sm:px-3 sm:text-sm">
+                      <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                       Community trends
                     </div>
-                    <h2 className="text-2xl sm:text-3xl font-bold">What MediGuard is seeing</h2>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <h2 className="text-lg font-bold leading-tight sm:text-3xl">What MediGuard is seeing</h2>
+                    <p className="mt-1 text-xs text-muted-foreground sm:mt-2 sm:text-sm">
                       A quick view from recent screenings and local seasonal risk signals.
                     </p>
                   </div>
-                  <Link to="/trends">
-                    <Button variant="outline" size="sm">View dashboard</Button>
+                  <Link to="/trends" className="w-full sm:w-auto">
+                    <Button variant="outline" size="sm" className="w-full text-xs sm:w-auto">View dashboard</Button>
                   </Link>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                  <Card>
-                    <CardContent className="p-3 text-center min-h-[94px] flex flex-col justify-center">
+                {/* Stats cards - row on mobile */}
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
+                  <Card className="min-w-0 overflow-hidden">
+                    <CardContent className="flex min-h-[80px] flex-col justify-center p-2 text-center sm:min-h-[94px] sm:p-3">
                       <p className="text-[10px] sm:text-xs text-muted-foreground">This week</p>
-                      <p className="text-lg sm:text-2xl font-bold text-primary">{summary.active_this_week || 0}</p>
+                      <p className="truncate text-base font-bold text-primary sm:text-2xl">{summary.active_this_week || 0}</p>
                       <p className="text-[10px] sm:text-xs text-muted-foreground">screenings</p>
                     </CardContent>
                   </Card>
-                  <Card>
-                    <CardContent className="p-3 text-center min-h-[94px] flex flex-col justify-center">
+                  <Card className="min-w-0 overflow-hidden">
+                    <CardContent className="flex min-h-[80px] min-w-0 flex-col justify-center p-2 text-center sm:min-h-[94px] sm:p-3">
                       <p className="text-[10px] sm:text-xs text-muted-foreground">Top report</p>
-                      <p className="text-sm sm:text-lg font-bold truncate">{summary.top_disease || 'No data'}</p>
+                      <p className="truncate text-xs font-bold sm:text-lg">{summary.top_disease || 'No data'}</p>
                       <p className="text-[10px] sm:text-xs text-muted-foreground">{summary.top_disease_count || 0} cases</p>
                     </CardContent>
                   </Card>
-                  <Card>
-                    <CardContent className="p-3 text-center min-h-[94px] flex flex-col justify-center">
+                  <Card className="min-w-0 overflow-hidden">
+                    <CardContent className="flex min-h-[80px] min-w-0 flex-col justify-center p-2 text-center sm:min-h-[94px] sm:p-3">
                       <p className="text-[10px] sm:text-xs text-muted-foreground">Risk watch</p>
-                      <p className="text-sm sm:text-lg font-bold truncate">{outbreakInfo.has_alerts ? 'Active' : outbreakInfo.rainy_season ? 'Rainy' : 'Stable'}</p>
+                      <p className="truncate text-xs font-bold sm:text-lg">{outbreakInfo.has_alerts ? 'Active' : outbreakInfo.rainy_season ? 'Rainy' : 'Stable'}</p>
                       <p className="text-[10px] sm:text-xs text-muted-foreground">status</p>
                     </CardContent>
                   </Card>
                 </div>
 
-                <div className="mt-5 space-y-3">
+                {/* Top diseases list */}
+                <div className="mt-4 min-w-0 space-y-3 sm:mt-5">
                   {(topDiseases.length ? topDiseases : [
                     { name: 'Malaria', count: 120 },
                     { name: 'Typhoid Fever', count: 96 },
@@ -382,11 +602,11 @@ const HomePage = () => {
                     const count = item.count || item.cases || 0;
                     return (
                       <div key={item.name || item.disease || index}>
-                        <div className="mb-1 flex items-center justify-between text-sm">
-                          <span className="font-semibold">{item.name || item.disease}</span>
-                          <span className="text-muted-foreground">{count}</span>
+                        <div className="mb-1 flex min-w-0 items-center justify-between gap-2 text-xs sm:gap-3 sm:text-sm">
+                          <span className="min-w-0 truncate font-semibold">{item.name || item.disease}</span>
+                          <span className="flex-shrink-0 text-muted-foreground">{count}</span>
                         </div>
-                        <div className="h-2 overflow-hidden rounded-full bg-muted">
+                        <div className="h-1.5 overflow-hidden rounded-full bg-muted sm:h-2">
                           <motion.div
                             className="h-full rounded-full bg-primary"
                             initial={{ width: 0 }}
@@ -401,36 +621,37 @@ const HomePage = () => {
                 </div>
 
                 {weeklyTrends.length > 0 && (
-                  <p className="mt-4 text-xs text-muted-foreground">
+                  <p className="mt-3 break-words text-[10px] text-muted-foreground sm:mt-4 sm:text-xs">
                     Latest trend point: {weeklyTrends[weeklyTrends.length - 1].disease} had {weeklyTrends[weeklyTrends.length - 1].count} report(s).
                   </p>
                 )}
               </motion.div>
 
+              {/* Right side - Health sensitization with compact cards */}
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="grid gap-4"
+                className="grid min-w-0 gap-4"
               >
-                <div>
-                  <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-secondary/10 px-3 py-1 text-sm font-semibold text-secondary">
-                    <Megaphone className="h-4 w-4" />
+                <div className="min-w-0">
+                  <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-secondary/10 px-2.5 py-1 text-xs font-semibold text-secondary sm:px-3 sm:text-sm">
+                    <Megaphone className="h-3 w-3 sm:h-4 sm:w-4" />
                     Health sensitization
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold">Simple actions that reduce risk</h2>
+                  <h2 className="text-lg font-bold sm:text-2xl lg:text-3xl">Simple actions that reduce risk</h2>
                 </div>
 
                 {outbreakInfo.has_alerts && (
-                  <Card className="border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/20">
-                    <CardContent className="p-4">
-                      <div className="flex items-start gap-3">
-                        <AlertCircle className="h-5 w-5 text-red-600 mt-0.5" />
-                        <div>
-                          <p className="font-bold text-red-800 dark:text-red-300">Community watch alert</p>
-                          <p className="text-sm text-red-700 dark:text-red-300">
-                            {outbreakInfo.alerts?.[0]?.disease || 'A condition'} is showing increased reports. Follow prevention guidance and seek care early.
+                  <Card className="min-w-0 overflow-hidden border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-950/20">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="flex min-w-0 items-start gap-2 sm:gap-3">
+                        <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-600 sm:h-5 sm:w-5" />
+                        <div className="min-w-0">
+                          <p className="text-sm font-bold text-red-800 dark:text-red-300 sm:text-base">Community watch alert</p>
+                          <p className="break-words text-xs text-red-700 dark:text-red-300 sm:text-sm">
+                            {outbreakInfo.alerts?.[0]?.disease || 'Malaria'} is showing increased reports. Follow prevention tips.
                           </p>
                         </div>
                       </div>
@@ -438,8 +659,29 @@ const HomePage = () => {
                   </Card>
                 )}
 
-                {/* Sensitization Tips - 2 columns on mobile, 1 on desktop */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+                {/* Sensitization Tips - Compact horizontal scroll cards */}
+                <div className="block min-w-0 sm:hidden">
+                  <AutoScrollCarousel items={sensitizationTips} title="Health Tips" cardWidth={300}>
+                    {sensitizationTips.map((tip) => (
+                      <div key={tip.title} className="w-[82vw] max-w-[330px] flex-shrink-0 snap-start">
+                        <Card className={`h-full min-w-0 border shadow-sm ${tip.tone}`}>
+                          <CardContent className="p-4">
+                            <div className="mb-3 flex min-w-0 items-center gap-2">
+                              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-background/80">
+                                <tip.icon className="h-4 w-4" />
+                              </div>
+                              <h3 className="min-w-0 text-base font-bold leading-tight">{tip.title}</h3>
+                            </div>
+                            <p className="break-words text-sm leading-relaxed">{tip.body}</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    ))}
+                  </AutoScrollCarousel>
+                </div>
+
+                {/* Desktop grid layout */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 hidden sm:grid">
                   {sensitizationTips.map((tip) => (
                     <motion.div key={tip.title} variants={fadeUpItem}>
                       <Card className={`h-full border ${tip.tone}`}>
@@ -459,26 +701,48 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* How It Works - 2 columns on mobile, 4 on desktop */}
-        <section className="py-16 sm:py-24 bg-muted/30 border-y">
+        {/* How It Works - Horizontal scroll on mobile */}
+        <section className="py-12 sm:py-24 bg-muted/30 border-y">
           <div className="container mx-auto px-4">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-8 sm:mb-12"
             >
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">How MediGuard Works</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <h2 className="text-2xl font-bold mb-3 sm:text-4xl sm:mb-4">How MediGuard Works</h2>
+              <p className="text-sm text-muted-foreground max-w-2xl mx-auto sm:text-lg">
                 Simple, fast, and accurate health screening in just four easy steps
               </p>
             </motion.div>
+            
+            {/* Mobile horizontal scroll */}
+            <div className="block sm:hidden">
+              <AutoScrollCarousel items={howItWorks} cardWidth={240}>
+                {howItWorks.map((step, index) => (
+                  <div key={index} className="snap-start w-[240px] flex-shrink-0">
+                    <div className="flex flex-col items-center text-center group p-4 bg-card rounded-xl border shadow-sm h-full">
+                      <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-lg font-bold mb-3 shadow-lg border-4 border-background group-hover:bg-secondary transition-colors">
+                        {step.step}
+                      </div>
+                      <div className="w-10 h-10 bg-background shadow-sm rounded-lg flex items-center justify-center mb-2 border border-border group-hover:border-primary/50 transition-colors">
+                        <step.icon className="h-5 w-5 text-primary group-hover:text-secondary transition-colors" />
+                      </div>
+                      <h3 className="text-base font-semibold mb-1">{step.title}</h3>
+                      <p className="text-muted-foreground text-xs">{step.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </AutoScrollCarousel>
+            </div>
+            
+            {/* Desktop grid */}
             <motion.div 
               variants={staggerContainer}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative hidden sm:grid"
             >
               <div className="hidden lg:block absolute top-8 left-[12%] right-[12%] h-1 bg-gradient-to-r from-primary/10 via-primary/40 to-primary/10 rounded-full z-0"></div>
               {howItWorks.map((step, index) => (
@@ -502,26 +766,66 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Featured Diseases - 2 columns on mobile, 4 on desktop */}
-        <section className="py-16 sm:py-24 bg-background">
+        {/* Featured Diseases - Horizontal scroll on mobile */}
+        <section className="py-12 sm:py-24 bg-background">
           <div className="container mx-auto px-4">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-12"
+              className="text-center mb-8 sm:mb-12"
             >
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Common Diseases in Bamenda</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <h2 className="text-2xl font-bold mb-3 sm:text-4xl sm:mb-4">Common Diseases in Bamenda</h2>
+              <p className="text-sm text-muted-foreground max-w-2xl mx-auto sm:text-lg">
                 Learn about the most prevalent health conditions in our community
               </p>
             </motion.div>
+            
+            {/* Mobile horizontal scroll */}
+            <div className="block sm:hidden">
+              <AutoScrollCarousel items={featuredDiseases.length ? featuredDiseases : fallbackDiseases} cardWidth={260}>
+                {(featuredDiseases.length ? featuredDiseases : fallbackDiseases).map((disease, index) => (
+                  <div key={disease.slug || disease.name || index} className="snap-start w-[260px] flex-shrink-0">
+                    <Card className="h-full hover:shadow-xl transition-all duration-300 border border-border hover:border-primary/50 group flex flex-col">
+                      <CardHeader className="pb-2">
+                        <div className="inline-block px-2 py-0.5 rounded-full text-xs font-semibold mb-2 bg-primary/10 text-primary w-fit">
+                          {disease.name}
+                        </div>
+                        <CardTitle className="text-sm font-semibold">{disease.category || 'General'} - {disease.severity || 'Medium'}</CardTitle>
+                        <CardDescription className="text-foreground/80 text-xs leading-relaxed line-clamp-2">
+                          {disease.description}
+                        </CardDescription>
+                        {Array.isArray(disease.symptoms) && (
+                          <p className="text-xs text-muted-foreground line-clamp-2 mt-1">
+                            Key symptoms: {disease.symptoms.slice(0, 3).join(', ')}
+                          </p>
+                        )}
+                      </CardHeader>
+                      <CardContent className="mt-auto pt-2 border-t border-border/50">
+                        <Link to={`/disease/${disease.slug || disease.id || ''}`}>
+                          <Button variant="ghost" size="sm" className="w-full text-xs group-hover:bg-primary/10 group-hover:text-primary transition-all duration-300">
+                            View Details <ArrowRight className="ml-1 h-3 w-3" />
+                          </Button>
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
+              </AutoScrollCarousel>
+              <div className="text-center mt-3">
+                <Link to="/disease-library" className="text-xs text-primary hover:underline inline-flex items-center gap-1">
+                  View all diseases <ArrowRight className="h-3 w-3" />
+                </Link>
+              </div>
+            </div>
+            
+            {/* Desktop grid */}
             <motion.div 
               variants={staggerContainer}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 hidden sm:grid"
             >
               {(featuredDiseases.length ? featuredDiseases : fallbackDiseases).map((disease, index) => (
                 <motion.div key={disease.slug || disease.name || index} variants={fadeUpItem}>
@@ -557,20 +861,20 @@ const HomePage = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mt-16 text-center"
+              className="mt-12 text-center sm:mt-16"
             >
-              <div className="flex flex-col sm:flex-row items-center gap-4 p-6 bg-card rounded-lg border border-primary/20 shadow-sm max-w-3xl mx-auto">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                  <Bot className="h-8 w-8 text-primary" />
+              <div className="flex flex-col sm:flex-row items-center gap-4 p-5 bg-card rounded-lg border border-primary/20 shadow-sm max-w-3xl mx-auto sm:p-6">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center sm:w-16 sm:h-16">
+                  <Bot className="h-6 w-6 text-primary sm:h-8 sm:w-8" />
                 </div>
-                <div className="text-left">
-                  <h3 className="text-2xl font-bold mb-2">Have questions? Talk to our AI assistant</h3>
-                  <p className="text-muted-foreground mb-3">
+                <div className="text-center sm:text-left">
+                  <h3 className="text-lg font-bold mb-1 sm:text-2xl sm:mb-2">Have questions? Talk to our AI assistant</h3>
+                  <p className="text-xs text-muted-foreground mb-3 sm:text-sm sm:mb-3">
                     Get instant answers about symptoms, diseases, and health recommendations
                   </p>
                   <Link to="/chat-ai">
-                    <Button className="bg-secondary hover:bg-secondary/90 text-white">
-                      <MessageCircle className="mr-2 h-4 w-4" />
+                    <Button className="bg-secondary hover:bg-secondary/90 text-white text-sm">
+                      <MessageCircle className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                       Start AI Chat
                     </Button>
                   </Link>
@@ -580,15 +884,15 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Nearby Health Facilities - Expanded on desktop/laptop */}
-        <section className="py-16 sm:py-20 bg-muted/30 border-t">
+        {/* Nearby Health Facilities */}
+        <section className="py-12 sm:py-20 bg-muted/30 border-t">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <NearbyFacilities compact={false} />
+              <NearbyFacilities compact />
             </motion.div>
           </div>
         </section>
