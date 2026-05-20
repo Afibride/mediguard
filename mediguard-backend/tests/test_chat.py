@@ -65,7 +65,26 @@ def test_chat_asks_questions_before_symptom_results():
     assert data["mode"] == "symptom_follow_up"
     assert data["predictions"] == []
     assert set(["Fever", "Chills", "Headache"]).issubset(set(data["symptoms"]))
-    assert data["follow_up_questions"]
+    assert data["follow_up_questions"] == ["How long have you had these symptoms?"]
+    assert "How long have you had these symptoms?" in data["answer"]
+
+
+def test_chat_asks_next_followup_one_at_a_time():
+    response = client.post(
+        "/chat",
+        json={
+            "query": "3 days",
+            "history": [
+                {"role": "user", "content": "I have fever and chills and headache. What could this be?"},
+                {"role": "assistant", "content": "I found this in your message: Fever, Chills, Headache. I will ask one question at a time before showing possible matches.\n\nHow long have you had these symptoms?"},
+            ],
+        },
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["mode"] == "symptom_follow_up"
+    assert data["predictions"] == []
+    assert data["follow_up_questions"] == ["Are they mild, moderate, or severe?"]
 
 
 def test_chat_returns_results_after_followup_answer():
@@ -75,7 +94,15 @@ def test_chat_returns_results_after_followup_answer():
             "query": "It started 3 days ago, it is moderate, and I also have sweating.",
             "history": [
                 {"role": "user", "content": "I have fever and chills and headache. What could this be?"},
-                {"role": "assistant", "content": "Before I show possible matches, I need a little more information. Please answer the follow-up questions below."},
+                {"role": "assistant", "content": "How long have you had these symptoms?"},
+                {"role": "user", "content": "3 days"},
+                {"role": "assistant", "content": "Are they mild, moderate, or severe?"},
+                {"role": "user", "content": "moderate"},
+                {"role": "assistant", "content": "Do you have any other symptoms, such as fever, vomiting, diarrhea, chest pain, rash, dizziness, or trouble breathing?"},
+                {"role": "user", "content": "sweating"},
+                {"role": "assistant", "content": "What is your temperature, and does the fever come with chills or sweating?"},
+                {"role": "user", "content": "I have chills and sweating"},
+                {"role": "assistant", "content": "Have you recently had poor sleep, heavy work, stress, missed meals, dehydration, or unusual exertion?"},
             ],
         },
     )
