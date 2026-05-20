@@ -22,6 +22,11 @@ const AutoScrollCarousel = ({ children, items, title, viewAllLink, className = "
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
       setShowLeftArrow(scrollLeft > 10);
       setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 10);
+      const firstItem = scrollContainerRef.current.children[0];
+      if (firstItem) {
+        const itemWidth = firstItem.offsetWidth + 12;
+        setActiveIndex(Math.min(items.length - 1, Math.max(0, Math.round(scrollLeft / itemWidth))));
+      }
     }
   };
 
@@ -53,7 +58,7 @@ const AutoScrollCarousel = ({ children, items, title, viewAllLink, className = "
           scrollContainerRef.current.scrollBy({ left: itemWidth + 12, behavior: 'smooth' });
         }
       }
-    }, 4000);
+    }, 3500);
   };
 
   const stopAutoScroll = () => {
@@ -463,20 +468,20 @@ const HomePage = () => {
         {/* Trust Indicators - Stats Grid */}
         <section className="py-12 sm:py-20 bg-background">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 mb-8 sm:mb-10">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-8 sm:mb-10">
               {[
                 { label: 'Diseases in Library', value: summary.diseases_tracked, icon: BookOpen },
                 { label: 'Recorded Screenings', value: summary.total_predictions, icon: Activity },
                 { label: 'Most Reported', value: summary.top_disease, icon: Database },
               ].map((item) => (
-                <Card key={item.label} className="medical-panel">
-                  <CardContent className="p-2.5 sm:p-5 flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 sm:gap-4 min-h-[100px] sm:min-h-0">
-                    <div className="h-8 w-8 sm:h-11 sm:w-11 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+                <Card key={item.label} className="medical-panel min-w-0 overflow-hidden">
+                  <CardContent className="p-2 sm:p-5 flex flex-col sm:flex-row items-center text-center sm:text-left gap-1.5 sm:gap-4 min-h-[96px] sm:min-h-0">
+                    <div className="h-7 w-7 sm:h-11 sm:w-11 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
                       <item.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <div className="min-w-0 w-full">
                       <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">{item.label}</p>
-                      <p className="text-sm sm:text-xl font-bold truncate">{item.value}</p>
+                      <p className="text-xs sm:text-xl font-bold truncate">{item.value}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -562,22 +567,22 @@ const HomePage = () => {
                 </div>
 
                 {/* Stats cards - row on mobile */}
-                <div className="flex overflow-x-auto gap-2 pb-3 sm:grid sm:grid-cols-3 sm:gap-3 sm:overflow-visible">
-                  <Card className="min-w-[100px] flex-shrink-0 overflow-hidden sm:min-w-0">
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
+                  <Card className="min-w-0 overflow-hidden">
                     <CardContent className="flex min-h-[80px] flex-col justify-center p-2 text-center sm:min-h-[94px] sm:p-3">
                       <p className="text-[10px] sm:text-xs text-muted-foreground">This week</p>
                       <p className="truncate text-base font-bold text-primary sm:text-2xl">{summary.active_this_week || 0}</p>
                       <p className="text-[10px] sm:text-xs text-muted-foreground">screenings</p>
                     </CardContent>
                   </Card>
-                  <Card className="min-w-[100px] flex-shrink-0 overflow-hidden sm:min-w-0">
+                  <Card className="min-w-0 overflow-hidden">
                     <CardContent className="flex min-h-[80px] min-w-0 flex-col justify-center p-2 text-center sm:min-h-[94px] sm:p-3">
                       <p className="text-[10px] sm:text-xs text-muted-foreground">Top report</p>
                       <p className="truncate text-xs font-bold sm:text-lg">{summary.top_disease || 'No data'}</p>
                       <p className="text-[10px] sm:text-xs text-muted-foreground">{summary.top_disease_count || 0} cases</p>
                     </CardContent>
                   </Card>
-                  <Card className="min-w-[100px] flex-shrink-0 overflow-hidden sm:min-w-0">
+                  <Card className="min-w-0 overflow-hidden">
                     <CardContent className="flex min-h-[80px] min-w-0 flex-col justify-center p-2 text-center sm:min-h-[94px] sm:p-3">
                       <p className="text-[10px] sm:text-xs text-muted-foreground">Risk watch</p>
                       <p className="truncate text-xs font-bold sm:text-lg">{outbreakInfo.has_alerts ? 'Active' : outbreakInfo.rainy_season ? 'Rainy' : 'Stable'}</p>
@@ -656,28 +661,23 @@ const HomePage = () => {
 
                 {/* Sensitization Tips - Compact horizontal scroll cards */}
                 <div className="block min-w-0 sm:hidden">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-semibold text-muted-foreground">Health Tips</h3>
-                  </div>
-                  <div className="-mx-4 w-screen overflow-x-auto px-4 pb-3 scrollbar-hide snap-x snap-mandatory overscroll-x-contain" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                    <div className="flex gap-3 pr-4">
-                      {sensitizationTips.map((tip) => (
-                        <div key={tip.title} className="w-[82vw] max-w-[330px] flex-shrink-0 snap-start">
-                          <Card className={`h-full min-w-0 border shadow-sm ${tip.tone}`}>
-                            <CardContent className="p-4">
-                              <div className="mb-3 flex min-w-0 items-center gap-2">
-                                <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-background/80">
-                                  <tip.icon className="h-4 w-4" />
-                                </div>
-                                <h3 className="min-w-0 text-base font-bold leading-tight">{tip.title}</h3>
+                  <AutoScrollCarousel items={sensitizationTips} title="Health Tips" cardWidth={300}>
+                    {sensitizationTips.map((tip) => (
+                      <div key={tip.title} className="w-[82vw] max-w-[330px] flex-shrink-0 snap-start">
+                        <Card className={`h-full min-w-0 border shadow-sm ${tip.tone}`}>
+                          <CardContent className="p-4">
+                            <div className="mb-3 flex min-w-0 items-center gap-2">
+                              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-background/80">
+                                <tip.icon className="h-4 w-4" />
                               </div>
-                              <p className="break-words text-sm leading-relaxed">{tip.body}</p>
-                            </CardContent>
-                          </Card>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                              <h3 className="min-w-0 text-base font-bold leading-tight">{tip.title}</h3>
+                            </div>
+                            <p className="break-words text-sm leading-relaxed">{tip.body}</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    ))}
+                  </AutoScrollCarousel>
                 </div>
 
                 {/* Desktop grid layout */}
@@ -718,7 +718,7 @@ const HomePage = () => {
             
             {/* Mobile horizontal scroll */}
             <div className="block sm:hidden">
-              <div className="flex overflow-x-auto gap-3 pb-3 scrollbar-hide snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              <AutoScrollCarousel items={howItWorks} cardWidth={240}>
                 {howItWorks.map((step, index) => (
                   <div key={index} className="snap-start w-[240px] flex-shrink-0">
                     <div className="flex flex-col items-center text-center group p-4 bg-card rounded-xl border shadow-sm h-full">
@@ -733,7 +733,7 @@ const HomePage = () => {
                     </div>
                   </div>
                 ))}
-              </div>
+              </AutoScrollCarousel>
             </div>
             
             {/* Desktop grid */}
@@ -783,7 +783,7 @@ const HomePage = () => {
             
             {/* Mobile horizontal scroll */}
             <div className="block sm:hidden">
-              <div className="flex overflow-x-auto gap-3 pb-3 scrollbar-hide snap-x snap-mandatory" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+              <AutoScrollCarousel items={featuredDiseases.length ? featuredDiseases : fallbackDiseases} cardWidth={260}>
                 {(featuredDiseases.length ? featuredDiseases : fallbackDiseases).map((disease, index) => (
                   <div key={disease.slug || disease.name || index} className="snap-start w-[260px] flex-shrink-0">
                     <Card className="h-full hover:shadow-xl transition-all duration-300 border border-border hover:border-primary/50 group flex flex-col">
@@ -811,7 +811,7 @@ const HomePage = () => {
                     </Card>
                   </div>
                 ))}
-              </div>
+              </AutoScrollCarousel>
               <div className="text-center mt-3">
                 <Link to="/disease-library" className="text-xs text-primary hover:underline inline-flex items-center gap-1">
                   View all diseases <ArrowRight className="h-3 w-3" />
