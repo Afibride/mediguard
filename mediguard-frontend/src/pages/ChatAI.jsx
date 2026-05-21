@@ -10,13 +10,14 @@ import {
   Send, Bot, User, RefreshCw,
   Plus, MessageSquare, Trash2, X,
   PanelLeftClose, PanelLeftOpen, Share2, Clock,
-  ThumbsUp, ThumbsDown
+  ThumbsUp, ThumbsDown, ImagePlus, Loader2, MapPin
 } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import SuggestedQuestions from '@/components/SuggestedQuestions';
 import SourceCitation from '@/components/SourceCitation';
-import { saveChatHistory, sendChatMessage, submitChatFeedback } from '@/services/api';
+import { analyzeImage, saveChatHistory, sendChatMessage, submitChatFeedback } from '@/services/api';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // ── Inline markdown renderer ──────────────────────────────────────────────────
 function renderInline(text) {
@@ -69,6 +70,7 @@ function MarkdownMessage({ content }) {
 const ChatAI = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { t } = useLanguage();
   const location = useLocation();
   const scrollRef = useRef(null);
   const messagesEndRef = useRef(null);
@@ -86,7 +88,23 @@ const ChatAI = () => {
   });
   const [sharingChatId, setSharingChatId] = useState(null);
   const [ratings, setRatings] = useState({});
+  const [userLocation, setUserLocation] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageAnalyzing, setImageAnalyzing] = useState(false);
+  const imageInputRef = useRef(null);
   const sessionId = useRef('sess_' + Date.now()).current;
+
+  // Request location silently on mount
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+        () => {},
+        { timeout: 8000 }
+      );
+    }
+  }, []);
 
   const scrollToLatest = (behavior = 'smooth') => {
     window.requestAnimationFrame(() => {
@@ -195,7 +213,7 @@ const ChatAI = () => {
       const newChatId = 'chat_' + Date.now();
       const welcomeMessage = {
         role: 'assistant',
-        content: 'Hello! I am your MediGuard AI health assistant. You can greet me, ask a health question, or describe symptoms like "fever and chills and headache" for a symptom check.',
+        content: t('chat_welcome'),
         id: 'msg_' + Date.now(),
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
@@ -282,7 +300,10 @@ const ChatAI = () => {
         content: message.content,
       }));
       const pregnancyContext = pregnancyContextFromText(textToSend);
-      const res = await sendChatMessage(textToSend, history, null, pregnancyContext);
+      const res = await sendChatMessage(textToSend, history, null, {
+        ...pregnancyContext,
+        ...(userLocation ? { user_lat: userLocation.lat, user_lng: userLocation.lng } : {}),
+      });
       const fullAnswer = res.data.answer || '';
       const aiMsgObj = {
         role: 'assistant',
@@ -381,6 +402,56 @@ const ChatAI = () => {
 
   const handleSelectQuestion = (question) => {
     handleSend(question);
+  };
+
+  const handleImageSend = async () => {
+    if (!imageFile) return;
+    const context = input.trim();
+    const userText = context
+      ? `[Image uploaded] ${context}`
+      : '[Image uploaded — analyzing visual symptom]';
+
+    const userMsgObj = {
+      role: 'user',
+      content: userText,
+      imagePreview: imagePreview,
+      id: 'msg_user_' + Date.now(),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    };
+    const updatedMessages = [...messages, userMsgObj];
+    setMessages(updatedMessages);
+    setChats(prev => prev.map(c => c.id === currentChatId
+      ? { ...c, messages: updatedMessages, preview: userText.substring(0, 30) + '…' }
+      : c
+    ));
+    setInput('');
+    setImageFile(null);
+    setImagePreview(null);
+    setImageAnalyzing(true);
+
+    try {
+      const res = await analyzeImage(imageFile, context);
+      const fullAnswer = res.data.analysis || 'Image analysis is unavailable.';
+      const aiMsgObj = {
+        role: 'assistant',
+        content: fullAnswer,
+        sources: [],
+        disclaimer: res.data.disclaimer,
+        followUpQuestions: [],
+        id: 'msg_ai_' + Date.now(),
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      };
+      const finalMessages = [...updatedMessages, aiMsgObj];
+      setMessages(finalMessages);
+      setChats(prev => prev.map(c => c.id === currentChatId
+        ? { ...c, messages: finalMessages, preview: fullAnswer.substring(0, 30) + '…' }
+        : c
+      ));
+    } catch {
+      toast({ variant: 'destructive', title: 'Image analysis failed', description: 'Could not analyse the image. Please try again.' });
+    } finally {
+      setImageAnalyzing(false);
+    }
   };
 
   const clearChat = () => {
@@ -630,7 +701,7 @@ const ChatAI = () => {
                   </h1>
                   <p className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1">
                     <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500 inline-block"></span> 
-                    <span className="truncate">Online & Ready</span>
+                    <span className="truncate">{t('chat_online')}</span>
                   </p>
                 </div>
               </div>
@@ -643,7 +714,7 @@ const ChatAI = () => {
                 )}
                 <Button variant="ghost" size="sm" onClick={clearChat} title="Clear Chat" className="text-muted-foreground hover:text-destructive h-8 sm:h-9 px-2 sm:px-3">
                   <RefreshCw className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-2" />
-                  <span className="hidden sm:inline">Clear</span>
+                  <span className="hidden sm:inline">{t('chat_clear')}</span>
                 </Button>
               </div>
             </div>
@@ -679,7 +750,15 @@ const ChatAI = () => {
                         >
                           {message.role === 'assistant'
                             ? <MarkdownMessage content={message.content} />
-                            : <p className="whitespace-pre-wrap break-words">{message.content}</p>
+                            : (
+                              <>
+                                {message.imagePreview && (
+                                  <img src={message.imagePreview} alt="uploaded symptom"
+                                    className="mb-2 max-h-48 rounded-lg object-contain border border-white/20" />
+                                )}
+                                <p className="whitespace-pre-wrap break-words">{message.content}</p>
+                              </>
+                            )
                           }
                         </div>
                         <span className="text-[10px] sm:text-[11px] text-muted-foreground mt-1 px-1">
@@ -781,25 +860,92 @@ const ChatAI = () => {
                 </div>
               )}
 
-              <div className="flex gap-2 relative w-full">
-                <Input
-                  placeholder="Type your message here..."
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  className="bg-muted/50 border-input focus-visible:ring-primary h-12 sm:h-14 text-sm sm:text-base rounded-lg pl-4 sm:pl-6 pr-12 sm:pr-14 shadow-inner w-full"
-                  disabled={isTyping}
-                />
-                <Button 
-                  onClick={() => handleSend()} 
-                  disabled={!input.trim() || isTyping}
-                  className="absolute right-1.5 top-1.5 bottom-1.5 rounded-md w-9 h-9 sm:w-11 sm:h-11 p-0 bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform active:scale-95"
+              {/* Image preview */}
+              {imagePreview && (
+                <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
+                  className="mb-2 flex items-center gap-2 p-2 bg-muted/50 rounded-lg border">
+                  <img src={imagePreview} alt="preview" className="h-14 w-14 rounded-md object-cover border" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium truncate">{imageFile?.name}</p>
+                    <p className="text-[10px] text-muted-foreground">
+                      {imageAnalyzing ? 'Analyzing image…' : 'Image ready — add a description or send directly'}
+                    </p>
+                  </div>
+                  <button onClick={() => { setImageFile(null); setImagePreview(null); }}
+                    className="p-1 rounded hover:bg-destructive/20 text-muted-foreground hover:text-destructive">
+                    <X className="h-4 w-4" />
+                  </button>
+                </motion.div>
+              )}
+
+              {/* Location indicator */}
+              {userLocation && (
+                <div className="mb-1.5 flex items-center gap-1 text-[10px] text-green-600 dark:text-green-400">
+                  <MapPin className="h-3 w-3" />
+                  <span>{t('chat_location_hint')}</span>
+                </div>
+              )}
+
+              {/* Hidden file input */}
+              <input
+                ref={imageInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  setImageFile(file);
+                  const reader = new FileReader();
+                  reader.onload = (ev) => setImagePreview(ev.target.result);
+                  reader.readAsDataURL(file);
+                  e.target.value = '';
+                }}
+              />
+
+              <div className="flex gap-2 items-center relative w-full">
+                {/* Image upload button */}
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  className="h-12 sm:h-14 w-12 sm:w-14 shrink-0 rounded-lg border-dashed hover:border-primary hover:text-primary"
+                  title="Upload image of symptom (rash, skin condition, etc.)"
+                  onClick={() => imageInputRef.current?.click()}
+                  disabled={isTyping || imageAnalyzing}
                 >
-                  <Send className="h-4 w-4 sm:h-5 sm:w-5" />
+                  {imageAnalyzing
+                    ? <Loader2 className="h-4 w-4 animate-spin" />
+                    : <ImagePlus className="h-4 w-4 sm:h-5 sm:w-5" />
+                  }
                 </Button>
+
+                <div className="relative flex-1 min-w-0">
+                  <Input
+                    placeholder={imagePreview ? t('chat_image_placeholder') : t('chat_placeholder')}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        imageFile ? handleImageSend() : handleSend();
+                      }
+                    }}
+                    className="bg-muted/50 border-input focus-visible:ring-primary h-12 sm:h-14 text-base rounded-lg pl-4 pr-12 shadow-inner w-full"
+                    disabled={isTyping || imageAnalyzing}
+                  />
+                  <Button
+                    onClick={() => imageFile ? handleImageSend() : handleSend()}
+                    disabled={(!input.trim() && !imageFile) || isTyping || imageAnalyzing}
+                    className="absolute right-1.5 top-1.5 bottom-1.5 rounded-md w-9 h-9 sm:w-11 sm:h-11 p-0 bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform active:scale-95"
+                  >
+                    <Send className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </Button>
+                </div>
               </div>
-              <p className="text-[10px] sm:text-xs text-muted-foreground mt-2 sm:mt-3 text-center px-2">
-                MediGuard AI is for informational purposes only and does not replace professional medical advice.
+
+              <p className="text-[10px] sm:text-xs text-muted-foreground mt-2 text-center px-2">
+                {t('chat_info')}
               </p>
             </div>
           </div>

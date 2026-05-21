@@ -1,11 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import {
   AlertCircle,
   Building2,
-  ChevronDown,
-  ChevronUp,
   Clock,
   ExternalLink,
   Locate,
@@ -14,34 +12,24 @@ import {
   Phone,
   Star,
 } from 'lucide-react';
-import { BAMENDA_FACILITIES, facilityDirectionsUrl, facilityEmbedUrl, facilityMapsUrl } from '@/data/facilities';
+import {
+  BAMENDA_FACILITIES,
+  facilityDirectionsUrl,
+  facilityDistanceKm,
+  facilityDistanceLabel,
+  facilityEmbedUrl,
+  facilityMapsUrl,
+} from '@/data/facilities';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-function FacilityMapEmbed({ facility }) {
+function FacilityMapEmbed({ facility, large = false }) {
   return (
-    <div className="h-48 w-full overflow-hidden rounded-lg border bg-muted sm:h-56 md:h-72">
+    <div className={`w-full overflow-hidden rounded-lg border bg-muted ${large ? 'h-[340px] sm:h-[420px] md:h-[520px]' : 'h-48 sm:h-56 md:h-72'}`}>
       <iframe
         title={`${facility.name} map preview`}
         src={facilityEmbedUrl(facility)}
-        width="100%"
-        height="100%"
-        style={{ border: 0 }}
-        allowFullScreen
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      />
-    </div>
-  );
-}
-
-function FacilitiesMapOverview() {
-  return (
-    <div className="h-[280px] w-full overflow-hidden bg-muted sm:h-[360px] md:h-[430px]">
-      <iframe
-        title="Nearby health facilities in Bamenda map"
-        src="https://maps.google.com/maps?q=hospitals%20and%20clinics%20in%20Bamenda%20Cameroon&output=embed&z=13&hl=en"
         width="100%"
         height="100%"
         style={{ border: 0 }}
@@ -57,35 +45,53 @@ const NearbyFacilitiesPage = () => {
   const [selectedId, setSelectedId] = useState(BAMENDA_FACILITIES[0].id);
   const [userLocation, setUserLocation] = useState(null);
   const [locating, setLocating] = useState(false);
-  const [expandedId, setExpandedId] = useState(null);
+  const [locationError, setLocationError] = useState('');
   const cardRefs = useRef({});
 
   const selected = BAMENDA_FACILITIES.find((facility) => facility.id === selectedId) || BAMENDA_FACILITIES[0];
+  const orderedFacilities = [...BAMENDA_FACILITIES].sort((a, b) => {
+    if (a.id === selectedId) return -1;
+    if (b.id === selectedId) return 1;
+    if (userLocation) {
+      return (facilityDistanceKm(a, userLocation) ?? Number.MAX_SAFE_INTEGER) - (facilityDistanceKm(b, userLocation) ?? Number.MAX_SAFE_INTEGER);
+    }
+    return a.id - b.id;
+  });
 
   const requestLocation = () => {
-    if (!navigator.geolocation) return;
+    if (!navigator.geolocation) {
+      setLocationError('Location is not supported by this browser.');
+      return;
+    }
+
     setLocating(true);
+    setLocationError('');
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
         setLocating(false);
       },
-      () => setLocating(false),
-      { timeout: 8000 }
+      (error) => {
+        setLocationError(
+          error.code === error.PERMISSION_DENIED
+            ? 'Allow location access in your browser to sort hospitals by distance.'
+            : 'Could not get your location. Check GPS/network and try again.'
+        );
+        setLocating(false);
+      },
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 }
     );
   };
 
+  useEffect(() => {
+    requestLocation();
+  }, []);
+
   const selectFacility = (facility) => {
     setSelectedId(facility.id);
-    setExpandedId(null); // Close expanded card on mobile when selecting new facility
-    if (window.innerWidth < 1024) {
-      cardRefs.current[facility.id]?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  const toggleExpand = (facilityId, event) => {
-    event.stopPropagation();
-    setExpandedId(expandedId === facilityId ? null : facilityId);
+    window.requestAnimationFrame(() => {
+      cardRefs.current[facility.id]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    });
   };
 
   return (
@@ -99,192 +105,115 @@ const NearbyFacilitiesPage = () => {
       </Helmet>
 
       <div className="min-h-screen bg-muted/30">
-        {/* Header Section */}
         <div className="border-b bg-background px-4 py-4 md:py-6">
           <div className="container mx-auto max-w-6xl">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h1 className="flex items-center gap-2 text-xl font-bold sm:text-2xl md:text-3xl">
-                  <MapPin className="h-6 w-6 md:h-7 md:w-7 text-primary" />
+                  <MapPin className="h-6 w-6 text-primary md:h-7 md:w-7" />
                   Nearby Health Facilities
                 </h1>
                 <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
                   {BAMENDA_FACILITIES.length} trusted facilities with maps, contacts, and directions
                 </p>
               </div>
-              <Button 
-                variant="outline" 
-                onClick={requestLocation} 
-                disabled={locating} 
-                className="gap-2 w-full sm:w-auto text-sm"
+              <Button
+                variant="outline"
+                onClick={requestLocation}
+                disabled={locating}
+                className="w-full gap-2 text-sm sm:w-auto"
                 size="sm"
               >
                 <Locate className={`h-4 w-4 ${locating ? 'animate-spin' : ''}`} />
-                {userLocation ? '📍 Location ready' : locating ? 'Locating...' : 'Use my location'}
+                {userLocation ? 'Location ready' : locating ? 'Locating...' : 'Use my location'}
               </Button>
             </div>
             {userLocation && (
-              <motion.p 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
-                className="mt-2 text-xs text-green-600 dark:text-green-400"
-              >
-                ✓ Directions will start from your current location
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-2 text-xs text-green-600 dark:text-green-400">
+                Facilities are now sorted by distance from your current location.
+              </motion.p>
+            )}
+            {locationError && (
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-2 text-xs text-red-600 dark:text-red-400">
+                {locationError}
               </motion.p>
             )}
           </div>
         </div>
 
         <div className="container mx-auto max-w-6xl px-4 py-4 md:py-6">
-          {/* Mobile: Show list first, then selected facility details */}
-          {/* Desktop: Side-by-side layout */}
           <div className="flex flex-col-reverse gap-5 lg:grid lg:grid-cols-5 lg:gap-6">
-            
-            {/* Facilities List - Takes 2 columns on desktop, full width on mobile */}
-            <div className="space-y-3 lg:col-span-2">
+            <div className="lg:col-span-2">
               <div className="mb-2 flex items-center justify-between lg:hidden">
                 <h2 className="text-sm font-semibold text-muted-foreground">
                   Available Facilities ({BAMENDA_FACILITIES.length})
                 </h2>
                 <p className="text-xs text-muted-foreground">Tap to view details</p>
               </div>
-              
-              {BAMENDA_FACILITIES.map((facility, index) => {
-                const isSelected = facility.id === selectedId;
-                const isExpanded = expandedId === facility.id;
-                return (
-                  <motion.div
-                    key={facility.id}
-                    ref={(el) => {
-                      cardRefs.current[facility.id] = el;
-                    }}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <Card
-                      className={`cursor-pointer overflow-hidden border-2 transition-all duration-200 ${
-                        isSelected ? `${facility.color} shadow-md ring-2 ring-primary/20` : 'border-border hover:border-primary/40'
-                      }`}
-                      onClick={() => selectFacility(facility)}
-                    >
-                      <div className={`p-3 sm:p-4 ${isSelected ? facility.headerBg : ''}`}>
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="min-w-0 flex-1">
-                            {facility.emergency && (
-                              <Badge variant="destructive" className="mb-1.5 px-1.5 py-0 text-[10px] sm:mb-2">
-                                <AlertCircle className="mr-0.5 h-2.5 w-2.5" />
-                                24/7 Emergency
-                              </Badge>
-                            )}
-                            <p className="text-sm font-bold leading-snug sm:text-base">{facility.name}</p>
-                            <p className="text-xs text-muted-foreground sm:text-sm">{facility.type}</p>
-                            <p className="mt-1 flex items-start gap-1 text-xs text-muted-foreground line-clamp-2">
-                              <MapPin className="mt-0.5 h-3 w-3 flex-shrink-0" />
-                              <span className="flex-1">{facility.address}</span>
-                            </p>
-                            <a
-                              href={`tel:${facility.phone.split('/')[0].trim()}`}
-                              className="mt-1 flex items-center gap-1 text-xs font-medium text-primary hover:underline"
-                              onClick={(event) => event.stopPropagation()}
-                            >
-                              <Phone className="h-3 w-3" />
-                              <span className="truncate">{facility.phone}</span>
-                            </a>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={(event) => toggleExpand(facility.id, event)}
-                            className="flex-shrink-0 rounded p-1 hover:bg-muted/50 transition-colors"
-                            aria-label={isExpanded ? 'Collapse facility' : 'Expand facility'}
-                          >
-                            {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                          </button>
-                        </div>
 
-                        {/* Expanded Content - Shows map and more details */}
-                        {isExpanded && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="mt-3 border-t border-border/50 pt-3"
-                          >
-                            <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                              <p className="flex items-center gap-1 text-xs font-semibold">
-                                <Star className="h-3 w-3 text-yellow-500" />
-                                {facility.rating}
-                              </p>
-                              <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                                <Clock className="h-3 w-3" />
-                                <span className="text-[11px]">{facility.hours}</span>
+              <div className="grid grid-flow-col grid-rows-2 auto-cols-[minmax(250px,84vw)] gap-3 overflow-x-auto pb-3 lg:block lg:space-y-3 lg:overflow-visible lg:pb-0">
+                {orderedFacilities.map((facility, index) => {
+                  const isSelected = facility.id === selectedId;
+                  const distance = facilityDistanceLabel(facility, userLocation);
+                  return (
+                    <motion.div
+                      key={facility.id}
+                      ref={(el) => {
+                        cardRefs.current[facility.id] = el;
+                      }}
+                      layout
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.03 }}
+                    >
+                      <Card
+                        className={`cursor-pointer overflow-hidden border-2 transition-all duration-200 ${
+                          isSelected ? `${facility.color} shadow-md ring-2 ring-primary/20` : 'border-border hover:border-primary/40'
+                        }`}
+                        onClick={() => selectFacility(facility)}
+                      >
+                        <div className={`p-3 sm:p-4 ${isSelected ? facility.headerBg : ''}`}>
+                          <div className="flex items-start gap-2">
+                            <Building2 className={`mt-0.5 h-4 w-4 flex-shrink-0 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`} />
+                            <div className="min-w-0 flex-1">
+                              <div className="mb-1.5 flex flex-wrap gap-1">
+                                {facility.emergency && (
+                                  <Badge variant="destructive" className="px-1.5 py-0 text-[10px]">
+                                    <AlertCircle className="mr-0.5 h-2.5 w-2.5" />
+                                    24/7 Emergency
+                                  </Badge>
+                                )}
+                                {isSelected && <Badge variant="secondary" className="px-1.5 py-0 text-[10px]">Selected first</Badge>}
                               </div>
-                            </div>
-                            
-                            <div className="mb-3 flex flex-wrap gap-1">
-                              {facility.services.slice(0, 4).map((service) => (
-                                <Badge key={service} variant="outline" className="px-1.5 py-0 text-[10px]">
-                                  {service}
-                                </Badge>
-                              ))}
-                              {facility.services.length > 4 && (
-                                <Badge variant="outline" className="px-1.5 py-0 text-[10px]">
-                                  +{facility.services.length - 4} more
-                                </Badge>
-                              )}
-                            </div>
-                            
-                            <div className="mb-3">
-                              <FacilityMapEmbed facility={facility} />
-                            </div>
-                            
-                            <div className="flex flex-wrap gap-2">
+                              <p className="text-sm font-bold leading-snug sm:text-base">{facility.name}</p>
+                              <p className="text-xs text-muted-foreground sm:text-sm">{facility.type}</p>
+                              {distance && <p className="mt-0.5 text-xs font-semibold text-primary">{distance}</p>}
+                              <p className="mt-1 flex items-start gap-1 text-xs text-muted-foreground line-clamp-2">
+                                <MapPin className="mt-0.5 h-3 w-3 flex-shrink-0" />
+                                <span className="flex-1">{facility.address}</span>
+                              </p>
                               <a
-                                href={facilityDirectionsUrl(facility, userLocation)}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href={`tel:${facility.phone.split('/')[0].trim()}`}
+                                className="mt-1 flex items-center gap-1 text-xs font-medium text-primary hover:underline"
                                 onClick={(event) => event.stopPropagation()}
-                                className="flex flex-1 items-center justify-center gap-1 rounded-md bg-primary px-2.5 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90"
                               >
-                                <Navigation className="h-3 w-3" />
-                                Directions
-                              </a>
-                              <a
-                                href={facilityMapsUrl(facility)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(event) => event.stopPropagation()}
-                                className="flex flex-1 items-center justify-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium hover:bg-muted"
-                              >
-                                <ExternalLink className="h-3 w-3" />
-                                Maps
-                              </a>
-                              <a
-                                href={facility.sourceUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(event) => event.stopPropagation()}
-                                className="flex flex-1 items-center justify-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium hover:bg-muted"
-                              >
-                                <ExternalLink className="h-3 w-3" />
-                                Source
+                                <Phone className="h-3 w-3" />
+                                <span className="truncate">{facility.phone}</span>
                               </a>
                             </div>
-                          </motion.div>
-                        )}
-                      </div>
-                    </Card>
-                  </motion.div>
-                );
-              })}
+                          </div>
+                        </div>
+                      </Card>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Selected Facility Details - Takes 3 columns on desktop, shown below list on mobile */}
             <div className="lg:col-span-3">
-              {/* Mobile: Quick facility chips */}
               <div className="mb-3 overflow-x-auto pb-2 lg:hidden">
                 <div className="flex gap-2">
-                  {BAMENDA_FACILITIES.map((facility) => (
+                  {orderedFacilities.map((facility) => (
                     <button
                       key={facility.id}
                       type="button"
@@ -301,12 +230,11 @@ const NearbyFacilitiesPage = () => {
                 </div>
               </div>
 
-              {/* Overview Map - Hidden on mobile, shown on tablet/desktop */}
-              <Card className="overflow-hidden mb-4 hidden sm:block">
-                <FacilitiesMapOverview />
+              <Card className="mb-4 overflow-hidden">
+                <FacilityMapEmbed facility={selected} large />
                 <div className="border-t bg-background px-3 py-2 sm:px-4 sm:py-3">
                   <div className="flex gap-2 overflow-x-auto pb-1">
-                    {BAMENDA_FACILITIES.map((facility) => (
+                    {orderedFacilities.map((facility) => (
                       <button
                         key={facility.id}
                         type="button"
@@ -324,20 +252,14 @@ const NearbyFacilitiesPage = () => {
                 </div>
                 <div className="border-t bg-muted/30 px-3 py-2 sm:px-4">
                   <p className="text-[11px] text-muted-foreground sm:text-xs">
-                    📍 Click any facility chip to view detailed information below
+                    This is the main map. Select any facility to move the map to that location.
                   </p>
                 </div>
               </Card>
 
-              {/* Selected Facility Detailed Card */}
-              <motion.div 
-                key={selected.id} 
-                initial={{ opacity: 0, y: 8 }} 
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-              >
+              <motion.div key={selected.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
                 <Card className={`border-2 ${selected.color}`}>
-                  <CardHeader className={`pb-3 ${selected.headerBg} p-4 sm:p-6`}>
+                  <CardHeader className={`p-4 pb-3 sm:p-6 ${selected.headerBg}`}>
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div className="flex-1">
                         {selected.emergency && (
@@ -352,9 +274,12 @@ const NearbyFacilitiesPage = () => {
                         </CardTitle>
                         <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">{selected.type}</p>
                         <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                          <Star className="h-3 w-3 text-yellow-500 fill-current" />
+                          <Star className="h-3 w-3 fill-current text-yellow-500" />
                           {selected.rating}
                         </p>
+                        {facilityDistanceLabel(selected, userLocation) && (
+                          <p className="mt-1 text-xs font-semibold text-primary">{facilityDistanceLabel(selected, userLocation)}</p>
+                        )}
                       </div>
                       <div className="flex gap-2">
                         <a
@@ -378,17 +303,16 @@ const NearbyFacilitiesPage = () => {
                       </div>
                     </div>
                   </CardHeader>
-                  
+
                   <CardContent className="space-y-4 p-4 sm:p-6">
-                    {/* Contact & Address Information */}
                     <div className="grid gap-3 text-sm sm:grid-cols-2">
                       <div className="flex items-start gap-2">
                         <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-muted-foreground" />
-                        <span className="text-xs sm:text-sm break-words">{selected.address}</span>
+                        <span className="break-words text-xs sm:text-sm">{selected.address}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Phone className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
-                        <a href={`tel:${selected.phone.split('/')[0].trim()}`} className="text-xs sm:text-sm font-medium text-primary hover:underline break-all">
+                        <a href={`tel:${selected.phone.split('/')[0].trim()}`} className="break-all text-xs font-medium text-primary hover:underline sm:text-sm">
                           {selected.phone}
                         </a>
                       </div>
@@ -398,11 +322,8 @@ const NearbyFacilitiesPage = () => {
                       </div>
                     </div>
 
-                    {/* Services Available */}
                     <div>
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        Services Available
-                      </p>
+                      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Services Available</p>
                       <div className="flex flex-wrap gap-1.5">
                         {selected.services.map((service) => (
                           <Badge key={service} variant="secondary" className="text-xs">
@@ -412,25 +333,17 @@ const NearbyFacilitiesPage = () => {
                       </div>
                     </div>
 
-                    {/* Map Preview */}
-                    <div>
-                      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                          Location Preview
+                    <div className="rounded-lg border bg-muted/30 p-3">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <p className="text-xs text-muted-foreground">
+                          The main map above is focused on {selected.name}.
                         </p>
-                        <a
-                          href={selected.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs font-medium text-primary hover:underline"
-                        >
+                        <a href={selected.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-primary hover:underline">
                           Source: {selected.sourceName}
                         </a>
                       </div>
-                      <FacilityMapEmbed facility={selected} />
                     </div>
 
-                    {/* Quick Actions for Mobile */}
                     <div className="flex gap-2 pt-2 sm:hidden">
                       <a
                         href={`tel:${selected.phone.split('/')[0].trim()}`}
@@ -453,10 +366,9 @@ const NearbyFacilitiesPage = () => {
                 </Card>
               </motion.div>
 
-              {/* Helpful Tip */}
               <div className="mt-4 rounded-lg bg-blue-50 p-3 dark:bg-blue-950/20">
                 <p className="text-xs text-blue-800 dark:text-blue-300">
-                  💡 <span className="font-semibold">Pro tip:</span> Enable location services to get turn-by-turn directions from your current position.
+                  <span className="font-semibold">Pro tip:</span> Enable location services to sort facilities by nearest distance and start direction links from your current position.
                 </p>
               </div>
             </div>

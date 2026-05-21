@@ -8,6 +8,8 @@ class ChatInput(BaseModel):
     gender: str | None = None
     is_pregnant: bool = False
     pregnancy_weeks: int | None = None
+    user_lat: float | None = None
+    user_lng: float | None = None
 
 
 class ChatResponse(BaseModel):

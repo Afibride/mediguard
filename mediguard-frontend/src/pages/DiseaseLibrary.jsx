@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Search, TrendingUp, AlertTriangle, BookOpen, Database, ShieldCheck } from 'lucide-react';
 import { diseases } from '@/data/diseases';
 import { getDiseases } from '@/services/api';
+import { getCommonName } from '@/data/layman';
 
 const DiseaseLibrary = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -43,9 +44,12 @@ const DiseaseLibrary = () => {
   const severities = ['All', 'Low', 'Medium', 'High'];
 
   const filteredDiseases = diseaseRows.filter((disease) => {
-    const matchesSearch = disease.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          disease.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          (disease.symptoms || []).some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
+    const q = searchQuery.toLowerCase();
+    const commonName = (getCommonName(disease.name) || '').toLowerCase();
+    const matchesSearch = disease.name.toLowerCase().includes(q) ||
+                          commonName.includes(q) ||
+                          disease.description.toLowerCase().includes(q) ||
+                          (disease.symptoms || []).some(s => s.toLowerCase().includes(q));
     const matchesCategory = categoryFilter === 'All' || disease.category === categoryFilter;
     const matchesSeverity = severityFilter === 'All' || disease.severity === severityFilter;
     const matchesCommon = !commonOnly || disease.commonInBamenda;
@@ -110,21 +114,21 @@ const DiseaseLibrary = () => {
 
           <Card className="mb-8 medical-panel">
             <CardContent className="pt-6">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="relative md:col-span-2">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                <div className="relative col-span-2 md:col-span-2">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Input
                     type="text"
                     placeholder="Search by name, symptom, or description..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 bg-background"
+                    className="pl-10 bg-background text-base"
                   />
                 </div>
                 
-                <div>
+                <div className="min-w-0">
                   <select
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-2 sm:px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={categoryFilter}
                     onChange={(e) => setCategoryFilter(e.target.value)}
                   >
@@ -132,9 +136,9 @@ const DiseaseLibrary = () => {
                   </select>
                 </div>
 
-                <div>
+                <div className="min-w-0">
                   <select
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-2 sm:px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     value={severityFilter}
                     onChange={(e) => setSeverityFilter(e.target.value)}
                   >
@@ -142,7 +146,7 @@ const DiseaseLibrary = () => {
                   </select>
                 </div>
 
-                <div className="md:col-span-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
+                <div className="col-span-2 md:col-span-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
                   <div className="flex items-center space-x-2">
                   <Checkbox
                     id="common-filter"
@@ -159,14 +163,21 @@ const DiseaseLibrary = () => {
             </CardContent>
           </Card>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-flow-col grid-rows-3 auto-cols-[minmax(250px,84vw)] gap-3 overflow-x-auto pb-3 md:grid-flow-row md:grid-rows-none md:auto-cols-auto md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-3 lg:gap-6">
             {filteredDiseases.map((disease) => (
               <Link key={disease.id} to={`/disease/${disease.id}`}>
                 <Card className="h-full hover:shadow-xl transition-all duration-300 cursor-pointer medical-panel hover:border-primary/50 flex flex-col">
                   <CardHeader className="flex-1">
                     <div className="flex items-start justify-between mb-2">
-                      <div className="px-3 py-1 rounded-full text-sm font-semibold bg-primary/10 text-primary">
-                        {disease.name}
+                      <div>
+                        <div className="px-3 py-1 rounded-full text-sm font-semibold bg-primary/10 text-primary inline-block">
+                          {disease.name}
+                        </div>
+                        {getCommonName(disease.name) && (
+                          <p className="text-xs text-muted-foreground mt-1 pl-1">
+                            {getCommonName(disease.name)}
+                          </p>
+                        )}
                       </div>
                       {disease.severity.toLowerCase() === 'high' && (
                         <AlertTriangle className="h-5 w-5 text-red-600 flex-shrink-0 ml-2" />

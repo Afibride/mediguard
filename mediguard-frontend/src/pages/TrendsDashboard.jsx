@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -155,6 +155,34 @@ const SampleDataNotice = () => (
     Showing representative sample data — live data will appear as screenings are recorded.
   </div>
 );
+
+const AutoScrollStrip = ({ children, className = '', innerClassName = '' }) => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    const timer = window.setInterval(() => {
+      const first = el.children[0];
+      const step = first ? first.getBoundingClientRect().width + 12 : el.clientWidth * 0.8;
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8;
+      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + step, behavior: 'smooth' });
+    }, 3500);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`overflow-x-auto pb-3 scrollbar-hide snap-x snap-mandatory ${className}`}
+      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+    >
+      <div className={innerClassName || 'flex gap-3'}>
+        {children}
+      </div>
+    </div>
+  );
+};
 
 // ─── Main component ───────────────────────────────────────────────────────────
 const TrendsDashboard = () => {
@@ -336,10 +364,32 @@ const TrendsDashboard = () => {
           </motion.div>
 
           {/* ── Stat cards ───────────────────────────────────────────────── */}
+          <div className="mb-8 sm:hidden">
+            <AutoScrollStrip>
+              {insights.map((insight) => (
+                <Card key={insight.title} className={`medical-panel w-[72vw] max-w-[260px] flex-shrink-0 snap-start bg-gradient-to-br ${insight.bg} to-transparent`}>
+                  <CardHeader className="flex flex-row items-center justify-between gap-2 p-3 pb-1">
+                    <CardTitle className="text-xs font-medium text-muted-foreground leading-tight">
+                      {insight.title}
+                    </CardTitle>
+                    <insight.icon className={`h-4 w-4 ${insight.color} flex-shrink-0`} />
+                  </CardHeader>
+                  <CardContent className="p-3 pt-0">
+                    {loading.summary
+                      ? <div className="h-7 w-16 bg-muted animate-pulse rounded" />
+                      : <div className="truncate text-lg font-bold">{insight.value}</div>
+                    }
+                    <p className="mt-1 text-xs text-muted-foreground">{insight.change}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </AutoScrollStrip>
+          </div>
+
           <motion.div
             initial="hidden" animate="visible"
             variants={{ visible: { transition: { staggerChildren: 0.07 } } }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 mb-8"
+            className="mb-8 hidden gap-4 sm:grid sm:grid-cols-3 lg:grid-cols-5"
           >
             {insights.map((insight, i) => (
               <motion.div key={i} variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0 } }}>
@@ -466,6 +516,18 @@ const TrendsDashboard = () => {
               <CardContent>
                 {loading.topDiseases ? <LoadingChart /> : (
                   <>
+                    <div className="mb-4 sm:hidden">
+                      <AutoScrollStrip>
+                        {apiDiseaseData.slice(0, 10).map((disease, index) => (
+                          <div key={disease.name || index} className="w-[68vw] max-w-[230px] flex-shrink-0 snap-start rounded-lg border bg-background p-3">
+                            <p className="text-xs font-semibold text-muted-foreground">#{index + 1}</p>
+                            <p className="truncate text-sm font-bold">{disease.name}</p>
+                            <p className="mt-1 text-2xl font-bold text-primary">{(disease.cases || 0).toLocaleString()}</p>
+                            <p className="text-xs text-muted-foreground">screenings</p>
+                          </div>
+                        ))}
+                      </AutoScrollStrip>
+                    </div>
                     <ResponsiveContainer width="100%" height={300}>
                       <BarChart data={apiDiseaseData.slice(0, 10)} layout="vertical" margin={{ left: 8, right: 16 }}>
                         <CartesianGrid strokeDasharray="3 3" />
@@ -629,7 +691,18 @@ const TrendsDashboard = () => {
                   <CardDescription>Prediction activity by region and disease</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                  <div className="sm:hidden">
+                    <AutoScrollStrip innerClassName="grid grid-flow-col grid-rows-2 auto-cols-[minmax(180px,68vw)] gap-3">
+                      {heatmapRows.map((row) => (
+                        <div key={`${row.region}-${row.disease}`} className="snap-start rounded-lg border bg-background p-4">
+                          <p className="font-semibold text-sm">{row.region}</p>
+                          <p className="text-xs text-muted-foreground">{row.disease}</p>
+                          <p className="text-2xl font-bold text-primary mt-1">{row.count.toLocaleString()}</p>
+                        </div>
+                      ))}
+                    </AutoScrollStrip>
+                  </div>
+                  <div className="hidden sm:grid sm:grid-cols-3 lg:grid-cols-4 gap-3">
                     {heatmapRows.map((row) => (
                       <div key={`${row.region}-${row.disease}`} className="rounded-lg border bg-background p-4">
                         <p className="font-semibold text-sm">{row.region}</p>
@@ -671,7 +744,29 @@ const TrendsDashboard = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="sm:hidden">
+                  <AutoScrollStrip>
+                    {(showAllTips ? currentTips : currentTips.slice(0, 3)).map((tip, i) => (
+                      <motion.div
+                        key={tip.disease}
+                        initial={{ opacity: 0, scale: 0.96 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.96 }}
+                        transition={{ delay: i * 0.05 }}
+                        className={`w-[82vw] max-w-[330px] flex-shrink-0 snap-start rounded-xl border p-4 ${tip.bg} ${tip.border}`}
+                      >
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="p-1.5 rounded-lg bg-white/60 dark:bg-black/20">
+                            <tip.icon className={`h-4 w-4 ${tip.color}`} />
+                          </div>
+                          <h4 className={`font-bold text-sm ${tip.color}`}>{tip.disease}</h4>
+                        </div>
+                        <p className="text-sm text-foreground/85 leading-relaxed">{tip.tip}</p>
+                      </motion.div>
+                    ))}
+                  </AutoScrollStrip>
+                </div>
+                <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   <AnimatePresence>
                     {(showAllTips ? currentTips : currentTips.slice(0, 3)).map((tip, i) => (
                       <motion.div

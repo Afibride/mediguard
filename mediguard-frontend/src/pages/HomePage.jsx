@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database, TrendingUp, Megaphone, Droplets, HandHeart, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import NearbyFacilities from '@/components/NearbyFacilities';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { getAnalyticsSummary, getDiseases, getOutbreakAlerts, getTopDiseases, getTrends } from '@/services/api';
@@ -189,6 +190,7 @@ style.textContent = `
 document.head.appendChild(style);
 
 const HomePage = () => {
+  const { t } = useLanguage();
   const [featuredDiseases, setFeaturedDiseases] = useState([]);
   const [summary, setSummary] = useState({
     diseases_tracked: 19,
@@ -394,17 +396,17 @@ const HomePage = () => {
               className="text-center max-w-4xl mx-auto"
             >
               <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight drop-shadow-lg tracking-tight text-balance">
-                Smart Diagnosis - Fast Care - Safe Health
+                {t('hero_title')}
               </h1>
               <p className="text-sm sm:text-lg md:text-xl text-gray-100 mb-6 sm:mb-8 max-w-2xl mx-auto drop-shadow-md font-medium">
-                AI-powered early disease detection for Bamenda, combining symptom prediction, encyclopedia-grounded chat, disease education, and local trend monitoring.
+                {t('hero_subtitle')}
               </p>
               
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none mx-auto">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/symptom-checker" className="block">
                     <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-xl transition-all border border-transparent">
-                      Get Started
+                      {t('hero_get_started')}
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
@@ -417,7 +419,7 @@ const HomePage = () => {
                       className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-secondary hover:bg-secondary/90 text-white font-semibold shadow-xl transition-all border border-white/20 backdrop-blur-sm"
                     >
                       <Bot className="mr-2 h-5 w-5" />
-                      Try MediGuard AI
+                      {t('hero_try_ai')}
                       <MessageCircle className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
@@ -426,7 +428,7 @@ const HomePage = () => {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/disease-library" className="block">
                     <Button size="lg" variant="outline" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-sm font-semibold shadow-xl transition-all">
-                      Learn More
+                      {t('hero_learn_more')}
                     </Button>
                   </Link>
                 </motion.div>

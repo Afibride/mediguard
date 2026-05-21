@@ -105,3 +105,24 @@ export const submitChatFeedback = (data) =>
 export const getChatInsights = () => request('/analytics/chat-insights');
 
 export const sendContact = (data) => request('/contact', { method: 'POST', body: JSON.stringify(data) });
+
+// File upload — does NOT set Content-Type so browser sets multipart boundary automatically
+async function uploadFile(path, formData) {
+  const token = localStorage.getItem('mediguard_token');
+  const res = await fetch(`${API_URL}${path}`, {
+    method: 'POST',
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    body: formData,
+  });
+  const text = await res.text();
+  const data = text ? JSON.parse(text) : null;
+  if (!res.ok) throw new ApiError(data?.detail || 'Upload failed', res.status);
+  return { data };
+}
+
+export const analyzeImage = (file, context = '') => {
+  const fd = new FormData();
+  fd.append('file', file);
+  fd.append('context', context);
+  return uploadFile('/chat/analyze-image', fd);
+};

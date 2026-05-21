@@ -21,6 +21,7 @@ import TermsPage from '@/pages/TermsPage';
 import PrivacyPage from '@/pages/PrivacyPage';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { AuthProvider } from '@/components/AuthContext';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 import MobileMenu from '@/components/MobileMenu'; // Kept for validation requirements
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
@@ -78,7 +79,9 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <AppLayout />
+        <LanguageProvider>
+          <AppLayout />
+        </LanguageProvider>
       </AuthProvider>
     </Router>
   );

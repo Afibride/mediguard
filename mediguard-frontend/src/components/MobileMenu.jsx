@@ -3,11 +3,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Moon, Sun, History, LogOut, Home, Activity, BookOpen, Bot, TrendingUp, LogIn, UserPlus, User, MapPin } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const { lang, switchLanguage, t } = useLanguage();
   const [isDark, setIsDark] = useState(false);
 
   // Initialize theme
@@ -35,12 +37,12 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
   };
 
   const baseNavLinks = [
-    { name: 'Home', path: '/', icon: Home },
-    { name: 'Symptom Checker', path: '/symptom-checker', icon: Activity },
-    { name: 'Disease Library', path: '/disease-library', icon: BookOpen },
-    { name: 'MediGuard AI', path: '/chat-ai', icon: Bot },
-    { name: 'Nearby Facilities', path: '/nearby-facilities', icon: MapPin },
-    { name: 'Trends Dashboard', path: '/trends', icon: TrendingUp },
+    { key: 'nav_home',            path: '/',                  icon: Home },
+    { key: 'nav_symptom_checker', path: '/symptom-checker',   icon: Activity },
+    { key: 'nav_disease_library', path: '/disease-library',   icon: BookOpen },
+    { key: 'nav_chat_ai',         path: '/chat-ai',           icon: Bot },
+    { key: 'nav_facilities',      path: '/nearby-facilities', icon: MapPin },
+    { key: 'nav_trends',          path: '/trends',            icon: TrendingUp },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -104,7 +106,7 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                           ? 'text-primary' 
                           : 'text-gray-500 dark:text-gray-400'
                       }`} />
-                      {link.name}
+                      {t(link.key)}
                     </Link>
                   ))}
                 </div>
@@ -147,27 +149,31 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                             ? 'text-primary' 
                             : 'text-gray-500 dark:text-gray-400'
                         }`} />
-                        History
+                        {t('nav_history')}
                       </Link>
-                      
+
+                      <button
+                        onClick={() => switchLanguage(lang === 'en' ? 'fr' : 'en')}
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left"
+                      >
+                        <span className="text-lg w-5 text-center">{lang === 'en' ? '🇫🇷' : '🇬🇧'}</span>
+                        {lang === 'en' ? 'Français' : 'English'}
+                      </button>
+
                       <button
                         onClick={toggleTheme}
                         className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left last:mb-4"
                       >
-                        {isDark ? (
-                          <Sun className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                        ) : (
-                          <Moon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                        )}
-                        {isDark ? 'Light Mode' : 'Dark Mode'}
+                        {isDark ? <Sun className="w-5 h-5 text-gray-500 dark:text-gray-400" /> : <Moon className="w-5 h-5 text-gray-500 dark:text-gray-400" />}
+                        {isDark ? t('nav_light_mode') : t('nav_dark_mode')}
                       </button>
-                      
+
                       <button
                         onClick={handleLogout}
                         className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left last:mb-4"
                       >
                         <LogOut className="w-5 h-5" />
-                        Logout
+                        {t('nav_logout')}
                       </button>
                     </>
                   ) : (
@@ -178,30 +184,34 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                         className="flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors last:mb-4"
                       >
                         <LogIn className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                        Login
+                        {t('nav_login')}
                       </Link>
-                      
+
                       <Link
                         to="/signup"
                         onClick={onClose}
                         className="flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium bg-primary/10 text-primary hover:bg-primary hover:text-white transition-colors last:mb-4"
                       >
                         <UserPlus className="w-5 h-5" />
-                        Register
+                        {t('nav_register')}
                       </Link>
-                      
-                      <div className="my-2 border-t border-gray-200 dark:border-gray-800"></div>
-                      
+
+                      <div className="my-2 border-t border-gray-200 dark:border-gray-800" />
+
+                      <button
+                        onClick={() => switchLanguage(lang === 'en' ? 'fr' : 'en')}
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left"
+                      >
+                        <span className="text-lg w-5 text-center">{lang === 'en' ? '🇫🇷' : '🇬🇧'}</span>
+                        {lang === 'en' ? 'Français' : 'English'}
+                      </button>
+
                       <button
                         onClick={toggleTheme}
                         className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left last:mb-4"
                       >
-                        {isDark ? (
-                          <Sun className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                        ) : (
-                          <Moon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-                        )}
-                        {isDark ? 'Light Mode' : 'Dark Mode'}
+                        {isDark ? <Sun className="w-5 h-5 text-gray-500 dark:text-gray-400" /> : <Moon className="w-5 h-5 text-gray-500 dark:text-gray-400" />}
+                        {isDark ? t('nav_light_mode') : t('nav_dark_mode')}
                       </button>
                     </>
                   )}
