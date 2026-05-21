@@ -1,4 +1,18 @@
-- name: Install Cloudflare Client & Run SSH Deploy
+name: Deploy MediGuard Application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Cloudflare Client & Run SSH Deploy
         env:
           SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_USER: ${{ secrets.SERVER_USER }}
