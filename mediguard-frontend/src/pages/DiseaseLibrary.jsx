@@ -18,10 +18,12 @@ const DiseaseLibrary = () => {
   const [categoryFilter, setCategoryFilter] = useState('All');
   const [severityFilter, setSeverityFilter] = useState('All');
   const [commonOnly, setCommonOnly] = useState(false);
-  const [diseaseRows, setDiseaseRows] = useState(diseases);
-  const [dataSource, setDataSource] = useState('Local fallback');
+  const [diseaseRows, setDiseaseRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [dataSource, setDataSource] = useState('Backend system');
 
   useEffect(() => {
+    setLoading(true);
     getDiseases()
       .then((res) => {
         if (Array.isArray(res.data) && res.data.length) {
@@ -31,13 +33,14 @@ const DiseaseLibrary = () => {
             commonInBamenda: d.commonInBamenda ?? d.featured,
             symptoms: d.symptoms || [],
           })));
-          setDataSource('Backend database');
+          setDataSource('Backend system database');
         }
       })
       .catch(() => {
         setDiseaseRows(diseases);
-        setDataSource('Local fallback');
-      });
+        setDataSource('Backend unavailable - emergency local fallback');
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const categories = ['All', ...new Set(diseaseRows.map(d => d.category))];
@@ -48,7 +51,7 @@ const DiseaseLibrary = () => {
     const commonName = (getCommonName(disease.name) || '').toLowerCase();
     const matchesSearch = disease.name.toLowerCase().includes(q) ||
                           commonName.includes(q) ||
-                          disease.description.toLowerCase().includes(q) ||
+                          (disease.description || '').toLowerCase().includes(q) ||
                           (disease.symptoms || []).some(s => s.toLowerCase().includes(q));
     const matchesCategory = categoryFilter === 'All' || disease.category === categoryFilter;
     const matchesSeverity = severityFilter === 'All' || disease.severity === severityFilter;
@@ -163,6 +166,13 @@ const DiseaseLibrary = () => {
             </CardContent>
           </Card>
 
+          {loading && (
+            <div className="py-12 text-center text-muted-foreground">
+              Loading disease data from MediGuard backend...
+            </div>
+          )}
+
+          {!loading && (
           <div className="grid grid-flow-col grid-rows-3 auto-cols-[minmax(250px,84vw)] gap-3 overflow-x-auto pb-3 md:grid-flow-row md:grid-rows-none md:auto-cols-auto md:grid-cols-2 md:overflow-visible md:pb-0 lg:grid-cols-3 lg:gap-6">
             {filteredDiseases.map((disease) => (
               <Link key={disease.id} to={`/disease/${disease.id}`}>
@@ -184,7 +194,7 @@ const DiseaseLibrary = () => {
                       )}
                     </div>
                     <CardDescription className="text-foreground/80">
-                      {disease.description}
+                      {disease.description || 'No description available from the backend yet.'}
                     </CardDescription>
                     <div className="flex flex-wrap gap-1.5 pt-2">
                       {(disease.symptoms || []).slice(0, 4).map((symptom) => (
@@ -218,8 +228,9 @@ const DiseaseLibrary = () => {
               </Link>
             ))}
           </div>
+          )}
 
-          {filteredDiseases.length === 0 && (
+          {!loading && filteredDiseases.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground text-lg">No diseases found matching your filters.</p>
               <Button 

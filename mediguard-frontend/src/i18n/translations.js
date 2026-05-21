@@ -21,7 +21,7 @@ const translations = {
 
     // ── Homepage ─────────────────────────────────────────────────────────────
     hero_title:            'Smart Diagnosis - Fast Care - Safe Health',
-    hero_subtitle:         'AI-powered early disease detection for Bamenda, combining symptom prediction, encyclopedia-grounded chat, disease education, and local trend monitoring.',
+    hero_subtitle:         'AI-powered early disease detection for Bamenda, combining symptom prediction, curated medical-reference chat, disease education, and local trend monitoring.',
     hero_get_started:      'Get Started',
     hero_try_ai:           'Try MediGuard AI',
     hero_learn_more:       'Learn More',

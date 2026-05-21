@@ -13,6 +13,7 @@ scikit-learn==1.6.0
 pandas==2.2.3
 openai==1.58.1
 pinecone-client==5.0.1
+pypdf==5.1.0
 sentence-transformers==3.3.1
 pytest==8.3.4
 httpx==0.28.1
