@@ -45,6 +45,28 @@ def test_chat_answers_malaria_prevention_accurately():
     assert data["sources"] == ["Malaria"]
 
 
+def test_chat_corrects_misspelled_disease_questions():
+    gonorrhea = client.post("/chat", json={"query": "what is gonorhea"})
+    syphilis = client.post("/chat", json={"query": "what is ciphilis"})
+
+    assert gonorrhea.status_code == 200
+    assert syphilis.status_code == 200
+
+    gonorrhea_data = gonorrhea.json()
+    gonorrhea_answer = gonorrhea_data["answer"].lower()
+    assert gonorrhea_data["mode"] == "disease_definition"
+    assert "gonorrhea" in gonorrhea_answer
+    assert any(term in gonorrhea_answer for term in ["sexually transmitted", "sti"])
+    assert "intestinal polyps" not in gonorrhea_answer
+
+    syphilis_data = syphilis.json()
+    syphilis_answer = syphilis_data["answer"].lower()
+    assert syphilis_data["mode"] == "disease_definition"
+    assert "syphilis" in syphilis_answer
+    assert any(term in syphilis_answer for term in ["sexually transmitted", "sti"])
+    assert "intestinal polyps" not in syphilis_answer
+
+
 def test_chat_answers_facility_and_platform_questions():
     facilities = client.post("/chat", json={"query": "where can i find nearby hospitals"})
     platform = client.post("/chat", json={"query": "how do i view my history on this platform"})

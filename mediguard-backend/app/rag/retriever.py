@@ -10,6 +10,7 @@ import os
 import re
 import time
 from collections import Counter
+from difflib import SequenceMatcher
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -385,8 +386,10 @@ DISEASE_ALIASES: dict[str, str] = {
     "herpès génital": "Genital Herpes",
     "trichomonase": "Trichomoniasis",
     # STIs
-    "gonorrhoea": "Gonorrhea", "the clap": "Gonorrhea", "clap": "Gonorrhea",
-    "the pox": "Syphilis", "syph": "Syphilis",
+    "gonorrhea": "Gonorrhea", "gonorrhoea": "Gonorrhea", "gonorhea": "Gonorrhea",
+    "gonorea": "Gonorrhea", "gonnorhea": "Gonorrhea", "the clap": "Gonorrhea", "clap": "Gonorrhea",
+    "the pox": "Syphilis", "syph": "Syphilis", "ciphilis": "Syphilis",
+    "siphilis": "Syphilis", "syfilis": "Syphilis", "sifilis": "Syphilis",
     "silent sti": "Chlamydia",
     "genital herpes": "Genital Herpes", "herpes": "Genital Herpes", "hsv": "Genital Herpes",
     "trich": "Trichomoniasis", "trichomonas": "Trichomoniasis",
@@ -410,6 +413,46 @@ DISEASE_ALIASES: dict[str, str] = {
 
 # Build lookup by canonical name for fast access
 _DISEASE_BY_NAME: dict[str, dict] = {d["name"]: d for d in DISEASES}
+
+
+def _normalize_medical_term(value: str) -> str:
+    value = value.lower()
+    value = re.sub(r"[^a-z0-9]+", " ", value)
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def _fuzzy_disease_match(term: str, threshold: float = 0.78) -> dict | None:
+    normalized = _normalize_medical_term(term)
+    compact = normalized.replace(" ", "")
+    if len(compact) < 4:
+        return None
+
+    best_score = 0.0
+    best_name: str | None = None
+    candidates: list[tuple[str, str]] = []
+    for disease in DISEASES:
+        candidates.extend([
+            (disease["name"], disease["name"]),
+            (disease["slug"].replace("-", " "), disease["name"]),
+        ])
+    candidates.extend((alias, canonical) for alias, canonical in DISEASE_ALIASES.items())
+
+    for candidate, canonical in candidates:
+        candidate_norm = _normalize_medical_term(candidate)
+        candidate_compact = candidate_norm.replace(" ", "")
+        if not candidate_compact:
+            continue
+        score = max(
+            SequenceMatcher(None, compact, candidate_compact).ratio(),
+            SequenceMatcher(None, normalized, candidate_norm).ratio(),
+        )
+        if score > best_score:
+            best_score = score
+            best_name = canonical
+
+    if best_name and best_score >= threshold:
+        return _DISEASE_BY_NAME.get(best_name)
+    return None
 
 DISEASE_SYMPTOM_QUERY_PATTERNS = [
     re.compile(r"^\s*symptoms\s+of\s+(.+?)\s*[?.!]*\s*$", re.I),
@@ -490,10 +533,11 @@ def _symptom_definition_response(query: str) -> dict | None:
 
 def _resolve_disease_name(term: str) -> dict | None:
     """Return a DISEASES entry for a user-supplied term, using aliases and fuzzy matching."""
-    term = term.strip().lower()
+    term = _normalize_medical_term(term)
     # 1. Alias lookup (longest-key-first to avoid partial hits)
     for alias in sorted(DISEASE_ALIASES, key=len, reverse=True):
-        if alias in term or term in alias:
+        normalized_alias = _normalize_medical_term(alias)
+        if normalized_alias in term or term in normalized_alias:
             d = _DISEASE_BY_NAME.get(DISEASE_ALIASES[alias])
             if d:
                 return d
@@ -506,6 +550,9 @@ def _resolve_disease_name(term: str) -> dict | None:
         }
         if any(n and len(n) > 2 and (n in term or term in n) for n in names):
             return d
+    fuzzy = _fuzzy_disease_match(term, threshold=0.74)
+    if fuzzy:
+        return fuzzy
     return None
 
 
@@ -608,13 +655,18 @@ def _disease_general_info_response(query: str) -> dict | None:
     if not disease:
         return None
 
-    profile = _database_disease_profile(disease["name"])
+    profile = _pinecone_disease_profile(disease["name"])
+    data_source = "pinecone" if profile else "database"
+    if not profile:
+        profile = _database_disease_profile(disease["name"])
     if not profile:
         return None
 
     symptoms = disease.get("symptoms") or []
     display = _disease_display_name(disease["name"])
     lines = [f"**{display}**\n"]
+    if candidate and _normalize_medical_term(candidate) != _normalize_medical_term(disease["name"]):
+        lines.append(f"You may mean **{display}**.")
 
     if profile.get("description"):
         lines.append(profile["description"])
@@ -643,7 +695,8 @@ def _disease_general_info_response(query: str) -> dict | None:
         "answer": "\n".join(lines),
         "sources": [disease["name"]],
         "disclaimer": DISCLAIMER,
-        "data_source": "database",
+        "data_source": data_source,
+        "mode": "disease_definition",
     }
 
 
@@ -1059,6 +1112,9 @@ def _detect_disease(query: str) -> dict | None:
         }
         if any(name and len(name) > 2 and name in text for name in names):
             return disease
+    fuzzy = _fuzzy_disease_match(query, threshold=0.82)
+    if fuzzy:
+        return fuzzy
     return None
 
 

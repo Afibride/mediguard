@@ -54,25 +54,40 @@ async def analyze_image(
     if context:
         prompt += f"\nUser context: {context}"
 
-    try:
-        response = llm.chat.completions.create(
-            model="gpt-4o",
-            messages=[{
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": prompt},
-                    {"type": "image_url", "image_url": {
-                        "url": f"data:{file.content_type};base64,{b64}",
-                        "detail": "high",
-                    }},
-                ],
-            }],
-            max_tokens=600,
-            temperature=0.3,
+    image_message = {
+        "role": "user",
+        "content": [
+            {"type": "text", "text": prompt},
+            {"type": "image_url", "image_url": {
+                "url": f"data:{file.content_type};base64,{b64}",
+                "detail": "low",
+            }},
+        ],
+    }
+
+    analysis = None
+    for model in ("gpt-4o-mini", "gpt-4o"):
+        try:
+            response = llm.chat.completions.create(
+                model=model,
+                messages=[image_message],
+                max_tokens=600,
+                temperature=0.3,
+            )
+            analysis = response.choices[0].message.content
+            break
+        except Exception as exc:
+            err_str = str(exc)
+            if "insufficient_quota" in err_str or "429" in err_str:
+                continue  # try next model
+            raise HTTPException(502, f"Vision analysis failed: {exc}") from exc
+
+    if analysis is None:
+        raise HTTPException(
+            503,
+            "Image analysis is temporarily unavailable — the AI vision quota has been reached. "
+            "Please try again later or describe your symptoms in the chat instead.",
         )
-        analysis = response.choices[0].message.content
-    except Exception as exc:
-        raise HTTPException(502, f"Vision analysis failed: {exc}") from exc
 
     return {
         "analysis": analysis,

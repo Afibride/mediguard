@@ -447,8 +447,13 @@ const ChatAI = () => {
         ? { ...c, messages: finalMessages, preview: fullAnswer.substring(0, 30) + '…' }
         : c
       ));
-    } catch {
-      toast({ variant: 'destructive', title: 'Image analysis failed', description: 'Could not analyse the image. Please try again.' });
+    } catch (err) {
+      const raw = err?.response?.data?.detail || err?.message || '';
+      const isQuota = raw.includes('quota') || raw.includes('429') || raw.includes('unavailable');
+      const description = isQuota
+        ? 'Image analysis is temporarily unavailable (AI vision quota reached). Please describe your symptoms in the chat instead.'
+        : 'Could not analyse the image. Please try again or describe your symptoms in the chat.';
+      toast({ variant: 'destructive', title: 'Image analysis failed', description });
     } finally {
       setImageAnalyzing(false);
     }

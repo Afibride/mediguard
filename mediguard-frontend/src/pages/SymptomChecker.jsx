@@ -211,8 +211,13 @@ const SymptomChecker = () => {
     try {
       const res = await analyzeImage(imageFile, freeText.trim());
       setImageAnalysis(res.data.analysis);
-    } catch {
-      toast({ variant: 'destructive', title: 'Image analysis failed', description: 'Could not analyse the image. Please try again.' });
+    } catch (err) {
+      const raw = err?.response?.data?.detail || err?.message || '';
+      const isQuota = raw.includes('quota') || raw.includes('429') || raw.includes('unavailable');
+      const description = isQuota
+        ? 'Image analysis is temporarily unavailable (AI vision quota reached). Please select your symptoms manually instead.'
+        : 'Could not analyse the image. Please try again or select symptoms manually.';
+      toast({ variant: 'destructive', title: 'Image analysis failed', description });
     } finally {
       setAnalyzingImage(false);
     }
