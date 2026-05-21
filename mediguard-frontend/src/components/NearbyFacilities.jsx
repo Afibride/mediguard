@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Building2, ExternalLink, Locate, MapPin, Navigation, Phone } from 'lucide-react';
-import { BAMENDA_FACILITIES, facilityDirectionsUrl, facilityMapsUrl } from '@/data/facilities';
+import {
+  BAMENDA_FACILITIES,
+  fetchNearbyFacilities,
+  facilityDirectionsUrl,
+  facilityDistanceKm,
+  facilityDistanceLabel,
+  facilityMapsUrl,
+} from '@/data/facilities';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,6 +17,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 const NearbyFacilities = ({ compact = false }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [locating, setLocating] = useState(false);
+  const [facilities, setFacilities] = useState([]);
+  const [loadingFacilities, setLoadingFacilities] = useState(false);
+  const [usingFallback, setUsingFallback] = useState(false);
 
   const requestLocation = () => {
     if (!navigator.geolocation) return;
@@ -28,7 +38,39 @@ const NearbyFacilities = ({ compact = false }) => {
     requestLocation();
   }, []);
 
-  const displayed = compact ? BAMENDA_FACILITIES.slice(0, 4) : BAMENDA_FACILITIES;
+  useEffect(() => {
+    if (!userLocation) return;
+    let cancelled = false;
+    setLoadingFacilities(true);
+    setUsingFallback(false);
+    fetchNearbyFacilities({ lat: userLocation.lat, lng: userLocation.lng, limit: compact ? 8 : 20 })
+      .then((rows) => {
+        if (cancelled) return;
+        if (rows.length) {
+          setFacilities(rows);
+        } else {
+          setUsingFallback(true);
+          setFacilities([...BAMENDA_FACILITIES].sort(
+            (a, b) => (facilityDistanceKm(a, userLocation) ?? Number.MAX_SAFE_INTEGER) - (facilityDistanceKm(b, userLocation) ?? Number.MAX_SAFE_INTEGER)
+          ));
+        }
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setUsingFallback(true);
+        setFacilities([...BAMENDA_FACILITIES].sort(
+          (a, b) => (facilityDistanceKm(a, userLocation) ?? Number.MAX_SAFE_INTEGER) - (facilityDistanceKm(b, userLocation) ?? Number.MAX_SAFE_INTEGER)
+        ));
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingFacilities(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [userLocation, compact]);
+
+  const displayed = compact ? facilities.slice(0, 4) : facilities;
 
   return (
     <Card>
@@ -40,7 +82,11 @@ const NearbyFacilities = ({ compact = false }) => {
               Nearby Health Facilities
             </CardTitle>
             <CardDescription className="mt-0.5">
-              Sourced hospitals and clinics with maps, phone numbers, and directions
+              {loadingFacilities
+                ? 'Searching hospitals and clinics near you'
+                : usingFallback
+                  ? 'Live search failed, showing fallback facilities'
+                  : 'Hospitals and clinics fetched from your current location'}
             </CardDescription>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -58,7 +104,7 @@ const NearbyFacilities = ({ compact = false }) => {
         </div>
         {userLocation && (
           <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="mt-1 text-xs text-green-600 dark:text-green-400">
-            Location detected. Direction links will start from your position.
+            Location detected. Nearby facilities are sorted by distance.
           </motion.p>
         )}
       </CardHeader>
@@ -69,6 +115,16 @@ const NearbyFacilities = ({ compact = false }) => {
             ? "grid grid-flow-col grid-rows-2 auto-cols-[minmax(230px,82vw)] gap-3 overflow-x-auto pb-2 sm:grid-flow-row sm:grid-rows-none sm:grid-cols-2 sm:auto-cols-auto sm:overflow-visible sm:pb-0"
             : "grid gap-3 sm:grid-cols-2"
         }>
+          {loadingFacilities && (
+            <div className="col-span-full rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+              Fetching nearby hospitals and clinics...
+            </div>
+          )}
+          {!loadingFacilities && displayed.length === 0 && (
+            <div className="col-span-full rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+              Allow location access to fetch hospitals close to you.
+            </div>
+          )}
           {displayed.map((facility, index) => (
             <motion.div
               key={facility.id}
@@ -82,6 +138,9 @@ const NearbyFacilities = ({ compact = false }) => {
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-semibold leading-snug">{facility.name}</p>
                   <p className="mt-0.5 text-xs text-muted-foreground">{facility.type}</p>
+                  {facilityDistanceLabel(facility, userLocation) && (
+                    <p className="text-xs font-semibold text-primary">{facilityDistanceLabel(facility, userLocation)}</p>
+                  )}
                   <p className="text-xs text-muted-foreground">{facility.address}</p>
 
                   <div className="mt-1.5 flex flex-wrap gap-1">
@@ -98,10 +157,12 @@ const NearbyFacilities = ({ compact = false }) => {
                   </div>
 
                   <div className="mt-2 flex flex-wrap items-center gap-2">
+                    {facility.phone ? (
                     <a href={`tel:${facility.phone.split('/')[0].trim()}`} className="flex items-center gap-1 text-xs text-primary hover:underline">
                       <Phone className="h-3 w-3" />
                       {facility.phone}
                     </a>
+                    ) : null}
                     <a
                       href={facilityMapsUrl(facility)}
                       target="_blank"
@@ -135,10 +196,10 @@ const NearbyFacilities = ({ compact = false }) => {
           ))}
         </div>
 
-        {compact && BAMENDA_FACILITIES.length > displayed.length && (
+        {compact && facilities.length > displayed.length && (
           <div className="mt-3 text-center">
             <Button asChild variant="link" size="sm" className="text-xs">
-              <Link to="/nearby-facilities">View all {BAMENDA_FACILITIES.length} facilities on the map</Link>
+              <Link to="/nearby-facilities">View all nearby facilities on the map</Link>
             </Button>
           </div>
         )}
