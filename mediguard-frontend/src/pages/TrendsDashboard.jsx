@@ -462,7 +462,8 @@ const TrendsDashboard = () => {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {/* Desktop view: grid layout */}
+                    <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
                       {outbreakAlerts.map((alert) => {
                         const colors = {
                           high: 'border-red-300 bg-red-50 dark:bg-red-950/30 dark:border-red-700',
@@ -493,6 +494,75 @@ const TrendsDashboard = () => {
                           </motion.div>
                         );
                       })}
+                    </div>
+                    {/* Mobile view: 2 rows with horizontal scroll */}
+                    <div className="sm:hidden">
+                      <div className="grid grid-rows-2 gap-3 overflow-x-auto pb-1" style={{ maxHeight: '260px' }}>
+                        <AutoScrollStrip innerClassName="flex gap-3">
+                          {outbreakAlerts.slice(0, Math.ceil(outbreakAlerts.length / 2)).map((alert) => {
+                            const colors = {
+                              high: 'border-red-300 bg-red-50 dark:bg-red-950/30 dark:border-red-700',
+                              medium: 'border-orange-300 bg-orange-50 dark:bg-orange-950/30 dark:border-orange-700',
+                              watch: 'border-yellow-300 bg-yellow-50 dark:bg-yellow-950/30 dark:border-yellow-700',
+                            };
+                            const labelColors = {
+                              high: 'bg-red-600 text-white',
+                              medium: 'bg-orange-500 text-white',
+                              watch: 'bg-yellow-500 text-white',
+                            };
+                            const label = { high: 'HIGH RISK', medium: 'ELEVATED', watch: 'WATCH' };
+                            return (
+                              <motion.div
+                                key={alert.disease}
+                                initial={{ scale: 0.94, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                className={`w-[70vw] max-w-[240px] flex-shrink-0 snap-start rounded-lg border p-4 ${colors[alert.level]}`}
+                              >
+                                <div className="flex items-start justify-between gap-2 mb-2">
+                                  <p className="font-bold text-sm leading-tight">{alert.disease}</p>
+                                  <Badge className={`text-[10px] ${labelColors[alert.level]} shrink-0`}>
+                                    {label[alert.level]}
+                                  </Badge>
+                                </div>
+                                <p className="text-2xl font-bold">{alert.count.toLocaleString()}</p>
+                                <p className="text-xs text-muted-foreground">{alert.reason}</p>
+                              </motion.div>
+                            );
+                          })}
+                        </AutoScrollStrip>
+                        <AutoScrollStrip innerClassName="flex gap-3">
+                          {outbreakAlerts.slice(Math.ceil(outbreakAlerts.length / 2)).map((alert) => {
+                            const colors = {
+                              high: 'border-red-300 bg-red-50 dark:bg-red-950/30 dark:border-red-700',
+                              medium: 'border-orange-300 bg-orange-50 dark:bg-orange-950/30 dark:border-orange-700',
+                              watch: 'border-yellow-300 bg-yellow-50 dark:bg-yellow-950/30 dark:border-yellow-700',
+                            };
+                            const labelColors = {
+                              high: 'bg-red-600 text-white',
+                              medium: 'bg-orange-500 text-white',
+                              watch: 'bg-yellow-500 text-white',
+                            };
+                            const label = { high: 'HIGH RISK', medium: 'ELEVATED', watch: 'WATCH' };
+                            return (
+                              <motion.div
+                                key={alert.disease}
+                                initial={{ scale: 0.94, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                className={`w-[70vw] max-w-[240px] flex-shrink-0 snap-start rounded-lg border p-4 ${colors[alert.level]}`}
+                              >
+                                <div className="flex items-start justify-between gap-2 mb-2">
+                                  <p className="font-bold text-sm leading-tight">{alert.disease}</p>
+                                  <Badge className={`text-[10px] ${labelColors[alert.level]} shrink-0`}>
+                                    {label[alert.level]}
+                                  </Badge>
+                                </div>
+                                <p className="text-2xl font-bold">{alert.count.toLocaleString()}</p>
+                                <p className="text-xs text-muted-foreground">{alert.reason}</p>
+                              </motion.div>
+                            );
+                          })}
+                        </AutoScrollStrip>
+                      </div>
                     </div>
                     <p className="text-xs text-muted-foreground mt-4 flex items-center gap-1.5">
                       <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
@@ -556,27 +626,53 @@ const TrendsDashboard = () => {
               <CardContent>
                 {loading.topDiseases ? <LoadingChart /> : (
                   <>
-                    <ResponsiveContainer width="100%" height={300}>
-                      <PieChart>
-                        <Pie
-                          data={categoryData}
-                          cx="50%"
-                          cy="50%"
-                          outerRadius={100}
-                          dataKey="value"
-                          labelLine={false}
-                          label={({ name, percent }) =>
-                            percent > 0.05 ? `${name}: ${(percent * 100).toFixed(0)}%` : ''
-                          }
-                        >
-                          {categoryData.map((_entry, i) => (
-                            <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                          ))}
-                        </Pie>
-                        <Tooltip formatter={(v) => [v.toLocaleString(), 'Screenings']} />
-                        <Legend />
-                      </PieChart>
-                    </ResponsiveContainer>
+                    {/* Smaller pie chart on mobile for better label visibility */}
+                    <div className="block sm:hidden">
+                      <ResponsiveContainer width="100%" height={260}>
+                        <PieChart>
+                          <Pie
+                            data={categoryData}
+                            cx="50%"
+                            cy="50%"
+                            outerRadius={80}
+                            dataKey="value"
+                            labelLine={false}
+                            label={({ name, percent }) =>
+                              percent > 0.08 ? `${name}: ${(percent * 100).toFixed(0)}%` : ''
+                            }
+                          >
+                            {categoryData.map((_entry, i) => (
+                              <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                            ))}
+                          </Pie>
+                          <Tooltip formatter={(v) => [v.toLocaleString(), 'Screenings']} />
+                          <Legend wrapperStyle={{ fontSize: '10px' }} />
+                        </PieChart>
+                      </ResponsiveContainer>
+                    </div>
+                    <div className="hidden sm:block">
+                      <ResponsiveContainer width="100%" height={300}>
+                        <PieChart>
+                          <Pie
+                            data={categoryData}
+                            cx="50%"
+                            cy="50%"
+                            outerRadius={100}
+                            dataKey="value"
+                            labelLine={false}
+                            label={({ name, percent }) =>
+                              percent > 0.05 ? `${name}: ${(percent * 100).toFixed(0)}%` : ''
+                            }
+                          >
+                            {categoryData.map((_entry, i) => (
+                              <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                            ))}
+                          </Pie>
+                          <Tooltip formatter={(v) => [v.toLocaleString(), 'Screenings']} />
+                          <Legend />
+                        </PieChart>
+                      </ResponsiveContainer>
+                    </div>
                     {usingFallback.topDiseases && <SampleDataNotice />}
                   </>
                 )}

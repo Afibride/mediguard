@@ -1,17 +1,20 @@
-"""
+﻿"""
 MediGuard RAG pipeline.
 
-Uses Pinecone + OpenAI when configured, and falls back to local encyclopedia
-chunks so the backend remains usable before the one-time Pinecone ingest runs.
+Uses Pinecone + OpenAI when configured, and falls back to local curated
+medical reference chunks so the backend remains usable before Pinecone ingest.
 """
 
 import json
+import math
 import os
 import re
 import time
 from collections import Counter
 from difflib import SequenceMatcher
 from pathlib import Path
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 from dotenv import load_dotenv
 
@@ -79,11 +82,11 @@ def _disease_display_name(name: str) -> str:
 
 
 DISCLAIMER = (
-    "This information is from the Gale Encyclopedia of Medicine and is provided "
-    "for educational purposes only. It is not a substitute for professional "
-    "medical advice, diagnosis, or treatment. MediGuard's automated results can "
-    "sometimes be incomplete or faulty, so always consult a qualified healthcare "
-    "professional for any health concerns."
+    "This information is from MediGuard's curated medical references and is "
+    "provided for educational purposes only. It is not a substitute for "
+    "professional medical advice, diagnosis, or treatment. MediGuard's automated "
+    "results can sometimes be incomplete or faulty, so always consult a qualified "
+    "healthcare professional for any health concerns."
 )
 
 PREGNANCY_WARNING_SIGNS = [
@@ -126,7 +129,7 @@ FATIGUE_CONTEXT_TERMS = [
     "heavy work",
 ]
 
-CHUNKS_FILE = Path(__file__).resolve().parents[2] / "data_pipeline" / "mediguard_rag_chunks.json"
+REFERENCE_CHUNKS_FILE = Path(__file__).resolve().parents[2] / "data_pipeline" / "mediguard_reference_chunks.json"
 
 _pinecone_index = None
 _pinecone_dimension = None
@@ -146,8 +149,8 @@ GREETING_PATTERNS = [
     r"^\s*(can|could)\s+you\s+help\s+me\s*[?.!]*\s*$",
     r"^\s*(help|what can you do)\s*[?.!]*\s*$",
     # French greetings
-    r"^\s*(bonjour|salut|bonsoir|bonne\s+nuit|allô)\s*[!.?]*\s*$",
-    r"^\s*comment\s+(allez.vous|vas.tu|ça\s+va)\s*[?.!]*\s*$",
+    r"^\s*(bonjour|salut|bonsoir|bonne\s+nuit|allÃ´)\s*[!.?]*\s*$",
+    r"^\s*comment\s+(allez.vous|vas.tu|Ã§a\s+va)\s*[?.!]*\s*$",
     r"^\s*(pouvez.vous|peux.tu)\s+m['']aider\s*[?.!]*\s*$",
 ]
 
@@ -158,21 +161,21 @@ THANKS_PATTERNS = [
     r"^\s*(merci|merci\s+beaucoup|je\s+vous\s+remercie|c['']est\s+bien)\s*[!.?]*\s*$",
 ]
 
-# French detection — uses accented chars (never in English) + unambiguous French words
+# French detection â€” uses accented chars (never in English) + unambiguous French words
 _FRENCH_STRONG = [
-    # Accented characters — near-certain French indicator
-    "à", "â", "é", "è", "ê", "ë", "î", "ï", "ô", "ù", "û", "ü", "ç", "œ", "æ",
+    # Accented characters â€” near-certain French indicator
+    "Ã ", "Ã¢", "Ã©", "Ã¨", "Ãª", "Ã«", "Ã®", "Ã¯", "Ã´", "Ã¹", "Ã»", "Ã¼", "Ã§", "Å“", "Ã¦",
     # Unambiguous French words / phrases (not found in English)
-    "bonjour", "bonsoir", "salut", "merci", "s'il vous plaît", "s'il te plaît",
+    "bonjour", "bonsoir", "salut", "merci", "s'il vous plaÃ®t", "s'il te plaÃ®t",
     "qu'est-ce", "c'est", "est-ce", "qu'il", "n'est", "je suis", "je vais",
     "je voudrais", "je veux", "je peux", "je dois", "je ne ",
-    "vous avez", "vous êtes", "vous pouvez", "nous avons",
-    "quel symptôme", "quels symptômes", "quels sont", "quelles sont",
+    "vous avez", "vous Ãªtes", "vous pouvez", "nous avons",
+    "quel symptÃ´me", "quels symptÃ´mes", "quels sont", "quelles sont",
     "pourquoi ", "voudrais", "voudrait", "pouvez-vous",
-    "maladie", "maladies", "fièvre", "douleur", "douleurs", "traitement",
-    "prévention", "paludisme", "médecin", "hôpital", "santé", "symptôme",
-    "symptômes", "guérir", "prévenir", "contagieux",
-    "comment soigner", "comment traiter", "comment prévenir",
+    "maladie", "maladies", "fiÃ¨vre", "douleur", "douleurs", "traitement",
+    "prÃ©vention", "paludisme", "mÃ©decin", "hÃ´pital", "santÃ©", "symptÃ´me",
+    "symptÃ´mes", "guÃ©rir", "prÃ©venir", "contagieux",
+    "comment soigner", "comment traiter", "comment prÃ©venir",
     "qu'est ce que", "qu est-ce",
 ]
 
@@ -184,14 +187,14 @@ def _is_french(query: str) -> bool:
 
 SYMPTOM_DEFINITIONS: dict[str, str] = {
     "fever": (
-        "A fever is a temporary rise in body temperature above the normal range of 36–37.5°C (97–99.5°F), "
-        "usually above 38°C (100.4°F). It is the body's natural defence response — an elevated temperature "
+        "A fever is a temporary rise in body temperature above the normal range of 36â€“37.5Â°C (97â€“99.5Â°F), "
+        "usually above 38Â°C (100.4Â°F). It is the body's natural defence response â€” an elevated temperature "
         "makes the environment less hospitable for many bacteria and viruses. Fever often comes with chills, "
-        "sweating, headache, muscle aches, and loss of appetite. Prolonged or very high fever (above 40°C/104°F) "
+        "sweating, headache, muscle aches, and loss of appetite. Prolonged or very high fever (above 40Â°C/104Â°F) "
         "needs prompt medical attention."
     ),
     "rash": (
-        "A rash is any change in the skin's colour, texture, or appearance — it may be flat (macular), "
+        "A rash is any change in the skin's colour, texture, or appearance â€” it may be flat (macular), "
         "raised (papular), blistered (vesicular), or pustular. Rashes can be localised to one area or spread "
         "across the body. They can be itchy, painful, or painless. The exact look of a rash is an important "
         "diagnostic clue: rashes from different diseases spread and appear differently."
@@ -223,7 +226,7 @@ SYMPTOM_DEFINITIONS: dict[str, str] = {
     "vomiting": (
         "Vomiting is the forceful expulsion of stomach contents through the mouth. It can be caused by "
         "infections, food poisoning, medications, motion sickness, appendicitis, or brain conditions. "
-        "Repeated vomiting leads to dehydration and electrolyte imbalance — warning signs include no urination "
+        "Repeated vomiting leads to dehydration and electrolyte imbalance â€” warning signs include no urination "
         "for 8+ hours, dry mouth, dizziness, and sunken eyes. Blood in vomit requires immediate medical attention."
     ),
     "diarrhea": (
@@ -259,7 +262,7 @@ SYMPTOM_DEFINITIONS: dict[str, str] = {
     "shortness of breath": (
         "Shortness of breath (dyspnea) is the feeling of not getting enough air. It can occur with exertion "
         "or at rest. Causes include asthma, pneumonia, pleural effusion, anemia, heart failure, and allergic "
-        "reactions. Sudden severe breathlessness — especially with chest pain, blue lips, or rapid heartbeat — "
+        "reactions. Sudden severe breathlessness â€” especially with chest pain, blue lips, or rapid heartbeat â€” "
         "is a medical emergency requiring immediate care."
     ),
     "joint pain": (
@@ -281,8 +284,8 @@ SYMPTOM_DEFINITIONS: dict[str, str] = {
         "tuberculosis, liver disease, cancer, or chronic infections."
     ),
     "weight loss": (
-        "Unintentional weight loss is losing body weight without trying — generally more than 5% of body "
-        "weight over 6–12 months. It can be caused by infections (tuberculosis, HIV), cancer, diabetes, "
+        "Unintentional weight loss is losing body weight without trying â€” generally more than 5% of body "
+        "weight over 6â€“12 months. It can be caused by infections (tuberculosis, HIV), cancer, diabetes, "
         "thyroid disease, or severe malnutrition. When combined with night sweats and persistent cough, it "
         "is a classic warning sign for tuberculosis."
     ),
@@ -293,13 +296,13 @@ SYMPTOM_DEFINITIONS: dict[str, str] = {
         "patches, high fever, or swollen lymph nodes may need antibiotic treatment."
     ),
     "runny nose": (
-        "A runny nose (rhinorrhea) is excess nasal discharge — it can be clear, white, yellow, or green. "
+        "A runny nose (rhinorrhea) is excess nasal discharge â€” it can be clear, white, yellow, or green. "
         "Clear discharge often indicates a viral infection or allergy; thick coloured discharge may suggest "
         "a bacterial secondary infection. Runny nose combined with body aches and fever typically points to "
         "influenza rather than a simple cold."
     ),
     "skin lesion": (
-        "A skin lesion is any abnormal area of skin — it can be a sore, ulcer, blister, spot, or growth. "
+        "A skin lesion is any abnormal area of skin â€” it can be a sore, ulcer, blister, spot, or growth. "
         "The type, location, edge, colour, and whether it is painful or painless all help identify the cause. "
         "Painless skin lesions can be associated with conditions like leprosy or some STIs."
     ),
@@ -310,7 +313,7 @@ SYMPTOM_DEFINITIONS: dict[str, str] = {
     ),
     "jaundice": (
         "Jaundice is a yellow colouring of the skin and whites of the eyes caused by excess bilirubin in "
-        "the blood. It indicates that the liver is not processing bilirubin normally — due to liver disease "
+        "the blood. It indicates that the liver is not processing bilirubin normally â€” due to liver disease "
         "(hepatitis, cirrhosis), bile duct obstruction, or destruction of red blood cells (haemolytic anaemia "
         "or severe malaria). New-onset jaundice always warrants prompt medical evaluation."
     ),
@@ -353,37 +356,37 @@ DISEASE_ALIASES: dict[str, str] = {
     "bph": "Benign Prostatic Hyperplasia", "enlarged prostate": "Benign Prostatic Hyperplasia",
     # French disease names
     "paludisme": "Malaria",
-    "fièvre typhoïde": "Typhoid Fever", "typhoïde": "Typhoid Fever",
-    "choléra": "Cholera",
+    "fiÃ¨vre typhoÃ¯de": "Typhoid Fever", "typhoÃ¯de": "Typhoid Fever",
+    "cholÃ©ra": "Cholera",
     "pneumonie": "Pneumonia",
     "tuberculose": "Tuberculosis",
-    "méningite": "Meningitis",
+    "mÃ©ningite": "Meningitis",
     "dengue": "Dengue Fever",
     "varicelle": "Chickenpox",
     "rougeole": "Measles",
-    "hépatite a": "Hepatitis A", "hépatite b": "Hepatitis B",
-    "fièvre jaune": "Yellow Fever",
+    "hÃ©patite a": "Hepatitis A", "hÃ©patite b": "Hepatitis B",
+    "fiÃ¨vre jaune": "Yellow Fever",
     "coqueluche": "Whooping Cough",
     "oreillons": "Mumps",
-    "rubéole": "Rubella",
+    "rubÃ©ole": "Rubella",
     "sinusite": "Sinusitis",
     "angine": "Tonsillitis",
     "otite": "Ear Infection",
     "conjonctivite": "Conjunctivitis",
     "zona": "Herpes Zoster",
     "appendicite": "Appendicitis",
-    "diabète": "Diabetes Mellitus",
+    "diabÃ¨te": "Diabetes Mellitus",
     "hypertension": "Hypertension",
-    "anémie": "Iron Deficiency Anemia",
-    "paludisme cérébral": "Malaria",
+    "anÃ©mie": "Iron Deficiency Anemia",
+    "paludisme cÃ©rÃ©bral": "Malaria",
     "grippe": "Common Cold",
     "asthme": "Asthma",
-    "épilepsie": "Epilepsy",
+    "Ã©pilepsie": "Epilepsy",
     "migraine": "Migraine",
-    "gonorrhée": "Gonorrhea", "blennorragie": "Gonorrhea",
+    "gonorrhÃ©e": "Gonorrhea", "blennorragie": "Gonorrhea",
     "syphilis": "Syphilis",
     "chlamydia": "Chlamydia",
-    "herpès génital": "Genital Herpes",
+    "herpÃ¨s gÃ©nital": "Genital Herpes",
     "trichomonase": "Trichomoniasis",
     # STIs
     "gonorrhea": "Gonorrhea", "gonorrhoea": "Gonorrhea", "gonorhea": "Gonorrhea",
@@ -462,10 +465,10 @@ DISEASE_SYMPTOM_QUERY_PATTERNS = [
     re.compile(r"^\s*(.+?)\s+symptoms\s*[?.!]*\s*$", re.I),
     re.compile(r"^\s*how\s+does\s+(.+?)\s+(?:present|manifest|show|appear)\s*[?.!]*\s*$", re.I),
     # French patterns
-    re.compile(r"^\s*sympt[oô]mes?\s+du?\s+(.+?)\s*[?.!]*\s*$", re.I),
-    re.compile(r"^\s*sympt[oô]mes?\s+de\s+(?:la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
-    re.compile(r"^\s*quels?\s+sont\s+(?:les\s+)?sympt[oô]mes?\s+(?:du?|de|d[e'])\s+(?:la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
-    re.compile(r"^\s*(.+?)\s+sympt[oô]mes?\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*sympt[oÃ´]mes?\s+du?\s+(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*sympt[oÃ´]mes?\s+de\s+(?:la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*quels?\s+sont\s+(?:les\s+)?sympt[oÃ´]mes?\s+(?:du?|de|d[e'])\s+(?:la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*(.+?)\s+sympt[oÃ´]mes?\s*[?.!]*\s*$", re.I),
 ]
 
 SYMPTOM_DEFINITION_PATTERNS = [
@@ -493,7 +496,7 @@ def _symptom_definition_response(query: str) -> dict | None:
     # Check for an exact or near match in our definitions table
     definition = SYMPTOM_DEFINITIONS.get(term)
     if not definition:
-        # Try substring match (e.g. "high fever" → "fever")
+        # Try substring match (e.g. "high fever" â†’ "fever")
         for key, val in SYMPTOM_DEFINITIONS.items():
             if key in term or term in key:
                 definition = val
@@ -508,7 +511,7 @@ def _symptom_definition_response(query: str) -> dict | None:
     for disease_name, desc_map in SYMPTOM_DESCRIPTIONS.items():
         for sym_key, sym_desc in desc_map.items():
             if term in sym_key.lower() or sym_key.lower() in term:
-                disease_examples.append(f"• **{disease_name}**: {sym_desc}")
+                disease_examples.append(f"**{disease_name}**: {sym_desc}")
                 break
     disease_examples = disease_examples[:5]
 
@@ -517,7 +520,10 @@ def _symptom_definition_response(query: str) -> dict | None:
         answer_parts.append(
             f"\n\nHow **{term}** specifically appears in different diseases:"
         )
-        answer_parts.extend(disease_examples)
+        answer_parts.extend(
+            f"{index}. {example}"
+            for index, example in enumerate(disease_examples, start=1)
+        )
     answer_parts.append(
         "\n\nIf you are experiencing this symptom yourself, describe it to a qualified healthcare "
         "professional or use the MediGuard Symptom Checker for a guided assessment."
@@ -567,7 +573,7 @@ def _disease_symptoms_response(query: str) -> dict | None:
     # Fuzzy fallback: if no pattern matched, check for "symptom*" anywhere + disease name
     if not term:
         text = query.lower()
-        if re.search(r"\bsymptom", text) or "symptôme" in text or re.search(r"\bsign(s)?\b", text) or re.search(r"\bpresent", text):
+        if re.search(r"\bsymptom", text) or "symptÃ´me" in text or re.search(r"\bsign(s)?\b", text) or re.search(r"\bpresent", text):
             d = _detect_disease(query)
             if d:
                 term = d["name"]
@@ -585,7 +591,7 @@ def _disease_symptoms_response(query: str) -> dict | None:
 
     desc_map = SYMPTOM_DESCRIPTIONS.get(disease["name"], {})
     lines = [f"**{_disease_display_name(disease['name'])}** commonly presents with these symptoms:\n"]
-    for sym in symptoms:
+    for index, sym in enumerate(symptoms, start=1):
         sym_lower = sym.lower().replace("_", " ")
         desc = next(
             (val for key, val in desc_map.items()
@@ -593,9 +599,9 @@ def _disease_symptoms_response(query: str) -> dict | None:
             None,
         )
         if desc:
-            lines.append(f"• **{sym.replace('_', ' ')}**: {desc}")
+            lines.append(f"{index}. **{sym.replace('_', ' ')}**: {desc}")
         else:
-            lines.append(f"• {sym.replace('_', ' ')}")
+            lines.append(f"{index}. {sym.replace('_', ' ')}")
 
     lines.append(
         "\n\nThis information is for educational purposes only. "
@@ -616,15 +622,17 @@ DISEASE_GENERAL_PATTERNS = [
     re.compile(r"^\s*(?:define)\s+(.+?)\s*[?.!]*\s*$", re.I),
     # French patterns
     re.compile(r"^\s*qu[''e]est.ce\s+que\s+(?:le\s+|la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
-    re.compile(r"^\s*(?:c[''e]est\s+quoi|keski|késako)\s+(?:le\s+|la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
-    re.compile(r"^\s*(?:expliquez?|décrivez?|parlez.moi\s+de)\s+(?:le\s+|la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
-    re.compile(r"^\s*(?:qu[''e]est.ce\s+que\s+c[''e]est|définissez?)\s+(?:le\s+|la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*(?:c[''e]est\s+quoi|keski|kÃ©sako)\s+(?:le\s+|la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*(?:expliquez?|dÃ©crivez?|parlez.moi\s+de)\s+(?:le\s+|la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
+    re.compile(r"^\s*(?:qu[''e]est.ce\s+que\s+c[''e]est|dÃ©finissez?)\s+(?:le\s+|la\s+|l[e']?\s+)?(.+?)\s*[?.!]*\s*$", re.I),
 ]
 
 # Terms that indicate other, more specific handlers should handle it
 _GENERAL_SKIP_TERMS = {
     "symptom", "sign of", "prevent", "prevention", "treatment", "treat",
     "cure", "cause", "causes", "spread", "how do i", "how can i",
+    "lab", "laboratory", "test", "testing", "diagnosis", "diagnostic",
+    "screen", "screening", "specimen", "culture", "smear",
 }
 
 
@@ -643,7 +651,7 @@ def _disease_general_info_response(query: str) -> dict | None:
             candidate = m.group(1).strip()
             break
 
-    # If no pattern matched, only proceed if the query is short (≤5 words) and contains a disease name
+    # If no pattern matched, only proceed if the query is short (â‰¤5 words) and contains a disease name
     if not candidate:
         if len(query.split()) > 5:
             return None
@@ -813,6 +821,96 @@ BAMENDA_FACILITIES_DATA = [
     {"name": "St. Martin de Porres Catholic Mission Hospital", "type": "Catholic Mission Hospital", "address": "Njinikom, North West Region", "phone": "+237 6 65 84 26 16 / +237 6 65 84 26 19", "maps": "https://www.google.com/maps/search/?api=1&query=St+Martin+de+Porres+Catholic+Mission+Hospital+Njinikom+Cameroon"},
 ]
 
+
+def _distance_km(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
+    earth_km = 6371.0
+    d_lat = math.radians(lat2 - lat1)
+    d_lng = math.radians(lng2 - lng1)
+    a = (
+        math.sin(d_lat / 2) ** 2
+        + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(d_lng / 2) ** 2
+    )
+    return earth_km * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+
+def _facility_type_from_tags(tags: dict) -> str:
+    healthcare = (tags.get("healthcare") or "").lower()
+    amenity = (tags.get("amenity") or "").lower()
+    if healthcare == "hospital" or amenity == "hospital":
+        return "Hospital"
+    if healthcare == "clinic" or amenity == "clinic":
+        return "Clinic"
+    if healthcare in {"doctor", "doctors"} or amenity == "doctors":
+        return "Doctors / Medical Practice"
+    return "Health Facility"
+
+
+def _address_from_tags(tags: dict) -> str:
+    parts = [
+        tags.get("addr:housenumber"),
+        tags.get("addr:street"),
+        tags.get("addr:suburb"),
+        tags.get("addr:city"),
+        tags.get("addr:state"),
+        tags.get("addr:country"),
+    ]
+    parts = [part for part in parts if part]
+    return ", ".join(parts) if parts else tags.get("address") or "Address not listed on map"
+
+
+def _fetch_map_facilities(user_lat: float, user_lng: float, radius: int = 15000, limit: int = 5) -> list[dict]:
+    overpass_query = f"""
+    [out:json][timeout:20];
+    (
+      node(around:{radius},{user_lat},{user_lng})["amenity"~"hospital|clinic|doctors"];
+      way(around:{radius},{user_lat},{user_lng})["amenity"~"hospital|clinic|doctors"];
+      relation(around:{radius},{user_lat},{user_lng})["amenity"~"hospital|clinic|doctors"];
+      node(around:{radius},{user_lat},{user_lng})["healthcare"~"hospital|clinic|doctor|doctors"];
+      way(around:{radius},{user_lat},{user_lng})["healthcare"~"hospital|clinic|doctor|doctors"];
+      relation(around:{radius},{user_lat},{user_lng})["healthcare"~"hospital|clinic|doctor|doctors"];
+    );
+    out center tags {limit * 4};
+    """
+    request = Request(
+        "https://overpass-api.de/api/interpreter",
+        data=urlencode({"data": overpass_query}).encode("utf-8"),
+        headers={"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8", "User-Agent": "MediGuard/1.0"},
+        method="POST",
+    )
+    with urlopen(request, timeout=25) as response:
+        payload = json.loads(response.read().decode("utf-8"))
+
+    seen: set[str] = set()
+    facilities: list[dict] = []
+    for element in payload.get("elements", []):
+        tags = element.get("tags") or {}
+        facility_lat = element.get("lat") or (element.get("center") or {}).get("lat")
+        facility_lng = element.get("lon") or (element.get("center") or {}).get("lon")
+        name = tags.get("name") or tags.get("operator")
+        if not facility_lat or not facility_lng or not name:
+            continue
+        facility_type = _facility_type_from_tags(tags)
+        if facility_type not in {"Hospital", "Clinic", "Doctors / Medical Practice"}:
+            continue
+        dedupe_key = f"{name.lower()}-{float(facility_lat):.4f}-{float(facility_lng):.4f}"
+        if dedupe_key in seen:
+            continue
+        seen.add(dedupe_key)
+        facilities.append({
+            "name": name,
+            "type": facility_type,
+            "address": _address_from_tags(tags),
+            "phone": tags.get("phone") or tags.get("contact:phone") or tags.get("mobile") or "Phone not listed on map",
+            "hours": tags.get("opening_hours") or "Hours not listed on map",
+            "lat": float(facility_lat),
+            "lng": float(facility_lng),
+            "distance_km": _distance_km(user_lat, user_lng, float(facility_lat), float(facility_lng)),
+            "source_url": f"https://www.openstreetmap.org/{element.get('type')}/{element.get('id')}",
+        })
+
+    return sorted(facilities, key=lambda item: item["distance_km"])[:limit]
+
+
 FACILITY_TERMS = [
     "hospital", "clinic", "health facility", "health centre", "health center",
     "nearest hospital", "nearby hospital", "where to go", "where can i go",
@@ -864,10 +962,10 @@ def _trends_response(query: str) -> dict | None:
                 "data_source": "database",
             }
 
-        lines = [f"**MediGuard Community Disease Trends — Bamenda** (based on {total} screening{'s' if total != 1 else ''}):\n"]
+        lines = [f"**MediGuard Community Disease Trends â€” Bamenda** (based on {total} screening{'s' if total != 1 else ''}):\n"]
         for i, (disease, count) in enumerate(rows, 1):
             pct = round((count / total) * 100)
-            lines.append(f"{i}. **{disease}** — {count} case{'s' if count != 1 else ''} ({pct}%)")
+            lines.append(f"{i}. **{disease}** â€” {count} case{'s' if count != 1 else ''} ({pct}%)")
 
         lines.append(
             "\nThese figures reflect symptom screenings submitted through MediGuard, not confirmed diagnoses. "
@@ -889,43 +987,69 @@ def _facilities_response(query: str, user_lat: float | None = None, user_lng: fl
         return None
 
     has_location = user_lat is not None and user_lng is not None
-    lines = ["**Nearby Health Facilities – Bamenda, NW Region**\n"]
+    if not has_location:
+        return {
+            "answer": (
+                "I need your current location to choose the nearest hospital from the map. "
+                "Please allow location access in your browser, then ask again or open **/nearby-facilities** and tap **Use my location**. "
+                "For an emergency, go to the closest open hospital you already know or call local emergency support immediately."
+            ),
+            "sources": ["OpenStreetMap / Overpass"],
+            "disclaimer": DISCLAIMER,
+            "mode": "facilities",
+            "data_source": "location_required",
+        }
 
-    for f in BAMENDA_FACILITIES_DATA:
-        if has_location:
-            dir_url = (
-                f"https://www.google.com/maps/dir/?api=1"
-                f"&origin={user_lat},{user_lng}"
-                f"&destination={f['maps'].split('query=')[1]}"
-            )
-        else:
-            dir_url = f"https://www.google.com/maps/dir/?api=1&destination={f['maps'].split('query=')[1]}"
+    try:
+        facilities = _fetch_map_facilities(float(user_lat), float(user_lng), limit=5)
+    except Exception:
+        facilities = []
 
+    if not facilities:
+        return {
+            "answer": (
+                "I could not fetch live nearby hospitals from the map right now. "
+                "Open **/nearby-facilities** in MediGuard and tap **Use my location** to retry with the embedded map. "
+                "For an emergency, go to the closest open hospital or call local emergency support immediately."
+            ),
+            "sources": ["OpenStreetMap / Overpass"],
+            "disclaimer": DISCLAIMER,
+            "mode": "facilities",
+            "data_source": "map_unavailable",
+        }
+
+    lines = ["**Nearest mapped health facilities from your location**\n"]
+
+    for index, f in enumerate(facilities, start=1):
+        destination = f"{f['lat']},{f['lng']}"
+        dir_url = (
+            "https://www.google.com/maps/dir/?api=1"
+            f"&origin={user_lat},{user_lng}"
+            f"&destination={destination}"
+        )
+        distance_label = f"{round(f['distance_km'] * 1000)} m" if f["distance_km"] < 1 else f"{f['distance_km']:.1f} km"
         lines.append(
-            f"• **{f['name']}** ({f['type']})\n"
-            f"  Address: {f['address']}\n"
-            f"  Phone: {f['phone']}\n"
-            f"  Directions: {dir_url}"
+            f"{index}. **{f['name']}** ({f['type']}) - {distance_label} away\n"
+            f"   Address: {f['address']}\n"
+            f"   Phone: {f['phone']}\n"
+            f"   Hours: {f['hours']}\n"
+            f"   Directions: {dir_url}\n"
+            f"   Map source: {f['source_url']}"
         )
 
-    if has_location:
-        lines.append(
-            "\nYour location was detected — the Directions links above will route from your current position. "
-            "You can also open the **Nearby Facilities** page inside MediGuard at /nearby-facilities for an embedded map."
-        )
-    else:
-        lines.append(
-            "\nOpen **Nearby Facilities** at /nearby-facilities inside MediGuard for an embedded interactive map. "
-            "For real-time directions from your location, tap 'Use my location' on that page."
-        )
-    lines.append("For emergencies, go directly to **Bamenda Regional Hospital** or call the closest open facility.")
+    lines.append(
+        "\nThese are live OpenStreetMap results sorted by distance from your detected location. "
+        "Open **/nearby-facilities** in MediGuard to view them on the embedded map. "
+        "For emergencies, go to the nearest open facility immediately."
+    )
 
     return {
         "answer": "\n".join(lines),
-        "sources": ["Bamenda Health Facilities Directory"],
+        "sources": [f["name"] for f in facilities[:3]],
         "disclaimer": DISCLAIMER,
         "mode": "facilities",
-        "data_source": "platform",
+        "data_source": "openstreetmap",
+        "facilities": facilities,
     }
 
 
@@ -988,7 +1112,7 @@ def _conversational_response(query: str) -> dict | None:
     french = _is_french(query)
 
     if not text:
-        answer = ("Je suis ici. Posez une question sur les symptômes, les maladies ou la prévention."
+        answer = ("Je suis ici. Posez une question sur les symptÃ´mes, les maladies ou la prÃ©vention."
                   if french else
                   "I am here. Ask me about symptoms, diseases, prevention, or when to seek care.")
         return {"answer": answer, "sources": [], "disclaimer": DISCLAIMER}
@@ -996,17 +1120,17 @@ def _conversational_response(query: str) -> dict | None:
     if any(re.match(pattern, text) for pattern in GREETING_PATTERNS):
         if "how are you" in text:
             answer = (
-                "Je vais bien, merci. Je peux expliquer les symptômes, la prévention et les informations de santé "
-                "de la base de données MediGuard. Dites-moi ce que vous souhaitez savoir."
+                "Je vais bien, merci. Je peux expliquer les symptÃ´mes, la prÃ©vention et les informations de santÃ© "
+                "de la base de donnÃ©es MediGuard. Dites-moi ce que vous souhaitez savoir."
                 if french else
                 "I am doing well and ready to help. I can explain symptoms, prevention, and general health information "
-                "from MediGuard's encyclopedia knowledge base. Tell me what you would like to understand."
+                "from MediGuard's curated medical references. Tell me what you would like to understand."
             )
         elif "help" in text or "aider" in text or "what can you do" in text or "que pouvez" in text:
             answer = (
-                "Oui, je peux vous aider. Vous pouvez poser des questions sur les symptômes, les maladies courantes à Bamenda, "
-                "la prévention, les traitements, ou quand consulter un médecin. Je peux aussi vous orienter vers les "
-                "établissements de santé proches et répondre aux questions sur MediGuard."
+                "Oui, je peux vous aider. Vous pouvez poser des questions sur les symptÃ´mes, les maladies courantes Ã  Bamenda, "
+                "la prÃ©vention, les traitements, ou quand consulter un mÃ©decin. Je peux aussi vous orienter vers les "
+                "Ã©tablissements de santÃ© proches et rÃ©pondre aux questions sur MediGuard."
                 if french else
                 "Yes, I can help. You can ask about symptoms, common conditions in Bamenda, prevention, treatment overview, "
                 "or when to see a doctor. I can also explain your symptom-checker result, point you to nearby facilities, "
@@ -1014,8 +1138,8 @@ def _conversational_response(query: str) -> dict | None:
             )
         else:
             answer = (
-                "Bonjour, bienvenue sur MediGuard. Je peux vous aider avec des questions de santé sur les symptômes, "
-                "les maladies, la prévention et quand consulter un professionnel de santé."
+                "Bonjour, bienvenue sur MediGuard. Je peux vous aider avec des questions de santÃ© sur les symptÃ´mes, "
+                "les maladies, la prÃ©vention et quand consulter un professionnel de santÃ©."
                 if french else
                 "Hello, welcome to MediGuard. I can help with health education questions about symptoms, diseases, "
                 "prevention, and when to seek professional care."
@@ -1023,7 +1147,7 @@ def _conversational_response(query: str) -> dict | None:
         return {"answer": answer, "sources": [], "disclaimer": DISCLAIMER}
     if any(re.match(pattern, text) for pattern in THANKS_PATTERNS):
         answer = (
-            "De rien. Je suis disponible chaque fois que vous souhaitez vérifier des symptômes, comprendre une maladie ou apprendre des mesures de prévention."
+            "De rien. Je suis disponible chaque fois que vous souhaitez vÃ©rifier des symptÃ´mes, comprendre une maladie ou apprendre des mesures de prÃ©vention."
             if french else
             "You are welcome. I am here whenever you want to check symptoms, understand a condition, "
             "or learn prevention steps from the MediGuard knowledge base."
@@ -1096,7 +1220,7 @@ def _pregnancy_followup_response(query: str, symptoms: list[str], is_pregnant: b
 
 def _detect_disease(query: str) -> dict | None:
     text = query.lower()
-    # Alias lookup first (handles "chicken pox" → "Chickenpox" etc.)
+    # Alias lookup first (handles "chicken pox" â†’ "Chickenpox" etc.)
     for alias in sorted(DISEASE_ALIASES, key=len, reverse=True):
         if alias in text:
             d = _DISEASE_BY_NAME.get(DISEASE_ALIASES[alias])
@@ -1530,7 +1654,7 @@ def _optional_imports():
 def _load_local_chunks() -> list[dict]:
     global _local_chunks
     if _local_chunks is None:
-        _local_chunks = json.loads(CHUNKS_FILE.read_text(encoding="utf-8"))
+        _local_chunks = json.loads(REFERENCE_CHUNKS_FILE.read_text(encoding="utf-8"))
     return _local_chunks
 
 
@@ -1580,7 +1704,7 @@ def _local_retrieve(query: str, top_k: int = 5, filter_disease: str | None = Non
             matches.append({
                 "text": text,
                 "disease": disease,
-                "source": chunk.get("source", "Gale Encyclopedia of Medicine"),
+                "source": chunk.get("source", "MediGuard medical references"),
                 "score": score,
                 "retrieval_source": "local_fallback",
             })
@@ -1593,7 +1717,7 @@ def retrieve(query: str, top_k: int = 5, filter_disease: str | None = None) -> l
         return _local_retrieve(query, top_k=top_k, filter_disease=filter_disease)
 
     query_vector = embed_text(query, dim=_pinecone_dimension or 384)
-    # Restrict to encyclopedia RAG chunks — exclude disease_profile and training_example
+    # Restrict to curated reference chunks; exclude disease_profile and training_example
     # vectors that were added by the prediction pipeline.
     pinecone_filter: dict = {"data_type": {"$nin": ["disease_profile", "training_example"]}}
     if filter_disease:
@@ -1615,11 +1739,11 @@ def retrieve(query: str, top_k: int = 5, filter_disease: str | None = None) -> l
         meta = match.metadata if hasattr(match, "metadata") else match.get("metadata", {})
         text = meta.get("text", "")
         if not text:
-            continue  # skip non-encyclopedia vectors that slipped through the filter
+            continue  # skip non-reference vectors that slipped through the filter
         chunks.append({
             "text": text,
             "disease": meta.get("disease", ""),
-            "source": meta.get("source", "Gale Encyclopedia of Medicine"),
+            "source": meta.get("source", "MediGuard medical references"),
             "score": round(match.score if hasattr(match, "score") else match.get("score", 0), 4),
             "retrieval_source": "pinecone",
         })
@@ -1638,7 +1762,7 @@ def _extractive_answer(query: str, chunks: list[dict]) -> str:
     if summary:
         summary += "."
     return (
-        f"Based on the encyclopedia passages I found, {summary} "
+        f"Based on the medical reference passages I found, {summary} "
         "For first aid, rest, drink safe fluids, monitor symptoms, and seek urgent care for severe, worsening, or persistent symptoms. "
         "MediGuard results can sometimes be faulty, so use this as educational guidance only and consult a qualified healthcare professional for personal symptoms."
     )
@@ -1701,7 +1825,7 @@ def generate_answer(
     data_source = chunks[0].get("retrieval_source", "unknown") if chunks else "none"
     if not chunks:
         return {
-            "answer": "I could not find relevant encyclopedia information for that question. Please try rephrasing or consult a healthcare professional.",
+            "answer": "I could not find relevant MediGuard reference information for that question. Please try rephrasing or consult a healthcare professional.",
             "sources": [],
             "disclaimer": DISCLAIMER,
             "data_source": data_source,
@@ -1734,7 +1858,7 @@ def generate_answer(
                 "ask concise follow-up questions about gestational age, severity, onset, bleeding, abdominal pain, fever, "
                 "headache, vision changes, swelling, shortness of breath, and fetal movement before giving non-urgent guidance.\n\n"
                 f"User context: gender={gender or 'not provided'}, pregnant={is_pregnant}, pregnancy_weeks={pregnancy_weeks or 'not provided'}.\n\n"
-                f"Context from the Gale Encyclopedia of Medicine:\n{context}"
+                f"Context from MediGuard curated medical references:\n{context}"
                 f"{weak_note}"
             ),
         }]
@@ -1761,3 +1885,4 @@ def generate_answer(
             sources.append(disease)
 
     return {"answer": answer, "sources": sources, "disclaimer": DISCLAIMER, "data_source": data_source}
+

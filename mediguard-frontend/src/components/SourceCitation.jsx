@@ -9,7 +9,7 @@ const SourceCitation = ({ sources }) => {
       <BookOpen className="h-3.5 w-3.5 mt-0.5 text-primary" />
       <span>
         <span className="font-medium text-foreground">Source: </span>
-        {sources.join(', ')} - Gale Encyclopedia of Medicine, 3rd Ed.
+        {sources.join(', ')} - MediGuard curated medical references
       </span>
     </div>
   );

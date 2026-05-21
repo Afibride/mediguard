@@ -85,7 +85,7 @@ def disease_profile(name: str, category: str, symptoms: list[str]) -> dict:
         "severity": "High" if name in {"Malaria", "Typhoid Fever", "Cholera", "Pneumonia", "Tuberculosis", "Meningitis", "Dengue Fever"} else "Medium",
         "symptoms": symptoms,
         "description": f"{name} is included in MediGuard's Bamenda-focused pre-consultation knowledge base.",
-        "causes": f"Common causes and risk factors for {name} are summarized from encyclopedia-style clinical reference notes.",
+        "causes": f"Common causes and risk factors for {name} are summarized from MediGuard curated medical-reference notes.",
         "treatment": "Consult a qualified healthcare professional for diagnosis and treatment. MediGuard provides educational guidance only.",
         "prevention": ["Seek early care for severe symptoms", "Practice hygiene and prevention measures", "Follow clinician guidance"],
         "sections": {
@@ -132,7 +132,7 @@ def write_knowledge_base() -> None:
         disease_name = file_stem.replace("_", " ")
         text = "\n\n".join([
             f"{disease_name}",
-            f"Overview: {disease_name} is part of the MediGuard encyclopedia-derived health education corpus.",
+            f"Overview: {disease_name} is part of the MediGuard curated medical-reference health education corpus.",
             "Symptoms: This section summarizes common warning signs, symptom progression, and when to seek professional care.",
             "Causes: This section captures likely causes, transmission routes, and risk factors relevant to community screening.",
             "Treatment: This educational text does not prescribe treatment. Users should consult qualified health professionals.",
@@ -158,9 +158,10 @@ def write_pipeline(symptoms: list[str]) -> None:
             "section": ["Overview", "Symptoms", "Causes", "Treatment", "Prevention"][index % 5],
             "chunk_index": index,
             "text": f"{disease} reference chunk {index + 1}. This passage supports MediGuard retrieval-grounded health education.",
-            "source": "Gale Encyclopedia of Medicine, 3rd Ed. seed placeholder",
+            "source": "MediGuard curated medical references seed placeholder",
+            "data_type": "medical_reference",
         })
-    (pipeline_dir / "mediguard_rag_chunks.json").write_text(json.dumps(chunks, indent=2), encoding="utf-8")
+    (pipeline_dir / "mediguard_reference_chunks.json").write_text(json.dumps(chunks, indent=2), encoding="utf-8")
 
 
 def write_model_artifacts(symptoms: list[str]) -> None:
@@ -187,7 +188,7 @@ def main() -> None:
     print("Generated MediGuard reference assets.")
     print(f"Symptoms: {len(symptoms)}")
     print("Dataset rows: 2200 full, 1760 train, 440 test")
-    print("RAG chunks: 453")
+    print("Reference chunks: 453")
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 
+from app.rag import retriever
 from app.main import app
 
 
@@ -75,9 +76,36 @@ def test_chat_answers_facility_and_platform_questions():
     assert platform.status_code == 200
     assert facilities.json()["mode"] == "facilities"
     assert "/nearby-facilities" in facilities.json()["answer"]
-    assert "Nkwen Baptist Hospital" in facilities.json()["answer"]
+    assert "allow location access" in facilities.json()["answer"].lower()
     assert platform.json()["mode"] == "platform_help"
     assert "History" in platform.json()["answer"]
+
+
+def test_chat_uses_map_results_for_nearest_facilities(monkeypatch):
+    monkeypatch.setattr(
+        retriever,
+        "_fetch_map_facilities",
+        lambda lat, lng, radius=15000, limit=5: [
+            {
+                "name": "Map Hospital",
+                "type": "Hospital",
+                "address": "Map Road",
+                "phone": "+237 600 000 000",
+                "hours": "24/7",
+                "lat": 5.9,
+                "lng": 10.1,
+                "distance_km": 0.4,
+                "source_url": "https://www.openstreetmap.org/node/1",
+            }
+        ],
+    )
+    response = client.post("/chat", json={"query": "i want the nearest hospital", "user_lat": 5.91, "user_lng": 10.11})
+    assert response.status_code == 200
+    data = response.json()
+    assert data["mode"] == "facilities"
+    assert data["data_source"] == "openstreetmap"
+    assert "Map Hospital" in data["answer"]
+    assert "Bamenda Regional Hospital" not in data["answer"]
 
 
 def test_chat_asks_questions_before_symptom_results():

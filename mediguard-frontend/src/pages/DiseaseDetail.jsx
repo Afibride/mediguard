@@ -67,8 +67,9 @@ const DiseaseDetail = () => {
   const navigate = useNavigate();
 
   const [disease, setDisease] = useState(null);
-  const [allDiseases, setAllDiseases] = useState(diseases);
+  const [allDiseases, setAllDiseases] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [dataSource, setDataSource] = useState('Backend system database');
 
   useEffect(() => {
     setLoading(true);
@@ -77,14 +78,25 @@ const DiseaseDetail = () => {
       getDiseases(),
     ])
       .then(([detailRes, listRes]) => {
-        setDisease(detailRes.data);
+        setDisease({
+          ...detailRes.data,
+          commonInBamenda: detailRes.data.commonInBamenda ?? detailRes.data.featured,
+          symptoms: detailRes.data.symptoms || [],
+        });
         if (Array.isArray(listRes.data)) {
-          setAllDiseases(listRes.data);
+          setAllDiseases(listRes.data.map((d) => ({
+            ...d,
+            id: d.id || d.slug,
+            commonInBamenda: d.commonInBamenda ?? d.featured,
+            symptoms: d.symptoms || [],
+          })));
         }
+        setDataSource('Backend system database');
       })
       .catch(() => {
         setDisease(diseases.find(d => d.id === id || d.slug === id));
         setAllDiseases(diseases);
+        setDataSource('Backend unavailable - emergency local fallback');
       })
       .finally(() => setLoading(false));
   }, [id]);
@@ -168,6 +180,9 @@ const DiseaseDetail = () => {
                   Common in Bamenda
                 </Badge>
               )}
+              <Badge variant="outline" className="text-sm">
+                Source: {dataSource}
+              </Badge>
             </div>
           </div>
 
@@ -195,7 +210,7 @@ const DiseaseDetail = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <SymptomList symptoms={disease.symptoms} descriptions={disease.symptom_descriptions || {}} diseaseName={disease.name} />
+                <SymptomList symptoms={disease.symptoms || []} descriptions={disease.symptom_descriptions || {}} diseaseName={disease.name} />
               </CardContent>
             </Card>
 

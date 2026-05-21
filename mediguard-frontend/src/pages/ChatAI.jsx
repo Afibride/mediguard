@@ -36,19 +36,22 @@ function MarkdownMessage({ content }) {
     <div className="space-y-2">
       {blocks.map((block, bi) => {
         const lines = block.split('\n').filter(Boolean);
-        const isList = lines.length > 1 && lines.every(l => /^[•\-]\s/.test(l.trim()));
-        const isSingleBullet = lines.length === 1 && /^[•\-]\s/.test(lines[0].trim());
+        const listMarker = /^(?:\d+[.)]|•|-)\s/;
+        const isList = lines.length > 1 && lines.every(l => listMarker.test(l.trim()));
+        const isSingleBullet = lines.length === 1 && listMarker.test(lines[0].trim());
+        const isNumbered = lines.every(l => /^\d+[.)]\s/.test(l.trim()));
 
         if (isList || isSingleBullet) {
+          const ListTag = isNumbered ? 'ol' : 'ul';
           return (
-            <ul key={bi} className="space-y-1 pl-1">
+            <ListTag key={bi} className={`space-y-1 ${isNumbered ? 'list-decimal pl-5' : 'pl-1'}`}>
               {lines.map((line, li) => (
-                <li key={li} className="flex items-start gap-2">
-                  <span className="text-primary font-bold mt-0.5 shrink-0 text-xs">•</span>
-                  <span className="leading-relaxed">{renderInline(line.replace(/^[•\-]\s*/, ''))}</span>
+                <li key={li} className={isNumbered ? 'leading-relaxed' : 'flex items-start gap-2'}>
+                  {!isNumbered && <span className="text-primary font-bold mt-0.5 shrink-0 text-xs">•</span>}
+                  <span className="leading-relaxed">{renderInline(line.replace(/^(?:\d+[.)]|•|-)\s*/, ''))}</span>
                 </li>
               ))}
-            </ul>
+            </ListTag>
           );
         }
 
@@ -159,6 +162,25 @@ const ChatAI = () => {
       pregnancy_weeks: weeksMatch ? Number(weeksMatch[1]) : null,
     };
   };
+
+  const isFacilityRequest = (text) =>
+    /\b(nearest|nearby|hospital|clinic|health facility|doctor|where can i go|where should i go|directions?)\b/i.test(text);
+
+  const requestCurrentLocation = () => new Promise((resolve) => {
+    if (!navigator.geolocation) {
+      resolve(null);
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const location = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        setUserLocation(location);
+        resolve(location);
+      },
+      () => resolve(null),
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
+    );
+  });
 
   // Check screen size for responsive behavior
   useEffect(() => {
@@ -300,9 +322,12 @@ const ChatAI = () => {
         content: message.content,
       }));
       const pregnancyContext = pregnancyContextFromText(textToSend);
+      const freshLocation = isFacilityRequest(textToSend) && !userLocation
+        ? await requestCurrentLocation()
+        : userLocation;
       const res = await sendChatMessage(textToSend, history, null, {
         ...pregnancyContext,
-        ...(userLocation ? { user_lat: userLocation.lat, user_lng: userLocation.lng } : {}),
+        ...(freshLocation ? { user_lat: freshLocation.lat, user_lng: freshLocation.lng } : {}),
       });
       const fullAnswer = res.data.answer || '';
       const aiMsgObj = {
