@@ -1,68 +1,35 @@
-
-
 - name: Install Cloudflare Client & Run SSH Deploy
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_USER: ${{ secrets.SERVER_USER }}
+          SUDO_PASS: ${{ secrets.SUDO_PASSWORD }}
         run: |
-          # Download cloudflared inside the GitHub Action runner
+          # Install cloudflared
           sudo mkdir -p /usr/local/bin
           sudo curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared
           sudo chmod +x /usr/local/bin/cloudflared
 
-         B # Write a temporary SSH config file so the runner knows to use the tunnel
+          # Configure SSH to target your updated domain
           mkdir -p ~/.ssh
-          echo -e "Host ssh.labflowpro.co.uk\n  ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h" > ~/.ssh/config
+          echo -e "Host ssh.mediguard.info\n  ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h" > ~/.ssh/config
           chmod 600 ~/.ssh/config
 
-          # Save the private key to a file safely
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          # Add private key
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-          # Connect and execute the local pull and deployment script
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@ssh.labflowpro.co.uk << 'EOF'
+          # Connect to your server domain via Cloudflare Tunnel
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o SendEnv=SUDO_PASS $SSH_USER@ssh.mediguard.info "SUDO_PASS='$SUDO_PASS'" << 'EOF'
             cd /home/afilesnice/mediguard/
             git pull origin main
+
+            # Navigate to frontend and install dependencies
             cd mediguard-frontend
             npm install --legacy-peer-deps
-            npm run build
-            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S systemctl restart nginx
+
+            # Rebuild clean static assets
+            npx vite build
+
+            # Hot-reload Nginx gracefully
+            echo "$SUDO_PASS" | sudo -S systemctl reload nginx
           EOF
-
-name: Deploy MediGuard Application
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-node: '20'
-          cache: 'npm'
-          cache-dependency-path: './mediguard-frontend/package-lock.json'
-          # Write a temporary SSH config file so the runner knows to use the tunnel
-          mkdir -p ~/.ssh
-          echo -e "Host ssh.labflowpro.co.uk\n  ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h" > ~/.ssh/config
-          chmod 600 ~/.ssh/config
-
-          # Save the private key to a file safely
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-
-          # Connect and execute the local pull and deployment script
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@ssh.labflowpro.co.uk << 'EOF'
-            cd /home/afilesnice/mediguard/
-            git pull origin main
-            cd mediguard-frontend
-            npm install --legacy-peer-deps
-            npm run build
-            echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S systemctl restart nginx
-          EOF
-
