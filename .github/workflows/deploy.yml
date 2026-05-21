@@ -34,6 +34,7 @@ jobs:
 
           # Connect to your server domain via Cloudflare Tunnel
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o SendEnv=SUDO_PASS $SSH_USER@ssh.mediguard.info "SUDO_PASS='$SUDO_PASS'" << 'EOF'
+            set -e
             cd /home/afilesnice/mediguard/
             git pull origin main
 
