@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -13,12 +13,14 @@ import {
   Loader2, Search, Thermometer, Activity, Baby, User,
   CheckCircle2, XCircle, HelpCircle, Wand2, ShieldCheck, Sparkles, Target,
   Trophy, Wind, Stethoscope, Brain, Eye, Droplets, Gauge, CircleDot,
-  ChevronRight, ChevronLeft, SkipForward, Star, Flame,
+  ChevronRight, ChevronLeft, SkipForward, Star, Flame, ImagePlus, X,
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { getAllSymptoms, diseases as diseaseDB } from '@/data/diseases';
-import { getSymptoms, predictDisease, normalizeSymptoms, getClarifyQuestions } from '@/services/api';
+import { getSymptoms, predictDisease, normalizeSymptoms, getClarifyQuestions, analyzeImage } from '@/services/api';
+import { SYMPTOM_PLAIN_NAMES } from '@/data/layman';
 import DisclaimerBanner from '@/components/DisclaimerBanner';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // ─── Static Data ─────────────────────────────────────────────────────────────
 
@@ -28,7 +30,7 @@ const CATEGORIES_MAP = {
   'Gastrointestinal': ['Nausea', 'Vomiting', 'Diarrhea', 'Profuse watery diarrhea', 'Bloody or mucus-filled diarrhea', 'Abdominal pain', 'Lower abdominal pain', 'Constipation', 'Loss of appetite', 'Bloating', 'Heartburn', 'Jaundice'],
   'Pain & Neurological': ['Headache', 'Severe headache', 'Joint pain', 'Muscle aches', 'Back pain', 'Stiff neck', 'Confusion', 'Dizziness', 'Seizures', 'Numbness', 'Sensitivity to light', 'Jaw stiffness', 'Ear pain', 'Facial pain'],
   'Skin & Eyes': ['Rash', 'Itchy rash', 'Itchy skin', 'Ring-shaped rash', 'Blisters', 'Skin lesions', 'Skin sores', 'Pale skin', 'Red eyes', 'Yellow eyes', 'Eye discharge', 'Pus or discharge', 'Hair loss'],
-  'Urinary & Reproductive': ['Frequent urination', 'Painful urination', 'Blood in urine', 'Pelvic pain', 'Vaginal discharge', 'Vaginal itching', 'Vaginal bleeding', 'Missed period', 'Pain during intercourse'],
+  'Urinary & Reproductive': ['Frequent urination', 'Painful urination', 'Blood in urine', 'Pelvic pain', 'Vaginal discharge', 'Vaginal itching', 'Vaginal bleeding', 'Missed period', 'Pain during intercourse', 'Genital sores', 'Genital discharge'],
   'Metabolic & Endocrine': ['Increased thirst', 'Slow-healing sores', 'Blurred vision', 'Fast heartbeat', 'Low blood pressure', 'Swollen feet', 'Dark urine', 'Weight gain', 'Heat intolerance', 'Cold intolerance'],
   'Other': ['Hearing loss', 'Difficulty swallowing', 'Visible worms in stool', 'Anal itching', 'White patches in mouth', 'Anxiety', 'Tremor'],
 };
@@ -76,6 +78,7 @@ const tileVariants = {
 const SymptomChecker = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useLanguage();
   // Wizard steps: 1 = symptom zones, 2 = clarifying questions
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -91,6 +94,11 @@ const SymptomChecker = () => {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [freeText, setFreeText] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageAnalysis, setImageAnalysis] = useState(null);
+  const [analyzingImage, setAnalyzingImage] = useState(false);
+  const imgInputRef = useRef(null);
 
   // Personal info
   const [formData, setFormData] = useState({
@@ -194,6 +202,37 @@ const SymptomChecker = () => {
 
   const handleFreeTextKeyDown = (e) => {
     if (e.key === 'Enter') { e.preventDefault(); handleNormalizeText(); }
+  };
+
+  const handleAnalyzeImage = async () => {
+    if (!imageFile) return;
+    setAnalyzingImage(true);
+    setImageAnalysis(null);
+    try {
+      const res = await analyzeImage(imageFile, freeText.trim());
+      setImageAnalysis(res.data.analysis);
+    } catch {
+      toast({ variant: 'destructive', title: 'Image analysis failed', description: 'Could not analyse the image. Please try again.' });
+    } finally {
+      setAnalyzingImage(false);
+    }
+  };
+
+  const handleImageFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImageFile(file);
+    setImageAnalysis(null);
+    const reader = new FileReader();
+    reader.onload = (ev) => setImagePreview(ev.target.result);
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  };
+
+  const clearImage = () => {
+    setImageFile(null);
+    setImagePreview(null);
+    setImageAnalysis(null);
   };
 
   const generatePredictionsLocal = (symptomsToAnalyze) =>
@@ -323,7 +362,7 @@ const SymptomChecker = () => {
   });
   const activeCategoryCount = categoryStats.filter(c => c.count > 0).length;
   const scanProgress = Math.min(100, selectedSymptoms.length * 16 + activeCategoryCount * 8 + (formData.duration ? 8 : 0) + (formData.severity ? 8 : 0));
-  const scanRank = selectedSymptoms.length >= 6 ? 'Deep scan ready' : selectedSymptoms.length >= 3 ? 'Good signal' : selectedSymptoms.length >= 1 ? 'Signal acquired' : 'Awaiting input';
+  const scanRank = selectedSymptoms.length >= 6 ? t('sc_deep_scan') : selectedSymptoms.length >= 3 ? t('sc_good_signal') : selectedSymptoms.length >= 1 ? t('sc_signal') : t('sc_awaiting');
 
   // ─── Symptom Tile ──────────────────────────────────────────────────────────
 
@@ -359,8 +398,15 @@ const SymptomChecker = () => {
             )}
           </AnimatePresence>
         </div>
-        <span className={`flex-1 text-xs sm:text-sm font-semibold leading-tight ${selected ? 'text-primary' : 'text-foreground'}`}>
-          {symptom}
+        <span className="flex-1 min-w-0">
+          <span className={`block text-xs sm:text-sm font-semibold leading-tight ${selected ? 'text-primary' : 'text-foreground'}`}>
+            {symptom}
+          </span>
+          {SYMPTOM_PLAIN_NAMES[symptom] && (
+            <span className="block text-[10px] text-muted-foreground leading-tight mt-0.5">
+              {SYMPTOM_PLAIN_NAMES[symptom]}
+            </span>
+          )}
         </span>
         {selected && (
           <motion.div
@@ -480,7 +526,7 @@ const SymptomChecker = () => {
                 <Thermometer className="h-6 w-6 text-primary" />
               </motion.div>
               <div className="flex-1 min-w-0">
-                <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Symptom Checker</h1>
+                <h1 className="text-2xl font-bold text-foreground sm:text-3xl">{t('sc_title')}</h1>
                 <p className="mt-0.5 text-sm text-muted-foreground leading-snug hidden sm:block">
                   Move through symptom zones, collect clues, then launch the diagnosis scan.
                 </p>
@@ -578,7 +624,7 @@ const SymptomChecker = () => {
                         >
                           <Card className="rounded-t-none border-t-0 shadow-sm">
                             <CardContent className="pt-5">
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                              <div className="grid grid-cols-2 gap-3 sm:gap-5">
                                 <div className="space-y-2">
                                   <Label className="font-medium text-sm">Gender</Label>
                                   <RadioGroup name="gender" value={formData.gender}
@@ -599,7 +645,7 @@ const SymptomChecker = () => {
                                 </div>
 
                                 {showPregnancyOption && (
-                                  <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-[1fr_160px] gap-3 p-4 bg-pink-50 dark:bg-pink-950/20 rounded-lg border border-pink-200 dark:border-pink-900/50">
+                                  <div className="col-span-2 grid grid-cols-1 sm:grid-cols-[1fr_160px] gap-3 p-4 bg-pink-50 dark:bg-pink-950/20 rounded-lg border border-pink-200 dark:border-pink-900/50">
                                     <div className="flex items-center gap-2">
                                       <Checkbox id="isPregnant" checked={formData.isPregnant}
                                         onCheckedChange={checked => setFormData(prev => ({ ...prev, isPregnant: checked, pregnancyWeeks: checked ? prev.pregnancyWeeks : '' }))} />
@@ -613,7 +659,7 @@ const SymptomChecker = () => {
                                   </div>
                                 )}
 
-                                <div className="md:col-span-2 p-3 rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/20 flex items-start gap-3">
+                                <div className="col-span-2 p-3 rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/20 flex items-start gap-3">
                                   <Checkbox id="fatigueContext" checked={formData.fatigueContext}
                                     onCheckedChange={checked => setFormData(prev => ({ ...prev, fatigueContext: checked }))} className="mt-0.5" />
                                   <Label htmlFor="fatigueContext" className="cursor-pointer text-sm">
@@ -622,10 +668,10 @@ const SymptomChecker = () => {
                                   </Label>
                                 </div>
 
-                                <div className="space-y-2">
+                                <div className="space-y-2 min-w-0">
                                   <Label htmlFor="duration" className="font-medium text-sm">Symptom Duration</Label>
                                   <select id="duration" name="duration" value={formData.duration} onChange={handleInputChange}
-                                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                                    className="flex h-10 w-full rounded-md border border-input bg-background px-2 sm:px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                                     <option value="">Select…</option>
                                     <option value="1-3 days">1–3 days</option>
                                     <option value="3-7 days">3–7 days</option>
@@ -633,10 +679,10 @@ const SymptomChecker = () => {
                                     <option value="2+ weeks">More than 2 weeks</option>
                                   </select>
                                 </div>
-                                <div className="space-y-2">
+                                <div className="space-y-2 min-w-0">
                                   <Label htmlFor="severity" className="font-medium text-sm">Overall Severity</Label>
                                   <select id="severity" name="severity" value={formData.severity} onChange={handleInputChange}
-                                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                                    className="flex h-10 w-full rounded-md border border-input bg-background px-2 sm:px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
                                     <option value="">Select…</option>
                                     <option value="mild">Mild — Annoying but manageable</option>
                                     <option value="moderate">Moderate — Affects daily activities</option>
@@ -657,7 +703,7 @@ const SymptomChecker = () => {
                       <CardContent className="pt-4 pb-4">
                         <div className="flex items-center gap-2 mb-2">
                           <Wand2 className="h-4 w-4 text-primary" />
-                          <span className="text-sm font-semibold">Describe symptoms in your own words</span>
+                          <span className="text-sm font-semibold">{t('sc_describe_hint')}</span>
                           <span className="text-xs text-muted-foreground">(handles typos & local names)</span>
                         </div>
                         <div className="flex gap-2">
@@ -677,12 +723,70 @@ const SymptomChecker = () => {
                     </Card>
                   </motion.div>
 
+                  {/* Image upload for visual symptoms */}
+                  <motion.div variants={itemVariants} className="mb-5">
+                    <Card className="border-amber-300/60 border shadow-sm dark:border-amber-700/40">
+                      <CardContent className="pt-4 pb-4">
+                        <div className="flex items-center gap-2 mb-3">
+                          <ImagePlus className="h-4 w-4 text-amber-600" />
+                          <span className="text-sm font-semibold">{t('sc_upload_photo')}</span>
+                          <span className="text-xs text-muted-foreground">(rash, skin lesion, eye, swelling…)</span>
+                        </div>
+
+                        {/* Hidden file input */}
+                        <input ref={imgInputRef} type="file" accept="image/jpeg,image/png,image/webp"
+                          className="hidden" onChange={handleImageFileChange} />
+
+                        {!imagePreview ? (
+                          <button type="button" onClick={() => imgInputRef.current?.click()}
+                            className="w-full border-2 border-dashed border-amber-300 dark:border-amber-700/50 rounded-xl p-6 flex flex-col items-center gap-2 text-muted-foreground hover:border-primary hover:text-primary transition-colors">
+                            <ImagePlus className="h-8 w-8" />
+                            <span className="text-sm font-medium">Tap to upload photo</span>
+                            <span className="text-xs">JPEG, PNG or WebP · max 10 MB</span>
+                          </button>
+                        ) : (
+                          <div className="space-y-3">
+                            <div className="flex items-start gap-3">
+                              <img src={imagePreview} alt="symptom" className="h-28 w-28 rounded-lg object-cover border shadow-sm shrink-0" />
+                              <div className="flex-1 min-w-0 space-y-2">
+                                <p className="text-xs text-muted-foreground truncate">{imageFile?.name}</p>
+                                <Button type="button" size="sm" onClick={handleAnalyzeImage}
+                                  disabled={analyzingImage}
+                                  className="gap-1.5 bg-amber-600 hover:bg-amber-700 text-white w-full sm:w-auto">
+                                  {analyzingImage
+                                    ? <><Loader2 className="h-3.5 w-3.5 animate-spin" />{t('sc_analysing')}</>
+                                    : <><Sparkles className="h-3.5 w-3.5" />{t('sc_analyse')}</>
+                                  }
+                                </Button>
+                                <button type="button" onClick={clearImage}
+                                  className="flex items-center gap-1 text-xs text-destructive hover:underline">
+                                  <X className="h-3 w-3" />Remove
+                                </button>
+                              </div>
+                            </div>
+
+                            {imageAnalysis && (
+                              <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
+                                className="p-3 bg-amber-50 dark:bg-amber-950/20 rounded-lg border border-amber-200 dark:border-amber-800 text-sm space-y-1">
+                                <p className="font-semibold text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
+                                  <Sparkles className="h-4 w-4" />Image Analysis
+                                </p>
+                                <p className="text-foreground/80 whitespace-pre-wrap text-xs leading-relaxed">{imageAnalysis}</p>
+                                <p className="text-[10px] text-muted-foreground">Not a diagnosis — always confirm with a healthcare professional.</p>
+                              </motion.div>
+                            )}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+
                   {/* Search input */}
                   <motion.div variants={itemVariants} className="mb-5 relative">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     <Input
                       type="text"
-                      placeholder="Search all symptoms…"
+                      placeholder={t('sc_search')}
                       value={searchQuery}
                       onChange={e => setSearchQuery(e.target.value)}
                       className="pl-12 h-11 bg-background shadow-sm"
@@ -826,14 +930,14 @@ const SymptomChecker = () => {
                                     >
                                       {loading
                                         ? <><Loader2 className="h-4 w-4 animate-spin" /><span className="hidden sm:inline">Scanning…</span></>
-                                        : <><Sparkles className="h-4 w-4" /><span className="hidden sm:inline">Launch Scan</span><span className="sm:hidden">Scan</span></>
+                                        : <><Sparkles className="h-4 w-4" /><span className="hidden sm:inline">{t('sc_launch')}</span><span className="sm:hidden">{t('sc_launch')}</span></>
                                       }
                                     </Button>
                                   </motion.div>
                                 ) : (
                                   <Button type="button" size="sm" onClick={goNextZone} className="gap-1.5 h-10 px-3 sm:px-4">
                                     {selectedInCurrentZone.length > 0 ? (
-                                      <><Star className="h-3.5 w-3.5 fill-current" /><span className="hidden sm:inline">Next Zone</span><span className="sm:hidden">Next</span><ChevronRight className="h-4 w-4" /></>
+                                      <><Star className="h-3.5 w-3.5 fill-current" /><span>{t('sc_next_zone')}</span><ChevronRight className="h-4 w-4" /></>
                                     ) : (
                                       <><SkipForward className="h-3.5 w-3.5" /><span className="hidden sm:inline">Skip</span><ChevronRight className="h-4 w-4" /></>
                                     )}
@@ -879,7 +983,7 @@ const SymptomChecker = () => {
                             {isLastZone && (
                               <Button type="submit" size="sm" disabled={loading} className="shrink-0 gap-1.5">
                                 {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-                                {loading ? 'Scanning…' : 'Launch Scan'}
+                                {loading ? t('sc_scanning') : t('sc_launch')}
                               </Button>
                             )}
                           </div>
@@ -899,7 +1003,7 @@ const SymptomChecker = () => {
                         className="gap-2 h-12 px-10 text-base font-bold shadow-xl bg-gradient-to-r from-primary to-primary/80">
                         {loading
                           ? <><Loader2 className="h-5 w-5 animate-spin" />Analyzing…</>
-                          : <><Sparkles className="h-5 w-5" />Launch Diagnosis Scan</>
+                          : <><Sparkles className="h-5 w-5" />{t('sc_launch_full')}</>
                         }
                       </Button>
                     </motion.div>

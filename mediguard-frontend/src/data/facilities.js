@@ -118,3 +118,27 @@ export const facilityMapsUrl = (facility) =>
 
 export const facilityEmbedUrl = (facility) =>
   `https://maps.google.com/maps?q=${facility.mapQuery}&output=embed&z=16&hl=en`;
+
+export const facilityDistanceKm = (facility, userLocation = null) => {
+  if (!facility?.coords || !userLocation) return null;
+  const [facilityLat, facilityLng] = facility.coords;
+  const userLat = userLocation.lat ?? userLocation[0];
+  const userLng = userLocation.lng ?? userLocation[1];
+  if ([facilityLat, facilityLng, userLat, userLng].some((value) => Number.isNaN(Number(value)))) {
+    return null;
+  }
+  const toRad = (value) => (Number(value) * Math.PI) / 180;
+  const earthKm = 6371;
+  const dLat = toRad(facilityLat - userLat);
+  const dLng = toRad(facilityLng - userLng);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(userLat)) * Math.cos(toRad(facilityLat)) * Math.sin(dLng / 2) ** 2;
+  return earthKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+};
+
+export const facilityDistanceLabel = (facility, userLocation = null) => {
+  const km = facilityDistanceKm(facility, userLocation);
+  if (km == null) return null;
+  return km < 1 ? `${Math.round(km * 1000)} m away` : `${km.toFixed(1)} km away`;
+};

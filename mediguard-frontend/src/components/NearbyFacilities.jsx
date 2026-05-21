@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Building2, ExternalLink, Locate, MapPin, Navigation, Phone } from 'lucide-react';
@@ -23,6 +23,10 @@ const NearbyFacilities = ({ compact = false }) => {
       { timeout: 8000 }
     );
   };
+
+  useEffect(() => {
+    requestLocation();
+  }, []);
 
   const displayed = compact ? BAMENDA_FACILITIES.slice(0, 4) : BAMENDA_FACILITIES;
 
@@ -60,7 +64,11 @@ const NearbyFacilities = ({ compact = false }) => {
       </CardHeader>
 
       <CardContent>
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className={
+          compact
+            ? "grid grid-flow-col grid-rows-2 auto-cols-[minmax(230px,82vw)] gap-3 overflow-x-auto pb-2 sm:grid-flow-row sm:grid-rows-none sm:grid-cols-2 sm:auto-cols-auto sm:overflow-visible sm:pb-0"
+            : "grid gap-3 sm:grid-cols-2"
+        }>
           {displayed.map((facility, index) => (
             <motion.div
               key={facility.id}

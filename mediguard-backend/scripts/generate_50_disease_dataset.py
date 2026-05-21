@@ -74,6 +74,8 @@ ALL_SYMPTOMS = [
     "Confusion at night", "Jaw stiffness", "Ear pain", "Hearing loss",
     "Hoarse voice", "Difficulty swallowing", "Nasal congestion", "Eye discharge",
     "Facial pain", "Hair loss",
+    # STI-specific
+    "Genital sores", "Genital discharge",
 ]
 SYMPTOM_INDEX = {s: i for i, s in enumerate(ALL_SYMPTOMS)}
 
@@ -382,6 +384,37 @@ DISEASE_PROFILES: dict[str, tuple[list, list, list, int]] = {
         ["Rash", "Shortness of breath", "Fast heartbeat", "Dizziness"],
         ["Low blood pressure", "Nausea", "Swollen feet"],
         ["Vomiting", "Abdominal pain", "Confusion"],
+        70,
+    ),
+    # ── STIs ──────────────────────────────────────────────────────────────────
+    "Gonorrhea": (
+        ["Genital discharge", "Painful urination"],
+        ["Pelvic pain", "Vaginal discharge", "Vaginal itching"],
+        ["Sore throat", "Swollen lymph nodes", "Fever"],
+        70,
+    ),
+    "Syphilis": (
+        ["Genital sores", "Rash"],
+        ["Swollen lymph nodes", "Fever", "Fatigue"],
+        ["Headache", "Muscle aches", "Skin sores"],
+        70,
+    ),
+    "Chlamydia": (
+        ["Genital discharge", "Painful urination", "Pelvic pain"],
+        ["Vaginal discharge", "Vaginal itching"],
+        ["Pain during intercourse", "Lower abdominal pain", "Fatigue"],
+        70,
+    ),
+    "Genital Herpes": (
+        ["Genital sores", "Blisters", "Painful urination"],
+        ["Fever", "Fatigue", "Muscle aches"],
+        ["Vaginal itching", "Skin sores", "Swollen lymph nodes"],
+        70,
+    ),
+    "Trichomoniasis": (
+        ["Vaginal itching", "Genital discharge"],
+        ["Painful urination", "Vaginal discharge", "Pelvic pain"],
+        ["Rash", "Lower abdominal pain", "Fatigue"],
         70,
     ),
 }

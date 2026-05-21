@@ -56,6 +56,12 @@ CORE_SYMPTOMS = {
     "HIV AIDS": ["Fatigue", "Weight loss", "Night sweats", "Swollen lymph nodes", "Diarrhea", "Fever", "Rash", "Loss of appetite", "Cough", "Sore throat"],
     "Skin Abscess": ["Skin sores", "Pus or discharge", "Rash", "Fever", "Fatigue", "Swollen lymph nodes"],
     "Anaphylaxis": ["Rash", "Shortness of breath", "Fast heartbeat", "Dizziness", "Low blood pressure", "Nausea", "Swollen feet", "Sweating"],
+    # ── STIs ──────────────────────────────────────────────────────────────────
+    "Gonorrhea": ["Genital discharge", "Painful urination", "Pelvic pain", "Vaginal discharge", "Vaginal itching", "Sore throat", "Swollen lymph nodes", "Fever"],
+    "Syphilis": ["Genital sores", "Rash", "Swollen lymph nodes", "Fever", "Fatigue", "Headache", "Muscle aches", "Skin sores"],
+    "Chlamydia": ["Genital discharge", "Painful urination", "Pelvic pain", "Vaginal discharge", "Pain during intercourse", "Vaginal itching", "Lower abdominal pain"],
+    "Genital Herpes": ["Genital sores", "Blisters", "Painful urination", "Fever", "Fatigue", "Muscle aches", "Vaginal itching", "Skin sores"],
+    "Trichomoniasis": ["Vaginal itching", "Genital discharge", "Painful urination", "Vaginal discharge", "Pelvic pain", "Rash", "Lower abdominal pain"],
 }
 
 CATEGORIES = {
@@ -108,6 +114,11 @@ CATEGORIES = {
     "Ringworm": "Fungal",
     "Pelvic Inflammatory Disease": "Reproductive",
     "Anaphylaxis": "Allergic",
+    "Gonorrhea": "STI",
+    "Syphilis": "STI",
+    "Chlamydia": "STI",
+    "Genital Herpes": "STI",
+    "Trichomoniasis": "STI",
 }
 
 CURATED_DETAILS = {
@@ -413,6 +424,42 @@ CURATED_DETAILS = {
         "causes": "Triggered by allergens such as insect stings, certain foods (nuts, shellfish), medications (penicillin), or latex.",
         "treatment": "MEDICAL EMERGENCY. Epinephrine (adrenaline) injection immediately, then seek emergency hospital care.",
         "prevention": ["Know and avoid allergens", "Carry an epinephrine auto-injector if prescribed", "Wear a medical alert bracelet", "Inform healthcare providers of allergies"],
+    },
+    # ── STIs ──────────────────────────────────────────────────────────────────
+    "Gonorrhea": {
+        "description": "A common bacterial sexually transmitted infection caused by Neisseria gonorrhoeae. It can infect the genitals, rectum, and throat. Many people have no symptoms, making it easy to spread unknowingly.",
+        "causes": "Caused by the Neisseria gonorrhoeae bacterium, spread through unprotected vaginal, anal, or oral sex. A pregnant woman can also pass it to her baby during delivery.",
+        "treatment": "Treated with antibiotics prescribed by a clinician. Both partners must be treated simultaneously. Do not self-medicate — resistance to common antibiotics is increasing.",
+        "prevention": ["Use condoms consistently and correctly", "Get tested regularly if sexually active with multiple partners", "Treat both partners at the same time", "Screen pregnant women to prevent mother-to-child transmission"],
+        "severity": "Medium",
+    },
+    "Syphilis": {
+        "description": "A bacterial STI caused by Treponema pallidum that progresses in stages. The primary stage presents as a painless sore (chancre); the secondary stage causes a body rash, fever, and swollen glands. Untreated syphilis can cause serious long-term damage to the heart, brain, and nerves.",
+        "causes": "Caused by the Treponema pallidum bacterium, spread through direct contact with syphilis sores during sex. Pregnant women can pass it to their unborn baby (congenital syphilis).",
+        "treatment": "Penicillin injection (or other antibiotics for penicillin-allergic patients) as prescribed by a clinician. Early stages are highly treatable. Late stages require longer treatment.",
+        "prevention": ["Use condoms", "Screen for syphilis regularly", "Screen all pregnant women at first antenatal visit", "Treat sexual partners", "Avoid sex with open sores"],
+        "severity": "High",
+    },
+    "Chlamydia": {
+        "description": "The most common bacterial STI worldwide. Caused by Chlamydia trachomatis, it often causes no symptoms, making it easy to spread. Untreated chlamydia can cause pelvic inflammatory disease, infertility, and complications in pregnancy.",
+        "causes": "Caused by the Chlamydia trachomatis bacterium, spread through unprotected vaginal, anal, or oral sex. Newborns can be infected during birth.",
+        "treatment": "Treated with antibiotics (azithromycin or doxycycline) as prescribed. Partners must also be treated. Repeat testing is recommended 3 months after treatment.",
+        "prevention": ["Use condoms", "Regular STI screening", "Treat sexual partners simultaneously", "Screen pregnant women to prevent neonatal infection"],
+        "severity": "Medium",
+    },
+    "Genital Herpes": {
+        "description": "A viral STI caused by herpes simplex virus type 2 (HSV-2) and occasionally type 1 (HSV-1). Causes recurring painful blisters or sores on and around the genitals. The virus remains in the body for life but can be managed with medication.",
+        "causes": "Caused by herpes simplex virus (HSV-2 primarily, HSV-1 increasingly). Spread through direct skin-to-skin contact during sex — even when no sores are visible (asymptomatic shedding).",
+        "treatment": "Antiviral medications (aciclovir, valaciclovir) reduce outbreaks, shorten healing time, and reduce transmission risk. There is no cure, but treatment controls symptoms effectively.",
+        "prevention": ["Use condoms (reduces but does not eliminate risk)", "Avoid sex during active outbreaks", "Inform partners of diagnosis", "Antiviral suppressive therapy reduces transmission risk"],
+        "severity": "Medium",
+    },
+    "Trichomoniasis": {
+        "description": "A very common parasitic STI caused by Trichomonas vaginalis. In women it causes vaginal itching, burning, redness, and an unpleasant-smelling discharge. Most men have no symptoms. It increases the risk of getting or spreading HIV.",
+        "causes": "Caused by the protozoan parasite Trichomonas vaginalis, spread through vaginal sex. The parasite can survive on moist surfaces for a short time.",
+        "treatment": "Treated with metronidazole or tinidazole antibiotics. Both partners must be treated to prevent reinfection.",
+        "prevention": ["Use condoms", "Treat both partners simultaneously", "Regular STI testing", "Avoid sharing sex toys"],
+        "severity": "Low",
     },
 }
 
@@ -844,6 +891,54 @@ SYMPTOM_DESCRIPTIONS = {
         "Nausea": "Sudden nausea and cramping abdominal pain.",
         "Swollen feet": "Swelling of the face, lips, tongue, and throat (angioedema) — throat swelling is immediately life-threatening.",
         "Sweating": "Pale, cold, clammy skin with profuse sweating as the body goes into shock.",
+    },
+    # ── STIs ──────────────────────────────────────────────────────────────────
+    "Gonorrhea": {
+        "Genital discharge": "Thick, creamy yellow or greenish pus-like discharge from the penis or vagina — often described as 'like toothpaste'. In men, it drips from the tip of the penis. In women, it may be mixed with normal vaginal discharge and less obvious. Unlike the watery discharge of trichomoniasis, gonorrhea discharge is thick and purulent.",
+        "Painful urination": "A burning, stinging sensation when urinating — often the first noticeable symptom in men. Described as 'like passing razor blades'. Begins within 1–14 days of infection.",
+        "Pelvic pain": "Dull ache or sharp pain in the lower abdomen and pelvis in women, indicating spread of infection into the uterus or fallopian tubes. Severe pelvic pain with fever may signal pelvic inflammatory disease.",
+        "Vaginal discharge": "Increased vaginal discharge, often yellow or green, sometimes with an unusual odour. Many women mistake it for a yeast infection.",
+        "Sore throat": "When gonorrhea infects the throat through oral sex, it causes a persistent sore throat or pain on swallowing — indistinguishable from a strep throat. Often no other genital symptoms are present.",
+        "Swollen lymph nodes": "Tender swollen lymph nodes in the groin from the immune response to genital infection.",
+        "Fever": "Mild fever may develop, especially if the infection has spread beyond the initial site.",
+    },
+    "Syphilis": {
+        "Genital sores": "Primary syphilis: a single painless, firm, round ulcer (chancre) with clean edges — typically on the genitals, anus, lips, or inside the mouth. It appears 10–90 days after infection, lasts 3–6 weeks, and heals on its own even without treatment. Unlike herpes sores which are painful and clustered, the syphilis chancre is classically painless and solitary — this is the diagnostic clue.",
+        "Rash": "Secondary syphilis (6–12 weeks after chancre): a copper-brown or red non-itchy rash that classically appears on the PALMS and SOLES — this specific location is highly suggestive of syphilis. The rash can also appear on the trunk and all body surfaces. Unlike most other rashes, it is usually neither itchy nor painful.",
+        "Swollen lymph nodes": "Generalised painless swelling of lymph nodes throughout the body — neck, armpits, and groin — during the secondary stage.",
+        "Fever": "Mild fever during secondary syphilis, part of the systemic immune response to bacterial spread.",
+        "Fatigue": "Generalised tiredness, malaise, and loss of energy during the secondary phase.",
+        "Headache": "Dull persistent headache during secondary syphilis from systemic infection.",
+        "Muscle aches": "Widespread muscle aches and body soreness, resembling flu, in the secondary stage.",
+        "Skin sores": "Flat, moist, grey-white patches (condylomata lata) on moist body areas — genitals, inner thighs, anus — during secondary syphilis. These are highly infectious.",
+    },
+    "Chlamydia": {
+        "Genital discharge": "Mild, watery or mucoid (clear/white) penile or vaginal discharge — less thick and purulent than gonorrhea. Many people, especially women, notice no discharge at all, making chlamydia the 'silent STI'.",
+        "Painful urination": "Mild burning or discomfort when urinating, less severe than gonorrhea. Often described as 'mildly uncomfortable' rather than 'burning'.",
+        "Pelvic pain": "Dull, chronic pelvic ache in women from silent spread to the fallopian tubes and pelvis. Often mistaken for period pain. This is the main route to infertility if untreated.",
+        "Vaginal discharge": "Slight increase in vaginal discharge, often clear or milky, with mild odour. Frequently absent, which is why chlamydia is called the 'silent' infection.",
+        "Pain during intercourse": "Discomfort or pain during sex in women, from cervical inflammation and pelvic tenderness caused by the infection.",
+        "Vaginal itching": "Mild itching or irritation around the vaginal opening from cervical or urethral inflammation.",
+        "Lower abdominal pain": "Cramping or aching in the lower abdomen in women — a warning sign of spread to the uterus or fallopian tubes (pelvic inflammatory disease).",
+    },
+    "Genital Herpes": {
+        "Genital sores": "Clusters of small painful blisters or sores on the genitals, buttocks, thighs, or around the anus. Unlike the single painless syphilis chancre, herpes sores are MULTIPLE, GROUPED, and PAINFUL. They burst open into shallow ulcers that ooze fluid, then crust over and heal in 2–4 weeks. Recurrent outbreaks are typically milder and shorter.",
+        "Blisters": "Fluid-filled blisters in a cluster pattern — starting as small red bumps, filling with clear fluid, then breaking to form painful raw sores. The first outbreak is usually the most severe.",
+        "Painful urination": "Intense burning pain when urinating if urine touches open herpes sores. May cause people to avoid urinating, leading to urinary retention.",
+        "Fever": "High fever, chills, and flu-like symptoms during the first (primary) outbreak as the immune system responds strongly to the new infection. Recurrent outbreaks rarely cause fever.",
+        "Fatigue": "Severe tiredness and malaise during the primary outbreak, often debilitating for several days.",
+        "Muscle aches": "Widespread body aches, back pain, and muscle soreness during the primary infection — resembles severe flu.",
+        "Vaginal itching": "An intense tingling, itching, or burning sensation in the genital area — often felt as a 'warning sign' (prodrome) 1–2 days before blisters appear in recurrent outbreaks.",
+        "Skin sores": "After blisters burst, raw, painful ulcers form that are exquisitely tender to touch. They take 2–4 weeks to fully heal in primary infection. Subsequent outbreaks are shorter (7–10 days).",
+    },
+    "Trichomoniasis": {
+        "Vaginal itching": "Intense itching, burning, and irritation inside the vagina and around the vulva — often described as 'impossible to ignore'. Gets worse during urination or sex. Unlike yeast infection itch (which is dry and deep), trichomonas itch is associated with discharge and redness.",
+        "Genital discharge": "Frothy (bubbly), thin, yellowish-green or grey vaginal discharge with a strong fishy or foul smell — a distinctive characteristic. The frothy appearance from the gas-producing parasite is a diagnostic clue. Unlike the thick discharge of gonorrhea or the curdy discharge of thrush.",
+        "Painful urination": "Burning or stinging when urinating from irritation of the urethra and surrounding tissues.",
+        "Vaginal discharge": "Copious, malodorous (fishy-smelling) vaginal discharge that may stain underwear. The odour often becomes worse after sex from the pH change.",
+        "Pelvic pain": "Mild discomfort or fullness in the lower abdomen during active infection.",
+        "Rash": "Redness, soreness, and swelling of the vulva, vaginal opening, and inner thighs from the inflammation — the genitals look inflamed and irritated.",
+        "Lower abdominal pain": "Mild lower abdominal cramping from the vaginal and cervical inflammation spreading upward.",
     },
 }
 
