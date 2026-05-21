@@ -104,7 +104,7 @@ export const BAMENDA_FACILITIES = [
 ];
 
 export const facilityDirectionsUrl = (facility, userLocation = null) => {
-  const destination = facility.mapQuery;
+  const destination = facility.mapQuery || (facility.coords ? `${facility.coords[0]},${facility.coords[1]}` : facility.name);
   if (userLocation) {
     const lat = userLocation.lat ?? userLocation[0];
     const lng = userLocation.lng ?? userLocation[1];
@@ -114,10 +114,10 @@ export const facilityDirectionsUrl = (facility, userLocation = null) => {
 };
 
 export const facilityMapsUrl = (facility) =>
-  `https://www.google.com/maps/search/?api=1&query=${facility.mapQuery}`;
+  `https://www.google.com/maps/search/?api=1&query=${facility.mapQuery || encodeURIComponent(facility.name)}`;
 
 export const facilityEmbedUrl = (facility) =>
-  `https://maps.google.com/maps?q=${facility.mapQuery}&output=embed&z=16&hl=en`;
+  `https://maps.google.com/maps?q=${facility.mapQuery || encodeURIComponent(facility.name)}&output=embed&z=16&hl=en`;
 
 export const facilityDistanceKm = (facility, userLocation = null) => {
   if (!facility?.coords || !userLocation) return null;
@@ -141,4 +141,89 @@ export const facilityDistanceLabel = (facility, userLocation = null) => {
   const km = facilityDistanceKm(facility, userLocation);
   if (km == null) return null;
   return km < 1 ? `${Math.round(km * 1000)} m away` : `${km.toFixed(1)} km away`;
+};
+
+const facilityTypeFromTags = (tags = {}) => {
+  if (tags.healthcare === 'hospital' || tags.amenity === 'hospital') return 'Hospital';
+  if (tags.healthcare === 'clinic' || tags.amenity === 'clinic') return 'Clinic';
+  if (tags.healthcare === 'doctors') return 'Doctors / Medical Practice';
+  if (tags.healthcare === 'pharmacy' || tags.amenity === 'pharmacy') return 'Pharmacy';
+  return 'Health Facility';
+};
+
+const addressFromTags = (tags = {}) => {
+  const parts = [
+    tags['addr:housenumber'],
+    tags['addr:street'],
+    tags['addr:suburb'],
+    tags['addr:city'],
+    tags['addr:state'],
+    tags['addr:country'],
+  ].filter(Boolean);
+  return parts.length ? parts.join(', ') : tags.address || 'Address not listed';
+};
+
+export const fetchNearbyFacilities = async ({ lat, lng, radius = 12000, limit = 20 }) => {
+  const query = `
+    [out:json][timeout:25];
+    (
+      node(around:${radius},${lat},${lng})["amenity"~"hospital|clinic|doctors"];
+      way(around:${radius},${lat},${lng})["amenity"~"hospital|clinic|doctors"];
+      relation(around:${radius},${lat},${lng})["amenity"~"hospital|clinic|doctors"];
+      node(around:${radius},${lat},${lng})["healthcare"~"hospital|clinic|doctor|doctors"];
+      way(around:${radius},${lat},${lng})["healthcare"~"hospital|clinic|doctor|doctors"];
+      relation(around:${radius},${lat},${lng})["healthcare"~"hospital|clinic|doctor|doctors"];
+    );
+    out center tags ${limit};
+  `;
+
+  const response = await fetch('https://overpass-api.de/api/interpreter', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    body: new URLSearchParams({ data: query }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Nearby facility search failed.');
+  }
+
+  const data = await response.json();
+  const userLocation = { lat, lng };
+  const seen = new Set();
+  return (data.elements || [])
+    .map((element) => {
+      const tags = element.tags || {};
+      const facilityLat = element.lat ?? element.center?.lat;
+      const facilityLng = element.lon ?? element.center?.lon;
+      const name = tags.name || tags.operator || 'Unnamed health facility';
+      if (!facilityLat || !facilityLng || !name) return null;
+      const dedupeKey = `${name.toLowerCase()}-${facilityLat.toFixed(4)}-${facilityLng.toFixed(4)}`;
+      if (seen.has(dedupeKey)) return null;
+      seen.add(dedupeKey);
+      const facility = {
+        id: `osm-${element.type}-${element.id}`,
+        name,
+        type: facilityTypeFromTags(tags),
+        address: addressFromTags(tags),
+        phone: tags.phone || tags['contact:phone'] || tags.mobile || '',
+        hours: tags.opening_hours || 'Hours not listed',
+        coords: [facilityLat, facilityLng],
+        services: ['Nearby care', facilityTypeFromTags(tags), tags.emergency === 'yes' ? 'Emergency' : null].filter(Boolean),
+        mapQuery: `${facilityLat},${facilityLng}`,
+        emergency: tags.emergency === 'yes' || tags.amenity === 'hospital' || tags.healthcare === 'hospital',
+        rating: 'Live OpenStreetMap result',
+        color: 'border-primary/50',
+        headerBg: 'bg-primary/5',
+        sourceName: 'OpenStreetMap / Overpass',
+        sourceUrl: `https://www.openstreetmap.org/${element.type}/${element.id}`,
+        live: true,
+      };
+      return {
+        ...facility,
+        distanceKm: facilityDistanceKm(facility, userLocation),
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => (a.distanceKm ?? Number.MAX_SAFE_INTEGER) - (b.distanceKm ?? Number.MAX_SAFE_INTEGER))
+    .slice(0, limit);
 };

@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import {
   BAMENDA_FACILITIES,
+  fetchNearbyFacilities,
   facilityDirectionsUrl,
   facilityDistanceKm,
   facilityDistanceLabel,
@@ -42,14 +43,17 @@ function FacilityMapEmbed({ facility, large = false }) {
 }
 
 const NearbyFacilitiesPage = () => {
-  const [selectedId, setSelectedId] = useState(BAMENDA_FACILITIES[0].id);
+  const [facilities, setFacilities] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [locating, setLocating] = useState(false);
+  const [loadingFacilities, setLoadingFacilities] = useState(false);
+  const [usingFallback, setUsingFallback] = useState(false);
   const [locationError, setLocationError] = useState('');
   const cardRefs = useRef({});
 
-  const selected = BAMENDA_FACILITIES.find((facility) => facility.id === selectedId) || BAMENDA_FACILITIES[0];
-  const orderedFacilities = [...BAMENDA_FACILITIES].sort((a, b) => {
+  const selected = facilities.find((facility) => facility.id === selectedId) || facilities[0] || null;
+  const orderedFacilities = [...facilities].sort((a, b) => {
     if (a.id === selectedId) return -1;
     if (b.id === selectedId) return 1;
     if (userLocation) {
@@ -87,12 +91,56 @@ const NearbyFacilitiesPage = () => {
     requestLocation();
   }, []);
 
+  useEffect(() => {
+    if (!userLocation) return;
+    let cancelled = false;
+    setLoadingFacilities(true);
+    setUsingFallback(false);
+    fetchNearbyFacilities({ lat: userLocation.lat, lng: userLocation.lng })
+      .then((rows) => {
+        if (cancelled) return;
+        if (rows.length) {
+          setFacilities(rows);
+          setSelectedId(rows[0].id);
+          setLocationError('');
+        } else {
+          const fallback = [...BAMENDA_FACILITIES].sort(
+            (a, b) => (facilityDistanceKm(a, userLocation) ?? Number.MAX_SAFE_INTEGER) - (facilityDistanceKm(b, userLocation) ?? Number.MAX_SAFE_INTEGER)
+          );
+          setFacilities(fallback);
+          setSelectedId(fallback[0]?.id || null);
+          setUsingFallback(true);
+          setLocationError('No live OpenStreetMap hospitals were found nearby, so MediGuard is showing its fallback facilities.');
+        }
+      })
+      .catch(() => {
+        if (cancelled) return;
+        const fallback = [...BAMENDA_FACILITIES].sort(
+          (a, b) => (facilityDistanceKm(a, userLocation) ?? Number.MAX_SAFE_INTEGER) - (facilityDistanceKm(b, userLocation) ?? Number.MAX_SAFE_INTEGER)
+        );
+        setFacilities(fallback);
+        setSelectedId(fallback[0]?.id || null);
+        setUsingFallback(true);
+        setLocationError('Live nearby facility search failed, so MediGuard is showing fallback facilities.');
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingFacilities(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [userLocation]);
+
   const selectFacility = (facility) => {
     setSelectedId(facility.id);
     window.requestAnimationFrame(() => {
       cardRefs.current[facility.id]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
     });
   };
+
+  const facilityCountText = loadingFacilities
+    ? 'Searching nearby hospitals...'
+    : `${facilities.length} ${usingFallback ? 'fallback' : 'nearby'} facilities`;
 
   return (
     <>
@@ -114,7 +162,7 @@ const NearbyFacilitiesPage = () => {
                   Nearby Health Facilities
                 </h1>
                 <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
-                  {BAMENDA_FACILITIES.length} trusted facilities with maps, contacts, and directions
+                  {facilityCountText} with maps, contacts, and directions
                 </p>
               </div>
               <Button
@@ -130,7 +178,7 @@ const NearbyFacilitiesPage = () => {
             </div>
             {userLocation && (
               <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-2 text-xs text-green-600 dark:text-green-400">
-                Facilities are now sorted by distance from your current location.
+                Searching and sorting hospitals close to your current location.
               </motion.p>
             )}
             {locationError && (
@@ -146,10 +194,26 @@ const NearbyFacilitiesPage = () => {
             <div className="lg:col-span-2">
               <div className="mb-2 flex items-center justify-between lg:hidden">
                 <h2 className="text-sm font-semibold text-muted-foreground">
-                  Available Facilities ({BAMENDA_FACILITIES.length})
+                  Available Facilities ({facilities.length})
                 </h2>
                 <p className="text-xs text-muted-foreground">Tap to view details</p>
               </div>
+
+              {loadingFacilities && (
+                <Card className="mb-3 border-dashed">
+                  <CardContent className="p-4 text-sm text-muted-foreground">
+                    Fetching hospitals and clinics near your location...
+                  </CardContent>
+                </Card>
+              )}
+
+              {!loadingFacilities && facilities.length === 0 && (
+                <Card className="mb-3 border-dashed">
+                  <CardContent className="p-4 text-sm text-muted-foreground">
+                    Allow location access to fetch nearby hospitals and clinics.
+                  </CardContent>
+                </Card>
+              )}
 
               <div className="grid grid-flow-col grid-rows-2 auto-cols-[minmax(250px,84vw)] gap-3 overflow-x-auto pb-3 lg:block lg:space-y-3 lg:overflow-visible lg:pb-0">
                 {orderedFacilities.map((facility, index) => {
@@ -192,14 +256,18 @@ const NearbyFacilitiesPage = () => {
                                 <MapPin className="mt-0.5 h-3 w-3 flex-shrink-0" />
                                 <span className="flex-1">{facility.address}</span>
                               </p>
-                              <a
-                                href={`tel:${facility.phone.split('/')[0].trim()}`}
-                                className="mt-1 flex items-center gap-1 text-xs font-medium text-primary hover:underline"
-                                onClick={(event) => event.stopPropagation()}
-                              >
-                                <Phone className="h-3 w-3" />
-                                <span className="truncate">{facility.phone}</span>
-                              </a>
+                              {facility.phone ? (
+                                <a
+                                  href={`tel:${facility.phone.split('/')[0].trim()}`}
+                                  className="mt-1 flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+                                  onClick={(event) => event.stopPropagation()}
+                                >
+                                  <Phone className="h-3 w-3" />
+                                  <span className="truncate">{facility.phone}</span>
+                                </a>
+                              ) : (
+                                <p className="mt-1 text-xs text-muted-foreground">Phone not listed</p>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -230,6 +298,7 @@ const NearbyFacilitiesPage = () => {
                 </div>
               </div>
 
+              {selected && (
               <Card className="mb-4 overflow-hidden">
                 <FacilityMapEmbed facility={selected} large />
                 <div className="border-t bg-background px-3 py-2 sm:px-4 sm:py-3">
@@ -256,7 +325,9 @@ const NearbyFacilitiesPage = () => {
                   </p>
                 </div>
               </Card>
+              )}
 
+              {selected && (
               <motion.div key={selected.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
                 <Card className={`border-2 ${selected.color}`}>
                   <CardHeader className={`p-4 pb-3 sm:p-6 ${selected.headerBg}`}>
@@ -312,9 +383,13 @@ const NearbyFacilitiesPage = () => {
                       </div>
                       <div className="flex items-center gap-2">
                         <Phone className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
-                        <a href={`tel:${selected.phone.split('/')[0].trim()}`} className="break-all text-xs font-medium text-primary hover:underline sm:text-sm">
-                          {selected.phone}
-                        </a>
+                        {selected.phone ? (
+                          <a href={`tel:${selected.phone.split('/')[0].trim()}`} className="break-all text-xs font-medium text-primary hover:underline sm:text-sm">
+                            {selected.phone}
+                          </a>
+                        ) : (
+                          <span className="text-xs text-muted-foreground sm:text-sm">Phone not listed</span>
+                        )}
                       </div>
                       <div className="flex items-center gap-2 sm:col-span-2">
                         <Clock className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
@@ -345,6 +420,7 @@ const NearbyFacilitiesPage = () => {
                     </div>
 
                     <div className="flex gap-2 pt-2 sm:hidden">
+                      {selected.phone && (
                       <a
                         href={`tel:${selected.phone.split('/')[0].trim()}`}
                         className="flex flex-1 items-center justify-center gap-2 rounded-md bg-green-600 px-3 py-2 text-sm font-medium text-white hover:bg-green-700"
@@ -352,6 +428,7 @@ const NearbyFacilitiesPage = () => {
                         <Phone className="h-4 w-4" />
                         Call Now
                       </a>
+                      )}
                       <a
                         href={facilityDirectionsUrl(selected, userLocation)}
                         target="_blank"
@@ -365,6 +442,7 @@ const NearbyFacilitiesPage = () => {
                   </CardContent>
                 </Card>
               </motion.div>
+              )}
 
               <div className="mt-4 rounded-lg bg-blue-50 p-3 dark:bg-blue-950/20">
                 <p className="text-xs text-blue-800 dark:text-blue-300">
