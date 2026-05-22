@@ -3,11 +3,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
 from app.db.init_db import init_db
-from app.routers import analytics, auth, chat, contact, diseases, history, predict
+from app.ml.model_store import ensure_model_files
 
 settings = get_settings()
 app = FastAPI(title="MediGuard API", version="1.0.0")
+model_status = ensure_model_files()
 init_db()
+
+from app.routers import analytics, auth, chat, contact, diseases, history, predict  # noqa: E402
 
 app.add_middleware(
     CORSMiddleware,
@@ -20,7 +23,7 @@ app.add_middleware(
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "service": "MediGuard API"}
+    return {"status": "ok", "service": "MediGuard API", "models": model_status}
 
 
 app.include_router(auth.router, prefix="/auth", tags=["Auth"])
