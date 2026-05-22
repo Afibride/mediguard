@@ -146,8 +146,15 @@ class DiseasePredictor:
     # -------------------------------------------------------------------------
 
     def _predict_local_model(self, symptoms: list[str]) -> list[dict] | None:
-        if not (self.model and hasattr(self.model, "predict_ranked")):
+        if not self.model:
             return None
+        if hasattr(self.model, "predict_ranked"):
+            return self._predict_simple_model(symptoms)
+        if hasattr(self.model, "predict_proba") and hasattr(self.model, "classes_"):
+            return self._predict_sklearn_model(symptoms)
+        return None
+
+    def _predict_simple_model(self, symptoms: list[str]) -> list[dict] | None:
         by_name = {d["name"]: d for d in DISEASES}
         results = []
         for item in self.model.predict_ranked(symptoms, top_k=5):
@@ -165,6 +172,47 @@ class DiseasePredictor:
                 "description": disease.get("description", "Disease information is available in the library."),
                 "symptoms": disease.get("symptoms", item.get("matched_symptoms", [])),
                 "matchCount": len(item.get("matched_symptoms", [])),
+                "data_source": "local_model",
+            })
+        return results or None
+
+    def _predict_sklearn_model(self, symptoms: list[str]) -> list[dict] | None:
+        selected = {symptom.strip().lower() for symptom in symptoms}
+        values = [[1 if symptom.lower() in selected else 0 for symptom in self.symptoms]]
+
+        try:
+            import pandas as pd
+            vector = pd.DataFrame(values, columns=self.symptoms)
+            probabilities = self.model.predict_proba(vector)[0]
+        except Exception:
+            return None
+
+        ranked_indexes = sorted(
+            range(len(probabilities)),
+            key=lambda index: float(probabilities[index]),
+            reverse=True,
+        )[:5]
+
+        by_name = {d["name"]: d for d in DISEASES}
+        results = []
+        for index in ranked_indexes:
+            disease_name = str(self.model.classes_[index])
+            probability = round(float(probabilities[index]) * 100, 2)
+            disease = by_name.get(disease_name, {})
+            disease_symptoms = disease.get("symptoms", [])
+            match_count = sum(1 for symptom in symptoms if symptom in disease_symptoms)
+            results.append({
+                "id": disease.get("id", disease_name.lower().replace(" ", "-")),
+                "slug": disease.get("slug", disease_name.lower().replace(" ", "-")),
+                "disease": disease_name,
+                "name": disease_name,
+                "probability": probability,
+                "confidence": probability,
+                "category": disease.get("category", "General"),
+                "severity": disease.get("severity", "Medium"),
+                "description": disease.get("description", "Disease information is available in the library."),
+                "symptoms": disease_symptoms or symptoms,
+                "matchCount": match_count,
                 "data_source": "local_model",
             })
         return results or None

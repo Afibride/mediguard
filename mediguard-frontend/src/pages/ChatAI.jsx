@@ -33,7 +33,7 @@ function MarkdownMessage({ content }) {
   if (!content) return null;
   const blocks = content.split(/\n{2,}/);
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 max-w-full min-w-0 break-words [overflow-wrap:anywhere]">
       {blocks.map((block, bi) => {
         const lines = block.split('\n').filter(Boolean);
         const listMarker = /^(?:\d+[.)]|•|-)\s/;
@@ -56,7 +56,7 @@ function MarkdownMessage({ content }) {
         }
 
         return (
-          <p key={bi} className="leading-relaxed">
+          <p key={bi} className="leading-relaxed max-w-full break-words [overflow-wrap:anywhere]">
             {lines.map((line, li) => (
               <React.Fragment key={li}>
                 {li > 0 && <br />}
@@ -185,8 +185,9 @@ const ChatAI = () => {
   // Check screen size for responsive behavior
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (!mobile) {
         setIsSidebarOpen(true);
       } else {
         setIsSidebarOpen(false);
@@ -229,8 +230,6 @@ const ChatAI = () => {
 
   // Create a new chat
   const createNewChat = () => {
-    // Don't create a new chat if there are no existing chats
-    // This ensures we don't create duplicate chats on initial load
     if (chats.length === 0 || currentChatId) {
       const newChatId = 'chat_' + Date.now();
       const welcomeMessage = {
@@ -262,15 +261,12 @@ const ChatAI = () => {
   const updateChatTitle = (chatId, userMessage) => {
     setChats(prev => prev.map(chat => {
       if (chat.id === chatId) {
-        // Create a more meaningful title from the user's question
         let title = userMessage;
         
-        // Clean up the message to make a better title
         if (userMessage.length > 40) {
           title = userMessage.substring(0, 40) + '...';
         }
         
-        // Capitalize first letter
         title = title.charAt(0).toUpperCase() + title.slice(1);
         
         return { ...chat, title };
@@ -291,19 +287,15 @@ const ChatAI = () => {
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
     
-    // Update messages
     const updatedMessages = [...messages, userMsgObj];
     setMessages(updatedMessages);
     
-    // Update chat in sidebar
     setChats(prev => prev.map(chat => {
       if (chat.id === currentChatId) {
-        // If this is the first user message, update the chat title with the question
         if (chat.title === 'New Conversation') {
           updateChatTitle(chat.id, textToSend);
         }
         
-        // Update messages and preview
         return { 
           ...chat, 
           messages: updatedMessages,
@@ -500,7 +492,7 @@ const ChatAI = () => {
           ...chat, 
           messages: [welcomeMessage],
           preview: welcomeMessage.content.substring(0, 30) + '...',
-          title: 'New Conversation' // Reset title when cleared
+          title: 'New Conversation'
         };
       }
       return chat;
@@ -570,7 +562,7 @@ const ChatAI = () => {
         <meta name="description" content="Conversational symptom checker and AI health assistant for personalized guidance." />
       </Helmet>
 
-      <div className="h-[calc(100dvh-64px)] min-h-[520px] bg-muted/30 flex overflow-hidden">
+      <div className="h-[calc(100dvh-64px)] min-h-[520px] w-full max-w-[100vw] bg-[radial-gradient(circle_at_top_left,hsl(var(--primary)/0.12),transparent_22rem),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.62))] flex overflow-hidden">
         {/* Sidebar */}
         <AnimatePresence mode="wait">
           {isSidebarOpen && (
@@ -701,11 +693,11 @@ const ChatAI = () => {
           )}
         </AnimatePresence>
 
-        {/* Main Chat Area */}
-        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Main Chat Area - FIXED for mobile cropping */}
+        <div className="flex-1 flex flex-col min-w-0 w-full max-w-full overflow-hidden">
           {/* Chat Header */}
-          <div className="p-3 sm:p-4 bg-background border-b shadow-sm flex items-center justify-between z-10 sticky top-0">
-            <div className="flex items-center gap-2 sm:gap-3 w-full">
+          <div className="p-3 sm:p-4 bg-background/95 backdrop-blur border-b shadow-sm flex items-center justify-between z-10 sticky top-0 max-w-full overflow-hidden">
+            <div className="flex items-center gap-2 sm:gap-3 w-full min-w-0">
               {/* Sidebar Toggle Button */}
               <Button
                 variant="ghost"
@@ -721,11 +713,11 @@ const ChatAI = () => {
                 )}
               </Button>
               
-              <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-shrink">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 ring-1 ring-primary/20 flex items-center justify-center flex-shrink-0">
                   <Bot className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
                 </div>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <h1 className="text-base sm:text-xl font-bold flex items-center gap-2 text-foreground truncate">
                     MediGuard AI
                   </h1>
@@ -750,140 +742,143 @@ const ChatAI = () => {
             </div>
           </div>
 
-          {/* Messages Area */}
-          <div className="flex-1 flex flex-col w-full max-w-full overflow-hidden">
-            <ScrollArea className="flex-1 p-3 sm:p-4" ref={scrollRef}>
-              <div className="space-y-4 sm:space-y-6 pb-4 w-full">
-                <AnimatePresence>
-                  {messages.map((message) => (
-                    <motion.div
-                      key={message.id}
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      className={`flex gap-2 sm:gap-3 w-full ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                    >
-                      {message.role === 'assistant' && (
-                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-sm mt-auto mb-1">
-                          <Bot className="h-3 w-3 sm:h-5 sm:w-5 text-primary-foreground" />
-                        </div>
-                      )}
-                      
-                      <div className={`max-w-[88%] sm:max-w-[75%] flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
-                        <div
-                          className={`rounded-xl sm:rounded-2xl px-3 py-2 sm:px-5 sm:py-3 shadow-sm text-sm sm:text-[15px] leading-relaxed relative break-words w-full ${
-                            message.role === 'user'
-                              ? 'bg-secondary text-secondary-foreground rounded-br-sm'
-                              : message.content.includes('🚨 EMERGENCY') 
-                                ? 'bg-red-50 text-red-900 border border-red-200 rounded-bl-sm dark:bg-red-950/50 dark:text-red-200'
-                                : 'bg-card text-foreground border rounded-bl-sm'
-                          }`}
-                        >
-                          {message.role === 'assistant'
-                            ? <MarkdownMessage content={message.content} />
-                            : (
-                              <>
-                                {message.imagePreview && (
-                                  <img src={message.imagePreview} alt="uploaded symptom"
-                                    className="mb-2 max-h-48 rounded-lg object-contain border border-white/20" />
-                                )}
-                                <p className="whitespace-pre-wrap break-words">{message.content}</p>
-                              </>
-                            )
-                          }
-                        </div>
-                        <span className="text-[10px] sm:text-[11px] text-muted-foreground mt-1 px-1">
-                          {message.timestamp}
-                        </span>
-                        {message.role === 'assistant' && <SourceCitation sources={message.sources} />}
-                        {message.role === 'assistant' && message.id !== messages[0]?.id && (
-                          <div className="flex items-center gap-1.5 mt-1.5 px-1">
-                            <span className="text-[10px] text-muted-foreground">Helpful?</span>
-                            <button
-                              onClick={() => handleRate(message, true)}
-                              disabled={ratings[message.id] !== undefined}
-                              className={`p-1 rounded transition-colors ${
-                                ratings[message.id] === true
-                                  ? 'text-green-600'
-                                  : ratings[message.id] !== undefined
-                                    ? 'text-muted-foreground/30'
-                                    : 'text-muted-foreground hover:text-green-600'
-                              }`}
-                              title="Helpful"
-                            >
-                              <ThumbsUp className="h-3 w-3" />
-                            </button>
-                            <button
-                              onClick={() => handleRate(message, false)}
-                              disabled={ratings[message.id] !== undefined}
-                              className={`p-1 rounded transition-colors ${
-                                ratings[message.id] === false
-                                  ? 'text-red-500'
-                                  : ratings[message.id] !== undefined
-                                    ? 'text-muted-foreground/30'
-                                    : 'text-muted-foreground hover:text-red-500'
-                              }`}
-                              title="Not helpful"
-                            >
-                              <ThumbsDown className="h-3 w-3" />
-                            </button>
-                            {ratings[message.id] !== undefined && (
-                              <motion.span
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                className="text-[10px] text-muted-foreground"
-                              >
-                                {ratings[message.id] ? 'Thanks!' : 'Noted, we\'ll improve.'}
-                              </motion.span>
-                            )}
+          {/* Messages Area - FIXED: proper overflow handling */}
+          <div className="flex-1 flex flex-col w-full max-w-full min-w-0 overflow-hidden">
+            <ScrollArea className="flex-1 w-full max-w-full overflow-x-hidden" ref={scrollRef}>
+              <div className="px-2.5 sm:px-4 py-2.5 sm:py-4 w-full max-w-full">
+                <div className="space-y-4 sm:space-y-6 w-full max-w-full">
+                  <AnimatePresence>
+                    {messages.map((message) => (
+                      <motion.div
+                        key={message.id}
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        className={`flex gap-2 sm:gap-3 w-full max-w-full ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                      >
+                        {message.role === 'assistant' && (
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-sm mt-auto mb-1">
+                            <Bot className="h-3 w-3 sm:h-5 sm:w-5 text-primary-foreground" />
                           </div>
                         )}
-                        {message.role === 'assistant' && Array.isArray(message.followUpQuestions) && message.followUpQuestions.filter((question) => !message.content?.includes(question)).length > 0 && (
-                          <div className="mt-2 flex flex-wrap gap-2">
-                            {message.followUpQuestions.filter((question) => !message.content?.includes(question)).map((question) => (
-                              <span
-                                key={question}
-                                className="rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-left text-[11px] sm:text-xs font-medium text-primary"
-                              >
-                                {question}
-                              </span>
-                            ))}
+                        
+                        {/* FIXED: Better responsive width management */}
+                        <div className={`max-w-[85%] sm:max-w-[75%] min-w-0 flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
+                          <div
+                            className={`rounded-2xl px-3 py-2.5 sm:px-5 sm:py-3 shadow-sm text-sm sm:text-[15px] leading-relaxed relative break-words [overflow-wrap:anywhere] w-full max-w-full ${
+                              message.role === 'user'
+                                ? 'bg-secondary text-secondary-foreground rounded-br-md shadow-secondary/10'
+                                : message.content.includes('🚨 EMERGENCY') 
+                                  ? 'bg-red-50 text-red-900 border border-red-200 rounded-bl-md dark:bg-red-950/50 dark:text-red-200'
+                                  : 'bg-card/95 text-foreground border border-primary/10 rounded-bl-md shadow-primary/5'
+                            }`}
+                          >
+                            {message.role === 'assistant'
+                              ? <MarkdownMessage content={message.content} />
+                              : (
+                                <>
+                                  {message.imagePreview && (
+                                    <img src={message.imagePreview} alt="uploaded symptom"
+                                      className="mb-2 max-h-48 rounded-lg object-contain border border-white/20 max-w-full" />
+                                  )}
+                                  <p className="whitespace-pre-wrap break-words [overflow-wrap:anywhere]">{message.content}</p>
+                                </>
+                              )
+                            }
                           </div>
-                        )}
-                      </div>
+                          <span className="text-[10px] sm:text-[11px] text-muted-foreground mt-1 px-1">
+                            {message.timestamp}
+                          </span>
+                          {message.role === 'assistant' && <SourceCitation sources={message.sources} />}
+                          {message.role === 'assistant' && message.id !== messages[0]?.id && (
+                            <div className="flex items-center gap-1.5 mt-1.5 px-1 flex-wrap">
+                              <span className="text-[10px] text-muted-foreground">Helpful?</span>
+                              <button
+                                onClick={() => handleRate(message, true)}
+                                disabled={ratings[message.id] !== undefined}
+                                className={`p-1 rounded transition-colors ${
+                                  ratings[message.id] === true
+                                    ? 'text-green-600'
+                                    : ratings[message.id] !== undefined
+                                      ? 'text-muted-foreground/30'
+                                      : 'text-muted-foreground hover:text-green-600'
+                                }`}
+                                title="Helpful"
+                              >
+                                <ThumbsUp className="h-3 w-3" />
+                              </button>
+                              <button
+                                onClick={() => handleRate(message, false)}
+                                disabled={ratings[message.id] !== undefined}
+                                className={`p-1 rounded transition-colors ${
+                                  ratings[message.id] === false
+                                    ? 'text-red-500'
+                                    : ratings[message.id] !== undefined
+                                      ? 'text-muted-foreground/30'
+                                      : 'text-muted-foreground hover:text-red-500'
+                                }`}
+                                title="Not helpful"
+                              >
+                                <ThumbsDown className="h-3 w-3" />
+                              </button>
+                              {ratings[message.id] !== undefined && (
+                                <motion.span
+                                  initial={{ opacity: 0, scale: 0.8 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  className="text-[10px] text-muted-foreground"
+                                >
+                                  {ratings[message.id] ? 'Thanks!' : 'Noted, we\'ll improve.'}
+                                </motion.span>
+                              )}
+                            </div>
+                          )}
+                          {message.role === 'assistant' && Array.isArray(message.followUpQuestions) && message.followUpQuestions.filter((question) => !message.content?.includes(question)).length > 0 && (
+                            <div className="mt-2 flex max-w-full flex-wrap gap-2 overflow-hidden">
+                              {message.followUpQuestions.filter((question) => !message.content?.includes(question)).map((question) => (
+                                <span
+                                  key={question}
+                                  className="max-w-full rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-left text-[11px] sm:text-xs font-medium text-primary break-words [overflow-wrap:anywhere]"
+                                >
+                                  {question}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
 
-                      {message.role === 'user' && (
-                        <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-muted border flex items-center justify-center flex-shrink-0 shadow-sm mt-auto mb-1">
-                          <User className="h-3 w-3 sm:h-5 sm:w-5 text-muted-foreground" />
-                        </div>
-                      )}
+                        {message.role === 'user' && (
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-muted border flex items-center justify-center flex-shrink-0 shadow-sm mt-auto mb-1">
+                            <User className="h-3 w-3 sm:h-5 sm:w-5 text-muted-foreground" />
+                          </div>
+                        )}
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                  
+                  {/* Typing Indicator — bouncing dots */}
+                  {isTyping && (
+                    <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="flex gap-2 sm:gap-3 justify-start">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-sm mt-auto mb-1">
+                        <Bot className="h-3 w-3 sm:h-5 sm:w-5 text-primary-foreground" />
+                      </div>
+                      <div className="bg-card/95 border border-primary/10 shadow-sm rounded-2xl rounded-bl-md px-4 py-3 flex items-center gap-1.5">
+                        {[0, 1, 2].map(i => (
+                          <motion.span
+                            key={i}
+                            className="w-2 h-2 rounded-full bg-primary/70 block"
+                            animate={{ y: [0, -5, 0] }}
+                            transition={{ duration: 0.55, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
+                          />
+                        ))}
+                      </div>
                     </motion.div>
-                  ))}
-                </AnimatePresence>
-                
-                {/* Typing Indicator — bouncing dots */}
-                {isTyping && (
-                  <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="flex gap-2 sm:gap-3 justify-start">
-                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-sm mt-auto mb-1">
-                      <Bot className="h-3 w-3 sm:h-5 sm:w-5 text-primary-foreground" />
-                    </div>
-                    <div className="bg-card border shadow-sm rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
-                      {[0, 1, 2].map(i => (
-                        <motion.span
-                          key={i}
-                          className="w-2 h-2 rounded-full bg-primary/70 block"
-                          animate={{ y: [0, -5, 0] }}
-                          transition={{ duration: 0.55, repeat: Infinity, delay: i * 0.15, ease: 'easeInOut' }}
-                        />
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-                <div ref={messagesEndRef} className="h-px" />
+                  )}
+                  <div ref={messagesEndRef} className="h-px" />
+                </div>
               </div>
             </ScrollArea>
 
-            {/* Input Area & Suggested Questions */}
-            <div className="p-3 sm:p-4 bg-background border-t w-full">
+            {/* Input Area & Suggested Questions - FIXED for mobile */}
+            <div className="p-2.5 sm:p-4 bg-background/95 backdrop-blur border-t w-full max-w-full shadow-[0_-10px_30px_hsl(var(--background)/0.85)]">
               {messages.length <= 1 && !isTyping && (
                 <div className="mb-3 sm:mb-4">
                   <SuggestedQuestions onSelectQuestion={handleSelectQuestion} />
@@ -893,8 +888,8 @@ const ChatAI = () => {
               {/* Image preview */}
               {imagePreview && (
                 <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
-                  className="mb-2 flex items-center gap-2 p-2 bg-muted/50 rounded-lg border">
-                  <img src={imagePreview} alt="preview" className="h-14 w-14 rounded-md object-cover border" />
+                  className="mb-2 flex items-center gap-2 p-2 bg-muted/50 rounded-lg border flex-wrap sm:flex-nowrap">
+                  <img src={imagePreview} alt="preview" className="h-12 w-12 sm:h-14 sm:w-14 rounded-md object-cover border" />
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-medium truncate">{imageFile?.name}</p>
                     <p className="text-[10px] text-muted-foreground">
@@ -902,7 +897,7 @@ const ChatAI = () => {
                     </p>
                   </div>
                   <button onClick={() => { setImageFile(null); setImagePreview(null); }}
-                    className="p-1 rounded hover:bg-destructive/20 text-muted-foreground hover:text-destructive">
+                    className="p-1 rounded hover:bg-destructive/20 text-muted-foreground hover:text-destructive flex-shrink-0">
                     <X className="h-4 w-4" />
                   </button>
                 </motion.div>
@@ -933,24 +928,24 @@ const ChatAI = () => {
                 }}
               />
 
-              <div className="flex gap-2 items-center relative w-full">
+              <div className="flex gap-2 items-center w-full max-w-full">
                 {/* Image upload button */}
                 <Button
                   type="button"
                   variant="outline"
                   size="icon"
-                  className="h-12 sm:h-14 w-12 sm:w-14 shrink-0 rounded-lg border-dashed hover:border-primary hover:text-primary"
+                  className="h-10 w-10 sm:h-14 sm:w-14 shrink-0 rounded-lg border-dashed hover:border-primary hover:text-primary"
                   title="Upload image of symptom (rash, skin condition, etc.)"
                   onClick={() => imageInputRef.current?.click()}
                   disabled={isTyping || imageAnalyzing}
                 >
                   {imageAnalyzing
-                    ? <Loader2 className="h-4 w-4 animate-spin" />
-                    : <ImagePlus className="h-4 w-4 sm:h-5 sm:w-5" />
+                    ? <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
+                    : <ImagePlus className="h-3 w-3 sm:h-5 sm:w-5" />
                   }
                 </Button>
 
-                <div className="relative flex-1 min-w-0">
+                <div className="relative flex-1 min-w-0 max-w-full">
                   <Input
                     placeholder={imagePreview ? t('chat_image_placeholder') : t('chat_placeholder')}
                     value={input}
@@ -961,15 +956,15 @@ const ChatAI = () => {
                         imageFile ? handleImageSend() : handleSend();
                       }
                     }}
-                    className="bg-muted/50 border-input focus-visible:ring-primary h-12 sm:h-14 text-base rounded-lg pl-4 pr-12 shadow-inner w-full"
+                    className="bg-muted/45 border-input focus-visible:ring-primary h-10 sm:h-14 text-base rounded-xl pl-3 sm:pl-4 pr-10 sm:pr-12 shadow-inner w-full text-sm sm:text-base"
                     disabled={isTyping || imageAnalyzing}
                   />
                   <Button
                     onClick={() => imageFile ? handleImageSend() : handleSend()}
                     disabled={(!input.trim() && !imageFile) || isTyping || imageAnalyzing}
-                    className="absolute right-1.5 top-1.5 bottom-1.5 rounded-md w-9 h-9 sm:w-11 sm:h-11 p-0 bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform active:scale-95"
+                    className="absolute right-1 top-1 bottom-1 rounded-md w-8 h-8 sm:w-11 sm:h-11 p-0 bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform active:scale-95"
                   >
-                    <Send className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <Send className="h-3 w-3 sm:h-5 sm:w-5" />
                   </Button>
                 </div>
               </div>

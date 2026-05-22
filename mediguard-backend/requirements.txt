@@ -8,9 +8,9 @@ passlib[bcrypt]==1.7.4
 bcrypt==4.2.1
 python-multipart==0.0.20
 email-validator==2.2.0
-joblib==1.4.2
-scikit-learn==1.6.0
-pandas==2.2.3
+joblib>=1.4.2
+scikit-learn>=1.7.0
+pandas>=2.2.3
 openai==1.58.1
 pinecone-client==5.0.1
 pypdf==5.1.0
