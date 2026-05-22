@@ -1,86 +1,83 @@
-import csv
 import json
-import pickle
-from collections import Counter, defaultdict
 from pathlib import Path
 
-from app.ml.simple_model import SimpleLabelEncoder, SimpleSymptomModel
+import joblib
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.naive_bayes import GaussianNB
+from sklearn.preprocessing import LabelEncoder
+from sklearn.tree import DecisionTreeClassifier
 
 
 TRAIN_PATH = Path("data/processed/mediguard_train.csv")
 TEST_PATH = Path("data/processed/mediguard_test.csv")
 MODELS_DIR = Path("models")
 SYMPTOMS_PATH = Path("data_pipeline/symptoms_list.json")
+RANDOM_STATE = 42
 
 
-def load_rows(path: Path) -> tuple[list[str], list[dict]]:
-    with path.open(newline="", encoding="utf-8") as handle:
-        reader = csv.DictReader(handle)
-        rows = list(reader)
-    symptoms = [field for field in reader.fieldnames or [] if field != "disease"]
-    return symptoms, rows
+def load_dataset(path: Path) -> tuple[pd.DataFrame, pd.Series, list[str]]:
+    df = pd.read_csv(path)
+    symptoms = [column for column in df.columns if column != "disease"]
+    x = df[symptoms].astype(int)
+    y = df["disease"].astype(str)
+    return x, y, symptoms
 
 
-def train_simple_model(symptoms: list[str], rows: list[dict], variant: str) -> SimpleSymptomModel:
-    class_counts = Counter(row["disease"] for row in rows)
-    classes = sorted(class_counts)
-    total_rows = len(rows)
-    symptom_counts = defaultdict(lambda: Counter())
-
-    for row in rows:
-        disease = row["disease"]
-        for symptom in symptoms:
-            if int(row[symptom]):
-                symptom_counts[disease][symptom] += 1
-
-    log_priors = {}
-    log_likelihoods = {}
-    for disease in classes:
-        log_priors[disease] = __import__("math").log(class_counts[disease] / total_rows)
-        log_likelihoods[disease] = {}
-        for symptom in symptoms:
-            # Laplace smoothing keeps probabilities away from 0/1.
-            present = symptom_counts[disease][symptom]
-            log_likelihoods[disease][symptom] = (present + 1) / (class_counts[disease] + 2)
-
-    return SimpleSymptomModel(symptoms, classes, log_priors, log_likelihoods, variant)
+def build_models() -> dict[str, object]:
+    return {
+        "random_forest": RandomForestClassifier(
+            n_estimators=300,
+            max_depth=None,
+            min_samples_split=2,
+            min_samples_leaf=1,
+            class_weight="balanced",
+            random_state=RANDOM_STATE,
+            n_jobs=-1,
+        ),
+        "decision_tree": DecisionTreeClassifier(
+            criterion="gini",
+            class_weight="balanced",
+            random_state=RANDOM_STATE,
+        ),
+        "naive_bayes": GaussianNB(),
+    }
 
 
-def evaluate(model: SimpleSymptomModel, rows: list[dict]) -> float:
-    correct = 0
-    for row in rows:
-        selected = [symptom for symptom in model.symptoms if int(row[symptom])]
-        prediction = model.predict_ranked(selected, top_k=1)[0]["disease"]
-        correct += prediction == row["disease"]
-    return correct / len(rows)
-
-
-def dump_pickle(path: Path, obj) -> None:
-    with path.open("wb") as handle:
-        pickle.dump(obj, handle)
+def save_json(path: Path, data: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 
 def main() -> None:
-    symptoms, train_rows = load_rows(TRAIN_PATH)
-    _, test_rows = load_rows(TEST_PATH)
-    MODELS_DIR.mkdir(exist_ok=True)
+    x_train, y_train, symptoms = load_dataset(TRAIN_PATH)
+    x_test, y_test, test_symptoms = load_dataset(TEST_PATH)
 
-    models = {
-        "random_forest": train_simple_model(symptoms, train_rows, "random_forest_fallback"),
-        "decision_tree": train_simple_model(symptoms, train_rows, "decision_tree_fallback"),
-        "naive_bayes": train_simple_model(symptoms, train_rows, "naive_bayes_fallback"),
-    }
+    if symptoms != test_symptoms:
+        raise ValueError("Train and test symptom columns do not match.")
 
+    MODELS_DIR.mkdir(parents=True, exist_ok=True)
+
+    label_encoder = LabelEncoder()
+    label_encoder.fit(y_train)
+    joblib.dump(label_encoder, MODELS_DIR / "label_encoder.pkl")
+
+    models = build_models()
     for name, model in models.items():
-        accuracy = evaluate(model, test_rows)
-        dump_pickle(MODELS_DIR / f"{name}.pkl", model)
-        print(f"{name}: accuracy={accuracy:.4f}")
+        model.fit(x_train, y_train)
+        predictions = model.predict(x_test)
+        accuracy = accuracy_score(y_test, predictions)
+        joblib.dump(model, MODELS_DIR / f"{name}.pkl")
+        print(f"{name}: {model.__class__.__name__} accuracy={accuracy:.4f}")
 
-    classes = sorted({row["disease"] for row in train_rows})
-    dump_pickle(MODELS_DIR / "label_encoder.pkl", SimpleLabelEncoder(classes))
-    (MODELS_DIR / "symptoms_list.json").write_text(json.dumps(symptoms, indent=2), encoding="utf-8")
-    SYMPTOMS_PATH.write_text(json.dumps(symptoms, indent=2), encoding="utf-8")
-    print(f"Saved {len(models)} models, label encoder, and {len(symptoms)} symptoms.")
+        if name == "random_forest":
+            report = classification_report(y_test, predictions, zero_division=0)
+            (MODELS_DIR / "random_forest_report.txt").write_text(report, encoding="utf-8")
+
+    save_json(MODELS_DIR / "symptoms_list.json", symptoms)
+    save_json(SYMPTOMS_PATH, symptoms)
+    print(f"Saved {len(models)} scikit-learn models, label encoder, and {len(symptoms)} symptoms.")
 
 
 if __name__ == "__main__":

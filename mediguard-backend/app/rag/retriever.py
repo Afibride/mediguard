@@ -21,6 +21,7 @@ from dotenv import load_dotenv
 from app.data import DISEASES, SYMPTOM_DESCRIPTIONS, SYMPTOMS
 from app.db.models import Disease
 from app.db.session import SessionLocal
+from app.ml.fuzzy_match import normalize_symptom_text
 from app.ml.predictor import DiseasePredictor
 from app.rag.embeddings import embed_text
 
@@ -390,14 +391,27 @@ DISEASE_ALIASES: dict[str, str] = {
     "trichomonase": "Trichomoniasis",
     # STIs
     "gonorrhea": "Gonorrhea", "gonorrhoea": "Gonorrhea", "gonorhea": "Gonorrhea",
-    "gonorea": "Gonorrhea", "gonnorhea": "Gonorrhea", "the clap": "Gonorrhea", "clap": "Gonorrhea",
+    "gonorea": "Gonorrhea", "gonnorhea": "Gonorrhea", "gonorrea": "Gonorrhea",
+    "gonnorrea": "Gonorrhea", "gonorrhe": "Gonorrhea", "gonorrhoe": "Gonorrhea",
+    "the clap": "Gonorrhea", "clap": "Gonorrhea",
     "the pox": "Syphilis", "syph": "Syphilis", "ciphilis": "Syphilis",
     "siphilis": "Syphilis", "syfilis": "Syphilis", "sifilis": "Syphilis",
-    "silent sti": "Chlamydia",
+    "syphillis": "Syphilis", "syphylis": "Syphilis", "sifilis": "Syphilis",
+    "silent sti": "Chlamydia", "clamydia": "Chlamydia", "chlamidia": "Chlamydia",
     "genital herpes": "Genital Herpes", "herpes": "Genital Herpes", "hsv": "Genital Herpes",
-    "trich": "Trichomoniasis", "trichomonas": "Trichomoniasis",
+    "trich": "Trichomoniasis", "trichomonas": "Trichomoniasis", "trichomoniasis": "Trichomoniasis",
+    "trichonomiasis": "Trichomoniasis",
     # Others
-    "typhoid": "Typhoid Fever", "dengue": "Dengue Fever",
+    "maleria": "Malaria", "malaira": "Malaria", "malarya": "Malaria", "mallaria": "Malaria",
+    "typhoid": "Typhoid Fever", "typhiod": "Typhoid Fever", "typoid": "Typhoid Fever",
+    "dengue": "Dengue Fever", "denge": "Dengue Fever",
+    "cholera": "Cholera", "colera": "Cholera",
+    "pneumonia": "Pneumonia", "pnemonia": "Pneumonia", "pnumonia": "Pneumonia",
+    "tuberculosis": "Tuberculosis", "tuberculoses": "Tuberculosis",
+    "tuberclosis": "Tuberculosis", "tubercolosis": "Tuberculosis",
+    "meningitis": "Meningitis", "menigitis": "Meningitis",
+    "measles": "Measles", "measels": "Measles",
+    "chickenpox": "Chickenpox", "chikenpox": "Chickenpox", "chiken pox": "Chickenpox",
     "hepatitis a": "Hepatitis A", "hepatitis b": "Hepatitis B",
     "kidney stone": "Kidney Stones", "renal calculi": "Kidney Stones",
     "tb": "Tuberculosis",
@@ -414,6 +428,41 @@ DISEASE_ALIASES: dict[str, str] = {
     "otitis": "Ear Infection",
 }
 
+MEDICAL_TYPO_REPLACEMENTS: dict[str, str] = {
+    "diarhea": "diarrhea",
+    "diarrhoea": "diarrhea",
+    "diarhoea": "diarrhea",
+    "diahrea": "diarrhea",
+    "diahorrhea": "diarrhea",
+    "stomack pain": "stomach pain",
+    "stomac pain": "stomach pain",
+    "abdomnal pain": "abdominal pain",
+    "headace": "headache",
+    "head ache": "headache",
+    "hedache": "headache",
+    "feaver": "fever",
+    "fiver": "fever",
+    "tempreture": "temperature",
+    "temprature": "temperature",
+    "nauseous": "nausea",
+    "nausious": "nausea",
+    "nausia": "nausea",
+    "vommiting": "vomiting",
+    "vomitting": "vomiting",
+    "vommitting": "vomiting",
+    "caugh": "cough",
+    "coff": "cough",
+    "troat pain": "sore throat",
+    "sore troat": "sore throat",
+    "sweating": "sweating",
+    "sweatting": "sweating",
+    "dizzyness": "dizziness",
+    "diziness": "dizziness",
+    "breathless": "shortness of breath",
+    "breathing problem": "shortness of breath",
+    "chestpain": "chest pain",
+}
+
 # Build lookup by canonical name for fast access
 _DISEASE_BY_NAME: dict[str, dict] = {d["name"]: d for d in DISEASES}
 
@@ -422,6 +471,20 @@ def _normalize_medical_term(value: str) -> str:
     value = value.lower()
     value = re.sub(r"[^a-z0-9]+", " ", value)
     return re.sub(r"\s+", " ", value).strip()
+
+
+def _correct_common_medical_typos(text: str) -> str:
+    corrected = f" {text.lower()} "
+    for typo, replacement in sorted(MEDICAL_TYPO_REPLACEMENTS.items(), key=lambda item: len(item[0]), reverse=True):
+        corrected = re.sub(rf"(?<![a-z]){re.escape(typo)}(?![a-z])", replacement, corrected)
+    return re.sub(r"\s+", " ", corrected).strip()
+
+
+def _strip_short_question_noise(query: str) -> str:
+    text = _correct_common_medical_typos(query)
+    text = re.sub(r"^[\s?.!,]*(what'?s|whats|what is|tell me|about|define|explain)\s+", "", text)
+    text = re.sub(r"[\s?.!,]+$", "", text)
+    return text.strip()
 
 
 def _fuzzy_disease_match(term: str, threshold: float = 0.78) -> dict | None:
@@ -484,7 +547,42 @@ def _extract_symptom_term(query: str) -> str | None:
     for pattern in SYMPTOM_DEFINITION_PATTERNS:
         match = pattern.match(query.strip())
         if match:
-            return match.group(1).strip().lower()
+            return _strip_short_question_noise(match.group(1))
+    short_term = _strip_short_question_noise(query)
+    if re.search(r"\b(and|with|plus|also)\b|[,/&+]", short_term):
+        return None
+    if 1 <= len(short_term.split()) <= 3 and _resolve_symptom_definition_term(short_term):
+        return short_term
+    return None
+
+
+def _resolve_symptom_definition_term(term: str) -> str | None:
+    term = _strip_short_question_noise(term)
+    if not term:
+        return None
+    if term in SYMPTOM_DEFINITIONS:
+        return term
+
+    for key in SYMPTOM_DEFINITIONS:
+        if key in term or term in key:
+            return key
+
+    normalized_symptoms = {
+        symptom.lower().replace("_", " "): symptom.lower().replace("_", " ")
+        for symptom in SYMPTOMS
+    }
+    candidates = list(SYMPTOM_DEFINITIONS) + list(normalized_symptoms)
+    best = max(
+        candidates,
+        key=lambda candidate: SequenceMatcher(None, term, candidate).ratio(),
+        default=None,
+    )
+    if best and SequenceMatcher(None, term, best).ratio() >= 0.76:
+        if best in SYMPTOM_DEFINITIONS:
+            return best
+        for definition_key in SYMPTOM_DEFINITIONS:
+            if definition_key in best or best in definition_key:
+                return definition_key
     return None
 
 
@@ -494,6 +592,10 @@ def _symptom_definition_response(query: str) -> dict | None:
         return None
 
     # Check for an exact or near match in our definitions table
+    resolved_term = _resolve_symptom_definition_term(term)
+    if not resolved_term:
+        return None
+    term = resolved_term
     definition = SYMPTOM_DEFINITIONS.get(term)
     if not definition:
         # Try substring match (e.g. "high fever" â†’ "fever")
@@ -534,16 +636,21 @@ def _symptom_definition_response(query: str) -> dict | None:
         "sources": list({name for name, desc_map in SYMPTOM_DESCRIPTIONS.items()
                          for sym_key in desc_map if term in sym_key.lower() or sym_key.lower() in term})[:4],
         "disclaimer": DISCLAIMER,
+        "mode": "symptom_definition",
     }
 
 
 def _resolve_disease_name(term: str) -> dict | None:
     """Return a DISEASES entry for a user-supplied term, using aliases and fuzzy matching."""
-    term = _normalize_medical_term(term)
+    term = _normalize_medical_term(_strip_short_question_noise(term))
+    if len(term.replace(" ", "")) < 4:
+        return None
     # 1. Alias lookup (longest-key-first to avoid partial hits)
     for alias in sorted(DISEASE_ALIASES, key=len, reverse=True):
         normalized_alias = _normalize_medical_term(alias)
-        if normalized_alias in term or term in normalized_alias:
+        exact_or_contained = normalized_alias in term
+        contained_in_alias = len(term) >= 4 and term in normalized_alias
+        if exact_or_contained or contained_in_alias:
             d = _DISEASE_BY_NAME.get(DISEASE_ALIASES[alias])
             if d:
                 return d
@@ -638,7 +745,7 @@ _GENERAL_SKIP_TERMS = {
 
 def _disease_general_info_response(query: str) -> dict | None:
     """Handle 'what is malaria', 'tell me about typhoid', etc. directly from the database."""
-    text = query.lower()
+    text = _correct_common_medical_typos(query)
     # Let more specific handlers deal with symptom/prevention/treatment/cause queries
     if any(t in text for t in _GENERAL_SKIP_TERMS):
         return None
@@ -655,7 +762,9 @@ def _disease_general_info_response(query: str) -> dict | None:
     if not candidate:
         if len(query.split()) > 5:
             return None
-        candidate = query.strip()
+        candidate = _strip_short_question_noise(query)
+    else:
+        candidate = _strip_short_question_noise(candidate)
 
     disease = _resolve_disease_name(candidate)
     if not disease:
@@ -752,8 +861,13 @@ def _database_disease_profile(disease_name: str) -> dict | None:
                 "prevention": row.prevention or [],
                 "source": "database",
             }
+    except Exception:
+        pass
     finally:
-        db.close()
+        try:
+            db.close()
+        except Exception:
+            pass
     disease = _DISEASE_BY_NAME.get(disease_name)
     if disease:
         return {
@@ -1219,10 +1333,11 @@ def _pregnancy_followup_response(query: str, symptoms: list[str], is_pregnant: b
 
 
 def _detect_disease(query: str) -> dict | None:
-    text = query.lower()
+    text = _normalize_medical_term(_strip_short_question_noise(query))
     # Alias lookup first (handles "chicken pox" â†’ "Chickenpox" etc.)
     for alias in sorted(DISEASE_ALIASES, key=len, reverse=True):
-        if alias in text:
+        normalized_alias = _normalize_medical_term(alias)
+        if normalized_alias and re.search(rf"(?<![a-z0-9]){re.escape(normalized_alias)}(?![a-z0-9])", text):
             d = _DISEASE_BY_NAME.get(DISEASE_ALIASES[alias])
             if d:
                 return d
@@ -1306,12 +1421,18 @@ def _enrich_predictions_from_database(predictions: list[dict]) -> list[dict]:
                 }
             enriched.append(item)
         return enriched
+    except Exception:
+        return predictions
     finally:
-        db.close()
+        try:
+            db.close()
+        except Exception:
+            pass
 
 
 def _extract_reported_symptoms(query: str) -> list[str]:
-    text = f" {query.lower()} "
+    normalized_query = _correct_common_medical_typos(query)
+    text = f" {normalized_query} "
     # Normalize common connectors and punctuation so phrases such as
     # "fever and chills", "fever,chills", or "cough plus chest pain" match
     # the ordered symptom vocabulary consistently.
@@ -1323,11 +1444,20 @@ def _extract_reported_symptoms(query: str) -> list[str]:
         pattern = rf"(?<![a-z]){re.escape(normalized)}(?![a-z])"
         if re.search(pattern, text) and symptom not in matches:
             matches.append(symptom)
+    for symptom in normalize_symptom_text(normalized_query, SYMPTOMS):
+        if symptom not in matches:
+            matches.append(symptom)
+    temp_match = re.search(r"\b(3[89]|4[0-5])\s*(?:degrees?|c|°c|celsius)?\b", text)
+    if temp_match:
+        if "Fever" in SYMPTOMS and "Fever" not in matches:
+            matches.append("Fever")
+        if "High fever" in SYMPTOMS and "High fever" not in matches:
+            matches.append("High fever")
     return matches
 
 
 def _is_symptom_check_request(query: str, symptoms: list[str]) -> bool:
-    text = query.lower()
+    text = _correct_common_medical_typos(query)
     general_question_starts = (
         "what is",
         "what are",
@@ -1351,8 +1481,14 @@ def _is_symptom_check_request(query: str, symptoms: list[str]) -> bool:
         "diagnose",
         "assessment",
         "symptom checker",
+        "i feel",
+        "i am feeling",
+        "feeling",
+        "sick",
+        "ill",
     ]
-    return len(symptoms) >= 2 or (bool(symptoms) and any(term in text for term in intent_terms))
+    short_symptom_list = len(text.split()) <= 5 and len(symptoms) >= 2
+    return short_symptom_list or len(symptoms) >= 2 or (bool(symptoms) and any(term in text for term in intent_terms))
 
 
 def _is_new_general_question(query: str) -> bool:
@@ -1793,6 +1929,16 @@ def generate_answer(
     platform = _platform_response(query)
     if platform:
         return platform
+
+    if _history_requested_followup(chat_history):
+        symptom_check = _symptom_check_response(
+            query,
+            is_pregnant=is_pregnant,
+            pregnancy_weeks=pregnancy_weeks,
+            chat_history=chat_history,
+        )
+        if symptom_check:
+            return symptom_check
 
     symptom_definition = _symptom_definition_response(query)
     if symptom_definition:

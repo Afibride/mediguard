@@ -1,0 +1,61 @@
+                               precision    recall  f1-score   support
+
+                  Anaphylaxis       1.00      1.00      1.00        12
+                 Appendicitis       0.94      0.94      0.94        18
+                       Asthma       1.00      1.00      1.00        18
+ Benign Prostatic Hyperplasia       0.80      0.86      0.83        14
+                  Brucellosis       0.92      0.86      0.89        14
+                   Chickenpox       1.00      1.00      1.00        16
+                    Chlamydia       0.50      0.36      0.42        14
+                      Cholera       1.00      1.00      1.00        24
+                  Common Cold       1.00      1.00      1.00        36
+               Conjunctivitis       1.00      1.00      1.00        16
+                 Cystitis UTI       0.85      0.92      0.88        24
+                 Dengue Fever       1.00      1.00      1.00        20
+            Diabetes Mellitus       1.00      0.95      0.98        22
+                   Diphtheria       1.00      0.93      0.96        14
+                    Dysentery       1.00      1.00      1.00        22
+                Ear Infection       0.78      0.88      0.82        16
+                     Epilepsy       1.00      1.00      1.00        16
+                   Filariasis       1.00      1.00      1.00        12
+              Gastroenteritis       0.97      1.00      0.98        32
+               Genital Herpes       1.00      0.93      0.96        14
+                    Gonorrhea       0.60      0.64      0.62        14
+                     HIV AIDS       0.94      0.83      0.88        18
+Helicobacteriosis PepticUlcer       0.94      1.00      0.97        16
+                  Hepatitis A       0.53      0.50      0.52        16
+                  Hepatitis B       0.75      0.67      0.71        18
+                Herpes Zoster       0.94      1.00      0.97        16
+                 Hypertension       0.95      0.90      0.92        20
+       Iron Deficiency Anemia       0.95      1.00      0.97        18
+                Kidney Stones       1.00      0.78      0.88        18
+                Leptospirosis       0.93      0.88      0.90        16
+                      Malaria       0.92      1.00      0.96        60
+                      Measles       1.00      1.00      1.00        16
+                   Meningitis       1.00      1.00      1.00        16
+                     Migraine       1.00      1.00      1.00        18
+                        Mumps       0.92      0.79      0.85        14
+               Onchocerciasis       1.00      1.00      1.00        12
+  Pelvic Inflammatory Disease       0.73      1.00      0.84        16
+                    Pneumonia       1.00      1.00      1.00        28
+                     Ringworm       1.00      0.94      0.97        16
+                      Rubella       1.00      1.00      1.00        14
+                      Scabies       1.00      1.00      1.00        14
+                   Septicemia       1.00      1.00      1.00        16
+           Sickle Cell Crisis       1.00      0.88      0.93        16
+                    Sinusitis       1.00      1.00      1.00        18
+                 Skin Abscess       1.00      1.00      1.00        16
+        Skin Fungal Infection       0.86      1.00      0.92        18
+                     Syphilis       0.93      0.93      0.93        14
+                      Tetanus       0.93      1.00      0.97        14
+                  Tonsillitis       0.94      0.94      0.94        18
+               Trichomoniasis       0.54      0.50      0.52        14
+                 Tuberculosis       0.93      0.96      0.94        26
+                Typhoid Fever       1.00      0.97      0.99        40
+                       Typhus       0.94      1.00      0.97        16
+               Whooping Cough       1.00      1.00      1.00        16
+                 Yellow Fever       0.87      0.81      0.84        16
+
+                     accuracy                           0.93      1026
+                    macro avg       0.92      0.92      0.92      1026
+                 weighted avg       0.93      0.93      0.93      1026
