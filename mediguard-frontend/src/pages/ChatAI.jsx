@@ -75,8 +75,9 @@ const ChatAI = () => {
   const { toast } = useToast();
   const { t } = useLanguage();
   const location = useLocation();
-  const scrollRef = useRef(null);
+  const messagesScrollRef = useRef(null);
   const messagesEndRef = useRef(null);
+  const shouldStickToBottomRef = useRef(true);
   
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -98,6 +99,17 @@ const ChatAI = () => {
   const imageInputRef = useRef(null);
   const sessionId = useRef('sess_' + Date.now()).current;
 
+  useEffect(() => {
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+    };
+  }, []);
+
   // Request location silently on mount
   useEffect(() => {
     if (navigator.geolocation) {
@@ -109,9 +121,21 @@ const ChatAI = () => {
     }
   }, []);
 
-  const scrollToLatest = (behavior = 'smooth') => {
+  const isNearMessageBottom = () => {
+    const node = messagesScrollRef.current;
+    if (!node) return true;
+    return node.scrollHeight - node.scrollTop - node.clientHeight < 96;
+  };
+
+  const handleMessagesScroll = () => {
+    shouldStickToBottomRef.current = isNearMessageBottom();
+  };
+
+  const scrollToLatest = (behavior = 'smooth', force = false) => {
     window.requestAnimationFrame(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior, block: 'end' });
+      const node = messagesScrollRef.current;
+      if (!node || (!force && !shouldStickToBottomRef.current)) return;
+      node.scrollTo({ top: node.scrollHeight, behavior });
     });
   };
 
@@ -288,7 +312,9 @@ const ChatAI = () => {
     };
     
     const updatedMessages = [...messages, userMsgObj];
+    shouldStickToBottomRef.current = true;
     setMessages(updatedMessages);
+    scrollToLatest('smooth', true);
     
     setChats(prev => prev.map(chat => {
       if (chat.id === currentChatId) {
@@ -344,7 +370,7 @@ const ChatAI = () => {
             message.id === aiMsgObj.id ? { ...message, content: typed } : message
           ));
           setMessages(typedMessages);
-          scrollToLatest('smooth');
+          scrollToLatest('auto');
           setChats(prev => prev.map(chat => (
             chat.id === currentChatId
               ? { ...chat, messages: typedMessages, preview: typed.substring(0, 30) + (typed.length >= 30 ? '...' : '') }
@@ -436,7 +462,9 @@ const ChatAI = () => {
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
     const updatedMessages = [...messages, userMsgObj];
+    shouldStickToBottomRef.current = true;
     setMessages(updatedMessages);
+    scrollToLatest('smooth', true);
     setChats(prev => prev.map(c => c.id === currentChatId
       ? { ...c, messages: updatedMessages, preview: userText.substring(0, 30) + '…' }
       : c
@@ -562,7 +590,7 @@ const ChatAI = () => {
         <meta name="description" content="Conversational symptom checker and AI health assistant for personalized guidance." />
       </Helmet>
 
-      <div className="h-[calc(100dvh-64px)] min-h-[520px] w-full max-w-[100vw] bg-[radial-gradient(circle_at_top_left,hsl(var(--primary)/0.12),transparent_22rem),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.62))] flex overflow-hidden">
+      <div className="fixed inset-x-0 bottom-0 top-16 w-full max-w-[100vw] bg-[radial-gradient(circle_at_top_left,hsl(var(--primary)/0.12),transparent_22rem),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.62))] flex overflow-hidden overscroll-none">
         {/* Sidebar */}
         <AnimatePresence mode="wait">
           {isSidebarOpen && (
@@ -744,8 +772,12 @@ const ChatAI = () => {
 
           {/* Messages Area - FIXED: proper overflow handling */}
           <div className="flex-1 flex flex-col w-full max-w-full min-w-0 overflow-hidden">
-            <ScrollArea className="flex-1 w-full max-w-full overflow-x-hidden" ref={scrollRef}>
-              <div className="px-2.5 sm:px-4 py-2.5 sm:py-4 w-full max-w-full">
+            <div
+              ref={messagesScrollRef}
+              onScroll={handleMessagesScroll}
+              className="flex-1 w-full max-w-full overflow-y-auto overflow-x-hidden overscroll-contain"
+            >
+              <div className="px-2.5 sm:px-4 py-2.5 sm:py-4 w-full max-w-full min-w-0">
                 <div className="space-y-4 sm:space-y-6 w-full max-w-full">
                   <AnimatePresence>
                     {messages.map((message) => (
@@ -753,7 +785,7 @@ const ChatAI = () => {
                         key={message.id}
                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        className={`flex gap-2 sm:gap-3 w-full max-w-full ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                        className={`flex gap-2 sm:gap-3 w-full max-w-full min-w-0 overflow-hidden ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
                         {message.role === 'assistant' && (
                           <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-sm mt-auto mb-1">
@@ -762,7 +794,7 @@ const ChatAI = () => {
                         )}
                         
                         {/* FIXED: Better responsive width management */}
-                        <div className={`max-w-[85%] sm:max-w-[75%] min-w-0 flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
+                        <div className={`max-w-[calc(100%-2.25rem)] sm:max-w-[75%] min-w-0 flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
                           <div
                             className={`rounded-2xl px-3 py-2.5 sm:px-5 sm:py-3 shadow-sm text-sm sm:text-[15px] leading-relaxed relative break-words [overflow-wrap:anywhere] w-full max-w-full ${
                               message.role === 'user'
@@ -875,7 +907,7 @@ const ChatAI = () => {
                   <div ref={messagesEndRef} className="h-px" />
                 </div>
               </div>
-            </ScrollArea>
+            </div>
 
             {/* Input Area & Suggested Questions - FIXED for mobile */}
             <div className="p-2.5 sm:p-4 bg-background/95 backdrop-blur border-t w-full max-w-full shadow-[0_-10px_30px_hsl(var(--background)/0.85)]">
