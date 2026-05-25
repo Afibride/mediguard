@@ -380,15 +380,13 @@ const SymptomChecker = () => {
         whileHover={{ y: -4, scale: 1.04 }}
         whileTap={{ scale: 0.93 }}
         onClick={() => handleSymptomToggle(symptom)}
-        className={`relative cursor-pointer select-none rounded-xl border-2 p-2.5 sm:p-3 min-h-[60px] sm:min-h-[68px] flex items-center gap-2 sm:gap-3 transition-colors ${
-          selected
+        className={`relative cursor-pointer select-none rounded-xl border-2 p-2.5 sm:p-3 min-h-[60px] sm:min-h-[68px] flex items-center gap-2 sm:gap-3 transition-colors ${selected
             ? `border-primary bg-primary/10 ring-2 ring-primary/30 shadow-md`
             : 'border-border/60 bg-background hover:border-primary/40 hover:bg-muted/30'
-        }`}
+          }`}
       >
-        <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all ${
-          selected ? 'border-primary bg-primary' : 'border-muted-foreground/30'
-        }`}>
+        <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all ${selected ? 'border-primary bg-primary' : 'border-muted-foreground/30'
+          }`}>
           <AnimatePresence>
             {selected && (
               <motion.div
@@ -442,19 +440,18 @@ const SymptomChecker = () => {
               title={cat}
               className="relative"
             >
-              <div className={`w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all duration-200 ${
-                isActive
+              <div className={`w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all duration-200 ${isActive
                   ? `${CATEGORY_META[cat]?.bg} ${CATEGORY_META[cat]?.border} scale-110 shadow-md`
                   : hasSelection
                     ? 'bg-primary/20 border-primary/60'
                     : i < categoryStep
                       ? 'bg-muted/60 border-muted-foreground/20'
                       : 'bg-background border-border/50'
-              }`}>
+                }`}>
                 {hasSelection && !isActive
                   ? <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2.4, repeat: Infinity }}>
-                      <Icon className="h-4 w-4 text-primary" />
-                    </motion.div>
+                    <Icon className="h-4 w-4 text-primary" />
+                  </motion.div>
                   : <Icon className={`h-4 w-4 ${isActive ? (CATEGORY_META[cat]?.accent || 'text-primary') : 'text-muted-foreground/60'}`} />
                 }
               </div>
@@ -629,7 +626,8 @@ const SymptomChecker = () => {
                         >
                           <Card className="rounded-t-none border-t-0 shadow-sm">
                             <CardContent className="pt-5">
-                              <div className="grid grid-cols-2 gap-3 sm:gap-5">
+                              {/* Changed: gender and age stacked on mobile, side-by-side on desktop */}
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
                                 <div className="space-y-2">
                                   <Label className="font-medium text-sm">Gender</Label>
                                   <RadioGroup name="gender" value={formData.gender}
@@ -648,31 +646,33 @@ const SymptomChecker = () => {
                                   <Input id="age" name="age" type="number" min="0" max="120"
                                     value={formData.age} onChange={handleInputChange} placeholder="Your age" className="h-10" />
                                 </div>
+                              </div>
 
-                                {showPregnancyOption && (
-                                  <div className="col-span-2 grid grid-cols-1 sm:grid-cols-[1fr_160px] gap-3 p-4 bg-pink-50 dark:bg-pink-950/20 rounded-lg border border-pink-200 dark:border-pink-900/50">
-                                    <div className="flex items-center gap-2">
-                                      <Checkbox id="isPregnant" checked={formData.isPregnant}
-                                        onCheckedChange={checked => setFormData(prev => ({ ...prev, isPregnant: checked, pregnancyWeeks: checked ? prev.pregnancyWeeks : '' }))} />
-                                      <Label htmlFor="isPregnant" className="flex items-center gap-2 cursor-pointer font-medium">
-                                        <Baby className="h-4 w-4 text-pink-500" />Currently pregnant
-                                      </Label>
-                                    </div>
-                                    <Input name="pregnancyWeeks" type="number" min="1" max="42"
-                                      value={formData.pregnancyWeeks} onChange={handleInputChange}
-                                      disabled={!formData.isPregnant} placeholder="Weeks" className="h-10" />
+                              {showPregnancyOption && (
+                                <div className="mt-3 grid grid-cols-1 sm:grid-cols-[1fr_160px] gap-3 p-4 bg-pink-50 dark:bg-pink-950/20 rounded-lg border border-pink-200 dark:border-pink-900/50">
+                                  <div className="flex items-center gap-2">
+                                    <Checkbox id="isPregnant" checked={formData.isPregnant}
+                                      onCheckedChange={checked => setFormData(prev => ({ ...prev, isPregnant: checked, pregnancyWeeks: checked ? prev.pregnancyWeeks : '' }))} />
+                                    <Label htmlFor="isPregnant" className="flex items-center gap-2 cursor-pointer font-medium">
+                                      <Baby className="h-4 w-4 text-pink-500" />Currently pregnant
+                                    </Label>
                                   </div>
-                                )}
-
-                                <div className="col-span-2 p-3 rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/20 flex items-start gap-3">
-                                  <Checkbox id="fatigueContext" checked={formData.fatigueContext}
-                                    onCheckedChange={checked => setFormData(prev => ({ ...prev, fatigueContext: checked }))} className="mt-0.5" />
-                                  <Label htmlFor="fatigueContext" className="cursor-pointer text-sm">
-                                    <span className="font-semibold flex items-center gap-1"><Brain className="h-3.5 w-3.5 text-amber-600" />Symptoms may relate to fatigue, poor sleep, stress, or heavy activity</span>
-                                    <span className="text-muted-foreground block mt-0.5">MediGuard will note this context while still checking for warning signs.</span>
-                                  </Label>
+                                  <Input name="pregnancyWeeks" type="number" min="1" max="42"
+                                    value={formData.pregnancyWeeks} onChange={handleInputChange}
+                                    disabled={!formData.isPregnant} placeholder="Weeks" className="h-10" />
                                 </div>
+                              )}
 
+                              <div className="mt-3 p-3 rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/20 flex items-start gap-3">
+                                <Checkbox id="fatigueContext" checked={formData.fatigueContext}
+                                  onCheckedChange={checked => setFormData(prev => ({ ...prev, fatigueContext: checked }))} className="mt-0.5" />
+                                <Label htmlFor="fatigueContext" className="cursor-pointer text-sm">
+                                  <span className="font-semibold flex items-center gap-1"><Brain className="h-3.5 w-3.5 text-amber-600" />Symptoms may relate to fatigue, poor sleep, stress, or heavy activity</span>
+                                  <span className="text-muted-foreground block mt-0.5">MediGuard will note this context while still checking for warning signs.</span>
+                                </Label>
+                              </div>
+
+                              <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div className="space-y-2 min-w-0">
                                   <Label htmlFor="duration" className="font-medium text-sm">Symptom Duration</Label>
                                   <select id="duration" name="duration" value={formData.duration} onChange={handleInputChange}
@@ -914,11 +914,10 @@ const SymptomChecker = () => {
 
                                 <div className="flex items-center gap-1">
                                   {CATEGORIES.map((_, i) => (
-                                    <div key={i} className={`h-1.5 rounded-full transition-all duration-300 ${
-                                      i === categoryStep ? 'w-5 bg-primary' :
-                                      categoryStats[i].count > 0 ? 'w-1.5 bg-primary/50' :
-                                      'w-1.5 bg-muted-foreground/25'
-                                    }`} />
+                                    <div key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === categoryStep ? 'w-5 bg-primary' :
+                                        categoryStats[i].count > 0 ? 'w-1.5 bg-primary/50' :
+                                          'w-1.5 bg-muted-foreground/25'
+                                      }`} />
                                   ))}
                                 </div>
 
@@ -1038,13 +1037,12 @@ const SymptomChecker = () => {
                           key={q.symptom}
                           variants={itemVariants}
                           whileHover={{ scale: 1.005 }}
-                          className={`p-4 rounded-xl border-2 transition-all duration-200 ${
-                            clarifyAnswers[q.symptom] === 'yes'
+                          className={`p-4 rounded-xl border-2 transition-all duration-200 ${clarifyAnswers[q.symptom] === 'yes'
                               ? 'border-green-400 bg-green-50 dark:bg-green-950/20 shadow-sm'
                               : clarifyAnswers[q.symptom] === 'no'
                                 ? 'border-muted bg-muted/30'
                                 : 'border-border bg-background'
-                          }`}
+                            }`}
                         >
                           <div className="flex items-start justify-between gap-4">
                             <div className="flex-1">
