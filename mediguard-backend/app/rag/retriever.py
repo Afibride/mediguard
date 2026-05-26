@@ -19,6 +19,12 @@ from urllib.request import Request, urlopen
 from dotenv import load_dotenv
 
 from app.data import DISEASES, SYMPTOM_DESCRIPTIONS, SYMPTOMS
+from app.data_firstaid import (
+    FIRST_AID_DATA,
+    detect_first_aid_type,
+    format_first_aid_response,
+    is_first_aid_request,
+)
 from app.db.models import Disease
 from app.db.session import SessionLocal
 from app.ml.fuzzy_match import normalize_symptom_text
@@ -2315,6 +2321,63 @@ def _extractive_answer(query: str, chunks: list[dict]) -> str:
     )
 
 
+def _first_aid_chat_response(
+    query: str,
+    user_lat: float | None = None,
+    user_lng: float | None = None,
+) -> dict | None:
+    """Return a structured first-aid response when the query describes an accident or injury.
+
+    Priority order:
+    1. Detect the specific accident type (burn, fracture, snake bite, etc.)
+    2. If not matched but looks like a first-aid request, return general first aid guidance
+    3. Otherwise return None so other handlers can process the query
+    """
+    if not is_first_aid_request(query):
+        return None
+
+    entry_key = detect_first_aid_type(query)
+
+    # Fallback: if query says "first aid" or "accident" but type not detected, use general
+    if entry_key is None:
+        entry_key = "general_firstaid"
+
+    answer = format_first_aid_response(entry_key, query)
+    if not answer:
+        return None
+
+    entry = FIRST_AID_DATA[entry_key]
+    severity = entry.get("severity", "moderate")
+
+    # For critical emergencies, always append a facility nudge
+    facility_note = ""
+    if severity == "critical":
+        if user_lat is not None and user_lng is not None:
+            facility_note = (
+                "\n\n📍 **Get to hospital now.** Ask me 'nearest hospital' and I will find "
+                "facilities closest to your location."
+            )
+        else:
+            facility_note = (
+                "\n\n📍 **Get to the nearest hospital immediately.** "
+                "You can also ask me 'nearest hospital' and share your location for directions."
+            )
+
+    return {
+        "answer": answer + facility_note,
+        "sources": ["MediGuard First Aid Guidelines"],
+        "disclaimer": (
+            "This first aid guidance is for immediate emergency use only. "
+            "It does not replace professional emergency care. Always seek qualified medical help."
+        ),
+        "mode": "first_aid",
+        "first_aid_type": entry_key,
+        "severity": severity,
+        "data_source": "firstaid_dataset",
+        "follow_up_questions": [],
+    }
+
+
 def generate_answer(
     query: str,
     filter_disease: str | None = None,
@@ -2328,6 +2391,11 @@ def generate_answer(
     conversational = _conversational_response(query)
     if conversational:
         return conversational
+
+    # ── First aid / accident handler (high priority — before disease lookup) ──
+    first_aid = _first_aid_chat_response(query, user_lat=user_lat, user_lng=user_lng)
+    if first_aid:
+        return first_aid
 
     trends = _trends_response(query)
     if trends:
@@ -2410,7 +2478,9 @@ def generate_answer(
                 f"{lang_note}"
                 "You are MediGuard's health assistant for Bamenda, Cameroon. "
                 "Answer clearly using only the context below. Never diagnose or prescribe medication. "
-                "When relevant, include simple first aid or self-care steps such as rest, fluids, monitoring symptoms, and urgent-care red flags. "
+                "When the user describes an accident or injury (burns, cuts, fractures, snake bites, car accidents, choking, drowning, electric shock, etc.), "
+                "provide clear step-by-step first aid guidance: what to do immediately, what NOT to do, and when to go to hospital. "
+                "For other health questions, include simple first aid or self-care steps such as rest, fluids, monitoring symptoms, and urgent-care red flags. "
                 "Tell users that automated results can sometimes be incomplete or faulty. Always recommend professional care for personal symptoms. If the user is pregnant or asks about pregnancy, "
                 "ask concise follow-up questions about gestational age, severity, onset, bleeding, abdominal pain, fever, "
                 "headache, vision changes, swelling, shortness of breath, and fetal movement before giving non-urgent guidance.\n\n"
