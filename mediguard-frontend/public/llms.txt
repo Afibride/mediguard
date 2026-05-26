@@ -13,6 +13,6 @@
 - [My Profile - MediGuard Bamenda](/profile): View and edit your MediGuard account profile.
 - [Privacy Policy - MediGuard Bamenda](/privacy): Privacy Policy detailing how MediGuard Bamenda handles your health data.
 - [Sign Up - MediGuard Bamenda](/signup): Create a comprehensive health profile on MediGuard.
-- [Support — MediGuard Bamenda | Get Help & Assistance](/contact): Get support for MediGuard Bamenda. Contact our team for help with symptom checking, account issues, or general inquiries.
+- [Support — MediGuard Bamenda | Get Help & Assistance](/support): Get support for MediGuard Bamenda. Contact our team for help with symptom checking, account issues, general inquiries, and newsletter updates.
 - [Symptom Checker - MediGuard Bamenda](/symptomchecker): AI-powered symptom checker for Bamenda health community.
 - [Terms of Service - MediGuard Bamenda](/terms): Terms of Service and legal agreements for using MediGuard Bamenda.

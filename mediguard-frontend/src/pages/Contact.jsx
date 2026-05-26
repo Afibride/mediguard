@@ -15,6 +15,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 import { sendContact } from '@/services/api';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -122,13 +123,16 @@ const Contact = () => {
       title: "FAQ & Guides",
       description: "Find answers quickly",
       details: ["Common questions", "User guides"],
-      action: "Browse FAQs",
-      href: "/faq",
+      action: "Ask AI",
+      href: "/chat-ai",
       bgColor: "bg-green-100 dark:bg-green-900/20",
       iconColor: "text-green-600 dark:text-green-400"
     },
     {
       icon: Phone,
+      title: "Phone Support",
+      description: "Call the MediGuard team",
+      details: ["+237 654 710 698"],
       action: "Call Now",
       href: "tel:+237654710698",
       bgColor: "bg-red-100 dark:bg-red-900/20",
@@ -444,11 +448,6 @@ const Contact = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-6 pt-4 border-t border-border">
-                    <Link to="/faq" className="text-primary hover:text-primary/80 text-sm font-medium flex items-center gap-1">
-                      View all FAQs <ExternalLink className="h-3 w-3" />
-                    </Link>
-                  </div>
                 </Card>
 
                 {/* Social Links */}
@@ -474,6 +473,12 @@ const Contact = () => {
                 </Card>
               </motion.div>
             </div>
+          </div>
+        </section>
+
+        <section className="py-12 md:py-16">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <NewsletterSignup compact />
           </div>
         </section>
 
