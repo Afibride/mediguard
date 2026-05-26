@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -78,17 +78,17 @@ const DiseaseLibrary = () => {
         <title>Disease Library — MediGuard Bamenda | Symptoms, Causes & Treatment</title>
         <meta name="description" content="Browse MediGuard's comprehensive disease library. Learn about symptoms, causes, treatment, and prevention for 30+ conditions common in Bamenda, Cameroon." />
         <meta name="keywords" content="disease library, Bamenda diseases, malaria symptoms, typhoid treatment, cholera prevention, disease information, health library Cameroon" />
-        <link rel="canonical" href="https://mediguard.app/disease-library" />
+        <link rel="canonical" href="https://mediguard.info/disease-library" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://mediguard.app/disease-library" />
+        <meta property="og:url" content="https://mediguard.info/disease-library" />
         <meta property="og:title" content="Disease Library — MediGuard Bamenda" />
         <meta property="og:description" content="Comprehensive library of 30+ diseases common in Bamenda. Learn about symptoms, causes, treatment, and prevention." />
-        <meta property="og:image" content="https://mediguard.app/mediguard.png" />
+        <meta property="og:image" content="https://mediguard.info/mediguard.png" />
         <meta property="og:site_name" content="MediGuard" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Disease Library — MediGuard Bamenda" />
         <meta name="twitter:description" content="30+ diseases covered. Learn symptoms, causes, and treatment for Bamenda community health." />
-        <meta name="twitter:image" content="https://mediguard.app/mediguard.png" />
+        <meta name="twitter:image" content="https://mediguard.info/mediguard.png" />
       </Helmet>
 
       <div className="min-h-screen medical-page py-8 sm:py-12">

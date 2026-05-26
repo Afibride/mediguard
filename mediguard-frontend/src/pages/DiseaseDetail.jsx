@@ -139,17 +139,17 @@ const DiseaseDetail = () => {
         <title>{disease.name} — Symptoms, Causes & Treatment | MediGuard Bamenda</title>
         <meta name="description" content={`${disease.description} Learn about ${disease.name} symptoms, causes, treatment, and prevention on MediGuard Bamenda.`} />
         <meta name="keywords" content={`${disease.name}, ${disease.name} symptoms, ${disease.name} treatment, ${disease.name} prevention, Bamenda health, Cameroon diseases`} />
-        <link rel="canonical" href={`https://mediguard.app/disease/${disease.slug}`} />
+        <link rel="canonical" href={`https://mediguard.info/disease/${disease.slug}`} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://mediguard.app/disease/${disease.slug}`} />
+        <meta property="og:url" content={`https://mediguard.info/disease/${disease.slug}`} />
         <meta property="og:title" content={`${disease.name} — Symptoms, Causes & Treatment`} />
         <meta property="og:description" content={disease.description} />
-        <meta property="og:image" content="https://mediguard.app/mediguard.png" />
+        <meta property="og:image" content="https://mediguard.info/mediguard.png" />
         <meta property="og:site_name" content="MediGuard" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={`${disease.name} — MediGuard Bamenda`} />
         <meta name="twitter:description" content={disease.description} />
-        <meta name="twitter:image" content="https://mediguard.app/mediguard.png" />
+        <meta name="twitter:image" content="https://mediguard.info/mediguard.png" />
       </Helmet>
 
       <div className="min-h-screen medical-page py-8 sm:py-12">

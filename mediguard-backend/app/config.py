@@ -22,8 +22,8 @@ class Settings(BaseSettings):
     model_download_token: str | None = None
     model_download_timeout_seconds: int = 180
     embedding_model: str = "all-MiniLM-L6-v2"
-    frontend_origins: str = "http://localhost:3000,http://localhost:5173"
-    frontend_url: str = "http://localhost:5173"
+    frontend_origins: str = "http://localhost:3000,http://localhost:5173,https://mediguard.info"
+    frontend_url: str = "https://mediguard.info"
     # SMTP email settings (leave smtp_user/smtp_password empty to disable email)
     smtp_host: str = "smtp.gmail.com"
     smtp_port: int = 587
