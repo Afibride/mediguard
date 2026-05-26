@@ -120,6 +120,138 @@ PREGNANCY_TERMS = [
     "trimester",
 ]
 
+# ---------------------------------------------------------------------------
+# Pregnancy-symptom detection for users who may not know they are pregnant
+# ---------------------------------------------------------------------------
+
+# Phrases that are *strong single-indicator* signals of possible pregnancy.
+# Even one match is enough to trigger the suggestion (for users who say
+# "missed period" or "morning sickness" without using the word "pregnant").
+_PREGNANCY_STRONG_INDICATORS: frozenset[str] = frozenset({
+    "missed period", "missed my period", "late period", "my period is late",
+    "period is late", "no period", "haven't had my period", "haven't gotten my period",
+    "delayed period", "period stopped", "no menstruation", "missed menstruation",
+    "skipped period", "period hasn't come",
+    "morning sickness", "nausea in the morning", "vomiting in the morning",
+    "sick every morning", "throwing up every morning",
+    "sore breasts", "tender breasts", "breast tenderness", "breasts are sore",
+    "breasts are tender", "breast soreness", "my breasts hurt",
+    "nipple tenderness", "nipples are sore", "nipple pain",
+    "implantation bleeding",
+    "think i might be pregnant", "could i be pregnant", "am i pregnant",
+    "might be pregnant", "possibly pregnant",
+    "pregnancy test", "home pregnancy test", "positive test",
+    "deux lignes sur le test", "test positif",  # French
+    "règles en retard", "pas de règles", "absence de règles",
+})
+
+# Additional pregnancy-related phrases: 2+ of these together also trigger
+_PREGNANCY_SOFT_SYMPTOMS: list[str] = [
+    "nausea", "nauseous", "feeling sick",
+    "fatigue", "tired all the time", "extreme tiredness",
+    "frequent urination", "urinating a lot", "peeing a lot",
+    "pee frequently", "always need to urinate", "urinating frequently",
+    "food cravings", "craving food", "craving",
+    "food aversion", "food makes me sick", "smell makes me nauseous",
+    "bloating", "swollen abdomen",
+    "mood swings", "emotional", "crying for no reason",
+    "dizziness", "lightheaded",
+    "lower back pain",
+    "metallic taste", "taste in my mouth",
+]
+
+
+def _has_unaware_pregnancy_symptoms(query: str) -> bool:
+    """Return True when query contains symptoms that could signal pregnancy
+    in someone who does not yet know they are pregnant.
+
+    Triggers on:
+    - any single *strong indicator* (missed period, morning sickness, etc.), OR
+    - 2 or more *soft symptoms* together.
+
+    Only skips when the user assertively states they ARE already pregnant
+    (e.g. "I am pregnant") — not when they are merely asking ("could I be pregnant?").
+    """
+    text = query.lower()
+    # Skip only when the user clearly asserts they are already pregnant —
+    # let the existing pregnancy-followup pathway handle those.
+    _ALREADY_PREGNANT_PHRASES = {
+        "i am pregnant", "i'm pregnant", "im pregnant",
+        "i am expecting", "i'm expecting",
+        "antenatal", "prenatal", "trimester",
+        "je suis enceinte", "enceinte de",   # French
+    }
+    if any(phrase in text for phrase in _ALREADY_PREGNANT_PHRASES):
+        return False
+    # A single strong indicator is enough
+    for indicator in _PREGNANCY_STRONG_INDICATORS:
+        if indicator in text:
+            return True
+    # Two or more soft symptoms together
+    soft_hits = sum(1 for s in _PREGNANCY_SOFT_SYMPTOMS if s in text)
+    return soft_hits >= 2
+
+
+def _unaware_pregnancy_response(query: str, gender: str | None) -> dict | None:
+    """Suggest possible pregnancy when symptoms match, asking for gender to confirm.
+
+    Returns None when:
+    - Symptoms don't match pregnancy pattern
+    - Gender is already confirmed as male
+    """
+    if not _has_unaware_pregnancy_symptoms(query):
+        return None
+
+    # If we already know the user is male, skip the suggestion entirely
+    _MALE_TERMS = {"male", "man", "boy", "homme", "garçon"}
+    if gender and gender.lower().strip() in _MALE_TERMS:
+        return None
+
+    # Ask for gender if not yet provided or ambiguous
+    gender_question = ""
+    _FEMALE_TERMS = {"female", "woman", "girl", "femme", "fille"}
+    if not gender or gender.lower().strip() not in _FEMALE_TERMS:
+        gender_question = (
+            "\n\n**To give you more accurate advice**, could you also tell me your gender? "
+            "*(Reply: female / male — this helps me personalise the guidance)*"
+        )
+
+    answer = (
+        "🤰 **These Symptoms Could Be Early Signs of Pregnancy**\n\n"
+        "The symptoms you've described — such as a missed/late period, breast tenderness, "
+        "morning nausea, fatigue, or frequent urination — are among the **most common early "
+        "signs of pregnancy**. It's possible you may be pregnant without yet knowing.\n\n"
+        "**What you can do right now:**\n"
+        "1. 💊 Take a **home pregnancy test** (available at pharmacies) — it can detect "
+        "pregnancy as early as the first day of a missed period.\n"
+        "2. 🏥 Visit a **health clinic or maternity unit** for a confirmed blood (HCG) test.\n"
+        "3. ✅ If the test is positive, **start antenatal care early** — early check-ups "
+        "protect both mother and baby.\n\n"
+        "⚠️ *These symptoms can also have other causes (hormonal changes, stress, illness, "
+        "or anaemia). A pregnancy test is the fastest and most reliable way to find out.*"
+        f"{gender_question}"
+    )
+
+    follow_up = [
+        "What is your gender?",
+        "Have you taken a pregnancy test?",
+        "When did you last have your period?",
+    ] if gender_question else [
+        "Have you taken a pregnancy test?",
+        "When did you last have your period?",
+    ]
+
+    return {
+        "answer": answer,
+        "sources": ["MediGuard Reproductive Health Guidelines"],
+        "disclaimer": (
+            "This is educational guidance only. Only a clinical pregnancy test can confirm "
+            "pregnancy. Consult a qualified healthcare professional for personal health concerns."
+        ),
+        "mode": "pregnancy_suggestion",
+        "follow_up_questions": follow_up,
+    }
+
 FATIGUE_CONTEXT_TERMS = [
     "fatigue",
     "tired",
@@ -2396,6 +2528,11 @@ def generate_answer(
     first_aid = _first_aid_chat_response(query, user_lat=user_lat, user_lng=user_lng)
     if first_aid:
         return first_aid
+
+    # ── Possible pregnancy suggestion for users who may not know they're pregnant ──
+    pregnancy_suggestion = _unaware_pregnancy_response(query, gender=gender)
+    if pregnancy_suggestion:
+        return pregnancy_suggestion
 
     trends = _trends_response(query)
     if trends:
