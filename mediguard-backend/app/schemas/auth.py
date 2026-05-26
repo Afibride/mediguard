@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, model_validator
 
 
 class RegisterRequest(BaseModel):
@@ -24,8 +24,16 @@ class ForgotPasswordRequest(BaseModel):
 
 
 class ResetPasswordRequest(BaseModel):
-    token: str
+    """Accept either a URL reset token OR the 6-digit OTP code sent in the email."""
+    token: str | None = None
+    otp_code: str | None = Field(None, min_length=6, max_length=6, pattern=r"^\d{6}$")
     password: str = Field(min_length=6)
+
+    @model_validator(mode="after")
+    def token_or_code_required(self) -> "ResetPasswordRequest":
+        if not self.token and not self.otp_code:
+            raise ValueError("Either 'token' (from reset link) or 'otp_code' (6-digit code) must be provided.")
+        return self
 
 
 class PatchNotificationRequest(BaseModel):

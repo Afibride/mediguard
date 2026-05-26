@@ -122,13 +122,53 @@ FATIGUE_CONTEXT_TERMS = [
     "weakness",
     "poor sleep",
     "lack of sleep",
+    "lack sleep",
+    "not sleeping",
+    "sleep deprived",
     "stress",
+    "stressed",
+    "stressful",
     "overworked",
     "overwork",
     "exhausted",
+    "exhaustion",
+    "burned out",
+    "burnout",
+    "burnt out",
+    "anxious",
+    "anxiety",
+    "exam pressure",
+    "exam stress",
+    "workload",
+    "too much work",
+    "long hours",
+    "no rest",
     "dehydrated",
+    "dehydration",
     "heavy work",
+    "skipped meals",
+    "missed meals",
+    "not eating",
+    "no appetite",
 ]
+
+# Symptoms that are typical of a non-specific stress / fatigue presentation.
+# If most of the user's reported symptoms fall in this set, we add a note that
+# lifestyle factors may be contributing — but we still show predictions.
+_STRESS_TYPICAL_SYMPTOMS: frozenset[str] = frozenset({
+    "fatigue", "tiredness", "tired", "weakness", "weak",
+    "headache", "mild headache", "tension headache",
+    "dizziness", "lightheadedness",
+    "nausea", "mild nausea",
+    "muscle aches", "body aches", "body pain", "muscle pain",
+    "mild fever", "low-grade fever", "low grade fever",
+    "loss of appetite", "poor appetite",
+    "difficulty concentrating", "brain fog", "poor focus",
+    "irritability", "mood swings",
+    "insomnia", "poor sleep",
+    "palpitations", "heart racing",
+    "shortness of breath", "shallow breathing",
+})
 
 REFERENCE_CHUNKS_FILE = Path(__file__).resolve().parents[2] / "data_pipeline" / "mediguard_reference_chunks.json"
 
@@ -1286,6 +1326,33 @@ def _mentions_fatigue_context(query: str, symptoms: list[str] | None = None) -> 
     return any(term in text for term in FATIGUE_CONTEXT_TERMS)
 
 
+def _is_stress_typical_presentation(symptoms: list[str], query: str = "") -> bool:
+    """Return True when the user presents with 4 or fewer symptoms AND most of
+    them are non-specific symptoms that are commonly caused by stress, fatigue,
+    dehydration, or lifestyle factors.
+
+    This never blocks a prediction — it only controls whether we show an
+    extra context note so the user knows those factors might be contributing.
+    """
+    if not symptoms:
+        return False
+    # Only trigger for short symptom lists (few reported symptoms)
+    if len(symptoms) > 4:
+        return False
+    normalised = {s.lower().strip() for s in symptoms}
+    stress_count = sum(1 for s in normalised if s in _STRESS_TYPICAL_SYMPTOMS)
+    # 60 % or more of reported symptoms match the stress-typical set
+    ratio = stress_count / len(normalised)
+    if ratio < 0.60:
+        return False
+    # Also trigger if the user's message itself mentions a fatigue/stress term
+    # even without meeting the ratio threshold (e.g. "I have a headache from stress")
+    query_text = query.lower()
+    if any(term in query_text for term in FATIGUE_CONTEXT_TERMS):
+        return True
+    return True
+
+
 def _pregnancy_warning_matches(query: str, symptoms: list[str]) -> list[str]:
     text = f"{query.lower()} {' '.join(symptom.lower() for symptom in symptoms)}"
     return [sign for sign in PREGNANCY_WARNING_SIGNS if sign in text]
@@ -1394,9 +1461,14 @@ def _symptom_answer(query: str, chunks: list[dict], disease: dict | None) -> dic
     }
 
 
-def _get_predictor() -> DiseasePredictor:
+def _get_predictor(_reload: bool = False) -> DiseasePredictor:
+    """Return the shared DiseasePredictor instance.
+
+    Pass ``_reload=True`` after a model file has been updated on disk to force
+    the singleton to be rebuilt from the new artefact.
+    """
     global _predictor
-    if _predictor is None:
+    if _predictor is None or _reload:
         _predictor = DiseasePredictor()
     return _predictor
 
@@ -1700,10 +1772,11 @@ _ALL_FOLLOWUP_QUESTIONS = [
 def _get_asked_question_set(chat_history: list[dict] | None) -> set[str]:
     """Return the set of follow-up questions already present in assistant messages.
 
-    Also adds the sentinel ``__other_symptoms_asked__`` when any variant of
-    the dynamic "other symptoms" question has been sent, so that
-    ``_next_unanswered_question`` can skip it even when the exact generated
-    string never matches a hardcoded template.
+    Adds category sentinels so ``_next_unanswered_question`` can skip the
+    whole *family* of related variants once any one of them has been asked —
+    e.g. all four fever-temperature variants share the ``__fever_asked__``
+    sentinel, so a second fever question is never repeated even when the
+    symptom set changes between turns.
     """
     if not chat_history:
         return set()
@@ -1711,31 +1784,149 @@ def _get_asked_question_set(chat_history: list[dict] | None) -> set[str]:
         m.get("content", "") for m in chat_history if m.get("role") == "assistant"
     ).lower()
     asked = {q for q in _ALL_FOLLOWUP_QUESTIONS if q.lower() in assistant_text}
-    # Dynamic "other symptoms" question — detect by prefix / key phrase rather than
-    # exact string, because the generated text varies based on which symptoms are
-    # already reported.
+
+    # ── Category sentinels (phrase-based, not exact-string) ──────────────────
+    # "Other symptoms" — dynamic question whose text varies per symptom set
     if (
         "do you have any other symptoms" in assistant_text
         or "have you noticed any additional changes in how you feel" in assistant_text
     ):
         asked.add("__other_symptoms_asked__")
+
+    # Fever/temperature — all four variants share this sentinel
+    if "what is your temperature" in assistant_text or "how long has the fever lasted" in assistant_text:
+        asked.add("__fever_asked__")
+
+    # Respiratory follow-up — variants share this sentinel
+    if any(phrase in assistant_text for phrase in [
+        "is there chest pain",
+        "is there wheezing",
+        "fast breathing or coughing up blood",
+        "coughing up blood",
+        "or unusually fast breathing",
+    ]):
+        asked.add("__resp_asked__")
+
+    # GI / fluids follow-up
+    if any(phrase in assistant_text for phrase in [
+        "are you able to keep fluids",
+        "are you able to drink fluids",
+        "blood in your stool",
+        "blood in stool",
+        "signs of dehydration",
+    ]):
+        asked.add("__gi_asked__")
+
+    # Fatigue / lifestyle follow-up
+    if any(phrase in assistant_text for phrase in [
+        "poor sleep",
+        "heavy physical work",
+        "unusual exertion",
+        "missed meals",
+    ]):
+        asked.add("__fatigue_asked__")
+
+    # Pregnancy follow-up
+    if "how many weeks pregnant" in assistant_text:
+        asked.add("__pregnancy_asked__")
+
     return asked
 
 
+# All sentinel names — used to count how many follow-up categories have been covered
+_CATEGORY_SENTINELS = frozenset({
+    "__other_symptoms_asked__",
+    "__fever_asked__",
+    "__resp_asked__",
+    "__gi_asked__",
+    "__fatigue_asked__",
+    "__pregnancy_asked__",
+})
+
+
 def _next_unanswered_question(questions: list[str], asked: set[str]) -> str | None:
-    other_symptoms_done = "__other_symptoms_asked__" in asked
+    other_symptoms_done  = "__other_symptoms_asked__" in asked
+    fever_done           = "__fever_asked__"          in asked
+    resp_done            = "__resp_asked__"           in asked
+    gi_done              = "__gi_asked__"             in asked
+    fatigue_done         = "__fatigue_asked__"        in asked
+    pregnancy_done       = "__pregnancy_asked__"      in asked
+
     for q in questions:
         if q in asked:
             continue
         q_lower = q.lower()
-        # Skip any "other symptoms" variant if we've already sent one
+
+        # Skip the whole "other symptoms" category once asked
         if other_symptoms_done and (
             q_lower.startswith("do you have any other symptoms")
             or "additional changes in how you feel" in q_lower
         ):
             continue
+
+        # Skip all fever temperature variants once any one was asked
+        if fever_done and "what is your temperature" in q_lower:
+            continue
+
+        # Skip all respiratory variants once asked
+        if resp_done and (
+            "is there chest pain" in q_lower
+            or "is there wheezing" in q_lower
+            or "coughing up blood" in q_lower
+            or "fast breathing" in q_lower
+            or "unusually fast breathing" in q_lower
+        ):
+            continue
+
+        # Skip GI/fluids variants once asked
+        if gi_done and (
+            q_lower.startswith("are you able to")
+            and ("fluids" in q_lower or "blood in" in q_lower or "dehydration" in q_lower)
+        ):
+            continue
+
+        # Skip fatigue follow-up once asked
+        if fatigue_done and (
+            "poor sleep" in q_lower
+            or "heavy physical work" in q_lower
+            or "unusual exertion" in q_lower
+        ):
+            continue
+
+        # Skip pregnancy follow-up once asked
+        if pregnancy_done and "how many weeks pregnant" in q_lower:
+            continue
+
         return q
     return None
+
+
+# ---------------------------------------------------------------------------
+# Reply hints — shown below each follow-up question
+# ---------------------------------------------------------------------------
+
+_REPLY_HINTS: list[tuple[str, str]] = [
+    ("how long have you had",        "*(e.g. 1 day · 3 days · about a week)*"),
+    ("mild, moderate, or severe",    "*(Reply: mild / moderate / severe)*"),
+    ("what is your temperature",     "*(e.g. 38 °C · 101 °F · or 'I don't have a thermometer')*"),
+    ("do you have any other symptom","*(Name them, or reply **no** to go straight to results)*"),
+    ("have you noticed any additional","*(Reply yes / no, or describe)*"),
+    ("are you able to keep fluids",  "*(Reply yes/no — and mention dry mouth, no urine, or sunken eyes if present)*"),
+    ("are you able to drink fluids", "*(Reply yes or no)*"),
+    ("is there chest pain",          "*(Reply yes or no for each symptom mentioned)*"),
+    ("is there wheezing",            "*(Reply yes or no)*"),
+    ("fast breathing",               "*(Reply yes or no)*"),
+    ("poor sleep",                   "*(Reply yes or no)*"),
+    ("how many weeks pregnant",      "*(e.g. 24 weeks — and mention bleeding, pain, or reduced movement if present)*"),
+]
+
+
+def _get_reply_hint(question: str) -> str:
+    q_lower = question.lower()
+    for key, hint in _REPLY_HINTS:
+        if key in q_lower:
+            return hint
+    return ""
 
 
 # ---------------------------------------------------------------------------
@@ -1772,17 +1963,31 @@ def _next_followup_response(
     asked_count: int,
     pregnancy_context: bool,
     fatigue_context: bool,
+    stress_presentation: bool = False,
 ) -> dict:
     next_question = questions[min(asked_count, len(questions) - 1)]
     symptom_text = ", ".join(symptoms) if symptoms else "your symptoms"
+    hint = _get_reply_hint(next_question)
+
     if asked_count == 0:
-        answer = (
+        intro = (
             f"I found this in your message: {symptom_text}. "
-            "I will ask one question at a time before showing possible matches.\n\n"
-            f"{next_question}"
+            "I will ask one question at a time before showing possible matches."
         )
+        # Offer a gentle stress/fatigue note on the very first question when the
+        # presentation is short and non-specific — so the user isn't alarmed.
+        if stress_presentation and len(symptoms) <= 4:
+            intro += (
+                "\n\n💡 *With just a few non-specific symptoms, stress, fatigue, or dehydration "
+                "might be playing a role. I'll still check carefully — just a heads-up.*"
+            )
+        answer = f"{intro}\n\n{next_question}"
     else:
         answer = f"Noted. {next_question}"
+
+    if hint:
+        answer += f"\n\n{hint}"
+
     return {
         "answer": answer,
         "sources": [],
@@ -1792,6 +1997,7 @@ def _next_followup_response(
         "mode": "symptom_follow_up",
         "pregnancy_context": pregnancy_context,
         "fatigue_context": fatigue_context,
+        "stress_presentation": stress_presentation,
         "follow_up_questions": [next_question],
         "data_source": "follow_up",  # collecting more info — no prediction engine used yet
     }
@@ -1827,24 +2033,37 @@ def _symptom_check_response(
 
     pregnancy_context = bool(is_pregnant or _mentions_pregnancy(query))
     fatigue_context = _mentions_fatigue_context(symptom_context, reported_symptoms)
+    stress_presentation = _is_stress_typical_presentation(reported_symptoms, symptom_context)
     follow_up_questions = _symptom_follow_up_questions(reported_symptoms, pregnancy_context)
 
     asked_set = _get_asked_question_set(chat_history)
 
-    # If the user explicitly says there are no more symptoms, skip remaining
-    # follow-up questions and go straight to the prediction results.
-    user_negated = followup_already_asked and _user_said_no_more_symptoms(query)
+    # ── Max follow-up round cap ──────────────────────────────────────────────
+    # Count how many question categories have already been covered.
+    # Each sentinel = one category; each hardcoded Q = one question.
+    # After 5 covered categories/questions proceed to predictions automatically,
+    # so the conversation never gets stuck in an infinite loop.
+    categories_done = len(asked_set & _CATEGORY_SENTINELS)
+    real_qs_done    = len({q for q in asked_set if not q.startswith("__")})
+    total_rounds    = categories_done + real_qs_done
+
+    # If the user explicitly says there are no more symptoms, OR we have
+    # reached the maximum number of follow-up rounds, skip to predictions.
+    user_negated = (
+        followup_already_asked and _user_said_no_more_symptoms(query)
+    ) or total_rounds >= 5
 
     if not user_negated:
         next_q = _next_unanswered_question(follow_up_questions, asked_set)
         if next_q:
-            is_first = not (asked_set - {"__other_symptoms_asked__"})
+            is_first = not (asked_set - _CATEGORY_SENTINELS)
             return _next_followup_response(
                 reported_symptoms,
                 [next_q],
                 0 if is_first else 1,
                 pregnancy_context,
                 fatigue_context,
+                stress_presentation,
             )
 
     # Chat mode: don't gate on cardinal symptoms — the user may not have mentioned
@@ -1872,14 +2091,25 @@ def _symptom_check_response(
             "mode": "symptom_check",
             "pregnancy_context": pregnancy_context,
             "fatigue_context": fatigue_context,
+            "stress_presentation": stress_presentation,
             "follow_up_questions": follow_up_questions,
             "data_source": actual_data_source,
         }
 
     lines = [
         f"I found these symptoms in your message: {', '.join(reported_symptoms)}.",
-        "Here are the top possible matches from the MediGuard symptom model:",
     ]
+
+    # ── Stress / few-symptom context note (shown BEFORE the predictions list) ──
+    if stress_presentation and len(reported_symptoms) <= 4:
+        lines.append(
+            "💡 *Note: Your symptoms could be linked to stress, fatigue, dehydration, or missed meals — "
+            "very common when life is busy. I'll still show possible matches below, but consider resting, "
+            "drinking water, and eating a proper meal first. If symptoms persist for more than 2 days or "
+            "get worse, please see a health worker.*"
+        )
+
+    lines.append("Here are the top possible matches from the MediGuard symptom model:")
     for index, prediction in enumerate(predictions[:5], start=1):
         lines.append(f"{index}. {prediction['disease']} - {prediction['probability']}% match")
     lines.append(
@@ -1893,7 +2123,8 @@ def _symptom_check_response(
         lines.append(
             "Pregnancy context noted: please arrange prompt antenatal or clinical assessment, especially for fever, abdominal pain, bleeding, severe headache, vision changes, swelling, shortness of breath, or reduced fetal movement."
         )
-    if fatigue_context:
+    if fatigue_context and not stress_presentation:
+        # Only show the generic fatigue note when the full stress-presentation note wasn't already shown
         lines.append(
             "Fatigue context noted: poor sleep, dehydration, missed meals, stress, or heavy activity can worsen symptoms, but they do not rule out infection or another medical condition."
         )
@@ -1906,6 +2137,7 @@ def _symptom_check_response(
         "mode": "symptom_check",
         "pregnancy_context": pregnancy_context,
         "fatigue_context": fatigue_context,
+        "stress_presentation": stress_presentation,
         "follow_up_questions": [],
         "data_source": actual_data_source,
     }

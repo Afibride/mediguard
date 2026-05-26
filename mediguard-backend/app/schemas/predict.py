@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 class SymptomInput(BaseModel):
     symptoms: list[str] = Field(min_length=1)
     gender: str | None = None
+    age_group: str | None = None   # e.g. "0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "60+"
     is_pregnant: bool = False
     pregnancy_weeks: int | None = None
     fatigue_context: bool = False

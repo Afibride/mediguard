@@ -160,6 +160,67 @@ CARDINAL_SYMPTOMS: dict[str, list[str]] = {
     "Genital Herpes": ["Genital sores", "Blisters"],
     # Frothy vaginal discharge or intense vaginal itching required
     "Trichomoniasis": ["Vaginal itching", "Genital discharge"],
+
+    # ── Fever / Systemic Infections ────────────────────────────────────────
+    # Malaria — cyclical fever and chills are the hallmark presentation
+    "Malaria": ["Fever", "Chills"],
+    # Typhoid — sustained prolonged fever distinguishes it from a common febrile illness
+    "Typhoid Fever": ["Prolonged fever"],
+    # Dengue — fever plus the characteristic retro-orbital (behind-eyes) pain
+    "Dengue Fever": ["High fever", "Pain behind eyes"],
+    # Leptospirosis — red eyes (conjunctival suffusion) + high fever are the cardinal triad
+    "Leptospirosis": ["High fever", "Red eyes"],
+    # Typhus — sudden very high fever plus a rash are required
+    "Typhus": ["Sudden high fever", "Rash"],
+    # Septicemia — high fever, altered mental status, and rapid heart rate
+    "Septicemia": ["High fever", "Confusion", "Fast heartbeat"],
+
+    # ── Respiratory ────────────────────────────────────────────────────────
+    # Pneumonia — cough AND breathing difficulty must both be present
+    "Pneumonia": ["Cough", "Shortness of breath"],
+    # Whooping cough — paroxysmal cough is the defining feature
+    "Whooping Cough": ["Cough"],
+    # Sinusitis — nasal congestion plus facial pressure/pain around the sinuses
+    "Sinusitis": ["Nasal congestion", "Facial pain"],
+    # Common cold — runny nose and sneezing are the defining presentation
+    "Common Cold": ["Runny nose", "Sneezing"],
+
+    # ── Gastrointestinal ───────────────────────────────────────────────────
+    # Gastroenteritis — diarrhea AND vomiting together define it
+    "Gastroenteritis": ["Diarrhea", "Vomiting"],
+    # H. pylori / Peptic Ulcer — burning epigastric/stomach pain is cardinal
+    "Helicobacteriosis PepticUlcer": ["Burning stomach pain"],
+
+    # ── Skin / Soft-Tissue ─────────────────────────────────────────────────
+    # Skin abscess — visible skin sore with pus or discharge
+    "Skin Abscess": ["Skin sores", "Pus or discharge"],
+    # Rubella — the mild macular rash (often starting on the face) is cardinal
+    "Rubella": ["Rash"],
+
+    # ── Haematological / Immunological ────────────────────────────────────
+    # Iron-deficiency anaemia — pallor and fatigue are the clinical hallmarks
+    "Iron Deficiency Anemia": ["Pale skin", "Fatigue"],
+    # Sickle cell crisis — vaso-occlusive joint/bone pain plus pallor from haemolysis
+    "Sickle Cell Crisis": ["Joint pain", "Pale skin"],
+
+    # ── Infectious Disease / Chronic ──────────────────────────────────────
+    # HIV/AIDS — without systemic markers this presentation overlaps too many conditions
+    "HIV AIDS": ["Weight loss", "Night sweats", "Swollen lymph nodes"],
+
+    # ── Allergic / Emergency ──────────────────────────────────────────────
+    # Anaphylaxis — severe breathing difficulty AND hypotension/rash combination
+    "Anaphylaxis": ["Shortness of breath", "Rash"],
+
+    # ── Ear ───────────────────────────────────────────────────────────────
+    # Ear pain is the defining symptom — fever alone never suggests ear infection
+    "Ear Infection": ["Ear pain"],
+
+    # ── Urological ────────────────────────────────────────────────────────
+    # BPH — urinary symptoms (frequency, hesitancy, reduced stream) are definitional
+    "Benign Prostatic Hyperplasia": ["Frequent urination", "Reduced urination"],
+
+    # Brucellosis and Hypertension intentionally have NO cardinal symptoms:
+    # their presentations are too non-specific to filter reliably without labs.
 }
 
 CATEGORIES = {

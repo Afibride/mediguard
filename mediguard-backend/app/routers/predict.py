@@ -152,6 +152,7 @@ def predict(
         symptoms=normalized,
         predictions=results,
         top_disease=top,
+        age_group=body.age_group or None,
     )
     db.add(log)
     db.commit()

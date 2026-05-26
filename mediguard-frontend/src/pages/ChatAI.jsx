@@ -10,7 +10,8 @@ import {
   Send, Bot, User, RefreshCw,
   Plus, MessageSquare, Trash2, X,
   PanelLeftClose, PanelLeftOpen, Share2, Clock,
-  ThumbsUp, ThumbsDown, ImagePlus, Loader2, MapPin
+  ThumbsUp, ThumbsDown, ImagePlus, Loader2, MapPin,
+  HelpCircle, ChevronDown
 } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -96,8 +97,32 @@ const ChatAI = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [imageAnalyzing, setImageAnalyzing] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   const imageInputRef = useRef(null);
   const sessionId = useRef('sess_' + Date.now()).current;
+
+  // ── Reply-hint chips for symptom follow-up questions ─────────────────────
+  const getReplyHints = (followUpQuestions) => {
+    if (!followUpQuestions?.length) return [];
+    const q = (followUpQuestions[0] || '').toLowerCase();
+    if (q.includes('how long have you had'))
+      return ['1 day', '2–3 days', 'About a week', 'More than 2 weeks'];
+    if (q.includes('mild, moderate, or severe'))
+      return ['Mild', 'Moderate', 'Severe'];
+    if (q.includes('what is your temperature') || q.includes('fever come with'))
+      return ["Don't know my temp", 'About 38 °C', 'About 39 °C', 'Very high — above 40 °C'];
+    if (q.includes('other symptoms') || q.includes('additional changes'))
+      return ['No other symptoms', 'Nausea', 'Vomiting', 'Rash'];
+    if (q.includes('keep fluids') || q.includes('drink fluids') || q.includes('blood in') || q.includes('dehydration'))
+      return ['Yes, can drink fluids', 'No, keep vomiting', 'Signs of dehydration', 'No blood in stool'];
+    if (q.includes('chest pain') || q.includes('wheezing') || q.includes('breathing'))
+      return ['No chest pain', 'Yes — chest pain', 'Yes — wheezing', 'Shortness of breath'];
+    if (q.includes('poor sleep') || q.includes('heavy') || q.includes('exertion') || q.includes('missed meals'))
+      return ['Yes — poor sleep', 'No unusual activity', 'Stressed / missed meals', 'Heavy physical work'];
+    if (q.includes('how many weeks pregnant'))
+      return ['Under 12 weeks', '12–28 weeks', 'Over 28 weeks'];
+    return [];
+  };
 
   useEffect(() => {
     const previousBodyOverflow = document.body.style.overflow;
@@ -774,6 +799,15 @@ const ChatAI = () => {
                     Guest Mode - <Link to="/login" className="ml-1 underline font-bold text-primary">Login</Link>
                   </Badge>
                 )}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setShowHelp(v => !v)}
+                  title="How to chat with MediGuard AI"
+                  className={`h-8 w-8 sm:h-9 sm:w-9 ${showHelp ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-primary'}`}
+                >
+                  <HelpCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                </Button>
                 <Button variant="ghost" size="sm" onClick={clearChat} title="Clear Chat" className="text-muted-foreground hover:text-destructive h-8 sm:h-9 px-2 sm:px-3">
                   <RefreshCw className="h-3 w-3 sm:h-4 sm:w-4 sm:mr-2" />
                   <span className="hidden sm:inline">{t('chat_clear')}</span>
@@ -781,6 +815,60 @@ const ChatAI = () => {
               </div>
             </div>
           </div>
+
+          {/* Help Panel — collapsible, shown when showHelp is true */}
+          <AnimatePresence>
+            {showHelp && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.22, ease: 'easeInOut' }}
+                className="overflow-hidden border-b border-primary/20 bg-primary/5"
+              >
+                <div className="px-4 py-3 max-w-2xl mx-auto">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs font-semibold text-primary uppercase tracking-wide flex items-center gap-1.5">
+                      <HelpCircle className="h-3.5 w-3.5" /> How to chat with MediGuard AI
+                    </p>
+                    <button onClick={() => setShowHelp(false)} className="text-muted-foreground hover:text-foreground">
+                      <ChevronDown className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] sm:text-xs text-muted-foreground">
+                    <div className="space-y-1.5">
+                      <p className="font-semibold text-foreground">💬 Describing symptoms</p>
+                      <p>✦ Say symptoms naturally: <em>"I have fever, headache and chills"</em></p>
+                      <p>✦ Mention how long: <em>"…for 3 days"</em></p>
+                      <p>✦ Mention severity: <em>"…and it's quite severe"</em></p>
+                      <p>✦ One message is enough — the AI will ask follow-up questions</p>
+                    </div>
+                    <div className="space-y-1.5">
+                      <p className="font-semibold text-foreground">🔁 Answering follow-ups</p>
+                      <p>✦ Duration → <em>"3 days"</em> or <em>"about a week"</em></p>
+                      <p>✦ Severity → <em>"mild"</em>, <em>"moderate"</em>, or <em>"severe"</em></p>
+                      <p>✦ Temperature → <em>"38 °C"</em> or <em>"I don't have a thermometer"</em></p>
+                      <p>✦ No more symptoms → just reply <em>"no"</em> or <em>"none"</em></p>
+                    </div>
+                    <div className="space-y-1.5">
+                      <p className="font-semibold text-foreground">💡 Other things you can ask</p>
+                      <p>✦ <em>"What is malaria?"</em></p>
+                      <p>✦ <em>"How is typhoid treated?"</em></p>
+                      <p>✦ <em>"Nearest hospital in Bamenda"</em></p>
+                      <p>✦ <em>"What are the current disease trends?"</em></p>
+                    </div>
+                    <div className="space-y-1.5">
+                      <p className="font-semibold text-foreground">⚠️ Important reminders</p>
+                      <p>✦ Results are guidance — not a medical diagnosis</p>
+                      <p>✦ Visit a clinic for severe or worsening symptoms</p>
+                      <p>✦ You can upload an image of a rash or skin condition</p>
+                      <p>✦ Start a new chat for a fresh topic</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Messages Area - FIXED: proper overflow handling */}
           <div className="flex-1 flex flex-col w-full max-w-full min-w-0 overflow-hidden">
@@ -875,18 +963,30 @@ const ChatAI = () => {
                               )}
                             </div>
                           )}
-                          {message.role === 'assistant' && Array.isArray(message.followUpQuestions) && message.followUpQuestions.filter((question) => !message.content?.includes(question)).length > 0 && (
-                            <div className="mt-2 flex max-w-full flex-wrap gap-2 overflow-hidden">
-                              {message.followUpQuestions.filter((question) => !message.content?.includes(question)).map((question) => (
-                                <span
-                                  key={question}
-                                  className="max-w-full rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-left text-[11px] sm:text-xs font-medium text-primary break-words [overflow-wrap:anywhere]"
-                                >
-                                  {question}
-                                </span>
-                              ))}
-                            </div>
-                          )}
+                          {/* Reply suggestion chips — shown only on the last AI follow-up message */}
+                          {message.role === 'assistant' &&
+                            message.id === messages.filter(m => m.role === 'assistant').at(-1)?.id &&
+                            Array.isArray(message.followUpQuestions) &&
+                            message.followUpQuestions.length > 0 && (() => {
+                              const hints = getReplyHints(message.followUpQuestions);
+                              return hints.length > 0 ? (
+                                <div className="mt-2.5">
+                                  <p className="text-[10px] text-muted-foreground mb-1.5 px-0.5">Quick replies:</p>
+                                  <div className="flex max-w-full flex-wrap gap-1.5 overflow-hidden">
+                                    {hints.map((hint) => (
+                                      <button
+                                        key={hint}
+                                        onClick={() => handleSend(hint)}
+                                        className="rounded-full border border-primary/40 bg-primary/8 hover:bg-primary hover:text-white hover:border-primary px-3 py-1 text-[11px] sm:text-xs font-medium text-primary transition-colors"
+                                      >
+                                        {hint}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              ) : null;
+                            })()
+                          }
                         </div>
 
                         {message.role === 'user' && (

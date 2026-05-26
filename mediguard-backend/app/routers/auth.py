@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import random
 import secrets
 
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
@@ -54,8 +55,8 @@ def register(
     db.refresh(user)
 
     # Send welcome email in the background (silent if SMTP not configured)
-    subject, html = welcome_email(user.full_name)
-    background_tasks.add_task(send_email, user.email, subject, html)
+    subject, html, plain = welcome_email(user.full_name)
+    background_tasks.add_task(send_email, user.email, subject, html, plain)
 
     return {
         "access_token": create_access_token(user.email),
@@ -103,42 +104,62 @@ def forgot_password(
     db.commit()
 
     token = secrets.token_urlsafe(32)
+    otp_code = f"{random.randint(100000, 999999)}"  # 6-digit numeric OTP
+
     reset = PasswordResetToken(
         user_id=user.id,
         token=token,
+        otp_code=otp_code,
         expires_at=datetime.utcnow() + timedelta(minutes=30),
     )
     db.add(reset)
     db.commit()
 
     settings = get_settings()
-    reset_url = f"{settings.frontend_url}/reset-password?token={token}"
+    # Strip trailing slash from FRONTEND_URL to avoid double-slash in the URL
+    base_url = settings.frontend_url.rstrip("/")
+    reset_url = f"{base_url}/reset-password?token={token}"
 
     if email_configured():
-        subject, html = reset_password_email(reset_url, user.full_name)
-        background_tasks.add_task(send_email, user.email, subject, html)
-        response = {"message": "Password reset link sent to your email.", "email_sent": True}
+        subject, html, plain = reset_password_email(reset_url, user.full_name, otp_code)
+        background_tasks.add_task(send_email, user.email, subject, html, plain)
+        response = {"message": "Password reset link and code sent to your email.", "email_sent": True}
+        # Always return dev-friendly hints for test accounts
         if user.email.endswith("@example.com"):
             response["reset_token"] = token
+            response["otp_code"] = otp_code
             response["reset_url"] = f"/reset-password?token={token}"
         return response
 
-    # Development fallback: return token directly when SMTP is not configured
+    # Development fallback: return token & code directly when SMTP is not configured
     return {
         "message": "Password reset token generated (SMTP not configured — dev mode).",
         "email_sent": False,
         "reset_token": token,
+        "otp_code": otp_code,
         "reset_url": f"/reset-password?token={token}",
     }
 
 
 @router.post("/reset-password")
 def reset_password(body: ResetPasswordRequest, db: Session = Depends(get_db)):
-    reset = db.query(PasswordResetToken).filter(
-        PasswordResetToken.token == body.token
-    ).first()
+    # Accept either a URL token or the 6-digit OTP code
+    reset = None
+    if body.token:
+        reset = db.query(PasswordResetToken).filter(
+            PasswordResetToken.token == body.token
+        ).first()
+    if reset is None and body.otp_code:
+        reset = db.query(PasswordResetToken).filter(
+            PasswordResetToken.otp_code == body.otp_code,
+            PasswordResetToken.used_at.is_(None),
+        ).first()
+
     if not reset or reset.used_at is not None or reset.expires_at < datetime.utcnow():
-        raise HTTPException(status_code=400, detail="Invalid or expired reset token")
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid or expired reset token/code. Please request a new password reset."
+        )
 
     user = db.query(User).filter(User.id == reset.user_id).first()
     if not user:

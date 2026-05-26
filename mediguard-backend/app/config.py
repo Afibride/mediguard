@@ -29,9 +29,9 @@ class Settings(BaseSettings):
     smtp_port: int = 587
     smtp_user: str = ""
     smtp_password: str = ""
-    smtp_from: str = "MediGuard Bamenda <noreply@mediguard.health>"
+    smtp_from: str = "MediGuard <support@mediguard.info>"
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     @property
     def cors_origins(self) -> List[str]:

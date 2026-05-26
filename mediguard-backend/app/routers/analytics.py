@@ -6,10 +6,10 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.data import DISEASES
-from app.db.models import ChatFeedback, Disease, PredictionFeedback, PredictionLog, User
+from app.db.models import ChatFeedback, Disease, NewsletterSubscriber, PredictionFeedback, PredictionLog, User
 from app.db.session import get_db
 from app.utils.dependencies import get_current_user
-from app.utils.email import is_rainy_season, outbreak_alert_email, send_email
+from app.utils.email import is_rainy_season, monthly_digest_email, outbreak_alert_email, send_email
 
 router = APIRouter()
 
@@ -138,7 +138,7 @@ def summary(db: Session = Depends(get_db)):
 
 # ---------------------------------------------------------------------------
 # POST /analytics/send-outbreak-alerts
-# Compute outbreak alerts and email all opted-in users
+# Compute outbreak alerts and email all opted-in users + newsletter subscribers
 # ---------------------------------------------------------------------------
 @router.post("/send-outbreak-alerts")
 def send_outbreak_alerts(
@@ -152,22 +152,157 @@ def send_outbreak_alerts(
 
     tips = (_TIPS_RAINY if is_rainy_season() else _TIPS_DRY) + _TIPS_GENERAL
 
-    recipients = (
+    # Registered users who opted in
+    registered = (
         db.query(User)
         .filter(User.is_active == True, User.notify_emails == True)  # noqa: E712
         .all()
     )
 
-    for user in recipients:
-        subject, html = outbreak_alert_email(user.full_name, alerts, tips)
+    # Guest newsletter subscribers
+    guests = (
+        db.query(NewsletterSubscriber)
+        .filter(NewsletterSubscriber.is_active == True)  # noqa: E712
+        .all()
+    )
+
+    count = 0
+    for user in registered:
+        subject, html, plain = outbreak_alert_email(user.full_name, alerts, tips)
         if subject:
-            background_tasks.add_task(send_email, user.email, subject, html)
+            background_tasks.add_task(send_email, user.email, subject, html, plain)
+            count += 1
+
+    for sub in guests:
+        from app.config import get_settings
+        base = get_settings().frontend_url.rstrip("/")
+        unsub_url = f"{base}/newsletter/unsubscribe?token={sub.unsubscribe_token}"
+        subject, html, plain = outbreak_alert_email(sub.name, alerts, tips, unsubscribe_url=unsub_url)
+        if subject:
+            background_tasks.add_task(send_email, sub.email, subject, html, plain)
+            count += 1
 
     return {
-        "message": f"Outbreak alert emails queued for {len(recipients)} subscriber(s).",
-        "sent": len(recipients),
+        "message": f"Outbreak alert emails queued for {count} subscriber(s).",
+        "sent": count,
+        "registered": len(registered),
+        "newsletter": len(guests),
         "alerts": alerts,
     }
+
+
+# ---------------------------------------------------------------------------
+# POST /analytics/send-monthly-digest
+# Send monthly health digest to all subscribers (admin-triggered or scheduled)
+# ---------------------------------------------------------------------------
+@router.post("/send-monthly-digest")
+def send_monthly_digest(
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    _user: User = Depends(get_current_user),
+):
+    month_start = datetime.utcnow().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    rows = (
+        db.query(PredictionLog.top_disease, func.count(PredictionLog.id).label("cnt"))
+        .filter(PredictionLog.timestamp >= month_start)
+        .filter(PredictionLog.top_disease.isnot(None))
+        .group_by(PredictionLog.top_disease)
+        .order_by(func.count(PredictionLog.id).desc())
+        .limit(5)
+        .all()
+    )
+    total = db.query(func.count(PredictionLog.id)).filter(PredictionLog.timestamp >= month_start).scalar() or 1
+    top_diseases = [
+        {"disease": d, "count": c, "pct": round((c / total) * 100)}
+        for d, c in rows if d
+    ]
+
+    alerts = _compute_outbreak_alerts(db)
+    tips = (_TIPS_RAINY if is_rainy_season() else _TIPS_DRY) + _TIPS_GENERAL
+    month_year = datetime.utcnow().strftime("%B %Y")
+
+    registered = (
+        db.query(User)
+        .filter(User.is_active == True, User.notify_emails == True)  # noqa: E712
+        .all()
+    )
+    guests = (
+        db.query(NewsletterSubscriber)
+        .filter(NewsletterSubscriber.is_active == True)  # noqa: E712
+        .all()
+    )
+
+    count = 0
+    for user in registered:
+        subject, html, plain = monthly_digest_email(user.full_name, top_diseases, alerts, tips, month_year)
+        background_tasks.add_task(send_email, user.email, subject, html, plain)
+        count += 1
+
+    for sub in guests:
+        from app.config import get_settings
+        base = get_settings().frontend_url.rstrip("/")
+        unsub_url = f"{base}/newsletter/unsubscribe?token={sub.unsubscribe_token}"
+        subject, html, plain = monthly_digest_email(sub.name, top_diseases, alerts, tips, month_year, unsub_url)
+        background_tasks.add_task(send_email, sub.email, subject, html, plain)
+        count += 1
+
+    return {
+        "message": f"Monthly digest queued for {count} subscriber(s).",
+        "sent": count,
+        "registered": len(registered),
+        "newsletter": len(guests),
+        "month": month_year,
+        "top_diseases": top_diseases,
+    }
+
+
+# ---------------------------------------------------------------------------
+# GET /analytics/age-distribution
+# Returns screening counts grouped by age bracket.
+# Falls back to documented representative data when no age data exists yet.
+# ---------------------------------------------------------------------------
+
+_AGE_GROUP_ORDER = ["0-10", "11-20", "21-30", "31-40", "41-50", "51-60", "60+"]
+
+_AGE_GROUP_FALLBACK = [
+    {"age": "0-10",  "cases": 380},
+    {"age": "11-20", "cases": 420},
+    {"age": "21-30", "cases": 580},
+    {"age": "31-40", "cases": 540},
+    {"age": "41-50", "cases": 400},
+    {"age": "51-60", "cases": 350},
+    {"age": "60+",   "cases": 330},
+]
+
+
+@router.get("/age-distribution")
+def age_distribution(db: Session = Depends(get_db)):
+    """Return screening counts grouped by age bracket.
+
+    Uses real ``prediction_logs.age_group`` values when available;
+    returns illustrative representative data otherwise.
+    """
+    rows = (
+        db.query(PredictionLog.age_group, func.count(PredictionLog.id).label("count"))
+        .filter(PredictionLog.age_group.isnot(None))
+        .group_by(PredictionLog.age_group)
+        .all()
+    )
+
+    if not rows:
+        return {"data": _AGE_GROUP_FALLBACK, "is_real_data": False}
+
+    bucket_map: dict[str, int] = {age: cnt for age, cnt in rows}
+    data = [
+        {"age": group, "cases": bucket_map.get(group, 0)}
+        for group in _AGE_GROUP_ORDER
+        if bucket_map.get(group, 0) > 0   # only return groups that have data
+    ]
+    # If somehow all rows had unknown groups, return fallback
+    if not data:
+        return {"data": _AGE_GROUP_FALLBACK, "is_real_data": False}
+
+    return {"data": data, "is_real_data": True}
 
 
 # ---------------------------------------------------------------------------
