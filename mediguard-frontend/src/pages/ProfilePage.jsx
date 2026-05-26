@@ -33,6 +33,7 @@ const ProfilePage = () => {
   const [confirmPw, setConfirmPw] = useState('');
   const [showCurrentPw, setShowCurrentPw] = useState(false);
   const [showNewPw, setShowNewPw] = useState(false);
+  const [showConfirmPw, setShowConfirmPw] = useState(false);
   const [pwSaving, setPwSaving] = useState(false);
 
   useEffect(() => {
@@ -298,15 +299,25 @@ const ProfilePage = () => {
                         </div>
                         <div className="space-y-1.5">
                           <Label htmlFor="confirm-pw">Confirm New Password</Label>
-                          <Input
-                            id="confirm-pw"
-                            type="password"
-                            value={confirmPw}
-                            onChange={(e) => setConfirmPw(e.target.value)}
-                            required
-                            placeholder="Repeat new password"
-                            className={confirmPw && confirmPw !== newPw ? 'border-destructive' : ''}
-                          />
+                          <div className="relative">
+                            <Input
+                              id="confirm-pw"
+                              type={showConfirmPw ? 'text' : 'password'}
+                              value={confirmPw}
+                              onChange={(e) => setConfirmPw(e.target.value)}
+                              required
+                              placeholder="Repeat new password"
+                              className={`pr-10 ${confirmPw && confirmPw !== newPw ? 'border-destructive' : ''}`}
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setShowConfirmPw(v => !v)}
+                              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                              aria-label={showConfirmPw ? 'Hide password' : 'Show password'}
+                            >
+                              {showConfirmPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                            </button>
+                          </div>
                           {confirmPw && confirmPw !== newPw && (
                             <p className="text-xs text-destructive">Passwords do not match</p>
                           )}

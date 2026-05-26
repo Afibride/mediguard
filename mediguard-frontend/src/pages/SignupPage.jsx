@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useAuth } from '@/components/AuthContext';
-import { UserPlus, Activity, ShieldCheck, CheckCircle2, XCircle } from 'lucide-react';
+import { UserPlus, Activity, ShieldCheck, CheckCircle2, XCircle, Eye, EyeOff } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const SignupPage = () => {
@@ -31,6 +31,8 @@ const SignupPage = () => {
   });
   const [usernameValid, setUsernameValid] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { signup } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -196,11 +198,21 @@ const SignupPage = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="password">Password <span className="text-red-500">*</span></Label>
-                      <Input id="password" name="password" type="password" required value={formData.password} onChange={handleChange} className="bg-white text-gray-900 dark:bg-slate-900 dark:text-gray-100" />
+                      <div className="relative">
+                        <Input id="password" name="password" type={showPassword ? 'text' : 'password'} required value={formData.password} onChange={handleChange} className="bg-white text-gray-900 dark:bg-slate-900 dark:text-gray-100 pr-10" />
+                        <button type="button" onClick={() => setShowPassword(v => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground" aria-label={showPassword ? 'Hide password' : 'Show password'}>
+                          {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="confirmPassword">Confirm Password <span className="text-red-500">*</span></Label>
-                      <Input id="confirmPassword" name="confirmPassword" type="password" required value={formData.confirmPassword} onChange={handleChange} className="bg-white text-gray-900 dark:bg-slate-900 dark:text-gray-100" />
+                      <div className="relative">
+                        <Input id="confirmPassword" name="confirmPassword" type={showConfirmPassword ? 'text' : 'password'} required value={formData.confirmPassword} onChange={handleChange} className="bg-white text-gray-900 dark:bg-slate-900 dark:text-gray-100 pr-10" />
+                        <button type="button" onClick={() => setShowConfirmPassword(v => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground" aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}>
+                          {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
