@@ -19,6 +19,12 @@ from urllib.request import Request, urlopen
 from dotenv import load_dotenv
 
 from app.data import DISEASES, SYMPTOM_DESCRIPTIONS, SYMPTOMS
+from app.data_firstaid import (
+    FIRST_AID_DATA,
+    detect_first_aid_type,
+    format_first_aid_response,
+    is_first_aid_request,
+)
 from app.db.models import Disease
 from app.db.session import SessionLocal
 from app.ml.fuzzy_match import normalize_symptom_text
@@ -113,6 +119,138 @@ PREGNANCY_TERMS = [
     "prenatal",
     "trimester",
 ]
+
+# ---------------------------------------------------------------------------
+# Pregnancy-symptom detection for users who may not know they are pregnant
+# ---------------------------------------------------------------------------
+
+# Phrases that are *strong single-indicator* signals of possible pregnancy.
+# Even one match is enough to trigger the suggestion (for users who say
+# "missed period" or "morning sickness" without using the word "pregnant").
+_PREGNANCY_STRONG_INDICATORS: frozenset[str] = frozenset({
+    "missed period", "missed my period", "late period", "my period is late",
+    "period is late", "no period", "haven't had my period", "haven't gotten my period",
+    "delayed period", "period stopped", "no menstruation", "missed menstruation",
+    "skipped period", "period hasn't come",
+    "morning sickness", "nausea in the morning", "vomiting in the morning",
+    "sick every morning", "throwing up every morning",
+    "sore breasts", "tender breasts", "breast tenderness", "breasts are sore",
+    "breasts are tender", "breast soreness", "my breasts hurt",
+    "nipple tenderness", "nipples are sore", "nipple pain",
+    "implantation bleeding",
+    "think i might be pregnant", "could i be pregnant", "am i pregnant",
+    "might be pregnant", "possibly pregnant",
+    "pregnancy test", "home pregnancy test", "positive test",
+    "deux lignes sur le test", "test positif",  # French
+    "règles en retard", "pas de règles", "absence de règles",
+})
+
+# Additional pregnancy-related phrases: 2+ of these together also trigger
+_PREGNANCY_SOFT_SYMPTOMS: list[str] = [
+    "nausea", "nauseous", "feeling sick",
+    "fatigue", "tired all the time", "extreme tiredness",
+    "frequent urination", "urinating a lot", "peeing a lot",
+    "pee frequently", "always need to urinate", "urinating frequently",
+    "food cravings", "craving food", "craving",
+    "food aversion", "food makes me sick", "smell makes me nauseous",
+    "bloating", "swollen abdomen",
+    "mood swings", "emotional", "crying for no reason",
+    "dizziness", "lightheaded",
+    "lower back pain",
+    "metallic taste", "taste in my mouth",
+]
+
+
+def _has_unaware_pregnancy_symptoms(query: str) -> bool:
+    """Return True when query contains symptoms that could signal pregnancy
+    in someone who does not yet know they are pregnant.
+
+    Triggers on:
+    - any single *strong indicator* (missed period, morning sickness, etc.), OR
+    - 2 or more *soft symptoms* together.
+
+    Only skips when the user assertively states they ARE already pregnant
+    (e.g. "I am pregnant") — not when they are merely asking ("could I be pregnant?").
+    """
+    text = query.lower()
+    # Skip only when the user clearly asserts they are already pregnant —
+    # let the existing pregnancy-followup pathway handle those.
+    _ALREADY_PREGNANT_PHRASES = {
+        "i am pregnant", "i'm pregnant", "im pregnant",
+        "i am expecting", "i'm expecting",
+        "antenatal", "prenatal", "trimester",
+        "je suis enceinte", "enceinte de",   # French
+    }
+    if any(phrase in text for phrase in _ALREADY_PREGNANT_PHRASES):
+        return False
+    # A single strong indicator is enough
+    for indicator in _PREGNANCY_STRONG_INDICATORS:
+        if indicator in text:
+            return True
+    # Two or more soft symptoms together
+    soft_hits = sum(1 for s in _PREGNANCY_SOFT_SYMPTOMS if s in text)
+    return soft_hits >= 2
+
+
+def _unaware_pregnancy_response(query: str, gender: str | None) -> dict | None:
+    """Suggest possible pregnancy when symptoms match, asking for gender to confirm.
+
+    Returns None when:
+    - Symptoms don't match pregnancy pattern
+    - Gender is already confirmed as male
+    """
+    if not _has_unaware_pregnancy_symptoms(query):
+        return None
+
+    # If we already know the user is male, skip the suggestion entirely
+    _MALE_TERMS = {"male", "man", "boy", "homme", "garçon"}
+    if gender and gender.lower().strip() in _MALE_TERMS:
+        return None
+
+    # Ask for gender if not yet provided or ambiguous
+    gender_question = ""
+    _FEMALE_TERMS = {"female", "woman", "girl", "femme", "fille"}
+    if not gender or gender.lower().strip() not in _FEMALE_TERMS:
+        gender_question = (
+            "\n\n**To give you more accurate advice**, could you also tell me your gender? "
+            "*(Reply: female / male — this helps me personalise the guidance)*"
+        )
+
+    answer = (
+        "🤰 **These Symptoms Could Be Early Signs of Pregnancy**\n\n"
+        "The symptoms you've described — such as a missed/late period, breast tenderness, "
+        "morning nausea, fatigue, or frequent urination — are among the **most common early "
+        "signs of pregnancy**. It's possible you may be pregnant without yet knowing.\n\n"
+        "**What you can do right now:**\n"
+        "1. 💊 Take a **home pregnancy test** (available at pharmacies) — it can detect "
+        "pregnancy as early as the first day of a missed period.\n"
+        "2. 🏥 Visit a **health clinic or maternity unit** for a confirmed blood (HCG) test.\n"
+        "3. ✅ If the test is positive, **start antenatal care early** — early check-ups "
+        "protect both mother and baby.\n\n"
+        "⚠️ *These symptoms can also have other causes (hormonal changes, stress, illness, "
+        "or anaemia). A pregnancy test is the fastest and most reliable way to find out.*"
+        f"{gender_question}"
+    )
+
+    follow_up = [
+        "What is your gender?",
+        "Have you taken a pregnancy test?",
+        "When did you last have your period?",
+    ] if gender_question else [
+        "Have you taken a pregnancy test?",
+        "When did you last have your period?",
+    ]
+
+    return {
+        "answer": answer,
+        "sources": ["MediGuard Reproductive Health Guidelines"],
+        "disclaimer": (
+            "This is educational guidance only. Only a clinical pregnancy test can confirm "
+            "pregnancy. Consult a qualified healthcare professional for personal health concerns."
+        ),
+        "mode": "pregnancy_suggestion",
+        "follow_up_questions": follow_up,
+    }
 
 FATIGUE_CONTEXT_TERMS = [
     "fatigue",
@@ -2315,6 +2453,63 @@ def _extractive_answer(query: str, chunks: list[dict]) -> str:
     )
 
 
+def _first_aid_chat_response(
+    query: str,
+    user_lat: float | None = None,
+    user_lng: float | None = None,
+) -> dict | None:
+    """Return a structured first-aid response when the query describes an accident or injury.
+
+    Priority order:
+    1. Detect the specific accident type (burn, fracture, snake bite, etc.)
+    2. If not matched but looks like a first-aid request, return general first aid guidance
+    3. Otherwise return None so other handlers can process the query
+    """
+    if not is_first_aid_request(query):
+        return None
+
+    entry_key = detect_first_aid_type(query)
+
+    # Fallback: if query says "first aid" or "accident" but type not detected, use general
+    if entry_key is None:
+        entry_key = "general_firstaid"
+
+    answer = format_first_aid_response(entry_key, query)
+    if not answer:
+        return None
+
+    entry = FIRST_AID_DATA[entry_key]
+    severity = entry.get("severity", "moderate")
+
+    # For critical emergencies, always append a facility nudge
+    facility_note = ""
+    if severity == "critical":
+        if user_lat is not None and user_lng is not None:
+            facility_note = (
+                "\n\n📍 **Get to hospital now.** Ask me 'nearest hospital' and I will find "
+                "facilities closest to your location."
+            )
+        else:
+            facility_note = (
+                "\n\n📍 **Get to the nearest hospital immediately.** "
+                "You can also ask me 'nearest hospital' and share your location for directions."
+            )
+
+    return {
+        "answer": answer + facility_note,
+        "sources": ["MediGuard First Aid Guidelines"],
+        "disclaimer": (
+            "This first aid guidance is for immediate emergency use only. "
+            "It does not replace professional emergency care. Always seek qualified medical help."
+        ),
+        "mode": "first_aid",
+        "first_aid_type": entry_key,
+        "severity": severity,
+        "data_source": "firstaid_dataset",
+        "follow_up_questions": [],
+    }
+
+
 def generate_answer(
     query: str,
     filter_disease: str | None = None,
@@ -2328,6 +2523,16 @@ def generate_answer(
     conversational = _conversational_response(query)
     if conversational:
         return conversational
+
+    # ── First aid / accident handler (high priority — before disease lookup) ──
+    first_aid = _first_aid_chat_response(query, user_lat=user_lat, user_lng=user_lng)
+    if first_aid:
+        return first_aid
+
+    # ── Possible pregnancy suggestion for users who may not know they're pregnant ──
+    pregnancy_suggestion = _unaware_pregnancy_response(query, gender=gender)
+    if pregnancy_suggestion:
+        return pregnancy_suggestion
 
     trends = _trends_response(query)
     if trends:
@@ -2410,7 +2615,9 @@ def generate_answer(
                 f"{lang_note}"
                 "You are MediGuard's health assistant for Bamenda, Cameroon. "
                 "Answer clearly using only the context below. Never diagnose or prescribe medication. "
-                "When relevant, include simple first aid or self-care steps such as rest, fluids, monitoring symptoms, and urgent-care red flags. "
+                "When the user describes an accident or injury (burns, cuts, fractures, snake bites, car accidents, choking, drowning, electric shock, etc.), "
+                "provide clear step-by-step first aid guidance: what to do immediately, what NOT to do, and when to go to hospital. "
+                "For other health questions, include simple first aid or self-care steps such as rest, fluids, monitoring symptoms, and urgent-care red flags. "
                 "Tell users that automated results can sometimes be incomplete or faulty. Always recommend professional care for personal symptoms. If the user is pregnant or asks about pregnancy, "
                 "ask concise follow-up questions about gestational age, severity, onset, bleeding, abdominal pain, fever, "
                 "headache, vision changes, swelling, shortness of breath, and fetal movement before giving non-urgent guidance.\n\n"

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database, TrendingUp, Megaphone, Droplets, HandHeart, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
+import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database, TrendingUp, Megaphone, Droplets, HandHeart, ChevronLeft, ChevronRight, Play, Pause, X, Heart } from 'lucide-react';
 import NearbyFacilities from '@/components/NearbyFacilities';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -200,6 +200,9 @@ const HomePage = () => {
   const [topDiseases, setTopDiseases] = useState([]);
   const [weeklyTrends, setWeeklyTrends] = useState([]);
   const [outbreakInfo, setOutbreakInfo] = useState({ alerts: [], rainy_season: false, has_alerts: false });
+  const [showStdBanner, setShowStdBanner] = useState(
+    () => localStorage.getItem('mg_stdBannerDismissed') !== '1'
+  );
   
   const trustIndicators = [
     {
@@ -481,6 +484,51 @@ const HomePage = () => {
             </div>
           </motion.div>
         </section>
+
+        {/* STD Awareness Banner */}
+        {showStdBanner && (
+          <div className="relative bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 text-white shadow-lg">
+            <div className="container mx-auto px-4 max-w-7xl">
+              <div className="flex items-start sm:items-center justify-between gap-3 py-3 sm:py-3.5">
+                <div className="flex items-start sm:items-center gap-2.5 min-w-0">
+                  <div className="flex-shrink-0 mt-0.5 sm:mt-0">
+                    <Heart className="h-4 w-4 sm:h-5 sm:w-5 fill-white/80 text-white" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm sm:text-base font-semibold leading-snug">
+                      💡 Youth Health Alert — Protect Yourself from STDs
+                    </p>
+                    <p className="text-xs sm:text-sm text-white/90 mt-0.5 leading-relaxed">
+                      Sexually transmitted infections (STDs/STIs) are preventable.{' '}
+                      <strong>Always use a condom</strong> or <strong>choose abstinence</strong> to protect yourself and your partner.{' '}
+                      Get tested regularly — many STIs show no symptoms.{' '}
+                      <Link
+                        to="/disease-library"
+                        className="underline underline-offset-2 font-semibold hover:text-white transition-colors"
+                        onClick={() => {
+                          setShowStdBanner(false);
+                          localStorage.setItem('mg_stdBannerDismissed', '1');
+                        }}
+                      >
+                        Learn more →
+                      </Link>
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    setShowStdBanner(false);
+                    localStorage.setItem('mg_stdBannerDismissed', '1');
+                  }}
+                  className="flex-shrink-0 p-1.5 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors"
+                  aria-label="Dismiss STD awareness banner"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Trust Indicators - Stats Grid */}
         <section className="py-12 sm:py-20 bg-background">
