@@ -366,17 +366,17 @@ const TrendsDashboard = () => {
         <title>Health Trends Dashboard — MediGuard Bamenda | Community Disease Insights</title>
         <meta name="description" content="Live community health trends, outbreak alerts, and disease prevention tips for Bamenda, Cameroon. See what MediGuard is tracking this week." />
         <meta name="keywords" content="health trends Bamenda, disease outbreak alerts, Cameroon health data, community health dashboard, malaria outbreak, seasonal disease trends" />
-        <link rel="canonical" href="https://mediguard.app/trends" />
+        <link rel="canonical" href="https://mediguard.info/trends" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://mediguard.app/trends" />
+        <meta property="og:url" content="https://mediguard.info/trends" />
         <meta property="og:title" content="Health Trends Dashboard — MediGuard Bamenda" />
         <meta property="og:description" content="Live community health trends, outbreak alerts, and disease prevention sensitization for Bamenda, Cameroon." />
-        <meta property="og:image" content="https://mediguard.app/mediguard.png" />
+        <meta property="og:image" content="https://mediguard.info/mediguard.png" />
         <meta property="og:site_name" content="MediGuard" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Health Trends — MediGuard Bamenda" />
         <meta name="twitter:description" content="Live community health trends and outbreak alerts for Bamenda." />
-        <meta name="twitter:image" content="https://mediguard.app/mediguard.png" />
+        <meta name="twitter:image" content="https://mediguard.info/mediguard.png" />
       </Helmet>
 
       <div className="min-h-screen medical-page py-8 sm:py-12">

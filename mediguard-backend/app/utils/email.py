@@ -137,7 +137,7 @@ def welcome_email(user_name: str) -> tuple[str, str]:
   </p>
 </div>
 <div style="text-align:center;margin:0 0 24px;">
-  <a href="https://mediguard.app/symptom-checker"
+  <a href="https://mediguard.info/symptom-checker"
      style="display:inline-block;background:#0891b2;color:#fff;padding:14px 36px;
             border-radius:8px;text-decoration:none;font-weight:bold;font-size:15px;">
     Start Your First Check
@@ -147,7 +147,7 @@ def welcome_email(user_name: str) -> tuple[str, str]:
 """)
     plain = (
         f"Welcome to MediGuard, {user_name}!\n\n"
-        "Your account is ready. Visit https://mediguard.app to get started.\n\n"
+        "Your account is ready. Visit https://mediguard.info to get started.\n\n"
         "Features: Symptom Checker, AI Chat, Health History, Trends Dashboard, Nearby Facilities.\n\n"
         "MediGuard is a pre-consultation tool — always consult a qualified health professional.\n\n"
         "– The MediGuard Team"
@@ -243,7 +243,7 @@ def subscription_confirmation_email(name: str, unsubscribe_url: str) -> tuple[st
   any time &mdash; no registration needed.
 </p>
 <div style="text-align:center;margin:0 0 28px;">
-  <a href="https://mediguard.app"
+  <a href="https://mediguard.info"
      style="display:inline-block;background:#0891b2;color:#fff;padding:12px 32px;
             border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px;">
     Visit MediGuard
@@ -296,7 +296,7 @@ def registered_subscription_email(user_name: str) -> tuple[str, str, str]:
   <strong>Profile &rsaquo; Notification Settings</strong> page.
 </p>
 <div style="text-align:center;margin:0 0 28px;">
-  <a href="https://mediguard.app/profile"
+  <a href="https://mediguard.info/profile"
      style="display:inline-block;background:#0891b2;color:#fff;padding:12px 32px;
             border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px;">
     Go to My Profile
@@ -311,7 +311,7 @@ def registered_subscription_email(user_name: str) -> tuple[str, str, str]:
         "- Monthly disease trends digest (1st of each month)\n"
         "- Outbreak alerts when elevated activity is detected\n"
         "- Seasonal prevention tips\n\n"
-        "Manage notifications at: https://mediguard.app/profile\n\n"
+        "Manage notifications at: https://mediguard.info/profile\n\n"
         "– The MediGuard Team"
     )
     return subject, html, plain
@@ -419,13 +419,13 @@ def monthly_digest_email(
   <p style="color:#475569;margin:0;font-size:12px;line-height:1.7;">
     <strong>Nearest facilities:</strong> Bamenda Regional Hospital &middot;
     Baptist Hospital Bamenda (Nkwen) &middot; NAHPI Medical Centre (Mankon).
-    Visit <a href="https://mediguard.app/nearby-facilities" style="color:#0891b2;">MediGuard Facilities</a>
+    Visit <a href="https://mediguard.info/nearby-facilities" style="color:#0891b2;">MediGuard Facilities</a>
     for directions and contact numbers.
   </p>
 </div>
 
 <div style="text-align:center;margin:0 0 24px;">
-  <a href="https://mediguard.app/trends"
+  <a href="https://mediguard.info/trends"
      style="display:inline-block;background:#0891b2;color:#fff;padding:12px 32px;
             border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px;">
     View Full Trends Dashboard
@@ -442,7 +442,7 @@ def monthly_digest_email(
         ("\n\nOutbreak Alerts:\n" + "\n".join(f"  - {a['disease']} [{a['level'].upper()}]: {a['reason']}" for a in alerts[:3]) if alerts else "") +
         "\n\nPrevention Tips:\n" +
         "\n".join(f"  - {t['disease']}: {t['tip']}" for t in prevention_tips[:4]) +
-        "\n\nView full trends: https://mediguard.app/trends\n\n"
+        "\n\nView full trends: https://mediguard.info/trends\n\n"
         + (f"Unsubscribe: {unsubscribe_url}\n\n" if unsubscribe_url else "") +
         "– The MediGuard Team"
     )
