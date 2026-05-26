@@ -144,6 +144,9 @@ def predict(
                 )
 
     top = results[0]["disease"] if results else "Unknown"
+    # Surface the actual prediction engine used so the frontend / logs can display it
+    data_source = results[0].get("data_source", "rule_based") if results else "no_results"
+
     log = PredictionLog(
         user_id=user.id if user else None,
         symptoms=normalized,
@@ -160,6 +163,7 @@ def predict(
         "prediction_log_id": log.id,
         "pregnancy_note": pregnancy_note,
         "fatigue_note": fatigue_note,
+        "data_source": data_source,
         "disclaimer": "MediGuard is not a medical diagnosis. Consult a qualified health professional.",
     }
 

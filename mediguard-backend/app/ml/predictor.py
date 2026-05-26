@@ -293,7 +293,20 @@ class DiseasePredictor:
     # Public predict — chooses the most accurate available engine
     # -------------------------------------------------------------------------
 
-    def predict(self, symptoms: list[str]) -> list[dict]:
+    def predict(self, symptoms: list[str], apply_cardinal_filter: bool = True) -> list[dict]:
+        """
+        Predict diseases for the given symptom list.
+
+        Parameters
+        ----------
+        symptoms : list[str]
+            Canonical symptom names (already normalised/fuzzy-matched).
+        apply_cardinal_filter : bool, default True
+            When True (default, used by the /predict API endpoint) diseases whose
+            cardinal symptom is absent are removed from results.
+            Pass False for the Chat AI flow, where users often describe symptoms
+            in natural language and may not mention every key symptom.
+        """
         # When sentence-transformers is available, Pinecone semantic search
         # understands symptom meaning better.  When only the hash-based embedder
         # is available the local trained model is more reliable (93 % accuracy).
@@ -316,5 +329,12 @@ class DiseasePredictor:
         if predictions is None:
             predictions = self._predict_rule_based(symptoms)
 
-        # Always apply cardinal symptom gate before returning results
-        return self._apply_cardinal_filter(predictions, symptoms)
+        if not predictions:
+            return []
+
+        # Apply cardinal symptom gate only when requested (API endpoint).
+        # Chat AI calls with apply_cardinal_filter=False to avoid blocking diseases
+        # when users haven't mentioned every distinguishing symptom in conversation.
+        if apply_cardinal_filter:
+            return self._apply_cardinal_filter(predictions, symptoms)
+        return predictions
