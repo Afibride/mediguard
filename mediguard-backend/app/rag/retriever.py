@@ -773,11 +773,14 @@ def _disease_general_info_response(query: str) -> dict | None:
         return None
 
     profile = _pinecone_disease_profile(disease["name"])
-    data_source = "pinecone" if profile else "database"
-    if not profile:
+    if profile:
+        data_source = "pinecone"
+    else:
         profile = _database_disease_profile(disease["name"])
-    if not profile:
-        return None
+        if not profile:
+            return None
+        # "database" → SQLite/Postgres diseases table; "curated" → built-in DISEASES list
+        data_source = profile.get("source", "local_db")
 
     symptoms = disease.get("symptoms") or []
     display = _disease_display_name(disease["name"])
@@ -890,11 +893,14 @@ def _disease_topic_response(query: str) -> dict | None:
         return None
 
     profile = _pinecone_disease_profile(disease["name"])
-    data_source = "pinecone" if profile else "database"
-    if not profile:
+    if profile:
+        data_source = "pinecone"
+    else:
         profile = _database_disease_profile(disease["name"])
-    if not profile:
-        return None
+        if not profile:
+            return None
+        # "database" → SQLite/Postgres diseases table; "curated" → built-in DISEASES list
+        data_source = profile.get("source", "local_db")
 
     name = profile.get("disease") or disease["name"]
     display_name = _disease_display_name(name)
@@ -1073,7 +1079,7 @@ def _trends_response(query: str) -> dict | None:
                 ),
                 "sources": [],
                 "disclaimer": DISCLAIMER,
-                "data_source": "database",
+                "data_source": "prediction_log",
             }
 
         lines = [f"**MediGuard Community Disease Trends â€” Bamenda** (based on {total} screening{'s' if total != 1 else ''}):\n"]
@@ -1692,20 +1698,67 @@ _ALL_FOLLOWUP_QUESTIONS = [
 
 
 def _get_asked_question_set(chat_history: list[dict] | None) -> set[str]:
-    """Return the set of follow-up questions already present in assistant messages."""
+    """Return the set of follow-up questions already present in assistant messages.
+
+    Also adds the sentinel ``__other_symptoms_asked__`` when any variant of
+    the dynamic "other symptoms" question has been sent, so that
+    ``_next_unanswered_question`` can skip it even when the exact generated
+    string never matches a hardcoded template.
+    """
     if not chat_history:
         return set()
     assistant_text = "\n".join(
         m.get("content", "") for m in chat_history if m.get("role") == "assistant"
     ).lower()
-    return {q for q in _ALL_FOLLOWUP_QUESTIONS if q.lower() in assistant_text}
+    asked = {q for q in _ALL_FOLLOWUP_QUESTIONS if q.lower() in assistant_text}
+    # Dynamic "other symptoms" question — detect by prefix / key phrase rather than
+    # exact string, because the generated text varies based on which symptoms are
+    # already reported.
+    if (
+        "do you have any other symptoms" in assistant_text
+        or "have you noticed any additional changes in how you feel" in assistant_text
+    ):
+        asked.add("__other_symptoms_asked__")
+    return asked
 
 
 def _next_unanswered_question(questions: list[str], asked: set[str]) -> str | None:
+    other_symptoms_done = "__other_symptoms_asked__" in asked
     for q in questions:
-        if q not in asked:
-            return q
+        if q in asked:
+            continue
+        q_lower = q.lower()
+        # Skip any "other symptoms" variant if we've already sent one
+        if other_symptoms_done and (
+            q_lower.startswith("do you have any other symptoms")
+            or "additional changes in how you feel" in q_lower
+        ):
+            continue
+        return q
     return None
+
+
+# ---------------------------------------------------------------------------
+# "No more symptoms" negation detector
+# ---------------------------------------------------------------------------
+
+_NO_MORE_SYMPTOMS_PATTERNS = [
+    re.compile(r"^\s*no\s*[.!?]*\s*$", re.I),
+    re.compile(r"^\s*(nope|nah)\s*[.!?]*\s*$", re.I),
+    re.compile(r"\bno\b.{0,20}\b(other|more|additional|else)\b.{0,30}symptom", re.I),
+    re.compile(r"\b(only|just)\s+those\b", re.I),
+    re.compile(r"\bthat'?s?\s+(all|it)\b", re.I),
+    re.compile(r"\bno\s+other\s+symptoms?\b", re.I),
+    re.compile(r"\bnothing\s+(else|more|other)\b", re.I),
+    re.compile(r"\bnone\b", re.I),
+    re.compile(r"\bthose\s+are\s+(all|it)\b", re.I),
+]
+
+
+def _user_said_no_more_symptoms(query: str) -> bool:
+    """Return True when the user's reply clearly signals there are no additional symptoms."""
+    text = query.strip()
+    return any(pat.search(text) for pat in _NO_MORE_SYMPTOMS_PATTERNS)
 
 
 def _answered_followup_count(chat_history: list[dict] | None, questions: list[str]) -> int:
@@ -1740,7 +1793,7 @@ def _next_followup_response(
         "pregnancy_context": pregnancy_context,
         "fatigue_context": fatigue_context,
         "follow_up_questions": [next_question],
-        "data_source": "database",
+        "data_source": "follow_up",  # collecting more info — no prediction engine used yet
     }
 
 
@@ -1777,21 +1830,35 @@ def _symptom_check_response(
     follow_up_questions = _symptom_follow_up_questions(reported_symptoms, pregnancy_context)
 
     asked_set = _get_asked_question_set(chat_history)
-    next_q = _next_unanswered_question(follow_up_questions, asked_set)
-    if next_q:
-        is_first = not asked_set
-        return _next_followup_response(
-            reported_symptoms,
-            [next_q],
-            0 if is_first else 1,
-            pregnancy_context,
-            fatigue_context,
-        )
 
-    predictions = _enrich_predictions_from_database(_get_predictor().predict(reported_symptoms))
+    # If the user explicitly says there are no more symptoms, skip remaining
+    # follow-up questions and go straight to the prediction results.
+    user_negated = followup_already_asked and _user_said_no_more_symptoms(query)
+
+    if not user_negated:
+        next_q = _next_unanswered_question(follow_up_questions, asked_set)
+        if next_q:
+            is_first = not (asked_set - {"__other_symptoms_asked__"})
+            return _next_followup_response(
+                reported_symptoms,
+                [next_q],
+                0 if is_first else 1,
+                pregnancy_context,
+                fatigue_context,
+            )
+
+    # Chat mode: don't gate on cardinal symptoms — the user may not have mentioned
+    # every distinguishing symptom in natural conversation.
+    predictions = _enrich_predictions_from_database(
+        _get_predictor().predict(reported_symptoms, apply_cardinal_filter=False)
+    )
     if fatigue_context:
         for prediction in predictions:
             prediction["fatigue_context"] = True
+
+    # Reflect the actual backend that produced the predictions
+    actual_data_source = predictions[0].get("data_source", "model") if predictions else "no_predictions"
+
     if not predictions:
         return {
             "answer": (
@@ -1806,7 +1873,7 @@ def _symptom_check_response(
             "pregnancy_context": pregnancy_context,
             "fatigue_context": fatigue_context,
             "follow_up_questions": follow_up_questions,
-            "data_source": "database",
+            "data_source": actual_data_source,
         }
 
     lines = [
@@ -1840,7 +1907,7 @@ def _symptom_check_response(
         "pregnancy_context": pregnancy_context,
         "fatigue_context": fatigue_context,
         "follow_up_questions": [],
-        "data_source": "database",
+        "data_source": actual_data_source,
     }
 
 
