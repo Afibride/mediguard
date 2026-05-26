@@ -64,6 +64,104 @@ CORE_SYMPTOMS = {
     "Trichomoniasis": ["Vaginal itching", "Genital discharge", "Painful urination", "Vaginal discharge", "Pelvic pain", "Rash", "Lower abdominal pain"],
 }
 
+# ─── Cardinal (Key) Symptoms ─────────────────────────────────────────────────
+# For diseases listed here, AT LEAST ONE cardinal symptom MUST be present in
+# the user's reported symptoms before the disease can appear in results.
+#
+# These are near-pathognomonic features that strongly distinguish a disease.
+# Without them, symptom overlap with other conditions is too non-specific to
+# justify suggesting the disease.
+#
+# Diseases NOT listed here (e.g. Malaria, Typhoid, Pneumonia) have no strict
+# cardinal requirement — they can be suggested on overlapping symptoms alone.
+CARDINAL_SYMPTOMS: dict[str, list[str]] = {
+    # ── Neurological / Musculoskeletal ─────────────────────────────────────
+    # Lockjaw is pathognomonic for tetanus — fever alone never suggests it
+    "Tetanus": ["Jaw stiffness"],
+    # Neck rigidity is the cardinal sign of meningitis
+    "Meningitis": ["Stiff neck"],
+    # Cannot diagnose epilepsy without actual seizures
+    "Epilepsy": ["Seizures"],
+    # Must have recurrent severe unilateral headache
+    "Migraine": ["Severe headache"],
+
+    # ── Respiratory ────────────────────────────────────────────────────────
+    # Chronic cough (>3 weeks) is required for TB; common cold doesn't suggest TB
+    "Tuberculosis": ["Chronic cough"],
+    # Must have the airway wheeze or tight chest
+    "Asthma": ["Wheezing", "Chest tightness"],
+
+    # ── Gastrointestinal / Diarrhoeal ──────────────────────────────────────
+    # Rice-water profuse diarrhoea is cardinal — ordinary diarrhoea ≠ cholera
+    "Cholera": ["Profuse watery diarrhea"],
+    # Bloody/mucus stool is cardinal — plain diarrhoea ≠ dysentery
+    "Dysentery": ["Bloody or mucus-filled diarrhea"],
+    # Abdominal pain must be present for appendicitis
+    "Appendicitis": ["Abdominal pain"],
+
+    # ── Skin / Rash ────────────────────────────────────────────────────────
+    # Must have characteristic itchy vesicular rash
+    "Chickenpox": ["Itchy rash", "Blisters"],
+    # Rash is essential for measles diagnosis
+    "Measles": ["Rash"],
+    # Intense, relentless itching is the hallmark of scabies
+    "Scabies": ["Severe itching"],
+    # Circular expanding ring rash is defining for ringworm
+    "Ringworm": ["Ring-shaped rash"],
+    # One-sided blistering stripe rash is cardinal for shingles
+    "Herpes Zoster": ["Blisters", "Rash"],
+    # Must have fungal skin signs
+    "Skin Fungal Infection": ["Itchy skin", "Ring-shaped rash", "Red scaly skin"],
+
+    # ── Eye ────────────────────────────────────────────────────────────────
+    # Eye redness or discharge is required — fever alone ≠ conjunctivitis
+    "Conjunctivitis": ["Red eyes", "Eye discharge"],
+
+    # ── Metabolic / Chronic ────────────────────────────────────────────────
+    # Polyuria and polydipsia are required for diabetes screening
+    "Diabetes Mellitus": ["Increased thirst", "Frequent urination"],
+
+    # ── Liver / Jaundice ───────────────────────────────────────────────────
+    "Hepatitis A": ["Jaundice", "Dark urine"],
+    "Hepatitis B": ["Jaundice", "Yellow eyes", "Dark urine"],
+    # The disease is named for jaundice — it's definitional
+    "Yellow Fever": ["Jaundice", "Yellow eyes"],
+
+    # ── Tropical / Parasitic ───────────────────────────────────────────────
+    # Intense whole-body itching is the defining feature of river blindness
+    "Onchocerciasis": ["Severe itching"],
+    # Lymphoedema (grossly swollen limbs) is cardinal for filariasis
+    "Filariasis": ["Swollen feet"],
+
+    # ── Urinary / Reproductive ─────────────────────────────────────────────
+    # UTI must have urinary tract symptoms
+    "Cystitis UTI": ["Painful urination", "Frequent urination"],
+    # Renal colic (severe flank/back pain) is cardinal for kidney stones
+    "Kidney Stones": ["Back pain"],
+    # Must have pelvic pain for PID
+    "Pelvic Inflammatory Disease": ["Pelvic pain"],
+
+    # ── Throat ─────────────────────────────────────────────────────────────
+    # Sore throat is the defining symptom of tonsillitis
+    "Tonsillitis": ["Sore throat"],
+    # Diphtheria must present with throat symptoms
+    "Diphtheria": ["Sore throat", "Hoarse voice", "Difficulty swallowing"],
+    # Mumps must have parotid swelling signs
+    "Mumps": ["Jaw stiffness", "Swollen lymph nodes"],
+
+    # ── STIs ───────────────────────────────────────────────────────────────
+    # Without genital discharge, gonorrhea should not appear in results
+    "Gonorrhea": ["Genital discharge"],
+    # Painless genital sore (chancre) is the primary-stage cardinal sign
+    "Syphilis": ["Genital sores"],
+    # Chlamydia: at least one genital/urinary symptom required
+    "Chlamydia": ["Genital discharge", "Vaginal discharge", "Painful urination", "Pelvic pain"],
+    # Painful clustered genital blisters/sores are cardinal for genital herpes
+    "Genital Herpes": ["Genital sores", "Blisters"],
+    # Frothy vaginal discharge or intense vaginal itching required
+    "Trichomoniasis": ["Vaginal itching", "Genital discharge"],
+}
+
 CATEGORIES = {
     "Malaria": "Parasitic",
     "Scabies": "Parasitic",

@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block private/authenticated pages
+Disallow: /profile
+Disallow: /history
+Disallow: /reset-password
+Disallow: /forgot-password
+
+# Sitemap location — update to match your actual domain
+Sitemap: https://mediguard.app/sitemap.xml

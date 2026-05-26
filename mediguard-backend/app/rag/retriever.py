@@ -1507,22 +1507,117 @@ def _is_new_general_question(query: str) -> bool:
 
 
 def _symptom_follow_up_questions(symptoms: list[str], is_pregnant: bool = False) -> list[str]:
+    """
+    Generate context-aware follow-up questions that:
+    1. Never ask about symptoms the user already reported.
+    2. Adapt conditional questions (fever/respiratory/GI) so they only mention
+       symptoms that are still unknown, avoiding redundant phrasing like
+       "does your fever come with sweating?" when the user already said they have sweating.
+    """
     questions = [
         "How long have you had these symptoms?",
         "Are they mild, moderate, or severe?",
-        "Do you have any other symptoms, such as fever, vomiting, diarrhea, chest pain, rash, dizziness, or trouble breathing?",
     ]
-    symptom_set = {symptom.lower() for symptom in symptoms}
-    if any(term in symptom_set for term in ["fever", "high fever", "prolonged fever", "sudden high fever"]):
-        questions.append("What is your temperature, and does the fever come with chills or sweating?")
-    if any(term in symptom_set for term in ["cough", "chronic cough", "shortness of breath", "chest pain"]):
-        questions.append("Is there chest pain, wheezing, fast breathing, or coughing up blood?")
-    if any(term in symptom_set for term in ["diarrhea", "vomiting", "abdominal pain", "nausea"]):
-        questions.append("Are you able to drink fluids, and is there blood in stool or signs of dehydration?")
-    if any(term in symptom_set for term in ["fatigue", "weakness", "body weakness", "dizziness", "headache"]):
-        questions.append("Have you recently had poor sleep, heavy work, stress, missed meals, dehydration, or unusual exertion?")
+
+    symptom_set = {s.lower() for s in symptoms}
+
+    # ── "Any other symptoms?" — exclude already-reported ones ────────────────
+    # Ordered list of common symptoms to probe; only include ones NOT yet reported.
+    _OTHER_POOL: list[tuple[str, str]] = [
+        # (lookup key,            display label)
+        ("fever",               "fever"),
+        ("vomiting",            "vomiting"),
+        ("diarrhea",            "diarrhoea"),
+        ("chest pain",          "chest pain"),
+        ("rash",                "rash"),
+        ("dizziness",           "dizziness"),
+        ("shortness of breath", "trouble breathing"),
+        ("headache",            "headache"),
+        ("nausea",              "nausea"),
+        ("chills",              "chills"),
+        ("sweating",            "sweating"),
+        ("fatigue",             "fatigue"),
+        ("weakness",            "weakness"),
+        ("muscle aches",        "muscle aches"),
+        ("joint pain",          "joint pain"),
+        ("stiff neck",          "stiff neck"),
+    ]
+    available_others = [
+        label for key, label in _OTHER_POOL
+        if key not in symptom_set
+    ]
+    if available_others:
+        sample = available_others[:6]
+        questions.append(
+            f"Do you have any other symptoms, such as {', '.join(sample)}?"
+        )
+    else:
+        questions.append("Have you noticed any additional changes in how you feel?")
+
+    # ── Fever follow-up — only ask about missing fever companions ────────────
+    _FEVER_KEYS = {"fever", "high fever", "prolonged fever", "sudden high fever", "mild fever"}
+    if symptom_set & _FEVER_KEYS:
+        has_chills   = "chills" in symptom_set
+        has_sweating = "sweating" in symptom_set or "night sweats" in symptom_set
+        if not has_chills and not has_sweating:
+            questions.append(
+                "What is your temperature, and does the fever come with chills or sweating?"
+            )
+        elif not has_chills:
+            questions.append(
+                "What is your temperature, and does the fever come with chills?"
+            )
+        elif not has_sweating:
+            questions.append(
+                "What is your temperature, and does the fever come with sweating?"
+            )
+        else:
+            # Both chills and sweating already known — just ask the temperature
+            questions.append(
+                "What is your temperature reading, and how long has the fever lasted?"
+            )
+
+    # ── Respiratory follow-up — only mention symptoms not yet known ──────────
+    _RESP_KEYS = {"cough", "chronic cough", "shortness of breath", "chest pain", "wheezing",
+                  "chest tightness", "coughing up blood"}
+    if symptom_set & _RESP_KEYS:
+        missing_resp = []
+        if "chest pain" not in symptom_set:
+            missing_resp.append("chest pain")
+        if "wheezing" not in symptom_set:
+            missing_resp.append("wheezing")
+        if "coughing up blood" not in symptom_set:
+            missing_resp.append("coughing up blood")
+        if missing_resp:
+            questions.append(
+                f"Is there {', '.join(missing_resp)}, or unusually fast breathing?"
+            )
+
+    # ── GI follow-up ─────────────────────────────────────────────────────────
+    _GI_KEYS = {"diarrhea", "profuse watery diarrhea", "bloody or mucus-filled diarrhea",
+                "vomiting", "abdominal pain", "nausea"}
+    if symptom_set & _GI_KEYS:
+        questions.append(
+            "Are you able to keep fluids down, and is there blood in your stool or "
+            "signs of dehydration (dry mouth, no urine, sunken eyes)?"
+        )
+
+    # ── Fatigue / general weakness follow-up ─────────────────────────────────
+    _FATIGUE_KEYS = {"fatigue", "weakness", "body weakness", "dizziness", "headache",
+                     "muscle aches"}
+    if symptom_set & _FATIGUE_KEYS:
+        questions.append(
+            "Have you recently had poor sleep, heavy physical work, stress, "
+            "missed meals, or unusual exertion?"
+        )
+
+    # ── Pregnancy follow-up ───────────────────────────────────────────────────
     if is_pregnant:
-        questions.append("How many weeks pregnant are you, and is there bleeding, severe pain, vision change, swelling, or reduced fetal movement?")
+        questions.append(
+            "How many weeks pregnant are you, and is there bleeding, severe pain, "
+            "vision change, swelling, or reduced fetal movement?"
+        )
+
     return questions[:5]
 
 
@@ -1566,15 +1661,32 @@ def _history_requested_followup(chat_history: list[dict] | None) -> bool:
 
 
 # Master list of every possible follow-up question the assistant may ask.
-# Any question asked will appear as a substring in an assistant message.
+# Used to detect which questions have already been asked in prior assistant turns.
+# Includes both the original templates and updated variants so history detection
+# works across versions.
 _ALL_FOLLOWUP_QUESTIONS = [
     "How long have you had these symptoms?",
     "Are they mild, moderate, or severe?",
+    # Original "other symptoms" question (kept for history detection)
     "Do you have any other symptoms, such as fever, vomiting, diarrhea, chest pain, rash, dizziness, or trouble breathing?",
+    # Fallback when all common symptoms are already reported
+    "Have you noticed any additional changes in how you feel?",
+    # Fever follow-up variants
     "What is your temperature, and does the fever come with chills or sweating?",
+    "What is your temperature, and does the fever come with chills?",
+    "What is your temperature, and does the fever come with sweating?",
+    "What is your temperature reading, and how long has the fever lasted?",
+    # Respiratory follow-up variants
     "Is there chest pain, wheezing, fast breathing, or coughing up blood?",
+    "Is there wheezing, fast breathing, or coughing up blood?",
+    "Is there chest pain, fast breathing, or coughing up blood?",
+    "Is there fast breathing or coughing up blood?",
+    # GI follow-up variants
     "Are you able to drink fluids, and is there blood in stool or signs of dehydration?",
+    "Are you able to keep fluids down, and is there blood in your stool or signs of dehydration?",
+    # Fatigue follow-up
     "Have you recently had poor sleep, heavy work, stress, missed meals, dehydration, or unusual exertion?",
+    # Pregnancy follow-up
     "How many weeks pregnant are you, and is there bleeding, severe pain, vision change, swelling, or reduced fetal movement?",
 ]
 

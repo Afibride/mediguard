@@ -113,8 +113,18 @@ const About = () => {
       <Helmet>
         <title>About Us — MediGuard Bamenda | AI-Powered Community Health</title>
         <meta name="description" content="Learn about MediGuard Bamenda's mission to provide accessible AI-driven health screening for the Bamenda community. Discover our values, team, and commitment to privacy-first healthcare." />
-        <meta property="og:title" content="About MediGuard Bamenda - Community Health Screening" />
+        <meta name="keywords" content="about MediGuard, MediGuard Bamenda, community health mission, AI health screening Cameroon, health technology Bamenda" />
+        <link rel="canonical" href="https://mediguard.app/about" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mediguard.app/about" />
+        <meta property="og:title" content="About MediGuard Bamenda — AI-Powered Community Health" />
         <meta property="og:description" content="AI-first health screening tool built for Bamenda. Free, private, and always available." />
+        <meta property="og:image" content="https://mediguard.app/mediguard.png" />
+        <meta property="og:site_name" content="MediGuard" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="About MediGuard Bamenda" />
+        <meta name="twitter:description" content="AI-first health screening tool built for Bamenda. Free, private, and always available." />
+        <meta name="twitter:image" content="https://mediguard.app/mediguard.png" />
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
