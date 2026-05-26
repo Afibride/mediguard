@@ -106,6 +106,8 @@ export const submitChatFeedback = (data) =>
 export const getChatInsights = () => request('/analytics/chat-insights');
 
 export const sendContact = (data) => request('/contact', { method: 'POST', body: JSON.stringify(data) });
+export const subscribeNewsletter = (data) =>
+  request('/newsletter/subscribe', { method: 'POST', body: JSON.stringify(data) });
 
 // File upload — does NOT set Content-Type so browser sets multipart boundary automatically
 async function uploadFile(path, formData) {

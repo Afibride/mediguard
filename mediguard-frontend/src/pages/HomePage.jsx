@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database, TrendingUp, Megaphone, Droplets, HandHeart, ChevronLeft, ChevronRight, Play, Pause, X, Heart } from 'lucide-react';
 import NearbyFacilities from '@/components/NearbyFacilities';
+import NewsletterSignup from '@/components/NewsletterSignup';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -948,6 +949,8 @@ const HomePage = () => {
             </motion.div>
           </div>
         </section>
+
+        <NewsletterSignup />
 
         {/* Nearby Health Facilities */}
         <section className="py-12 sm:py-20 bg-muted/30 border-t">

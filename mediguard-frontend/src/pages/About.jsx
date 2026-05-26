@@ -357,7 +357,7 @@ const About = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link to="/contact" className="w-full sm:w-auto">
+                <a href="mailto:support@mediguard.info" className="w-full sm:w-auto">
                   <Button 
                     size="lg" 
                     variant="secondary" 
@@ -367,7 +367,7 @@ const About = () => {
                     Support Us
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
-                </Link>
+                </a>
                 
                 <Link to="/symptom-checker" className="w-full sm:w-auto">
                   <Button 

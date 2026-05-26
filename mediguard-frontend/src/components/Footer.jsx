@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
   const quickLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Support', path: '/contact' },
+    { name: 'Support', path: '/support' },
     { name: 'Symptom Checker', path: '/symptom-checker' },
     { name: 'Disease Library', path: '/disease-library' },
     { name: 'Nearby Facilities', path: '/nearby-facilities' },
@@ -75,9 +75,6 @@ const Footer = () => {
               <li className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
                 <span>Bamenda, Cameroon</span>
-              </li>
-              <li className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <Phone className="h-4 w-4 text-primary flex-shrink-0" />
               </li>
               <li className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 text-primary flex-shrink-0" />

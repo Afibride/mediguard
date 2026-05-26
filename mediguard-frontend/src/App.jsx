@@ -49,6 +49,8 @@ function AppLayout() {
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/about" element={<About />} />
+            <Route path="/support" element={<Contact />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/nearby-facilities" element={<NearbyFacilitiesPage />} />
             
             <Route path="/symptom-checker" element={<SymptomChecker />} />
