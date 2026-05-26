@@ -51,32 +51,49 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Dark Overlay Background - lower z-index than menu */}
+          {/* Dark Overlay — covers full viewport, click anywhere outside menu to close */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-100"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[55]"
             onClick={onClose}
+            aria-hidden="true"
           />
-          
-          {/* Slide-in Menu Panel - positioned on top of header with higher z-index */}
+
+          {/* Slide-in Menu Panel */}
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 250 }}
             className="fixed top-0 right-0 bottom-0 w-[280px] bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-800 shadow-2xl z-[60] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Header / Close Button */}
+            {/* Header: Logo + Theme toggle + Close button */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-              <img 
-                src="/mediguard.png" 
-                alt="MediGuard Logo" 
-                className="logo-sm"
-              />
-              <button 
+              {/* Logo + theme icon side-by-side */}
+              <div className="flex items-center gap-2">
+                <img
+                  src="/mediguard.png"
+                  alt="MediGuard Logo"
+                  className="logo-sm"
+                />
+                <button
+                  onClick={toggleTheme}
+                  className="min-h-[36px] min-w-[36px] flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
+                  aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                >
+                  {isDark
+                    ? <Sun  className="w-5 h-5 text-amber-400" />
+                    : <Moon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                  }
+                </button>
+              </div>
+
+              {/* Close button */}
+              <button
                 onClick={onClose}
                 className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
                 aria-label="Close Menu"
@@ -161,14 +178,6 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                       </button>
 
                       <button
-                        onClick={toggleTheme}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left last:mb-4"
-                      >
-                        {isDark ? <Sun className="w-5 h-5 text-gray-500 dark:text-gray-400" /> : <Moon className="w-5 h-5 text-gray-500 dark:text-gray-400" />}
-                        {isDark ? t('nav_light_mode') : t('nav_dark_mode')}
-                      </button>
-
-                      <button
                         onClick={handleLogout}
                         className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors text-left last:mb-4"
                       >
@@ -204,14 +213,6 @@ const MobileMenu = ({ isOpen, onClose, isLoggedIn }) => {
                       >
                         <span className="text-lg w-5 text-center">{lang === 'en' ? '🇫🇷' : '🇬🇧'}</span>
                         {lang === 'en' ? 'Français' : 'English'}
-                      </button>
-
-                      <button
-                        onClick={toggleTheme}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-left last:mb-4"
-                      >
-                        {isDark ? <Sun className="w-5 h-5 text-gray-500 dark:text-gray-400" /> : <Moon className="w-5 h-5 text-gray-500 dark:text-gray-400" />}
-                        {isDark ? t('nav_light_mode') : t('nav_dark_mode')}
                       </button>
                     </>
                   )}
