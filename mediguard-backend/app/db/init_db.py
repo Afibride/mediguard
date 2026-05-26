@@ -1,5 +1,5 @@
 from app.data import DISEASES
-from app.db.models import ChatFeedback, ChatLog, ContactMessage, Disease, PasswordResetToken, PredictionFeedback, PredictionLog, User
+from app.db.models import ChatFeedback, ChatLog, ContactMessage, Disease, NewsletterSubscriber, PasswordResetToken, PredictionFeedback, PredictionLog, User
 from app.db.session import Base, engine
 from app.db.session import SessionLocal
 from sqlalchemy import inspect, text
@@ -10,6 +10,8 @@ def init_db() -> None:
     ensure_chat_log_columns()
     ensure_user_columns()
     ensure_disease_columns()
+    ensure_password_reset_token_columns()
+    ensure_prediction_log_columns()
     seed_diseases()
 
 
@@ -47,6 +49,30 @@ def ensure_user_columns() -> None:
         for column, definition in additions.items():
             if column not in existing:
                 connection.execute(text(f"ALTER TABLE users ADD COLUMN {column} {definition}"))
+
+
+def ensure_password_reset_token_columns() -> None:
+    inspector = inspect(engine)
+    if "password_reset_tokens" not in inspector.get_table_names():
+        return
+    existing = {col["name"] for col in inspector.get_columns("password_reset_tokens")}
+    additions = {"otp_code": "VARCHAR(6)"}
+    with engine.begin() as connection:
+        for column, definition in additions.items():
+            if column not in existing:
+                connection.execute(text(f"ALTER TABLE password_reset_tokens ADD COLUMN {column} {definition}"))
+
+
+def ensure_prediction_log_columns() -> None:
+    inspector = inspect(engine)
+    if "prediction_logs" not in inspector.get_table_names():
+        return
+    existing = {col["name"] for col in inspector.get_columns("prediction_logs")}
+    additions = {"age_group": "VARCHAR(10)"}
+    with engine.begin() as connection:
+        for column, definition in additions.items():
+            if column not in existing:
+                connection.execute(text(f"ALTER TABLE prediction_logs ADD COLUMN {column} {definition}"))
 
 
 def ensure_disease_columns() -> None:

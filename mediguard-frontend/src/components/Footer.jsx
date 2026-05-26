@@ -81,7 +81,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 text-primary flex-shrink-0" />
-                <span>info@mediguard.cm</span>
+                <span>support@mediguard.info</span>
               </li>
             </ul>
           </div>

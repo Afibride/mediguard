@@ -26,6 +26,8 @@ class PasswordResetToken(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     token = Column(String, unique=True, index=True, nullable=False)
+    # 6-digit OTP code — alternative to clicking the reset link
+    otp_code = Column(String(6), nullable=True, index=True)
     expires_at = Column(DateTime, nullable=False)
     used_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -60,6 +62,7 @@ class PredictionLog(Base):
     top_disease = Column(String, index=True)
     timestamp = Column(DateTime, default=datetime.utcnow, index=True)
     region = Column(String, default="Bamenda")
+    age_group = Column(String, nullable=True, index=True)  # e.g. "0-10", "11-20", …, "60+"
 
     user = relationship("User", back_populates="predictions")
 
@@ -126,3 +129,18 @@ class PredictionFeedback(Base):
     confirmed_disease = Column(String, nullable=True)   # what the doctor actually said
     comment = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow, index=True)
+
+
+class NewsletterSubscriber(Base):
+    """Guest (non-registered) user who opted-in to monthly health digests and
+    outbreak alerts. Registered users use the ``User.notify_emails`` flag instead.
+    """
+    __tablename__ = "newsletter_subscribers"
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True, nullable=False)
+    name = Column(String, default="Friend", nullable=False)
+    # Random token used in the one-click unsubscribe link
+    unsubscribe_token = Column(String, unique=True, index=True, nullable=False)
+    is_active = Column(Boolean, default=True, nullable=False)
+    subscribed_at = Column(DateTime, default=datetime.utcnow)

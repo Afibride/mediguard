@@ -152,6 +152,19 @@ const SymptomChecker = () => {
     isPregnant: false, pregnancyWeeks: '', fatigueContext: false,
   });
   const [showPregnancyOption, setShowPregnancyOption] = useState(false);
+
+  /** Convert a numeric age string to a backend age_group bucket. */
+  const getAgeGroup = (ageStr) => {
+    const n = parseInt(ageStr, 10);
+    if (isNaN(n) || n < 0) return null;
+    if (n <= 10) return '0-10';
+    if (n <= 20) return '11-20';
+    if (n <= 30) return '21-30';
+    if (n <= 40) return '31-40';
+    if (n <= 50) return '41-50';
+    if (n <= 60) return '51-60';
+    return '60+';
+  };
   const [showPersonalInfo, setShowPersonalInfo] = useState(true);
 
   // Clarify state
@@ -321,6 +334,7 @@ const SymptomChecker = () => {
     try {
       const res = await predictDisease(selectedSymptoms, {
         gender: formData.gender || null,
+        age_group: getAgeGroup(formData.age),
         is_pregnant: formData.isPregnant,
         pregnancy_weeks: formData.pregnancyWeeks ? Number(formData.pregnancyWeeks) : null,
         fatigue_context: formData.fatigueContext,
@@ -355,6 +369,7 @@ const SymptomChecker = () => {
     try {
       const res = await predictDisease(finalSymptoms, {
         gender: formData.gender || null,
+        age_group: getAgeGroup(formData.age),
         is_pregnant: formData.isPregnant,
         pregnancy_weeks: formData.pregnancyWeeks ? Number(formData.pregnancyWeeks) : null,
         fatigue_context: formData.fatigueContext,

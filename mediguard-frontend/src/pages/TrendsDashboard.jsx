@@ -14,7 +14,7 @@ import {
   Info, Loader2, Send,
 } from 'lucide-react';
 import { diseases } from '@/data/diseases';
-import { getAnalyticsSummary, getDiseases, getHeatmap, getTopDiseases, getTrends, sendOutbreakAlerts } from '@/services/api';
+import { getAgeDistribution, getAnalyticsSummary, getDiseases, getHeatmap, getTopDiseases, getTrends, sendOutbreakAlerts } from '@/services/api';
 import { useAuth } from '@/components/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 
@@ -34,7 +34,7 @@ const SEASONAL_FALLBACK = [
   { month: 'Dec', Malaria: 45, Typhoid: 25, Respiratory: 65, Cholera: 5 },
 ];
 
-const AGE_GROUP_DATA = [
+const AGE_GROUP_FALLBACK = [
   { age: '0–10', cases: 380 },
   { age: '11–20', cases: 420 },
   { age: '21–30', cases: 580 },
@@ -202,11 +202,12 @@ const TrendsDashboard = () => {
   const [apiDiseaseData, setApiDiseaseData] = useState([]);
   const [apiTrendRows, setApiTrendRows] = useState([]);
   const [heatmapRows, setHeatmapRows] = useState([]);
+  const [ageGroupData, setAgeGroupData] = useState(AGE_GROUP_FALLBACK);
   const [usingFallback, setUsingFallback] = useState({
-    topDiseases: false, trends: false, heatmap: false,
+    topDiseases: false, trends: false, heatmap: false, ageGroup: true,
   });
   const [loading, setLoading] = useState({
-    summary: true, topDiseases: true, trends: true, heatmap: true,
+    summary: true, topDiseases: true, trends: true, heatmap: true, ageGroup: true,
   });
   const [showAllTips, setShowAllTips] = useState(false);
 
@@ -264,6 +265,23 @@ const TrendsDashboard = () => {
       })
       .catch(() => setUsingFallback(p => ({ ...p, heatmap: true })))
       .finally(() => setLoading(p => ({ ...p, heatmap: false })));
+
+    getAgeDistribution()
+      .then((res) => {
+        const payload = res.data || {};
+        const rows = Array.isArray(payload.data) ? payload.data : [];
+        const isReal = Boolean(payload.is_real_data);
+        if (rows.length) {
+          // Normalise hyphen variants so labels display consistently (0–10 style)
+          setAgeGroupData(rows.map(r => ({
+            age: (r.age || '').replace('-', '–'),
+            cases: r.cases || 0,
+          })));
+        }
+        setUsingFallback(p => ({ ...p, ageGroup: !isReal }));
+      })
+      .catch(() => setUsingFallback(p => ({ ...p, ageGroup: true })))
+      .finally(() => setLoading(p => ({ ...p, ageGroup: false })));
   }, []);
 
   // ── Derived: disease category breakdown from real prediction counts ─────
@@ -743,23 +761,30 @@ const TrendsDashboard = () => {
               <CardHeader>
                 <CardTitle>Age Group Distribution</CardTitle>
                 <CardDescription>
-                  Illustrative distribution across age groups (representative data — full breakdown available when age is collected during screening)
+                  {usingFallback.ageGroup
+                    ? 'Illustrative distribution across age groups — real data will appear once age is collected during screening'
+                    : 'Live data — screening counts by age group from the database'}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={280}>
-                  <BarChart data={AGE_GROUP_DATA}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="age" tick={{ fontSize: 12 }} />
-                    <YAxis tick={{ fontSize: 12 }} />
-                    <Tooltip formatter={(v) => [v.toLocaleString(), 'Cases']} />
-                    <Bar dataKey="cases" fill="hsl(38 92% 50%)" radius={[4, 4, 0, 0]}>
-                      {AGE_GROUP_DATA.map((_, i) => (
-                        <Cell key={i} fill={COLORS[i % COLORS.length]} opacity={0.85} />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+                {loading.ageGroup ? <LoadingChart height={280} /> : (
+                  <>
+                    <ResponsiveContainer width="100%" height={280}>
+                      <BarChart data={ageGroupData}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="age" tick={{ fontSize: 12 }} />
+                        <YAxis tick={{ fontSize: 12 }} />
+                        <Tooltip formatter={(v) => [v.toLocaleString(), 'Screenings']} />
+                        <Bar dataKey="cases" radius={[4, 4, 0, 0]}>
+                          {ageGroupData.map((_, i) => (
+                            <Cell key={i} fill={COLORS[i % COLORS.length]} opacity={0.85} />
+                          ))}
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                    {usingFallback.ageGroup && <SampleDataNotice />}
+                  </>
+                )}
               </CardContent>
             </Card>
 
