@@ -22,6 +22,53 @@ import { SYMPTOM_PLAIN_NAMES } from '@/data/layman';
 import DisclaimerBanner from '@/components/DisclaimerBanner';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+// ─── Cardinal Symptoms (mirrors backend app/data.py CARDINAL_SYMPTOMS) ───────
+// At least ONE cardinal symptom must be present for the disease to appear.
+// This prevents false positives like Tetanus appearing when user only has fever.
+const CARDINAL_SYMPTOMS_MAP = {
+  Tetanus:                  ['Jaw stiffness'],
+  Meningitis:               ['Stiff neck'],
+  Epilepsy:                 ['Seizures'],
+  Migraine:                 ['Severe headache'],
+  Tuberculosis:             ['Chronic cough'],
+  Asthma:                   ['Wheezing', 'Chest tightness'],
+  Cholera:                  ['Profuse watery diarrhea'],
+  Dysentery:                ['Bloody or mucus-filled diarrhea'],
+  Appendicitis:             ['Abdominal pain'],
+  Chickenpox:               ['Itchy rash', 'Blisters'],
+  Measles:                  ['Rash'],
+  Scabies:                  ['Severe itching'],
+  Ringworm:                 ['Ring-shaped rash'],
+  'Herpes Zoster':          ['Blisters', 'Rash'],
+  'Skin Fungal Infection':  ['Itchy skin', 'Ring-shaped rash', 'Red scaly skin'],
+  Conjunctivitis:           ['Red eyes', 'Eye discharge'],
+  'Diabetes Mellitus':      ['Increased thirst', 'Frequent urination'],
+  'Hepatitis A':            ['Jaundice', 'Dark urine'],
+  'Hepatitis B':            ['Jaundice', 'Yellow eyes', 'Dark urine'],
+  'Yellow Fever':           ['Jaundice', 'Yellow eyes'],
+  Onchocerciasis:           ['Severe itching'],
+  Filariasis:               ['Swollen feet'],
+  'Cystitis UTI':           ['Painful urination', 'Frequent urination'],
+  'Kidney Stones':          ['Back pain'],
+  'Pelvic Inflammatory Disease': ['Pelvic pain'],
+  Tonsillitis:              ['Sore throat'],
+  Diphtheria:               ['Sore throat', 'Hoarse voice', 'Difficulty swallowing'],
+  Mumps:                    ['Jaw stiffness', 'Swollen lymph nodes'],
+  Gonorrhea:                ['Genital discharge'],
+  Syphilis:                 ['Genital sores'],
+  Chlamydia:                ['Genital discharge', 'Vaginal discharge', 'Painful urination', 'Pelvic pain'],
+  'Genital Herpes':         ['Genital sores', 'Blisters'],
+  Trichomoniasis:           ['Vaginal itching', 'Genital discharge'],
+};
+
+/** Returns true if the symptom list satisfies the disease's cardinal requirement. */
+const meetsCardinalRequirement = (diseaseName, selectedSymptoms) => {
+  const cardinals = CARDINAL_SYMPTOMS_MAP[diseaseName];
+  if (!cardinals) return true; // No cardinal requirement — always allowed
+  const selectedLower = new Set(selectedSymptoms.map(s => s.toLowerCase()));
+  return cardinals.some(c => selectedLower.has(c.toLowerCase()));
+};
+
 // ─── Static Data ─────────────────────────────────────────────────────────────
 
 const CATEGORIES_MAP = {
@@ -258,6 +305,8 @@ const SymptomChecker = () => {
         confidence = Math.min(Math.max(Math.round(confidence), 0), 98);
         return { ...disease, confidence, matchCount };
       })
+      // Cardinal symptom gate: disease must have at least one cardinal symptom present
+      .filter(d => meetsCardinalRequirement(d.name, symptomsToAnalyze))
       .filter(d => d.matchCount > 0 || d.confidence > 20)
       .sort((a, b) => b.confidence - a.confidence)
       .slice(0, 7);

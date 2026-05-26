@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from app.data import DISEASES, SYMPTOMS as ALL_SYMPTOMS
+from app.data import CARDINAL_SYMPTOMS, DISEASES, SYMPTOMS as ALL_SYMPTOMS
 from app.db.models import Disease, PredictionLog
 from app.db.session import get_db
 from app.ml.fuzzy_match import normalize_symptom_list, normalize_symptom_text
@@ -176,16 +176,35 @@ def clarify(body: ClarifyInput):
 
     A discriminating symptom is one that is present in some candidate diseases
     but absent in others — answering it helps the model narrow the prediction.
+
+    Rules:
+    - Never ask about symptoms the user already reported (current_symptoms).
+    - Never ask about symptoms already asked in a prior round (already_asked).
+    - Only include candidate diseases that satisfy their cardinal symptom
+      requirement (at least one cardinal symptom must be in current_symptoms).
     """
     current_lower = {s.lower() for s in body.current_symptoms}
     already_asked_lower = {s.lower() for s in body.already_asked}
 
     # Use provided top diseases or run a quick prediction to get them
     if body.top_diseases:
-        candidates = body.top_diseases[:5]
+        raw_candidates = body.top_diseases[:5]
     else:
         preds = predictor.predict(body.current_symptoms)
-        candidates = [p["disease"] for p in preds[:5]]
+        raw_candidates = [p["disease"] for p in preds[:5]]
+
+    # Filter candidates through the cardinal symptom gate so we never generate
+    # questions for diseases the user couldn't possibly have based on their
+    # reported symptoms (e.g. don't ask "do you have jaw stiffness?" to help
+    # distinguish Tetanus when the user has no jaw stiffness at all).
+    candidates: list[str] = []
+    for name in raw_candidates:
+        cardinals = CARDINAL_SYMPTOMS.get(name)
+        if cardinals:
+            cardinals_lower = {c.lower() for c in cardinals}
+            if not (current_lower & cardinals_lower):
+                continue  # Cardinal symptom missing — exclude from clarification too
+        candidates.append(name)
 
     if not candidates:
         return ClarifyResponse(questions=[], should_ask=False)

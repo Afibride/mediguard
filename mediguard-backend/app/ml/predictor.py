@@ -8,7 +8,7 @@ except ImportError:
     joblib = None
 
 from app.config import get_settings
-from app.data import DISEASES, SYMPTOMS
+from app.data import CARDINAL_SYMPTOMS, DISEASES, SYMPTOMS
 from app.ml.simple_model import SimpleLabelEncoder, SimpleSymptomModel  # noqa: F401 — needed for pickle resolution
 
 
@@ -250,6 +250,46 @@ class DiseasePredictor:
         return sorted(ranked, key=lambda x: x["probability"], reverse=True)[:5]
 
     # -------------------------------------------------------------------------
+    # Cardinal symptom filter
+    # -------------------------------------------------------------------------
+
+    @staticmethod
+    def _apply_cardinal_filter(predictions: list[dict], symptoms: list[str]) -> list[dict]:
+        """
+        Remove predictions for diseases whose cardinal (key) symptoms are absent
+        from the user's reported symptom list.
+
+        Logic: if CARDINAL_SYMPTOMS defines a list for a disease, at least ONE of
+        those cardinal symptoms must appear in `symptoms`.  Diseases with no entry
+        in CARDINAL_SYMPTOMS are unaffected (they can appear on symptom overlap
+        alone).
+
+        Example — Tetanus has cardinal symptom "Jaw stiffness".  A patient who
+        reports only fever, headache, and sweating will never see Tetanus in their
+        results even though those symptoms appear in Tetanus's full symptom list.
+        """
+        if not predictions:
+            return predictions
+
+        reported_lower = {s.strip().lower() for s in symptoms}
+        filtered: list[dict] = []
+
+        for pred in predictions:
+            disease_name: str = pred.get("disease") or pred.get("name") or ""
+            cardinals = CARDINAL_SYMPTOMS.get(disease_name)
+
+            if cardinals:
+                # Require at least one cardinal symptom to be present (OR logic)
+                cardinals_lower = {c.lower() for c in cardinals}
+                if not (reported_lower & cardinals_lower):
+                    # Cardinal symptom missing — skip this disease entirely
+                    continue
+
+            filtered.append(pred)
+
+        return filtered
+
+    # -------------------------------------------------------------------------
     # Public predict — chooses the most accurate available engine
     # -------------------------------------------------------------------------
 
@@ -259,21 +299,22 @@ class DiseasePredictor:
         # is available the local trained model is more reliable (93 % accuracy).
         use_pinecone_first = self._try_init_pinecone() and getattr(self, "_use_st", False)
 
+        predictions: list[dict] | None = None
+
         if use_pinecone_first:
-            result = self._predict_pinecone(symptoms)
-            if result:
-                return result
+            predictions = self._predict_pinecone(symptoms)
 
         # Trained Naive-Bayes model (consistent 93 % accuracy)
-        model_result = self._predict_local_model(symptoms)
-        if model_result is not None:
-            return model_result
+        if predictions is None:
+            predictions = self._predict_local_model(symptoms)
 
         # Pinecone as secondary fallback (hash-based) when sentence-transformers absent
-        if not use_pinecone_first:
-            pinecone_result = self._predict_pinecone(symptoms)
-            if pinecone_result:
-                return pinecone_result
+        if predictions is None and not use_pinecone_first:
+            predictions = self._predict_pinecone(symptoms)
 
         # Deterministic rule-based overlap scoring (always available)
-        return self._predict_rule_based(symptoms)
+        if predictions is None:
+            predictions = self._predict_rule_based(symptoms)
+
+        # Always apply cardinal symptom gate before returning results
+        return self._apply_cardinal_filter(predictions, symptoms)

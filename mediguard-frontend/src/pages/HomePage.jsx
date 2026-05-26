@@ -361,8 +361,23 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>MediGuard Bamenda - Community Health Screening</title>
-        <meta name="description" content="AI-powered early disease detection system for the Bamenda community. Check symptoms, explore diseases, and get personalized health guidance." />
+        <title>MediGuard Bamenda — AI Health Screening & Disease Detection</title>
+        <meta name="description" content="AI-powered early disease detection for the Bamenda community. Check symptoms, explore diseases, get personalized guidance, and find nearby health facilities — free, 24/7." />
+        <meta name="keywords" content="MediGuard, symptom checker, Bamenda health, disease detection, malaria, typhoid, AI health assistant, Cameroon community health" />
+        <link rel="canonical" href="https://mediguard.app/" />
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mediguard.app/" />
+        <meta property="og:title" content="MediGuard Bamenda — AI Health Screening & Disease Detection" />
+        <meta property="og:description" content="AI-powered early disease detection for the Bamenda community. Check symptoms, explore diseases, and get personalized health guidance." />
+        <meta property="og:image" content="https://mediguard.app/mediguard.png" />
+        <meta property="og:image:alt" content="MediGuard Logo" />
+        <meta property="og:site_name" content="MediGuard" />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="MediGuard Bamenda — AI Health Screening" />
+        <meta name="twitter:description" content="Free AI-powered symptom checker and disease detection for Bamenda. Available 24/7." />
+        <meta name="twitter:image" content="https://mediguard.app/mediguard.png" />
       </Helmet>
 
       <div className="min-h-screen flex flex-col overflow-x-hidden">

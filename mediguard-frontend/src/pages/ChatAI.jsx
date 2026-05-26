@@ -586,8 +586,20 @@ const ChatAI = () => {
   return (
     <>
       <Helmet>
-        <title>Chat AI Assistant - MediGuard Bamenda</title>
-        <meta name="description" content="Conversational symptom checker and AI health assistant for personalized guidance." />
+        <title>Chat AI Assistant — MediGuard Bamenda | Health Guidance</title>
+        <meta name="description" content="Talk to MediGuard's AI health assistant. Describe your symptoms in plain language and receive personalized health guidance, disease information, and next-step advice for the Bamenda community." />
+        <meta name="keywords" content="AI health chat, symptom assistant, MediGuard chat, Bamenda health AI, disease guidance, medical chatbot, Cameroon" />
+        <link rel="canonical" href="https://mediguard.app/chat-ai" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mediguard.app/chat-ai" />
+        <meta property="og:title" content="Chat AI Assistant — MediGuard Bamenda" />
+        <meta property="og:description" content="Describe your symptoms and get personalized AI health guidance. Available 24/7 for the Bamenda community." />
+        <meta property="og:image" content="https://mediguard.app/mediguard.png" />
+        <meta property="og:site_name" content="MediGuard" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Chat AI Assistant — MediGuard Bamenda" />
+        <meta name="twitter:description" content="AI health assistant for the Bamenda community. Available 24/7." />
+        <meta name="twitter:image" content="https://mediguard.app/mediguard.png" />
       </Helmet>
 
       <div className="fixed inset-x-0 bottom-0 top-16 w-full max-w-[100vw] bg-[radial-gradient(circle_at_top_left,hsl(var(--primary)/0.12),transparent_22rem),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.62))] flex overflow-hidden overscroll-none">
