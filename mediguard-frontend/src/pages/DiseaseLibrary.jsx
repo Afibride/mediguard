@@ -12,6 +12,7 @@ import { Search, TrendingUp, AlertTriangle, BookOpen, Database, ShieldCheck } fr
 import { diseases } from '@/data/diseases';
 import { getDiseases } from '@/services/api';
 import { getCommonName } from '@/data/layman';
+import SeasonalBanner from '@/components/SeasonalBanner';
 
 const DiseaseLibrary = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -93,6 +94,7 @@ const DiseaseLibrary = () => {
 
       <div className="min-h-screen medical-page py-8 sm:py-12">
         <div className="container mx-auto px-4 max-w-7xl">
+          <SeasonalBanner compact className="mb-5" />
           <div className="text-center mb-8 flex flex-col items-center">
             <div className="mb-4">
               <img 

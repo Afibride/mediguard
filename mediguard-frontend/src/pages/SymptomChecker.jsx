@@ -20,6 +20,7 @@ import { getAllSymptoms, diseases as diseaseDB } from '@/data/diseases';
 import { getSymptoms, predictDisease, normalizeSymptoms, getClarifyQuestions, analyzeImage } from '@/services/api';
 import { SYMPTOM_PLAIN_NAMES } from '@/data/layman';
 import DisclaimerBanner from '@/components/DisclaimerBanner';
+import SeasonalBanner from '@/components/SeasonalBanner';
 import VoiceInput from '@/components/VoiceInput';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -690,6 +691,7 @@ const SymptomChecker = () => {
             })}
           </div>
 
+          <SeasonalBanner className="mb-4 sm:mb-5" />
           <DisclaimerBanner variant="warning" className="mb-4 sm:mb-6" />
 
           {/* ── Main Content ───────────────────────────────────────────────── */}

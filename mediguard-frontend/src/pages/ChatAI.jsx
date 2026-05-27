@@ -11,7 +11,7 @@ import {
   Plus, MessageSquare, Trash2, X,
   PanelLeftClose, PanelLeftOpen, Share2, Clock,
   ThumbsUp, ThumbsDown, ImagePlus, Loader2, MapPin,
-  HelpCircle, ChevronDown, Baby
+  HelpCircle, ChevronDown, Baby, CornerUpLeft
 } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -102,6 +102,7 @@ const ChatAI = () => {
   const [showHelp, setShowHelp] = useState(false);
   const [childMode, setChildMode] = useState(false);
   const [voiceListening, setVoiceListening] = useState(false);
+  const [replyingTo, setReplyingTo] = useState(null); // { id, role, content }
   const imageInputRef = useRef(null);
   const sessionId = useRef('sess_' + Date.now()).current;
 
@@ -341,12 +342,14 @@ const ChatAI = () => {
     const textToSend = textOverride || input;
     if (!textToSend.trim()) return;
 
-    const userMsgObj = { 
-      role: 'user', 
-      content: textToSend, 
+    const userMsgObj = {
+      role: 'user',
+      content: textToSend,
       id: 'msg_user_' + Date.now(),
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      ...(replyingTo ? { replyTo: { id: replyingTo.id, role: replyingTo.role, content: replyingTo.content } } : {}),
     };
+    setReplyingTo(null);
     
     const updatedMessages = [...messages, userMsgObj];
     shouldStickToBottomRef.current = true;
@@ -927,7 +930,7 @@ const ChatAI = () => {
                         key={message.id}
                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        className={`flex gap-2 sm:gap-3 w-full max-w-full min-w-0 overflow-hidden ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                        className={`group/msg flex gap-2 sm:gap-3 w-full max-w-full min-w-0 overflow-hidden ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
                         {message.role === 'assistant' && (
                           <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-sm mt-auto mb-1">
@@ -941,11 +944,28 @@ const ChatAI = () => {
                             className={`rounded-2xl px-3 py-2.5 sm:px-5 sm:py-3 shadow-sm text-sm sm:text-[15px] leading-relaxed relative break-words [overflow-wrap:anywhere] w-full max-w-full ${
                               message.role === 'user'
                                 ? 'bg-secondary text-secondary-foreground rounded-br-md shadow-secondary/10'
-                                : message.content.includes('🚨 EMERGENCY') 
+                                : message.content.includes('🚨 EMERGENCY')
                                   ? 'bg-red-50 text-red-900 border border-red-200 rounded-bl-md dark:bg-red-950/50 dark:text-red-200'
                                   : 'bg-card/95 text-foreground border border-primary/10 rounded-bl-md shadow-primary/5'
                             }`}
                           >
+                            {/* ── Reply quote ── */}
+                            {message.replyTo && (
+                              <div className={`mb-2 rounded-lg border-l-[3px] pl-2.5 pr-2 py-1.5 text-[11px] ${
+                                message.role === 'user'
+                                  ? 'border-white/50 bg-white/15'
+                                  : 'border-primary/40 bg-primary/5'
+                              }`}>
+                                <p className="font-semibold text-[10px] uppercase tracking-wide mb-0.5 opacity-70">
+                                  {message.replyTo.role === 'user' ? 'You said' : 'MediGuard AI said'}
+                                </p>
+                                <p className="opacity-75 leading-snug line-clamp-2">
+                                  {message.replyTo.content.length > 100
+                                    ? message.replyTo.content.slice(0, 100) + '…'
+                                    : message.replyTo.content}
+                                </p>
+                              </div>
+                            )}
                             {message.role === 'assistant'
                               ? <MarkdownMessage content={message.content} />
                               : (
@@ -959,9 +979,19 @@ const ChatAI = () => {
                               )
                             }
                           </div>
-                          <span className="text-[10px] sm:text-[11px] text-muted-foreground mt-1 px-1">
-                            {message.timestamp}
-                          </span>
+                          <div className={`flex items-center gap-1.5 mt-1 px-1 ${message.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                            <span className="text-[10px] sm:text-[11px] text-muted-foreground">
+                              {message.timestamp}
+                            </span>
+                            {/* Reply button */}
+                            <button
+                              onClick={() => setReplyingTo({ id: message.id, role: message.role, content: message.content })}
+                              className="opacity-0 group-hover/msg:opacity-100 focus:opacity-100 p-0.5 rounded text-muted-foreground/50 hover:text-primary transition-all"
+                              title="Reply to this message"
+                            >
+                              <CornerUpLeft className="h-3 w-3" />
+                            </button>
+                          </div>
                           {message.role === 'assistant' && <SourceCitation sources={message.sources} />}
                           {message.role === 'assistant' && message.id !== messages[0]?.id && (
                             <div className="flex items-center gap-1.5 mt-1.5 px-1 flex-wrap">
@@ -1069,6 +1099,33 @@ const ChatAI = () => {
                 <div className="mb-3 sm:mb-4">
                   <SuggestedQuestions onSelectQuestion={handleSelectQuestion} />
                 </div>
+              )}
+
+              {/* Reply preview strip */}
+              {replyingTo && (
+                <motion.div
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 4 }}
+                  className="mb-2 flex items-start gap-2 bg-primary/6 border border-primary/20 rounded-lg px-3 py-2"
+                >
+                  <CornerUpLeft className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] font-semibold text-primary uppercase tracking-wide">
+                      Replying to {replyingTo.role === 'user' ? 'yourself' : 'MediGuard AI'} — correct or add more info
+                    </p>
+                    <p className="text-[11px] text-muted-foreground truncate mt-0.5">
+                      {replyingTo.content.length > 110 ? replyingTo.content.slice(0, 110) + '…' : replyingTo.content}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setReplyingTo(null)}
+                    className="p-0.5 text-muted-foreground/50 hover:text-destructive transition-colors shrink-0"
+                    title="Cancel reply"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </motion.div>
               )}
 
               {/* Image preview */}
