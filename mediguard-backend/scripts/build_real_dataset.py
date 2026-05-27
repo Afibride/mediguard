@@ -79,6 +79,12 @@ ALL_SYMPTOMS = [
     "Hoarse voice", "Difficulty swallowing", "Nasal congestion", "Eye discharge",
     "Facial pain", "Hair loss",
     "Genital sores", "Genital discharge",
+    # New symptoms for additional diseases (Anal itching already in list above)
+    "Rectal bleeding", "Anal pain", "Swelling near anus",
+    "Pain during bowel movement", "Mucus discharge from anus",
+    "Tooth pain", "Jaw swelling",
+    "Joint swelling", "Stiffness", "Reduced range of motion",
+    "Dry skin", "Poor wound healing",
 ]
 SYMPTOM_SET = set(ALL_SYMPTOMS)
 
@@ -874,6 +880,114 @@ DISEASE_PROFILES: dict[str, tuple[dict[str, float], int]] = {
         "Confusion":          0.45,
         "Vomiting":           0.40,
     }, 80),
+
+    # ------------------------------------------------------------------
+    # ANORECTAL / COLORECTAL
+    # ------------------------------------------------------------------
+
+    # NHS / ASCRS Hemorrhoid Guidelines; Sandler RS Am J Gastroenterol 2007
+    "Hemorrhoids (Piles)": ({
+        "Rectal bleeding":            0.80,
+        "Anal pain":                  0.72,
+        "Anal itching":               0.78,
+        "Swelling near anus":         0.68,
+        "Pain during bowel movement": 0.70,
+        "Constipation":               0.65,
+        "Mucus discharge from anus":  0.40,
+        "Fatigue":                    0.15,
+    }, 150),
+
+    # ------------------------------------------------------------------
+    # PARASITIC — INTESTINAL WORMS
+    # ------------------------------------------------------------------
+
+    # WHO STH (Soil-Transmitted Helminthiasis) Programme data; Pullan RL PLoS Negl Trop Dis 2014
+    "Intestinal Worms": ({
+        "Anal itching":               0.82,
+        "Abdominal pain":             0.70,
+        "Diarrhea":                   0.55,
+        "Loss of appetite":           0.60,
+        "Weight loss":                0.45,
+        "Fatigue":                    0.55,
+        "Nausea":                     0.40,
+        "Visible worms in stool":     0.35,
+        "Fever":                      0.20,
+    }, 180),
+
+    # ------------------------------------------------------------------
+    # NUTRITIONAL
+    # ------------------------------------------------------------------
+
+    # WHO Malnutrition Guidelines; Black RE Lancet 2008
+    "Malnutrition": ({
+        "Weight loss":                0.92,
+        "Fatigue":                    0.88,
+        "Pale skin":                  0.70,
+        "Weakness":                   0.85,
+        "Swollen feet":               0.45,
+        "Hair loss":                  0.55,
+        "Poor wound healing":         0.40,
+        "Loss of appetite":           0.65,
+        "Dizziness":                  0.50,
+    }, 120),
+
+    # ------------------------------------------------------------------
+    # DENTAL
+    # ------------------------------------------------------------------
+
+    # NICE Dental Abscess Guidelines; Robertson DP BMJ 2015
+    "Dental Abscess": ({
+        "Tooth pain":                 0.95,
+        "Jaw swelling":               0.72,
+        "Swollen lymph nodes":        0.60,
+        "Fever":                      0.55,
+        "Facial pain":                0.70,
+        "Difficulty swallowing":      0.38,
+        "Pus or discharge":           0.50,
+        "Headache":                   0.40,
+    }, 100),
+
+    # ------------------------------------------------------------------
+    # MUSCULOSKELETAL
+    # ------------------------------------------------------------------
+
+    # ACR/EULAR Arthritis Guidelines; Prevoo ML Arthritis Rheum 1995
+    "Arthritis": ({
+        "Joint pain":                 0.95,
+        "Joint swelling":             0.78,
+        "Stiffness":                  0.82,
+        "Weakness":                   0.65,
+        "Fatigue":                    0.60,
+        "Reduced range of motion":    0.70,
+        "Muscle aches":               0.55,
+        "Swollen feet":               0.35,
+    }, 120),
+
+    # ------------------------------------------------------------------
+    # SKIN CONDITIONS
+    # ------------------------------------------------------------------
+
+    # NICE/AAD Atopic Eczema (Dermatitis) Guidelines; Eichenfield LF JAAD 2014
+    "Eczema": ({
+        "Itchy skin":                 0.95,
+        "Dry skin":                   0.90,
+        "Skin peeling":               0.75,
+        "Red scaly skin":             0.80,
+        "Skin sores":                 0.55,
+        "Rash":                       0.78,
+        "Fatigue":                    0.25,
+    }, 130),
+
+    # AAD Acne Guidelines; Zaenglein AL JAAD 2016
+    "Acne": ({
+        "Skin sores":                 0.88,
+        "Pus or discharge":           0.72,
+        "Rash":                       0.65,
+        "Facial pain":                0.45,
+        "Skin lesions":               0.80,
+        "Fatigue":                    0.15,
+    }, 130),
+
 }
 
 # ---------------------------------------------------------------------------

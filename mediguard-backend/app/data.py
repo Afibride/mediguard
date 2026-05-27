@@ -62,6 +62,19 @@ CORE_SYMPTOMS = {
     "Chlamydia": ["Genital discharge", "Painful urination", "Pelvic pain", "Vaginal discharge", "Pain during intercourse", "Vaginal itching", "Lower abdominal pain"],
     "Genital Herpes": ["Genital sores", "Blisters", "Painful urination", "Fever", "Fatigue", "Muscle aches", "Vaginal itching", "Skin sores"],
     "Trichomoniasis": ["Vaginal itching", "Genital discharge", "Painful urination", "Vaginal discharge", "Pelvic pain", "Rash", "Lower abdominal pain"],
+    # ── Colorectal / Anorectal ────────────────────────────────────────────────
+    "Hemorrhoids (Piles)": ["Rectal bleeding", "Anal pain", "Anal itching", "Swelling near anus", "Pain during bowel movement", "Constipation", "Mucus discharge from anus"],
+    # ── Parasitic / Worm infections ───────────────────────────────────────────
+    "Intestinal Worms": ["Anal itching", "Abdominal pain", "Diarrhea", "Loss of appetite", "Weight loss", "Fatigue", "Nausea", "Visible worms in stool"],
+    # ── Nutritional ───────────────────────────────────────────────────────────
+    "Malnutrition": ["Weight loss", "Fatigue", "Pale skin", "Weakness", "Swollen feet", "Hair loss", "Poor wound healing", "Loss of appetite"],
+    # ── Dental / Oral ─────────────────────────────────────────────────────────
+    "Dental Abscess": ["Tooth pain", "Jaw swelling", "Swollen lymph nodes", "Fever", "Facial pain", "Difficulty swallowing", "Pus or discharge"],
+    # ── Musculoskeletal ───────────────────────────────────────────────────────
+    "Arthritis": ["Joint pain", "Joint swelling", "Stiffness", "Weakness", "Fatigue", "Reduced range of motion"],
+    # ── Skin ──────────────────────────────────────────────────────────────────
+    "Eczema": ["Itchy skin", "Dry skin", "Skin peeling", "Red scaly skin", "Skin sores", "Rash"],
+    "Acne": ["Skin sores", "Pus or discharge", "Rash", "Facial pain", "Skin lesions"],
 }
 
 # ─── Cardinal (Key) Symptoms ─────────────────────────────────────────────────
@@ -221,6 +234,17 @@ CARDINAL_SYMPTOMS: dict[str, list[str]] = {
 
     # Brucellosis and Hypertension intentionally have NO cardinal symptoms:
     # their presentations are too non-specific to filter reliably without labs.
+
+    # ── Anorectal ──────────────────────────────────────────────────────────────
+    # Piles: must present with at least one anorectal symptom
+    "Hemorrhoids (Piles)": ["Rectal bleeding", "Anal pain", "Anal itching", "Swelling near anus"],
+    # ── Parasitic ──────────────────────────────────────────────────────────────
+    # Worm infections: perianal itching is the cardinal sign
+    "Intestinal Worms": ["Anal itching"],
+    # ── Dental ─────────────────────────────────────────────────────────────────
+    "Dental Abscess": ["Tooth pain", "Jaw swelling"],
+    # ── Skin ───────────────────────────────────────────────────────────────────
+    "Eczema": ["Itchy skin", "Dry skin"],
 }
 
 CATEGORIES = {
@@ -278,6 +302,13 @@ CATEGORIES = {
     "Chlamydia": "STI",
     "Genital Herpes": "STI",
     "Trichomoniasis": "STI",
+    "Hemorrhoids (Piles)": "Gastrointestinal",
+    "Intestinal Worms": "Parasitic",
+    "Malnutrition": "Nutritional",
+    "Dental Abscess": "Bacterial",
+    "Arthritis": "Musculoskeletal",
+    "Eczema": "Skin",
+    "Acne": "Skin",
 }
 
 CURATED_DETAILS = {
@@ -618,6 +649,55 @@ CURATED_DETAILS = {
         "causes": "Caused by the protozoan parasite Trichomonas vaginalis, spread through vaginal sex. The parasite can survive on moist surfaces for a short time.",
         "treatment": "Treated with metronidazole or tinidazole antibiotics. Both partners must be treated to prevent reinfection.",
         "prevention": ["Use condoms", "Treat both partners simultaneously", "Regular STI testing", "Avoid sharing sex toys"],
+        "severity": "Low",
+    },
+    "Hemorrhoids (Piles)": {
+        "description": "Swollen blood vessels (veins) inside or around the anus and lower rectum. Very common — affecting up to 75% of people at some point. Internal hemorrhoids form inside the rectum; external hemorrhoids form under the skin around the anus. They can cause pain, itching, bleeding, and discomfort — especially when sitting or passing stool.",
+        "causes": "Increased pressure in the veins around the anus from straining during bowel movements, chronic constipation or diarrhea, prolonged sitting on the toilet, pregnancy, obesity, or a low-fibre diet.",
+        "treatment": "Mild cases improve with high-fibre diet, adequate water intake, and avoiding straining. Warm sitz baths (sitting in warm water 10–15 mins) help relieve pain and swelling. Pharmacy creams or suppositories provide short-term relief. Persistent, severe, or bleeding hemorrhoids need clinical evaluation. Do not assume all rectal bleeding is piles — see a doctor if bleeding continues.",
+        "prevention": ["Eat high-fibre foods — vegetables, fruits, whole grains, beans", "Drink plenty of water daily (at least 2 litres)", "Do not strain or push hard during bowel movements", "Do not sit too long on the toilet", "Exercise regularly", "Treat constipation early"],
+        "severity": "Low",
+    },
+    "Intestinal Worms": {
+        "description": "Infections caused by parasitic worms (helminths) living in the intestines. Common types in Cameroon include roundworms (Ascaris), hookworms, pinworms, whipworms, and tapeworms. Very common in children and in areas with poor sanitation or contaminated water/soil.",
+        "causes": "Swallowing worm eggs from contaminated food, water, or soil. Hookworms can enter through bare skin on the ground. Tapeworms can come from undercooked pork or beef.",
+        "treatment": "Anthelmintic medications (mebendazole, albendazole) treat most intestinal worms effectively. A single dose or short course is usually curative. The whole household may need treatment for pinworms.",
+        "prevention": ["Wash hands thoroughly before eating and after toilet use", "Wear shoes — never walk barefoot in soil", "Wash and cook vegetables thoroughly", "Drink safe or treated water", "Cook meat fully", "Deworm children regularly as recommended"],
+        "severity": "Low",
+    },
+    "Malnutrition": {
+        "description": "A condition where the body does not get enough nutrients — vitamins, minerals, proteins, calories — to maintain normal health and functions. Very common in children under 5 in Cameroon. Severe malnutrition (kwashiorkor, marasmus) can be life-threatening.",
+        "causes": "Inadequate food intake, poor dietary diversity, repeated infections reducing nutrient absorption, poverty, food insecurity, and disrupted breastfeeding practices.",
+        "treatment": "Mild malnutrition: increase food diversity, add protein-rich foods (beans, eggs, groundnuts, meat, fish), ensure adequate calories. Severe malnutrition in children needs urgent hospitalisation and therapeutic feeding. Treat any underlying infections.",
+        "prevention": ["Breastfeed exclusively for the first 6 months", "Introduce diverse complementary foods at 6 months", "Ensure regular deworming", "Manage infections promptly", "Grow or buy protein-rich foods regularly"],
+        "severity": "High",
+    },
+    "Dental Abscess": {
+        "description": "A collection of pus (bacterial infection) in or around a tooth or in the gum. Causes intense, throbbing tooth pain that may spread to the jaw, ear, or neck. Without treatment it can spread to the jaw, neck, or brain — a medical emergency.",
+        "causes": "Tooth decay, cracked tooth, gum disease, or injury allowing bacteria to enter the dental pulp or surrounding tissue.",
+        "treatment": "Requires dental treatment — drainage of the abscess, antibiotics, and often root canal or tooth extraction. Pain relief with paracetamol. A spreading abscess (jaw swelling, difficulty breathing or swallowing, fever) is an emergency — go to hospital immediately.",
+        "prevention": ["Brush teeth twice daily", "Use fluoride toothpaste", "Floss regularly", "Limit sugary foods and drinks", "See a dentist for tooth pain early — do not delay"],
+        "severity": "Medium",
+    },
+    "Arthritis": {
+        "description": "Inflammation of one or more joints causing pain, swelling, stiffness, and reduced range of motion. Common types include osteoarthritis (joint wear-and-tear, common in older adults) and rheumatoid arthritis (autoimmune). Reactive arthritis can follow infections like chlamydia, salmonella, or streptococcus.",
+        "causes": "Osteoarthritis: cartilage breakdown from age, obesity, or repetitive use. Rheumatoid arthritis: immune system attacks joints. Reactive arthritis: triggered by infection elsewhere in the body.",
+        "treatment": "Pain relief, physiotherapy, anti-inflammatory medications as prescribed. Severe or systemic arthritis needs rheumatology referral. Maintain joint movement with gentle exercise.",
+        "prevention": ["Maintain healthy weight", "Exercise regularly", "Treat joint injuries promptly", "Manage infections early to prevent reactive arthritis"],
+        "severity": "Medium",
+    },
+    "Eczema": {
+        "description": "A chronic skin condition causing patches of red, itchy, inflamed, and cracked skin. Very common in children but affects all ages. It often flares and improves in cycles. Not contagious.",
+        "causes": "Combination of genetic predisposition, immune system dysfunction, and environmental triggers (soaps, dust, certain fabrics, sweat, stress, dry weather). Often linked to asthma or allergic rhinitis.",
+        "treatment": "Moisturise the skin regularly to prevent dryness. Avoid identified triggers. Mild topical steroid creams (as directed by a clinician) reduce flares. Keep skin cool and avoid scratching — scratching causes skin damage and infection risk.",
+        "prevention": ["Moisturise skin daily", "Avoid harsh soaps and detergents", "Wear soft, breathable cotton clothing", "Identify and avoid personal triggers", "Keep fingernails short to reduce scratch damage"],
+        "severity": "Low",
+    },
+    "Acne": {
+        "description": "A very common skin condition where hair follicles become plugged with oil and dead skin cells, forming pimples, blackheads, whiteheads, or cysts — mainly on the face, chest, and back. Most common in teenagers but can affect adults.",
+        "causes": "Excess oil (sebum) production, dead skin cells clogging pores, bacterial growth (Cutibacterium acnes), and hormonal changes during puberty, menstrual cycle, or stress.",
+        "treatment": "Keep skin clean (gentle wash twice daily). Avoid squeezing pimples — this spreads bacteria and causes scarring. Benzoyl peroxide or salicylic acid products (available at pharmacies) help mild acne. Severe or cystic acne needs clinical assessment and may require prescription antibiotics or retinoids.",
+        "prevention": ["Wash face gently twice daily with mild cleanser", "Remove make-up before sleeping", "Avoid touching face frequently", "Use non-comedogenic (non-pore-blocking) skin products", "Manage stress"],
         "severity": "Low",
     },
 }

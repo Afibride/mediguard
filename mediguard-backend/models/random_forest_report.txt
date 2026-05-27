@@ -1,61 +1,68 @@
                                precision    recall  f1-score   support
 
-                  Anaphylaxis       0.88      1.00      0.94        23
-                 Appendicitis       0.91      0.87      0.89        23
-                       Asthma       0.90      0.83      0.86        23
- Benign Prostatic Hyperplasia       0.79      0.86      0.83        22
-                  Brucellosis       1.00      0.77      0.87        22
-                   Chickenpox       0.95      0.91      0.93        23
-                    Chlamydia       0.70      0.64      0.67        22
-                      Cholera       0.95      1.00      0.97        38
-                  Common Cold       0.90      1.00      0.95        27
-               Conjunctivitis       0.88      1.00      0.94        22
-                 Cystitis UTI       0.80      0.91      0.85        22
-                 Dengue Fever       1.00      1.00      1.00        30
-            Diabetes Mellitus       0.88      0.91      0.89        23
-                   Diphtheria       0.88      0.96      0.92        23
-                    Dysentery       0.93      0.93      0.93        30
-                Ear Infection       0.82      0.82      0.82        22
-                     Epilepsy       1.00      0.77      0.87        22
-                   Filariasis       0.86      0.52      0.65        23
-              Gastroenteritis       0.88      0.76      0.81        37
-               Genital Herpes       1.00      0.86      0.93        22
-                    Gonorrhea       0.59      0.59      0.59        22
-                     HIV AIDS       0.83      0.83      0.83        23
-Helicobacteriosis PepticUlcer       0.79      0.86      0.83        22
-                  Hepatitis A       0.81      0.63      0.71        27
-                  Hepatitis B       0.81      0.63      0.71        27
-                Herpes Zoster       0.84      0.91      0.88        23
-                 Hypertension       0.81      0.74      0.77        23
-       Iron Deficiency Anemia       0.95      0.91      0.93        23
-                Kidney Stones       0.90      0.78      0.84        23
-                Leptospirosis       0.95      0.86      0.90        22
-                      Malaria       0.90      1.00      0.95        75
-                      Measles       0.90      1.00      0.95        27
-                   Meningitis       0.97      0.97      0.97        37
-                     Migraine       0.87      0.91      0.89        22
-                        Mumps       0.73      0.86      0.79        22
-               Onchocerciasis       1.00      0.91      0.95        23
-  Pelvic Inflammatory Disease       0.78      0.91      0.84        23
-                    Pneumonia       0.95      1.00      0.97        38
-                     Ringworm       0.86      0.86      0.86        22
-                      Rubella       0.86      0.82      0.84        22
-                      Scabies       0.92      1.00      0.96        23
-                   Septicemia       0.85      1.00      0.92        23
-           Sickle Cell Crisis       0.86      0.86      0.86        22
-                    Sinusitis       1.00      0.87      0.93        23
-                 Skin Abscess       0.87      0.91      0.89        22
-        Skin Fungal Infection       0.76      0.83      0.79        23
-                     Syphilis       0.78      0.82      0.80        22
-                      Tetanus       0.91      1.00      0.95        30
-                  Tonsillitis       0.94      0.70      0.80        23
-               Trichomoniasis       0.72      0.59      0.65        22
-                 Tuberculosis       0.91      0.84      0.88        38
-                Typhoid Fever       0.93      1.00      0.96        52
-                       Typhus       0.81      1.00      0.90        22
-               Whooping Cough       0.96      1.00      0.98        23
-                 Yellow Fever       0.87      1.00      0.93        27
+                         Acne       0.92      0.88      0.90        26
+                  Anaphylaxis       1.00      1.00      1.00        12
+                 Appendicitis       0.94      0.94      0.94        18
+                    Arthritis       1.00      1.00      1.00        24
+                       Asthma       0.90      1.00      0.95        18
+ Benign Prostatic Hyperplasia       0.92      0.79      0.85        14
+                  Brucellosis       1.00      0.86      0.92        14
+                   Chickenpox       1.00      1.00      1.00        16
+                    Chlamydia       0.40      0.57      0.47        14
+                      Cholera       1.00      1.00      1.00        24
+                  Common Cold       0.97      1.00      0.99        36
+               Conjunctivitis       0.89      1.00      0.94        16
+                 Cystitis UTI       0.88      0.88      0.88        24
+                 Dengue Fever       0.95      1.00      0.98        20
+               Dental Abscess       0.95      0.95      0.95        20
+            Diabetes Mellitus       0.96      1.00      0.98        22
+                   Diphtheria       1.00      1.00      1.00        14
+                    Dysentery       1.00      1.00      1.00        22
+                Ear Infection       0.89      1.00      0.94        16
+                       Eczema       0.93      1.00      0.96        26
+                     Epilepsy       1.00      1.00      1.00        16
+                   Filariasis       1.00      1.00      1.00        12
+              Gastroenteritis       0.91      0.97      0.94        32
+               Genital Herpes       0.93      0.93      0.93        14
+                    Gonorrhea       0.82      0.64      0.72        14
+                     HIV AIDS       1.00      0.83      0.91        18
+Helicobacteriosis PepticUlcer       1.00      1.00      1.00        16
+          Hemorrhoids (Piles)       1.00      1.00      1.00        30
+                  Hepatitis A       0.75      0.56      0.64        16
+                  Hepatitis B       0.70      0.78      0.74        18
+                Herpes Zoster       0.89      1.00      0.94        16
+                 Hypertension       0.85      0.85      0.85        20
+             Intestinal Worms       0.94      0.89      0.91        36
+       Iron Deficiency Anemia       0.94      0.89      0.91        18
+                Kidney Stones       1.00      1.00      1.00        18
+                Leptospirosis       1.00      0.88      0.93        16
+                      Malaria       0.95      0.97      0.96        60
+                 Malnutrition       0.92      0.96      0.94        24
+                      Measles       1.00      1.00      1.00        16
+                   Meningitis       1.00      1.00      1.00        16
+                     Migraine       0.95      1.00      0.97        18
+                        Mumps       0.93      1.00      0.97        14
+               Onchocerciasis       1.00      0.92      0.96        12
+  Pelvic Inflammatory Disease       0.87      0.81      0.84        16
+                    Pneumonia       1.00      0.96      0.98        28
+                     Ringworm       0.94      0.94      0.94        16
+                      Rubella       0.93      1.00      0.97        14
+                      Scabies       1.00      0.93      0.96        14
+                   Septicemia       0.89      1.00      0.94        16
+           Sickle Cell Crisis       0.94      0.94      0.94        16
+                    Sinusitis       1.00      0.94      0.97        18
+                 Skin Abscess       0.88      0.94      0.91        16
+        Skin Fungal Infection       0.94      0.83      0.88        18
+                     Syphilis       1.00      0.93      0.96        14
+                      Tetanus       1.00      1.00      1.00        14
+                  Tonsillitis       1.00      1.00      1.00        18
+               Trichomoniasis       0.80      0.57      0.67        14
+                 Tuberculosis       0.93      1.00      0.96        26
+                Typhoid Fever       1.00      1.00      1.00        40
+                       Typhus       1.00      1.00      1.00        16
+               Whooping Cough       1.00      0.88      0.93        16
+                 Yellow Fever       0.88      0.94      0.91        16
 
-                     accuracy                           0.88      1440
-                    macro avg       0.88      0.87      0.87      1440
-                 weighted avg       0.88      0.88      0.88      1440
+                     accuracy                           0.94      1212
+                    macro avg       0.94      0.93      0.93      1212
+                 weighted avg       0.94      0.94      0.94      1212

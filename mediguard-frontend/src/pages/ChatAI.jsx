@@ -23,49 +23,108 @@ import { analyzeImage, saveChatHistory, sendChatMessage, submitChatFeedback } fr
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // ── Inline markdown renderer ──────────────────────────────────────────────────
+// Handles: **bold**, *italic*, `code`
 function renderInline(text) {
-  const parts = text.split(/(\*\*[^*\n]+\*\*)/g);
-  return parts.map((part, i) =>
-    part.startsWith('**') && part.endsWith('**')
-      ? <strong key={i} className="font-semibold">{part.slice(2, -2)}</strong>
-      : part
-  );
+  const parts = text.split(/(\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**'))
+      return <strong key={i} className="font-semibold text-foreground">{part.slice(2, -2)}</strong>;
+    if (part.startsWith('*') && part.endsWith('*') && part.length > 2)
+      return <em key={i} className="italic">{part.slice(1, -1)}</em>;
+    if (part.startsWith('`') && part.endsWith('`') && part.length > 2)
+      return <code key={i} className="px-1 py-0.5 rounded bg-muted text-[0.85em] font-mono">{part.slice(1, -1)}</code>;
+    return part;
+  });
 }
 
 function MarkdownMessage({ content }) {
   if (!content) return null;
+
+  // Split into blocks on blank lines
   const blocks = content.split(/\n{2,}/);
+
   return (
     <div className="space-y-2 max-w-full min-w-0 break-words [overflow-wrap:anywhere]">
       {blocks.map((block, bi) => {
-        const lines = block.split('\n').filter(Boolean);
-        const listMarker = /^(?:\d+[.)]|•|-)\s/;
+        const trimmed = block.trim();
+        if (!trimmed) return null;
+
+        // Horizontal rule
+        if (/^---+$/.test(trimmed)) {
+          return <hr key={bi} className="border-border my-1" />;
+        }
+
+        const lines = trimmed.split('\n').filter(Boolean);
+
+        // Heading: ## or ###
+        if (lines.length === 1) {
+          const h3Match = lines[0].match(/^###\s+(.+)/);
+          const h2Match = lines[0].match(/^##\s+(.+)/);
+          const h1Match = lines[0].match(/^#\s+(.+)/);
+          if (h1Match) return <h3 key={bi} className="font-bold text-base mt-1 leading-snug text-foreground">{renderInline(h1Match[1])}</h3>;
+          if (h2Match) return <h3 key={bi} className="font-bold text-sm mt-1 leading-snug text-foreground">{renderInline(h2Match[1])}</h3>;
+          if (h3Match) return <h4 key={bi} className="font-semibold text-sm mt-0.5 leading-snug text-foreground">{renderInline(h3Match[1])}</h4>;
+        }
+
+        const listMarker = /^(?:\d+[.)]|[•\-\*])\s/;
         const isList = lines.length > 1 && lines.every(l => listMarker.test(l.trim()));
         const isSingleBullet = lines.length === 1 && listMarker.test(lines[0].trim());
         const isNumbered = lines.every(l => /^\d+[.)]\s/.test(l.trim()));
+
+        // Handle headings inside multi-line blocks
+        const headingLine = lines.find(l => /^#{1,3}\s/.test(l));
+        const nonHeadingLines = lines.filter(l => !/^#{1,3}\s/.test(l));
+
+        if (headingLine && nonHeadingLines.length > 0) {
+          const headingText = headingLine.replace(/^#{1,3}\s+/, '');
+          return (
+            <div key={bi} className="space-y-1.5">
+              <h4 className="font-bold text-sm text-foreground">{renderInline(headingText)}</h4>
+              <p className="leading-relaxed break-words [overflow-wrap:anywhere]">
+                {nonHeadingLines.map((line, li) => (
+                  <React.Fragment key={li}>{li > 0 && <br />}{renderInline(line)}</React.Fragment>
+                ))}
+              </p>
+            </div>
+          );
+        }
 
         if (isList || isSingleBullet) {
           const ListTag = isNumbered ? 'ol' : 'ul';
           return (
             <ListTag key={bi} className={`space-y-1 ${isNumbered ? 'list-decimal pl-5' : 'pl-1'}`}>
-              {lines.map((line, li) => (
-                <li key={li} className={isNumbered ? 'leading-relaxed' : 'flex items-start gap-2'}>
-                  {!isNumbered && <span className="text-primary font-bold mt-0.5 shrink-0 text-xs">•</span>}
-                  <span className="leading-relaxed">{renderInline(line.replace(/^(?:\d+[.)]|•|-)\s*/, ''))}</span>
-                </li>
-              ))}
+              {lines.map((line, li) => {
+                const lineText = line.replace(/^(?:\d+[.)]|[•\-\*])\s*/, '');
+                // Sub-heading check within list item (bold-only line)
+                const boldOnly = lineText.startsWith('**') && lineText.endsWith('**') && !lineText.slice(2,-2).includes('**');
+                return (
+                  <li key={li} className={isNumbered ? 'leading-relaxed' : 'flex items-start gap-2'}>
+                    {!isNumbered && <span className="text-primary font-bold mt-0.5 shrink-0 text-xs">•</span>}
+                    <span className={`leading-relaxed ${boldOnly ? 'font-semibold text-foreground' : ''}`}>
+                      {renderInline(lineText)}
+                    </span>
+                  </li>
+                );
+              })}
             </ListTag>
           );
         }
 
         return (
           <p key={bi} className="leading-relaxed max-w-full break-words [overflow-wrap:anywhere]">
-            {lines.map((line, li) => (
-              <React.Fragment key={li}>
-                {li > 0 && <br />}
-                {renderInline(line)}
-              </React.Fragment>
-            ))}
+            {lines.map((line, li) => {
+              // Detect inline heading pattern (line that IS a heading)
+              const h2m = line.match(/^##\s+(.+)/);
+              const h3m = line.match(/^###\s+(.+)/);
+              if (h2m) return <React.Fragment key={li}>{li > 0 && <br />}<strong className="font-bold text-sm block mt-1">{renderInline(h2m[1])}</strong></React.Fragment>;
+              if (h3m) return <React.Fragment key={li}>{li > 0 && <br />}<strong className="font-semibold text-sm block mt-0.5">{renderInline(h3m[1])}</strong></React.Fragment>;
+              return (
+                <React.Fragment key={li}>
+                  {li > 0 && <br />}
+                  {renderInline(line)}
+                </React.Fragment>
+              );
+            })}
           </p>
         );
       })}
@@ -643,7 +702,7 @@ const ChatAI = () => {
         <meta name="twitter:image" content="https://mediguard.info/mediguard.png" />
       </Helmet>
 
-      <div className="fixed inset-x-0 bottom-0 top-16 w-full max-w-[100vw] bg-[radial-gradient(circle_at_top_left,hsl(var(--primary)/0.12),transparent_22rem),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.62))] flex overflow-hidden overscroll-none">
+      <div className="fixed inset-x-0 bottom-0 top-16 w-full max-w-[100vw] overflow-x-hidden bg-[radial-gradient(circle_at_top_left,hsl(var(--primary)/0.12),transparent_22rem),linear-gradient(180deg,hsl(var(--background)),hsl(var(--muted)/0.62))] flex overflow-hidden overscroll-none">
         {/* Sidebar */}
         <AnimatePresence mode="wait">
           {isSidebarOpen && (
@@ -776,8 +835,8 @@ const ChatAI = () => {
 
         {/* Main Chat Area - FIXED for mobile cropping */}
         <div className="flex-1 flex flex-col min-w-0 w-full max-w-full overflow-hidden">
-          {/* Chat Header */}
-          <div className="p-3 sm:p-4 bg-background/95 backdrop-blur border-b shadow-sm flex items-center justify-between z-10 sticky top-0 max-w-full overflow-hidden">
+          {/* Chat Header — always visible, pinned to top */}
+          <div className="p-3 sm:p-4 bg-background/98 backdrop-blur-md border-b shadow-sm flex items-center justify-between z-20 sticky top-0 shrink-0 max-w-full overflow-hidden">
             <div className="flex items-center gap-2 sm:gap-3 w-full min-w-0">
               {/* Sidebar Toggle Button */}
               <Button
@@ -1094,7 +1153,7 @@ const ChatAI = () => {
             </div>
 
             {/* Input Area & Suggested Questions - FIXED for mobile */}
-            <div className="p-2.5 sm:p-4 bg-background/95 backdrop-blur border-t w-full max-w-full shadow-[0_-10px_30px_hsl(var(--background)/0.85)]">
+            <div className="p-2.5 sm:p-4 bg-background/95 backdrop-blur border-t w-full max-w-full overflow-x-hidden shadow-[0_-10px_30px_hsl(var(--background)/0.85)]">
               {messages.length <= 1 && !isTyping && (
                 <div className="mb-3 sm:mb-4">
                   <SuggestedQuestions onSelectQuestion={handleSelectQuestion} />
