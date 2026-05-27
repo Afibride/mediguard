@@ -2777,7 +2777,8 @@ _CHILD_TERMS: list[str] = [
     "my child", "my baby", "my pikin", "my son", "my daughter",
     "the baby", "the child", "my toddler", "my infant", "my kid",
     "mon enfant", "mon bébé", "ma fille", "mon fils", "le bébé",
-    "pikin dey", "pikin get", "pikin no", "my pikin",
+    "pikin dey", "pikin de", "pikin get", "pikin no", "my pikin", "ma pikin",
+    "smol pikin", "pikin man", "pikin woman",
     "years old", "months old", "year old", "month old",
     "newborn", "new born", "neonate",
 ]
@@ -2869,47 +2870,69 @@ def _vaccination_query_response(query: str) -> dict | None:
 # ---------------------------------------------------------------------------
 
 _PIDGIN_GREETINGS: list[str] = [
+    # Textbook forms (Peace Corps Cameroon Pidgin, 1983)
+    "how yu de", "gut monin", "gut aftenun", "gud ivin", "gut ivin",
+    "a de fayn", "a fayn",
+    # Common spoken variants
     "how you dey", "how na", "how far", "i dey here",
     "oga", "na wah", "wetin dey happen", "wussap",
     "whats up na", "how e dey", "na how", "e don do",
+    "good morning na", "good evening na",
 ]
 
 _PIDGIN_THANKS: list[str] = [
+    # Textbook: "tank yu" / "tanki" = thank you
+    "tank yu", "tanki", "tankyu",
+    # Common spoken
     "i thank you", "tanks na", "thank you o", "e don do fine",
     "you do well", "you sabi", "you know book",
+    "waka fayn",   # "go well" = farewell / thank you
+    "olrayt",      # alright = acknowledgement
 ]
 
 
 def _pidgin_conversational_response(query: str) -> dict | None:
-    """Detect Pidgin greetings/thanks and respond naturally."""
+    """Detect Pidgin greetings/thanks and respond naturally.
+
+    Response style follows authentic Cameroonian Pidgin grammar
+    (Peace Corps Cameroon Pidgin textbook, 1983):
+      - "de" = present progressive marker (textbook)
+      - "dey" also accepted (modern spoken form)
+      - "a" = I,  "ma" = my,  "ya" = your
+      - "pikin" = child,  "taya" = tired,  "sik" = sick
+      - "fayn" = fine/good,  "waka fayn" = go well
+      - "olrayt" = alright/okay
+    """
     text = query.lower().strip()
     if any(pg in text for pg in _PIDGIN_GREETINGS):
         return {
             "answer": (
-                "How you dey! 👋 Welcome to MediGuard Bamenda.\n\n"
-                "I fit help you with:\n"
-                "• **Symptom check** — tell me how your body dey feel\n"
-                "• **Disease information** — I go explain any sickness\n"
-                "• **Nearest hospital** — I fit find hospital wey dey close to you\n"
-                "• **Traditional medicine** — I go tell you if any herb fit help\n"
-                "• **Child health** — for your pikin dem\n\n"
-                "Just tell me wetin dey worry you or your family. No need plenty grammar! 😊"
+                "How yu de! 👋 Welcome to MediGuard Bamenda.\n\n"
+                "A fit help yu wit:\n"
+                "• **Symptom check** — tell mi how ya bodi de feel, or wetin de hot\n"
+                "• **Disease information** — a go explain any sickness for yu\n"
+                "• **Nearest hospital** — a fit find hospital wey de close to yu\n"
+                "• **Traditional medicine** — a go tell yu if any herb fit help\n"
+                "• **Pikin health** — for ya smol pikin dem\n\n"
+                "Just tell mi wetin de worry yu or ya family. "
+                "No need plenti grammar — tok Pidgin, tok English, tok French, olrayt! 😊"
             ),
             "sources": [],
             "disclaimer": DISCLAIMER,
             "mode": "pidgin_greeting",
             "follow_up_questions": [
-                "Wetin dey worry you?",
-                "Which part of your body dey pain you?",
-                "You get fever or your pikin get fever?",
+                "Wetin de worry yu?",
+                "Which part of ya bodi de hot or de pain yu?",
+                "Yu get feba? Or ya pikin de sik?",
             ],
         }
     if any(pt in text for pt in _PIDGIN_THANKS):
         return {
             "answer": (
-                "You welcome! 🙏 Any time your body dey do you anyhow or your pikin sick, "
-                "just come back tell me. MediGuard dey here for Bamenda community. "
-                "Make you stay well! 💪"
+                "Olrayt, tank yu! 🙏 Any time ya bodi de do yu anyhow, "
+                "or ya pikin de sik, just come back tell mi. "
+                "MediGuard de here for Bamenda community. "
+                "Waka fayn! 💪"
             ),
             "sources": [],
             "disclaimer": DISCLAIMER,
@@ -3061,8 +3084,15 @@ def generate_answer(
             "content": (
                 f"{lang_note}"
                 "You are MediGuard's health assistant for Bamenda, Cameroon. "
-                "You understand Cameroon Pidgin English (Camfranglais) — if the user writes in Pidgin, "
-                "respond in plain, simple English that is easy to understand. "
+                "You understand Cameroon Pidgin English (Camfranglais). "
+                "Pidgin grammar: 'de'/'dey'=present-progressive, 'na'=is/am, 'no'=negation, "
+                "'bin'=past, 'don'=recently done, 'go'=future, 'a'=I, 'ma'=my, 'ya'=your, "
+                "'pikin'=child, 'bele'=stomach, 'het/hed'=head, 'skin'=body, "
+                "'taya'=tired, 'fayn'=fine, 'sik'=sick, 'kof'=cough, 'kol'=cold. "
+                "KEY: 'hot' in Pidgin means BOTH temperature AND pain "
+                "('ma het de hot'=my head hurts, 'ma skin de hot'=feverish). "
+                "If the user writes in Pidgin, respond in simple clear English they can understand, "
+                "but include short Pidgin phrases naturally (e.g. 'no worry', 'waka go hospital'). "
                 "Answer clearly using only the context below. Never diagnose or prescribe medication. "
                 "When the user describes an accident or injury, provide clear step-by-step first aid guidance. "
                 "For health questions, include simple first aid, self-care steps, and urgent-care red flags. "
