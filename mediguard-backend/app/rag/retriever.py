@@ -2234,9 +2234,18 @@ def _symptom_check_response(
             "data_source": actual_data_source,
         }
 
+    # ── Seasonal alert ───────────────────────────────────────────────────────
+    seasonal_note = _seasonal_context_note(query, reported_symptoms)
+    # ── Child health note ────────────────────────────────────────────────────
+    child_note = _child_health_context_note(query, reported_symptoms)
+
     lines = [
         f"I found these symptoms in your message: {', '.join(reported_symptoms)}.",
     ]
+    if seasonal_note:
+        lines.append(seasonal_note)
+    if child_note:
+        lines.append(child_note)
 
     # ── Stress / few-symptom context note (shown BEFORE the predictions list) ──
     if stress_presentation and len(reported_symptoms) <= 4:
@@ -2510,6 +2519,428 @@ def _first_aid_chat_response(
     }
 
 
+# ---------------------------------------------------------------------------
+# Seasonal disease context — Bamenda, North West Cameroon
+# ---------------------------------------------------------------------------
+
+# Month (1–12) → high-risk diseases with local explanations
+_BAMENDA_SEASONAL_RISKS: dict[int, list[dict]] = {
+    1:  [{"disease": "Meningitis",                "risk": "high",   "reason": "Dry harmattan air — NW Cameroon is in the African meningitis belt"},
+         {"disease": "Measles",                   "risk": "medium", "reason": "Dry-season crowding increases measles spread"},
+         {"disease": "Common Cold",               "risk": "medium", "reason": "Cold, dry harmattan air dries airways"}],
+    2:  [{"disease": "Meningitis",                "risk": "high",   "reason": "Peak meningitis month in the harmattan season"},
+         {"disease": "Measles",                   "risk": "high",   "reason": "Measles outbreaks peak February–March in Cameroon"}],
+    3:  [{"disease": "Meningitis",                "risk": "medium", "reason": "End of harmattan meningitis season"},
+         {"disease": "Typhoid Fever",             "risk": "medium", "reason": "Typhoid rises as rains approach and water sources change"}],
+    4:  [{"disease": "Malaria",                   "risk": "high",   "reason": "Long rainy season starts — mosquito breeding surges"},
+         {"disease": "Typhoid Fever",             "risk": "medium", "reason": "Contaminated water risk rises with first rains"}],
+    5:  [{"disease": "Malaria",                   "risk": "high",   "reason": "Peak malaria month — stagnant pools everywhere"},
+         {"disease": "Cholera",                   "risk": "medium", "reason": "Heavy rains can contaminate water sources"},
+         {"disease": "Typhoid Fever",             "risk": "high",   "reason": "Waterborne disease risk elevated throughout rainy season"}],
+    6:  [{"disease": "Malaria",                   "risk": "high",   "reason": "Malaria season continues through June–July"},
+         {"disease": "Cholera",                   "risk": "medium", "reason": "Flood water contamination risk"},
+         {"disease": "Typhoid Fever",             "risk": "high",   "reason": "Waterborne risk remains elevated"}],
+    7:  [{"disease": "Malaria",                   "risk": "high",   "reason": "Mosquito numbers peak in the rainy season"},
+         {"disease": "Skin Fungal Infection",     "risk": "medium", "reason": "Persistent wet weather promotes skin fungal infections"}],
+    8:  [{"disease": "Malaria",                   "risk": "high",   "reason": "Malaria season at maximum intensity"},
+         {"disease": "Typhoid Fever",             "risk": "high",   "reason": "Continued waterborne risk from rain-contaminated sources"},
+         {"disease": "Cholera",                   "risk": "high",   "reason": "Cholera risk peaks approaching the second rains"}],
+    9:  [{"disease": "Malaria",                   "risk": "high",   "reason": "Second rainy season — malaria risk high"},
+         {"disease": "Cholera",                   "risk": "high",   "reason": "Peak cholera month — heavily contaminated water possible"},
+         {"disease": "Typhoid Fever",             "risk": "high",   "reason": "Waterborne disease risk highest of the year"}],
+    10: [{"disease": "Malaria",                   "risk": "high",   "reason": "Malaria still high as rains continue"},
+         {"disease": "Cholera",                   "risk": "medium", "reason": "Cholera risk easing but still elevated"}],
+    11: [{"disease": "Common Cold",               "risk": "medium", "reason": "Harmattan dust starts — respiratory infections rise"},
+         {"disease": "Malaria",                   "risk": "medium", "reason": "Malaria declining but still present"}],
+    12: [{"disease": "Common Cold",               "risk": "high",   "reason": "Peak harmattan — cold dry air causes respiratory infections"},
+         {"disease": "Meningitis",                "risk": "medium", "reason": "Meningitis risk begins rising again in December"}],
+}
+
+_MONTH_NAMES = {
+    1: "January", 2: "February", 3: "March", 4: "April",
+    5: "May", 6: "June", 7: "July", 8: "August",
+    9: "September", 10: "October", 11: "November", 12: "December",
+}
+
+
+def get_seasonal_context(month: int | None = None) -> dict:
+    """Return the current seasonal disease risks for Bamenda.
+
+    Returns a dict with ``month_name``, ``risks`` (list of disease dicts),
+    and ``banner_text`` suitable for UI display.
+    """
+    from datetime import datetime
+    if month is None:
+        month = datetime.now().month
+    risks = _BAMENDA_SEASONAL_RISKS.get(month, [])
+    month_name = _MONTH_NAMES.get(month, "")
+    high = [r for r in risks if r["risk"] == "high"]
+    if high:
+        names = " & ".join(r["disease"] for r in high[:2])
+        banner = f"⚠️ {month_name} in Bamenda: High risk of {names}. Mention any related symptoms early."
+    elif risks:
+        names = " & ".join(r["disease"] for r in risks[:2])
+        banner = f"🌿 {month_name}: Watch for {names} in Bamenda. Stay hydrated and sleep under a net."
+    else:
+        banner = ""
+    return {"month": month, "month_name": month_name, "risks": risks, "banner_text": banner}
+
+
+def _seasonal_context_note(query: str, symptoms: list[str]) -> str:
+    """Inject a seasonal note into a response when the query involves fever, diarrhea,
+    or neck stiffness and the current season makes a specific disease more likely."""
+    from datetime import datetime
+    month = datetime.now().month
+    risks = _BAMENDA_SEASONAL_RISKS.get(month, [])
+    if not risks:
+        return ""
+    text = f"{query.lower()} {' '.join(s.lower() for s in symptoms)}"
+    notes = []
+    for risk in risks:
+        if risk["risk"] != "high":
+            continue
+        disease = risk["disease"]
+        if disease == "Malaria" and any(t in text for t in ["fever", "chills", "headache", "sweating"]):
+            notes.append(f"⚠️ **Seasonal alert:** It is currently high malaria season in Bamenda. Fever + headache + chills should be tested for malaria urgently.")
+        elif disease == "Meningitis" and any(t in text for t in ["neck", "stiff", "headache", "fever", "confusion"]):
+            notes.append(f"⚠️ **Seasonal alert:** This is meningitis season in NW Cameroon. A stiff neck with fever needs urgent hospital evaluation — do not wait.")
+        elif disease == "Cholera" and any(t in text for t in ["diarrhea", "vomiting", "watery stool", "purge"]):
+            notes.append(f"⚠️ **Seasonal alert:** Cholera risk is high this season. Profuse watery diarrhea needs urgent oral rehydration and hospital care.")
+        elif disease == "Typhoid Fever" and any(t in text for t in ["fever", "stomach", "abdominal", "belly", "headache"]):
+            notes.append(f"⚠️ **Seasonal alert:** Typhoid risk is elevated in the current rainy season. Drink only clean/boiled water.")
+    return "\n\n".join(notes)
+
+
+# ---------------------------------------------------------------------------
+# Traditional medicine / herb bridge
+# ---------------------------------------------------------------------------
+
+_HERB_KNOWLEDGE: dict[str, dict] = {
+    "neem": {
+        "local_name": "Neem (dongoyaro)",
+        "traditional_use": "Fever, malaria, infections",
+        "evidence": "Neem has antimicrobial compounds and may help reduce fever symptoms. However, it **cannot replace antimalarial drugs** (e.g. Coartem) for confirmed malaria.",
+        "warning": "Do not delay clinic-based malaria testing while using neem. Malaria can become life-threatening within hours.",
+        "related_symptoms": ["Fever"],
+    },
+    "bitter leaf": {
+        "local_name": "Bitter leaf (Vernonia amygdalina / ndole)",
+        "traditional_use": "Stomach pain, fever, diabetes management",
+        "evidence": "Bitter leaf has shown anti-inflammatory properties in research. It is commonly used for abdominal discomfort and is nutritious.",
+        "warning": "It does not treat infections causing stomach pain. If pain is severe, persistent, or comes with fever — see a doctor.",
+        "related_symptoms": ["Abdominal pain"],
+    },
+    "garlic": {
+        "local_name": "Garlic (ail)",
+        "traditional_use": "Cough, respiratory infections, antibacterial",
+        "evidence": "Garlic contains allicin which has mild antimicrobial properties. It may soothe mild coughs and boost immunity slightly.",
+        "warning": "Garlic tea cannot treat bacterial pneumonia or tuberculosis. Persistent cough (> 2 weeks) needs clinical evaluation.",
+        "related_symptoms": ["Cough"],
+    },
+    "ginger": {
+        "local_name": "Ginger (gingembre)",
+        "traditional_use": "Nausea, stomach upset, fever",
+        "evidence": "Ginger is well-studied for nausea relief and has mild anti-inflammatory effects. Safe during pregnancy in moderate amounts.",
+        "warning": "Persistent vomiting with signs of dehydration (no urine, dry mouth, weakness) needs oral rehydration solution and clinic care.",
+        "related_symptoms": ["Nausea", "Vomiting"],
+    },
+    "lemongrass": {
+        "local_name": "Lemongrass / Lemon grass (citronnelle)",
+        "traditional_use": "Fever, anxiety, digestive issues",
+        "evidence": "Lemongrass tea may provide mild fever relief and has antioxidant properties. Widely used in West and Central Africa.",
+        "warning": "Cannot replace malaria testing if fever is present. Use as supportive comfort, not treatment.",
+        "related_symptoms": ["Fever"],
+    },
+    "moringa": {
+        "local_name": "Moringa (moringa oleifera / arbre de vie)",
+        "traditional_use": "Malnutrition, weakness, anaemia",
+        "evidence": "Moringa leaves are very nutritious — high in iron, vitamins A/C, and protein. Helpful for malnutrition and iron-deficiency anaemia.",
+        "warning": "Does not treat the cause of severe fatigue if caused by infection or disease. See a clinician if fatigue is persistent.",
+        "related_symptoms": ["Fatigue", "Weakness"],
+    },
+    "pawpaw leaf": {
+        "local_name": "Pawpaw/Papaya leaf (feuille de papaye)",
+        "traditional_use": "Malaria, fever, platelet boost (dengue)",
+        "evidence": "Papaya leaf extract has shown some benefit for platelet counts in dengue fever in small studies. Evidence for malaria treatment is insufficient.",
+        "warning": "Do NOT use papaya leaf instead of anti-malarial treatment. Malaria must be tested and treated with proven drugs.",
+        "related_symptoms": ["Fever"],
+    },
+    "guava leaf": {
+        "local_name": "Guava leaf tea (feuille de goyave)",
+        "traditional_use": "Diarrhea, stomach upset",
+        "evidence": "Guava leaf has demonstrated antidiarrheal properties in several studies. May help with mild diarrhea.",
+        "warning": "Bloody diarrhea, watery diarrhea with weakness, or diarrhea in children under 5 needs immediate ORS and clinical care.",
+        "related_symptoms": ["Diarrhea"],
+    },
+    "aloe vera": {
+        "local_name": "Aloe vera",
+        "traditional_use": "Skin rashes, burns, wound healing",
+        "evidence": "Aloe vera gel has soothing anti-inflammatory effects on skin. Well-supported for minor burns and mild rashes.",
+        "warning": "Do not apply to deep wounds or infected skin. Infected sores or spreading rashes need antibiotic treatment.",
+        "related_symptoms": ["Rash"],
+    },
+    "turmeric": {
+        "local_name": "Turmeric (curcuma)",
+        "traditional_use": "Joint pain, inflammation, digestion",
+        "evidence": "Curcumin (in turmeric) has anti-inflammatory properties. May help mild joint pain and digestive discomfort.",
+        "warning": "Cannot treat septic arthritis (hot, very swollen single joint) — that is a medical emergency.",
+        "related_symptoms": ["Joint pain"],
+    },
+    "eucalyptus": {
+        "local_name": "Eucalyptus / steam inhalation",
+        "traditional_use": "Nasal congestion, cough, respiratory",
+        "evidence": "Eucalyptus oil has decongestant properties. Steam inhalation with eucalyptus leaves can ease blocked nose and mild cough.",
+        "warning": "Do not give eucalyptus oil orally to children. If breathing difficulty is severe, go to hospital immediately.",
+        "related_symptoms": ["Cough", "Nasal congestion"],
+    },
+    "scent leaf": {
+        "local_name": "Scent leaf / African basil (basilic africain / effirin)",
+        "traditional_use": "Fever, malaria, infections",
+        "evidence": "Some antimicrobial and antipyretic (fever-reducing) properties reported in research.",
+        "warning": "As with neem, cannot replace confirmed malaria treatment. Use only as comfort measure while arranging testing.",
+        "related_symptoms": ["Fever"],
+    },
+}
+
+# Keywords that signal a traditional medicine query
+_HERB_KEYWORDS: list[str] = [
+    "neem", "bitter leaf", "garlic", "ginger", "lemongrass", "lemon grass",
+    "moringa", "pawpaw leaf", "papaya leaf", "guava leaf", "aloe vera",
+    "turmeric", "eucalyptus", "scent leaf", "african basil", "coconut water",
+    "herbal", "herb", "traditional medicine", "bush medicine", "local medicine",
+    "plant remedy", "remedy", "natural remedy", "home remedy",
+    "feuille de", "tisane", "décoction", "remède naturel",
+]
+
+
+def _traditional_medicine_response(query: str) -> dict | None:
+    """Detect herb / traditional medicine mentions and return a bridge response."""
+    text = query.lower()
+    if not any(kw in text for kw in _HERB_KEYWORDS):
+        return None
+
+    matched_herb: dict | None = None
+    matched_key: str = ""
+    for key, herb in _HERB_KNOWLEDGE.items():
+        if key in text:
+            matched_herb = herb
+            matched_key = key
+            break
+
+    if matched_herb:
+        lines = [
+            f"🌿 **Traditional remedy: {matched_herb['local_name']}**\n",
+            f"**Traditional use:** {matched_herb['traditional_use']}",
+            f"\n**What the evidence says:** {matched_herb['evidence']}",
+            f"\n⚠️ **Important:** {matched_herb['warning']}",
+            "\n**MediGuard's advice:** Traditional remedies can provide comfort and may have genuine benefits, "
+            "but they should complement — not replace — clinical care when symptoms are severe, persistent, "
+            "or worsening. Always test for malaria if you have fever in Bamenda.",
+        ]
+        follow_ups = [
+            f"What symptoms are you using {matched_key} for?",
+            "How long have you had these symptoms?",
+            "Have you been tested at a clinic yet?",
+        ]
+    else:
+        # Generic herbal / home remedy query
+        lines = [
+            "🌿 **Traditional medicine and home remedies**\n",
+            "Many local plants used in Bamenda have genuine health benefits supported by research. "
+            "However, **traditional remedies work best as supportive comfort** — they should not replace "
+            "proven treatments for serious illnesses like malaria, meningitis, typhoid, or tuberculosis.\n",
+            "**Ask me about a specific herb or plant** (e.g. neem, bitter leaf, ginger, moringa, guava leaf) "
+            "and I will tell you what the evidence says, what it is used for, and when you still need to go to the clinic.\n",
+            "⚠️ **Always seek clinic care for:** high fever, stiff neck, severe diarrhea, difficulty breathing, "
+            "chest pain, confusion, or symptoms in a child under 5.",
+        ]
+        follow_ups = [
+            "Which herb or plant are you asking about?",
+            "What symptoms are you trying to treat?",
+            "How long have you had these symptoms?",
+        ]
+
+    return {
+        "answer": "\n".join(lines),
+        "sources": ["MediGuard Traditional Medicine Reference", "WHO African Traditional Medicine Guidance"],
+        "disclaimer": DISCLAIMER,
+        "mode": "traditional_medicine",
+        "follow_up_questions": follow_ups,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Child health mode — detect queries about children/infants
+# ---------------------------------------------------------------------------
+
+_CHILD_TERMS: list[str] = [
+    "my child", "my baby", "my pikin", "my son", "my daughter",
+    "the baby", "the child", "my toddler", "my infant", "my kid",
+    "mon enfant", "mon bébé", "ma fille", "mon fils", "le bébé",
+    "pikin dey", "pikin de", "pikin get", "pikin no", "my pikin", "ma pikin",
+    "smol pikin", "pikin man", "pikin woman",
+    "years old", "months old", "year old", "month old",
+    "newborn", "new born", "neonate",
+]
+
+# Vaccination schedule for Cameroon EPI (Expanded Programme on Immunization)
+_CAMEROON_EPI: list[dict] = [
+    {"age": "At birth",       "vaccines": ["BCG", "OPV0 (Polio)"]},
+    {"age": "6 weeks",        "vaccines": ["Pentavalent 1 (DTP-HepB-Hib)", "OPV1", "Pneumococcal PCV13-1", "Rotavirus 1"]},
+    {"age": "10 weeks",       "vaccines": ["Pentavalent 2", "OPV2", "Pneumococcal PCV13-2", "Rotavirus 2"]},
+    {"age": "14 weeks",       "vaccines": ["Pentavalent 3", "OPV3", "IPV", "Pneumococcal PCV13-3"]},
+    {"age": "9 months",       "vaccines": ["Measles-Rubella (MR1)", "Yellow Fever", "Meningococcal A"]},
+    {"age": "15–18 months",   "vaccines": ["Measles-Rubella booster (MR2)"]},
+]
+
+_CHILD_DANGER_SIGNS: list[str] = [
+    "convulsions", "seizures", "fits", "unconscious", "not waking",
+    "very fast breathing", "chest in-drawing", "unable to drink",
+    "vomiting everything", "blood in stool", "severe dehydration",
+    "high fever in baby", "bulging fontanelle", "stiff neck in baby",
+    "yellow skin newborn", "yellow eyes newborn",
+]
+
+
+def _is_child_health_query(query: str) -> bool:
+    text = query.lower()
+    return any(term in text for term in _CHILD_TERMS)
+
+
+def _child_health_context_note(query: str, symptoms: list[str]) -> str:
+    """Return a child-specific note when the query is about a child."""
+    if not _is_child_health_query(query):
+        return ""
+    text = f"{query.lower()} {' '.join(s.lower() for s in symptoms)}"
+    danger_found = [sign for sign in _CHILD_DANGER_SIGNS if sign in text]
+    if danger_found:
+        return (
+            "\n\n🚨 **CHILD DANGER SIGN DETECTED:** "
+            f"You mentioned: *{', '.join(danger_found[:3])}*. "
+            "**This is an emergency — take the child to the nearest hospital immediately.** "
+            "Do not wait. Danger signs in children under 5 can become life-threatening within hours."
+        )
+    # Gentle child-specific note
+    return (
+        "\n\n👶 **Child health note:** Symptoms in children — especially under 5 — can worsen quickly. "
+        "Seek clinic care if the child has high fever (≥ 38.5 °C), cannot drink, has fast breathing, "
+        "a stiff neck, fits/seizures, or is unusually drowsy. Do not give adult medication doses to children."
+    )
+
+
+def _vaccination_query_response(query: str) -> dict | None:
+    """Handle vaccination / immunisation schedule queries."""
+    text = query.lower()
+    if not any(kw in text for kw in [
+        "vaccine", "vaccination", "immunisation", "immunization",
+        "vaccin", "epi", "immuniser", "jab", "shot", "injection schedule",
+        "when to vaccinate", "vaccination schedule",
+    ]):
+        return None
+    lines = [
+        "💉 **Cameroon Immunisation Schedule (EPI)**\n",
+        "The following vaccines are provided **free** at government health centres in Cameroon:\n",
+    ]
+    for entry in _CAMEROON_EPI:
+        vaccines = ", ".join(entry["vaccines"])
+        lines.append(f"**{entry['age']}:** {vaccines}")
+    lines.extend([
+        "\n📍 **Where to vaccinate in Bamenda:**",
+        "- Bamenda Regional Hospital — Immunisation Unit",
+        "- Any district health centre (free under Cameroon EPI)",
+        "- Nkwen Baptist Hospital",
+        "\n⚠️ Keep your child's vaccination card safe — bring it to every clinic visit.",
+        "\n*If your child has missed vaccinations, visit the nearest health centre — catch-up vaccines are available.*",
+    ])
+    return {
+        "answer": "\n".join(lines),
+        "sources": ["Cameroon EPI / MINSANTE", "WHO Immunisation Schedule"],
+        "disclaimer": DISCLAIMER,
+        "mode": "vaccination_info",
+        "follow_up_questions": [
+            "How old is your child?",
+            "Which vaccines has the child already received?",
+            "Does your child have a vaccination card?",
+        ],
+    }
+
+
+# ---------------------------------------------------------------------------
+# Pidgin / Camfranglais conversational detection
+# ---------------------------------------------------------------------------
+
+_PIDGIN_GREETINGS: list[str] = [
+    # Textbook forms (Peace Corps Cameroon Pidgin, 1983)
+    "how yu de", "gut monin", "gut aftenun", "gud ivin", "gut ivin",
+    "a de fayn", "a fayn",
+    # Common spoken variants
+    "how you dey", "how na", "how far", "i dey here",
+    "oga", "na wah", "wetin dey happen", "wussap",
+    "whats up na", "how e dey", "na how", "e don do",
+    "good morning na", "good evening na",
+]
+
+_PIDGIN_THANKS: list[str] = [
+    # Textbook: "tank yu" / "tanki" = thank you
+    "tank yu", "tanki", "tankyu",
+    # Common spoken
+    "i thank you", "tanks na", "thank you o", "e don do fine",
+    "you do well", "you sabi", "you know book",
+    "waka fayn",   # "go well" = farewell / thank you
+    "olrayt",      # alright = acknowledgement
+]
+
+
+def _pidgin_conversational_response(query: str) -> dict | None:
+    """Detect Pidgin greetings/thanks and respond naturally.
+
+    Response style follows authentic Cameroonian Pidgin grammar
+    (Peace Corps Cameroon Pidgin textbook, 1983):
+      - "de" = present progressive marker (textbook)
+      - "dey" also accepted (modern spoken form)
+      - "a" = I,  "ma" = my,  "ya" = your
+      - "pikin" = child,  "taya" = tired,  "sik" = sick
+      - "fayn" = fine/good,  "waka fayn" = go well
+      - "olrayt" = alright/okay
+    """
+    text = query.lower().strip()
+    if any(pg in text for pg in _PIDGIN_GREETINGS):
+        return {
+            "answer": (
+                "How yu de! 👋 Welcome to MediGuard Bamenda.\n\n"
+                "A fit help yu wit:\n"
+                "• **Symptom check** — tell mi how ya bodi de feel, or wetin de hot\n"
+                "• **Disease information** — a go explain any sickness for yu\n"
+                "• **Nearest hospital** — a fit find hospital wey de close to yu\n"
+                "• **Traditional medicine** — a go tell yu if any herb fit help\n"
+                "• **Pikin health** — for ya smol pikin dem\n\n"
+                "Just tell mi wetin de worry yu or ya family. "
+                "No need plenti grammar — tok Pidgin, tok English, tok French, olrayt! 😊"
+            ),
+            "sources": [],
+            "disclaimer": DISCLAIMER,
+            "mode": "pidgin_greeting",
+            "follow_up_questions": [
+                "Wetin de worry yu?",
+                "Which part of ya bodi de hot or de pain yu?",
+                "Yu get feba? Or ya pikin de sik?",
+            ],
+        }
+    if any(pt in text for pt in _PIDGIN_THANKS):
+        return {
+            "answer": (
+                "Olrayt, tank yu! 🙏 Any time ya bodi de do yu anyhow, "
+                "or ya pikin de sik, just come back tell mi. "
+                "MediGuard de here for Bamenda community. "
+                "Waka fayn! 💪"
+            ),
+            "sources": [],
+            "disclaimer": DISCLAIMER,
+            "mode": "pidgin_thanks",
+        }
+    return None
+
+
 def generate_answer(
     query: str,
     filter_disease: str | None = None,
@@ -2519,10 +2950,30 @@ def generate_answer(
     pregnancy_weeks: int | None = None,
     user_lat: float | None = None,
     user_lng: float | None = None,
+    child_mode: bool = False,
 ) -> dict:
+    # If child mode is active, prepend context so all handlers recognise it
+    if child_mode and not query.lower().startswith("my child"):
+        query = f"[Child mode] {query}"
+
+    # ── Pidgin / Camfranglais greeting (before standard conversational) ─────────
+    pidgin_conv = _pidgin_conversational_response(query)
+    if pidgin_conv:
+        return pidgin_conv
+
     conversational = _conversational_response(query)
     if conversational:
         return conversational
+
+    # ── Vaccination / immunisation schedule ──────────────────────────────────
+    vaccination = _vaccination_query_response(query)
+    if vaccination:
+        return vaccination
+
+    # ── Traditional medicine / herb bridge ────────────────────────────────────
+    trad_med = _traditional_medicine_response(query)
+    if trad_med:
+        return trad_med
 
     # ── First aid / accident handler (high priority — before disease lookup) ──
     first_aid = _first_aid_chat_response(query, user_lat=user_lat, user_lng=user_lng)
@@ -2609,19 +3060,49 @@ def generate_answer(
             "Translate any medical terms to plain French where possible.\n\n"
             if _is_french(query) else ""
         )
+        from datetime import datetime as _dt
+        _season_ctx = get_seasonal_context(_dt.now().month)
+        _season_prompt = ""
+        if _season_ctx["risks"]:
+            high_risk = [r["disease"] for r in _season_ctx["risks"] if r["risk"] == "high"]
+            if high_risk:
+                _season_prompt = (
+                    f"\n\nSEASONAL CONTEXT: It is currently {_season_ctx['month_name']} in Bamenda. "
+                    f"High-risk diseases this season: {', '.join(high_risk)}. "
+                    "Mention this context when relevant to the user's symptoms."
+                )
+        _child_prompt = ""
+        if _is_child_health_query(query):
+            _child_prompt = (
+                "\n\nCHILD HEALTH MODE: The user is asking about a child. "
+                "Use age-appropriate dosing guidance, mention child danger signs (high fever, fast breathing, "
+                "inability to drink, stiff neck, fits/convulsions), and recommend the Cameroon EPI vaccination "
+                "schedule when relevant. Be extra cautious — symptoms in children under 5 escalate quickly."
+            )
         messages = [{
             "role": "system",
             "content": (
                 f"{lang_note}"
                 "You are MediGuard's health assistant for Bamenda, Cameroon. "
+                "You understand Cameroon Pidgin English (Camfranglais). "
+                "Pidgin grammar: 'de'/'dey'=present-progressive, 'na'=is/am, 'no'=negation, "
+                "'bin'=past, 'don'=recently done, 'go'=future, 'a'=I, 'ma'=my, 'ya'=your, "
+                "'pikin'=child, 'bele'=stomach, 'het/hed'=head, 'skin'=body, "
+                "'taya'=tired, 'fayn'=fine, 'sik'=sick, 'kof'=cough, 'kol'=cold. "
+                "KEY: 'hot' in Pidgin means BOTH temperature AND pain "
+                "('ma het de hot'=my head hurts, 'ma skin de hot'=feverish). "
+                "If the user writes in Pidgin, respond in simple clear English they can understand, "
+                "but include short Pidgin phrases naturally (e.g. 'no worry', 'waka go hospital'). "
                 "Answer clearly using only the context below. Never diagnose or prescribe medication. "
-                "When the user describes an accident or injury (burns, cuts, fractures, snake bites, car accidents, choking, drowning, electric shock, etc.), "
-                "provide clear step-by-step first aid guidance: what to do immediately, what NOT to do, and when to go to hospital. "
-                "For other health questions, include simple first aid or self-care steps such as rest, fluids, monitoring symptoms, and urgent-care red flags. "
-                "Tell users that automated results can sometimes be incomplete or faulty. Always recommend professional care for personal symptoms. If the user is pregnant or asks about pregnancy, "
-                "ask concise follow-up questions about gestational age, severity, onset, bleeding, abdominal pain, fever, "
-                "headache, vision changes, swelling, shortness of breath, and fetal movement before giving non-urgent guidance.\n\n"
-                f"User context: gender={gender or 'not provided'}, pregnant={is_pregnant}, pregnancy_weeks={pregnancy_weeks or 'not provided'}.\n\n"
+                "When the user describes an accident or injury, provide clear step-by-step first aid guidance. "
+                "For health questions, include simple first aid, self-care steps, and urgent-care red flags. "
+                "Tell users that automated results can sometimes be incomplete or faulty. "
+                "Always recommend professional care for personal symptoms. "
+                "If the user is pregnant, ask follow-up questions about gestational age, bleeding, fever, "
+                "pain, vision changes, swelling, and fetal movement before giving non-urgent guidance."
+                f"{_season_prompt}{_child_prompt}\n\n"
+                f"User context: gender={gender or 'not provided'}, pregnant={is_pregnant}, "
+                f"pregnancy_weeks={pregnancy_weeks or 'not provided'}.\n\n"
                 f"Context from MediGuard curated medical references:\n{context}"
                 f"{weak_note}"
             ),

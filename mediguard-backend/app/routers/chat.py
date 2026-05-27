@@ -19,6 +19,7 @@ def chat(body: ChatInput):
         pregnancy_weeks=body.pregnancy_weeks,
         user_lat=body.user_lat,
         user_lng=body.user_lng,
+        child_mode=body.child_mode,
     )
 
 

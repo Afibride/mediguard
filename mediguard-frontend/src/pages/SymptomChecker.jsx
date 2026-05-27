@@ -20,6 +20,7 @@ import { getAllSymptoms, diseases as diseaseDB } from '@/data/diseases';
 import { getSymptoms, predictDisease, normalizeSymptoms, getClarifyQuestions, analyzeImage } from '@/services/api';
 import { SYMPTOM_PLAIN_NAMES } from '@/data/layman';
 import DisclaimerBanner from '@/components/DisclaimerBanner';
+import VoiceInput from '@/components/VoiceInput';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // ─── Cardinal Symptoms (mirrors backend app/data.py CARDINAL_SYMPTOMS) ───────
@@ -146,6 +147,10 @@ const SymptomChecker = () => {
   const [analyzingImage, setAnalyzingImage] = useState(false);
   const imgInputRef = useRef(null);
 
+  // Child mode & voice input
+  const [childMode, setChildMode] = useState(false);
+  const [voiceListening, setVoiceListening] = useState(false);
+
   // Personal info
   const [formData, setFormData] = useState({
     duration: '', severity: '', gender: '', age: '',
@@ -233,8 +238,8 @@ const SymptomChecker = () => {
     setFormData(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
-  const handleNormalizeText = async () => {
-    const text = freeText.trim();
+  const handleNormalizeText = async (overrideText) => {
+    const text = (typeof overrideText === 'string' ? overrideText : freeText).trim();
     if (!text) return;
     setNormalizing(true);
     try {
@@ -261,6 +266,14 @@ const SymptomChecker = () => {
 
   const handleFreeTextKeyDown = (e) => {
     if (e.key === 'Enter') { e.preventDefault(); handleNormalizeText(); }
+  };
+
+  /** Voice transcript — prepend child prefix if child mode is active, then auto-normalise */
+  const handleVoiceTranscript = (transcript) => {
+    const text = childMode ? `My child: ${transcript}` : transcript;
+    setFreeText(text);
+    // Small delay so state settles, then normalise immediately
+    setTimeout(() => handleNormalizeText(text), 400);
   };
 
   const handleAnalyzeImage = async () => {
@@ -338,6 +351,7 @@ const SymptomChecker = () => {
         is_pregnant: formData.isPregnant,
         pregnancy_weeks: formData.pregnancyWeeks ? Number(formData.pregnancyWeeks) : null,
         fatigue_context: formData.fatigueContext,
+        child_mode: childMode,
       });
       const apiPredictions = mapApiPredictions(res.data.predictions || [], selectedSymptoms);
       const normSymptoms = res.data.normalized_symptoms || selectedSymptoms;
@@ -373,6 +387,7 @@ const SymptomChecker = () => {
         is_pregnant: formData.isPregnant,
         pregnancy_weeks: formData.pregnancyWeeks ? Number(formData.pregnancyWeeks) : null,
         fatigue_context: formData.fatigueContext,
+        child_mode: childMode,
       });
       const apiPredictions = mapApiPredictions(res.data.predictions || [], finalSymptoms);
       navigateToResults(res, apiPredictions, finalSymptoms);
@@ -400,6 +415,7 @@ const SymptomChecker = () => {
     isPregnant: formData.isPregnant,
     pregnancyWeeks: formData.pregnancyWeeks || 'Not specified',
     fatigueContext: formData.fatigueContext,
+    childMode,
     predictions,
     disclaimer,
     pregnancyNote,
@@ -749,6 +765,22 @@ const SymptomChecker = () => {
                                 </div>
                               )}
 
+                              {/* Child mode toggle */}
+                              <div className="mt-3 p-3 rounded-lg border border-rose-200 bg-rose-50 dark:border-rose-900/50 dark:bg-rose-950/20 flex items-start gap-2 sm:gap-3">
+                                <Checkbox id="childMode" checked={childMode}
+                                  onCheckedChange={checked => setChildMode(!!checked)} className="mt-0.5 shrink-0" />
+                                <Label htmlFor="childMode" className="cursor-pointer text-xs sm:text-sm flex-1">
+                                  <span className="font-semibold flex items-center gap-1.5">
+                                    <Baby className="h-3.5 w-3.5 text-rose-500" />
+                                    <span className="hidden xs:inline">I am checking for a child (my pikin)</span>
+                                    <span className="xs:hidden">Checking for a child?</span>
+                                  </span>
+                                  <span className="text-muted-foreground block mt-0.5 text-[10px] sm:text-xs hidden xs:block">
+                                    Activates child health mode — paediatric dosing, EPI vaccination schedule, child danger signs.
+                                  </span>
+                                </Label>
+                              </div>
+
                               <div className="mt-3 p-3 rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/20 flex items-start gap-2 sm:gap-3">
                                 <Checkbox id="fatigueContext" checked={formData.fatigueContext}
                                   onCheckedChange={checked => setFormData(prev => ({ ...prev, fatigueContext: checked }))} className="mt-0.5 shrink-0" />
@@ -794,6 +826,28 @@ const SymptomChecker = () => {
                     </AnimatePresence>
                   </motion.div>
 
+                  {/* Child mode active indicator strip */}
+                  <AnimatePresence>
+                    {childMode && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="mb-3 overflow-hidden"
+                      >
+                        <div className="flex items-center gap-2 rounded-lg border border-rose-300 bg-rose-50 dark:border-rose-800 dark:bg-rose-950/30 px-3 py-2">
+                          <Baby className="h-4 w-4 text-rose-500 shrink-0" />
+                          <span className="text-xs font-semibold text-rose-700 dark:text-rose-300">
+                            Child mode active — all guidance uses paediatric context
+                          </span>
+                          <button type="button" onClick={() => setChildMode(false)} className="ml-auto text-rose-400 hover:text-rose-600">
+                            <X className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
                   {/* Free-text input */}
                   <motion.div variants={itemVariants} className="mb-4 sm:mb-5">
                     <Card className="border-primary/30 border shadow-sm">
@@ -801,21 +855,43 @@ const SymptomChecker = () => {
                         <div className="flex items-center gap-2 mb-2">
                           <Wand2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
                           <span className="text-xs sm:text-sm font-semibold">{t('sc_describe_hint')}</span>
-                          <span className="text-[10px] text-muted-foreground hidden xs:inline">(handles typos & local names)</span>
+                          <span className="text-[10px] text-muted-foreground hidden xs:inline">(Pidgin, English, Français)</span>
                         </div>
+                        {/* Pidgin / language examples */}
+                        <p className="text-[9px] sm:text-[10px] text-muted-foreground mb-2 leading-relaxed hidden sm:block">
+                          💬 Type in any language:&nbsp;
+                          <em>"my head dey pain me"</em>,&nbsp;
+                          <em>"belle dey do me"</em>,&nbsp;
+                          <em>"j'ai de la fièvre"</em>,&nbsp;
+                          <em>"fever and body ache"</em>
+                        </p>
                         <div className="flex gap-2">
                           <Input
                             value={freeText}
                             onChange={e => setFreeText(e.target.value)}
                             onKeyDown={handleFreeTextKeyDown}
-                            placeholder='"fever and body ache"'
+                            placeholder={childMode ? '"My pikin dey hot and vomit"' : '"my head dey pain me / fever and body ache"'}
                             className="h-9 sm:h-10 flex-1 text-sm"
-                            disabled={normalizing}
+                            disabled={normalizing || voiceListening}
                           />
-                          <Button type="button" onClick={handleNormalizeText} disabled={normalizing || !freeText.trim()} className="h-9 sm:h-10 px-3 sm:px-5 shrink-0 text-xs sm:text-sm">
+                          {/* Voice input */}
+                          <VoiceInput
+                            onTranscript={handleVoiceTranscript}
+                            onListening={setVoiceListening}
+                            lang="en-NG"
+                            disabled={normalizing}
+                            size="sm"
+                          />
+                          <Button type="button" onClick={() => handleNormalizeText()} disabled={normalizing || !freeText.trim()} className="h-9 sm:h-10 px-3 sm:px-5 shrink-0 text-xs sm:text-sm">
                             {normalizing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <><Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1" />Add</>}
                           </Button>
                         </div>
+                        {voiceListening && (
+                          <p className="mt-1.5 text-[10px] text-rose-500 font-medium flex items-center gap-1">
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
+                            Listening… speak your symptoms now
+                          </p>
+                        )}
                       </CardContent>
                     </Card>
                   </motion.div>

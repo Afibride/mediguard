@@ -4,6 +4,11 @@ Fuzzy symptom matching.
 Maps free-text symptom descriptions — including misspellings, informal phrases,
 connectives ("I have a fever and headache"), and common typos — to canonical
 symptom names used by the ML model.
+
+Also covers:
+  - Cameroon Pidgin English (Camfranglais) phrases
+  - Local herb / traditional-medicine queries (mapped to related symptoms)
+  - Common Francophone African phrasing
 """
 
 import difflib
@@ -405,18 +410,522 @@ SYMPTOM_ALIASES: dict[str, str] = {
     "anal itching": "Anal itching",
     "river blindness": "Blurred vision",
     "swollen limbs": "Swollen feet",
+
+    # ── Cameroon Pidgin English (Camfranglais) ────────────────────────────────
+    # Based on "An Introduction to Cameroonian Pidgin"
+    #   (Peace Corps Cameroon, 1983, 2nd Ed. — Bellama, Nkwele, Yudom)
+    #
+    # Grammar notes:
+    #   "de"  = present-progressive tense marker (TEXTBOOK form)
+    #   "dey" = modern/spoken variant — BOTH accepted here
+    #   "na"  = is/am/are       "no" = negation
+    #   "bin" = past tense      "don" = recently completed
+    #   "go"  = future          "a"   = I (subject, textbook)
+    #
+    # Body vocabulary (textbook spellings):
+    #   het / hed = head        bele = stomach/belly    fut = foot/leg
+    #   skin = body             ia   = ear              nek = neck
+    #   bak  = back             xhes / ches = chest     ai  = eye
+    #   tit  = teeth/jaw
+    #
+    # KEY RULE: "hot" in Pidgin means BOTH temperature AND pain/hurt.
+    #   "ma het de hot" → my head hurts (= Headache)
+    #   "ma skin de hot" → my body is feverish (skin = body → Fever)
+    # ─────────────────────────────────────────────────────────────────────────
+
+    # ── Pain pattern: [body part] de/dey hot ─────────────────────────────────
+    # het / hed = head
+    "het de hot":          "Headache",
+    "hed de hot":          "Headache",
+    "ma het de hot":       "Headache",
+    "ma hed de hot":       "Headache",
+    "het dey hot":         "Headache",
+    "hed dey hot":         "Headache",
+    "ma het dey hot":      "Headache",
+    "ma hed dey hot":      "Headache",
+    # bele = stomach/belly
+    "bele de hot":         "Abdominal pain",
+    "ma bele de hot":      "Abdominal pain",
+    "bele dey hot":        "Abdominal pain",
+    "ma bele dey hot":     "Abdominal pain",
+    # bak = back
+    "bak de hot":          "Back pain",
+    "ma bak de hot":       "Back pain",
+    "bak dey hot":         "Back pain",
+    "ma bak dey hot":      "Back pain",
+    # fut = foot/leg
+    "fut de hot":          "Joint pain",
+    "ma fut de hot":       "Joint pain",
+    "fut dey hot":         "Joint pain",
+    "ma fut dey hot":      "Joint pain",
+    # nek = neck
+    "nek de hot":          "Neck pain",
+    "ma nek de hot":       "Neck pain",
+    "nek dey hot":         "Neck pain",
+    "ma nek dey hot":      "Neck pain",
+    # ia = ear
+    "ia de hot":           "Ear pain",
+    "ma ia de hot":        "Ear pain",
+    "ia dey hot":          "Ear pain",
+    "ma ia dey hot":       "Ear pain",
+    # xhes / ches = chest
+    "xhes de hot":         "Chest pain",
+    "ma xhes de hot":      "Chest pain",
+    "xhes dey hot":        "Chest pain",
+    "ma xhes dey hot":     "Chest pain",
+    "ches de hot":         "Chest pain",
+    "ma ches de hot":      "Chest pain",
+    "ches dey hot":        "Chest pain",
+    "ma ches dey hot":     "Chest pain",
+    # ai = eye
+    "ai de hot":           "Eye pain",
+    "ma ai de hot":        "Eye pain",
+    "ai dey hot":          "Eye pain",
+    "ma ai dey hot":       "Eye pain",
+    # tit = teeth / jaw
+    "tit de hot":          "Jaw stiffness",
+    "ma tit de hot":       "Jaw stiffness",
+    "tit dey hot":         "Jaw stiffness",
+    "ma tit dey hot":      "Jaw stiffness",
+    # skin = body → feverish
+    "skin de hot":         "Fever",
+    "ma skin de hot":      "Fever",
+    "skin dey hot":        "Fever",
+    "ma skin dey hot":     "Fever",
+    "a skin de hot":       "Fever",
+
+    # ── "hye hot" = to be in pain / feel pain ────────────────────────────────
+    "hye hot":             "Muscle aches",
+    "a de hye hot":        "Muscle aches",
+    "a dey hye hot":       "Muscle aches",
+    "a de hye hot plenti": "Severe headache",
+    "body de hye hot":     "Muscle aches",
+    "body dey hye hot":    "Muscle aches",
+    "bodi de hye hot":     "Muscle aches",
+
+    # ── Head / neurological (de + dey) ───────────────────────────────────────
+    "ma het de pain mi":     "Headache",
+    "het de pain mi":        "Headache",
+    "het de do mi":          "Headache",
+    "ma het de do mi":       "Headache",
+    "ma het de beat":        "Severe headache",
+    "het de beat mi":        "Severe headache",
+    "a de feba":             "Fever",
+    "a de fiba":             "Fever",
+    "ma het de spin":        "Dizziness",
+    "het de spin":           "Dizziness",
+    "a de reel":             "Dizziness",
+    "a de spin":             "Dizziness",
+    "ma ai no de si wel":    "Blurred vision",
+    "ai de blor":            "Blurred vision",
+    # dey variants (existing + new)
+    "my head dey pain me":   "Headache",
+    "head dey pain me":      "Headache",
+    "my head dey do me":     "Headache",
+    "head dey do me":        "Headache",
+    "my head dey hot":       "Fever",
+    "head dey pain":         "Headache",
+    "e dey pain my head":    "Headache",
+    "e dey beat for my head":"Severe headache",
+    "my head dey spin":      "Dizziness",
+    "head dey spin":         "Dizziness",
+    "i dey feel dizzy":      "Dizziness",
+    "my eye dey blur":       "Blurred vision",
+    "my eye no dey see well":"Blurred vision",
+
+    # ── Fever / temperature ───────────────────────────────────────────────────
+    "a de hot trong trong":  "High fever",
+    "a de hot strong strong":"High fever",
+    "feba de kai":           "High fever",
+    "feba de bad":           "High fever",
+    "a de hot for bodi":     "Fever",
+    "a de hot for skin":     "Fever",
+    "a de bad for skin":     "Fever",
+    # dey variants (existing)
+    "my body dey hot":       "Fever",
+    "body dey hot":          "Fever",
+    "i get fever":           "Fever",
+    "i get hot body":        "Fever",
+    "e dey hot for body":    "Fever",
+    "body hot":              "Fever",
+
+    # ── Chills / kol ─────────────────────────────────────────────────────────
+    "a de hye kol":          "Chills",
+    "a dey hye kol":         "Chills",
+    "a de shake for kol":    "Chills",
+    "a de shiver":           "Chills",
+    "bodi de shake for kol": "Chills",
+    "a de kol":              "Chills",
+    "a de kol for bodi":     "Chills",
+    # dey variants (existing)
+    "i dey shake for cold":  "Chills",
+    "i dey shiver":          "Chills",
+    "my body dey shake":     "Chills",
+
+    # ── Fatigue / weakness — "taya" = tired (textbook) ───────────────────────
+    "a de taya":             "Fatigue",
+    "a dey taya":            "Fatigue",
+    "a taya plenti":         "Fatigue",
+    "a taya bad bad":        "Fatigue",
+    "a de taya plenti":      "Fatigue",
+    "bodi de taya mi":       "Fatigue",
+    "body de taya mi":       "Fatigue",
+    "a no get paoa":         "Weakness",
+    "a no get pawa":         "Weakness",
+    "a no get stren":        "Weakness",
+    "a no fit stan":         "Weakness",
+    "a de dray":             "Weight loss",   # dray = thin/pale (textbook)
+    "a don dray":            "Weight loss",
+    "a de fas":              "Weakness",
+    "a get bodi pain":       "Muscle aches",
+    "a de pein for skin":    "Muscle aches",
+    # dey variants (existing)
+    "my body dey tire me":   "Fatigue",
+    "body dey tire me":      "Fatigue",
+    "i dey feel weak":       "Weakness",
+    "i no get strength":     "Weakness",
+    "body weak":             "Weakness",
+    "i dey tire":            "Fatigue",
+    "i no fit stand":        "Weakness",
+    "my body dey pain me":   "Muscle aches",
+    "body dey pain me":      "Muscle aches",
+
+    # ── General sickness — "a no fayn" / "a no wel" ───────────────────────────
+    "a no fayn":             "Fatigue",
+    "a no fayn at ol":       "Fatigue",
+    "a no wel":              "Fatigue",
+    "a sik":                 "Fatigue",
+    "a de sik":              "Fatigue",
+    "a bin sik":             "Fatigue",
+    "a don sik":             "Fatigue",
+    "a de sik bad":          "Fatigue",
+    "i no fayn":             "Fatigue",
+    "i no wel":              "Fatigue",
+    "bodi no fayn":          "Fatigue",
+    "a neba fayn":           "Fatigue",
+    "a no fayn bifo":        "Fatigue",
+    "a no fayn nawa":        "Fatigue",
+    "a de sik nawa":         "Fatigue",
+    "a bin sik fo hous":     "Fatigue",
+
+    # ── Stomach / gastrointestinal — "bele" = textbook spelling ──────────────
+    "ma bele de do mi":          "Abdominal pain",
+    "bele de do mi":             "Abdominal pain",
+    "bele de pain mi":           "Abdominal pain",
+    "ma bele de pain mi":        "Abdominal pain",
+    "bele de ran":               "Diarrhea",
+    "ma bele de ran":            "Diarrhea",
+    "a de purge":                "Diarrhea",
+    "a dey purge":               "Diarrhea",
+    "a de purge bad":            "Diarrhea",
+    "a de purge trong":          "Diarrhea",
+    "a de purge strong":         "Diarrhea",
+    "a noba chop":               "Loss of appetite",   # noba = never/haven't
+    "a no fit chop":             "Loss of appetite",
+    "a no wan chop":             "Loss of appetite",
+    "chop no swit mi":           "Loss of appetite",
+    "a no de chop":              "Loss of appetite",
+    "a de vom":                  "Vomiting",
+    "a don vom":                 "Vomiting",
+    "wata wata stul":            "Diarrhea",
+    "wata stul":                 "Diarrhea",
+    "stul de com anyhau":        "Diarrhea",
+    "blod for stul":             "Bloody or mucus-filled diarrhea",
+    "a de sik fo beli":          "Abdominal pain",
+    # bele with dey (also accept older "belle" spelling)
+    "bele dey do me":            "Abdominal pain",
+    "belle dey do me":           "Abdominal pain",
+    "my belle dey do me":        "Abdominal pain",
+    "my bele dey do me":         "Abdominal pain",
+    "stomach dey do me":         "Abdominal pain",
+    "my stomach dey pain me":    "Abdominal pain",
+    "belly dey pain me":         "Abdominal pain",
+    "i get stomach pain":        "Abdominal pain",
+    "i dey vomit":               "Vomiting",
+    "i dey vomit since yesterday":"Vomiting",
+    "i dey purge":               "Diarrhea",
+    "i get purge":               "Diarrhea",
+    "running stomach":           "Diarrhea",
+    "my stomach dey run":        "Diarrhea",
+    "stool dey come anyhow":     "Diarrhea",
+    "watery poo-poo":            "Diarrhea",
+    "watery poo poo":            "Diarrhea",
+    "blood for poo-poo":         "Bloody or mucus-filled diarrhea",
+    "blood for stool":           "Bloody or mucus-filled diarrhea",
+    "i no wan eat":              "Loss of appetite",
+    "i no dey hungry":           "Loss of appetite",
+    "food no dey sweet me":      "Loss of appetite",
+    "i no fit eat":              "Loss of appetite",
+    "my pikin no dey eat":       "Loss of appetite",
+
+    # ── Cough / respiratory — "kof" = textbook, "bref" = breath ─────────────
+    "a de kof":                  "Cough",
+    "a dey kof":                 "Cough",
+    "a de kof trong trong":      "Chronic cough",
+    "a de kof strong strong":    "Chronic cough",
+    "a don kof ovatem":          "Chronic cough",
+    "kof de worry mi":           "Chronic cough",
+    "a no fit bref wel":         "Shortness of breath",
+    "a no fit bref":             "Shortness of breath",
+    "bref de shot mi":           "Shortness of breath",
+    "ma xhes de pain mi":        "Chest pain",
+    "xhes de pain mi":           "Chest pain",
+    "ma ches de pain mi":        "Chest pain",
+    "xhes de tight":             "Chest tightness",
+    "a de hwiz":                 "Wheezing",
+    "a de wheez":                "Wheezing",
+    "ma nek de pain mi":         "Sore throat",
+    "nek de pain mi":            "Sore throat",
+    "noz de ran":                "Runny nose",
+    "ma noz de ran":             "Runny nose",
+    # dey variants (existing)
+    "i dey cough":               "Cough",
+    "i get cough":               "Cough",
+    "strong cough":              "Chronic cough",
+    "cough dey worry me":        "Chronic cough",
+    "i no fit breathe well":     "Shortness of breath",
+    "breath dey short me":       "Shortness of breath",
+    "chest dey pain me":         "Chest pain",
+    "my chest dey pain me":      "Chest pain",
+    "chest dey tight":           "Chest tightness",
+    "i dey wheeze":              "Wheezing",
+    "throat dey pain me":        "Sore throat",
+    "my throat dey pain me":     "Sore throat",
+    "nose dey run":              "Runny nose",
+    "my nose dey run":           "Runny nose",
+
+    # ── Eyes / skin (ai = eye, skin = body) ──────────────────────────────────
+    "ma ai de yelo":             "Yellow eyes",
+    "ai de yelo":                "Yellow eyes",
+    "skin de yelo":              "Jaundice",
+    "ma skin de yelo":           "Jaundice",
+    "skin de scratch mi":        "Itchy skin",
+    "ma skin de scratch mi":     "Itchy skin",
+    "skin de itch mi":           "Itchy skin",
+    "a get rash for skin":       "Rash",
+    "ai de red":                 "Red eyes",
+    "ma ai de red":              "Red eyes",
+    "ai de wata":                "Eye discharge",
+    "ma ai de wata":             "Eye discharge",
+    "ai de yelo":                "Yellow eyes",
+    # dey variants (existing)
+    "my eye dey yellow":         "Yellow eyes",
+    "eye dey yellow":            "Yellow eyes",
+    "yellow eye":                "Yellow eyes",
+    "skin dey yellow":           "Jaundice",
+    "my skin dey yellow":        "Jaundice",
+    "i get rash for skin":       "Rash",
+    "rash dey my body":          "Rash",
+    "skin dey itch me":          "Itchy skin",
+    "my skin dey itch me":       "Itchy skin",
+    "body dey itch me":          "Itchy skin",
+    "skin dey scratch":          "Itchy skin",
+    "eye dey red":               "Red eyes",
+    "my eye dey red":            "Red eyes",
+    "eye discharge":             "Eye discharge",
+
+    # ── Urinary / reproductive ────────────────────────────────────────────────
+    "a de pis plenti":           "Frequent urination",
+    "pis de pain mi":            "Painful urination",
+    "blod for pis":              "Blood in urine",
+    "pis de dak":                "Dark urine",
+    # dey variants (existing)
+    "i dey urinate too much":    "Frequent urination",
+    "pee dey pain me":           "Painful urination",
+    "piss dey pain me":          "Painful urination",
+    "urine dey pain me":         "Painful urination",
+    "blood for urine":           "Blood in urine",
+    "dark urine":                "Dark urine",
+
+    # ── Joints / bones / muscles ──────────────────────────────────────────────
+    "joynt de pain mi":          "Joint pain",
+    "ma joynt de pain mi":       "Joint pain",
+    "bon de pain mi":            "Joint pain",
+    "wes de pain mi":            "Back pain",
+    "ma wes de pain mi":         "Back pain",
+    "nek stif":                  "Stiff neck",
+    "ma nek stif":               "Stiff neck",
+    "ma nek de stif":            "Stiff neck",
+    # dey variants (existing)
+    "joint dey pain me":         "Joint pain",
+    "my joint dey pain me":      "Joint pain",
+    "bone dey pain me":          "Joint pain",
+    "waist dey pain me":         "Back pain",
+    "my waist dey pain me":      "Back pain",
+    "neck stiff":                "Stiff neck",
+    "my neck stiff":             "Stiff neck",
+
+    # ── Child-specific Pidgin — pikin / smol pikin ────────────────────────────
+    # "de" (textbook) forms
+    "ma pikin de hot":           "Fever",
+    "pikin de hot":              "Fever",
+    "ma pikin skin de hot":      "Fever",
+    "pikin skin de hot":         "Fever",
+    "ma pikin de shake":         "Chills",
+    "pikin de shake":            "Chills",
+    "ma pikin de taya":          "Fatigue",
+    "pikin de taya":             "Fatigue",
+    "ma pikin no fit chop":      "Loss of appetite",
+    "pikin no fit chop":         "Loss of appetite",
+    "pikin no wan chop":         "Loss of appetite",
+    "ma pikin de kof":           "Cough",
+    "pikin de kof":              "Cough",
+    "ma pikin de vomit":         "Vomiting",
+    "pikin de vomit":            "Vomiting",
+    "pikin de vom":              "Vomiting",
+    "ma pikin de purge":         "Diarrhea",
+    "pikin de purge":            "Diarrhea",
+    "smol pikin de hot":         "Fever",
+    "smol pikin de kof":         "Cough",
+    "smol pikin de purge":       "Diarrhea",
+    "pikin nek stif":            "Stiff neck",
+    "ma pikin nek stif":         "Stiff neck",
+    "pikin ai de yelo":          "Yellow eyes",
+    "pikin fit":                 "Seizures",        # "fit" = convulsion/seizure
+    "ma pikin fit":              "Seizures",
+    "pikin get fit":             "Seizures",
+    "pikin de shake trong":      "Seizures",
+    "pikin de shake strong":     "Seizures",
+    "ma pikin de shake trong":   "Seizures",
+    "pikin no sabi":             "Confusion",       # "no sabi" = doesn't know/confused
+    "pikin no de tok":           "Confusion",
+    # "dey" forms (existing + new)
+    "my pikin dey hot":          "Fever",
+    "pikin dey shake":           "Chills",
+    "pikin body hot":            "Fever",
+    "my pikin dey cry":          "Abdominal pain",
+    "pikin no dey sleep":        "Fatigue",
+    "my pikin dey vomit":        "Vomiting",
+    "pikin dey purge":           "Diarrhea",
+    "pikin get rash":            "Rash",
+    "pikin neck stiff":          "Stiff neck",
+    "pikin eye dey yellow":      "Yellow eyes",
+    # ── Traditional medicine / local herb symptom links ───────────────────────
+    # These map herb mentions to the symptom the user is TREATING,
+    # so the normalizer can extract the underlying symptom for prediction.
+    "neem leaf": "Fever",
+    "neem leaves": "Fever",
+    "neem tea": "Fever",
+    "bitter leaf": "Abdominal pain",
+    "bitter leaf soup": "Abdominal pain",
+    "garlic tea": "Cough",
+    "garlic water": "Cough",
+    "ginger tea": "Nausea",
+    "ginger water": "Nausea",
+    "lemon grass": "Fever",
+    "lemongrass tea": "Fever",
+    "african basil": "Fever",
+    "scent leaf": "Fever",
+    "moringa": "Fatigue",
+    "moringa leaf": "Fatigue",
+    "moringa water": "Fatigue",
+    "turmeric": "Joint pain",
+    "turmeric water": "Joint pain",
+    "eucalyptus": "Cough",
+    "eucalyptus leaf": "Cough",
+    "aloe vera": "Rash",
+    "aloe leaf": "Rash",
+    "pawpaw leaf": "Fever",
+    "papaya leaf": "Fever",
+    "guava leaf": "Diarrhea",
+    "guava leaf tea": "Diarrhea",
+    "bush pepper": "Abdominal pain",
+    "black pepper tea": "Cough",
+    "coconut water": "Dehydration",
+    "eru": "Abdominal pain",
+    "njama njama": "Abdominal pain",
+    "tonton": "Abdominal pain",
+    # ── Francophone African informal phrases ──────────────────────────────────
+    "j'ai mal à la tête": "Headache",
+    "mal de tête": "Headache",
+    "j'ai de la fièvre": "Fever",
+    "j'ai chaud": "Fever",
+    "j'ai froid": "Chills",
+    "j'ai mal au ventre": "Abdominal pain",
+    "mal au ventre": "Abdominal pain",
+    "j'ai la diarrhée": "Diarrhea",
+    "j'ai vomi": "Vomiting",
+    "je tousse": "Cough",
+    "j'ai mal à la gorge": "Sore throat",
+    "yeux jaunes": "Yellow eyes",
+    "peau jaune": "Jaundice",
+    "j'ai des boutons": "Rash",
+    "boutons sur la peau": "Rash",
+    "démangeaisons": "Itchy skin",
+    "pieds enflés": "Swollen feet",
+    "j'urine souvent": "Frequent urination",
+    "ça brûle quand j'urine": "Painful urination",
+    "j'ai perdu l'appétit": "Loss of appetite",
+    "je me sens faible": "Weakness",
+    "j'ai les articulations qui font mal": "Joint pain",
 }
 
 
 def _split_on_connectives(text: str) -> list[str]:
-    """Split text on common connectives and punctuation."""
+    """Split text on common connectives and punctuation.
+
+    Handles English, Pidgin English (Camfranglais), and French connectives.
+    Pidgin patterns:
+      'i get fever and headache'
+      'bele de do mi an a de kof'          (an = and, textbook)
+      'a de hot wit headache'              (wit = with)
+      'a dey vomit and i dey purge'
+    """
     return [
         part.strip()
         for part in re.split(
-            r"\band\b|\bwith\b|\balso\b|\bplus\b|\bor\b|,|;|\.", text.lower()
+            r"\band\b|\bwith\b|\balso\b|\bplus\b|\bor\b"
+            r"|\bi get\b|\bi dey\b|\bi don\b|\bi de\b"   # Pidgin: I-starters
+            r"|\ba de\b|\ba dey\b|\ba don\b|\ba bin\b"   # textbook "a" subject
+            r"|\bwit\b|\ban\b"                            # Pidgin "with" / "and"
+            r"|\bet\b|\bavec\b|\baussi\b|\bainsi que\b"  # French connectives
+            r"|,|;|\.",
+            text.lower()
         )
         if part.strip()
     ]
+
+
+def _preprocess_pidgin(text: str) -> str:
+    """Normalise Pidgin / Camfranglais constructs before alias matching.
+
+    Based on "An Introduction to Cameroonian Pidgin" (Peace Corps Cameroon, 1983).
+    Removes filler subject pronouns and tense markers so bare phrases can match
+    alias entries regardless of which tense form the user typed.
+
+    Examples:
+      'a de taya plenti'         → 'taya plenti'
+      'ma het de hot'            → 'het de hot'
+      'my pikin dey purge'       → 'pikin dey purge'
+      'i have a fever'           → 'a fever'  (then → 'fever')
+    """
+    text = text.lower().strip()
+
+    # ── Textbook possessives: "ma" (my), "ya" (your) ─────────────────────────
+    # Strip leading "ma" / "ya" so 'ma het de hot' → 'het de hot'
+    text = re.sub(r"^(ma|ya)\s+", "", text)
+
+    # ── English possessives ───────────────────────────────────────────────────
+    # 'my pikin dey ...' → 'pikin dey ...'
+    text = re.sub(r"^(my|the|our|her|his)\s+", "", text)
+
+    # ── Filler subject + tense — textbook "a de/dey/don/bin" ─────────────────
+    # 'a de kof' → 'kof', 'a dey purge' → 'purge'
+    text = re.sub(r"^(a|i)\s+(de|dey|don|bin|go)\s+", "", text)
+
+    # ── "e dey" filler (3rd-person impersonal) ────────────────────────────────
+    text = re.sub(r"\be\s+(dey|de)\s+", "", text)
+
+    # ── English "i have / i get / i dey" starters ────────────────────────────
+    text = re.sub(r"^(i have|i get|i don get|i dey|i de)\s+", "", text)
+
+    # ── Trailing object pronoun "mi" / "me" — 'pain mi' stays, but if after
+    #    stripping subject the phrase is just a verb + mi, keep verb only ──────
+    # e.g. 'pain mi' → keep (so aliases like 'het de pain mi' still match);
+    # we only remove trailing "me" on bare verbs like 'tire me', 'do me'
+    text = re.sub(r"\s+(me|mi)$", "", text)
+
+    return text.strip()
 
 
 def normalize_symptom_text(text: str, known_symptoms: list[str]) -> list[str]:
@@ -439,12 +948,14 @@ def normalize_symptom_text(text: str, known_symptoms: list[str]) -> list[str]:
     known_lower = {s.lower(): s for s in known_symptoms}
     found: set[str] = set()
 
-    # 1. Try whole-text alias first
-    if text in SYMPTOM_ALIASES:
-        canonical = SYMPTOM_ALIASES[text]
-        if canonical in known_symptoms:
-            found.add(canonical)
-            return list(found)
+    # 1. Try whole-text alias first (original + pidgin-preprocessed)
+    for candidate_text in {text, _preprocess_pidgin(text)}:
+        if candidate_text in SYMPTOM_ALIASES:
+            canonical = SYMPTOM_ALIASES[candidate_text]
+            if canonical in known_symptoms:
+                found.add(canonical)
+    if found:
+        return list(found)
 
     # 2. Split on connectives, process each part
     parts = _split_on_connectives(text)
@@ -452,20 +963,27 @@ def normalize_symptom_text(text: str, known_symptoms: list[str]) -> list[str]:
         if not part:
             continue
 
+        # Also try the pidgin-preprocessed version of each part
+        part_variants = {part, _preprocess_pidgin(part)}
+
         # 2a. Direct alias match
-        if part in SYMPTOM_ALIASES:
-            canonical = SYMPTOM_ALIASES[part]
-            if canonical in known_symptoms:
-                found.add(canonical)
-                continue
+        for pv in part_variants:
+            if pv in SYMPTOM_ALIASES:
+                canonical = SYMPTOM_ALIASES[pv]
+                if canonical in known_symptoms:
+                    found.add(canonical)
+
+        if any(pv in SYMPTOM_ALIASES for pv in part_variants):
+            continue
 
         # 2b. Partial alias scan (phrase in part or part in phrase)
         matched_alias = False
         for phrase, canonical in SYMPTOM_ALIASES.items():
-            if phrase in part or part in phrase:
-                if canonical in known_symptoms:
-                    found.add(canonical)
-                    matched_alias = True
+            for pv in part_variants:
+                if phrase in pv or pv in phrase:
+                    if canonical in known_symptoms:
+                        found.add(canonical)
+                        matched_alias = True
 
         if matched_alias:
             continue
