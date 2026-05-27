@@ -10,6 +10,7 @@ class ChatInput(BaseModel):
     pregnancy_weeks: int | None = None
     user_lat: float | None = None
     user_lng: float | None = None
+    child_mode: bool = False   # True when user is asking about a child/infant
 
 
 class ChatResponse(BaseModel):

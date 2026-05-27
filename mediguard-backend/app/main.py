@@ -31,6 +31,18 @@ def health():
     return {"status": "ok", "service": "MediGuard API", "models": model_status}
 
 
+@app.get("/seasonal-context", tags=["Health Context"])
+def seasonal_context(month: int | None = None):
+    """Return current seasonal disease risks for Bamenda, NW Cameroon.
+
+    Query param ``month`` (1–12) overrides the current calendar month — useful
+    for testing. Returns high/medium risk diseases, explanations, and a
+    banner text string for the frontend.
+    """
+    from app.rag.retriever import get_seasonal_context
+    return get_seasonal_context(month)
+
+
 # ---------------------------------------------------------------------------
 # POST /admin/model-update
 # Manually trigger a model refresh from Hugging Face (admin-only).

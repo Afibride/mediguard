@@ -11,12 +11,14 @@ import {
   Plus, MessageSquare, Trash2, X,
   PanelLeftClose, PanelLeftOpen, Share2, Clock,
   ThumbsUp, ThumbsDown, ImagePlus, Loader2, MapPin,
-  HelpCircle, ChevronDown
+  HelpCircle, ChevronDown, Baby
 } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import SuggestedQuestions from '@/components/SuggestedQuestions';
 import SourceCitation from '@/components/SourceCitation';
+import SeasonalBanner from '@/components/SeasonalBanner';
+import VoiceInput from '@/components/VoiceInput';
 import { analyzeImage, saveChatHistory, sendChatMessage, submitChatFeedback } from '@/services/api';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -98,8 +100,18 @@ const ChatAI = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageAnalyzing, setImageAnalyzing] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
+  const [childMode, setChildMode] = useState(false);
+  const [voiceListening, setVoiceListening] = useState(false);
   const imageInputRef = useRef(null);
   const sessionId = useRef('sess_' + Date.now()).current;
+
+  // Voice transcript handler — inject into input, then auto-send
+  const handleVoiceTranscript = (transcript) => {
+    const text = childMode ? `My child: ${transcript}` : transcript;
+    setInput(text);
+    // Small delay so the user sees what was captured before it sends
+    setTimeout(() => handleSend(text), 400);
+  };
 
   // ── Reply-hint chips for symptom follow-up questions ─────────────────────
   const getReplyHints = (followUpQuestions) => {
@@ -371,6 +383,7 @@ const ChatAI = () => {
       const res = await sendChatMessage(textToSend, history, null, {
         ...pregnancyContext,
         ...(freshLocation ? { user_lat: freshLocation.lat, user_lng: freshLocation.lng } : {}),
+        child_mode: childMode,
       });
       const fullAnswer = res.data.answer || '';
       const aiMsgObj = {
@@ -799,6 +812,16 @@ const ChatAI = () => {
                     Guest Mode - <Link to="/login" className="ml-1 underline font-bold text-primary">Login</Link>
                   </Badge>
                 )}
+                {/* Child mode toggle */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setChildMode(v => !v)}
+                  title={childMode ? 'Turn off child mode' : 'Child mode — asking about a child/infant'}
+                  className={`h-8 w-8 sm:h-9 sm:w-9 ${childMode ? 'text-rose-600 bg-rose-50 dark:bg-rose-950/30' : 'text-muted-foreground hover:text-rose-600'}`}
+                >
+                  <Baby className="h-4 w-4 sm:h-5 sm:w-5" />
+                </Button>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -815,6 +838,25 @@ const ChatAI = () => {
               </div>
             </div>
           </div>
+
+          {/* Seasonal disease banner — compact strip below header */}
+          <SeasonalBanner compact className="mx-3 mt-2 mb-0" />
+
+          {/* Child mode indicator strip */}
+          {childMode && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="mx-3 mt-1.5 flex items-center gap-2 rounded-lg border border-rose-300 bg-rose-50 dark:bg-rose-950/30 dark:border-rose-700 px-3 py-1.5 text-[11px] text-rose-700 dark:text-rose-300"
+            >
+              <Baby className="h-3.5 w-3.5 shrink-0" />
+              <span className="flex-1 font-medium">Child mode ON — responses adapted for children & infants</span>
+              <button onClick={() => setChildMode(false)} className="opacity-60 hover:opacity-100">
+                <X className="h-3 w-3" />
+              </button>
+            </motion.div>
+          )}
 
           {/* Help Panel — collapsible, shown when showHelp is true */}
           <AnimatePresence>
@@ -837,31 +879,31 @@ const ChatAI = () => {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] sm:text-xs text-muted-foreground">
                     <div className="space-y-1.5">
-                      <p className="font-semibold text-foreground">💬 Describing symptoms</p>
-                      <p>✦ Say symptoms naturally: <em>"I have fever, headache and chills"</em></p>
-                      <p>✦ Mention how long: <em>"…for 3 days"</em></p>
-                      <p>✦ Mention severity: <em>"…and it's quite severe"</em></p>
-                      <p>✦ One message is enough — the AI will ask follow-up questions</p>
+                      <p className="font-semibold text-foreground">💬 Any language works</p>
+                      <p>✦ English: <em>"I have fever and chills"</em></p>
+                      <p>✦ Pidgin: <em>"My head dey pain me and body hot"</em></p>
+                      <p>✦ Français: <em>"J'ai de la fièvre et mal à la tête"</em></p>
+                      <p>✦ Or just <strong>tap a body tile</strong> — no typing needed!</p>
                     </div>
                     <div className="space-y-1.5">
-                      <p className="font-semibold text-foreground">🔁 Answering follow-ups</p>
+                      <p className="font-semibold text-foreground">🔁 Quick answers to follow-ups</p>
                       <p>✦ Duration → <em>"3 days"</em> or <em>"about a week"</em></p>
-                      <p>✦ Severity → <em>"mild"</em>, <em>"moderate"</em>, or <em>"severe"</em></p>
-                      <p>✦ Temperature → <em>"38 °C"</em> or <em>"I don't have a thermometer"</em></p>
-                      <p>✦ No more symptoms → just reply <em>"no"</em> or <em>"none"</em></p>
+                      <p>✦ Severity → <em>"mild"</em>, <em>"moderate"</em>, <em>"severe"</em></p>
+                      <p>✦ Temperature → <em>"38 °C"</em> or <em>"no thermometer"</em></p>
+                      <p>✦ No more symptoms → reply <em>"no"</em> or <em>"none"</em></p>
                     </div>
                     <div className="space-y-1.5">
                       <p className="font-semibold text-foreground">💡 Other things you can ask</p>
-                      <p>✦ <em>"What is malaria?"</em></p>
-                      <p>✦ <em>"How is typhoid treated?"</em></p>
+                      <p>✦ <em>"Can neem leaves help with fever?"</em></p>
+                      <p>✦ <em>"Vaccination schedule for my pikin"</em></p>
                       <p>✦ <em>"Nearest hospital in Bamenda"</em></p>
-                      <p>✦ <em>"What are the current disease trends?"</em></p>
+                      <p>✦ <em>"What diseases are trending now?"</em></p>
                     </div>
                     <div className="space-y-1.5">
-                      <p className="font-semibold text-foreground">⚠️ Important reminders</p>
-                      <p>✦ Results are guidance — not a medical diagnosis</p>
-                      <p>✦ Visit a clinic for severe or worsening symptoms</p>
-                      <p>✦ You can upload an image of a rash or skin condition</p>
+                      <p className="font-semibold text-foreground">🎤 Voice &amp; special modes</p>
+                      <p>✦ Tap the <strong>🎤 mic button</strong> to speak your symptoms</p>
+                      <p>✦ Tap the <strong>👶 baby icon</strong> for child health mode</p>
+                      <p>✦ Upload an image of a rash or skin condition</p>
                       <p>✦ Start a new chat for a fresh topic</p>
                     </div>
                   </div>
@@ -1088,6 +1130,15 @@ const ChatAI = () => {
                     : <ImagePlus className="h-3 w-3 sm:h-5 sm:w-5" />
                   }
                 </Button>
+
+                {/* Voice input button */}
+                <VoiceInput
+                  onTranscript={handleVoiceTranscript}
+                  onListening={setVoiceListening}
+                  lang="en-NG"
+                  disabled={isTyping || imageAnalyzing}
+                  size="md"
+                />
 
                 <div className="relative flex-1 min-w-0 max-w-full">
                   <Input

@@ -4,6 +4,11 @@ Fuzzy symptom matching.
 Maps free-text symptom descriptions — including misspellings, informal phrases,
 connectives ("I have a fever and headache"), and common typos — to canonical
 symptom names used by the ML model.
+
+Also covers:
+  - Cameroon Pidgin English (Camfranglais) phrases
+  - Local herb / traditional-medicine queries (mapped to related symptoms)
+  - Common Francophone African phrasing
 """
 
 import difflib
@@ -405,18 +410,215 @@ SYMPTOM_ALIASES: dict[str, str] = {
     "anal itching": "Anal itching",
     "river blindness": "Blurred vision",
     "swollen limbs": "Swollen feet",
+
+    # ── Cameroon Pidgin English (Camfranglais) ────────────────────────────────
+    # Head / neurological
+    "my head dey pain me": "Headache",
+    "head dey pain me": "Headache",
+    "my head dey do me": "Headache",
+    "head dey do me": "Headache",
+    "my head dey hot": "Fever",
+    "head dey pain": "Headache",
+    "e dey pain my head": "Headache",
+    "e dey beat for my head": "Severe headache",
+    "my head dey spin": "Dizziness",
+    "head dey spin": "Dizziness",
+    "i dey feel dizzy": "Dizziness",
+    "my eye dey blur": "Blurred vision",
+    "my eye no dey see well": "Blurred vision",
+    # Fever / temperature
+    "my body dey hot": "Fever",
+    "body dey hot": "Fever",
+    "i get fever": "Fever",
+    "i get hot body": "Fever",
+    "e dey hot for body": "Fever",
+    "body hot": "Fever",
+    "i dey shake for cold": "Chills",
+    "i dey shiver": "Chills",
+    "my body dey shake": "Chills",
+    # Fatigue / weakness
+    "my body dey tire me": "Fatigue",
+    "body dey tire me": "Fatigue",
+    "i dey feel weak": "Weakness",
+    "i no get strength": "Weakness",
+    "body weak": "Weakness",
+    "i dey tire": "Fatigue",
+    "i no fit stand": "Weakness",
+    "my body dey pain me": "Muscle aches",
+    "body dey pain me": "Muscle aches",
+    # Stomach / gastrointestinal
+    "belle dey do me": "Abdominal pain",
+    "my belle dey do me": "Abdominal pain",
+    "stomach dey do me": "Abdominal pain",
+    "my stomach dey pain me": "Abdominal pain",
+    "belly dey pain me": "Abdominal pain",
+    "i get stomach pain": "Abdominal pain",
+    "i dey vomit": "Vomiting",
+    "i dey vomit since yesterday": "Vomiting",
+    "i dey purge": "Diarrhea",
+    "i get purge": "Diarrhea",
+    "running stomach": "Diarrhea",
+    "my stomach dey run": "Diarrhea",
+    "stool dey come anyhow": "Diarrhea",
+    "watery poo-poo": "Diarrhea",
+    "watery poo poo": "Diarrhea",
+    "blood for poo-poo": "Bloody or mucus-filled diarrhea",
+    "blood for stool": "Bloody or mucus-filled diarrhea",
+    "i no wan eat": "Loss of appetite",
+    "i no dey hungry": "Loss of appetite",
+    "food no dey sweet me": "Loss of appetite",
+    "i no fit eat": "Loss of appetite",
+    "my pikin no dey eat": "Loss of appetite",
+    # Cough / respiratory
+    "i dey cough": "Cough",
+    "i get cough": "Cough",
+    "strong cough": "Chronic cough",
+    "cough dey worry me": "Chronic cough",
+    "i no fit breathe well": "Shortness of breath",
+    "breath dey short me": "Shortness of breath",
+    "chest dey pain me": "Chest pain",
+    "my chest dey pain me": "Chest pain",
+    "chest dey tight": "Chest tightness",
+    "i dey wheeze": "Wheezing",
+    "throat dey pain me": "Sore throat",
+    "my throat dey pain me": "Sore throat",
+    "nose dey run": "Runny nose",
+    "my nose dey run": "Runny nose",
+    # Eyes / skin
+    "my eye dey yellow": "Yellow eyes",
+    "eye dey yellow": "Yellow eyes",
+    "yellow eye": "Yellow eyes",
+    "skin dey yellow": "Jaundice",
+    "my skin dey yellow": "Jaundice",
+    "i get rash for skin": "Rash",
+    "rash dey my body": "Rash",
+    "skin dey itch me": "Itchy skin",
+    "my skin dey itch me": "Itchy skin",
+    "body dey itch me": "Itchy skin",
+    "skin dey scratch": "Itchy skin",
+    "eye dey red": "Red eyes",
+    "my eye dey red": "Red eyes",
+    "eye discharge": "Eye discharge",
+    # Urinary / reproductive
+    "i dey urinate too much": "Frequent urination",
+    "pee dey pain me": "Painful urination",
+    "piss dey pain me": "Painful urination",
+    "urine dey pain me": "Painful urination",
+    "blood for urine": "Blood in urine",
+    "dark urine": "Dark urine",
+    # Joints / bones
+    "joint dey pain me": "Joint pain",
+    "my joint dey pain me": "Joint pain",
+    "bone dey pain me": "Joint pain",
+    "waist dey pain me": "Back pain",
+    "my waist dey pain me": "Back pain",
+    "neck stiff": "Stiff neck",
+    "my neck stiff": "Stiff neck",
+    # Child-specific Pidgin
+    "my pikin dey hot": "Fever",
+    "pikin dey shake": "Chills",
+    "pikin body hot": "Fever",
+    "my pikin dey cry": "Abdominal pain",
+    "pikin no dey sleep": "Fatigue",
+    "my pikin dey vomit": "Vomiting",
+    "pikin dey purge": "Diarrhea",
+    "pikin get rash": "Rash",
+    "pikin neck stiff": "Stiff neck",
+    "pikin eye dey yellow": "Yellow eyes",
+    # ── Traditional medicine / local herb symptom links ───────────────────────
+    # These map herb mentions to the symptom the user is TREATING,
+    # so the normalizer can extract the underlying symptom for prediction.
+    "neem leaf": "Fever",
+    "neem leaves": "Fever",
+    "neem tea": "Fever",
+    "bitter leaf": "Abdominal pain",
+    "bitter leaf soup": "Abdominal pain",
+    "garlic tea": "Cough",
+    "garlic water": "Cough",
+    "ginger tea": "Nausea",
+    "ginger water": "Nausea",
+    "lemon grass": "Fever",
+    "lemongrass tea": "Fever",
+    "african basil": "Fever",
+    "scent leaf": "Fever",
+    "moringa": "Fatigue",
+    "moringa leaf": "Fatigue",
+    "moringa water": "Fatigue",
+    "turmeric": "Joint pain",
+    "turmeric water": "Joint pain",
+    "eucalyptus": "Cough",
+    "eucalyptus leaf": "Cough",
+    "aloe vera": "Rash",
+    "aloe leaf": "Rash",
+    "pawpaw leaf": "Fever",
+    "papaya leaf": "Fever",
+    "guava leaf": "Diarrhea",
+    "guava leaf tea": "Diarrhea",
+    "bush pepper": "Abdominal pain",
+    "black pepper tea": "Cough",
+    "coconut water": "Dehydration",
+    "eru": "Abdominal pain",
+    "njama njama": "Abdominal pain",
+    "tonton": "Abdominal pain",
+    # ── Francophone African informal phrases ──────────────────────────────────
+    "j'ai mal à la tête": "Headache",
+    "mal de tête": "Headache",
+    "j'ai de la fièvre": "Fever",
+    "j'ai chaud": "Fever",
+    "j'ai froid": "Chills",
+    "j'ai mal au ventre": "Abdominal pain",
+    "mal au ventre": "Abdominal pain",
+    "j'ai la diarrhée": "Diarrhea",
+    "j'ai vomi": "Vomiting",
+    "je tousse": "Cough",
+    "j'ai mal à la gorge": "Sore throat",
+    "yeux jaunes": "Yellow eyes",
+    "peau jaune": "Jaundice",
+    "j'ai des boutons": "Rash",
+    "boutons sur la peau": "Rash",
+    "démangeaisons": "Itchy skin",
+    "pieds enflés": "Swollen feet",
+    "j'urine souvent": "Frequent urination",
+    "ça brûle quand j'urine": "Painful urination",
+    "j'ai perdu l'appétit": "Loss of appetite",
+    "je me sens faible": "Weakness",
+    "j'ai les articulations qui font mal": "Joint pain",
 }
 
 
 def _split_on_connectives(text: str) -> list[str]:
-    """Split text on common connectives and punctuation."""
+    """Split text on common connectives and punctuation.
+
+    Handles English, Pidgin English (Camfranglais), and French connectives.
+    Pidgin patterns: 'i get fever and headache', 'belle dey do me and i dey vomit'
+    """
     return [
         part.strip()
         for part in re.split(
-            r"\band\b|\bwith\b|\balso\b|\bplus\b|\bor\b|,|;|\.", text.lower()
+            r"\band\b|\bwith\b|\balso\b|\bplus\b|\bor\b"
+            r"|\bi get\b|\bi dey\b|\bi don\b"  # Pidgin starters — split multi-symptom
+            r"|\bet\b|\bavec\b|\baussi\b|\bainsi que\b"  # French connectives
+            r"|,|;|\.",
+            text.lower()
         )
         if part.strip()
     ]
+
+
+def _preprocess_pidgin(text: str) -> str:
+    """Normalise common Pidgin / Camfranglais constructs before alias matching.
+
+    Removes filler verbs and subject pronouns so 'my head dey pain me'
+    can still match the alias 'head dey pain me', etc.
+    """
+    text = text.lower().strip()
+    # Strip leading subject phrases: 'my pikin dey ...' → 'pikin dey ...'
+    text = re.sub(r"^(my|the|our|her|his)\s+", "", text)
+    # Normalise 'e dey' → remove filler
+    text = re.sub(r"\be\s+dey\s+", "", text)
+    # 'i have ...' → remove 'i have' so the noun phrase can match
+    text = re.sub(r"^(i have|i get|i don get|i dey)\s+", "", text)
+    return text.strip()
 
 
 def normalize_symptom_text(text: str, known_symptoms: list[str]) -> list[str]:
@@ -439,12 +641,14 @@ def normalize_symptom_text(text: str, known_symptoms: list[str]) -> list[str]:
     known_lower = {s.lower(): s for s in known_symptoms}
     found: set[str] = set()
 
-    # 1. Try whole-text alias first
-    if text in SYMPTOM_ALIASES:
-        canonical = SYMPTOM_ALIASES[text]
-        if canonical in known_symptoms:
-            found.add(canonical)
-            return list(found)
+    # 1. Try whole-text alias first (original + pidgin-preprocessed)
+    for candidate_text in {text, _preprocess_pidgin(text)}:
+        if candidate_text in SYMPTOM_ALIASES:
+            canonical = SYMPTOM_ALIASES[candidate_text]
+            if canonical in known_symptoms:
+                found.add(canonical)
+    if found:
+        return list(found)
 
     # 2. Split on connectives, process each part
     parts = _split_on_connectives(text)
@@ -452,20 +656,27 @@ def normalize_symptom_text(text: str, known_symptoms: list[str]) -> list[str]:
         if not part:
             continue
 
+        # Also try the pidgin-preprocessed version of each part
+        part_variants = {part, _preprocess_pidgin(part)}
+
         # 2a. Direct alias match
-        if part in SYMPTOM_ALIASES:
-            canonical = SYMPTOM_ALIASES[part]
-            if canonical in known_symptoms:
-                found.add(canonical)
-                continue
+        for pv in part_variants:
+            if pv in SYMPTOM_ALIASES:
+                canonical = SYMPTOM_ALIASES[pv]
+                if canonical in known_symptoms:
+                    found.add(canonical)
+
+        if any(pv in SYMPTOM_ALIASES for pv in part_variants):
+            continue
 
         # 2b. Partial alias scan (phrase in part or part in phrase)
         matched_alias = False
         for phrase, canonical in SYMPTOM_ALIASES.items():
-            if phrase in part or part in phrase:
-                if canonical in known_symptoms:
-                    found.add(canonical)
-                    matched_alias = True
+            for pv in part_variants:
+                if phrase in pv or pv in phrase:
+                    if canonical in known_symptoms:
+                        found.add(canonical)
+                        matched_alias = True
 
         if matched_alias:
             continue

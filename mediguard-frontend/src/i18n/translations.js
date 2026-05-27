@@ -135,6 +135,28 @@ const translations = {
     auth_no_account:       "Don't have an account?",
     auth_have_account:     'Already have an account?',
     auth_forgot:           'Forgot password?',
+
+    // ── Seasonal Alert Banner ─────────────────────────────────────────────────
+    seasonal_alert_title:  'Health Alert — Bamenda',
+    seasonal_high_risk:    'High risk this month',
+    seasonal_dismiss:      'Dismiss alert',
+    seasonal_tip:          'Mention related symptoms early for faster guidance.',
+
+    // ── Voice Input ───────────────────────────────────────────────────────────
+    voice_speak_now:       'Listening… speak your symptoms now',
+    voice_btn_title:       'Speak your symptoms (voice input)',
+    voice_btn_stop:        'Stop listening',
+
+    // ── Child Mode (Symptom Checker & Chat) ──────────────────────────────────
+    child_mode_label:      'I am checking for a child (my pikin)',
+    child_mode_sub:        'Activates child health mode — paediatric dosing, EPI vaccination schedule, child danger signs.',
+    child_mode_active:     'Child mode active — all guidance uses paediatric context',
+    child_mode_toggle:     'Toggle child mode',
+
+    // ── Symptom Checker extras ─────────────────────────────────────────────────
+    sc_describe_sub_lang:  '(Pidgin, English, Français)',
+    sc_voice_placeholder_child: '"My pikin dey hot and vomit"',
+    sc_voice_placeholder:  '"my head dey pain me / fever and body ache"',
   },
 
   fr: {
@@ -269,6 +291,28 @@ const translations = {
     auth_no_account:       'Pas encore de compte ?',
     auth_have_account:     'Vous avez déjà un compte ?',
     auth_forgot:           'Mot de passe oublié ?',
+
+    // ── Seasonal Alert Banner ─────────────────────────────────────────────────
+    seasonal_alert_title:  'Alerte Santé — Bamenda',
+    seasonal_high_risk:    'Risque élevé ce mois-ci',
+    seasonal_dismiss:      'Fermer l\'alerte',
+    seasonal_tip:          'Mentionnez les symptômes liés tôt pour une orientation plus rapide.',
+
+    // ── Voice Input ───────────────────────────────────────────────────────────
+    voice_speak_now:       'Écoute… décrivez vos symptômes maintenant',
+    voice_btn_title:       'Parler vos symptômes (saisie vocale)',
+    voice_btn_stop:        'Arrêter l\'écoute',
+
+    // ── Child Mode ────────────────────────────────────────────────────────────
+    child_mode_label:      'Je consulte pour un enfant',
+    child_mode_sub:        'Active le mode pédiatrique — dosage enfant, calendrier EPI, signes de danger.',
+    child_mode_active:     'Mode enfant actif — tous les conseils utilisent le contexte pédiatrique',
+    child_mode_toggle:     'Activer/désactiver le mode enfant',
+
+    // ── Symptom Checker extras ─────────────────────────────────────────────────
+    sc_describe_sub_lang:  '(Pidgin, English, Français)',
+    sc_voice_placeholder_child: '"Mon enfant a de la fièvre et vomit"',
+    sc_voice_placeholder:  '"j\'ai mal à la tête / fièvre et courbatures"',
   },
 };
 
