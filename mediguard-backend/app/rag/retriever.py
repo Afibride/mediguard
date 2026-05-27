@@ -79,6 +79,13 @@ DISEASE_COMMON_NAMES: dict[str, str] = {
     "Chlamydia":                     "Silent STI",
     "Genital Herpes":                "Herpes (HSV-2)",
     "Trichomoniasis":                "Trich",
+    "Hemorrhoids (Piles)":           "Piles",
+    "Intestinal Worms":              "Worm Infection / Helminthiasis",
+    "Malnutrition":                  "Nutritional Deficiency",
+    "Dental Abscess":                "Tooth Abscess",
+    "Arthritis":                     "Joint Disease",
+    "Eczema":                        "Atopic Dermatitis",
+    "Acne":                          "Pimples / Acne Vulgaris",
 }
 
 
@@ -362,6 +369,36 @@ _FRENCH_STRONG = [
 def _is_french(query: str) -> bool:
     text = query.lower()
     return any(w in text for w in _FRENCH_STRONG)
+
+
+# ---------------------------------------------------------------------------
+# Pidgin detection — looks for 2+ Pidgin-specific markers
+# ---------------------------------------------------------------------------
+_PIDGIN_MARKERS: list[str] = [
+    # Core grammar markers
+    " dey ", " de ", " na ", " don ", " bin ", " go ",
+    # Subject pronoun "a" = I (very specific to Pidgin)
+    " a de ", " a dey ", " a don ", " a get ", " a no ",
+    # Body/health vocabulary
+    "pikin", "bele", " het ", " hed ", "yansh", "wahala",
+    "taya", "fayn", "sik ", " kof", " kol ",
+    # Common Pidgin verbs/phrases
+    "no fit ", "waka", "chop", "sabi",
+    "de pain", "dey pain", "de hot", "dey hot", "de do", "dey do",
+    "de kof", "dey kof", "de purge", "dey purge", "dey vomit",
+    "strong strong", "hot hot", "small small", "very very",
+    # Pronoun "dem" = they/them
+    " dem ", "wetin", " sef ",
+    # Disease-specific Pidgin
+    "ma bele", "ma het", "ma hed", "ma skin", "ya bodi", "ma pikin",
+]
+
+
+def _is_pidgin(query: str) -> bool:
+    """Return True if the query contains 2+ Pidgin-specific markers."""
+    text = " " + query.lower() + " "
+    hits = sum(1 for marker in _PIDGIN_MARKERS if marker in text)
+    return hits >= 2
 
 
 SYMPTOM_DEFINITIONS: dict[str, str] = {
@@ -3055,11 +3092,48 @@ def generate_answer(
         answer = _extractive_answer(query, chunks)
     else:
         weak_note = _get_weak_topic_note(query)
-        lang_note = (
-            "IMPORTANT: The user is writing in French. Respond entirely in French. "
-            "Translate any medical terms to plain French where possible.\n\n"
-            if _is_french(query) else ""
-        )
+
+        # ── Language detection: French → French response ──────────────────
+        if _is_french(query):
+            lang_note = (
+                "IMPORTANT: The user is writing in French. Respond ENTIRELY in French. "
+                "Use simple, plain French suitable for a community health platform. "
+                "Translate medical terms to everyday French where possible. "
+                "Use bold (**text**) for key medical terms and action steps.\n\n"
+            )
+        # ── Language detection: Pidgin → Pidgin response ──────────────────
+        elif _is_pidgin(query):
+            lang_note = (
+                "IMPORTANT: The user is writing in Cameroon Pidgin English. "
+                "Respond ENTIRELY in Cameroon Pidgin English. "
+                "Use authentic Cameroonian Pidgin grammar and vocabulary:\n"
+                "- 'dey'/'de' = present progressive (action happening now)\n"
+                "- 'na' = is/am/are\n"
+                "- 'no' = not/don't\n"
+                "- 'bin' = was/were/did (past)\n"
+                "- 'don' = have done/already (perfect)\n"
+                "- 'go' = will/shall (future)\n"
+                "- 'a' = I, 'ma' = my, 'ya' = your\n"
+                "- 'pikin' = child, 'bele' = stomach/belly\n"
+                "- 'het'/'hed' = head, 'skin' = body/skin\n"
+                "- 'taya' = tired, 'fayn' = fine/well, 'sik' = sick\n"
+                "- 'kof' = cough, 'wahala' = problem/trouble\n"
+                "- 'waka' = walk/go, 'chop' = eat/food\n"
+                "- 'sabi' = know, 'sef' = even/also/too\n"
+                "- 'no fit' = cannot, 'wetin' = what\n"
+                "- 'e get' = there is/are, 'make' = should/let\n"
+                "- 'dem' = they/them, 'dis' = this, 'dat' = that\n"
+                "- 'plenti' = plenty/a lot, 'smol' = small/little\n"
+                "- 'yansh' = anus/buttocks\n"
+                "Write health advice in Pidgin. Include medical terms in parentheses for clarity "
+                "(e.g. 'feba (fever)', 'malaria', 'dehydration'). "
+                "Use **bold** for key actions and warning signs. "
+                "Example style: 'If ya bele de pain yu plenti an yu dey vomit, "
+                "dat fit be **gastroenteritis** (stomach infection). "
+                "Drink plenti water small small. If e no better for 2 days, **waka go hospital**.'\n\n"
+            )
+        else:
+            lang_note = ""
         from datetime import datetime as _dt
         _season_ctx = get_seasonal_context(_dt.now().month)
         _season_prompt = ""
@@ -3084,16 +3158,16 @@ def generate_answer(
             "content": (
                 f"{lang_note}"
                 "You are MediGuard's health assistant for Bamenda, Cameroon. "
-                "You understand Cameroon Pidgin English (Camfranglais). "
+                "You understand Cameroon Pidgin English (Camfranglais), English, and French. "
                 "Pidgin grammar: 'de'/'dey'=present-progressive, 'na'=is/am, 'no'=negation, "
                 "'bin'=past, 'don'=recently done, 'go'=future, 'a'=I, 'ma'=my, 'ya'=your, "
                 "'pikin'=child, 'bele'=stomach, 'het/hed'=head, 'skin'=body, "
-                "'taya'=tired, 'fayn'=fine, 'sik'=sick, 'kof'=cough, 'kol'=cold. "
+                "'taya'=tired, 'fayn'=fine, 'sik'=sick, 'kof'=cough, 'kol'=cold, "
+                "'yansh'=anus/buttocks. "
                 "KEY: 'hot' in Pidgin means BOTH temperature AND pain "
                 "('ma het de hot'=my head hurts, 'ma skin de hot'=feverish). "
-                "If the user writes in Pidgin, respond in simple clear English they can understand, "
-                "but include short Pidgin phrases naturally (e.g. 'no worry', 'waka go hospital'). "
                 "Answer clearly using only the context below. Never diagnose or prescribe medication. "
+                "Use **bold** for key medical terms, warning signs, and action steps in ALL responses. "
                 "When the user describes an accident or injury, provide clear step-by-step first aid guidance. "
                 "For health questions, include simple first aid, self-care steps, and urgent-care red flags. "
                 "Tell users that automated results can sometimes be incomplete or faulty. "

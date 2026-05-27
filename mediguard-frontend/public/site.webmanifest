@@ -1,34 +1,20 @@
 {
-  "name": "MediGuard",
+  "name": "MediGuard — AI Health Screening",
   "short_name": "MediGuard",
-  "description": "AI-powered health screening for the Bamenda community",
+  "description": "AI-powered symptom checker and health assistant for Bamenda, Cameroon",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0ea5e9",
+  "orientation": "portrait-primary",
   "lang": "en",
-  "scope": "/",
+  "categories": ["health", "medical"],
   "icons": [
-    {
-      "src": "/mediguard.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/mediguard.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    { "src": "/mediguard.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/mediguard.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ],
-  "categories": ["health", "medical", "productivity"],
-  "screenshots": [
-    {
-      "src": "/hero.jpeg",
-      "type": "image/jpeg",
-      "sizes": "1280x720",
-      "label": "MediGuard Home Screen"
-    }
+  "shortcuts": [
+    { "name": "Check Symptoms", "short_name": "Symptoms", "description": "AI symptom checker", "url": "/symptom-checker", "icons": [{"src": "/mediguard.png", "sizes": "96x96"}] },
+    { "name": "Chat AI", "short_name": "Chat", "description": "Talk to MediGuard AI", "url": "/chat-ai", "icons": [{"src": "/mediguard.png", "sizes": "96x96"}] }
   ]
 }
