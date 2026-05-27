@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Shield, Brain, AlertCircle, Users, Thermometer, Activity, Stethoscope, Bot, MessageCircle, BookOpen, Database, TrendingUp, Megaphone, Droplets, HandHeart, ChevronLeft, ChevronRight, Play, Pause, X, Heart } from 'lucide-react';
 import NearbyFacilities from '@/components/NearbyFacilities';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import SeasonalBanner from '@/components/SeasonalBanner';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -201,8 +202,9 @@ const HomePage = () => {
   const [topDiseases, setTopDiseases] = useState([]);
   const [weeklyTrends, setWeeklyTrends] = useState([]);
   const [outbreakInfo, setOutbreakInfo] = useState({ alerts: [], rainy_season: false, has_alerts: false });
+  // STD banner: dismissable only for the current session — always returns on next visit
   const [showStdBanner, setShowStdBanner] = useState(
-    () => localStorage.getItem('mg_stdBannerDismissed') !== '1'
+    () => sessionStorage.getItem('mg_stdBannerHidden') !== '1'
   );
   
   const trustIndicators = [
@@ -486,49 +488,87 @@ const HomePage = () => {
           </motion.div>
         </section>
 
-        {/* STD Awareness Banner */}
+        {/* ── Seasonal Health Alert Banner ─────────────────────────────────── */}
+        <div className="container mx-auto px-4 max-w-7xl py-4">
+          <SeasonalBanner className="w-full" />
+        </div>
+
+        {/* ── STD / Sexual Health Awareness Banner ─────────────────────────────
+             Always shown on home page (session-only dismiss — resets each visit) */}
         {showStdBanner && (
-          <div className="relative bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 text-white shadow-lg">
-            <div className="container mx-auto px-4 max-w-7xl">
-              <div className="flex items-start sm:items-center justify-between gap-3 py-3 sm:py-3.5">
-                <div className="flex items-start sm:items-center gap-2.5 min-w-0">
-                  <div className="flex-shrink-0 mt-0.5 sm:mt-0">
-                    <Heart className="h-4 w-4 sm:h-5 sm:w-5 fill-white/80 text-white" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-sm sm:text-base font-semibold leading-snug">
-                      💡 Youth Health Alert — Protect Yourself from STDs
-                    </p>
-                    <p className="text-xs sm:text-sm text-white/90 mt-0.5 leading-relaxed">
-                      Sexually transmitted infections (STDs/STIs) are preventable.{' '}
-                      <strong>Always use a condom</strong> or <strong>choose abstinence</strong> to protect yourself and your partner.{' '}
-                      Get tested regularly — many STIs show no symptoms.{' '}
-                      <Link
-                        to="/disease-library"
-                        className="underline underline-offset-2 font-semibold hover:text-white transition-colors"
-                        onClick={() => {
-                          setShowStdBanner(false);
-                          localStorage.setItem('mg_stdBannerDismissed', '1');
-                        }}
-                      >
-                        Learn more →
-                      </Link>
-                    </p>
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="relative bg-gradient-to-r from-violet-700 via-purple-600 to-pink-600 text-white shadow-lg"
+          >
+            <div className="container mx-auto px-4 max-w-7xl py-4 sm:py-5">
+              <div className="flex items-start justify-between gap-3">
+                {/* Icon */}
+                <div className="flex-shrink-0 mt-0.5">
+                  <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center">
+                    <Heart className="h-5 w-5 fill-white/80 text-white" />
                   </div>
                 </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm sm:text-base font-bold leading-snug mb-1">
+                    🛡️ Sexual Health Reminder — Protect Yourself &amp; Others from STDs/STIs
+                  </p>
+                  <p className="text-xs sm:text-sm text-white/90 leading-relaxed mb-3">
+                    Sexually transmitted infections (STIs) including HIV, gonorrhoea, syphilis, chlamydia, and herpes
+                    are <strong>preventable</strong>. Many show <strong>no symptoms</strong> — you can have one and not know it.
+                    Regular testing saves lives.
+                  </p>
+
+                  {/* Protection tips grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mb-3">
+                    {[
+                      { icon: '🩺', text: 'Get tested regularly — even with no symptoms' },
+                      { icon: '🧰', text: 'Always use a condom correctly every time you have sex' },
+                      { icon: '🚫', text: 'Abstinence is the surest way to prevent all STIs' },
+                      { icon: '🤝', text: 'Be faithful to one tested, uninfected partner' },
+                      { icon: '💊', text: 'Complete every treatment course if diagnosed — do not stop early' },
+                      { icon: '📣', text: 'Inform your partner(s) if you test positive — they need care too' },
+                    ].map(({ icon, text }) => (
+                      <div key={text} className="flex items-start gap-2 text-[11px] sm:text-xs text-white/90">
+                        <span className="text-sm shrink-0 leading-none mt-0.5">{icon}</span>
+                        <span className="leading-relaxed">{text}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Link
+                      to="/disease-library"
+                      className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 hover:bg-white/30 rounded-full px-3 py-1 transition-colors"
+                    >
+                      Learn about STIs in our Disease Library →
+                    </Link>
+                    <Link
+                      to="/chat-ai"
+                      className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 hover:bg-white/30 rounded-full px-3 py-1 transition-colors"
+                    >
+                      Ask MediGuard AI about protection →
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Dismiss (session-only) */}
                 <button
                   onClick={() => {
                     setShowStdBanner(false);
-                    localStorage.setItem('mg_stdBannerDismissed', '1');
+                    sessionStorage.setItem('mg_stdBannerHidden', '1');
                   }}
-                  className="flex-shrink-0 p-1.5 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors"
-                  aria-label="Dismiss STD awareness banner"
+                  className="flex-shrink-0 p-1.5 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors mt-0.5"
+                  aria-label="Hide for this session"
+                  title="Hide for this session (will show again next visit)"
                 >
                   <X className="h-4 w-4" />
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* Trust Indicators - Stats Grid */}
