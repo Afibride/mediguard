@@ -37,7 +37,8 @@ jobs:
             set -e
 
             cd /home/afilesnice/mediguard/
-            git pull origin main
+            git fetch origin main
+            git reset --hard origin/main
 
             # ----------------------------------------
             # 1. DEPLOY BACKEND
