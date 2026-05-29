@@ -86,6 +86,18 @@ DISEASE_COMMON_NAMES: dict[str, str] = {
     "Arthritis":                     "Joint Disease",
     "Eczema":                        "Atopic Dermatitis",
     "Acne":                          "Pimples / Acne Vulgaris",
+    # New diseases
+    "Schistosomiasis":               "Bilharzia",
+    "Mpox":                          "Monkeypox",
+    "African Trypanosomiasis":       "Sleeping Sickness",
+    "Rabies":                        "Rabies (Hydrophobia)",
+    "Buruli Ulcer":                  "Buruli Ulcer (Painless Skin Ulcer)",
+    "Candidiasis":                   "Thrush / Yeast Infection",
+    "Cellulitis":                    "Bacterial Skin Infection",
+    "Stroke":                        "Cerebrovascular Accident (CVA)",
+    "Heart Failure":                 "Congestive Heart Failure",
+    "Hypothyroidism":                "Underactive Thyroid / Goitre",
+    "COVID-19":                      "Coronavirus Disease (COVID-19)",
 }
 
 
@@ -641,6 +653,59 @@ DISEASE_ALIASES: dict[str, str] = {
     "german measles": "Rubella",
     "anaphylactic shock": "Anaphylaxis",
     "otitis": "Ear Infection",
+    # Hemorrhoids / Piles
+    "hemorrhoids": "Hemorrhoids (Piles)", "haemorrhoids": "Hemorrhoids (Piles)",
+    "hemorrhoid": "Hemorrhoids (Piles)", "haemorrhoid": "Hemorrhoids (Piles)",
+    "piles": "Hemorrhoids (Piles)", "pile": "Hemorrhoids (Piles)",
+    "rectal piles": "Hemorrhoids (Piles)",
+    "hémorroïdes": "Hemorrhoids (Piles)",
+    # Schistosomiasis
+    "schistosomiasis": "Schistosomiasis", "bilharzia": "Schistosomiasis",
+    "bilharziasis": "Schistosomiasis", "bilhazia": "Schistosomiasis",
+    "schistosomosis": "Schistosomiasis", "snail fever": "Schistosomiasis",
+    "blood in urine worm": "Schistosomiasis",
+    # Mpox
+    "mpox": "Mpox", "monkeypox": "Mpox", "monkey pox": "Mpox",
+    "variole du singe": "Mpox", "mpox virus": "Mpox",
+    # African Trypanosomiasis
+    "sleeping sickness": "African Trypanosomiasis",
+    "african sleeping sickness": "African Trypanosomiasis",
+    "trypanosomiasis": "African Trypanosomiasis",
+    "trypanosomosis": "African Trypanosomiasis",
+    "maladie du sommeil": "African Trypanosomiasis",
+    "hat": "African Trypanosomiasis",
+    # Rabies
+    "rabies": "Rabies", "hydrophobia": "Rabies",
+    "rage": "Rabies",
+    # Buruli Ulcer
+    "buruli ulcer": "Buruli Ulcer", "buruli": "Buruli Ulcer",
+    "mycobacterium ulcerans": "Buruli Ulcer",
+    # Candidiasis
+    "candidiasis": "Candidiasis", "thrush": "Candidiasis",
+    "oral thrush": "Candidiasis", "vaginal thrush": "Candidiasis",
+    "yeast infection": "Candidiasis", "candida": "Candidiasis",
+    "muguet": "Candidiasis",
+    # Cellulitis
+    "cellulitis": "Cellulitis", "skin infection spreading": "Cellulitis",
+    # Stroke
+    "stroke": "Stroke", "cerebrovascular accident": "Stroke",
+    "cva": "Stroke", "brain attack": "Stroke",
+    "ischaemic stroke": "Stroke", "hemorrhagic stroke": "Stroke",
+    "mini stroke": "Stroke", "tia": "Stroke",
+    "avc": "Stroke",
+    # Heart Failure
+    "heart failure": "Heart Failure", "cardiac failure": "Heart Failure",
+    "congestive heart failure": "Heart Failure", "chf": "Heart Failure",
+    "insuffisance cardiaque": "Heart Failure",
+    # Hypothyroidism
+    "hypothyroidism": "Hypothyroidism", "underactive thyroid": "Hypothyroidism",
+    "goiter": "Hypothyroidism", "goitre": "Hypothyroidism",
+    "thyroid disease": "Hypothyroidism", "low thyroid": "Hypothyroidism",
+    "hypothyroïdie": "Hypothyroidism",
+    # COVID-19
+    "covid": "COVID-19", "covid-19": "COVID-19", "covid19": "COVID-19",
+    "coronavirus": "COVID-19", "sars-cov-2": "COVID-19",
+    "corona virus": "COVID-19",
 }
 
 MEDICAL_TYPO_REPLACEMENTS: dict[str, str] = {
@@ -2139,26 +2204,42 @@ def _next_followup_response(
     pregnancy_context: bool,
     fatigue_context: bool,
     stress_presentation: bool = False,
+    pidgin: bool = False,
 ) -> dict:
     next_question = questions[min(asked_count, len(questions) - 1)]
     symptom_text = ", ".join(symptoms) if symptoms else "your symptoms"
     hint = _get_reply_hint(next_question)
 
-    if asked_count == 0:
-        intro = (
-            f"I found this in your message: {symptom_text}. "
-            "I will ask one question at a time before showing possible matches."
-        )
-        # Offer a gentle stress/fatigue note on the very first question when the
-        # presentation is short and non-specific — so the user isn't alarmed.
-        if stress_presentation and len(symptoms) <= 4:
-            intro += (
-                "\n\n💡 *With just a few non-specific symptoms, stress, fatigue, or dehydration "
-                "might be playing a role. I'll still check carefully — just a heads-up.*"
+    if pidgin:
+        if asked_count == 0:
+            intro = (
+                f"A see dis for ya tok: **{symptom_text}**. "
+                "Make yu answer small questions one by one, den a go show yu wetin fit be ya sickness."
             )
-        answer = f"{intro}\n\n{next_question}"
+            if stress_presentation and len(symptoms) <= 4:
+                intro += (
+                    "\n\n💡 *Wit just small symptom, stress, taya, or dehydration fit be de cause. "
+                    "A go still check well well — just heads-up.*"
+                )
+            answer = f"{intro}\n\n{next_question}"
+        else:
+            answer = f"Olrayt. {next_question}"
     else:
-        answer = f"Noted. {next_question}"
+        if asked_count == 0:
+            intro = (
+                f"I found this in your message: {symptom_text}. "
+                "I will ask one question at a time before showing possible matches."
+            )
+            # Offer a gentle stress/fatigue note on the very first question when the
+            # presentation is short and non-specific — so the user isn't alarmed.
+            if stress_presentation and len(symptoms) <= 4:
+                intro += (
+                    "\n\n💡 *With just a few non-specific symptoms, stress, fatigue, or dehydration "
+                    "might be playing a role. I'll still check carefully — just a heads-up.*"
+                )
+            answer = f"{intro}\n\n{next_question}"
+        else:
+            answer = f"Noted. {next_question}"
 
     if hint:
         answer += f"\n\n{hint}"
@@ -2239,6 +2320,7 @@ def _symptom_check_response(
                 pregnancy_context,
                 fatigue_context,
                 stress_presentation,
+                pidgin=_is_pidgin(query),
             )
 
     # Chat mode: don't gate on cardinal symptoms — the user may not have mentioned

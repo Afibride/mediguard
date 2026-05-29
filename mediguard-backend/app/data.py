@@ -75,6 +75,23 @@ CORE_SYMPTOMS = {
     # ── Skin ──────────────────────────────────────────────────────────────────
     "Eczema": ["Itchy skin", "Dry skin", "Skin peeling", "Red scaly skin", "Skin sores", "Rash"],
     "Acne": ["Skin sores", "Pus or discharge", "Rash", "Facial pain", "Skin lesions"],
+    # ── Tropical / Endemic (Cameroon) ─────────────────────────────────────────
+    "Schistosomiasis": ["Blood in urine", "Abdominal pain", "Diarrhea", "Fatigue", "Fever", "Itchy skin", "Rash", "Abdominal swelling", "Blood in stool", "Weight loss"],
+    "Mpox": ["Fever", "Rash", "Swollen lymph nodes", "Headache", "Muscle aches", "Fatigue", "Blisters", "Skin sores", "Back pain", "Pustular rash"],
+    "African Trypanosomiasis": ["Fever", "Headache", "Swollen lymph nodes", "Fatigue", "Muscle aches", "Confusion", "Excessive sleepiness", "Rash", "Joint pain", "Night sweats"],
+    "Rabies": ["Fever", "Headache", "Fatigue", "Muscle aches", "Agitation", "Hydrophobia", "Confusion", "Muscle cramps", "Sweating", "Difficulty swallowing"],
+    "Buruli Ulcer": ["Skin sores", "Skin lesions", "Swelling near skin area", "Fatigue", "Weakness", "Skin peeling"],
+    # ── Fungal / Opportunistic ────────────────────────────────────────────────
+    "Candidiasis": ["White patches in mouth", "Vaginal discharge", "Vaginal itching", "Fatigue", "Itchy skin", "Sore throat", "Loss of appetite"],
+    # ── Bacterial / Skin ─────────────────────────────────────────────────────
+    "Cellulitis": ["Skin redness", "Skin warmth", "Skin sores", "Fever", "Swollen lymph nodes", "Fatigue", "Skin lesions"],
+    # ── Cardiovascular / Neurological ────────────────────────────────────────
+    "Stroke": ["Severe headache", "Confusion", "Dizziness", "Blurred vision", "Nausea", "Vomiting", "Weakness", "Speech difficulty", "Facial drooping", "Loss of balance"],
+    "Heart Failure": ["Shortness of breath", "Ankle swelling", "Fatigue", "Fast heartbeat", "Cough", "Dizziness", "Chest pain", "Weakness", "Night sweats"],
+    # ── Endocrine ─────────────────────────────────────────────────────────────
+    "Hypothyroidism": ["Fatigue", "Weight gain", "Cold intolerance", "Constipation", "Dry skin", "Hair loss", "Muscle aches", "Dizziness", "Sleep disturbances", "Weakness"],
+    # ── Global Respiratory ────────────────────────────────────────────────────
+    "COVID-19": ["Fever", "Cough", "Shortness of breath", "Fatigue", "Muscle aches", "Headache", "Loss of taste", "Loss of smell", "Diarrhea", "Sore throat"],
 }
 
 # ─── Cardinal (Key) Symptoms ─────────────────────────────────────────────────
@@ -245,6 +262,29 @@ CARDINAL_SYMPTOMS: dict[str, list[str]] = {
     "Dental Abscess": ["Tooth pain", "Jaw swelling"],
     # ── Skin ───────────────────────────────────────────────────────────────────
     "Eczema": ["Itchy skin", "Dry skin"],
+    # ── Tropical / Endemic (Cameroon) ─────────────────────────────────────────
+    # Blood in urine (hematuria) is pathognomonic for urinary schistosomiasis
+    "Schistosomiasis": ["Blood in urine", "Blood in stool"],
+    # Mpox: pustular/blistering rash with lymphadenopathy is cardinal
+    "Mpox": ["Rash", "Swollen lymph nodes", "Blisters"],
+    # Trypanosomiasis: swollen posterior cervical nodes (Winterbottom's sign) + excessive sleepiness
+    "African Trypanosomiasis": ["Excessive sleepiness", "Swollen lymph nodes"],
+    # Rabies: hydrophobia (fear of water) is pathognomonic once encephalitic
+    "Rabies": ["Hydrophobia", "Agitation"],
+    # Buruli ulcer: painless progressive skin ulcer/lesion is cardinal
+    "Buruli Ulcer": ["Skin sores", "Skin lesions"],
+    # Candidiasis: white patches in mouth or genital symptoms required
+    "Candidiasis": ["White patches in mouth", "Vaginal itching", "Vaginal discharge"],
+    # Cellulitis: localised skin redness and warmth are cardinal
+    "Cellulitis": ["Skin redness", "Skin warmth"],
+    # Stroke: at least one focal neuro sign required — headache alone ≠ stroke
+    "Stroke": ["Speech difficulty", "Facial drooping", "Severe headache"],
+    # Heart failure: breathlessness + ankle oedema is the defining combination
+    "Heart Failure": ["Shortness of breath", "Ankle swelling"],
+    # Hypothyroidism: metabolic triad required
+    "Hypothyroidism": ["Fatigue", "Weight gain", "Cold intolerance"],
+    # COVID-19: loss of taste/smell are pathognomonic — without them it's indistinct from flu
+    "COVID-19": ["Loss of taste", "Loss of smell"],
 }
 
 CATEGORIES = {
@@ -309,6 +349,17 @@ CATEGORIES = {
     "Arthritis": "Musculoskeletal",
     "Eczema": "Skin",
     "Acne": "Skin",
+    "Schistosomiasis": "Parasitic",
+    "Mpox": "Viral",
+    "African Trypanosomiasis": "Parasitic",
+    "Rabies": "Viral",
+    "Buruli Ulcer": "Bacterial",
+    "Candidiasis": "Fungal",
+    "Cellulitis": "Bacterial",
+    "Stroke": "Neurological",
+    "Heart Failure": "Chronic",
+    "Hypothyroidism": "Chronic",
+    "COVID-19": "Viral",
 }
 
 CURATED_DETAILS = {
@@ -699,6 +750,89 @@ CURATED_DETAILS = {
         "treatment": "Keep skin clean (gentle wash twice daily). Avoid squeezing pimples — this spreads bacteria and causes scarring. Benzoyl peroxide or salicylic acid products (available at pharmacies) help mild acne. Severe or cystic acne needs clinical assessment and may require prescription antibiotics or retinoids.",
         "prevention": ["Wash face gently twice daily with mild cleanser", "Remove make-up before sleeping", "Avoid touching face frequently", "Use non-comedogenic (non-pore-blocking) skin products", "Manage stress"],
         "severity": "Low",
+    },
+    # ── Tropical / Endemic (Cameroon) ─────────────────────────────────────────
+    "Schistosomiasis": {
+        "description": "A parasitic disease caused by blood flukes (Schistosoma worms) acquired by swimming or washing in infected freshwater. Urinary schistosomiasis (S. haematobium) causes blood in urine; intestinal schistosomiasis (S. mansoni) causes abdominal pain and bloody stool. Very common in Cameroon and sub-Saharan Africa.",
+        "causes": "Caused by Schistosoma parasites whose larvae live in freshwater snails. Larvae penetrate the skin during water contact. Endemic in rivers, lakes, and irrigation areas of Cameroon including the North West Region.",
+        "treatment": "Treated with praziquantel, a single-dose oral medicine provided through mass drug administration and health facilities. Seek care for blood in urine or stool even without pain.",
+        "prevention": ["Avoid swimming or wading in freshwater lakes, rivers, or streams in endemic areas", "Use treated or boiled water for bathing", "Participate in community mass drug administration (praziquantel)", "Wear protective footwear when crossing streams"],
+        "severity": "High",
+    },
+    "Mpox": {
+        "description": "A viral disease caused by the Mpox (Monkeypox) virus, endemic in parts of Central and West Africa including Cameroon. It causes fever, swollen lymph nodes, and a distinctive rash that progresses from flat spots to blisters to pustules. Usually self-limiting but can be severe in immunocompromised patients or children.",
+        "causes": "Caused by the Mpox virus, a member of the Orthopoxvirus family. Spreads through close contact with an infected person's rash, body fluids, respiratory droplets, or contaminated materials. Also spread from infected animals (rodents, monkeys).",
+        "treatment": "Mostly supportive care: rest, fluids, pain relief. Keep rash clean and dry. Avoid touching face. Tecovirimat (antiviral) is available in some settings for severe cases. Isolate to prevent spread. Seek hospital care for breathing difficulty, eye involvement, or very severe rash.",
+        "prevention": ["Avoid contact with sick animals (rodents, monkeys)", "Avoid skin-to-skin contact with people who have an unexplained rash", "Wash hands thoroughly", "Vaccination is available for high-risk contacts", "Report suspected cases to the health facility"],
+        "severity": "High",
+    },
+    "African Trypanosomiasis": {
+        "description": "Also called African Sleeping Sickness, this parasitic disease is transmitted by tsetse fly bites and affects the blood, lymph nodes, and eventually the brain. Early stage causes fever and swollen lymph nodes; late stage causes confusion, personality change, and excessive daytime sleepiness. Present in forested areas of Cameroon.",
+        "causes": "Caused by Trypanosoma brucei parasites transmitted by infected tsetse flies, found in savanna and forested regions. Two subspecies affect humans: T. b. gambiense (West/Central Africa, including Cameroon) and T. b. rhodesiense (East Africa).",
+        "treatment": "Requires specific antiparasitic drugs (pentamidine for early stage, eflornithine or nifurtimox-eflornithine combination for late stage). Treatment must be supervised by a clinician at a specialised facility. Early diagnosis and treatment are critical for survival.",
+        "prevention": ["Avoid tsetse fly bites by wearing long-sleeved clothing in forest and savanna areas", "Avoid bright-coloured and dark-blue clothing that attract tsetse flies", "Use insect repellent", "Participate in active surveillance if in an endemic area", "Report fever or swollen lymph nodes after exposure to fly-infested areas"],
+        "severity": "High",
+    },
+    "Rabies": {
+        "description": "A fatal viral disease affecting the brain, almost always transmitted through the bite or scratch of a rabid animal — most commonly a dog in Cameroon. Once symptoms appear, rabies is nearly always fatal. Post-exposure vaccination immediately after a bite can prevent disease.",
+        "causes": "Caused by the Rabies lyssavirus, transmitted through saliva of infected animals. Dogs are the main source of human rabies in Cameroon. Other animals include cats, bats, and monkeys.",
+        "treatment": "If bitten: wash the wound immediately and thoroughly with soap and water for at least 15 minutes, then go to a health facility for post-exposure prophylaxis (PEP) — rabies vaccine and immunoglobulin. PEP is effective only if started promptly BEFORE symptoms appear. Once symptoms develop, rabies is fatal — seek hospital care for comfort and supportive management.",
+        "prevention": ["Vaccinate dogs against rabies", "Avoid approaching stray or wild animals", "Wash any animal bite immediately with soap and water", "Seek post-exposure vaccination within hours of any suspected rabid animal bite", "Pre-exposure vaccination for high-risk individuals (veterinarians, animal handlers)"],
+        "severity": "High",
+    },
+    "Buruli Ulcer": {
+        "description": "A chronic skin disease caused by Mycobacterium ulcerans bacteria, present in Cameroon and other Central/West African countries. Starts as a painless skin swelling or nodule that breaks down into a large, destructive ulcer. Painlessness is a distinguishing feature. Without early treatment, the ulcer can destroy skin, tissue, and bone.",
+        "causes": "Caused by Mycobacterium ulcerans, related to the bacteria causing tuberculosis and leprosy. Exact transmission route is not fully understood but associated with slow-moving or stagnant water environments. Not spread person-to-person.",
+        "treatment": "Combination antibiotic therapy (rifampicin + clarithromycin for 8 weeks) is effective if started early. Advanced disease may require surgery and wound care. Early diagnosis is critical — seek care for any painless skin swelling, nodule, or ulcer, especially near water bodies.",
+        "prevention": ["Seek early medical care for any unexplained, painless skin swelling or ulcer", "Avoid contact with stagnant or slow-moving water where possible", "Wear protective clothing in endemic areas", "Participate in community screening programmes"],
+        "severity": "High",
+    },
+    # ── Fungal / Opportunistic ────────────────────────────────────────────────
+    "Candidiasis": {
+        "description": "A fungal infection caused by Candida yeasts. It can affect the mouth (oral thrush: white patches), genitals (vaginal thrush: itching, discharge), skin folds, or spread internally in immunocompromised patients. Very common in people with HIV, diabetes, or after antibiotic use.",
+        "causes": "Caused by Candida albicans and related yeasts. Normally present in small amounts on skin and mucous membranes; overgrows when immunity is low, after antibiotics disturb normal flora, or with poorly controlled diabetes.",
+        "treatment": "Oral thrush: antifungal oral gel or lozenges (miconazole, nystatin). Vaginal thrush: antifungal pessary or cream (clotrimazole, fluconazole tablet as prescribed). Seek care if symptoms are severe, recurrent, or if you have HIV. Treatment of underlying condition (e.g. blood sugar control) helps prevent recurrence.",
+        "prevention": ["Complete only necessary antibiotic courses", "Maintain good oral and genital hygiene", "Control blood sugar if diabetic", "Treat HIV appropriately to maintain immunity", "Wear breathable cotton underwear"],
+        "severity": "Medium",
+    },
+    # ── Bacterial / Skin ─────────────────────────────────────────────────────
+    "Cellulitis": {
+        "description": "A common bacterial infection of the skin and underlying tissue causing painful redness, warmth, and swelling — most often on the legs. It can spread rapidly and needs antibiotic treatment. Recurrent cellulitis is common in people with lymphoedema or poor circulation.",
+        "causes": "Usually caused by Streptococcus or Staphylococcus bacteria entering through a break in the skin (cut, insect bite, wound, athlete's foot, or eczema). Risk increases with obesity, poor circulation, lymphoedema, or diabetes.",
+        "treatment": "Antibiotics prescribed by a clinician (usually amoxicillin-clavulanate, cloxacillin, or similar). Elevate the affected limb. Mark the edge of redness with a pen to monitor spread. If red streaks, high fever, rapidly spreading redness, or pus appear — go to hospital urgently.",
+        "prevention": ["Clean all skin cuts and wounds promptly", "Treat athlete's foot (fungal foot infection) early", "Moisturise dry, cracked skin", "Manage underlying conditions like oedema or diabetes", "Elevate legs if lymphoedema is present"],
+        "severity": "Medium",
+    },
+    # ── Cardiovascular / Neurological ────────────────────────────────────────
+    "Stroke": {
+        "description": "A medical emergency where blood supply to part of the brain is cut off (ischaemic stroke) or a blood vessel bursts (haemorrhagic stroke), causing sudden neurological symptoms. A stroke can cause permanent disability or death — time is brain, act FAST. Common in people with high blood pressure, heart disease, or diabetes.",
+        "causes": "Ischaemic stroke: blood clot blocks a brain artery (most common, 85%). Haemorrhagic stroke: a blood vessel ruptures. Risk factors: high blood pressure, smoking, diabetes, heart disease, high cholesterol, obesity, and family history.",
+        "treatment": "EMERGENCY — call for help or go to hospital immediately. Time from symptom start to treatment determines outcome. Treatment includes clot-busting drugs (thrombolysis within 4.5 hours), blood pressure management, and rehabilitation. Do not give food or water to a person with stroke symptoms.",
+        "prevention": ["Control blood pressure — the most important preventable risk", "Take prescribed medications regularly", "Quit smoking", "Exercise regularly and maintain healthy weight", "Control blood sugar and cholesterol", "Use FAST test: Face drooping / Arm weakness / Speech difficulty / Time to call emergency"],
+        "severity": "High",
+    },
+    "Heart Failure": {
+        "description": "A chronic condition where the heart is unable to pump blood efficiently enough to meet the body's needs. Causes breathlessness, ankle and leg swelling, and fatigue. It is managed not cured, but many people live well with the right treatment and lifestyle changes.",
+        "causes": "Common causes in Cameroon include uncontrolled hypertension (most common), rheumatic heart disease, ischaemic heart disease, cardiomyopathy, severe anaemia, and thyroid disease. HIV-associated cardiomyopathy is also seen.",
+        "treatment": "Requires medical management including diuretics (to reduce fluid), ACE inhibitors, beta-blockers, and salt restriction — all under a clinician's supervision. Seek urgent care for sudden severe breathlessness, chest pain, or inability to lie flat.",
+        "prevention": ["Control blood pressure and diabetes", "Treat heart valve disease and rheumatic fever early", "Limit salt intake", "Avoid excessive alcohol", "Take HIV medication if HIV-positive to protect the heart", "Seek care for breathlessness with exertion — do not ignore it"],
+        "severity": "High",
+    },
+    # ── Endocrine ─────────────────────────────────────────────────────────────
+    "Hypothyroidism": {
+        "description": "An underactive thyroid gland that produces insufficient thyroid hormone, slowing metabolism. Common symptoms include fatigue, weight gain, feeling cold, constipation, dry skin, and hair loss. Goitre (enlarged thyroid gland visible in the neck) is common in iodine-deficient areas such as the Bamenda highlands.",
+        "causes": "Most commonly caused by Hashimoto's thyroiditis (autoimmune), iodine deficiency (common in highland areas like the North West Region of Cameroon), or as a result of thyroid surgery or radioactive iodine treatment.",
+        "treatment": "Treated with daily oral levothyroxine (thyroid hormone replacement). Dose is adjusted by blood test (TSH level). Treatment is lifelong. Iodine deficiency-related hypothyroidism can be prevented and treated with iodised salt.",
+        "prevention": ["Use iodised salt consistently", "Eat iodine-containing foods (fish, dairy)", "Screen thyroid function during pregnancy", "Seek care for unexplained weight gain, fatigue, or neck swelling"],
+        "severity": "Medium",
+    },
+    # ── Global Respiratory ────────────────────────────────────────────────────
+    "COVID-19": {
+        "description": "A respiratory disease caused by the SARS-CoV-2 coronavirus, spread through droplets and aerosols from an infected person. Symptoms range from mild (cold-like illness) to severe (pneumonia, oxygen failure). High-risk groups: elderly, people with diabetes, hypertension, heart disease, obesity, or immunosuppression.",
+        "causes": "Caused by SARS-CoV-2 virus, spread through breathing, coughing, sneezing, talking, or singing near an infected person. Close indoor contact without ventilation is the highest risk. Can also spread through touching contaminated surfaces and then touching face.",
+        "treatment": "Mild: rest, fluids, paracetamol for fever. Seek care if breathing difficulty, chest pain, confusion, persistent high fever, or unable to keep fluids down. Severe cases need oxygen and hospital care. Antivirals (nirmatrelvir/ritonavir, remdesivir) are used in specific high-risk patients as prescribed.",
+        "prevention": ["Vaccination protects against severe disease", "Wear a mask in crowded indoor spaces", "Ventilate rooms well", "Wash hands regularly", "Isolate if sick to protect others", "Seek care promptly if breathing difficulty develops"],
+        "severity": "High",
     },
 }
 
@@ -1179,6 +1313,90 @@ SYMPTOM_DESCRIPTIONS = {
         "Rash": "Redness, soreness, and swelling of the vulva, vaginal opening, and inner thighs from the inflammation — the genitals look inflamed and irritated.",
         "Lower abdominal pain": "Mild lower abdominal cramping from the vaginal and cervical inflammation spreading upward.",
     },
+    # ── New diseases ──────────────────────────────────────────────────────────
+    "Schistosomiasis": {
+        "Blood in urine": "Painless blood in urine (haematuria) — from pink tinge to frankly red urine — is the hallmark of urinary schistosomiasis (S. haematobium). The blood typically appears at the end of urination. Occurs because the parasites' eggs lodge in the bladder wall, causing inflammation and bleeding. Key distinguishing feature: pain-FREE blood in urine (unlike UTI or kidney stones which are painful).",
+        "Abdominal pain": "Chronic, dull ache in the right upper abdomen from liver enlargement and portal hypertension in intestinal schistosomiasis (S. mansoni). May develop into a hard, enlarged liver and spleen.",
+        "Diarrhea": "Alternating diarrhoea and constipation in intestinal schistosomiasis, sometimes with blood in the stool.",
+        "Itchy skin": "Intense itching and a rash ('swimmer's itch') at the site where larvae penetrated the skin — usually on legs or arms — appearing within hours of water contact.",
+        "Fatigue": "Chronic fatigue and weakness from anaemia caused by persistent blood loss and the body's immune response to the parasites.",
+        "Fever": "Low-grade fever and flu-like illness (Katayama fever) during acute infection, 4–8 weeks after initial exposure.",
+    },
+    "Mpox": {
+        "Fever": "High fever (38–40°C) appearing 1–5 days before the rash. Unlike many fevers, it is accompanied by very pronounced swollen lymph nodes — a combination that distinguishes mpox from chickenpox.",
+        "Swollen lymph nodes": "Prominent, painful swelling of lymph nodes — especially in the neck, armpits, and groin — appearing BEFORE or with the rash. This is a key distinguishing feature from chickenpox (which does NOT cause swollen lymph nodes) and from smallpox.",
+        "Rash": "A distinctive rash that starts on the face and spreads outward to the body, palms, and soles. It progresses through 4 stages: flat spots (macules) → raised bumps (papules) → fluid-filled blisters (vesicles) → pus-filled (pustules) → scabs. All lesions on the body are typically in the SAME stage at the same time — unlike chickenpox where different stages coexist.",
+        "Blisters": "Deep-seated, firm, fluid-filled blisters that progress to pustules (filled with pus) — unlike the superficial, fragile blisters of chickenpox. More similar to the old smallpox lesions.",
+        "Headache": "Severe, throbbing headache during the febrile phase.",
+        "Muscle aches": "Pronounced muscle aches and back pain during the febrile phase.",
+    },
+    "African Trypanosomiasis": {
+        "Excessive sleepiness": "Progressive daytime sleeping — the defining symptom of late-stage sleeping sickness. The infected person falls asleep at inappropriate times, cannot be roused easily, and the sleep–wake cycle is completely disrupted. This occurs because parasites cross the blood-brain barrier and infect the brain.",
+        "Swollen lymph nodes": "Enlarged, rubbery, painless lymph nodes at the back of the neck (Winterbottom's sign) — a classic, highly specific early sign of West African trypanosomiasis. The doctor can feel a characteristic chain of enlarged nodes along the back of the neck.",
+        "Fever": "Intermittent, recurring fever episodes that may be irregular. Notably comes and goes over weeks to months unlike malaria which has a more regular pattern.",
+        "Confusion": "Progressive mental deterioration in late stage — personality changes, confusion, difficulty concentrating, memory problems. The person may become irritable or withdrawn, or show behaviour unlike their normal self.",
+        "Rash": "A transient, non-itchy skin rash (trypanosomal chancre) may appear at the site of the tsetse fly bite within 1–2 weeks, lasting several weeks. Also a circular rash (trypanosomiasis rash / trypanids) on the trunk.",
+    },
+    "Rabies": {
+        "Hydrophobia": "An intense, involuntary spasm of the throat and jaw when seeing or thinking about water — the most famous symptom of rabies encephalitis. Even attempting to drink triggers violent pharyngeal spasms. The person desperately wants water but chokes uncontrollably when trying to swallow it. This is pathognomonic for rabies.",
+        "Agitation": "Extreme restlessness, anxiety, and agitation — alternating with calm periods. The person may be confused, disoriented, and frightened without reason. Alternates with periods of lucidity.",
+        "Fever": "Fever (38–40°C), often with chills, appearing first. Early symptoms resemble flu: headache, fatigue, muscle aches.",
+        "Confusion": "Progressive confusion, delirium, and hallucinations as the virus invades the brain.",
+        "Difficulty swallowing": "Difficulty swallowing liquids and solids due to throat muscle spasms — different from a simple sore throat.",
+    },
+    "Buruli Ulcer": {
+        "Skin sores": "A large, painless ulcer with undermined (undermining) edges — meaning the edges overhang the ulcer base, making the true extent larger than it appears. The base is typically whitish-yellowish and necrotic. Crucially, despite its large and horrifying appearance, it is PAINLESS or mildly painful — this lack of pain distinguishes it from most other severe skin infections.",
+        "Skin lesions": "Starts as a painless nodule (hard lump), papule (raised spot), or plaque (flat raised area) before breaking down. The skin over the nodule becomes tethered and oedematous before the ulcer forms. The surrounding skin may look swollen and hyperpigmented.",
+        "Swelling near skin area": "Diffuse, painless swelling of the skin and underlying tissue (oedematous form) — resembling a bruise or cellulitis. Can be large, covering an entire limb, without open ulceration yet.",
+        "Fatigue": "General fatigue from the chronic disease process.",
+    },
+    "Candidiasis": {
+        "White patches in mouth": "White, curd-like or creamy plaques on the tongue, inner cheeks, throat, or roof of the mouth that CANNOT be wiped off without bleeding — oral thrush. Unlike white food residue, which wipes off easily. When the tongue is red underneath the white patches, it is diagnostic. Accompanied by soreness and an altered taste.",
+        "Vaginal discharge": "Thick, white, cottage-cheese-like discharge — clumpy and odourless (or mildly bread-like/yeasty smell). Unlike the fishy-smelling discharge of bacterial vaginosis or the frothy discharge of trichomoniasis.",
+        "Vaginal itching": "Intense, constant itching of the vulva and inside the vagina — the most distressing symptom. The vulva is often red and swollen. Made worse by warmth, tight clothing, and sweating.",
+        "Itchy skin": "Itching and moist redness in skin folds — armpits, under the breasts, groin, between toes — where warmth and moisture allow Candida to overgrow.",
+        "Sore throat": "Soreness and discomfort in the throat from oral thrush — may make swallowing uncomfortable.",
+    },
+    "Cellulitis": {
+        "Skin redness": "A spreading area of red, warm, tender skin — often starting at a skin break (cut, insect bite, crack). The redness expands over hours to days. Borders are usually irregular (unlike the well-defined red ring of ringworm). Red streaks spreading from the area suggest spread to lymphatic vessels — a serious sign.",
+        "Skin warmth": "The affected skin is noticeably warmer than the surrounding normal skin when touched — from increased blood flow due to inflammation. Often felt before visible redness in darker skin tones.",
+        "Fever": "Fever, chills, and general illness when the infection is significant. High fever or shaking chills suggest spread beyond the skin — seek urgent care.",
+        "Skin sores": "The skin may develop blisters, small abscesses, or a puncture wound at the original entry site. Pus may drain if an abscess has formed within the cellulitis.",
+        "Swollen lymph nodes": "Tender, swollen lymph nodes in the area draining the infection — e.g., groin nodes for leg cellulitis, armpit nodes for arm cellulitis — indicating the body is fighting the spread.",
+    },
+    "Stroke": {
+        "Severe headache": "A sudden, explosive 'thunderclap' headache — often described as 'the worst headache of my life' — which is the hallmark of subarachnoid haemorrhage (a type of stroke from a burst aneurysm). Unlike tension headaches or migraines which build gradually, this headache reaches maximum intensity within seconds.",
+        "Confusion": "Sudden onset of confusion, disorientation, or inability to understand what is being said — the person may be unable to tell you where they are, what day it is, or what is happening. Very different from gradual confusion of dementia.",
+        "Speech difficulty": "Suddenly unable to speak clearly (slurred speech, aphasia), produce words, or find words — may speak nonsense or garbled sentences. A completely different pattern from alcohol slurring or hoarseness.",
+        "Facial drooping": "One side of the face droops or feels numb — the person cannot smile symmetrically, one corner of the mouth hangs lower, the eye on the affected side may not close properly.",
+        "Dizziness": "Sudden severe vertigo (room spinning) and loss of balance — especially when combined with other neurological symptoms.",
+        "Blurred vision": "Sudden loss of vision in one eye, or double vision (diplopia), from blockage of the eye's blood supply or damage to eye movement centres.",
+        "Weakness": "Sudden weakness or numbness on one side of the body — one arm cannot be raised as high, one leg drags, one side of the face is numb. FAST test: Face / Arm / Speech / Time.",
+    },
+    "Heart Failure": {
+        "Shortness of breath": "Breathlessness on exertion that progressively worsens over time — eventually occurring at rest. Waking from sleep unable to breathe (paroxysmal nocturnal dyspnoea) or needing to sleep propped up with multiple pillows (orthopnoea) are characteristic. Caused by fluid accumulating in the lungs (pulmonary oedema).",
+        "Ankle swelling": "Bilateral (both sides) ankle and leg swelling that pits when pressed (pitting oedema). Worse at the end of the day, improves slightly overnight when lying flat. Caused by fluid retention from the failing heart's inability to pump blood forward.",
+        "Fatigue": "Profound, persistent tiredness even with minimal activity — from reduced cardiac output delivering less oxygen to muscles. Patients often describe feeling exhausted just walking across a room.",
+        "Cough": "A chronic, non-productive cough — especially at night or when lying flat. Caused by fluid accumulating around the lungs (pleural effusion) or within the lungs. Unlike a cold cough, it does not produce coloured sputum.",
+        "Fast heartbeat": "Palpitations — awareness of a racing or irregular heartbeat as the heart compensates for reduced pump function by beating faster.",
+    },
+    "Hypothyroidism": {
+        "Fatigue": "Deep, persistent tiredness not relieved by sleep — described as 'bone-deep exhaustion'. Even after 10 hours of sleep, the person wakes feeling unrested. Unlike depression fatigue (psychological), hypothyroid fatigue is primarily physical with slow muscle movement.",
+        "Weight gain": "Gradual weight gain despite no change in diet or activity — often 3–10 kg over months. The weight is partly from true fat accumulation and partly from fluid retention (myxoedema). Unlike weight gain from overeating, it responds poorly to diet changes alone.",
+        "Cold intolerance": "Persistent feeling of being cold even in warm weather — wearing extra layers when others are comfortable. Caused by the reduced metabolic rate meaning the body generates less heat.",
+        "Constipation": "Slow bowel movements, often passing stool only every 3–5 days with dry, hard stool. From reduced gut motility due to low thyroid hormone.",
+        "Dry skin": "Rough, dry, flaking skin that does not respond to ordinary moisturisers. The skin may feel thickened or 'doughy'. Hair is brittle, coarse, and falls out easily. Eyebrows thin especially at the outer third.",
+        "Hair loss": "Diffuse hair thinning over the entire scalp — not patchy like alopecia. Hair becomes brittle, breaks easily, and falls out in larger amounts than normal.",
+    },
+    "COVID-19": {
+        "Fever": "Fever typically 38–40°C, often associated with chills. Unlike malaria, it does not follow a cyclical pattern and is usually continuous rather than spiking.",
+        "Cough": "Persistent dry cough — not producing sputum in mild cases. A productive cough with coloured sputum may develop in severe disease with pneumonia.",
+        "Shortness of breath": "Breathlessness, especially on exertion. Silent hypoxaemia (low oxygen without obvious breathlessness) is dangerous — oxygen saturation may drop significantly before the person feels breathless.",
+        "Loss of taste": "Sudden, complete loss of taste (ageusia) — food becomes completely flavourless. Appears 2–14 days after infection. One of the most distinctive features of COVID-19, uncommon in other respiratory infections.",
+        "Loss of smell": "Sudden, complete loss of smell (anosmia) — cannot detect strong smells at all. Often occurs before other symptoms or in people with mild disease who have no fever or cough.",
+        "Fatigue": "Severe, debilitating fatigue — often the most distressing symptom. In Long COVID, fatigue may persist for months after the initial infection clears.",
+        "Muscle aches": "Widespread muscle pain and body aches, often severe, particularly in the back and thighs.",
+    },
 }
 
 
@@ -1218,7 +1436,10 @@ def _normalize_disease(raw: dict) -> dict:
         "Tetanus", "Diphtheria", "Leptospirosis", "Typhus", "Septicemia",
         "Sickle Cell Crisis", "Appendicitis", "Kidney Stones", "Epilepsy",
         "Onchocerciasis", "Filariasis", "HIV AIDS", "Anaphylaxis",
-        "Pelvic Inflammatory Disease",
+        "Pelvic Inflammatory Disease", "Malnutrition",
+        # New high-severity diseases
+        "Schistosomiasis", "Mpox", "African Trypanosomiasis", "Rabies",
+        "Buruli Ulcer", "Stroke", "Heart Failure", "COVID-19",
     }
     severity = raw.get("severity") or ("High" if name in HIGH_SEVERITY else "Medium")
 

@@ -15,7 +15,7 @@ app = FastAPI(title="MediGuard API", version="1.0.0")
 model_status = ensure_model_files()
 init_db()
 
-from app.routers import analytics, auth, chat, contact, diseases, history, newsletter, predict  # noqa: E402
+from app.routers import admin, analytics, auth, chat, contact, diseases, history, newsletter, predict  # noqa: E402
 
 app.add_middleware(
     CORSMiddleware,
@@ -78,6 +78,7 @@ app.include_router(history.router,     prefix="/history",     tags=["History"])
 app.include_router(analytics.router,   prefix="/analytics",   tags=["Analytics"])
 app.include_router(contact.router,     prefix="/contact",     tags=["Contact"])
 app.include_router(newsletter.router,  prefix="/newsletter",  tags=["Newsletter"])
+app.include_router(admin.router,                             tags=["Admin"])
 
 
 # ---------------------------------------------------------------------------

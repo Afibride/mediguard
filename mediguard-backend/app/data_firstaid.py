@@ -776,15 +776,15 @@ def is_first_aid_request(query: str) -> bool:
 
     # Positive triggers — these clearly indicate an accident / injury
     accident_triggers = [
-        "accident", "first aid", "what to do", "how to treat", "how do i treat",
-        "what should i do", "emergency", "broken", "fracture", "fractured",
-        "sprained", "sprain", "burned", "burnt", "burn", "cut myself",
-        "bleeding", "choked", "choking", "drowned", "drowning", "bitten by",
+        "accident", "first aid", "how to treat", "how do i treat",
+        "emergency", "broken", "fracture", "fractured",
+        "sprained", "sprain", "burned", "burnt", "cut myself",
+        "choked", "choking", "drowned", "drowning", "bitten by",
         "snake bite", "snake attack", "electrocuted", "electric shock",
-        "unconscious", "fainted", "fainting", "collapsed", "heart attack",
-        "stroke", "poisoned", "overdose", "nosebleed",
+        "unconscious", "fainted", "fainting", "collapsed",
+        "poisoned", "overdose", "nosebleed",
         "swallowed", "ingested", "drank bleach", "drank chemicals",
-        "premiers secours", "urgence", "que faire",
+        "premiers secours", "urgence",
     ]
 
     # Check for any accident trigger

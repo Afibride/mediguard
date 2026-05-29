@@ -85,6 +85,10 @@ ALL_SYMPTOMS = [
     "Tooth pain", "Jaw swelling",
     "Joint swelling", "Stiffness", "Reduced range of motion",
     "Dry skin", "Poor wound healing",
+    # New symptoms for Cameroon-endemic and additional diseases (2024)
+    "Blood in stool", "Excessive sleepiness", "Hydrophobia", "Agitation",
+    "Skin redness", "Skin warmth", "Speech difficulty", "Facial drooping",
+    "Loss of balance", "Loss of taste", "Loss of smell",
 ]
 SYMPTOM_SET = set(ALL_SYMPTOMS)
 
@@ -987,6 +991,156 @@ DISEASE_PROFILES: dict[str, tuple[dict[str, float], int]] = {
         "Skin lesions":               0.80,
         "Fatigue":                    0.15,
     }, 130),
+
+    # ------------------------------------------------------------------
+    # NEW CAMEROON-ENDEMIC & GLOBAL DISEASES (2024)
+    # ------------------------------------------------------------------
+
+    # WHO Schistosomiasis fact sheet; Steinmann et al. PLoS NTD 2006
+    "Schistosomiasis": ({
+        "Blood in urine":             0.92,   # urinary form — cardinal
+        "Blood in stool":             0.35,   # intestinal form
+        "Abdominal pain":             0.55,
+        "Diarrhea":                   0.40,
+        "Fatigue":                    0.72,
+        "Fever":                      0.45,   # Katayama fever (acute)
+        "Itchy skin":                 0.35,   # cercarial dermatitis
+        "Rash":                       0.28,
+        "Abdominal swelling":         0.30,   # hepatosplenomegaly
+        "Weight loss":                0.40,
+        "Weakness":                   0.45,
+    }, 120),
+
+    # WHO Mpox fact sheet 2023; Nolen et al. Emerg Infect Dis 2016
+    "Mpox": ({
+        "Fever":                      0.97,
+        "Rash":                       0.98,
+        "Swollen lymph nodes":        0.90,   # distinguishes from chickenpox
+        "Headache":                   0.85,
+        "Muscle aches":               0.72,
+        "Fatigue":                    0.78,
+        "Blisters":                   0.90,
+        "Skin sores":                 0.85,
+        "Back pain":                  0.60,
+        "Loss of appetite":           0.55,
+    }, 60),
+
+    # WHO HAT fact sheet; Checchi et al. PLoS NTD 2008
+    "African Trypanosomiasis": ({
+        "Excessive sleepiness":       0.78,   # stage 2 — pathognomonic
+        "Swollen lymph nodes":        0.85,   # Winterbottom's sign
+        "Fever":                      0.88,
+        "Headache":                   0.75,
+        "Fatigue":                    0.82,
+        "Muscle aches":               0.65,
+        "Confusion":                  0.55,
+        "Rash":                       0.40,
+        "Joint pain":                 0.45,
+        "Night sweats":               0.50,
+        "Weakness":                   0.60,
+    }, 30),
+
+    # WHO Rabies fact sheet; Fooks et al. Nat Rev Dis Primers 2017
+    "Rabies": ({
+        "Hydrophobia":                0.80,   # pathognomonic
+        "Agitation":                  0.85,
+        "Fever":                      0.92,
+        "Headache":                   0.82,
+        "Fatigue":                    0.75,
+        "Muscle aches":               0.70,
+        "Confusion":                  0.75,
+        "Muscle cramps":              0.65,
+        "Sweating":                   0.60,
+        "Difficulty swallowing":      0.72,
+    }, 20),
+
+    # WHO Buruli Ulcer fact sheet; Merritt et al. Lancet Infect Dis 2010
+    "Buruli Ulcer": ({
+        "Skin sores":                 0.95,
+        "Skin lesions":               0.92,
+        "Skin peeling":               0.55,
+        "Fatigue":                    0.45,
+        "Weakness":                   0.40,
+        "Swollen lymph nodes":        0.30,
+    }, 25),
+
+    # CDC Candidiasis guidelines; Pappas et al. Clin Infect Dis 2016
+    "Candidiasis": ({
+        "White patches in mouth":     0.85,
+        "Vaginal itching":            0.80,
+        "Vaginal discharge":          0.75,
+        "Sore throat":                0.60,
+        "Itchy skin":                 0.55,
+        "Fatigue":                    0.40,
+        "Loss of appetite":           0.35,
+    }, 100),
+
+    # IDSA Cellulitis guidelines; Stevens et al. Clin Infect Dis 2014
+    "Cellulitis": ({
+        "Skin redness":               0.97,
+        "Skin warmth":                0.95,
+        "Fever":                      0.65,
+        "Skin sores":                 0.55,
+        "Swollen lymph nodes":        0.55,
+        "Fatigue":                    0.50,
+        "Skin lesions":               0.40,
+    }, 80),
+
+    # AHA/ASA Stroke guidelines; Feigin et al. Lancet 2022
+    "Stroke": ({
+        "Speech difficulty":          0.82,
+        "Facial drooping":            0.75,
+        "Weakness":                   0.85,
+        "Loss of balance":            0.70,
+        "Severe headache":            0.70,
+        "Confusion":                  0.80,
+        "Dizziness":                  0.75,
+        "Blurred vision":             0.55,
+        "Nausea":                     0.55,
+        "Vomiting":                   0.45,
+    }, 60),
+
+    # ACC/AHA Heart Failure guidelines; McDonagh et al. Eur Heart J 2021
+    "Heart Failure": ({
+        "Shortness of breath":        0.95,
+        "Ankle swelling":             0.88,
+        "Fatigue":                    0.90,
+        "Fast heartbeat":             0.72,
+        "Cough":                      0.65,
+        "Weakness":                   0.70,
+        "Dizziness":                  0.55,
+        "Chest pain":                 0.45,
+        "Night sweats":               0.30,
+    }, 70),
+
+    # ATA/ETA Hypothyroidism guidelines; Jonklaas et al. Thyroid 2014
+    "Hypothyroidism": ({
+        "Fatigue":                    0.90,
+        "Weight gain":                0.82,
+        "Cold intolerance":           0.85,
+        "Constipation":               0.72,
+        "Dry skin":                   0.78,
+        "Hair loss":                  0.68,
+        "Muscle aches":               0.55,
+        "Weakness":                   0.65,
+        "Sleep disturbances":         0.55,
+        "Dizziness":                  0.35,
+    }, 60),
+
+    # WHO COVID-19 clinical management; Guan et al. NEJM 2020
+    "COVID-19": ({
+        "Fever":                      0.85,
+        "Cough":                      0.82,
+        "Fatigue":                    0.78,
+        "Loss of taste":              0.55,   # ageusia — specific to COVID-19
+        "Loss of smell":              0.58,   # anosmia — specific to COVID-19
+        "Muscle aches":               0.65,
+        "Headache":                   0.62,
+        "Shortness of breath":        0.55,
+        "Sore throat":                0.55,
+        "Diarrhea":                   0.35,
+        "Runny nose":                 0.30,
+    }, 150),
 
 }
 
