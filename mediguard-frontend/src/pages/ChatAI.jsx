@@ -605,6 +605,30 @@ const ChatAI = () => {
     handleSend(question);
   };
 
+  // Card click: show a bot clarifying prompt instead of sending to AI.
+  // The synthetic message IS included in history when the user next replies,
+  // so the AI understands the context of what area the user is concerned about.
+  const handleSelectCard = (tile) => {
+    // Activate child mode for the child card
+    if (tile.childCard) {
+      setChildMode(true);
+    }
+
+    const syntheticMsg = {
+      id: 'card_' + Date.now(),
+      role: 'assistant',
+      content: tile.prompt,
+      sources: [],
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      followUpQuestions: tile.followUps || [],   // camelCase matches AI message shape
+      isCardPrompt: true,   // skip rating/feedback buttons
+    };
+
+    setMessages(prev => [...prev, syntheticMsg]);
+    shouldStickToBottomRef.current = true;
+    scrollToLatest('smooth', true);
+  };
+
   const handleImageSend = async () => {
     if (!imageFile) return;
     const context = input.trim();
@@ -1111,8 +1135,8 @@ const ChatAI = () => {
                               <CornerUpLeft className="h-3 w-3" />
                             </button>
                           </div>
-                          {message.role === 'assistant' && <SourceCitation sources={message.sources} />}
-                          {message.role === 'assistant' && message.id !== messages[0]?.id && (
+                          {message.role === 'assistant' && !message.isCardPrompt && <SourceCitation sources={message.sources} />}
+                          {message.role === 'assistant' && message.id !== messages[0]?.id && !message.isCardPrompt && (
                             <div className="flex items-center gap-1.5 mt-1.5 px-1 flex-wrap">
                               <span className="text-[10px] text-muted-foreground">Helpful?</span>
                               <button
@@ -1154,11 +1178,31 @@ const ChatAI = () => {
                               )}
                             </div>
                           )}
-                          {/* Reply suggestion chips — shown only on the last AI follow-up message */}
+                          {/* Reply suggestion chips — last AI message only */}
                           {message.role === 'assistant' &&
                             message.id === messages.filter(m => m.role === 'assistant').at(-1)?.id &&
                             Array.isArray(message.followUpQuestions) &&
                             message.followUpQuestions.length > 0 && (() => {
+                              // Card prompts: show follow-up options directly as tappable chips
+                              if (message.isCardPrompt) {
+                                return (
+                                  <div className="mt-2.5">
+                                    <p className="text-[10px] text-muted-foreground mb-1.5 px-0.5">Tap to describe, or type your own:</p>
+                                    <div className="flex max-w-full flex-wrap gap-1.5 overflow-hidden">
+                                      {message.followUpQuestions.map((hint) => (
+                                        <button
+                                          key={hint}
+                                          onClick={() => handleSend(hint)}
+                                          className="rounded-full border border-primary/40 bg-primary/8 hover:bg-primary hover:text-white hover:border-primary px-3 py-1 text-[11px] sm:text-xs font-medium text-primary transition-colors text-left"
+                                        >
+                                          {hint}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  </div>
+                                );
+                              }
+                              // AI follow-up questions: map to short reply hints
                               const hints = getReplyHints(message.followUpQuestions);
                               return hints.length > 0 ? (
                                 <div className="mt-2.5">
@@ -1216,7 +1260,7 @@ const ChatAI = () => {
             <div className="p-2.5 sm:p-4 bg-background/95 backdrop-blur border-t w-full max-w-full overflow-x-hidden shadow-[0_-10px_30px_hsl(var(--background)/0.85)]">
               {messages.length <= 1 && !isTyping && (
                 <div className="mb-3 sm:mb-4">
-                  <SuggestedQuestions onSelectQuestion={handleSelectQuestion} />
+                  <SuggestedQuestions onSelectQuestion={handleSelectQuestion} onSelectCard={handleSelectCard} />
                 </div>
               )}
 
