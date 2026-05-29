@@ -2569,15 +2569,31 @@ def retrieve(query: str, top_k: int = 5, filter_disease: str | None = None) -> l
 
 
 def _extractive_answer(query: str, chunks: list[dict]) -> str:
-    source_text = " ".join(chunk["text"] for chunk in chunks[:3])
-    sentences = [part.strip() for part in source_text.replace("\n", " ").split(".") if part.strip()]
-    summary = ". ".join(sentences[:5])
+    # Only use chunks that are actually about the query topic (basic relevance filter)
+    query_words = {w.lower() for w in query.split() if len(w) > 3}
+    relevant = [
+        c for c in chunks
+        if any(w in c["text"].lower() for w in query_words)
+    ]
+    if not relevant:
+        relevant = chunks[:2]
+
+    source_text = " ".join(c["text"] for c in relevant[:2])
+    sentences = [p.strip() for p in source_text.replace("\n", " ").split(".") if len(p.strip()) > 30]
+    summary = ". ".join(sentences[:3])
     if summary:
         summary += "."
+
+    if not summary or len(summary) < 50:
+        return (
+            "I could not find a precise match for your query in the current knowledge base. "
+            "Please try rephrasing your question, or consult the MediGuard Disease Library for detailed disease information. "
+            "For personal symptoms, always consult a qualified healthcare professional."
+        )
     return (
-        f"Based on the medical reference passages I found, {summary} "
-        "For first aid, rest, drink safe fluids, monitor symptoms, and seek urgent care for severe, worsening, or persistent symptoms. "
-        "MediGuard results can sometimes be faulty, so use this as educational guidance only and consult a qualified healthcare professional for personal symptoms."
+        f"Based on MediGuard medical references: {summary} "
+        "For personal symptoms, always consult a qualified healthcare professional. "
+        "MediGuard is educational guidance only — results can sometimes be incomplete."
     )
 
 
@@ -3010,6 +3026,89 @@ _PIDGIN_THANKS: list[str] = [
 ]
 
 
+_STI_TRIGGERS: list[str] = [
+    "sexually transmitted", "sexual health", "sti", "stis", "std", "stds",
+    "sexually transmitted infection", "sexually transmitted disease",
+    "gonorrhea", "syphilis", "chlamydia", "genital herpes", "trichomoniasis",
+    "hiv", "aids", "genital warts", "protect myself sexually",
+    "safe sex", "condom", "unprotected sex",
+    "infection sexuelle", "maladie sexuelle",
+]
+
+_STI_NAMES_DISPLAY = [
+    "Gonorrhea (The Clap)", "Syphilis (The Pox)", "Chlamydia (Silent STI)",
+    "Genital Herpes (HSV-2)", "Trichomoniasis", "HIV/AIDS",
+]
+
+
+def _sti_sexual_health_response(query: str) -> dict | None:
+    """Handle general STI / sexual health queries."""
+    text = query.lower()
+    if not any(t in text for t in _STI_TRIGGERS):
+        return None
+
+    # If a specific disease is mentioned, let the disease handler deal with it
+    specific = _resolve_disease_name(_strip_short_question_noise(query))
+    if specific and specific["name"] in [
+        "Gonorrhea", "Syphilis", "Chlamydia", "Genital Herpes", "Trichomoniasis"
+    ]:
+        return None  # let the disease-specific handler respond
+
+    answer = (
+        "🔴 **Sexually Transmitted Infections (STIs) — Signs & Protection**\n\n"
+        "STIs are infections spread mainly through sexual contact. Many have no symptoms "
+        "but can cause serious harm if untreated. The most common STIs seen in Cameroon:\n\n"
+
+        "**Common STIs and their key warning signs:**\n"
+        "1. **Gonorrhea (The Clap)** — Thick yellow/green discharge from the penis or vagina, "
+        "burning when urinating, pelvic pain. Often no symptoms in women.\n"
+        "2. **Chlamydia (Silent STI)** — Often NO symptoms. May cause mild discharge, painful "
+        "urination, or pelvic ache. Leads to infertility if untreated.\n"
+        "3. **Syphilis (The Pox)** — Painless sore (chancre) on genitals or mouth, then a "
+        "copper-coloured rash on palms and soles. Can affect the heart and brain if ignored.\n"
+        "4. **Genital Herpes** — Painful clustered blisters or sores on the genitals, thighs, "
+        "or buttocks. Burning when urinating. Comes back in flare-ups.\n"
+        "5. **Trichomoniasis (Trich)** — Frothy, fishy-smelling vaginal discharge, intense vaginal "
+        "itching and burning. Often symptom-free in men.\n"
+        "6. **HIV/AIDS** — Early stage: flu-like illness, swollen lymph nodes, night sweats. "
+        "Later: weight loss, recurrent infections, chronic diarrhoea.\n\n"
+
+        "**⚠️ Red flags — see a clinician immediately:**\n"
+        "- Any unusual genital sore, blister, or ulcer\n"
+        "- Discharge with unusual colour, smell, or consistency\n"
+        "- Burning or pain when urinating\n"
+        "- Pain during sex or pelvic pain\n"
+        "- Rash on palms, soles, or genitals\n\n"
+
+        "**How to protect yourself:**\n"
+        "• **Use condoms correctly every time** — this is the most effective protection against STIs\n"
+        "• **Get tested regularly** if sexually active — especially before a new partner\n"
+        "• **Know your partner's status** — talk openly about STI testing\n"
+        "• **Get vaccinated** — vaccines exist for HIV (PrEP), Hepatitis B, and HPV\n"
+        "• **Avoid sharing razors, needles, or sharp instruments**\n"
+        "• **If exposed** — seek post-exposure treatment promptly (PEP for HIV within 72 hours)\n\n"
+
+        "🏥 **Where to get tested in Bamenda:**\n"
+        "- Bamenda Regional Hospital — STI / VCT Clinic\n"
+        "- Any district health centre — free HIV testing and STI screening\n"
+        "- Family planning clinics\n\n"
+        "*Testing is confidential. Early treatment prevents complications and stops spread.*"
+    )
+
+    return {
+        "answer": answer,
+        "sources": ["Gonorrhea", "Syphilis", "Chlamydia", "Genital Herpes", "Trichomoniasis", "HIV AIDS"],
+        "disclaimer": DISCLAIMER,
+        "mode": "sti_sexual_health",
+        "follow_up_questions": [
+            "I have unusual discharge — what could it be?",
+            "I have a genital sore — is it serious?",
+            "How do I get tested for STIs in Bamenda?",
+            "What is PrEP and where can I get it?",
+        ],
+    }
+
+
 def _pidgin_conversational_response(query: str) -> dict | None:
     """Detect Pidgin greetings/thanks and respond naturally.
 
@@ -3083,6 +3182,11 @@ def generate_answer(
     conversational = _conversational_response(query)
     if conversational:
         return conversational
+
+    # ── STI / Sexual health general queries ──────────────────────────────────
+    sti_response = _sti_sexual_health_response(query)
+    if sti_response:
+        return sti_response
 
     # ── Vaccination / immunisation schedule ──────────────────────────────────
     vaccination = _vaccination_query_response(query)

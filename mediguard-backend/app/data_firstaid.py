@@ -88,7 +88,8 @@ FIRST_AID_DATA: dict[str, dict] = {
             "Person has not had a tetanus shot in 5–10 years",
         ],
         "keywords": [
-            "cut", "cuts", "laceration", "wound", "gash", "slash", "bleeding", "blood",
+            "cut", "cuts", "laceration", "wound", "gash", "slash",
+            "bleeding wound", "wound is bleeding", "cut is bleeding", "blood won't stop",
             "knife cut", "glass cut", "sharp object", "machete cut", "deep cut",
             "stab wound", "puncture", "puncture wound", "dog bite", "animal bite",
             "blessure", "coupure", "saignement",

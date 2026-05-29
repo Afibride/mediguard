@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { adminLogin } from '@/services/adminApi';
@@ -6,17 +6,34 @@ import { useAdminAuth } from '@/contexts/AdminAuthContext';
 
 export default function AdminLogin() {
   const navigate = useNavigate();
-  const { loginAdmin } = useAdminAuth();
+  const { admin, loading: authLoading, loginAdmin } = useAdminAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPw, setShowPw] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+
+  // Already authenticated — redirect to dashboard
+  useEffect(() => {
+    if (!authLoading && admin) {
+      navigate('/admin/dashboard', { replace: true });
+    }
+  }, [admin, authLoading, navigate]);
+
+  // Show spinner while checking stored session
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+        <div className="w-7 h-7 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
-    setLoading(true);
+    setSubmitting(true);
     try {
       const data = await adminLogin(email, password);
       loginAdmin(data.access_token, data.admin);
@@ -24,7 +41,7 @@ export default function AdminLogin() {
     } catch (err) {
       setError(err.message || 'Login failed');
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   }
 
@@ -89,11 +106,11 @@ export default function AdminLogin() {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={submitting}
               className="w-full rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 text-white font-semibold py-2.5 text-sm transition flex items-center justify-center gap-2"
             >
-              {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-              {loading ? 'Signing in…' : 'Sign in to Admin'}
+              {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
+              {submitting ? 'Signing in…' : 'Sign in to Admin'}
             </button>
           </form>
         </div>
