@@ -493,84 +493,6 @@ const HomePage = () => {
           <SeasonalBanner className="w-full" />
         </div>
 
-        {/* ── STD / Sexual Health Awareness Banner ─────────────────────────────
-             Always shown on home page (session-only dismiss — resets each visit) */}
-        {showStdBanner && (
-          <motion.div
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="relative bg-gradient-to-r from-violet-700 via-purple-600 to-pink-600 text-white shadow-lg"
-          >
-            <div className="container mx-auto px-4 max-w-7xl py-4 sm:py-5">
-              <div className="flex items-start justify-between gap-3">
-                {/* Icon */}
-                <div className="flex-shrink-0 mt-0.5">
-                  <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center">
-                    <Heart className="h-5 w-5 fill-white/80 text-white" />
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm sm:text-base font-bold leading-snug mb-1">
-                    🛡️ Sexual Health Reminder — Protect Yourself &amp; Others from STDs/STIs
-                  </p>
-                  <p className="text-xs sm:text-sm text-white/90 leading-relaxed mb-3">
-                    Sexually transmitted infections (STIs) including HIV, gonorrhoea, syphilis, chlamydia, and herpes
-                    are <strong>preventable</strong>. Many show <strong>no symptoms</strong> — you can have one and not know it.
-                    Regular testing saves lives.
-                  </p>
-
-                  {/* Protection tips grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mb-3">
-                    {[
-                      { icon: '🩺', text: 'Get tested regularly — even with no symptoms' },
-                      { icon: '🧰', text: 'Always use a condom correctly every time you have sex' },
-                      { icon: '🚫', text: 'Abstinence is the surest way to prevent all STIs' },
-                      { icon: '🤝', text: 'Be faithful to one tested, uninfected partner' },
-                      { icon: '💊', text: 'Complete every treatment course if diagnosed — do not stop early' },
-                      { icon: '📣', text: 'Inform your partner(s) if you test positive — they need care too' },
-                    ].map(({ icon, text }) => (
-                      <div key={text} className="flex items-start gap-2 text-[11px] sm:text-xs text-white/90">
-                        <span className="text-sm shrink-0 leading-none mt-0.5">{icon}</span>
-                        <span className="leading-relaxed">{text}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-3">
-                    <Link
-                      to="/disease-library"
-                      className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 hover:bg-white/30 rounded-full px-3 py-1 transition-colors"
-                    >
-                      Learn about STIs in our Disease Library →
-                    </Link>
-                    <Link
-                      to="/chat-ai"
-                      className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 hover:bg-white/30 rounded-full px-3 py-1 transition-colors"
-                    >
-                      Ask MediGuard AI about protection →
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Dismiss (session-only) */}
-                <button
-                  onClick={() => {
-                    setShowStdBanner(false);
-                    sessionStorage.setItem('mg_stdBannerHidden', '1');
-                  }}
-                  className="flex-shrink-0 p-1.5 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors mt-0.5"
-                  aria-label="Hide for this session"
-                  title="Hide for this session (will show again next visit)"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-
         {/* Trust Indicators - Stats Grid */}
         <section className="py-12 sm:py-20 bg-background">
           <div className="container mx-auto px-4">
@@ -806,6 +728,83 @@ const HomePage = () => {
             </div>
           </div>
         </section>
+
+        {/* ── STD / Sexual Health Awareness Banner (MOVED HERE) ─────────────────── */}
+        {showStdBanner && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="relative bg-gradient-to-r from-violet-700 via-purple-600 to-pink-600 text-white shadow-lg"
+          >
+            <div className="container mx-auto px-4 max-w-7xl py-4 sm:py-5">
+              <div className="flex items-start justify-between gap-3">
+                {/* Icon */}
+                <div className="flex-shrink-0 mt-0.5">
+                  <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center">
+                    <Heart className="h-5 w-5 fill-white/80 text-white" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm sm:text-base font-bold leading-snug mb-1">
+                    🛡️ Sexual Health Reminder — Protect Yourself &amp; Others from STDs/STIs
+                  </p>
+                  <p className="text-xs sm:text-sm text-white/90 leading-relaxed mb-3">
+                    Sexually transmitted infections (STIs) including HIV, gonorrhoea, syphilis, chlamydia, and herpes
+                    are <strong>preventable</strong>. Many show <strong>no symptoms</strong> — you can have one and not know it.
+                    Regular testing saves lives.
+                  </p>
+
+                  {/* Protection tips grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mb-3">
+                    {[
+                      { icon: '🩺', text: 'Get tested regularly — even with no symptoms' },
+                      { icon: '🧰', text: 'Always use a condom correctly every time you have sex' },
+                      { icon: '🚫', text: 'Abstinence is the surest way to prevent all STIs' },
+                      { icon: '🤝', text: 'Be faithful to one tested, uninfected partner' },
+                      { icon: '💊', text: 'Complete every treatment course if diagnosed — do not stop early' },
+                      { icon: '📣', text: 'Inform your partner(s) if you test positive — they need care too' },
+                    ].map(({ icon, text }) => (
+                      <div key={text} className="flex items-start gap-2 text-[11px] sm:text-xs text-white/90">
+                        <span className="text-sm shrink-0 leading-none mt-0.5">{icon}</span>
+                        <span className="leading-relaxed">{text}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Link
+                      to="/disease-library"
+                      className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 hover:bg-white/30 rounded-full px-3 py-1 transition-colors"
+                    >
+                      Learn about STIs in our Disease Library →
+                    </Link>
+                    <Link
+                      to="/chat-ai"
+                      className="inline-flex items-center gap-1 text-xs font-semibold bg-white/20 hover:bg-white/30 rounded-full px-3 py-1 transition-colors"
+                    >
+                      Ask MediGuard AI about protection →
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Dismiss (session-only) */}
+                <button
+                  onClick={() => {
+                    setShowStdBanner(false);
+                    sessionStorage.setItem('mg_stdBannerHidden', '1');
+                  }}
+                  className="flex-shrink-0 p-1.5 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors mt-0.5"
+                  aria-label="Hide for this session"
+                  title="Hide for this session (will show again next visit)"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
         {/* How It Works - Horizontal scroll on mobile */}
         <section className="py-12 sm:py-24 bg-muted/30 border-y">

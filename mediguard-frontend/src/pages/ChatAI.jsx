@@ -22,6 +22,64 @@ import VoiceInput from '@/components/VoiceInput';
 import { analyzeImage, saveChatHistory, sendChatMessage, submitChatFeedback } from '@/services/api';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+// ── Swipe-to-reply wrapper (mobile touch only) ───────────────────────────────
+function SwipeableMessage({ onReply, children }) {
+  const [swipeX, setSwipeX] = React.useState(0);
+  const startX = useRef(0);
+  const startY = useRef(0);
+  const swiping = useRef(false);
+
+  function onTouchStart(e) {
+    startX.current = e.touches[0].clientX;
+    startY.current = e.touches[0].clientY;
+    swiping.current = false;
+  }
+
+  function onTouchMove(e) {
+    const dx = e.touches[0].clientX - startX.current;
+    const dy = e.touches[0].clientY - startY.current;
+    if (!swiping.current) {
+      if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy) * 1.5) swiping.current = true;
+      else if (Math.abs(dy) > 8) return;
+    }
+    if (swiping.current && dx > 0) setSwipeX(Math.min(dx, 65));
+  }
+
+  function onTouchEnd() {
+    if (swipeX > 42) onReply();
+    setSwipeX(0);
+    swiping.current = false;
+  }
+
+  const iconOpacity = Math.min(Math.max((swipeX - 10) / 40, 0), 1);
+
+  return (
+    <div
+      className="relative touch-pan-y w-full"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
+      {/* Reply icon revealed as user swipes right */}
+      <div
+        className="absolute left-0 inset-y-0 flex items-center pointer-events-none text-primary"
+        style={{ opacity: iconOpacity }}
+        aria-hidden
+      >
+        <CornerUpLeft className="h-3.5 w-3.5" />
+      </div>
+      <div
+        style={{
+          transform: `translateX(${swipeX}px)`,
+          transition: swipeX === 0 ? 'transform 0.25s ease' : 'none',
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
 // ── Inline markdown renderer ──────────────────────────────────────────────────
 // Handles: **bold**, *italic*, `code`
 function renderInline(text) {
@@ -989,7 +1047,7 @@ const ChatAI = () => {
                         key={message.id}
                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        className={`group/msg flex gap-2 sm:gap-3 w-full max-w-full min-w-0 overflow-hidden ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                        className={`group/msg flex gap-2 sm:gap-3 w-full max-w-full min-w-0 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
                         {message.role === 'assistant' && (
                           <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-sm mt-auto mb-1">
@@ -999,6 +1057,7 @@ const ChatAI = () => {
                         
                         {/* FIXED: Better responsive width management */}
                         <div className={`max-w-[calc(100%-2.25rem)] sm:max-w-[75%] min-w-0 flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
+                          <SwipeableMessage onReply={() => setReplyingTo({ id: message.id, role: message.role, content: message.content })}>
                           <div
                             className={`rounded-2xl px-3 py-2.5 sm:px-5 sm:py-3 shadow-sm text-sm sm:text-[15px] leading-relaxed relative break-words [overflow-wrap:anywhere] w-full max-w-full ${
                               message.role === 'user'
@@ -1038,6 +1097,7 @@ const ChatAI = () => {
                               )
                             }
                           </div>
+                          </SwipeableMessage>
                           <div className={`flex items-center gap-1.5 mt-1 px-1 ${message.role === 'user' ? 'flex-row-reverse' : ''}`}>
                             <span className="text-[10px] sm:text-[11px] text-muted-foreground">
                               {message.timestamp}

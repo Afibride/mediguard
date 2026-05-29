@@ -14,6 +14,7 @@ class User(Base):
     full_name = Column(String, nullable=False)
     hashed_pw = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
+    is_admin = Column(Boolean, default=False, nullable=False, server_default="false")
     notify_emails = Column(Boolean, default=True, nullable=False, server_default="true")
     created_at = Column(DateTime, default=datetime.utcnow)
 
@@ -91,6 +92,7 @@ class ContactMessage(Base):
     subject = Column(String, nullable=False)
     message = Column(Text, nullable=False)
     sent_at = Column(DateTime, default=datetime.utcnow)
+    read_at = Column(DateTime, nullable=True)
 
 
 class ChatFeedback(Base):

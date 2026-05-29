@@ -14,55 +14,55 @@ import {
   Baby, Leaf, MapPin, TrendingUp, HelpCircle, Heart, Bone, Shield,
 } from 'lucide-react';
 
-// Body-area tiles — msg is a topic query so the AI fetches accurate data
+// Body-area tiles — send a plain symptom report so the AI asks follow-up questions
 const BODY_TILES = [
   {
     icon: Thermometer,
     label: 'Fever / Hot body',
     emoji: '🌡️',
-    msg: 'I have fever and my body is very hot. What could it be and what should I do?',
+    msg: 'I have fever and my body is very hot',
     color: 'bg-red-50 border-red-200 text-red-700 dark:bg-red-950/30 dark:border-red-800 dark:text-red-300',
   },
   {
     icon: Brain,
     label: 'Head pain',
     emoji: '🤕',
-    msg: 'I have a headache. What are the possible causes and what should I do?',
+    msg: 'I have a headache',
     color: 'bg-purple-50 border-purple-200 text-purple-700 dark:bg-purple-950/30 dark:border-purple-800 dark:text-purple-300',
   },
   {
     icon: Stethoscope,
     label: 'Stomach / Belle',
     emoji: '🤢',
-    msg: 'I have stomach pain and sometimes vomiting. What diseases could cause this?',
+    msg: 'I have stomach pain and I am vomiting',
     color: 'bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/30 dark:border-emerald-800 dark:text-emerald-300',
   },
   {
     icon: Wind,
     label: 'Cough / Breathing',
     emoji: '😮‍💨',
-    msg: 'I have a cough and difficulty breathing. What could be wrong?',
+    msg: 'I have a cough and difficulty breathing',
     color: 'bg-sky-50 border-sky-200 text-sky-700 dark:bg-sky-950/30 dark:border-sky-800 dark:text-sky-300',
   },
   {
     icon: Eye,
     label: 'Skin / Eyes',
     emoji: '👁️',
-    msg: 'I have a skin rash and my eyes are red. What conditions could this be?',
+    msg: 'I have a skin rash and my eyes are red and itchy',
     color: 'bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950/30 dark:border-amber-800 dark:text-amber-300',
   },
   {
     icon: Droplets,
     label: 'Urinary / Pelvic',
     emoji: '💧',
-    msg: 'I have pain when urinating and lower belly pain. What could this be?',
+    msg: 'I have pain when urinating and lower belly pain',
     color: 'bg-pink-50 border-pink-200 text-pink-700 dark:bg-pink-950/30 dark:border-pink-800 dark:text-pink-300',
   },
   {
     icon: Baby,
     label: 'My child is sick',
     emoji: '👶',
-    msg: 'My child has fever and has been vomiting. What could be wrong and when should I go to hospital?',
+    msg: 'My child has fever and has been vomiting',
     color: 'bg-rose-50 border-rose-200 text-rose-700 dark:bg-rose-950/30 dark:border-rose-800 dark:text-rose-300',
   },
   {
@@ -76,14 +76,14 @@ const BODY_TILES = [
     icon: Heart,
     label: 'Chest / Heart',
     emoji: '❤️',
-    msg: 'I have chest pain and shortness of breath. What could be causing this?',
+    msg: 'I have chest pain and shortness of breath',
     color: 'bg-red-50 border-red-200 text-red-600 dark:bg-red-950/30 dark:border-red-800 dark:text-red-300',
   },
   {
     icon: Bone,
     label: 'Joints / Bones',
     emoji: '🦴',
-    msg: 'I have joint pain and body aches all over. What diseases could cause this?',
+    msg: 'I have joint pain and body aches all over',
     color: 'bg-orange-50 border-orange-200 text-orange-700 dark:bg-orange-950/30 dark:border-orange-800 dark:text-orange-300',
   },
   {
@@ -97,7 +97,7 @@ const BODY_TILES = [
     icon: Stethoscope,
     label: 'Anus / Rectal pain',
     emoji: '🩸',
-    msg: 'I have pain near my anus and sometimes see blood when I pass stool. What could this be?',
+    msg: 'I have pain near my anus and sometimes see blood when I pass stool',
     color: 'bg-red-50 border-red-300 text-red-800 dark:bg-red-950/30 dark:border-red-700 dark:text-red-300',
   },
 ];
