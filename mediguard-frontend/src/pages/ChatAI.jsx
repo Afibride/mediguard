@@ -1371,7 +1371,7 @@ const ChatAI = () => {
                         imageFile ? handleImageSend() : handleSend();
                       }
                     }}
-                    className="bg-muted/45 border-input focus-visible:ring-primary h-10 sm:h-14 text-base rounded-xl pl-3 sm:pl-4 pr-10 sm:pr-12 shadow-inner w-full text-sm sm:text-base"
+                    className="bg-muted/45 border-input focus-visible:ring-primary h-10 sm:h-14 rounded-xl pl-3 sm:pl-4 pr-10 sm:pr-12 shadow-inner w-full text-base"
                     disabled={isTyping || imageAnalyzing}
                   />
                   <Button
