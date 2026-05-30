@@ -27,7 +27,7 @@ const CHIP_GROUPS = [
     ],
   },
   {
-    label: '🇬🇧 English',
+    label: 'EN English',
     chips: [
       'I have fever, headache and chills',
       'What are the symptoms of malaria?',
