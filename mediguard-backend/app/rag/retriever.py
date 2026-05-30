@@ -179,6 +179,18 @@ _PREGNANCY_SOFT_SYMPTOMS: list[str] = [
     "metallic taste", "taste in my mouth",
 ]
 
+# Period-specific triggers — subset of strong indicators relating ONLY to menstrual
+# irregularity. When only these fire (no other pregnancy signals), the AI asks
+# clarifying questions before suggesting pregnancy, because a missed period has
+# many non-pregnancy causes (stress, illness, PCOS, weight change, etc.).
+_PERIOD_ONLY_TRIGGERS: frozenset[str] = frozenset({
+    "missed period", "missed my period", "late period", "my period is late",
+    "period is late", "no period", "haven't had my period", "haven't gotten my period",
+    "delayed period", "period stopped", "no menstruation", "missed menstruation",
+    "skipped period", "period hasn't come",
+    "règles en retard", "pas de règles", "absence de règles",
+})
+
 
 def _has_unaware_pregnancy_symptoms(query: str) -> bool:
     """Return True when query contains symptoms that could signal pregnancy
@@ -212,7 +224,10 @@ def _has_unaware_pregnancy_symptoms(query: str) -> bool:
 
 
 def _unaware_pregnancy_response(query: str, gender: str | None) -> dict | None:
-    """Suggest possible pregnancy when symptoms match, asking for gender to confirm.
+    """Ask clarifying questions before suggesting pregnancy when period-related terms are detected.
+
+    A missed period has many non-pregnancy causes. The AI first asks whether
+    the user has been sexually active, and about other symptoms, before concluding.
 
     Returns None when:
     - Symptoms don't match pregnancy pattern
@@ -221,20 +236,67 @@ def _unaware_pregnancy_response(query: str, gender: str | None) -> dict | None:
     if not _has_unaware_pregnancy_symptoms(query):
         return None
 
-    # If we already know the user is male, skip the suggestion entirely
     _MALE_TERMS = {"male", "man", "boy", "homme", "garçon"}
     if gender and gender.lower().strip() in _MALE_TERMS:
         return None
 
-    # Ask for gender if not yet provided or ambiguous
+    text = query.lower()
+
+    # Determine whether this is a "period only" mention or a broader set of indicators
+    has_period_trigger = any(ind in text for ind in _PERIOD_ONLY_TRIGGERS)
+    has_other_strong = any(
+        ind in text for ind in (_PREGNANCY_STRONG_INDICATORS - _PERIOD_ONLY_TRIGGERS)
+    )
+    soft_hits = sum(1 for s in _PREGNANCY_SOFT_SYMPTOMS if s in text)
+
     gender_question = ""
     _FEMALE_TERMS = {"female", "woman", "girl", "femme", "fille"}
     if not gender or gender.lower().strip() not in _FEMALE_TERMS:
         gender_question = (
-            "\n\n**To give you more accurate advice**, could you also tell me your gender? "
+            "\n\n**Also**, could you tell me your gender? "
             "*(Reply: female / male — this helps me personalise the guidance)*"
         )
 
+    # ── Path 1: Only a missed/late period mentioned — ask first, don't conclude ──
+    # A missed period alone is NOT enough to conclude pregnancy; stress, illness,
+    # PCOS, weight changes, and many other factors can also delay or stop a period.
+    if has_period_trigger and not has_other_strong and soft_hits < 2:
+        answer = (
+            "🩺 **Missed or Late Period — Let me ask a few questions first**\n\n"
+            "A missed or late period can have **many causes** — pregnancy is just one of them. "
+            "Other common reasons include:\n\n"
+            "- **Stress or anxiety** — one of the most frequent causes\n"
+            "- **Significant weight change** (gain or loss)\n"
+            "- **Recent illness or fever** — can temporarily disrupt the cycle\n"
+            "- **Hormonal imbalance** (e.g. PCOS — polycystic ovary syndrome)\n"
+            "- **Extreme exercise or very low body weight**\n"
+            "- **Thyroid problems**\n"
+            "- **Starting or stopping hormonal contraception**\n"
+            "- **Pregnancy** — if you have been sexually active recently\n\n"
+            "To give you more accurate guidance, please answer these:\n"
+            "1. **Have you had unprotected sex in the past 4–6 weeks?**\n"
+            "2. **Do you have any other symptoms** — such as nausea (especially in the morning), "
+            "breast tenderness, fatigue, frequent urination, or unusual spotting?\n"
+            "3. **Have you had recent stress, illness, a significant weight change, or changed "
+            "any medication or contraception recently?**"
+            f"{gender_question}"
+        )
+        return {
+            "answer": answer,
+            "sources": ["MediGuard Reproductive Health Guidelines"],
+            "disclaimer": (
+                "This is educational guidance only. Consult a qualified healthcare professional "
+                "for personal health concerns."
+            ),
+            "mode": "missed_period_inquiry",
+            "follow_up_questions": [
+                "Have you had unprotected sex recently?",
+                "Any other symptoms like nausea, breast tenderness, or fatigue?",
+                "Any recent stress, illness, weight change, or medication change?",
+            ],
+        }
+
+    # ── Path 2: Multiple pregnancy indicators or explicit question — suggest test ──
     answer = (
         "🤰 **These Symptoms Could Be Early Signs of Pregnancy**\n\n"
         "The symptoms you've described — such as a missed/late period, breast tenderness, "
@@ -250,7 +312,6 @@ def _unaware_pregnancy_response(query: str, gender: str | None) -> dict | None:
         "or anaemia). A pregnancy test is the fastest and most reliable way to find out.*"
         f"{gender_question}"
     )
-
     follow_up = [
         "What is your gender?",
         "Have you taken a pregnancy test?",
@@ -259,7 +320,6 @@ def _unaware_pregnancy_response(query: str, gender: str | None) -> dict | None:
         "Have you taken a pregnancy test?",
         "When did you last have your period?",
     ]
-
     return {
         "answer": answer,
         "sources": ["MediGuard Reproductive Health Guidelines"],
@@ -1948,16 +2008,38 @@ def _first_aid_guidance(symptoms: list[str], is_pregnant: bool = False) -> list[
         "Do not start antibiotics, antimalarials, or strong pain medicines without advice from a qualified clinician.",
     ]
     if any(term in symptom_text for term in ["fever", "chills", "headache", "sweating"]):
-        guidance.append("For fever, keep cool, hydrate, and arrange testing or clinical review if it persists or is high.")
+        guidance.append(
+            "For fever, keep cool and hydrate. Traditional comfort: neem or lemongrass tea may help reduce mild fever. "
+            "Arrange malaria testing urgently if fever is high or persists."
+        )
     if any(term in symptom_text for term in ["diarrhea", "vomiting", "abdominal pain"]):
-        guidance.append("For diarrhea or vomiting, prioritize rehydration and seek care urgently for blood in stool, severe weakness, or inability to keep fluids down.")
+        guidance.append(
+            "For diarrhea or vomiting, prioritize oral rehydration. Guava leaf tea may help ease mild diarrhea. "
+            "Seek care urgently for blood in stool, severe weakness, or inability to keep fluids down."
+        )
+    if any(term in symptom_text for term in ["cough"]):
+        guidance.append(
+            "For cough: garlic tea (crushed garlic in warm water with honey) or eucalyptus steam inhalation can provide comfort. "
+            "Persistent cough beyond 2 weeks or cough with blood needs clinical evaluation."
+        )
+    if any(term in symptom_text for term in ["nausea"]):
+        guidance.append(
+            "For nausea: ginger tea (fresh ginger sliced in warm water) is well-supported for nausea relief. "
+            "If vomiting is severe or you cannot keep fluids down, seek care."
+        )
     if any(term in symptom_text for term in ["shortness of breath", "chest pain", "wheezing"]):
         guidance.append("Shortness of breath, chest pain, or severe wheezing needs urgent medical attention.")
     if any(term in symptom_text for term in ["fatigue", "weakness", "body weakness", "dizziness", "headache"]):
-        guidance.append("If tiredness may be contributing, rest, rehydrate, eat a light meal if you missed food, and monitor whether symptoms improve.")
+        guidance.append(
+            "If tiredness may be contributing, rest and rehydrate. Moringa leaves (in soup or tea) are nutritious and "
+            "can support recovery from fatigue. Eat a light meal if you missed food. See a clinician if symptoms persist."
+        )
     if is_pregnant:
-        guidance.append("Because pregnancy is involved, contact an antenatal clinic or maternity unit promptly, especially with bleeding, fever, severe pain, headache, swelling, vision changes, or reduced fetal movement.")
-    return guidance[:6]
+        guidance.append(
+            "Because pregnancy is involved, contact an antenatal clinic or maternity unit promptly — "
+            "especially with bleeding, fever, severe pain, headache, swelling, vision changes, or reduced fetal movement."
+        )
+    return guidance[:7]
 
 
 def _history_requested_followup(chat_history: list[dict] | None) -> bool:
@@ -2837,6 +2919,40 @@ _HERB_KNOWLEDGE: dict[str, dict] = {
     },
 }
 
+# Symptom keywords → herbs that may help (for "what herb can I use for X?" queries)
+_SYMPTOM_HERB_LOOKUP: dict[str, list[str]] = {
+    "cough":          ["garlic", "eucalyptus"],
+    "respiratory":    ["garlic", "eucalyptus"],
+    "cold":           ["garlic", "eucalyptus", "ginger"],
+    "fever":          ["neem", "lemongrass", "scent leaf", "pawpaw leaf"],
+    "malaria":        ["neem", "pawpaw leaf", "scent leaf"],
+    "diarrhea":       ["guava leaf"],
+    "diarrhoea":      ["guava leaf"],
+    "purge":          ["guava leaf"],
+    "nausea":         ["ginger"],
+    "vomiting":       ["ginger"],
+    "stomach":        ["bitter leaf", "ginger"],
+    "abdominal":      ["bitter leaf", "ginger"],
+    "belly":          ["bitter leaf"],
+    "bele":           ["bitter leaf"],
+    "joint":          ["turmeric"],
+    "arthritis":      ["turmeric"],
+    "inflammation":   ["turmeric", "ginger"],
+    "skin":           ["aloe vera"],
+    "rash":           ["aloe vera"],
+    "burn":           ["aloe vera"],
+    "wound":          ["aloe vera"],
+    "fatigue":        ["moringa"],
+    "weakness":       ["moringa"],
+    "tired":          ["moringa"],
+    "anaemia":        ["moringa"],
+    "anemia":         ["moringa"],
+    "congestion":     ["eucalyptus"],
+    "blocked nose":   ["eucalyptus"],
+    "malnutrition":   ["moringa"],
+}
+
+
 # Keywords that signal a traditional medicine query
 _HERB_KEYWORDS: list[str] = [
     "neem", "bitter leaf", "garlic", "ginger", "lemongrass", "lemon grass",
@@ -2878,22 +2994,57 @@ def _traditional_medicine_response(query: str) -> dict | None:
             "Have you been tested at a clinic yet?",
         ]
     else:
-        # Generic herbal / home remedy query
-        lines = [
-            "🌿 **Traditional medicine and home remedies**\n",
-            "Many local plants used in Bamenda have genuine health benefits supported by research. "
-            "However, **traditional remedies work best as supportive comfort** — they should not replace "
-            "proven treatments for serious illnesses like malaria, meningitis, typhoid, or tuberculosis.\n",
-            "**Ask me about a specific herb or plant** (e.g. neem, bitter leaf, ginger, moringa, guava leaf) "
-            "and I will tell you what the evidence says, what it is used for, and when you still need to go to the clinic.\n",
-            "⚠️ **Always seek clinic care for:** high fever, stiff neck, severe diarrhea, difficulty breathing, "
-            "chest pain, confusion, or symptoms in a child under 5.",
-        ]
-        follow_ups = [
-            "Which herb or plant are you asking about?",
-            "What symptoms are you trying to treat?",
-            "How long have you had these symptoms?",
-        ]
+        # Check if the query mentions a symptom — provide targeted herb suggestions
+        symptom_herbs: list[tuple[str, dict]] = []
+        for sym_key, herb_keys in _SYMPTOM_HERB_LOOKUP.items():
+            if sym_key in text:
+                for hk in herb_keys:
+                    herb_data = _HERB_KNOWLEDGE.get(hk)
+                    if herb_data and not any(h[0] == hk for h in symptom_herbs):
+                        symptom_herbs.append((hk, herb_data))
+                break  # use first matching symptom
+
+        if symptom_herbs:
+            lines = ["🌿 **Traditional remedies that may help**\n"]
+            for hk, hd in symptom_herbs[:3]:
+                lines.append(
+                    f"**{hd['local_name']}** — traditionally used for {hd['traditional_use']}. "
+                    f"{hd['evidence']}\n"
+                    f"⚠️ {hd['warning']}"
+                )
+            lines.append(
+                "\n**MediGuard's advice:** Traditional remedies can provide comfort and may have genuine "
+                "benefits, but they **complement — not replace** — clinical care when symptoms are severe, "
+                "persistent, or worsening. Always test for malaria if you have fever in Bamenda."
+            )
+            follow_ups = [
+                "How long have you had these symptoms?",
+                "Have you been tested at a clinic yet?",
+                "Are the symptoms mild, moderate, or severe?",
+            ]
+        else:
+            # Fully generic herbal query — list all available herbs
+            lines = [
+                "🌿 **Traditional medicine and home remedies**\n",
+                "Many local plants used in Bamenda have genuine health benefits. "
+                "Here is what MediGuard knows about common herbs:\n",
+                "- 🌡️ **Fever:** Neem (dongoyaro), lemongrass tea, scent leaf\n"
+                "- 😮‍💨 **Cough:** Garlic tea, eucalyptus steam inhalation\n"
+                "- 🤢 **Nausea / stomach upset:** Ginger tea, bitter leaf\n"
+                "- 💧 **Diarrhea:** Guava leaf tea\n"
+                "- 💪 **Fatigue / weakness / anaemia:** Moringa leaves\n"
+                "- 🦴 **Joint pain / inflammation:** Turmeric\n"
+                "- 🩹 **Skin rashes / minor burns:** Aloe vera gel\n",
+                "Ask me about any of these (e.g. 'tell me about neem' or 'what herb for fever?') "
+                "and I will explain the evidence, proper use, and when you still need a clinic.\n",
+                "⚠️ **Always seek clinic care for:** high fever, stiff neck, severe diarrhea, "
+                "difficulty breathing, chest pain, confusion, or symptoms in a child under 5.",
+            ]
+            follow_ups = [
+                "Which symptom are you trying to treat?",
+                "Which herb or plant are you asking about?",
+                "How long have you had these symptoms?",
+            ]
 
     return {
         "answer": "\n".join(lines),
