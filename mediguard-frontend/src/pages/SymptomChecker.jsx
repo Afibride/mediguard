@@ -79,7 +79,7 @@ const CATEGORIES_MAP = {
   'Gastrointestinal': ['Nausea', 'Vomiting', 'Diarrhea', 'Profuse watery diarrhea', 'Bloody or mucus-filled diarrhea', 'Abdominal pain', 'Lower abdominal pain', 'Constipation', 'Loss of appetite', 'Bloating', 'Heartburn', 'Jaundice'],
   'Pain & Neurological': ['Headache', 'Severe headache', 'Joint pain', 'Muscle aches', 'Back pain', 'Stiff neck', 'Confusion', 'Dizziness', 'Seizures', 'Numbness', 'Sensitivity to light', 'Jaw stiffness', 'Ear pain', 'Facial pain'],
   'Skin & Eyes': ['Rash', 'Itchy rash', 'Itchy skin', 'Ring-shaped rash', 'Blisters', 'Skin lesions', 'Skin sores', 'Pale skin', 'Red eyes', 'Yellow eyes', 'Eye discharge', 'Pus or discharge', 'Hair loss'],
-  'Urinary & Reproductive': ['Frequent urination', 'Painful urination', 'Blood in urine', 'Pelvic pain', 'Vaginal discharge', 'Vaginal itching', 'Vaginal bleeding', 'Missed period', 'Pain during intercourse', 'Genital sores', 'Genital discharge'],
+  'Urinary & Reproductive': ['Frequent urination', 'Painful urination', 'Blood in urine', 'Pelvic pain', 'Vaginal discharge', 'Vaginal itching', 'Vaginal bleeding', 'Missed period', 'Breast pain', 'Breast tenderness', 'Morning sickness', 'Food cravings', 'Reduced fetal movement', 'Leaking fluid', 'Contractions', 'Face swelling', 'Hand swelling', 'Severe abdominal pain', 'Vision changes', 'Pain during intercourse', 'Genital sores', 'Genital discharge'],
   'Metabolic & Endocrine': ['Increased thirst', 'Slow-healing sores', 'Blurred vision', 'Fast heartbeat', 'Low blood pressure', 'Swollen feet', 'Dark urine', 'Weight gain', 'Heat intolerance', 'Cold intolerance'],
   'Other': ['Hearing loss', 'Difficulty swallowing', 'Visible worms in stool', 'Anal itching', 'White patches in mouth', 'Anxiety', 'Tremor'],
 };

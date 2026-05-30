@@ -89,6 +89,12 @@ export const SYMPTOM_PLAIN_NAMES = {
   // STI-specific symptoms
   'Genital sores':                   'Sores / blisters on genitals',
   'Genital discharge':               'Unusual genital discharge / pus',
+  'Morning sickness':                'Pregnancy nausea / vomiting',
+  'Reduced fetal movement':          'Baby moving less than usual',
+  'Leaking fluid':                   'Fluid leaking from vagina',
+  'Face swelling':                   'Swollen face',
+  'Hand swelling':                   'Swollen hands',
+  'Vision changes':                  'Seeing spots / blurred vision',
 };
 
 /**

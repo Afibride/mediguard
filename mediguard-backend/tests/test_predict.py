@@ -19,8 +19,8 @@ def test_symptoms_returns_reference_feature_list():
     response = client.get("/symptoms")
     assert response.status_code == 200
     symptoms = response.json()["symptoms"]
-    assert len(symptoms) == 126
-    assert {"Fever", "Chills", "Headache"}.issubset(set(symptoms))
+    assert len(symptoms) == 161
+    assert {"Fever", "Chills", "Headache", "Morning sickness", "Reduced fetal movement"}.issubset(set(symptoms))
 
 
 def test_predict_includes_pregnancy_context_note():

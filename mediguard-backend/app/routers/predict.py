@@ -126,6 +126,19 @@ def predict(
                 "but do not ignore disease warning signs."
             )
 
+    pregnancy_warning_symptoms = {
+        "Vaginal bleeding", "Severe abdominal pain", "Reduced fetal movement",
+        "Leaking fluid", "Contractions", "Face swelling", "Hand swelling",
+        "Severe headache", "Vision changes", "Blurred vision", "Fever",
+        "Chest pain", "Shortness of breath", "Dizziness",
+    }
+    pregnancy_suggestive_symptoms = {
+        "Missed period", "Breast pain", "Breast tenderness", "Morning sickness",
+        "Food cravings", "Frequent urination", "Fatigue", "Nausea", "Vomiting",
+    }
+    has_pregnancy_warning = any(symptom in pregnancy_warning_symptoms for symptom in normalized)
+    has_pregnancy_suggestive = any(symptom in pregnancy_suggestive_symptoms for symptom in normalized)
+
     if body.is_pregnant:
         pregnancy_note = (
             "Pregnancy can change how symptoms should be assessed. Seek prompt antenatal or clinical care for "
@@ -142,6 +155,17 @@ def predict(
                     "This condition can be more important during pregnancy. "
                     "Please seek clinical assessment promptly."
                 )
+            if has_pregnancy_warning:
+                item["pregnancy_warning"] = (
+                    "You reported a pregnancy warning symptom. Please seek urgent antenatal or clinical care."
+                )
+    elif has_pregnancy_warning or has_pregnancy_suggestive:
+        pregnancy_note = (
+            "Some reported symptoms can be related to pregnancy or can be more urgent if pregnancy is possible. "
+            "Use a pregnancy test or antenatal clinic if pregnancy may apply, and seek urgent care for bleeding, "
+            "severe abdominal pain, vision changes, swelling of face or hands, leaking fluid, contractions, "
+            "reduced fetal movement, chest pain, fainting, or shortness of breath."
+        )
 
     top = results[0]["disease"] if results else "Unknown"
     # Surface the actual prediction engine used so the frontend / logs can display it
