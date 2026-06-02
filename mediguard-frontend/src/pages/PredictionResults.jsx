@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/components/AuthContext';
 import DisclaimerBanner from '@/components/DisclaimerBanner';
 import NearbyFacilities from '@/components/NearbyFacilities';
+import SpeakButton from '@/components/SpeakButton';
 import { submitFeedback } from '@/services/api';
 
 const DISEASE_TESTS = {
@@ -69,6 +70,24 @@ const PredictionResults = () => {
   const [feedbackLoading, setFeedbackLoading] = useState(false);
   const [actualDiagnosis, setActualDiagnosis] = useState('');
   const [feedbackComment, setFeedbackComment] = useState('');
+
+  const buildReadAloudText = () => {
+    const top = predictions[0];
+    if (!top) return '';
+    const lines = [
+      `Diagnosis Assessment.`,
+      symptoms.length ? `You reported ${symptoms.length} symptom${symptoms.length !== 1 ? 's' : ''}: ${symptoms.join(', ')}.` : '',
+      `The top match is ${top.name} with ${top.confidence} percent confidence.`,
+      top.description ? top.description : '',
+      top.whenToSeeDoctorText ? `When to seek care: ${top.whenToSeeDoctorText}` : '',
+      top.treatment ? `Treatment: ${top.treatment}` : '',
+      predictions.length > 1
+        ? `Other possible conditions include: ${predictions.slice(1, 4).map(p => p.name).join(', ')}.`
+        : '',
+      `This is not a medical diagnosis. Always consult a qualified health professional.`,
+    ];
+    return lines.filter(Boolean).join(' ');
+  };
 
   useEffect(() => {
     if (symptoms.length === 0 || predictions.length === 0) {
@@ -199,6 +218,7 @@ const PredictionResults = () => {
               <ArrowLeft className="mr-2 h-4 w-4" />New Diagnosis
             </Button>
             <div className="flex gap-2 flex-wrap">
+              <SpeakButton text={buildReadAloudText()} label="Read Aloud" size="md" />
               <Button variant="outline" onClick={handlePrint} className="shadow-sm">
                 <Printer className="mr-2 h-4 w-4" />Download PDF
               </Button>

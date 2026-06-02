@@ -19,6 +19,7 @@ import SuggestedQuestions from '@/components/SuggestedQuestions';
 import SourceCitation from '@/components/SourceCitation';
 import SeasonalBanner from '@/components/SeasonalBanner';
 import VoiceInput from '@/components/VoiceInput';
+import SpeakButton from '@/components/SpeakButton';
 import { analyzeImage, saveChatHistory, sendChatMessage, submitChatFeedback } from '@/services/api';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -1136,6 +1137,11 @@ const ChatAI = () => {
                             </button>
                           </div>
                           {message.role === 'assistant' && !message.isCardPrompt && <SourceCitation sources={message.sources} />}
+                          {message.role === 'assistant' && !message.isCardPrompt && (
+                            <div className="mt-1 px-1">
+                              <SpeakButton text={message.content} size="sm" />
+                            </div>
+                          )}
                           {message.role === 'assistant' && message.id !== messages[0]?.id && !message.isCardPrompt && (
                             <div className="flex items-center gap-1.5 mt-1.5 px-1 flex-wrap">
                               <span className="text-[10px] text-muted-foreground">Helpful?</span>

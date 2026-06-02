@@ -612,6 +612,24 @@ SYMPTOM_DEFINITIONS: dict[str, str] = {
         "cerebral malaria, or encephalitis. A first seizure or any seizure with persistent loss of "
         "consciousness requires emergency evaluation."
     ),
+    "parotid swelling": (
+        "Parotid swelling is enlargement of the parotid salivary glands, located in front of and just below "
+        "the ears. It causes the characteristic 'chipmunk cheeks' or 'hamster face' appearance and pain when "
+        "chewing or opening the mouth. One or both sides may be affected. It is the hallmark sign of mumps "
+        "and distinguishes it from other causes of jaw or neck swelling."
+    ),
+    "eye itching": (
+        "Eye itching (ocular pruritus) is an intense, gritty, or sandy sensation inside the eye. It is most "
+        "prominent in allergic conjunctivitis but also occurs in viral and bacterial conjunctivitis. Unlike "
+        "skin itching, it is localised to the eye and is often accompanied by redness and discharge. "
+        "Rubbing the eyes worsens irritation and increases infection risk."
+    ),
+    "paroxysmal cough": (
+        "A paroxysmal cough consists of sudden, violent, uncontrollable bursts of coughing — typically "
+        "5–10 rapid coughs in a single exhalation, ending with a high-pitched inspiratory 'whoop' as the "
+        "person gasps for air. The fits can turn the face red or blue and often end in vomiting. This "
+        "pattern is the hallmark of whooping cough (pertussis) and distinguishes it from ordinary cough."
+    ),
 }
 
 DISEASE_ALIASES: dict[str, str] = {

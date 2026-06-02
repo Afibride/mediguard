@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes, BrowserRouter as Router, useLocation, Navigate, Outlet } from 'react-router-dom';
+import SplashScreen from '@/components/SplashScreen';
 import ScrollToTop from '@/components/ScrollToTop';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -84,8 +85,17 @@ function MainLayout() {
 }
 
 export default function App() {
+  // Show the splash once per browser session (not on every navigation).
+  const [splashDone, setSplashDone] = useState(() => {
+    if (sessionStorage.getItem('mg_splash')) return true;
+    sessionStorage.setItem('mg_splash', '1');
+    return false;
+  });
+
   return (
-    <Router>
+    <>
+      {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
+      <Router>
       <Routes>
 
         {/* ════════════════════════════════════════════════════════════════
@@ -150,5 +160,6 @@ export default function App() {
 
       </Routes>
     </Router>
+    </>
   );
 }

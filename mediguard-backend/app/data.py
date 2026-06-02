@@ -29,13 +29,13 @@ CORE_SYMPTOMS = {
     "Hepatitis A": ["Jaundice", "Fatigue", "Nausea", "Vomiting", "Abdominal pain", "Dark urine", "Loss of appetite", "Fever"],
     "Hepatitis B": ["Jaundice", "Dark urine", "Fatigue", "Yellow eyes", "Abdominal pain", "Joint pain", "Loss of appetite", "Nausea"],
     "Yellow Fever": ["High fever", "Jaundice", "Muscle aches", "Severe headache", "Nausea", "Vomiting", "Back pain", "Yellow eyes"],
-    "Whooping Cough": ["Cough", "Runny nose", "Fever", "Sneezing", "Vomiting", "Fatigue", "Weakness"],
-    "Mumps": ["Swollen lymph nodes", "Jaw stiffness", "Fever", "Headache", "Muscle aches", "Fatigue", "Loss of appetite"],
+    "Whooping Cough": ["Paroxysmal cough", "Runny nose", "Fever", "Sneezing", "Vomiting", "Fatigue", "Weakness"],
+    "Mumps": ["Parotid swelling", "Jaw stiffness", "Fever", "Headache", "Muscle aches", "Fatigue", "Loss of appetite"],
     "Rubella": ["Mild fever", "Rash", "Swollen lymph nodes", "Red eyes", "Runny nose", "Joint pain", "Headache"],
     "Sinusitis": ["Headache", "Nasal congestion", "Facial pain", "Runny nose", "Cough", "Sore throat", "Fever"],
     "Tonsillitis": ["Sore throat", "Difficulty swallowing", "Swollen lymph nodes", "High fever", "Headache", "Fatigue", "Loss of appetite"],
     "Ear Infection": ["Ear pain", "Fever", "Hearing loss", "Headache", "Dizziness", "Fatigue", "Pus or discharge"],
-    "Conjunctivitis": ["Red eyes", "Eye discharge", "Itchy skin", "Eye pain", "Sensitivity to light", "Headache"],
+    "Conjunctivitis": ["Red eyes", "Eye discharge", "Eye itching", "Eye pain", "Sensitivity to light", "Headache"],
     "Herpes Zoster": ["Blisters", "Rash", "Itchy rash", "Fever", "Fatigue", "Headache", "Sensitivity to light", "Skin sores"],
     "Appendicitis": ["Abdominal pain", "Fever", "Nausea", "Vomiting", "Loss of appetite", "Weakness", "Constipation"],
     "Kidney Stones": ["Back pain", "Blood in urine", "Painful urination", "Nausea", "Vomiting", "Frequent urination", "Lower abdominal pain"],
@@ -47,7 +47,7 @@ CORE_SYMPTOMS = {
     "Typhus": ["Sudden high fever", "Severe headache", "Rash", "Muscle aches", "Fatigue", "Confusion", "Chills"],
     "Brucellosis": ["Fever", "Sweating", "Joint pain", "Muscle aches", "Fatigue", "Loss of appetite", "Back pain", "Night sweats"],
     "Septicemia": ["High fever", "Confusion", "Fast heartbeat", "Shortness of breath", "Low blood pressure", "Chills", "Sweating"],
-    "Pelvic Inflammatory Disease": ["Pelvic pain", "Vaginal discharge", "Lower abdominal pain", "Fever", "Painful urination", "Missed period"],
+    "Pelvic Inflammatory Disease": ["Pelvic pain", "Vaginal discharge", "Lower abdominal pain", "Fever", "Painful urination", "Pain during intercourse"],
     "Benign Prostatic Hyperplasia": ["Frequent urination", "Reduced urination", "Sleep disturbances", "Lower abdominal pain", "Weakness", "Back pain"],
     "Migraine": ["Severe headache", "Sensitivity to light", "Sensitivity to sound", "Nausea", "Vomiting", "Blurred vision", "Dizziness"],
     "Epilepsy": ["Seizures", "Confusion", "Confusion at night", "Muscle cramps", "Fatigue", "Weakness", "Poor coordination"],
@@ -55,7 +55,7 @@ CORE_SYMPTOMS = {
     "Filariasis": ["Swollen feet", "Ankle swelling", "Skin lesions", "Fever", "Skin sores", "Weakness", "Itchy skin"],
     "HIV AIDS": ["Fatigue", "Weight loss", "Night sweats", "Swollen lymph nodes", "Diarrhea", "Fever", "Rash", "Loss of appetite", "Cough", "Sore throat"],
     "Skin Abscess": ["Skin sores", "Pus or discharge", "Rash", "Fever", "Fatigue", "Swollen lymph nodes"],
-    "Anaphylaxis": ["Rash", "Shortness of breath", "Fast heartbeat", "Dizziness", "Low blood pressure", "Nausea", "Swollen feet", "Sweating"],
+    "Anaphylaxis": ["Rash", "Shortness of breath", "Fast heartbeat", "Dizziness", "Low blood pressure", "Nausea", "Face swelling", "Sweating"],
     # ── STIs ──────────────────────────────────────────────────────────────────
     "Gonorrhea": ["Genital discharge", "Painful urination", "Pelvic pain", "Vaginal discharge", "Vaginal itching", "Sore throat", "Swollen lymph nodes", "Fever"],
     "Syphilis": ["Genital sores", "Rash", "Swollen lymph nodes", "Fever", "Fatigue", "Headache", "Muscle aches", "Skin sores"],
@@ -177,7 +177,7 @@ CARDINAL_SYMPTOMS: dict[str, list[str]] = {
     # Diphtheria must present with throat symptoms
     "Diphtheria": ["Sore throat", "Hoarse voice", "Difficulty swallowing"],
     # Mumps must have parotid swelling signs
-    "Mumps": ["Jaw stiffness", "Swollen lymph nodes"],
+    "Mumps": ["Parotid swelling"],
 
     # ── STIs ───────────────────────────────────────────────────────────────
     # Without genital discharge, gonorrhea should not appear in results
@@ -208,8 +208,8 @@ CARDINAL_SYMPTOMS: dict[str, list[str]] = {
     # ── Respiratory ────────────────────────────────────────────────────────
     # Pneumonia — cough AND breathing difficulty must both be present
     "Pneumonia": ["Cough", "Shortness of breath"],
-    # Whooping cough — paroxysmal cough is the defining feature
-    "Whooping Cough": ["Cough"],
+    # Whooping cough — paroxysmal cough with inspiratory whoop is the defining feature
+    "Whooping Cough": ["Paroxysmal cough"],
     # Sinusitis — nasal congestion plus facial pressure/pain around the sinuses
     "Sinusitis": ["Nasal congestion", "Facial pain"],
     # Common cold — runny nose and sneezing are the defining presentation
@@ -1021,7 +1021,7 @@ SYMPTOM_DESCRIPTIONS = {
         "Yellow eyes": "The sclera turns deeply yellow from bilirubin accumulation.",
     },
     "Whooping Cough": {
-        "Cough": "Begins as an ordinary cough for 1–2 weeks, then develops into violent, uncontrollable coughing fits: 5–10 rapid coughs in a single breath, followed by the characteristic high-pitched 'whoop' as the person gasps for air. The fits can last a minute, turn the face red or blue, and often end in vomiting. This pattern is highly distinctive.",
+        "Paroxysmal cough": "Begins as an ordinary cough for 1–2 weeks, then develops into violent, uncontrollable coughing fits: 5–10 rapid coughs in a single breath, followed by the characteristic high-pitched 'whoop' as the person gasps for air. The fits can last a minute, turn the face red or blue, and often end in vomiting. This pattern is highly distinctive.",
         "Runny nose": "Watery nasal discharge in the early cold-like stage before severe coughing begins.",
         "Fever": "Usually low-grade or absent — the violent cough, not fever, distinguishes this illness.",
         "Sneezing": "Present in the early stage.",
@@ -1030,7 +1030,7 @@ SYMPTOM_DESCRIPTIONS = {
         "Weakness": "Progressive weakness as the illness continues for weeks.",
     },
     "Mumps": {
-        "Swollen lymph nodes": "Swelling of the parotid salivary glands in front of and below the ears causes the characteristic 'chipmunk cheeks' or 'hamster face' appearance. One or both sides may be affected. This is unique to mumps among common infections.",
+        "Parotid swelling": "Swelling of the parotid salivary glands in front of and below the ears causes the characteristic 'chipmunk cheeks' or 'hamster face' appearance. One or both sides may be affected. This is unique to mumps among common infections.",
         "Jaw stiffness": "Pain and stiffness when opening the mouth or chewing, due to the swollen glands pressing on the jaw.",
         "Fever": "Moderate fever (38–39°C) from the start.",
         "Headache": "Generalised headache accompanying the fever.",
@@ -1077,7 +1077,7 @@ SYMPTOM_DESCRIPTIONS = {
     "Conjunctivitis": {
         "Red eyes": "The white of the eye (sclera) turns bright red or pink from inflammation. Both eyes are often affected.",
         "Eye discharge": "Sticky, crusting discharge from the eye. Bacterial: thick, yellow-green — causes eyelids to seal shut on waking. Viral: watery. Allergic: stringy or ropy. The type of discharge helps identify the cause.",
-        "Itchy skin": "Intense itching and a gritty or sandy sensation in the eye, particularly in allergic conjunctivitis.",
+        "Eye itching": "Intense itching and a gritty or sandy sensation in the eye, particularly in allergic conjunctivitis.",
         "Eye pain": "Mild discomfort or burning — severe pain suggests a more serious eye condition.",
         "Sensitivity to light": "Mild discomfort in bright light.",
         "Headache": "Mild headache from eye strain and inflammation.",
