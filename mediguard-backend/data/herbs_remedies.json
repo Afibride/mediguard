@@ -1,0 +1,2244 @@
+{
+  "Malaria": [
+    {
+      "herb": "Vernonia amygdalina",
+      "local_name": "Ndole / Bitter Leaf",
+      "preparation": "Boil fresh leaves in water and drink as tea twice daily; eat cooked leaves (ndole stew)",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Loss of appetite",
+        "Jaundice",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Azadirachta indica",
+      "local_name": "Neem / Nimba",
+      "preparation": "Boil bark or leaves; drink as tea; apply paste to skin for rashes",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Itchy skin",
+        "Painful urination",
+        "Rash"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Cymbopogon citratus",
+      "local_name": "Lemon Grass / Citronnelle",
+      "preparation": "Boil fresh stalks; drink as hot tea",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Runny nose",
+        "Mild fever"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Carica papaya",
+      "local_name": "Pawpaw / Papaya",
+      "preparation": "Boil unripe fruit or seeds; drink juice of fresh leaves",
+      "symptoms_treated": [
+        "High fever",
+        "Weakness",
+        "Abdominal pain",
+        "Diarrhea",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Ocimum gratissimum",
+      "local_name": "Fever Plant / Basilic Africain",
+      "preparation": "Boil leaves in water; inhale steam; drink as tea three times daily",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Runny nose",
+        "Sore throat",
+        "Painful urination",
+        "Nausea"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Morinda lucida",
+      "local_name": "Oruwo / Brimstone Tree",
+      "preparation": "Boil bark in water; drink decoction twice daily",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Muscle aches",
+        "Sweating"
+      ],
+      "region": "West / Central Africa"
+    },
+    {
+      "herb": "Annona muricata",
+      "local_name": "Corossol / Soursop",
+      "preparation": "Boil leaves; drink as tea; eat ripe fruit",
+      "symptoms_treated": [
+        "High fever",
+        "Headache",
+        "Increased thirst",
+        "Frequent urination"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Mangifera indica",
+      "local_name": "Mango Tree / Manguier",
+      "preparation": "Boil bark or leaves in water; drink daily",
+      "symptoms_treated": [
+        "Fever",
+        "Prolonged fever",
+        "Headache",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Momordica charantia",
+      "local_name": "Bitter Melon / Margose",
+      "preparation": "Extract juice from fresh fruit; drink fresh juice diluted in water",
+      "symptoms_treated": [
+        "Increased thirst",
+        "Frequent urination",
+        "Fatigue",
+        "Fever",
+        "Chills"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Bridelia ferruginea",
+      "local_name": "Bridelia / Asan",
+      "preparation": "Boil stem bark; drink twice daily; apply crushed bark to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Bloody or mucus-filled diarrhea",
+        "Skin sores"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Khaya senegalensis",
+      "local_name": "African Mahogany / Acajou",
+      "preparation": "Boil bark in water; drink as decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Prolonged fever",
+        "Headache",
+        "Pus or discharge",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / Sahel region"
+    },
+    {
+      "herb": "Cassia siamea",
+      "local_name": "Cassia / Cassia Siamese",
+      "preparation": "Boil leaves or pods; drink as laxative tea",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Constipation",
+        "Anal itching",
+        "Visible worms in stool"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Clausena anisata",
+      "local_name": "Horsewood / Clausene",
+      "preparation": "Boil roots or leaves; drink as tea; inhale steam",
+      "symptoms_treated": [
+        "Fever",
+        "Seizures",
+        "Headache",
+        "Sweating"
+      ],
+      "region": "NW Cameroon / Bamenda highlands"
+    },
+    {
+      "herb": "Rauvolfia vomitoria",
+      "local_name": "Poison Devil's Pepper / Rauwolfia",
+      "preparation": "Boil root bark in water; drink small amounts twice daily",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Seizures",
+        "Fever",
+        "Fast heartbeat"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Chenopodium ambrosioides",
+      "local_name": "Mexican Tea / Anserine",
+      "preparation": "Boil aerial parts in water; drink as tea on empty stomach",
+      "symptoms_treated": [
+        "Visible worms in stool",
+        "Anal itching",
+        "Abdominal pain",
+        "Fever"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Entada africana",
+      "local_name": "African Entada / Entada",
+      "preparation": "Boil bark in water; drink decoction twice daily",
+      "symptoms_treated": [
+        "Fever",
+        "Prolonged fever",
+        "Sweating",
+        "Genital discharge",
+        "Genital sores"
+      ],
+      "region": "NW Cameroon / Sahel"
+    },
+    {
+      "herb": "Byrsocarpus coccineus",
+      "local_name": "Blood Creeper / Byrsocarpus",
+      "preparation": "Boil leaves and roots; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Cough",
+        "Genital discharge",
+        "Painful urination"
+      ],
+      "region": "West / Central Africa"
+    },
+    {
+      "herb": "Harungana madagascariensis",
+      "local_name": "Orange Milk Tree / Harungana",
+      "preparation": "Apply latex to skin; boil bark and drink",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Itchy skin",
+        "Jaundice",
+        "Red scaly skin"
+      ],
+      "region": "Cameroon / Central Africa"
+    },
+    {
+      "herb": "Costus afer",
+      "local_name": "Bush Cane / Roseau de Brousse",
+      "preparation": "Boil stems in water; drink daily",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Genital discharge",
+        "Joint pain",
+        "Swelling near anus"
+      ],
+      "region": "Forest zone / NW Cameroon"
+    },
+    {
+      "herb": "Securidaca longipedunculata",
+      "local_name": "Violet Tree / Securidaca",
+      "preparation": "Boil root bark; drink decoction (small doses — toxic in excess)",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Genital sores",
+        "Rash",
+        "Itchy skin"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Vitex doniana",
+      "local_name": "Black Plum / Prunier Noir",
+      "preparation": "Boil bark; drink decoction; eat ripe fruit",
+      "symptoms_treated": [
+        "Fever",
+        "Bloody or mucus-filled diarrhea",
+        "Pale skin",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Combretum micranthum",
+      "local_name": "Kinkeliba",
+      "preparation": "Boil dried leaves; drink as tea",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Jaundice",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / Sahel"
+    },
+    {
+      "herb": "Ageratum conyzoides",
+      "local_name": "Goatweed / Herbe a chat",
+      "preparation": "Boil leaves and drink; apply crushed leaves to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Pus or discharge",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Tithonia diversifolia",
+      "local_name": "Mexican Sunflower / Heliantheme",
+      "preparation": "Boil leaves; drink as tea; apply leaf juice to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Increased thirst",
+        "Fatigue",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Spilanthes acmella",
+      "local_name": "Toothache Plant / Cresson de Para",
+      "preparation": "Chew flower heads; boil and use as mouthwash",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Tooth pain",
+        "Jaw swelling"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Ficus thonningii",
+      "local_name": "Strangler Fig / Ficus",
+      "preparation": "Boil bark and leaves; inhale steam; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Wheezing",
+        "Chest tightness",
+        "Itchy skin"
+      ],
+      "region": "NW Cameroon / Central Africa"
+    },
+    {
+      "herb": "Piper guineense",
+      "local_name": "West African Black Pepper / Poivre de Guinee",
+      "preparation": "Boil seeds; add to foods; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Genital discharge",
+        "Cough"
+      ],
+      "region": "West / NW Cameroon"
+    },
+    {
+      "herb": "Nauclea latifolia",
+      "local_name": "African Peach / Pêche Africaine",
+      "preparation": "Boil bark or roots; drink twice daily",
+      "symptoms_treated": [
+        "Prolonged fever",
+        "Headache",
+        "Bloody or mucus-filled diarrhea",
+        "Weakness"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Zanthoxylum zanthoxyloides",
+      "local_name": "African Pepper / Poivre Africain",
+      "preparation": "Boil bark; chew bark for toothache; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Joint pain",
+        "Body aches",
+        "Tooth pain",
+        "Jaw stiffness"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Uvaria chamae",
+      "local_name": "Bush Banana / Uvaria",
+      "preparation": "Boil roots in water; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Genital discharge",
+        "Seizures"
+      ],
+      "region": "West / Central Africa"
+    },
+    {
+      "herb": "Dissotis rotundifolia",
+      "local_name": "Pink Ladies / Dissotis",
+      "preparation": "Boil aerial parts; drink tea; apply to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Diarrhea",
+        "Skin sores",
+        "Pus or discharge"
+      ],
+      "region": "NW Cameroon highlands"
+    },
+    {
+      "herb": "Microglossa pyrifolia",
+      "local_name": "Microglossa / Microglossa",
+      "preparation": "Boil leaves; drink decoction; inhale steam",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Skin sores",
+        "Cough"
+      ],
+      "region": "Cameroon highlands / Bamenda"
+    }
+  ],
+  "Typhoid Fever": [
+    {
+      "herb": "Vernonia amygdalina",
+      "local_name": "Ndole / Bitter Leaf",
+      "preparation": "Boil fresh leaves in water and drink as tea twice daily; eat cooked leaves (ndole stew)",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Loss of appetite",
+        "Jaundice",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Morinda lucida",
+      "local_name": "Oruwo / Brimstone Tree",
+      "preparation": "Boil bark in water; drink decoction twice daily",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Muscle aches",
+        "Sweating"
+      ],
+      "region": "West / Central Africa"
+    },
+    {
+      "herb": "Mangifera indica",
+      "local_name": "Mango Tree / Manguier",
+      "preparation": "Boil bark or leaves in water; drink daily",
+      "symptoms_treated": [
+        "Fever",
+        "Prolonged fever",
+        "Headache",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Khaya senegalensis",
+      "local_name": "African Mahogany / Acajou",
+      "preparation": "Boil bark in water; drink as decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Prolonged fever",
+        "Headache",
+        "Pus or discharge",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / Sahel region"
+    },
+    {
+      "herb": "Entada africana",
+      "local_name": "African Entada / Entada",
+      "preparation": "Boil bark in water; drink decoction twice daily",
+      "symptoms_treated": [
+        "Fever",
+        "Prolonged fever",
+        "Sweating",
+        "Genital discharge",
+        "Genital sores"
+      ],
+      "region": "NW Cameroon / Sahel"
+    },
+    {
+      "herb": "Nauclea latifolia",
+      "local_name": "African Peach / Pêche Africaine",
+      "preparation": "Boil bark or roots; drink twice daily",
+      "symptoms_treated": [
+        "Prolonged fever",
+        "Headache",
+        "Bloody or mucus-filled diarrhea",
+        "Weakness"
+      ],
+      "region": "West Africa / Cameroon"
+    }
+  ],
+  "Hepatitis A": [
+    {
+      "herb": "Vernonia amygdalina",
+      "local_name": "Ndole / Bitter Leaf",
+      "preparation": "Boil fresh leaves in water and drink as tea twice daily; eat cooked leaves (ndole stew)",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Loss of appetite",
+        "Jaundice",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Curcuma longa",
+      "local_name": "Turmeric / Curcuma",
+      "preparation": "Add powder to food; boil in warm milk; make tea",
+      "symptoms_treated": [
+        "Jaundice",
+        "Dark urine",
+        "Joint pain",
+        "Burning stomach pain",
+        "Fatigue"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Terminalia catappa",
+      "local_name": "Indian Almond / Badamier",
+      "preparation": "Boil bark or leaves; drink as tea; apply to skin",
+      "symptoms_treated": [
+        "Jaundice",
+        "Yellow eyes",
+        "Dark urine",
+        "Itchy skin",
+        "Red scaly skin"
+      ],
+      "region": "Coastal / NW Cameroon"
+    },
+    {
+      "herb": "Harungana madagascariensis",
+      "local_name": "Orange Milk Tree / Harungana",
+      "preparation": "Apply latex to skin; boil bark and drink",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Itchy skin",
+        "Jaundice",
+        "Red scaly skin"
+      ],
+      "region": "Cameroon / Central Africa"
+    },
+    {
+      "herb": "Combretum micranthum",
+      "local_name": "Kinkeliba",
+      "preparation": "Boil dried leaves; drink as tea",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Jaundice",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / Sahel"
+    }
+  ],
+  "Hepatitis B": [
+    {
+      "herb": "Vernonia amygdalina",
+      "local_name": "Ndole / Bitter Leaf",
+      "preparation": "Boil fresh leaves in water and drink as tea twice daily; eat cooked leaves (ndole stew)",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Loss of appetite",
+        "Jaundice",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Curcuma longa",
+      "local_name": "Turmeric / Curcuma",
+      "preparation": "Add powder to food; boil in warm milk; make tea",
+      "symptoms_treated": [
+        "Jaundice",
+        "Dark urine",
+        "Joint pain",
+        "Burning stomach pain",
+        "Fatigue"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Terminalia catappa",
+      "local_name": "Indian Almond / Badamier",
+      "preparation": "Boil bark or leaves; drink as tea; apply to skin",
+      "symptoms_treated": [
+        "Jaundice",
+        "Yellow eyes",
+        "Dark urine",
+        "Itchy skin",
+        "Red scaly skin"
+      ],
+      "region": "Coastal / NW Cameroon"
+    }
+  ],
+  "Diabetes Mellitus": [
+    {
+      "herb": "Vernonia amygdalina",
+      "local_name": "Ndole / Bitter Leaf",
+      "preparation": "Boil fresh leaves in water and drink as tea twice daily; eat cooked leaves (ndole stew)",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Loss of appetite",
+        "Jaundice",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Annona muricata",
+      "local_name": "Corossol / Soursop",
+      "preparation": "Boil leaves; drink as tea; eat ripe fruit",
+      "symptoms_treated": [
+        "High fever",
+        "Headache",
+        "Increased thirst",
+        "Frequent urination"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Moringa oleifera",
+      "local_name": "Moringa / Neverdai",
+      "preparation": "Add dried leaf powder to food; boil leaves as soup; make leaf tea",
+      "symptoms_treated": [
+        "Fatigue",
+        "Weakness",
+        "Pale skin",
+        "Weight loss",
+        "Increased thirst"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Mangifera indica",
+      "local_name": "Mango Tree / Manguier",
+      "preparation": "Boil bark or leaves in water; drink daily",
+      "symptoms_treated": [
+        "Fever",
+        "Prolonged fever",
+        "Headache",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Momordica charantia",
+      "local_name": "Bitter Melon / Margose",
+      "preparation": "Extract juice from fresh fruit; drink fresh juice diluted in water",
+      "symptoms_treated": [
+        "Increased thirst",
+        "Frequent urination",
+        "Fatigue",
+        "Fever",
+        "Chills"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Persea americana",
+      "local_name": "Avocado / Avocatier",
+      "preparation": "Boil leaves in water; drink as tea; eat ripe fruit regularly",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Increased thirst",
+        "Fatigue",
+        "Pale skin"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Combretum micranthum",
+      "local_name": "Kinkeliba",
+      "preparation": "Boil dried leaves; drink as tea",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Jaundice",
+        "Increased thirst",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / Sahel"
+    },
+    {
+      "herb": "Tithonia diversifolia",
+      "local_name": "Mexican Sunflower / Heliantheme",
+      "preparation": "Boil leaves; drink as tea; apply leaf juice to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Increased thirst",
+        "Fatigue",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    }
+  ],
+  "Chickenpox": [
+    {
+      "herb": "Azadirachta indica",
+      "local_name": "Neem / Nimba",
+      "preparation": "Boil bark or leaves; drink as tea; apply paste to skin for rashes",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Itchy skin",
+        "Painful urination",
+        "Rash"
+      ],
+      "region": "NW Cameroon / National"
+    }
+  ],
+  "Skin Fungal Infection": [
+    {
+      "herb": "Azadirachta indica",
+      "local_name": "Neem / Nimba",
+      "preparation": "Boil bark or leaves; drink as tea; apply paste to skin for rashes",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Itchy skin",
+        "Painful urination",
+        "Rash"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Allium sativum",
+      "local_name": "Garlic / Ail",
+      "preparation": "Eat raw cloves; crush into warm water; apply to skin infections",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Chest pain",
+        "Chronic cough",
+        "Itchy skin",
+        "Genital discharge"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Senna alata",
+      "local_name": "Ringworm Bush / Dartrier",
+      "preparation": "Crush fresh leaves; apply paste directly to affected skin area",
+      "symptoms_treated": [
+        "Ring-shaped rash",
+        "Itchy skin",
+        "Red scaly skin",
+        "Severe itching"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Aloe vera",
+      "local_name": "Aloe / Aloes",
+      "preparation": "Apply fresh gel directly from cut leaf to affected skin",
+      "symptoms_treated": [
+        "Itchy skin",
+        "Skin sores",
+        "Rash",
+        "Blisters",
+        "Skin peeling"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Terminalia catappa",
+      "local_name": "Indian Almond / Badamier",
+      "preparation": "Boil bark or leaves; drink as tea; apply to skin",
+      "symptoms_treated": [
+        "Jaundice",
+        "Yellow eyes",
+        "Dark urine",
+        "Itchy skin",
+        "Red scaly skin"
+      ],
+      "region": "Coastal / NW Cameroon"
+    },
+    {
+      "herb": "Harungana madagascariensis",
+      "local_name": "Orange Milk Tree / Harungana",
+      "preparation": "Apply latex to skin; boil bark and drink",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Itchy skin",
+        "Jaundice",
+        "Red scaly skin"
+      ],
+      "region": "Cameroon / Central Africa"
+    },
+    {
+      "herb": "Securidaca longipedunculata",
+      "local_name": "Violet Tree / Securidaca",
+      "preparation": "Boil root bark; drink decoction (small doses — toxic in excess)",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Genital sores",
+        "Rash",
+        "Itchy skin"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Mimosa pudica",
+      "local_name": "Sensitive Plant / Sensitive a Fleur Rose",
+      "preparation": "Apply crushed plant to wounds; boil and drink for seizures",
+      "symptoms_treated": [
+        "Seizures",
+        "Skin sores",
+        "Pus or discharge"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Microglossa pyrifolia",
+      "local_name": "Microglossa / Microglossa",
+      "preparation": "Boil leaves; drink decoction; inhale steam",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Skin sores",
+        "Cough"
+      ],
+      "region": "Cameroon highlands / Bamenda"
+    }
+  ],
+  "Cystitis UTI": [
+    {
+      "herb": "Azadirachta indica",
+      "local_name": "Neem / Nimba",
+      "preparation": "Boil bark or leaves; drink as tea; apply paste to skin for rashes",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Itchy skin",
+        "Painful urination",
+        "Rash"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Ocimum gratissimum",
+      "local_name": "Fever Plant / Basilic Africain",
+      "preparation": "Boil leaves in water; inhale steam; drink as tea three times daily",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Runny nose",
+        "Sore throat",
+        "Painful urination",
+        "Nausea"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Hibiscus sabdariffa",
+      "local_name": "Bissap / Folere",
+      "preparation": "Boil dried calyces in water; drink as bissap juice (cold or warm)",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Fatigue",
+        "Pale skin",
+        "Fast heartbeat"
+      ],
+      "region": "National / Cameroon"
+    }
+  ],
+  "Common Cold": [
+    {
+      "herb": "Cymbopogon citratus",
+      "local_name": "Lemon Grass / Citronnelle",
+      "preparation": "Boil fresh stalks; drink as hot tea",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Runny nose",
+        "Mild fever"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Ocimum gratissimum",
+      "local_name": "Fever Plant / Basilic Africain",
+      "preparation": "Boil leaves in water; inhale steam; drink as tea three times daily",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Runny nose",
+        "Sore throat",
+        "Painful urination",
+        "Nausea"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Zingiber officinale",
+      "local_name": "Ginger / Gingembre",
+      "preparation": "Boil fresh root; add honey; drink warm",
+      "symptoms_treated": [
+        "Nausea",
+        "Vomiting",
+        "Diarrhea",
+        "Headache",
+        "Chills",
+        "Burning stomach pain"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Garcinia kola",
+      "local_name": "Bitter Kola / Kola Amer",
+      "preparation": "Chew raw seeds; extract juice into warm water",
+      "symptoms_treated": [
+        "Cough",
+        "Wheezing",
+        "Chest tightness",
+        "Runny nose",
+        "Sore throat"
+      ],
+      "region": "Southern / Western Cameroon"
+    },
+    {
+      "herb": "Cola acuminata",
+      "local_name": "Kola Nut / Noix de Kola",
+      "preparation": "Chew raw nut; boil in water and drink",
+      "symptoms_treated": [
+        "Cough",
+        "Wheezing",
+        "Chest tightness",
+        "Bloody or mucus-filled diarrhea"
+      ],
+      "region": "Western / NW Cameroon"
+    },
+    {
+      "herb": "Desmodium adscendens",
+      "local_name": "Amor Seco / Desmodium",
+      "preparation": "Boil aerial parts in water; drink as tea three times daily",
+      "symptoms_treated": [
+        "Wheezing",
+        "Chest tightness",
+        "Runny nose",
+        "Nausea",
+        "Diarrhea"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Xylopia aethiopica",
+      "local_name": "Ethiopian Pepper / Grains de Selim",
+      "preparation": "Boil fruits in water; use as spice in soups; drink infusion",
+      "symptoms_treated": [
+        "Cough",
+        "Chest tightness",
+        "Runny nose",
+        "Burning stomach pain"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ],
+  "Hypertension": [
+    {
+      "herb": "Cymbopogon citratus",
+      "local_name": "Lemon Grass / Citronnelle",
+      "preparation": "Boil fresh stalks; drink as hot tea",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Runny nose",
+        "Mild fever"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Annona muricata",
+      "local_name": "Corossol / Soursop",
+      "preparation": "Boil leaves; drink as tea; eat ripe fruit",
+      "symptoms_treated": [
+        "High fever",
+        "Headache",
+        "Increased thirst",
+        "Frequent urination"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Hibiscus sabdariffa",
+      "local_name": "Bissap / Folere",
+      "preparation": "Boil dried calyces in water; drink as bissap juice (cold or warm)",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Fatigue",
+        "Pale skin",
+        "Fast heartbeat"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Moringa oleifera",
+      "local_name": "Moringa / Neverdai",
+      "preparation": "Add dried leaf powder to food; boil leaves as soup; make leaf tea",
+      "symptoms_treated": [
+        "Fatigue",
+        "Weakness",
+        "Pale skin",
+        "Weight loss",
+        "Increased thirst"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Allium sativum",
+      "local_name": "Garlic / Ail",
+      "preparation": "Eat raw cloves; crush into warm water; apply to skin infections",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Chest pain",
+        "Chronic cough",
+        "Itchy skin",
+        "Genital discharge"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Persea americana",
+      "local_name": "Avocado / Avocatier",
+      "preparation": "Boil leaves in water; drink as tea; eat ripe fruit regularly",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Increased thirst",
+        "Fatigue",
+        "Pale skin"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Rauvolfia vomitoria",
+      "local_name": "Poison Devil's Pepper / Rauwolfia",
+      "preparation": "Boil root bark in water; drink small amounts twice daily",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Seizures",
+        "Fever",
+        "Fast heartbeat"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ],
+  "Dengue Fever": [
+    {
+      "herb": "Carica papaya",
+      "local_name": "Pawpaw / Papaya",
+      "preparation": "Boil unripe fruit or seeds; drink juice of fresh leaves",
+      "symptoms_treated": [
+        "High fever",
+        "Weakness",
+        "Abdominal pain",
+        "Diarrhea",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / National"
+    }
+  ],
+  "Dysentery": [
+    {
+      "herb": "Carica papaya",
+      "local_name": "Pawpaw / Papaya",
+      "preparation": "Boil unripe fruit or seeds; drink juice of fresh leaves",
+      "symptoms_treated": [
+        "High fever",
+        "Weakness",
+        "Abdominal pain",
+        "Diarrhea",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Psidium guajava",
+      "local_name": "Guava / Goyavier",
+      "preparation": "Boil young leaves or bark; drink as tea",
+      "symptoms_treated": [
+        "Bloody or mucus-filled diarrhea",
+        "Abdominal pain",
+        "Diarrhea",
+        "Vomiting"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Bridelia ferruginea",
+      "local_name": "Bridelia / Asan",
+      "preparation": "Boil stem bark; drink twice daily; apply crushed bark to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Bloody or mucus-filled diarrhea",
+        "Skin sores"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Cola acuminata",
+      "local_name": "Kola Nut / Noix de Kola",
+      "preparation": "Chew raw nut; boil in water and drink",
+      "symptoms_treated": [
+        "Cough",
+        "Wheezing",
+        "Chest tightness",
+        "Bloody or mucus-filled diarrhea"
+      ],
+      "region": "Western / NW Cameroon"
+    },
+    {
+      "herb": "Vitex doniana",
+      "local_name": "Black Plum / Prunier Noir",
+      "preparation": "Boil bark; drink decoction; eat ripe fruit",
+      "symptoms_treated": [
+        "Fever",
+        "Bloody or mucus-filled diarrhea",
+        "Pale skin",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Nauclea latifolia",
+      "local_name": "African Peach / Pêche Africaine",
+      "preparation": "Boil bark or roots; drink twice daily",
+      "symptoms_treated": [
+        "Prolonged fever",
+        "Headache",
+        "Bloody or mucus-filled diarrhea",
+        "Weakness"
+      ],
+      "region": "West Africa / Cameroon"
+    }
+  ],
+  "Intestinal Worms": [
+    {
+      "herb": "Carica papaya",
+      "local_name": "Pawpaw / Papaya",
+      "preparation": "Boil unripe fruit or seeds; drink juice of fresh leaves",
+      "symptoms_treated": [
+        "High fever",
+        "Weakness",
+        "Abdominal pain",
+        "Diarrhea",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Cassia siamea",
+      "local_name": "Cassia / Cassia Siamese",
+      "preparation": "Boil leaves or pods; drink as laxative tea",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Constipation",
+        "Anal itching",
+        "Visible worms in stool"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Chenopodium ambrosioides",
+      "local_name": "Mexican Tea / Anserine",
+      "preparation": "Boil aerial parts in water; drink as tea on empty stomach",
+      "symptoms_treated": [
+        "Visible worms in stool",
+        "Anal itching",
+        "Abdominal pain",
+        "Fever"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    }
+  ],
+  "Gastroenteritis": [
+    {
+      "herb": "Ocimum gratissimum",
+      "local_name": "Fever Plant / Basilic Africain",
+      "preparation": "Boil leaves in water; inhale steam; drink as tea three times daily",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Runny nose",
+        "Sore throat",
+        "Painful urination",
+        "Nausea"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Zingiber officinale",
+      "local_name": "Ginger / Gingembre",
+      "preparation": "Boil fresh root; add honey; drink warm",
+      "symptoms_treated": [
+        "Nausea",
+        "Vomiting",
+        "Diarrhea",
+        "Headache",
+        "Chills",
+        "Burning stomach pain"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Psidium guajava",
+      "local_name": "Guava / Goyavier",
+      "preparation": "Boil young leaves or bark; drink as tea",
+      "symptoms_treated": [
+        "Bloody or mucus-filled diarrhea",
+        "Abdominal pain",
+        "Diarrhea",
+        "Vomiting"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Desmodium adscendens",
+      "local_name": "Amor Seco / Desmodium",
+      "preparation": "Boil aerial parts in water; drink as tea three times daily",
+      "symptoms_treated": [
+        "Wheezing",
+        "Chest tightness",
+        "Runny nose",
+        "Nausea",
+        "Diarrhea"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Dissotis rotundifolia",
+      "local_name": "Pink Ladies / Dissotis",
+      "preparation": "Boil aerial parts; drink tea; apply to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Diarrhea",
+        "Skin sores",
+        "Pus or discharge"
+      ],
+      "region": "NW Cameroon highlands"
+    },
+    {
+      "herb": "Xylopia aethiopica",
+      "local_name": "Ethiopian Pepper / Grains de Selim",
+      "preparation": "Boil fruits in water; use as spice in soups; drink infusion",
+      "symptoms_treated": [
+        "Cough",
+        "Chest tightness",
+        "Runny nose",
+        "Burning stomach pain"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ],
+  "Cholera": [
+    {
+      "herb": "Zingiber officinale",
+      "local_name": "Ginger / Gingembre",
+      "preparation": "Boil fresh root; add honey; drink warm",
+      "symptoms_treated": [
+        "Nausea",
+        "Vomiting",
+        "Diarrhea",
+        "Headache",
+        "Chills",
+        "Burning stomach pain"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Psidium guajava",
+      "local_name": "Guava / Goyavier",
+      "preparation": "Boil young leaves or bark; drink as tea",
+      "symptoms_treated": [
+        "Bloody or mucus-filled diarrhea",
+        "Abdominal pain",
+        "Diarrhea",
+        "Vomiting"
+      ],
+      "region": "NW Cameroon / National"
+    }
+  ],
+  "Helicobacteriosis PepticUlcer": [
+    {
+      "herb": "Zingiber officinale",
+      "local_name": "Ginger / Gingembre",
+      "preparation": "Boil fresh root; add honey; drink warm",
+      "symptoms_treated": [
+        "Nausea",
+        "Vomiting",
+        "Diarrhea",
+        "Headache",
+        "Chills",
+        "Burning stomach pain"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Curcuma longa",
+      "local_name": "Turmeric / Curcuma",
+      "preparation": "Add powder to food; boil in warm milk; make tea",
+      "symptoms_treated": [
+        "Jaundice",
+        "Dark urine",
+        "Joint pain",
+        "Burning stomach pain",
+        "Fatigue"
+      ],
+      "region": "National / Cameroon"
+    }
+  ],
+  "Yellow Fever": [
+    {
+      "herb": "Morinda lucida",
+      "local_name": "Oruwo / Brimstone Tree",
+      "preparation": "Boil bark in water; drink decoction twice daily",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Muscle aches",
+        "Sweating"
+      ],
+      "region": "West / Central Africa"
+    }
+  ],
+  "Iron Deficiency Anemia": [
+    {
+      "herb": "Hibiscus sabdariffa",
+      "local_name": "Bissap / Folere",
+      "preparation": "Boil dried calyces in water; drink as bissap juice (cold or warm)",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Fatigue",
+        "Pale skin",
+        "Fast heartbeat"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Moringa oleifera",
+      "local_name": "Moringa / Neverdai",
+      "preparation": "Add dried leaf powder to food; boil leaves as soup; make leaf tea",
+      "symptoms_treated": [
+        "Fatigue",
+        "Weakness",
+        "Pale skin",
+        "Weight loss",
+        "Increased thirst"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Persea americana",
+      "local_name": "Avocado / Avocatier",
+      "preparation": "Boil leaves in water; drink as tea; eat ripe fruit regularly",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Increased thirst",
+        "Fatigue",
+        "Pale skin"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Vitex doniana",
+      "local_name": "Black Plum / Prunier Noir",
+      "preparation": "Boil bark; drink decoction; eat ripe fruit",
+      "symptoms_treated": [
+        "Fever",
+        "Bloody or mucus-filled diarrhea",
+        "Pale skin",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ],
+  "Malnutrition": [
+    {
+      "herb": "Moringa oleifera",
+      "local_name": "Moringa / Neverdai",
+      "preparation": "Add dried leaf powder to food; boil leaves as soup; make leaf tea",
+      "symptoms_treated": [
+        "Fatigue",
+        "Weakness",
+        "Pale skin",
+        "Weight loss",
+        "Increased thirst"
+      ],
+      "region": "NW Cameroon / National"
+    }
+  ],
+  "Tuberculosis": [
+    {
+      "herb": "Allium sativum",
+      "local_name": "Garlic / Ail",
+      "preparation": "Eat raw cloves; crush into warm water; apply to skin infections",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Chest pain",
+        "Chronic cough",
+        "Itchy skin",
+        "Genital discharge"
+      ],
+      "region": "National / Cameroon"
+    }
+  ],
+  "Gonorrhea": [
+    {
+      "herb": "Allium sativum",
+      "local_name": "Garlic / Ail",
+      "preparation": "Eat raw cloves; crush into warm water; apply to skin infections",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Chest pain",
+        "Chronic cough",
+        "Itchy skin",
+        "Genital discharge"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Byrsocarpus coccineus",
+      "local_name": "Blood Creeper / Byrsocarpus",
+      "preparation": "Boil leaves and roots; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Cough",
+        "Genital discharge",
+        "Painful urination"
+      ],
+      "region": "West / Central Africa"
+    },
+    {
+      "herb": "Costus afer",
+      "local_name": "Bush Cane / Roseau de Brousse",
+      "preparation": "Boil stems in water; drink daily",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Genital discharge",
+        "Joint pain",
+        "Swelling near anus"
+      ],
+      "region": "Forest zone / NW Cameroon"
+    },
+    {
+      "herb": "Piper guineense",
+      "local_name": "West African Black Pepper / Poivre de Guinee",
+      "preparation": "Boil seeds; add to foods; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Genital discharge",
+        "Cough"
+      ],
+      "region": "West / NW Cameroon"
+    },
+    {
+      "herb": "Uvaria chamae",
+      "local_name": "Bush Banana / Uvaria",
+      "preparation": "Boil roots in water; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Genital discharge",
+        "Seizures"
+      ],
+      "region": "West / Central Africa"
+    }
+  ],
+  "Ringworm": [
+    {
+      "herb": "Senna alata",
+      "local_name": "Ringworm Bush / Dartrier",
+      "preparation": "Crush fresh leaves; apply paste directly to affected skin area",
+      "symptoms_treated": [
+        "Ring-shaped rash",
+        "Itchy skin",
+        "Red scaly skin",
+        "Severe itching"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Symphonia globulifera",
+      "local_name": "Ossol / Boarwood",
+      "preparation": "Apply latex/resin directly to skin lesions",
+      "symptoms_treated": [
+        "Severe itching",
+        "Ring-shaped rash",
+        "Pus or discharge",
+        "Skin sores"
+      ],
+      "region": "Southern Cameroon / Forest zone"
+    }
+  ],
+  "Scabies": [
+    {
+      "herb": "Senna alata",
+      "local_name": "Ringworm Bush / Dartrier",
+      "preparation": "Crush fresh leaves; apply paste directly to affected skin area",
+      "symptoms_treated": [
+        "Ring-shaped rash",
+        "Itchy skin",
+        "Red scaly skin",
+        "Severe itching"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Aloe vera",
+      "local_name": "Aloe / Aloes",
+      "preparation": "Apply fresh gel directly from cut leaf to affected skin",
+      "symptoms_treated": [
+        "Itchy skin",
+        "Skin sores",
+        "Rash",
+        "Blisters",
+        "Skin peeling"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Symphonia globulifera",
+      "local_name": "Ossol / Boarwood",
+      "preparation": "Apply latex/resin directly to skin lesions",
+      "symptoms_treated": [
+        "Severe itching",
+        "Ring-shaped rash",
+        "Pus or discharge",
+        "Skin sores"
+      ],
+      "region": "Southern Cameroon / Forest zone"
+    }
+  ],
+  "Asthma": [
+    {
+      "herb": "Garcinia kola",
+      "local_name": "Bitter Kola / Kola Amer",
+      "preparation": "Chew raw seeds; extract juice into warm water",
+      "symptoms_treated": [
+        "Cough",
+        "Wheezing",
+        "Chest tightness",
+        "Runny nose",
+        "Sore throat"
+      ],
+      "region": "Southern / Western Cameroon"
+    },
+    {
+      "herb": "Euphorbia hirta",
+      "local_name": "Asthma Weed / Herbe Chapelier",
+      "preparation": "Boil aerial parts; drink as warm tea twice daily",
+      "symptoms_treated": [
+        "Wheezing",
+        "Shortness of breath",
+        "Cough",
+        "Chest tightness"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Cola acuminata",
+      "local_name": "Kola Nut / Noix de Kola",
+      "preparation": "Chew raw nut; boil in water and drink",
+      "symptoms_treated": [
+        "Cough",
+        "Wheezing",
+        "Chest tightness",
+        "Bloody or mucus-filled diarrhea"
+      ],
+      "region": "Western / NW Cameroon"
+    },
+    {
+      "herb": "Desmodium adscendens",
+      "local_name": "Amor Seco / Desmodium",
+      "preparation": "Boil aerial parts in water; drink as tea three times daily",
+      "symptoms_treated": [
+        "Wheezing",
+        "Chest tightness",
+        "Runny nose",
+        "Nausea",
+        "Diarrhea"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Ficus thonningii",
+      "local_name": "Strangler Fig / Ficus",
+      "preparation": "Boil bark and leaves; inhale steam; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Wheezing",
+        "Chest tightness",
+        "Itchy skin"
+      ],
+      "region": "NW Cameroon / Central Africa"
+    },
+    {
+      "herb": "Xylopia aethiopica",
+      "local_name": "Ethiopian Pepper / Grains de Selim",
+      "preparation": "Boil fruits in water; use as spice in soups; drink infusion",
+      "symptoms_treated": [
+        "Cough",
+        "Chest tightness",
+        "Runny nose",
+        "Burning stomach pain"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ],
+  "Whooping Cough": [
+    {
+      "herb": "Garcinia kola",
+      "local_name": "Bitter Kola / Kola Amer",
+      "preparation": "Chew raw seeds; extract juice into warm water",
+      "symptoms_treated": [
+        "Cough",
+        "Wheezing",
+        "Chest tightness",
+        "Runny nose",
+        "Sore throat"
+      ],
+      "region": "Southern / Western Cameroon"
+    },
+    {
+      "herb": "Euphorbia hirta",
+      "local_name": "Asthma Weed / Herbe Chapelier",
+      "preparation": "Boil aerial parts; drink as warm tea twice daily",
+      "symptoms_treated": [
+        "Wheezing",
+        "Shortness of breath",
+        "Cough",
+        "Chest tightness"
+      ],
+      "region": "West Africa / Cameroon"
+    }
+  ],
+  "Bronchitis": [
+    {
+      "herb": "Euphorbia hirta",
+      "local_name": "Asthma Weed / Herbe Chapelier",
+      "preparation": "Boil aerial parts; drink as warm tea twice daily",
+      "symptoms_treated": [
+        "Wheezing",
+        "Shortness of breath",
+        "Cough",
+        "Chest tightness"
+      ],
+      "region": "West Africa / Cameroon"
+    }
+  ],
+  "Pneumonia": [
+    {
+      "herb": "Euphorbia hirta",
+      "local_name": "Asthma Weed / Herbe Chapelier",
+      "preparation": "Boil aerial parts; drink as warm tea twice daily",
+      "symptoms_treated": [
+        "Wheezing",
+        "Shortness of breath",
+        "Cough",
+        "Chest tightness"
+      ],
+      "region": "West Africa / Cameroon"
+    }
+  ],
+  "Herpes Zoster": [
+    {
+      "herb": "Aloe vera",
+      "local_name": "Aloe / Aloes",
+      "preparation": "Apply fresh gel directly from cut leaf to affected skin",
+      "symptoms_treated": [
+        "Itchy skin",
+        "Skin sores",
+        "Rash",
+        "Blisters",
+        "Skin peeling"
+      ],
+      "region": "National / Cameroon"
+    }
+  ],
+  "Eczema": [
+    {
+      "herb": "Aloe vera",
+      "local_name": "Aloe / Aloes",
+      "preparation": "Apply fresh gel directly from cut leaf to affected skin",
+      "symptoms_treated": [
+        "Itchy skin",
+        "Skin sores",
+        "Rash",
+        "Blisters",
+        "Skin peeling"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Ficus thonningii",
+      "local_name": "Strangler Fig / Ficus",
+      "preparation": "Boil bark and leaves; inhale steam; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Wheezing",
+        "Chest tightness",
+        "Itchy skin"
+      ],
+      "region": "NW Cameroon / Central Africa"
+    }
+  ],
+  "Arthritis": [
+    {
+      "herb": "Curcuma longa",
+      "local_name": "Turmeric / Curcuma",
+      "preparation": "Add powder to food; boil in warm milk; make tea",
+      "symptoms_treated": [
+        "Jaundice",
+        "Dark urine",
+        "Joint pain",
+        "Burning stomach pain",
+        "Fatigue"
+      ],
+      "region": "National / Cameroon"
+    },
+    {
+      "herb": "Costus afer",
+      "local_name": "Bush Cane / Roseau de Brousse",
+      "preparation": "Boil stems in water; drink daily",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Genital discharge",
+        "Joint pain",
+        "Swelling near anus"
+      ],
+      "region": "Forest zone / NW Cameroon"
+    }
+  ],
+  "Wound infections": [
+    {
+      "herb": "Bridelia ferruginea",
+      "local_name": "Bridelia / Asan",
+      "preparation": "Boil stem bark; drink twice daily; apply crushed bark to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Bloody or mucus-filled diarrhea",
+        "Skin sores"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Tithonia diversifolia",
+      "local_name": "Mexican Sunflower / Heliantheme",
+      "preparation": "Boil leaves; drink as tea; apply leaf juice to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Increased thirst",
+        "Fatigue",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Mimosa pudica",
+      "local_name": "Sensitive Plant / Sensitive a Fleur Rose",
+      "preparation": "Apply crushed plant to wounds; boil and drink for seizures",
+      "symptoms_treated": [
+        "Seizures",
+        "Skin sores",
+        "Pus or discharge"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Dissotis rotundifolia",
+      "local_name": "Pink Ladies / Dissotis",
+      "preparation": "Boil aerial parts; drink tea; apply to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Diarrhea",
+        "Skin sores",
+        "Pus or discharge"
+      ],
+      "region": "NW Cameroon highlands"
+    }
+  ],
+  "Skin Abscess": [
+    {
+      "herb": "Bridelia ferruginea",
+      "local_name": "Bridelia / Asan",
+      "preparation": "Boil stem bark; drink twice daily; apply crushed bark to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Headache",
+        "Bloody or mucus-filled diarrhea",
+        "Skin sores"
+      ],
+      "region": "West Africa / Cameroon"
+    },
+    {
+      "herb": "Khaya senegalensis",
+      "local_name": "African Mahogany / Acajou",
+      "preparation": "Boil bark in water; drink as decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Prolonged fever",
+        "Headache",
+        "Pus or discharge",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / Sahel region"
+    },
+    {
+      "herb": "Symphonia globulifera",
+      "local_name": "Ossol / Boarwood",
+      "preparation": "Apply latex/resin directly to skin lesions",
+      "symptoms_treated": [
+        "Severe itching",
+        "Ring-shaped rash",
+        "Pus or discharge",
+        "Skin sores"
+      ],
+      "region": "Southern Cameroon / Forest zone"
+    },
+    {
+      "herb": "Ageratum conyzoides",
+      "local_name": "Goatweed / Herbe a chat",
+      "preparation": "Boil leaves and drink; apply crushed leaves to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Pus or discharge",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Ageratum conyzoides",
+      "local_name": "Goatweed / Herbe a chat",
+      "preparation": "Boil leaves and drink; apply crushed leaves to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Pus or discharge",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / National"
+    },
+    {
+      "herb": "Tithonia diversifolia",
+      "local_name": "Mexican Sunflower / Heliantheme",
+      "preparation": "Boil leaves; drink as tea; apply leaf juice to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Increased thirst",
+        "Fatigue",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / Bamenda"
+    },
+    {
+      "herb": "Mimosa pudica",
+      "local_name": "Sensitive Plant / Sensitive a Fleur Rose",
+      "preparation": "Apply crushed plant to wounds; boil and drink for seizures",
+      "symptoms_treated": [
+        "Seizures",
+        "Skin sores",
+        "Pus or discharge"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Dissotis rotundifolia",
+      "local_name": "Pink Ladies / Dissotis",
+      "preparation": "Boil aerial parts; drink tea; apply to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Diarrhea",
+        "Skin sores",
+        "Pus or discharge"
+      ],
+      "region": "NW Cameroon highlands"
+    }
+  ],
+  "Constipation": [
+    {
+      "herb": "Cassia siamea",
+      "local_name": "Cassia / Cassia Siamese",
+      "preparation": "Boil leaves or pods; drink as laxative tea",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Constipation",
+        "Anal itching",
+        "Visible worms in stool"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ],
+  "Epilepsy": [
+    {
+      "herb": "Clausena anisata",
+      "local_name": "Horsewood / Clausene",
+      "preparation": "Boil roots or leaves; drink as tea; inhale steam",
+      "symptoms_treated": [
+        "Fever",
+        "Seizures",
+        "Headache",
+        "Sweating"
+      ],
+      "region": "NW Cameroon / Bamenda highlands"
+    },
+    {
+      "herb": "Rauvolfia vomitoria",
+      "local_name": "Poison Devil's Pepper / Rauwolfia",
+      "preparation": "Boil root bark in water; drink small amounts twice daily",
+      "symptoms_treated": [
+        "Headache",
+        "Dizziness",
+        "Seizures",
+        "Fever",
+        "Fast heartbeat"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Mimosa pudica",
+      "local_name": "Sensitive Plant / Sensitive a Fleur Rose",
+      "preparation": "Apply crushed plant to wounds; boil and drink for seizures",
+      "symptoms_treated": [
+        "Seizures",
+        "Skin sores",
+        "Pus or discharge"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Uvaria chamae",
+      "local_name": "Bush Banana / Uvaria",
+      "preparation": "Boil roots in water; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Genital discharge",
+        "Seizures"
+      ],
+      "region": "West / Central Africa"
+    }
+  ],
+  "Headache": [
+    {
+      "herb": "Clausena anisata",
+      "local_name": "Horsewood / Clausene",
+      "preparation": "Boil roots or leaves; drink as tea; inhale steam",
+      "symptoms_treated": [
+        "Fever",
+        "Seizures",
+        "Headache",
+        "Sweating"
+      ],
+      "region": "NW Cameroon / Bamenda highlands"
+    }
+  ],
+  "Sexually transmitted infections": [
+    {
+      "herb": "Entada africana",
+      "local_name": "African Entada / Entada",
+      "preparation": "Boil bark in water; drink decoction twice daily",
+      "symptoms_treated": [
+        "Fever",
+        "Prolonged fever",
+        "Sweating",
+        "Genital discharge",
+        "Genital sores"
+      ],
+      "region": "NW Cameroon / Sahel"
+    }
+  ],
+  "Cough": [
+    {
+      "herb": "Byrsocarpus coccineus",
+      "local_name": "Blood Creeper / Byrsocarpus",
+      "preparation": "Boil leaves and roots; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Cough",
+        "Genital discharge",
+        "Painful urination"
+      ],
+      "region": "West / Central Africa"
+    },
+    {
+      "herb": "Piper guineense",
+      "local_name": "West African Black Pepper / Poivre de Guinee",
+      "preparation": "Boil seeds; add to foods; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Genital discharge",
+        "Cough"
+      ],
+      "region": "West / NW Cameroon"
+    },
+    {
+      "herb": "Microglossa pyrifolia",
+      "local_name": "Microglossa / Microglossa",
+      "preparation": "Boil leaves; drink decoction; inhale steam",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Skin sores",
+        "Cough"
+      ],
+      "region": "Cameroon highlands / Bamenda"
+    }
+  ],
+  "Syphilis": [
+    {
+      "herb": "Securidaca longipedunculata",
+      "local_name": "Violet Tree / Securidaca",
+      "preparation": "Boil root bark; drink decoction (small doses — toxic in excess)",
+      "symptoms_treated": [
+        "Fever",
+        "Chills",
+        "Genital sores",
+        "Rash",
+        "Itchy skin"
+      ],
+      "region": "West Africa / Cameroon"
+    }
+  ],
+  "Anemia": [
+    {
+      "herb": "Vitex doniana",
+      "local_name": "Black Plum / Prunier Noir",
+      "preparation": "Boil bark; drink decoction; eat ripe fruit",
+      "symptoms_treated": [
+        "Fever",
+        "Bloody or mucus-filled diarrhea",
+        "Pale skin",
+        "Fatigue"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ],
+  "Wounds": [
+    {
+      "herb": "Ageratum conyzoides",
+      "local_name": "Goatweed / Herbe a chat",
+      "preparation": "Boil leaves and drink; apply crushed leaves to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Pus or discharge",
+        "Skin sores"
+      ],
+      "region": "NW Cameroon / National"
+    }
+  ],
+  "Dental Abscess": [
+    {
+      "herb": "Spilanthes acmella",
+      "local_name": "Toothache Plant / Cresson de Para",
+      "preparation": "Chew flower heads; boil and use as mouthwash",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Tooth pain",
+        "Jaw swelling"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Spilanthes acmella",
+      "local_name": "Toothache Plant / Cresson de Para",
+      "preparation": "Chew flower heads; boil and use as mouthwash",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Tooth pain",
+        "Jaw swelling"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Zanthoxylum zanthoxyloides",
+      "local_name": "African Pepper / Poivre Africain",
+      "preparation": "Boil bark; chew bark for toothache; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Joint pain",
+        "Body aches",
+        "Tooth pain",
+        "Jaw stiffness"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ],
+  "Toothache": [
+    {
+      "herb": "Spilanthes acmella",
+      "local_name": "Toothache Plant / Cresson de Para",
+      "preparation": "Chew flower heads; boil and use as mouthwash",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Tooth pain",
+        "Jaw swelling"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Zanthoxylum zanthoxyloides",
+      "local_name": "African Pepper / Poivre Africain",
+      "preparation": "Boil bark; chew bark for toothache; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Joint pain",
+        "Body aches",
+        "Tooth pain",
+        "Jaw stiffness"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ],
+  "Skin infections": [
+    {
+      "herb": "Mimosa pudica",
+      "local_name": "Sensitive Plant / Sensitive a Fleur Rose",
+      "preparation": "Apply crushed plant to wounds; boil and drink for seizures",
+      "symptoms_treated": [
+        "Seizures",
+        "Skin sores",
+        "Pus or discharge"
+      ],
+      "region": "NW Cameroon / West Africa"
+    },
+    {
+      "herb": "Microglossa pyrifolia",
+      "local_name": "Microglossa / Microglossa",
+      "preparation": "Boil leaves; drink decoction; inhale steam",
+      "symptoms_treated": [
+        "Fever",
+        "Headache",
+        "Skin sores",
+        "Cough"
+      ],
+      "region": "Cameroon highlands / Bamenda"
+    }
+  ],
+  "Skin conditions": [
+    {
+      "herb": "Ficus thonningii",
+      "local_name": "Strangler Fig / Ficus",
+      "preparation": "Boil bark and leaves; inhale steam; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Wheezing",
+        "Chest tightness",
+        "Itchy skin"
+      ],
+      "region": "NW Cameroon / Central Africa"
+    }
+  ],
+  "Sickle Cell Crisis": [
+    {
+      "herb": "Zanthoxylum zanthoxyloides",
+      "local_name": "African Pepper / Poivre Africain",
+      "preparation": "Boil bark; chew bark for toothache; drink decoction",
+      "symptoms_treated": [
+        "Fever",
+        "Joint pain",
+        "Body aches",
+        "Tooth pain",
+        "Jaw stiffness"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ],
+  "Diarrhea": [
+    {
+      "herb": "Dissotis rotundifolia",
+      "local_name": "Pink Ladies / Dissotis",
+      "preparation": "Boil aerial parts; drink tea; apply to wounds",
+      "symptoms_treated": [
+        "Fever",
+        "Diarrhea",
+        "Skin sores",
+        "Pus or discharge"
+      ],
+      "region": "NW Cameroon highlands"
+    }
+  ],
+  "Stomach pain": [
+    {
+      "herb": "Xylopia aethiopica",
+      "local_name": "Ethiopian Pepper / Grains de Selim",
+      "preparation": "Boil fruits in water; use as spice in soups; drink infusion",
+      "symptoms_treated": [
+        "Cough",
+        "Chest tightness",
+        "Runny nose",
+        "Burning stomach pain"
+      ],
+      "region": "NW Cameroon / West Africa"
+    }
+  ]
+}

@@ -35,11 +35,14 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 MODEL_TARGETS: dict[str, tuple[str, Path]] = {
-    "random_forest": ("model_random_forest_url",   Path("models/random_forest.pkl")),
-    "decision_tree": ("model_decision_tree_url",   Path("models/decision_tree.pkl")),
-    "naive_bayes":   ("model_naive_bayes_url",      Path("models/naive_bayes.pkl")),
-    "label_encoder": ("model_label_encoder_url",   Path("models/label_encoder.pkl")),
-    "model_symptoms":("model_symptoms_list_url",   Path("models/symptoms_list.json")),
+    "random_forest":  ("model_random_forest_url",   Path("models/random_forest.pkl")),
+    "decision_tree":  ("model_decision_tree_url",   Path("models/decision_tree.pkl")),
+    "naive_bayes":    ("model_naive_bayes_url",     Path("models/naive_bayes.pkl")),
+    "label_encoder":  ("model_label_encoder_url",  Path("models/label_encoder.pkl")),
+    "model_symptoms": ("model_symptoms_list_url",  Path("models/symptoms_list.json")),
+    # Cameroon herbs remedy lookup — downloaded alongside models so the
+    # predict endpoint can suggest traditional remedies without a restart.
+    "herbs_remedies": ("model_herbs_remedies_url", Path("data/herbs_remedies.json")),
 }
 
 # The version manifest is stored alongside the model files on HF.
