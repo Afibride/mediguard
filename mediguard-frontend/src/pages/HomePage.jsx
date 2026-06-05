@@ -407,7 +407,7 @@ const HomePage = () => {
             src="/hero.jpeg"
             alt=""
             aria-hidden="true"
-            fetchpriority="high"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
           />
           {/* Dark overlay on its own layer so it never composites with the photo */}

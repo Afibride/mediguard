@@ -47,10 +47,10 @@ function cleanText(raw) {
 }
 
 /** Split cleaned text into sentence-sized chunks (≤ 200 chars each). */
-function chunkText(text, maxLen = 200) {
+function chunkText(text, maxLen = 170) {
   if (!text) return [];
-  // Split on sentence boundaries: ., !, ?, ;  followed by space or end
-  const raw = text.split(/(?<=[.!?;])\s+/);
+  // Split on sentence and soft-pause punctuation so the voice does not rush lists.
+  const raw = text.split(/(?<=[.!?;:])\s+|(?<=,)\s+/);
   const chunks = [];
   let current = '';
   for (const part of raw) {
@@ -81,12 +81,27 @@ function chunkText(text, maxLen = 200) {
   return chunks.filter(Boolean);
 }
 
+function pauseForChunk(text) {
+  if (/[.!?]$/.test(text)) return 420;
+  if (/[;:]$/.test(text)) return 320;
+  if (/,$/.test(text)) return 220;
+  return 160;
+}
+
 // ── Voice selection ───────────────────────────────────────────────────────────
 
-function pickVoice() {
+function pickVoice(preferredLang) {
   if (!supported) return null;
   const voices = window.speechSynthesis.getVoices();
   if (!voices.length) return null;
+
+  if (preferredLang) {
+    const preferred = preferredLang.toLowerCase();
+    const exact = voices.find(v => v.lang.toLowerCase() === preferred);
+    if (exact) return exact;
+    const partial = voices.find(v => v.lang.toLowerCase().startsWith(preferred));
+    if (partial) return partial;
+  }
 
   // 1. Exact match on preferred African / British codes
   for (const lang of PREFERRED_LANGS) {
@@ -111,6 +126,7 @@ function pickVoice() {
 export function useSpeech() {
   const [speaking, setSpeaking]   = useState(false);
   const voiceRef   = useRef(null);   // cached voice
+  const langRef    = useRef('en-NG');
   const queueRef   = useRef([]);     // pending sentence chunks
   const activeRef  = useRef(false);  // true while playback loop is running
   const cancelRef  = useRef(false);  // set to true on stop()
@@ -143,16 +159,16 @@ export function useSpeech() {
     const utt  = new SpeechSynthesisUtterance(text);
 
     // Apply voice
-    const voice = voiceRef.current || pickVoice();
+    const voice = pickVoice(langRef.current) || voiceRef.current || pickVoice();
     if (voice) {
       utt.voice = voice;
       utt.lang  = voice.lang;
     } else {
-      utt.lang = 'en-NG';
+      utt.lang = langRef.current || 'en-NG';
     }
 
-    // Warm, deliberate West-African delivery
-    utt.rate  = 0.86;
+    // Warm, slow, deliberate delivery that gives punctuation room to breathe.
+    utt.rate  = 0.72;
     utt.pitch = 0.94;
 
     utt.onstart = () => setSpeaking(true);
@@ -162,9 +178,9 @@ export function useSpeech() {
         activeRef.current = false;
         return;
       }
-      // Natural inter-sentence pause (120 ms) before next chunk
+      // Natural punctuation-aware pause before next chunk
       if (queueRef.current.length > 0) {
-        setTimeout(_speakNext, 120);
+        setTimeout(_speakNext, pauseForChunk(text));
       } else {
         setSpeaking(false);
         activeRef.current = false;
@@ -180,7 +196,7 @@ export function useSpeech() {
 
   // ── Public API ──────────────────────────────────────────────────────────────
 
-  const speak = useCallback((rawText) => {
+  const speak = useCallback((rawText, preferredLang = 'en-NG') => {
     if (!supported || !rawText) return;
 
     // Stop any current playback
@@ -193,6 +209,7 @@ export function useSpeech() {
     if (!chunks.length) return;
 
     queueRef.current  = chunks;
+    langRef.current = preferredLang || 'en-NG';
     cancelRef.current = false;
     activeRef.current = true;
 

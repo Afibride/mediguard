@@ -115,6 +115,8 @@ DISCLAIMER = (
     "healthcare professional for any health concerns."
 )
 
+RIGHT_ANSWER_NOT_FOUND = "I did not find the right answer for that question."
+
 PREGNANCY_WARNING_SIGNS = [
     "vaginal bleeding",
     "severe abdominal pain",
@@ -2685,11 +2687,7 @@ def _extractive_answer(query: str, chunks: list[dict]) -> str:
         summary += "."
 
     if not summary or len(summary) < 50:
-        return (
-            "I could not find a precise match for your query in the current knowledge base. "
-            "Please try rephrasing your question, or consult the MediGuard Disease Library for detailed disease information. "
-            "For personal symptoms, always consult a qualified healthcare professional."
-        )
+        return RIGHT_ANSWER_NOT_FOUND
     return (
         f"Based on MediGuard medical references: {summary} "
         "For personal symptoms, always consult a qualified healthcare professional. "
@@ -2935,19 +2933,94 @@ _HERB_KNOWLEDGE: dict[str, dict] = {
         "warning": "As with neem, cannot replace confirmed malaria treatment. Use only as comfort measure while arranging testing.",
         "related_symptoms": ["Fever"],
     },
+    "honey": {
+        "local_name": "Honey",
+        "traditional_use": "Cough, sore throat",
+        "evidence": "Honey can soothe throat irritation and may reduce night cough in adults and children over 1 year.",
+        "warning": "Do not give honey to babies under 1 year. Breathing difficulty, chest pain, or cough lasting more than 2 weeks needs clinical care.",
+        "related_symptoms": ["Cough", "Sore throat"],
+    },
+    "lime": {
+        "local_name": "Lime / Lemon",
+        "traditional_use": "Cold symptoms, sore throat, nausea",
+        "evidence": "Lime and lemon provide vitamin C and can make warm fluids more soothing during mild colds.",
+        "warning": "They do not treat malaria, pneumonia, or bacterial throat infections. Seek care for high fever or breathing difficulty.",
+        "related_symptoms": ["Sore throat", "Nausea"],
+    },
+    "hibiscus": {
+        "local_name": "Hibiscus / Zobo / Bissap",
+        "traditional_use": "Hydration, mild blood-pressure support",
+        "evidence": "Hibiscus tea may modestly support blood pressure control in some adults and is useful as a non-sugary fluid.",
+        "warning": "It cannot replace prescribed blood-pressure medicine. Avoid very strong preparations in pregnancy unless a clinician approves.",
+        "related_symptoms": ["Dizziness"],
+    },
+    "mint": {
+        "local_name": "Mint / Peppermint",
+        "traditional_use": "Indigestion, nausea, blocked nose",
+        "evidence": "Mint tea may ease mild indigestion and nausea; its smell can feel helpful for nasal congestion.",
+        "warning": "Avoid strong peppermint preparations for small children. Persistent vomiting or dehydration needs ORS and clinic care.",
+        "related_symptoms": ["Nausea", "Nasal congestion"],
+    },
+    "clove": {
+        "local_name": "Clove",
+        "traditional_use": "Tooth pain, sore throat",
+        "evidence": "Clove contains eugenol, which can temporarily numb tooth pain when used carefully.",
+        "warning": "Clove does not cure dental abscess. Facial swelling, fever, pus, or severe tooth pain needs dental or clinic care.",
+        "related_symptoms": ["Tooth pain"],
+    },
+    "baobab": {
+        "local_name": "Baobab fruit powder",
+        "traditional_use": "Nutrition, weakness, recovery support",
+        "evidence": "Baobab fruit is rich in vitamin C and fibre and can support nutrition during recovery.",
+        "warning": "It does not treat the cause of weight loss, persistent weakness, or severe malnutrition. Children with swelling or wasting need urgent care.",
+        "related_symptoms": ["Weakness", "Fatigue"],
+    },
+    "okra": {
+        "local_name": "Okra",
+        "traditional_use": "Nutrition, digestion, diabetes support",
+        "evidence": "Okra is nutritious and high in fibre, which can support digestion and blood-sugar control as part of diet.",
+        "warning": "It cannot replace diabetes testing, insulin, or prescribed diabetes medication.",
+        "related_symptoms": ["Abdominal pain"],
+    },
+    "black pepper": {
+        "local_name": "Black pepper / Bush pepper",
+        "traditional_use": "Cold symptoms, cough, digestion",
+        "evidence": "Pepper can warm drinks and may ease a blocked nose sensation for some people.",
+        "warning": "Avoid excess pepper with ulcers, severe stomach pain, or vomiting. It does not treat pneumonia or tuberculosis.",
+        "related_symptoms": ["Cough", "Nasal congestion"],
+    },
+}
+
+_HERB_ALIASES: dict[str, str] = {
+    "dongoyaro": "neem",
+    "dogonyaro": "neem",
+    "ndole": "bitter leaf",
+    "vernonia": "bitter leaf",
+    "citronnelle": "lemongrass",
+    "feuille de papaye": "pawpaw leaf",
+    "papaya leaf": "pawpaw leaf",
+    "feuille de goyave": "guava leaf",
+    "effirin": "scent leaf",
+    "african basil": "scent leaf",
+    "basilic africain": "scent leaf",
+    "zobo": "hibiscus",
+    "bissap": "hibiscus",
+    "peppermint": "mint",
+    "bush pepper": "black pepper",
 }
 
 # Symptom keywords → herbs that may help (for "what herb can I use for X?" queries)
 _SYMPTOM_HERB_LOOKUP: dict[str, list[str]] = {
     "cough":          ["garlic", "eucalyptus"],
-    "respiratory":    ["garlic", "eucalyptus"],
-    "cold":           ["garlic", "eucalyptus", "ginger"],
+    "sore throat":    ["honey", "lime", "clove"],
+    "respiratory":    ["garlic", "eucalyptus", "honey"],
+    "cold":           ["garlic", "eucalyptus", "ginger", "lime", "black pepper"],
     "fever":          ["neem", "lemongrass", "scent leaf", "pawpaw leaf"],
     "malaria":        ["neem", "pawpaw leaf", "scent leaf"],
     "diarrhea":       ["guava leaf"],
     "diarrhoea":      ["guava leaf"],
     "purge":          ["guava leaf"],
-    "nausea":         ["ginger"],
+    "nausea":         ["ginger", "mint", "lime"],
     "vomiting":       ["ginger"],
     "stomach":        ["bitter leaf", "ginger"],
     "abdominal":      ["bitter leaf", "ginger"],
@@ -2961,13 +3034,17 @@ _SYMPTOM_HERB_LOOKUP: dict[str, list[str]] = {
     "burn":           ["aloe vera"],
     "wound":          ["aloe vera"],
     "fatigue":        ["moringa"],
-    "weakness":       ["moringa"],
-    "tired":          ["moringa"],
+    "weakness":       ["moringa", "baobab"],
+    "tired":          ["moringa", "baobab"],
     "anaemia":        ["moringa"],
     "anemia":         ["moringa"],
-    "congestion":     ["eucalyptus"],
-    "blocked nose":   ["eucalyptus"],
+    "congestion":     ["eucalyptus", "mint", "black pepper"],
+    "blocked nose":   ["eucalyptus", "mint", "black pepper"],
     "malnutrition":   ["moringa"],
+    "tooth":          ["clove"],
+    "toothache":      ["clove"],
+    "blood pressure": ["hibiscus"],
+    "diabetes":       ["bitter leaf", "okra", "moringa"],
 }
 
 
@@ -2976,8 +3053,12 @@ _HERB_KEYWORDS: list[str] = [
     "neem", "bitter leaf", "garlic", "ginger", "lemongrass", "lemon grass",
     "moringa", "pawpaw leaf", "papaya leaf", "guava leaf", "aloe vera",
     "turmeric", "eucalyptus", "scent leaf", "african basil", "coconut water",
+    "honey", "lime", "lemon", "hibiscus", "zobo", "bissap", "mint",
+    "peppermint", "clove", "baobab", "okra", "black pepper", "bush pepper",
     "herbal", "herb", "traditional medicine", "bush medicine", "local medicine",
     "plant remedy", "remedy", "natural remedy", "home remedy",
+    "native medicine", "country medicine", "leaf medicine", "medicinal plant",
+    "plant medicine", "agbo", "which leaf", "what leaf", "what plant",
     "feuille de", "tisane", "décoction", "remède naturel",
 ]
 
@@ -2985,7 +3066,21 @@ _HERB_KEYWORDS: list[str] = [
 def _traditional_medicine_response(query: str) -> dict | None:
     """Detect herb / traditional medicine mentions and return a bridge response."""
     text = query.lower()
-    if not any(kw in text for kw in _HERB_KEYWORDS):
+    for alias, canonical in _HERB_ALIASES.items():
+        if alias in text:
+            text = text.replace(alias, canonical)
+
+    herb_signal = any(kw in text for kw in _HERB_KEYWORDS)
+    question_signal = any(
+        phrase in text
+        for phrase in [
+            "what can i use", "what should i use", "which leaf", "what leaf",
+            "what plant", "natural treatment", "natural cure", "local cure",
+            "home treatment", "home cure", "bush treatment", "bush cure",
+            "wetin a fit use", "wetin i fit use", "which medicine",
+        ]
+    )
+    if not herb_signal and not question_signal:
         return None
 
     matched_herb: dict | None = None
@@ -3041,11 +3136,35 @@ def _traditional_medicine_response(query: str) -> dict | None:
                 "Are the symptoms mild, moderate, or severe?",
             ]
         else:
+            generic_list_signal = any(
+                phrase in text
+                for phrase in [
+                    "list", "available", "what herbs", "which herbs", "show herbs",
+                    "known herbs", "common herbs", "about herbs", "about herb",
+                    "tell me about herbs", "traditional medicine",
+                    "home remedies", "natural remedies",
+                ]
+            )
+            if herb_signal and not symptom_herbs and not generic_list_signal:
+                return {
+                    "answer": RIGHT_ANSWER_NOT_FOUND,
+                    "sources": [],
+                    "disclaimer": DISCLAIMER,
+                    "mode": "traditional_medicine",
+                    "follow_up_questions": [
+                        "Which symptom are you trying to treat?",
+                        "Can you spell the herb or plant another way?",
+                    ],
+                }
             # Fully generic herbal query — list all available herbs
+            herb_names = ", ".join(
+                sorted(herb["local_name"] for herb in _HERB_KNOWLEDGE.values())
+            )
             lines = [
                 "🌿 **Traditional medicine and home remedies**\n",
                 "Many local plants used in Bamenda have genuine health benefits. "
                 "Here is what MediGuard knows about common herbs:\n",
+                f"{herb_names}\n",
                 "- 🌡️ **Fever:** Neem (dongoyaro), lemongrass tea, scent leaf\n"
                 "- 😮‍💨 **Cough:** Garlic tea, eucalyptus steam inhalation\n"
                 "- 🤢 **Nausea / stomach upset:** Ginger tea, bitter leaf\n"
@@ -3071,6 +3190,27 @@ def _traditional_medicine_response(query: str) -> dict | None:
         "mode": "traditional_medicine",
         "follow_up_questions": follow_ups,
     }
+
+
+_GENERAL_HEALTH_SCOPE_TERMS = [
+    "health", "sick", "ill", "disease", "symptom", "pain", "ache", "fever",
+    "cough", "rash", "diarrhea", "diarrhoea", "vomit", "nausea", "bleeding",
+    "swelling", "infection", "medicine", "treatment", "prevention", "vaccine",
+    "hospital", "clinic", "doctor", "nurse", "pregnant", "pregnancy", "child",
+    "baby", "first aid", "emergency", "injury", "wound", "burn", "bite",
+    "malaria", "typhoid", "cholera", "herb", "remedy", "traditional",
+]
+
+
+def _is_in_scope_health_query(query: str) -> bool:
+    text = query.lower()
+    if any(term in text for term in _GENERAL_HEALTH_SCOPE_TERMS):
+        return True
+    if _detect_disease(query):
+        return True
+    if normalize_symptom_text(query, SYMPTOMS):
+        return True
+    return False
 
 
 # ---------------------------------------------------------------------------
@@ -3213,7 +3353,7 @@ _STI_NAMES_DISPLAY = [
 def _sti_sexual_health_response(query: str) -> dict | None:
     """Handle general STI / sexual health queries."""
     text = query.lower()
-    if not any(t in text for t in _STI_TRIGGERS):
+    if not any(re.search(rf"(?<![a-z0-9]){re.escape(t)}(?![a-z0-9])", text) for t in _STI_TRIGGERS):
         return None
 
     # If a specific disease is mentioned, let the disease handler deal with it
@@ -3424,13 +3564,21 @@ def generate_answer(
     if symptom_check:
         return symptom_check
 
+    if not _is_in_scope_health_query(query):
+        return {
+            "answer": RIGHT_ANSWER_NOT_FOUND,
+            "sources": [],
+            "disclaimer": DISCLAIMER,
+            "data_source": "out_of_scope",
+        }
+
     detected_disease = _detect_disease(query)
     effective_filter = filter_disease or (detected_disease["name"] if detected_disease else None)
     chunks = retrieve(query, top_k=5, filter_disease=effective_filter)
     data_source = chunks[0].get("retrieval_source", "unknown") if chunks else "none"
     if not chunks:
         return {
-            "answer": "I could not find relevant MediGuard reference information for that question. Please try rephrasing or consult a healthcare professional.",
+            "answer": RIGHT_ANSWER_NOT_FOUND,
             "sources": [],
             "disclaimer": DISCLAIMER,
             "data_source": data_source,
@@ -3549,6 +3697,9 @@ def generate_answer(
             answer = response.choices[0].message.content
         except Exception:
             answer = _extractive_answer(query, chunks)
+
+    if not answer or not answer.strip():
+        answer = RIGHT_ANSWER_NOT_FOUND
 
     sources = []
     seen = set()

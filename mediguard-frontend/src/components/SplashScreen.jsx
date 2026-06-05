@@ -47,6 +47,19 @@ export default function SplashScreen({ onDone }) {
   // True when the whole overlay is fading out
   const [leaving, setLeaving] = useState(false);
 
+  // Lock body scroll for the entire duration of the splash so the page
+  // behind cannot be scrolled on mobile (pull-to-refresh, swipe, etc.)
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    // Also lock html element for iOS Safari which ignores body overflow
+    document.documentElement.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+      document.documentElement.style.overflow = '';
+    };
+  }, []);
+
   useEffect(() => {
     const timers = [];
     const add = (fn, ms) => timers.push(setTimeout(fn, ms));
@@ -84,17 +97,21 @@ export default function SplashScreen({ onDone }) {
   return (
     <div
       aria-hidden="true"
+      onTouchMove={e => e.preventDefault()}
       style={{
-        position:   'fixed',
-        inset:      0,
-        zIndex:     9999,
-        display:    'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: '#ffffff',
-        opacity:    leaving ? 0 : 1,
-        transition: leaving ? 'opacity 0.52s cubic-bezier(0.4,0,0.2,1)' : 'none',
-        pointerEvents: leaving ? 'none' : 'auto',
+        position:          'fixed',
+        inset:             0,
+        zIndex:            9999,
+        display:           'flex',
+        alignItems:        'center',
+        justifyContent:    'center',
+        background:        '#ffffff',
+        opacity:           leaving ? 0 : 1,
+        transition:        leaving ? 'opacity 0.52s cubic-bezier(0.4,0,0.2,1)' : 'none',
+        pointerEvents:     leaving ? 'none' : 'auto',
+        touchAction:       'none',          // blocks all touch gestures
+        overscrollBehavior:'none',          // blocks pull-to-refresh on Android
+        userSelect:        'none',          // prevents text selection on long-press
       }}
     >
       {/* Logo container — sized to the image, keeps all quadrant clips aligned */}

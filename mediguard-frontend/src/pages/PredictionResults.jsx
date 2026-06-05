@@ -277,20 +277,6 @@ const PredictionResults = () => {
                 <p className="text-sm text-blue-800 dark:text-blue-300">{analysisNote}</p>
               </motion.div>
             )}
-            {pregnancyNote && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                className="mt-4 p-4 bg-pink-50 dark:bg-pink-950/30 rounded-lg border border-pink-200 dark:border-pink-800 flex items-start gap-3 text-left">
-                <Baby className="h-5 w-5 text-pink-600 dark:text-pink-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-pink-800 dark:text-pink-300">{pregnancyNote}</p>
-              </motion.div>
-            )}
-            {fatigueNote && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                className="mt-4 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg border border-amber-200 dark:border-amber-800 flex items-start gap-3 text-left">
-                <Brain className="h-5 w-5 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-amber-800 dark:text-amber-300">{fatigueNote}</p>
-              </motion.div>
-            )}
           </motion.div>
 
           <motion.div variants={itemVariants} className="mb-6">
@@ -600,6 +586,24 @@ const PredictionResults = () => {
                   </p>
                 </div>
               </div>
+            </motion.div>
+          )}
+
+          {/* Pregnancy & fatigue context notes — shown at bottom after results */}
+          {(pregnancyNote || fatigueNote) && (
+            <motion.div variants={itemVariants} className="mt-8 space-y-3">
+              {pregnancyNote && (
+                <div className="p-4 bg-pink-50 dark:bg-pink-950/30 rounded-xl border border-pink-200 dark:border-pink-800 flex items-start gap-3">
+                  <Baby className="h-5 w-5 text-pink-600 dark:text-pink-400 mt-0.5 shrink-0" />
+                  <p className="text-sm text-pink-800 dark:text-pink-300">{pregnancyNote}</p>
+                </div>
+              )}
+              {fatigueNote && (
+                <div className="p-4 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200 dark:border-amber-800 flex items-start gap-3">
+                  <Brain className="h-5 w-5 text-amber-600 dark:text-amber-400 mt-0.5 shrink-0" />
+                  <p className="text-sm text-amber-800 dark:text-amber-300">{fatigueNote}</p>
+                </div>
+              )}
             </motion.div>
           )}
 
