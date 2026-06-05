@@ -47,24 +47,30 @@ HF_TOKEN = (
 HF_REPO = "afiBride/mediguard-models"
 BASE = Path(__file__).parent.parent
 
-# Files to upload with their destination path in the HF repo
+# Files to upload with their destination path in the HF repo.
+# Models go to the REPO ROOT so the existing .env URLs
+# (.../resolve/main/random_forest.pkl) keep working without any change.
 UPLOAD_PLAN: list[tuple[Path, str]] = [
-    # ── Models ────────────────────────────────────────────────────────────────
-    (BASE / "models/random_forest.pkl",      "models/random_forest.pkl"),
-    (BASE / "models/decision_tree.pkl",      "models/decision_tree.pkl"),
-    (BASE / "models/naive_bayes.pkl",        "models/naive_bayes.pkl"),
-    (BASE / "models/label_encoder.pkl",      "models/label_encoder.pkl"),
-    (BASE / "models/symptoms_list.json",     "models/symptoms_list.json"),
-    (BASE / "models/version.json",           "models/version.json"),
-    (BASE / "models/random_forest_report.txt", "models/random_forest_report.txt"),
+    # ── Models at repo root (matches existing .env MODEL_*_URL values) ────────
+    (BASE / "models/random_forest.pkl",        "random_forest.pkl"),
+    (BASE / "models/decision_tree.pkl",        "decision_tree.pkl"),
+    (BASE / "models/naive_bayes.pkl",          "naive_bayes.pkl"),
+    (BASE / "models/label_encoder.pkl",        "label_encoder.pkl"),
+    (BASE / "models/symptoms_list.json",       "symptoms_list.json"),
+    (BASE / "models/version.json",             "version.json"),
+    (BASE / "models/random_forest_report.txt", "random_forest_report.txt"),
 
-    # ── Processed training data ───────────────────────────────────────────────
+    # ── Cameroon herbs remedy lookup ──────────────────────────────────────────
+    (BASE / "data/herbs_remedies.json",        "herbs_remedies.json"),
+
+    # ── Processed training datasets (in datasets/ subfolder) ─────────────────
     (BASE / "data/raw/mediguard_dataset_full.csv",  "datasets/mediguard_dataset_full.csv"),
     (BASE / "data/processed/mediguard_train.csv",   "datasets/mediguard_train.csv"),
     (BASE / "data/processed/mediguard_test.csv",    "datasets/mediguard_test.csv"),
 
     # ── Custom real-patient CSVs ──────────────────────────────────────────────
-    (BASE / "data/custom/Malaria_Dataset.csv", "datasets/custom/Malaria_Dataset.csv"),
+    (BASE / "data/custom/Malaria_Dataset.csv",           "datasets/custom/Malaria_Dataset.csv"),
+    (BASE / "data/custom/cameroon_herbs_remedies.csv",   "datasets/custom/cameroon_herbs_remedies.csv"),
 ]
 
 # External Kaggle downloads — upload every CSV + JSON found under data/external/

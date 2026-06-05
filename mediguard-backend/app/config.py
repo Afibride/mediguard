@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     model_naive_bayes_url: str | None = None
     model_label_encoder_url: str | None = None
     model_symptoms_list_url: str | None = None
+    model_herbs_remedies_url: str | None = None
     model_download_token: str | None = None
     model_download_timeout_seconds: int = 180
     embedding_model: str = "all-MiniLM-L6-v2"

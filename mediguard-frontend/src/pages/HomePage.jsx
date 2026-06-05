@@ -394,14 +394,24 @@ const HomePage = () => {
       </Helmet>
 
       <div className="min-h-screen flex flex-col overflow-x-hidden">
-        {/* Hero Section */}
+        {/* ── Hero Section ────────────────────────────────────────────────────
+            FIX: use <img> for background instead of CSS background-image.
+            CSS background-image + backdrop-blur + Framer Motion on the same
+            GPU layer causes the striped-corruption artifact on Android Chrome.
+            Using an <img> tag keeps the photo on a separate paint layer and
+            avoids the compositing conflict entirely.
+        ────────────────────────────────────────────────────────────────────── */}
         <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-12 sm:py-16">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-            style={{ backgroundImage: 'url(/hero.jpeg)' }}
-          >
-            <div className="absolute inset-0 bg-black/40"></div>
-          </div>
+          {/* Background photo — dedicated layer, no inline style, no will-change */}
+          <img
+            src="/hero.jpeg"
+            alt=""
+            aria-hidden="true"
+            fetchpriority="high"
+            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
+          />
+          {/* Dark overlay on its own layer so it never composites with the photo */}
+          <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
           <div className="container mx-auto px-4 z-10 relative flex flex-col items-center">
             <motion.div
@@ -410,10 +420,10 @@ const HomePage = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="mb-4 sm:mb-8"
             >
-              <img 
-                src="/mediguard.png" 
-                alt="MediGuard Logo" 
-                className="h-20 sm:logo-lg w-auto object-contain drop-shadow-2xl brightness-0 invert" 
+              <img
+                src="/mediguard.png"
+                alt="MediGuard Logo"
+                className="h-20 sm:h-24 w-auto object-contain drop-shadow-2xl brightness-0 invert"
               />
             </motion.div>
 
@@ -429,7 +439,10 @@ const HomePage = () => {
               <p className="text-sm sm:text-lg md:text-xl text-gray-100 mb-6 sm:mb-8 max-w-2xl mx-auto drop-shadow-md font-medium">
                 {t('hero_subtitle')}
               </p>
-              
+
+              {/* Buttons: solid semi-transparent bg instead of backdrop-blur
+                  backdrop-filter forces a GPU compositing layer which conflicts
+                  with the background image layer on low-end Android devices. */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-sm sm:max-w-none mx-auto">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/symptom-checker" className="block">
@@ -439,12 +452,12 @@ const HomePage = () => {
                     </Button>
                   </Link>
                 </motion.div>
-                
+
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/chat-ai" className="block">
-                    <Button 
-                      size="lg" 
-                      className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-secondary hover:bg-secondary/90 text-white font-semibold shadow-xl transition-all border border-white/20 backdrop-blur-sm"
+                    <Button
+                      size="lg"
+                      className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-secondary hover:bg-secondary/90 text-white font-semibold shadow-xl transition-all border border-white/20"
                     >
                       <Bot className="mr-2 h-5 w-5" />
                       {t('hero_try_ai')}
@@ -452,17 +465,17 @@ const HomePage = () => {
                     </Button>
                   </Link>
                 </motion.div>
-                
+
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link to="/disease-library" className="block">
-                    <Button size="lg" variant="outline" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-sm font-semibold shadow-xl transition-all">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 bg-white/15 hover:bg-white/25 text-white border-white/30 font-semibold shadow-xl transition-all">
                       {t('hero_learn_more')}
                     </Button>
                   </Link>
                 </motion.div>
               </div>
 
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
@@ -470,12 +483,12 @@ const HomePage = () => {
               >
                 <span className="text-sm text-white/80">Live MediGuard coverage:</span>
                 <Link to="/chat-ai">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white hover:bg-white/30 transition-colors">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-white/20 rounded-full text-sm text-white hover:bg-white/30 transition-colors">
                     <Bot className="h-3 w-3" /> Symptom chat
                   </span>
                 </Link>
                 <Link to="/disease-library">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm text-white hover:bg-white/30 transition-colors">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-white/20 rounded-full text-sm text-white hover:bg-white/30 transition-colors">
                     <BookOpen className="h-3 w-3" /> {summary.diseases_tracked} diseases
                   </span>
                 </Link>
@@ -483,27 +496,24 @@ const HomePage = () => {
             </motion.div>
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1, repeat: Infinity, repeatType: "reverse" }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/80"
-          >
+          {/* Scroll indicator — CSS animation only, no Framer Motion repeat:Infinity
+              which creates a persistent GPU layer that corrupts nearby compositing. */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/80 animate-bounce">
             <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-              <div className="w-1 h-2 bg-white/60 rounded-full mt-2"></div>
+              <div className="w-1 h-2 bg-white/60 rounded-full mt-2" />
             </div>
-          </motion.div>
+          </div>
         </section>
 
         {/* ── Seasonal Health Alert Banner ─────────────────────────────────── */}
-        <div className="relative z-10 isolate bg-background py-4 [backface-visibility:hidden] [transform:translateZ(0)]">
+        <div className="relative z-10 bg-background py-4">
           <div className="container mx-auto px-4 max-w-7xl">
             <SeasonalBanner className="w-full" />
           </div>
         </div>
 
         {/* Trust Indicators - Stats Grid */}
-        <section className="relative z-10 isolate bg-background py-8 sm:py-20 [backface-visibility:hidden]">
+        <section className="relative z-10 bg-background py-8 sm:py-20">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-8 sm:mb-10">
               {[
