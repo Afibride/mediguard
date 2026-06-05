@@ -496,12 +496,14 @@ const HomePage = () => {
         </section>
 
         {/* ── Seasonal Health Alert Banner ─────────────────────────────────── */}
-        <div className="container mx-auto px-4 max-w-7xl py-4">
-          <SeasonalBanner className="w-full" />
+        <div className="relative z-10 isolate bg-background py-4 [backface-visibility:hidden] [transform:translateZ(0)]">
+          <div className="container mx-auto px-4 max-w-7xl">
+            <SeasonalBanner className="w-full" />
+          </div>
         </div>
 
         {/* Trust Indicators - Stats Grid */}
-        <section className="py-12 sm:py-20 bg-background">
+        <section className="relative z-10 isolate bg-background py-8 sm:py-20 [backface-visibility:hidden]">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-3 gap-1.5 sm:gap-4 mb-8 sm:mb-10">
               {[
@@ -510,13 +512,13 @@ const HomePage = () => {
                 { label: 'Most Reported', value: summary.top_disease, icon: Database },
               ].map((item) => (
                 <Card key={item.label} className="medical-panel min-w-0 overflow-hidden">
-                  <CardContent className="p-2 sm:p-5 flex flex-col sm:flex-row items-center text-center sm:text-left gap-1.5 sm:gap-4 min-h-[96px] sm:min-h-0">
+                  <CardContent className="p-2 sm:p-5 flex flex-col sm:flex-row items-center justify-center text-center sm:text-left gap-1.5 sm:gap-4 min-h-[104px] sm:min-h-0">
                     <div className="h-7 w-7 sm:h-11 sm:w-11 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
                       <item.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <div className="min-w-0 w-full">
-                      <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">{item.label}</p>
-                      <p className="text-xs sm:text-xl font-bold truncate">{item.value}</p>
+                      <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight break-words">{item.label}</p>
+                      <p className="text-xs sm:text-xl font-bold break-words">{item.value}</p>
                     </div>
                   </CardContent>
                 </Card>
