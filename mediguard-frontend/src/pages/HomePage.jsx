@@ -206,6 +206,13 @@ const HomePage = () => {
   const [showStdBanner, setShowStdBanner] = useState(
     () => sessionStorage.getItem('mg_stdBannerHidden') !== '1'
   );
+
+  // Auto-dismiss STI banner after 10 seconds
+  useEffect(() => {
+    if (!showStdBanner) return;
+    const timer = setTimeout(() => setShowStdBanner(false), 10000);
+    return () => clearTimeout(timer);
+  }, [showStdBanner]);
   
   const trustIndicators = [
     {

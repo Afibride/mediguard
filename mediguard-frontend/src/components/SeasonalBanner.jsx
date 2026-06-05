@@ -213,6 +213,13 @@ export default function SeasonalBanner({ className = '', compact = false }) {
   const [visible, setVisible]     = useState(true);
   const [expanded, setExpanded]   = useState(false);   // for compact mode expand
 
+  // Auto-dismiss after 8 s (full) / 12 s (compact)
+  useEffect(() => {
+    const delay = compact ? 12000 : 8000;
+    const timer = setTimeout(() => setVisible(false), delay);
+    return () => clearTimeout(timer);
+  }, [compact]);
+
   useEffect(() => {
     const month = new Date().getMonth() + 1;
     const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:8000';

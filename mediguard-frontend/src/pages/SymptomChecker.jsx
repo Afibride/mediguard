@@ -97,6 +97,55 @@ const CATEGORY_META = {
 
 const CATEGORIES = Object.keys(CATEGORIES_MAP);
 
+// ─── SymptomTile — defined OUTSIDE SymptomChecker so React never unmounts it
+// on symptom selection changes (preventing spurious re-entry animations).
+const SymptomTile = React.memo(({ symptom, isSelected, onToggle }) => (
+  <motion.div
+    whileHover={{ y: -3, scale: 1.03 }}
+    whileTap={{ scale: 0.94 }}
+    onClick={() => onToggle(symptom)}
+    className={`relative cursor-pointer select-none rounded-xl border-2 p-2.5 sm:p-3 min-h-[60px] sm:min-h-[68px] flex items-center gap-2 sm:gap-3 transition-colors ${
+      isSelected
+        ? 'border-primary bg-primary/10 ring-2 ring-primary/30 shadow-md'
+        : 'border-border/60 bg-background hover:border-primary/40 hover:bg-muted/30'
+    }`}
+  >
+    <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all ${
+      isSelected ? 'border-primary bg-primary' : 'border-muted-foreground/30'
+    }`}>
+      <AnimatePresence>
+        {isSelected && (
+          <motion.div
+            key="check"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            exit={{ scale: 0 }}
+            transition={{ type: 'spring', stiffness: 600, damping: 22 }}
+          >
+            <CheckCircle2 className="h-3.5 w-3.5 text-primary-foreground" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+    <span className="flex-1 min-w-0">
+      <span className={`block text-xs sm:text-sm font-semibold leading-tight ${isSelected ? 'text-primary' : 'text-foreground'}`}>
+        {symptom}
+      </span>
+      {SYMPTOM_PLAIN_NAMES[symptom] && (
+        <span className="block text-[10px] text-muted-foreground leading-tight mt-0.5">
+          {SYMPTOM_PLAIN_NAMES[symptom]}
+        </span>
+      )}
+    </span>
+    {isSelected && (
+      <motion.div
+        layoutId={`glow-${symptom}`}
+        className="absolute inset-0 rounded-xl bg-primary/5 pointer-events-none"
+      />
+    )}
+  </motion.div>
+));
+
 // ─── Animation Variants ───────────────────────────────────────────────────────
 
 const zoneVariants = {
@@ -116,10 +165,8 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-const tileVariants = {
-  hidden: { opacity: 0, scale: 0.82, y: 8 },
-  visible: (i) => ({ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 380, damping: 24, delay: i * 0.03 } }),
-};
+// tileVariants intentionally removed — tiles must not re-animate on symptom check.
+// Entry animation is handled by the zone slider (zoneVariants) on zone transitions only.
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -449,59 +496,8 @@ const SymptomChecker = () => {
   const scanProgress = Math.min(100, selectedSymptoms.length * 16 + activeCategoryCount * 8 + (formData.duration ? 8 : 0) + (formData.severity ? 8 : 0));
   const scanRank = selectedSymptoms.length >= 6 ? t('sc_deep_scan') : selectedSymptoms.length >= 3 ? t('sc_good_signal') : selectedSymptoms.length >= 1 ? t('sc_signal') : t('sc_awaiting');
 
-  // ─── Symptom Tile ──────────────────────────────────────────────────────────
-
-  const SymptomTile = ({ symptom, index }) => {
-    const selected = selectedSymptoms.includes(symptom);
-    return (
-      <motion.div
-        custom={index}
-        variants={tileVariants}
-        whileHover={{ y: -4, scale: 1.04 }}
-        whileTap={{ scale: 0.93 }}
-        onClick={() => handleSymptomToggle(symptom)}
-        className={`relative cursor-pointer select-none rounded-xl border-2 p-2.5 sm:p-3 min-h-[60px] sm:min-h-[68px] flex items-center gap-2 sm:gap-3 transition-colors ${
-          selected
-            ? `border-primary bg-primary/10 ring-2 ring-primary/30 shadow-md`
-            : 'border-border/60 bg-background hover:border-primary/40 hover:bg-muted/30'
-        }`}
-      >
-        <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all ${
-          selected ? 'border-primary bg-primary' : 'border-muted-foreground/30'
-        }`}>
-          <AnimatePresence>
-            {selected && (
-              <motion.div
-                key="check"
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                exit={{ scale: 0 }}
-                transition={{ type: 'spring', stiffness: 600, damping: 22 }}
-              >
-                <CheckCircle2 className="h-3.5 w-3.5 text-primary-foreground" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-        <span className="flex-1 min-w-0">
-          <span className={`block text-xs sm:text-sm font-semibold leading-tight ${selected ? 'text-primary' : 'text-foreground'}`}>
-            {symptom}
-          </span>
-          {SYMPTOM_PLAIN_NAMES[symptom] && (
-            <span className="block text-[10px] text-muted-foreground leading-tight mt-0.5">
-              {SYMPTOM_PLAIN_NAMES[symptom]}
-            </span>
-          )}
-        </span>
-        {selected && (
-          <motion.div
-            layoutId={`glow-${symptom}`}
-            className="absolute inset-0 rounded-xl bg-primary/5 pointer-events-none"
-          />
-        )}
-      </motion.div>
-    );
-  };
+  // SymptomTile is defined outside this component (above) to prevent remounting
+  // on every selectedSymptoms state change. Pass isSelected + onToggle as stable props.
 
   // ─── Zone Mini-Map ─────────────────────────────────────────────────────────
 
@@ -984,8 +980,13 @@ const SymptomChecker = () => {
                           </CardHeader>
                           <CardContent className="pt-4">
                             <motion.div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3" variants={containerVariants} initial="hidden" animate="visible">
-                              {filteredSymptoms.map((symptom, i) => (
-                                <SymptomTile key={symptom} symptom={symptom} index={i} />
+                              {filteredSymptoms.map((symptom) => (
+                                <SymptomTile
+                                  key={symptom}
+                                  symptom={symptom}
+                                  isSelected={selectedSymptoms.includes(symptom)}
+                                  onToggle={handleSymptomToggle}
+                                />
                               ))}
                             </motion.div>
                             {filteredSymptoms.length === 0 && (
@@ -1060,9 +1061,16 @@ const SymptomChecker = () => {
                                   initial="hidden"
                                   animate="visible"
                                 >
-                                  {(CATEGORIES_MAP[currentCategory] || []).map((symptom, i) => {
+                                  {(CATEGORIES_MAP[currentCategory] || []).map((symptom) => {
                                     if (!allSymptoms.includes(symptom)) return null;
-                                    return <SymptomTile key={symptom} symptom={symptom} index={i} />;
+                                    return (
+                                      <SymptomTile
+                                        key={symptom}
+                                        symptom={symptom}
+                                        isSelected={selectedSymptoms.includes(symptom)}
+                                        onToggle={handleSymptomToggle}
+                                      />
+                                    );
                                   })}
                                 </motion.div>
 
