@@ -53,6 +53,12 @@ export const deleteAdminSubscriber = (id) =>
 export const sendAdminNewsletter = (subject, body) =>
   adminRequest('/admin/newsletter/send', { method: 'POST', body: JSON.stringify({ subject, body }) });
 
+export const sendAdminOutbreakAlerts = () =>
+  adminRequest('/analytics/send-outbreak-alerts', { method: 'POST' });
+
+export const sendAdminMonthlyDigest = () =>
+  adminRequest('/analytics/send-monthly-digest', { method: 'POST' });
+
 // Trends
 export const getAdminTrends = (days = 30) =>
   adminRequest(`/admin/trends?days=${days}`);

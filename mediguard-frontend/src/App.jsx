@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes, BrowserRouter as Router, useLocation, Navigate, Outlet } from 'react-router-dom';
 import SplashScreen from '@/components/SplashScreen';
 import ScrollToTop from '@/components/ScrollToTop';
@@ -40,6 +40,45 @@ import AdminTrends from '@/pages/admin/AdminTrends';
 import AdminDiseases from '@/pages/admin/AdminDiseases';
 import AdminMessages from '@/pages/admin/AdminMessages';
 import AdminFeedback from '@/pages/admin/AdminFeedback';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const FALLBACK_API_URL = 'http://localhost:8001';
+
+const wait = (ms) => new Promise(resolve => window.setTimeout(resolve, ms));
+
+function getStartupTiming() {
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const type = connection?.effectiveType;
+  if (type === 'slow-2g' || type === '2g') return { minMs: 4500, timeoutMs: 12000 };
+  if (type === '3g') return { minMs: 3000, timeoutMs: 8000 };
+  return { minMs: 1800, timeoutMs: 5000 };
+}
+
+async function waitForBackend(timeoutMs) {
+  const bases = [...new Set([API_URL, FALLBACK_API_URL])];
+  const checks = bases.map(base =>
+    fetch(`${base}/health`, { cache: 'no-store' }).then(res => {
+      if (!res.ok) throw new Error('Health check failed');
+      return true;
+    })
+  );
+  return Promise.race([
+    Promise.any(checks).catch(() => false),
+    wait(timeoutMs).then(() => false),
+  ]);
+}
+
+async function waitForStartupReadiness() {
+  const startedAt = Date.now();
+  const { minMs, timeoutMs } = getStartupTiming();
+  const fontReady = document.fonts?.ready || Promise.resolve();
+  await Promise.race([
+    Promise.allSettled([waitForBackend(timeoutMs), fontReady]),
+    wait(timeoutMs),
+  ]);
+  const elapsed = Date.now() - startedAt;
+  if (elapsed < minMs) await wait(minMs - elapsed);
+}
 
 // ── Admin auth guard ──────────────────────────────────────────────────────────
 function AdminGuard() {
@@ -88,13 +127,34 @@ export default function App() {
   // Show the splash once per browser session (not on every navigation).
   const [splashDone, setSplashDone] = useState(() => {
     if (sessionStorage.getItem('mg_splash')) return true;
-    sessionStorage.setItem('mg_splash', '1');
     return false;
   });
+  const [appReady, setAppReady] = useState(() => sessionStorage.getItem('mg_splash') === '1');
+
+  useEffect(() => {
+    if (splashDone) {
+      setAppReady(true);
+      return undefined;
+    }
+
+    let cancelled = false;
+    waitForStartupReadiness().finally(() => {
+      if (!cancelled) setAppReady(true);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [splashDone]);
+
+  const finishSplash = () => {
+    sessionStorage.setItem('mg_splash', '1');
+    setSplashDone(true);
+  };
 
   return (
     <>
-      {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
+      {!splashDone && <SplashScreen ready={appReady} onDone={finishSplash} />}
       <Router>
       <Routes>
 

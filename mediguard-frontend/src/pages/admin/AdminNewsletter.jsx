@@ -1,6 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Send, Trash2, ToggleLeft, ToggleRight, Loader2, ChevronLeft, ChevronRight, Users } from 'lucide-react';
-import { getAdminSubscribers, updateAdminSubscriber, deleteAdminSubscriber, sendAdminNewsletter } from '@/services/adminApi';
+import { Send, Trash2, ToggleLeft, ToggleRight, Loader2, ChevronLeft, ChevronRight, Users, Bell, CalendarClock } from 'lucide-react';
+import {
+  getAdminSubscribers,
+  updateAdminSubscriber,
+  deleteAdminSubscriber,
+  sendAdminNewsletter,
+  sendAdminOutbreakAlerts,
+  sendAdminMonthlyDigest,
+} from '@/services/adminApi';
 
 export default function AdminNewsletter() {
   const [subs, setSubs] = useState([]);
@@ -16,6 +23,7 @@ export default function AdminNewsletter() {
   const [body, setBody] = useState('');
   const [sending, setSending] = useState(false);
   const [sendResult, setSendResult] = useState('');
+  const [quickSending, setQuickSending] = useState('');
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -72,6 +80,21 @@ export default function AdminNewsletter() {
     }
   }
 
+  async function handleQuickSend(type) {
+    const isOutbreak = type === 'outbreak';
+    if (!confirm(`Send ${isOutbreak ? 'outbreak warning emails' : 'the monthly digest'} to active subscribers and opted-in users?`)) return;
+    setQuickSending(type);
+    setSendResult('');
+    try {
+      const res = isOutbreak ? await sendAdminOutbreakAlerts() : await sendAdminMonthlyDigest();
+      setSendResult(res.message);
+    } catch (e) {
+      setSendResult('Error: ' + e.message);
+    } finally {
+      setQuickSending('');
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -118,11 +141,6 @@ export default function AdminNewsletter() {
             rows={6}
             className="w-full rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-500 px-3.5 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 resize-none"
           />
-          {sendResult && (
-            <div className={`rounded-lg px-3 py-2 text-xs border ${sendResult.startsWith('Error') ? 'bg-rose-950 border-rose-700 text-rose-300' : 'bg-emerald-950 border-emerald-700 text-emerald-300'}`}>
-              {sendResult}
-            </div>
-          )}
           <button
             type="submit"
             disabled={sending}
@@ -133,6 +151,39 @@ export default function AdminNewsletter() {
           </button>
         </form>
       </div>
+
+      <div className="bg-gray-900 rounded-xl border border-gray-800 p-5">
+        <div className="flex items-center gap-2 mb-4">
+          <Bell className="h-4 w-4 text-orange-400" />
+          <h2 className="text-white font-semibold text-sm">Admin Mail Actions</h2>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button
+            type="button"
+            disabled={!!quickSending}
+            onClick={() => handleQuickSend('outbreak')}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-orange-600 hover:bg-orange-500 disabled:opacity-60 text-white text-sm font-semibold transition"
+          >
+            {quickSending === 'outbreak' ? <Loader2 className="h-4 w-4 animate-spin" /> : <Bell className="h-4 w-4" />}
+            Send Warning Emails
+          </button>
+          <button
+            type="button"
+            disabled={!!quickSending}
+            onClick={() => handleQuickSend('digest')}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 disabled:opacity-60 text-white text-sm font-semibold transition"
+          >
+            {quickSending === 'digest' ? <Loader2 className="h-4 w-4 animate-spin" /> : <CalendarClock className="h-4 w-4" />}
+            Send Monthly Digest
+          </button>
+        </div>
+      </div>
+
+      {sendResult && (
+        <div className={`rounded-lg px-3 py-2 text-xs border ${sendResult.startsWith('Error') ? 'bg-rose-950 border-rose-700 text-rose-300' : 'bg-emerald-950 border-emerald-700 text-emerald-300'}`}>
+          {sendResult}
+        </div>
+      )}
 
       {/* Subscriber list */}
       <div className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden">

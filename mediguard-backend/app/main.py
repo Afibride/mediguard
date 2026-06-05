@@ -163,6 +163,62 @@ async def _run_monthly_digest() -> None:
         db.close()
 
 
+async def _run_outbreak_alerts() -> None:
+    """Background coroutine that sends current outbreak warnings to subscribers."""
+    from app.db.session import SessionLocal
+    from app.db.models import NewsletterSubscriber, User
+    from app.routers.analytics import _compute_outbreak_alerts, _TIPS_RAINY, _TIPS_DRY, _TIPS_GENERAL
+    from app.utils.email import is_rainy_season, outbreak_alert_email, send_email
+
+    db = SessionLocal()
+    try:
+        alerts = _compute_outbreak_alerts(db)
+        if not alerts:
+            logger.info("Outbreak warning job: no alert threshold reached - skipping send.")
+            return
+
+        tips = (_TIPS_RAINY if is_rainy_season() else _TIPS_DRY) + _TIPS_GENERAL
+        base_url = settings.frontend_url.rstrip("/")
+
+        registered = (
+            db.query(User)
+            .filter(User.is_active == True, User.notify_emails == True)  # noqa: E712
+            .all()
+        )
+        guests = (
+            db.query(NewsletterSubscriber)
+            .filter(NewsletterSubscriber.is_active == True)  # noqa: E712
+            .all()
+        )
+
+        tasks = []
+        for user in registered:
+            subject, html, plain = outbreak_alert_email(user.full_name, alerts, tips)
+            if subject:
+                tasks.append(send_email(user.email, subject, html, plain))
+
+        for sub in guests:
+            unsub_url = f"{base_url}/newsletter/unsubscribe?token={sub.unsubscribe_token}"
+            subject, html, plain = outbreak_alert_email(sub.name, alerts, tips, unsubscribe_url=unsub_url)
+            if subject:
+                tasks.append(send_email(sub.email, subject, html, plain))
+
+        if not tasks:
+            logger.info("Outbreak warning job: alerts found but no opted-in recipients.")
+            return
+
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        sent = sum(1 for r in results if r is True)
+        logger.info(
+            "Outbreak warnings sent: %d/%d emails delivered (%d registered, %d newsletter)",
+            sent, len(tasks), len(registered), len(guests),
+        )
+    except Exception as exc:
+        logger.error("Outbreak warning job failed: %s", exc, exc_info=True)
+    finally:
+        db.close()
+
+
 async def _run_model_update_check() -> None:
     """Check Hugging Face for updated model artefacts and hot-swap any that changed."""
     from app.ml.model_store import check_and_update_models
@@ -198,6 +254,14 @@ def _setup_scheduler() -> None:
             CronTrigger(day=1, hour=8, minute=0),
             id="monthly_digest",
             name="Monthly Health Digest",
+            replace_existing=True,
+        )
+
+        scheduler.add_job(
+            _run_outbreak_alerts,
+            CronTrigger(hour=8, minute=30),
+            id="daily_outbreak_warnings",
+            name="Daily Outbreak Warning Emails",
             replace_existing=True,
         )
 

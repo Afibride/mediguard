@@ -11,7 +11,7 @@ import {
   Plus, MessageSquare, Trash2, X,
   PanelLeftClose, PanelLeftOpen, Share2, Clock,
   ThumbsUp, ThumbsDown, ImagePlus, Loader2, MapPin,
-  HelpCircle, ChevronDown, Baby, CornerUpLeft
+  HelpCircle, ChevronDown, Baby, CornerUpLeft, Activity
 } from 'lucide-react';
 import { useAuth } from '@/components/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -190,6 +190,12 @@ function MarkdownMessage({ content }) {
     </div>
   );
 }
+
+const SYMPTOM_CHECKER_NUDGE =
+  "For more accurate results when testing symptoms, please use MediGuard's Symptom Checker. It asks structured questions and compares your symptoms more carefully than chat.";
+
+const isSymptomTestingRequest = (text) =>
+  /\b(symptoms?|symptom checker|diagnos(?:e|is|ing)?|what disease|what illness|what do i have|check me|test me|i have|i feel|fever|headache|cough|pain|vomit|diarrh(?:ea|e?a)|rash|malaria|typhoid|cholera|dizzy|nausea|sore throat|stomach|chest)\b/i.test(text);
 
 const ChatAI = () => {
   const { user } = useAuth();
@@ -506,7 +512,12 @@ const ChatAI = () => {
         ...(freshLocation ? { user_lat: freshLocation.lat, user_lng: freshLocation.lng } : {}),
         child_mode: childMode,
       });
-      const fullAnswer = res.data.answer || '';
+      const rawAnswer = res.data.answer || '';
+      const shouldNudgeSymptomChecker = isSymptomTestingRequest(textToSend)
+        && !rawAnswer.toLowerCase().includes('symptom checker');
+      const fullAnswer = shouldNudgeSymptomChecker
+        ? `${rawAnswer}\n\n${SYMPTOM_CHECKER_NUDGE}`
+        : rawAnswer;
       const aiMsgObj = {
         role: 'assistant',
         content: '',
@@ -1322,6 +1333,16 @@ const ChatAI = () => {
                   <span>{t('chat_location_hint')}</span>
                 </div>
               )}
+
+              <div className="mb-2 flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/5 px-3 py-2 text-[11px] sm:text-xs text-muted-foreground">
+                <Activity className="h-3.5 w-3.5 text-primary shrink-0" />
+                <span className="flex-1 min-w-0">
+                  Testing symptoms in chat? Use the Symptom Checker for more accurate structured results.
+                </span>
+                <Link to="/symptom-checker" className="font-semibold text-primary hover:underline shrink-0">
+                  Open
+                </Link>
+              </div>
 
               {/* Hidden file input */}
               <input
