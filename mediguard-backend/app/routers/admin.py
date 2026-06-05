@@ -25,7 +25,7 @@ from app.db.models import (
 )
 from app.db.session import SessionLocal
 from app.utils.auth import create_access_token, hash_password, verify_password
-from app.utils.dependencies import get_current_user
+from app.utils.dependencies import require_admin
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -45,12 +45,6 @@ def get_db():
 # ---------------------------------------------------------------------------
 # Admin guard — all admin endpoints pass through this
 # ---------------------------------------------------------------------------
-
-def require_admin(current_user: User = Depends(get_current_user)):
-    if not current_user.is_admin:
-        raise HTTPException(status_code=403, detail="Admin access required")
-    return current_user
-
 
 # ---------------------------------------------------------------------------
 # Schemas

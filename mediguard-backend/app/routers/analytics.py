@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from app.data import DISEASES
 from app.db.models import ChatFeedback, Disease, NewsletterSubscriber, PredictionFeedback, PredictionLog, User
 from app.db.session import get_db
-from app.utils.dependencies import get_current_user
+from app.utils.dependencies import require_admin
 from app.utils.email import is_rainy_season, monthly_digest_email, outbreak_alert_email, send_email
 
 router = APIRouter()
@@ -144,7 +144,7 @@ def summary(db: Session = Depends(get_db)):
 def send_outbreak_alerts(
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
-    _user: User = Depends(get_current_user),
+    _user: User = Depends(require_admin),
 ):
     alerts = _compute_outbreak_alerts(db)
     if not alerts:
@@ -199,7 +199,7 @@ def send_outbreak_alerts(
 def send_monthly_digest(
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
-    _user: User = Depends(get_current_user),
+    _user: User = Depends(require_admin),
 ):
     month_start = datetime.utcnow().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     rows = (

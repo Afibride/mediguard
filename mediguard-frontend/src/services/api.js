@@ -95,7 +95,6 @@ export const getTopDiseases = () => request('/analytics/top-diseases');
 export const getHeatmap = () => request('/analytics/heatmap');
 export const getAnalyticsSummary = () => request('/analytics/summary');
 export const getOutbreakAlerts = () => request('/analytics/outbreak-alerts');
-export const sendOutbreakAlerts = () => request('/analytics/send-outbreak-alerts', { method: 'POST' });
 export const getAgeDistribution = () => request('/analytics/age-distribution');
 
 export const updateNotificationPrefs = (data) =>

@@ -11,12 +11,10 @@ import {
 import {
   TrendingUp, Users, Activity, AlertCircle, ShieldCheck, MapPinned, Database,
   AlertTriangle, Bell, Shield, Droplets, Wind, Thermometer, Bug, ChevronDown, ChevronUp,
-  Info, Loader2, Send,
+  Info, Loader2,
 } from 'lucide-react';
 import { diseases } from '@/data/diseases';
-import { getAgeDistribution, getAnalyticsSummary, getDiseases, getHeatmap, getTopDiseases, getTrends, sendOutbreakAlerts } from '@/services/api';
-import { useAuth } from '@/components/AuthContext';
-import { useToast } from '@/hooks/use-toast';
+import { getAgeDistribution, getAnalyticsSummary, getDiseases, getHeatmap, getTopDiseases, getTrends } from '@/services/api';
 
 // ─── Seasonal fallback data (Bamenda documented patterns) ────────────────────
 const SEASONAL_FALLBACK = [
@@ -186,9 +184,6 @@ const AutoScrollStrip = ({ children, className = '', innerClassName = '' }) => {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 const TrendsDashboard = () => {
-  const { user } = useAuth();
-  const { toast } = useToast();
-  const [sendingAlerts, setSendingAlerts] = useState(false);
   const [diseaseRows, setDiseaseRows] = useState(diseases);
   const [summary, setSummary] = useState({
     total_predictions: 0,
@@ -462,33 +457,6 @@ const TrendsDashboard = () => {
                           Based on current screening patterns — not a confirmed outbreak declaration.
                         </CardDescription>
                       </div>
-                      {user && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="border-orange-400 text-orange-700 hover:bg-orange-100 dark:text-orange-300 shrink-0"
-                          disabled={sendingAlerts}
-                          onClick={async () => {
-                            setSendingAlerts(true);
-                            try {
-                              const res = await sendOutbreakAlerts();
-                              toast({
-                                title: 'Alert emails sent',
-                                description: res.data.message,
-                              });
-                            } catch {
-                              toast({ variant: 'destructive', title: 'Send failed', description: 'Could not send alert emails. Check SMTP settings.' });
-                            } finally {
-                              setSendingAlerts(false);
-                            }
-                          }}
-                        >
-                          {sendingAlerts
-                            ? <><Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />Sending…</>
-                            : <><Send className="h-3.5 w-3.5 mr-1.5" />Notify Subscribers</>
-                          }
-                        </Button>
-                      )}
                     </div>
                   </CardHeader>
                   <CardContent>
