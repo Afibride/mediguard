@@ -201,6 +201,12 @@ const PredictionResults = () => {
   const itemVariants = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
 
   const displayedPredictions = showAllConditions ? predictions : predictions.slice(0, 3);
+  const buildAiDiscussionPrompt = (disease) => {
+    const matched = disease.matched_symptoms?.length
+      ? ` My result matched: ${disease.matched_symptoms.join(', ')}.`
+      : '';
+    return `Explain my MediGuard assessment result for ${disease.name}. Please cover what it means, practical home care steps, warning signs, and when I should seek medical care.${isPregnant ? ' I am pregnant.' : ''}${matched}`;
+  };
 
   return (
     <>
@@ -218,7 +224,7 @@ const PredictionResults = () => {
               <ArrowLeft className="mr-2 h-4 w-4" />New Diagnosis
             </Button>
             <div className="flex gap-2 flex-wrap">
-              <SpeakButton text={buildReadAloudText()} label="Read Aloud" size="md" />
+              <SpeakButton text={buildReadAloudText()} label="Read Aloud" size="md" showSpeed />
               <Button variant="outline" onClick={handlePrint} className="shadow-sm">
                 <Printer className="mr-2 h-4 w-4" />Download PDF
               </Button>
@@ -549,7 +555,7 @@ const PredictionResults = () => {
                               <Button
                                 className="flex-1 sm:flex-none bg-secondary hover:bg-secondary/90 text-white"
                                 onClick={() => navigate('/chat-ai', {
-                                  state: { initialMessage: `I received a diagnosis assessment suggesting ${disease.name} as a match. ${isPregnant ? 'I am pregnant. ' : ''}Can you explain home care steps and tell me more?` }
+                                  state: { initialMessage: buildAiDiscussionPrompt(disease) }
                                 })}
                               >
                                 <MessageCircle className="mr-2 h-4 w-4" />Discuss with AI

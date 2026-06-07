@@ -12,7 +12,7 @@
  *   - Markdown / HTML stripping before speaking
  *   - Sentence-level chunking so long texts never get cut off mid-word
  *   - Queue-based chunked playback with natural inter-sentence pause
- *   - Rate 0.86 / Pitch 0.94 — warm, deliberate, unhurried delivery
+ *   - Adjustable rate / Pitch 0.94 — warm, deliberate delivery
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -23,6 +23,7 @@ const supported =
 const PREFERRED_LANGS = [
   'en-NG', 'en-ZA', 'en-GH', 'en-KE', 'en-TZ', 'en-UG', 'en-CM', 'en-GB',
 ];
+const DEFAULT_SPEECH_RATE = 0.92;
 
 // ── Text preprocessing ────────────────────────────────────────────────────────
 
@@ -130,6 +131,7 @@ export function useSpeech() {
   const queueRef   = useRef([]);     // pending sentence chunks
   const activeRef  = useRef(false);  // true while playback loop is running
   const cancelRef  = useRef(false);  // set to true on stop()
+  const rateRef    = useRef(DEFAULT_SPEECH_RATE);
 
   // Pre-load voices as soon as they're available (async in most browsers)
   useEffect(() => {
@@ -167,8 +169,8 @@ export function useSpeech() {
       utt.lang = langRef.current || 'en-NG';
     }
 
-    // Warm, slow, deliberate delivery that gives punctuation room to breathe.
-    utt.rate  = 0.72;
+    // Warm, deliberate delivery that still lets users increase playback speed.
+    utt.rate  = rateRef.current;
     utt.pitch = 0.94;
 
     utt.onstart = () => setSpeaking(true);
@@ -196,7 +198,7 @@ export function useSpeech() {
 
   // ── Public API ──────────────────────────────────────────────────────────────
 
-  const speak = useCallback((rawText, preferredLang = 'en-NG') => {
+  const speak = useCallback((rawText, preferredLang = 'en-NG', options = {}) => {
     if (!supported || !rawText) return;
 
     // Stop any current playback
@@ -210,6 +212,7 @@ export function useSpeech() {
 
     queueRef.current  = chunks;
     langRef.current = preferredLang || 'en-NG';
+    rateRef.current = Number.isFinite(options.rate) ? options.rate : DEFAULT_SPEECH_RATE;
     cancelRef.current = false;
     activeRef.current = true;
 
