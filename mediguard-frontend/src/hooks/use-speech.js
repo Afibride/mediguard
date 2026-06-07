@@ -198,6 +198,12 @@ export function useSpeech() {
 
   // ── Public API ──────────────────────────────────────────────────────────────
 
+  const setRate = useCallback((rate) => {
+    if (Number.isFinite(rate)) {
+      rateRef.current = rate;
+    }
+  }, []);
+
   const speak = useCallback((rawText, preferredLang = 'en-NG', options = {}) => {
     if (!supported || !rawText) return;
 
@@ -228,5 +234,5 @@ export function useSpeech() {
     activeRef.current = false;
   }, []);
 
-  return { speak, stop, speaking, supported };
+  return { speak, stop, speaking, supported, setRate };
 }

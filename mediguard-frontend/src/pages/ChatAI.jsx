@@ -194,8 +194,13 @@ function MarkdownMessage({ content }) {
 const SYMPTOM_CHECKER_NUDGE =
   "For more accurate results when testing symptoms, please use MediGuard's Symptom Checker. It asks structured questions and compares your symptoms more carefully than chat.";
 
+const isAssessmentDiscussionRequest = (text) =>
+  /\b(explain|discuss|tell me more about).*\b(mediguard\s+)?assessment\s+result\b/i.test(text)
+  || /\bmy result matched\b/i.test(text);
+
 const isSymptomTestingRequest = (text) =>
-  /\b(symptoms?|symptom checker|diagnos(?:e|is|ing)?|what disease|what illness|what do i have|check me|test me|i have|i feel|fever|headache|cough|pain|vomit|diarrh(?:ea|e?a)|rash|malaria|typhoid|cholera|dizzy|nausea|sore throat|stomach|chest)\b/i.test(text);
+  !isAssessmentDiscussionRequest(text)
+  && /\b(symptoms?|symptom checker|diagnos(?:e|is|ing)?|what disease|what illness|what do i have|check me|test me|i have|i feel|fever|headache|cough|pain|vomit|diarrh(?:ea|e?a)|rash|malaria|typhoid|cholera|dizzy|nausea|sore throat|stomach|chest)\b/i.test(text);
 
 const ChatAI = () => {
   const { user } = useAuth();

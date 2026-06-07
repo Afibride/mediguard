@@ -10,7 +10,7 @@
  *   size      — 'sm' | 'md' (default 'md')
  *   className — extra CSS classes
  *   label     — optional visible label next to the icon
- *   showSpeed — show playback speed selector
+ *   showSpeed — show compact playback speed cycle button
  */
 import React, { useState } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
@@ -26,7 +26,7 @@ const SPEED_OPTIONS = [
 ];
 
 export default function SpeakButton({ text, lang, size = 'md', className = '', label, showSpeed = false }) {
-  const { speak, stop, speaking, supported } = useSpeech();
+  const { speak, stop, speaking, supported, setRate } = useSpeech();
   const { lang: appLang } = useLanguage();
   const [speed, setSpeed] = useState(() => {
     const stored = Number(localStorage.getItem('mg_speech_speed'));
@@ -40,14 +40,12 @@ export default function SpeakButton({ text, lang, size = 'md', className = '', l
     ? { btn: 'h-7 w-7', icon: 'h-3.5 w-3.5', ring: 'h-9 w-9' }
     : { btn: 'h-9 w-9', icon: 'h-4 w-4',   ring: 'h-11 w-11' };
 
-  const handleSpeedChange = (event) => {
-    const nextSpeed = Number(event.target.value);
+  const handleSpeedClick = () => {
+    const currentIndex = SPEED_OPTIONS.findIndex(option => option.value === speed);
+    const nextSpeed = SPEED_OPTIONS[(currentIndex + 1) % SPEED_OPTIONS.length].value;
     setSpeed(nextSpeed);
+    setRate(nextSpeed);
     localStorage.setItem('mg_speech_speed', String(nextSpeed));
-    if (speaking) {
-      stop();
-      window.setTimeout(() => speak(text, resolvedLang, { rate: nextSpeed }), 80);
-    }
   };
 
   const handleClick = () => speaking ? stop() : speak(text, resolvedLang, { rate: speed });
@@ -114,17 +112,15 @@ export default function SpeakButton({ text, lang, size = 'md', className = '', l
       </button>
 
       {showSpeed && (
-        <select
-          value={speed}
-          onChange={handleSpeedChange}
-          title="Audio speed"
-          aria-label="Audio speed"
-          className="relative z-10 h-8 rounded-md border border-primary/30 bg-background px-1.5 text-xs font-medium text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+        <button
+          type="button"
+          onClick={handleSpeedClick}
+          title="Increase audio speed"
+          aria-label={`Audio speed ${speed}x. Click to increase speed.`}
+          className="relative z-10 inline-flex h-8 min-w-10 items-center justify-center rounded-full border border-primary/30 bg-background px-2 text-xs font-semibold text-foreground shadow-sm transition-colors hover:border-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary/30"
         >
-          {SPEED_OPTIONS.map(option => (
-            <option key={option.value} value={option.value}>{option.label}</option>
-          ))}
-        </select>
+          {SPEED_OPTIONS.find(option => option.value === speed)?.label || '1x'}
+        </button>
       )}
 
       {/* Keyframes injected once */}

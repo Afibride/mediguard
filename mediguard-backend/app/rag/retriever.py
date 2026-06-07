@@ -104,6 +104,8 @@ DISEASE_COMMON_NAMES: dict[str, str] = {
 def _disease_display_name(name: str) -> str:
     """Return 'Official Name (Common Name)' or just 'Official Name' if no alias."""
     common = DISEASE_COMMON_NAMES.get(name)
+    if common and common.lower() in name.lower():
+        return name
     return f"{name} ({common})" if common else name
 
 
@@ -1242,6 +1244,98 @@ def _database_disease_profile(disease_name: str) -> dict | None:
             "source": "curated",
         }
     return None
+
+
+def _extract_assessment_matched_items(query: str) -> list[str]:
+    match = re.search(r"\b(?:my\s+result\s+matched|matched)\s*:\s*(.+)", query, re.I | re.S)
+    if not match:
+        return []
+    raw = re.split(r"[.!?]\s", match.group(1).strip(), maxsplit=1)[0]
+    return [item.strip(" .") for item in raw.split(",") if item.strip(" .")]
+
+
+def _assessment_result_explanation_response(query: str) -> dict | None:
+    text = query.lower()
+    if not any(term in text for term in [
+        "assessment result",
+        "assessment suggesting",
+        "assessment match",
+        "my result matched",
+        "explain my mediguard assessment",
+    ]):
+        return None
+
+    disease = _detect_disease(query)
+    if not disease:
+        return None
+
+    profile = _pinecone_disease_profile(disease["name"])
+    data_source = "pinecone" if profile else None
+    if not profile:
+        profile = _database_disease_profile(disease["name"])
+        if not profile:
+            return None
+        data_source = profile.get("source", "local_db")
+
+    name = profile.get("disease") or disease["name"]
+    display_name = _disease_display_name(name)
+    matched_items = _extract_assessment_matched_items(query)
+    treatment = profile.get("treatment") or disease.get("treatment") or ""
+    prevention = profile.get("prevention") or disease.get("prevention") or []
+    if isinstance(prevention, str):
+        prevention = [item.strip() for item in re.split(r"[;\n]", prevention) if item.strip()]
+
+    home_care = [
+        "Drink enough safe fluids and eat fibre-rich foods such as vegetables, fruits, beans, and whole grains to reduce constipation.",
+        "Avoid straining or sitting on the toilet for a long time; go when you feel the urge.",
+        "Use warm sitz baths for 10-15 minutes, especially after bowel movements, to ease pain and itching.",
+        "Keep the anal area clean and gently dry; avoid harsh soaps, perfumed wipes, or vigorous rubbing.",
+        "Use stool-softening measures and simple pain relief only with guidance from a pharmacist or clinician, especially if you are pregnant or have other conditions.",
+    ]
+    if treatment:
+        home_care.insert(0, treatment)
+
+    warning_signs = [
+        "heavy rectal bleeding, black/tarry stool, dizziness, fainting, or weakness",
+        "severe or worsening anal pain, a hard painful lump, or pain with fever",
+        "pus, spreading redness, or signs of infection",
+        "unexplained weight loss, persistent change in bowel habits, or blood mixed through the stool",
+        "bleeding that continues, returns often, or happens for the first time without a clinician confirming the cause",
+    ]
+
+    lines = [
+        f"Your MediGuard assessment suggests **{display_name}** as a possible match.",
+    ]
+    if profile.get("description"):
+        lines.append(profile["description"])
+    else:
+        lines.append(
+            "Hemorrhoids are swollen veins around the anus or lower rectum. They can cause bleeding, itching, swelling, and pain during bowel movements."
+        )
+    if matched_items:
+        lines.append(f"\n**Why it matched:** {', '.join(matched_items)} can fit with {display_name}, especially when constipation or straining is present.")
+
+    lines.append("\n**Practical home care:**")
+    lines.extend(f"- {item}" for item in home_care[:6])
+    if prevention:
+        lines.append("\n**Prevention:**")
+        lines.extend(f"- {item}" for item in prevention[:5])
+
+    lines.append("\n**Warning signs - seek urgent care if you notice:**")
+    lines.extend(f"- {item}" for item in warning_signs)
+    lines.append(
+        "\n**When to see a health professional:** arrange a clinic visit if symptoms last more than a few days, keep recurring, bleeding is present, pain is significant, or you are unsure this is hemorrhoids."
+    )
+    lines.append("This is education from your MediGuard result, not a confirmed diagnosis.")
+
+    return {
+        "answer": "\n".join(lines),
+        "sources": [name],
+        "disclaimer": DISCLAIMER,
+        "mode": "assessment_result_explanation",
+        "data_source": data_source,
+        "follow_up_questions": [],
+    }
 
 
 def _disease_topic_response(query: str) -> dict | None:
@@ -3524,6 +3618,10 @@ def generate_answer(
     facilities = _facilities_response(query, user_lat=user_lat, user_lng=user_lng)
     if facilities:
         return facilities
+
+    assessment_explanation = _assessment_result_explanation_response(query)
+    if assessment_explanation:
+        return assessment_explanation
 
     platform = _platform_response(query)
     if platform:
