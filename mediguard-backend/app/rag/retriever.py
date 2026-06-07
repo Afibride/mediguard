@@ -1254,6 +1254,80 @@ def _extract_assessment_matched_items(query: str) -> list[str]:
     return [item.strip(" .") for item in raw.split(",") if item.strip(" .")]
 
 
+def _assessment_home_care_items(
+    disease_name: str,
+    matched_items: list[str],
+    treatment: str = "",
+) -> list[str]:
+    name = disease_name.lower()
+    matched_text = " ".join(matched_items).lower()
+    items = []
+    if treatment:
+        items.append(treatment)
+
+    if "hemorrhoid" in name or "piles" in name:
+        items.extend([
+            "Drink enough safe fluids and eat fibre-rich foods such as vegetables, fruits, beans, and whole grains to reduce constipation.",
+            "Avoid straining or sitting on the toilet for a long time; go when you feel the urge.",
+            "Use warm sitz baths for 10-15 minutes, especially after bowel movements, to ease pain and itching.",
+            "Keep the anal area clean and gently dry; avoid harsh soaps, perfumed wipes, or vigorous rubbing.",
+        ])
+    else:
+        items.extend([
+            "Rest and avoid heavy activity while symptoms are active.",
+            "Drink safe fluids regularly; use oral rehydration solution if vomiting, diarrhea, or dehydration is present.",
+            "Eat light meals as tolerated and avoid alcohol or self-medicating with antibiotics, antimalarials, or strong pain medicines without a qualified clinician.",
+            "Track temperature, symptom start date, severity, and anything that is getting worse.",
+        ])
+        if any(term in matched_text for term in ["fever", "chills", "sweating", "headache", "muscle aches"]):
+            items.append("For fever, keep cool, hydrate, and arrange appropriate testing when malaria, typhoid, dengue, or another infection is possible.")
+        if any(term in matched_text for term in ["nausea", "vomiting", "diarrhea", "diarrhoea"]):
+            items.append("For nausea, vomiting, or diarrhea, take small frequent sips of fluid and seek care if you cannot keep fluids down.")
+        if any(term in matched_text for term in ["cough", "shortness of breath", "chest pain", "wheezing"]):
+            items.append("For breathing symptoms, avoid smoke/dust and seek urgent care for shortness of breath, chest pain, blue lips, or worsening wheeze.")
+        if any(term in matched_text for term in ["painful urination", "genital", "vaginal", "discharge", "lower abdominal pain"]):
+            items.append("For urinary or sexual-health symptoms, avoid sex or use condoms until a clinician confirms the cause and treatment is completed.")
+        if "malaria" in name:
+            items.append("Malaria needs confirmatory testing and prompt proven treatment; do not rely on home remedies alone.")
+        if any(term in name for term in ["chlamydia", "gonorrhea", "syphilis", "herpes", "trichomoniasis"]):
+            items.append("Sexual partners may also need testing or treatment; do not share medicines or delay clinic care.")
+
+    deduped = []
+    seen = set()
+    for item in items:
+        key = item.strip().lower()
+        if key and key not in seen:
+            seen.add(key)
+            deduped.append(item)
+    return deduped[:7]
+
+
+def _assessment_warning_signs(disease_name: str, matched_items: list[str]) -> list[str]:
+    name = disease_name.lower()
+    matched_text = " ".join(matched_items).lower()
+    if "hemorrhoid" in name or "piles" in name:
+        return [
+            "heavy rectal bleeding, black/tarry stool, dizziness, fainting, or weakness",
+            "severe or worsening anal pain, a hard painful lump, or pain with fever",
+            "pus, spreading redness, or signs of infection",
+            "unexplained weight loss, persistent change in bowel habits, or blood mixed through the stool",
+            "bleeding that continues, returns often, or happens for the first time without a clinician confirming the cause",
+        ]
+
+    signs = [
+        "symptoms that are severe, rapidly worsening, or lasting longer than expected",
+        "confusion, fainting, severe weakness, seizure, stiff neck, or severe dehydration",
+        "breathing difficulty, chest pain, blue lips, or persistent high fever",
+    ]
+    if "malaria" in name or any(term in matched_text for term in ["fever", "chills", "sweating"]):
+        signs.append("fever with repeated vomiting, extreme sleepiness, yellow eyes, dark urine, convulsions, or inability to drink")
+    if any(term in matched_text for term in ["vomiting", "diarrhea", "diarrhoea"]):
+        signs.append("blood in stool/vomit, no urination, very dry mouth, sunken eyes, or inability to keep fluids down")
+    if any(term in matched_text for term in ["painful urination", "genital", "vaginal", "discharge", "lower abdominal pain"]):
+        signs.append("pelvic/lower abdominal pain, fever, pregnancy, testicular pain, genital sores, or symptoms after sexual exposure")
+    return signs[:6]
+
+
 def _assessment_result_explanation_response(query: str) -> dict | None:
     text = query.lower()
     if not any(term in text for term in [
@@ -1285,23 +1359,8 @@ def _assessment_result_explanation_response(query: str) -> dict | None:
     if isinstance(prevention, str):
         prevention = [item.strip() for item in re.split(r"[;\n]", prevention) if item.strip()]
 
-    home_care = [
-        "Drink enough safe fluids and eat fibre-rich foods such as vegetables, fruits, beans, and whole grains to reduce constipation.",
-        "Avoid straining or sitting on the toilet for a long time; go when you feel the urge.",
-        "Use warm sitz baths for 10-15 minutes, especially after bowel movements, to ease pain and itching.",
-        "Keep the anal area clean and gently dry; avoid harsh soaps, perfumed wipes, or vigorous rubbing.",
-        "Use stool-softening measures and simple pain relief only with guidance from a pharmacist or clinician, especially if you are pregnant or have other conditions.",
-    ]
-    if treatment:
-        home_care.insert(0, treatment)
-
-    warning_signs = [
-        "heavy rectal bleeding, black/tarry stool, dizziness, fainting, or weakness",
-        "severe or worsening anal pain, a hard painful lump, or pain with fever",
-        "pus, spreading redness, or signs of infection",
-        "unexplained weight loss, persistent change in bowel habits, or blood mixed through the stool",
-        "bleeding that continues, returns often, or happens for the first time without a clinician confirming the cause",
-    ]
+    home_care = _assessment_home_care_items(name, matched_items, treatment)
+    warning_signs = _assessment_warning_signs(name, matched_items)
 
     lines = [
         f"Your MediGuard assessment suggests **{display_name}** as a possible match.",
@@ -1313,7 +1372,7 @@ def _assessment_result_explanation_response(query: str) -> dict | None:
             "Hemorrhoids are swollen veins around the anus or lower rectum. They can cause bleeding, itching, swelling, and pain during bowel movements."
         )
     if matched_items:
-        lines.append(f"\n**Why it matched:** {', '.join(matched_items)} can fit with {display_name}, especially when constipation or straining is present.")
+        lines.append(f"\n**Why it matched:** {', '.join(matched_items)} can fit with {display_name}.")
 
     lines.append("\n**Practical home care:**")
     lines.extend(f"- {item}" for item in home_care[:6])
@@ -1324,7 +1383,7 @@ def _assessment_result_explanation_response(query: str) -> dict | None:
     lines.append("\n**Warning signs - seek urgent care if you notice:**")
     lines.extend(f"- {item}" for item in warning_signs)
     lines.append(
-        "\n**When to see a health professional:** arrange a clinic visit if symptoms last more than a few days, keep recurring, bleeding is present, pain is significant, or you are unsure this is hemorrhoids."
+        "\n**When to see a health professional:** arrange a clinic visit for confirmation if symptoms are persistent, recurring, worsening, severe, or you are unsure about the cause. Seek urgent care immediately for any warning sign above."
     )
     lines.append("This is education from your MediGuard result, not a confirmed diagnosis.")
 
@@ -3586,6 +3645,12 @@ def generate_answer(
     if conversational:
         return conversational
 
+    # Completed Symptom Checker results should be explained as results, not
+    # re-triaged as new symptom reports by pregnancy, STI, or symptom handlers.
+    assessment_explanation = _assessment_result_explanation_response(query)
+    if assessment_explanation:
+        return assessment_explanation
+
     # ── STI / Sexual health general queries ──────────────────────────────────
     sti_response = _sti_sexual_health_response(query)
     if sti_response:
@@ -3618,10 +3683,6 @@ def generate_answer(
     facilities = _facilities_response(query, user_lat=user_lat, user_lng=user_lng)
     if facilities:
         return facilities
-
-    assessment_explanation = _assessment_result_explanation_response(query)
-    if assessment_explanation:
-        return assessment_explanation
 
     platform = _platform_response(query)
     if platform:
