@@ -1150,7 +1150,7 @@ const ChatAI = () => {
                           {message.role === 'assistant' && !message.isCardPrompt && <SourceCitation sources={message.sources} />}
                           {message.role === 'assistant' && !message.isCardPrompt && (
                             <div className="mt-1 px-1">
-                              <SpeakButton text={message.content} size="sm" />
+                              <SpeakButton text={message.content} size="sm" showSpeed />
                             </div>
                           )}
                           {message.role === 'assistant' && message.id !== messages[0]?.id && !message.isCardPrompt && (

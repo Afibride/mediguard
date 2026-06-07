@@ -10,17 +10,28 @@
  *   size      — 'sm' | 'md' (default 'md')
  *   className — extra CSS classes
  *   label     — optional visible label next to the icon
+ *   showSpeed — show playback speed selector
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 import { useSpeech } from '@/hooks/use-speech';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const LANG_MAP = { en: 'en-NG', fr: 'fr-FR' };
+const SPEED_OPTIONS = [
+  { label: '0.75x', value: 0.75 },
+  { label: '1x', value: 1 },
+  { label: '1.25x', value: 1.25 },
+  { label: '1.5x', value: 1.5 },
+];
 
-export default function SpeakButton({ text, lang, size = 'md', className = '', label }) {
+export default function SpeakButton({ text, lang, size = 'md', className = '', label, showSpeed = false }) {
   const { speak, stop, speaking, supported } = useSpeech();
   const { lang: appLang } = useLanguage();
+  const [speed, setSpeed] = useState(() => {
+    const stored = Number(localStorage.getItem('mg_speech_speed'));
+    return SPEED_OPTIONS.some(option => option.value === stored) ? stored : 1;
+  });
 
   if (!supported) return null;
 
@@ -29,11 +40,21 @@ export default function SpeakButton({ text, lang, size = 'md', className = '', l
     ? { btn: 'h-7 w-7', icon: 'h-3.5 w-3.5', ring: 'h-9 w-9' }
     : { btn: 'h-9 w-9', icon: 'h-4 w-4',   ring: 'h-11 w-11' };
 
-  const handleClick = () => speaking ? stop() : speak(text, resolvedLang);
+  const handleSpeedChange = (event) => {
+    const nextSpeed = Number(event.target.value);
+    setSpeed(nextSpeed);
+    localStorage.setItem('mg_speech_speed', String(nextSpeed));
+    if (speaking) {
+      stop();
+      window.setTimeout(() => speak(text, resolvedLang, { rate: nextSpeed }), 80);
+    }
+  };
+
+  const handleClick = () => speaking ? stop() : speak(text, resolvedLang, { rate: speed });
 
   return (
     <span
-      className={`relative inline-flex items-center justify-center shrink-0 ${label ? '' : s.ring} ${className}`}
+      className={`relative inline-flex items-center justify-center shrink-0 gap-1.5 ${label || showSpeed ? '' : s.ring} ${className}`}
       style={{ isolation: 'isolate' }}
     >
       {/* Idle pulse ring — always visible so users see audio is available */}
@@ -91,6 +112,20 @@ export default function SpeakButton({ text, lang, size = 'md', className = '', l
           <span className="text-xs font-medium">{speaking ? 'Stop' : label}</span>
         )}
       </button>
+
+      {showSpeed && (
+        <select
+          value={speed}
+          onChange={handleSpeedChange}
+          title="Audio speed"
+          aria-label="Audio speed"
+          className="relative z-10 h-8 rounded-md border border-primary/30 bg-background px-1.5 text-xs font-medium text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+        >
+          {SPEED_OPTIONS.map(option => (
+            <option key={option.value} value={option.value}>{option.label}</option>
+          ))}
+        </select>
+      )}
 
       {/* Keyframes injected once */}
       <style>{`
