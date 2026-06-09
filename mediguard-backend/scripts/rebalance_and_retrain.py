@@ -81,6 +81,9 @@ MODELS_DIR.mkdir(parents=True, exist_ok=True)
 # Tunable thresholds
 TARGET_PER_CLASS_RAW   = 200   # min samples per class after augmentation (was 120)
 TARGET_PER_CLASS_SMOTE = 600   # samples per class after SMOTE in training (was 300)
+MAX_PER_CLASS_TRAIN    = 1200  # cap: no class can exceed 2× SMOTE target before training
+                               # prevents Malaria/TB/Hepatitis (1000-1800 rows) from
+                               # dominating even after class_weight='balanced'
 TEST_FRACTION          = 0.20
 MIN_TEST_SAMPLES       = 20
 
@@ -215,6 +218,22 @@ print(f"  Min class after SMOTE: {vc_after.min()}  |  Max: {vc_after.max()}")
 
 df_train_smote = pd.DataFrame(X_smote.astype(int), columns=symptoms)
 df_train_smote["disease"] = y_smote
+
+# Cap overrepresented classes so no class exceeds MAX_PER_CLASS_TRAIN.
+# Without this, Malaria/TB/Hepatitis A still appear at 1200-1500 rows
+# (their pre-SMOTE counts were already > TARGET_PER_CLASS_SMOTE) and
+# dominate training even with class_weight='balanced'.
+capped_pieces = []
+for disease, group in df_train_smote.groupby("disease"):
+    if len(group) > MAX_PER_CLASS_TRAIN:
+        group = group.sample(n=MAX_PER_CLASS_TRAIN, random_state=RANDOM_STATE)
+    capped_pieces.append(group)
+df_train_smote = pd.concat(capped_pieces, ignore_index=True).sample(
+    frac=1, random_state=RANDOM_STATE
+)
+vc_capped = df_train_smote["disease"].value_counts()
+print(f"  After cap ({MAX_PER_CLASS_TRAIN}/class): "
+      f"min={vc_capped.min()}  max={vc_capped.max()}  total={len(df_train_smote):,}")
 
 
 # ─── 5. Save balanced CSVs ───────────────────────────────────────────────────

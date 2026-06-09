@@ -15,7 +15,6 @@ class Settings(BaseSettings):
     symptoms_list: str = "data_pipeline/symptoms_list.json"
     model_download_enabled: bool = True
     model_random_forest_url: str | None = None
-    model_gradient_boosting_url: str | None = None
     model_decision_tree_url: str | None = None
     model_naive_bayes_url: str | None = None
     model_label_encoder_url: str | None = None

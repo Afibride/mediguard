@@ -5,41 +5,41 @@
                     Arthritis       1.00      0.92      0.96        50
                        Asthma       0.98      0.91      0.94        53
                    Chickenpox       1.00      1.00      1.00        49
-                      Cholera       0.88      0.90      0.89        40
+                      Cholera       0.83      0.85      0.84        40
                   Common Cold       1.00      1.00      1.00        50
-               Conjunctivitis       0.95      0.95      0.95        40
+               Conjunctivitis       0.97      0.95      0.96        40
                  Cystitis UTI       0.72      1.00      0.83        48
                  Dengue Fever       1.00      0.98      0.99        49
-            Diabetes Mellitus       0.99      0.95      0.97       163
-                       Eczema       0.98      0.92      0.95        51
-                     Epilepsy       0.97      0.95      0.96        40
+            Diabetes Mellitus       0.99      0.96      0.97       163
+                       Eczema       1.00      0.92      0.96        51
+                     Epilepsy       1.00      0.95      0.97        40
               Gastroenteritis       1.00      0.92      0.96        50
-                    Gonorrhea       0.97      0.97      0.97        40
+                    Gonorrhea       1.00      0.97      0.99        40
                      HIV AIDS       0.98      0.98      0.98        49
                 Heart Failure       1.00      0.98      0.99        49
-Helicobacteriosis PepticUlcer       0.96      1.00      0.98        48
-          Hemorrhoids (Piles)       0.93      0.97      0.95        40
+Helicobacteriosis PepticUlcer       0.94      1.00      0.97        48
+          Hemorrhoids (Piles)       0.95      0.97      0.96        40
                   Hepatitis A       0.99      0.99      0.99       194
                   Hepatitis B       1.00      0.99      1.00       146
                 Herpes Zoster       0.97      0.90      0.94        40
-                 Hypertension       0.83      0.96      0.89        50
-               Hypothyroidism       0.97      0.98      0.98       100
-       Iron Deficiency Anemia       0.88      0.88      0.88        40
-                Kidney Stones       0.88      0.95      0.92        40
-                      Malaria       0.99      0.98      0.98       373
+                 Hypertension       0.84      0.96      0.90        50
+               Hypothyroidism       0.95      0.98      0.97       100
+       Iron Deficiency Anemia       0.90      0.90      0.90        40
+                Kidney Stones       0.89      0.97      0.93        40
+                      Malaria       0.99      0.97      0.98       373
                       Measles       0.93      1.00      0.96        40
-                   Meningitis       0.95      0.88      0.91        40
+                   Meningitis       0.92      0.90      0.91        40
                      Migraine       1.00      0.98      0.99        50
                         Mumps       0.93      1.00      0.96        40
-                    Pneumonia       0.94      0.98      0.96        51
+                    Pneumonia       0.93      0.98      0.95        51
                        Rabies       1.00      0.97      0.99        40
                       Rubella       1.00      0.97      0.99        40
                    Septicemia       0.82      0.93      0.87        40
-                    Sinusitis       0.91      0.80      0.85        40
+                    Sinusitis       0.89      0.80      0.84        40
                  Skin Abscess       1.00      0.98      0.99        48
         Skin Fungal Infection       1.00      1.00      1.00        49
-                       Stroke       0.89      0.97      0.93        40
-                      Tetanus       1.00      1.00      1.00        40
+                       Stroke       0.91      0.97      0.94        40
+                      Tetanus       1.00      0.97      0.99        40
                   Tonsillitis       0.97      0.95      0.96        40
                  Tuberculosis       1.00      0.97      0.99       249
                 Typhoid Fever       1.00      0.98      0.99        49

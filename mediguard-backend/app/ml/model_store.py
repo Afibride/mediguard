@@ -35,16 +35,19 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 MODEL_TARGETS: dict[str, tuple[str, Path]] = {
-    "random_forest":      ("model_random_forest_url",      Path("models/random_forest.pkl")),
-    "gradient_boosting":  ("model_gradient_boosting_url",  Path("models/gradient_boosting.pkl")),
-    "decision_tree":      ("model_decision_tree_url",      Path("models/decision_tree.pkl")),
-    "naive_bayes":        ("model_naive_bayes_url",        Path("models/naive_bayes.pkl")),
-    "label_encoder":      ("model_label_encoder_url",      Path("models/label_encoder.pkl")),
-    "model_symptoms":     ("model_symptoms_list_url",      Path("models/symptoms_list.json")),
+    "random_forest":  ("model_random_forest_url",   Path("models/random_forest.pkl")),
+    "decision_tree":  ("model_decision_tree_url",   Path("models/decision_tree.pkl")),
+    "naive_bayes":    ("model_naive_bayes_url",     Path("models/naive_bayes.pkl")),
+    "label_encoder":  ("model_label_encoder_url",  Path("models/label_encoder.pkl")),
+    "model_symptoms": ("model_symptoms_list_url",  Path("models/symptoms_list.json")),
     # Cameroon herbs remedy lookup — downloaded alongside models so the
     # predict endpoint can suggest traditional remedies without a restart.
-    "herbs_remedies":     ("model_herbs_remedies_url",     Path("data/herbs_remedies.json")),
+    "herbs_remedies": ("model_herbs_remedies_url", Path("data/herbs_remedies.json")),
 }
+
+# gradient_boosting.pkl lives in the same HF repo as random_forest.pkl.
+# Its URL is derived automatically — no extra env variable needed.
+_GB_DEST = Path("models/gradient_boosting.pkl")
 
 # The version manifest is stored alongside the model files on HF.
 # Its URL is derived by replacing the filename in any model URL.
@@ -212,6 +215,29 @@ def ensure_model_files() -> dict[str, str]:
         except Exception as exc:
             logger.error("Failed to %s %s: %s", action, destination.name, exc)
             results[name] = f"failed: {exc}"
+
+    # gradient_boosting.pkl — URL is derived from MODEL_RANDOM_FOREST_URL by
+    # replacing the filename.  No separate env variable required.
+    rf_url = getattr(settings, "model_random_forest_url", None)
+    if rf_url:
+        gb_url = rf_url.rsplit("/", 1)[0] + "/gradient_boosting.pkl"
+        needs_gb = _file_needs_update(_GB_DEST, remote_version, _GB_DEST.name)
+        if needs_gb:
+            action = "updating" if _GB_DEST.exists() else "downloading"
+            logger.info("%s gradient_boosting.pkl (derived URL) ...", action)
+            try:
+                _download_file(
+                    gb_url,
+                    _GB_DEST,
+                    settings.model_download_timeout_seconds,
+                    settings.model_download_token,
+                )
+                results["gradient_boosting"] = "updated" if action == "updating" else "downloaded"
+            except Exception as exc:
+                logger.warning("Could not download gradient_boosting.pkl: %s", exc)
+                results["gradient_boosting"] = f"skipped: {exc}"
+        else:
+            results["gradient_boosting"] = "up_to_date"
 
     # Also keep local version.json in sync with remote
     if remote_version:

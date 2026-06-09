@@ -1,20 +1,20 @@
 {
-  "trained_at": "2026-06-09T15:38:24.304921+00:00",
+  "trained_at": "2026-06-09T15:58:59.164379+00:00",
   "files": {
     "random_forest.pkl": {
-      "sha256": "a820af5d61036018445bd43ef93e209bdd8f15bb906e70e555266518a11dd3f4",
-      "size_bytes": 20438264
+      "sha256": "b0e231ede15df4b77aace22dbe75ea573374229777be94a4139b6789aa8d05d6",
+      "size_bytes": 16754440
     },
     "gradient_boosting.pkl": {
-      "sha256": "a820af5d61036018445bd43ef93e209bdd8f15bb906e70e555266518a11dd3f4",
-      "size_bytes": 20438264
+      "sha256": "b0e231ede15df4b77aace22dbe75ea573374229777be94a4139b6789aa8d05d6",
+      "size_bytes": 16754440
     },
     "decision_tree.pkl": {
-      "sha256": "d4d693c63cfcfa27d7c15f6358b6a964d82146c02db12186f92e9a61ba69b0df",
-      "size_bytes": 794801
+      "sha256": "6cbc5d3b001d439f9cf3ea09a509463901df9c1bda20831a366f88bb6a4158c9",
+      "size_bytes": 845393
     },
     "naive_bayes.pkl": {
-      "sha256": "f5c63c359b9dca7816874ed08b3336e8fb1fab48911d3571137d610eb6e7d8e1",
+      "sha256": "b3ccb01bddc83584a0efff093ab08b475cafae0745e503d8eee347f74fb92152",
       "size_bytes": 110303
     },
     "label_encoder.pkl": {
