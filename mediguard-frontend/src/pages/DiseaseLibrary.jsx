@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Search, TrendingUp, AlertTriangle, BookOpen, Database, ShieldCheck } from 'lucide-react';
 import { diseases } from '@/data/diseases';
 import { getDiseases } from '@/services/api';
-import { getCommonName } from '@/data/layman';
+import { getCommonName, diseaseLabel } from '@/data/layman';
 import SeasonalBanner from '@/components/SeasonalBanner';
 
 const DiseaseLibrary = () => {
@@ -195,13 +195,8 @@ const DiseaseLibrary = () => {
                     <div className="flex items-start justify-between mb-2">
                       <div>
                         <div className="px-3 py-1 rounded-full text-sm font-semibold bg-primary/10 text-primary inline-block">
-                          {disease.name}
+                          {diseaseLabel(disease.name)}
                         </div>
-                        {getCommonName(disease.name) && (
-                          <p className="text-xs text-muted-foreground mt-1 pl-1">
-                            {getCommonName(disease.name)}
-                          </p>
-                        )}
                       </div>
                       {disease.severity.toLowerCase() === 'high' && (
                         <AlertTriangle className="h-5 w-5 text-red-600 flex-shrink-0 ml-2" />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { getCommonName } from '@/data/layman';
+import { diseaseLabel } from '@/data/layman';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -347,12 +347,7 @@ const PredictionResults = () => {
                             <Badge variant="destructive" className="text-xs"><AlertTriangle className="h-3 w-3 mr-1" />Pregnancy Warning</Badge>
                           )}
                         </div>
-                        <h2 className="text-xl md:text-2xl font-bold text-foreground">{disease.name}</h2>
-                        {getCommonName(disease.name) && (
-                          <p className="text-sm text-primary font-medium -mt-1">
-                            Also known as: {getCommonName(disease.name)}
-                          </p>
-                        )}
+                        <h2 className="text-xl md:text-2xl font-bold text-foreground">{diseaseLabel(disease.name)}</h2>
                         <p className="text-sm text-muted-foreground line-clamp-2 md:line-clamp-1 mt-1">{disease.description}</p>
 
                         {/* Matched symptoms explainability */}

@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, AlertCircle, Shield, Activity, Stethoscope, TrendingUp, HelpCircle, BookOpen, Pill, ClipboardList, ChevronDown } from 'lucide-react';
 import { diseases } from '@/data/diseases';
 import { getDiseaseDetail, getDiseases } from '@/services/api';
-import { getCommonName } from '@/data/layman';
+import { diseaseLabel } from '@/data/layman';
 
 const SymptomList = ({ symptoms, descriptions, diseaseName }) => {
   const [expanded, setExpanded] = useState(null);
@@ -170,12 +170,7 @@ const DiseaseDetail = () => {
           </div>
 
           <div className="mb-6">
-            <h1 className="text-3xl sm:text-4xl font-bold mb-1 text-balance">{disease.name}</h1>
-            {getCommonName(disease.name) && (
-              <p className="text-base text-primary font-medium mb-3">
-                Also known as: <span className="font-semibold">{getCommonName(disease.name)}</span>
-              </p>
-            )}
+            <h1 className="text-3xl sm:text-4xl font-bold mb-3 text-balance">{diseaseLabel(disease.name)}</h1>
             <div className="flex flex-wrap gap-3">
               <Badge variant="secondary" className="text-sm">
                 Category: {disease.category}

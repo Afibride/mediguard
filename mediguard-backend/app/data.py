@@ -92,6 +92,22 @@ CORE_SYMPTOMS = {
     "Hypothyroidism": ["Fatigue", "Weight gain", "Cold intolerance", "Constipation", "Dry skin", "Hair loss", "Muscle aches", "Dizziness", "Sleep disturbances", "Weakness"],
     # ── Global Respiratory ────────────────────────────────────────────────────
     "COVID-19": ["Fever", "Cough", "Shortness of breath", "Fatigue", "Muscle aches", "Headache", "Loss of taste", "Loss of smell", "Diarrhea", "Sore throat"],
+    # ── Endocrine (local: Goiter / Throat-swell) ──────────────────────────────
+    "Goiter": ["Neck pain", "Difficulty swallowing", "Hoarse voice", "Weight gain", "Weight loss", "Fatigue", "Cold intolerance", "Fast heartbeat"],
+    # ── Musculoskeletal / Neurological (local) ────────────────────────────────
+    "Sciatica": ["Back pain", "Numbness", "Weakness", "Difficulty walking", "Joint pain", "Muscle cramps"],
+    "Vertigo": ["Dizziness", "Loss of balance", "Nausea", "Vomiting", "Blurred vision", "Sweating", "Sensitivity to light"],
+    # ── Gastrointestinal (local) ──────────────────────────────────────────────
+    "Gastric Reflux GERD": ["Heartburn", "Burning stomach pain", "Sore throat", "Hoarse voice", "Difficulty swallowing", "Chest pain", "Bloating"],
+    "Severe Constipation": ["Constipation", "Abdominal pain", "Bloating", "Loss of appetite", "Pain during bowel movement"],
+    "Inguinal Hernia": ["Abdominal pain", "Lower abdominal pain", "Abdominal swelling", "Pain during bowel movement", "Weakness"],
+    # ── Parasitic / Worm infections (local) ───────────────────────────────────
+    "Hookworm": ["Abdominal pain", "Diarrhea", "Loss of appetite", "Pale skin", "Fatigue", "Itchy skin", "Weight loss"],
+    "Pinworm Infection": ["Anal itching", "Night itching", "Sleep disturbances", "Irritability", "Loss of appetite"],
+    # ── Reproductive (local) ──────────────────────────────────────────────────
+    "Uterine Fibroids": ["Pelvic pain", "Vaginal bleeding", "Lower abdominal pain", "Abdominal swelling", "Back pain", "Frequent urination"],
+    # ── Pediatric (local) ──────────────────────────────────────────────────────
+    "Infant Colic": ["Abdominal pain", "Irritability", "Sleep disturbances", "Excessive sweating"],
 }
 
 # ─── Cardinal (Key) Symptoms ─────────────────────────────────────────────────
@@ -285,6 +301,32 @@ CARDINAL_SYMPTOMS: dict[str, list[str]] = {
     "Hypothyroidism": ["Fatigue", "Weight gain", "Cold intolerance"],
     # COVID-19: loss of taste/smell are pathognomonic — without them it's indistinct from flu
     "COVID-19": ["Loss of taste", "Loss of smell"],
+
+    # ── Endocrine (local) ────────────────────────────────────────────────────
+    # Goiter: visible neck swelling — neck pain alone is too non-specific
+    "Goiter": ["Neck pain", "Difficulty swallowing"],
+
+    # ── Musculoskeletal / Neurological (local) ──────────────────────────────
+    # Sciatica: radiating back/leg pain is the defining feature
+    "Sciatica": ["Back pain"],
+    # Vertigo: a spinning sensation requires dizziness or balance loss
+    "Vertigo": ["Dizziness", "Loss of balance"],
+
+    # ── Gastrointestinal (local) ─────────────────────────────────────────────
+    # GERD: heartburn or burning stomach pain is required
+    "Gastric Reflux GERD": ["Heartburn", "Burning stomach pain"],
+    # Severe constipation must include constipation itself
+    "Severe Constipation": ["Constipation"],
+    # Inguinal hernia: visible/palpable abdominal swelling is cardinal
+    "Inguinal Hernia": ["Abdominal swelling"],
+
+    # ── Parasitic / Worm infections (local) ──────────────────────────────────
+    # Pinworm: night-time anal itching is pathognomonic
+    "Pinworm Infection": ["Anal itching", "Night itching"],
+
+    # ── Reproductive (local) ──────────────────────────────────────────────────
+    # Uterine fibroids: abnormal vaginal bleeding or pelvic pain required
+    "Uterine Fibroids": ["Vaginal bleeding", "Pelvic pain"],
 }
 
 CATEGORIES = {
@@ -360,6 +402,16 @@ CATEGORIES = {
     "Heart Failure": "Chronic",
     "Hypothyroidism": "Chronic",
     "COVID-19": "Viral",
+    "Goiter": "Chronic",
+    "Sciatica": "Musculoskeletal",
+    "Vertigo": "Neurological",
+    "Gastric Reflux GERD": "Gastrointestinal",
+    "Severe Constipation": "Gastrointestinal",
+    "Inguinal Hernia": "Gastrointestinal",
+    "Hookworm": "Parasitic",
+    "Pinworm Infection": "Parasitic",
+    "Uterine Fibroids": "Reproductive",
+    "Infant Colic": "Pediatric",
 }
 
 CURATED_DETAILS = {
@@ -833,6 +885,82 @@ CURATED_DETAILS = {
         "treatment": "Mild: rest, fluids, paracetamol for fever. Seek care if breathing difficulty, chest pain, confusion, persistent high fever, or unable to keep fluids down. Severe cases need oxygen and hospital care. Antivirals (nirmatrelvir/ritonavir, remdesivir) are used in specific high-risk patients as prescribed.",
         "prevention": ["Vaccination protects against severe disease", "Wear a mask in crowded indoor spaces", "Ventilate rooms well", "Wash hands regularly", "Isolate if sick to protect others", "Seek care promptly if breathing difficulty develops"],
         "severity": "High",
+    },
+    # ── Endocrine (local: Goiter / Throat-swell) ──────────────────────────────
+    "Goiter": {
+        "description": "An enlargement of the thyroid gland, seen as a swelling at the front of the neck (\"throat-swell\" / \"koko for neck\"). Common in iodine-deficient highland areas like the Bamenda North West Region. May or may not affect thyroid hormone levels.",
+        "causes": "Most often caused by iodine deficiency. Can also result from thyroid nodules, Hashimoto's thyroiditis, Graves' disease, or pregnancy.",
+        "treatment": "Treatment depends on the cause and size — iodine supplementation, thyroid hormone medication, or surgery for very large goitres that press on the windpipe or gullet. Needs clinical evaluation and thyroid function tests.",
+        "prevention": ["Use iodised salt consistently", "Eat iodine-rich foods (fish, eggs, dairy)", "Seek care for any visible neck swelling", "Screen during pregnancy in iodine-deficient areas"],
+        "severity": "Medium",
+    },
+    # ── Musculoskeletal / Neurological (local) ────────────────────────────────
+    "Sciatica": {
+        "description": "Pain that radiates along the path of the sciatic nerve, from the lower back down through the hip and leg — known locally as \"waist pain\". Usually affects only one side of the body.",
+        "causes": "Most often caused by a herniated/slipped disc, bone spur, or spinal narrowing pressing on the sciatic nerve. Heavy lifting, prolonged sitting, and poor posture are common contributing factors.",
+        "treatment": "Most cases improve with rest, gentle stretching, and over-the-counter pain relief. Persistent pain, leg weakness, or loss of bladder/bowel control needs urgent medical evaluation.",
+        "prevention": ["Maintain good posture when sitting and lifting", "Avoid prolonged sitting — take regular breaks", "Strengthen back and core muscles", "Use proper lifting technique (bend knees, not back)"],
+        "severity": "Medium",
+    },
+    "Vertigo": {
+        "description": "A spinning or whirling sensation as if the surroundings are moving — known locally as \"giddy-giddy\" or \"eye dey turn\". Often comes with nausea, vomiting, and unsteadiness.",
+        "causes": "Commonly caused by inner ear problems (such as benign positional vertigo, ear infection, or Meniere's disease), but can also result from low blood pressure, anaemia, or neurological conditions.",
+        "treatment": "Mild cases settle with rest and avoiding sudden head movements. Recurrent or severe vertigo, especially with hearing loss, weakness, or slurred speech, needs urgent medical evaluation.",
+        "prevention": ["Avoid sudden changes in head position", "Stay hydrated and treat anaemia", "Sit or lie down immediately when dizziness starts", "Seek care for vertigo with weakness, slurred speech, or hearing loss"],
+        "severity": "Medium",
+    },
+    # ── Gastrointestinal (local) ──────────────────────────────────────────────
+    "Gastric Reflux GERD": {
+        "description": "A condition where stomach acid flows back into the gullet, causing a burning sensation in the chest — known locally as \"fire for chest\" or heartburn. Often worse after meals or when lying down.",
+        "causes": "Caused by a weak valve between the stomach and gullet. Triggers include spicy or fatty foods, overeating, alcohol, smoking, obesity, and pregnancy.",
+        "treatment": "Managed with smaller meals, avoiding trigger foods, not lying down soon after eating, and antacid medication. Persistent symptoms, difficulty swallowing, or weight loss need medical evaluation.",
+        "prevention": ["Eat smaller, more frequent meals", "Avoid spicy, fatty, or acidic foods close to bedtime", "Avoid lying down for 2-3 hours after eating", "Limit alcohol and avoid smoking"],
+        "severity": "Medium",
+    },
+    "Severe Constipation": {
+        "description": "Difficulty passing stool, with infrequent, hard, or painful bowel movements — known locally as \"hard-shitt\" or \"belly lock\". Often comes with bloating and abdominal discomfort.",
+        "causes": "Common causes include low fibre intake, insufficient water, low physical activity, ignoring the urge to pass stool, certain medications, and underlying bowel conditions.",
+        "treatment": "Increase fibre and water intake, stay active, and respond promptly to the urge to pass stool. Persistent constipation, blood in stool, or severe abdominal pain needs medical evaluation.",
+        "prevention": ["Eat more fruits, vegetables, and whole grains", "Drink plenty of water daily", "Exercise regularly", "Do not ignore the urge to pass stool"],
+        "severity": "Medium",
+    },
+    "Inguinal Hernia": {
+        "description": "A bulge in the groin or lower abdomen caused by tissue pushing through a weak spot in the abdominal wall — known locally as \"belle-burst\" or hernia. The bulge may increase with coughing, straining, or standing.",
+        "causes": "Caused by a weakness in the abdominal wall combined with pressure from heavy lifting, chronic coughing, straining during bowel movements, pregnancy, or obesity.",
+        "treatment": "Most hernias require surgical repair, especially if they are painful, enlarging, or cannot be pushed back in. A hernia that becomes hard, painful, and cannot be reduced is a surgical emergency.",
+        "prevention": ["Avoid heavy lifting or use proper technique", "Treat chronic cough and constipation promptly", "Maintain a healthy weight", "Seek urgent care if a hernia becomes painful, hard, or discoloured"],
+        "severity": "Medium",
+    },
+    # ── Parasitic / Worm infections (local) ───────────────────────────────────
+    "Hookworm": {
+        "description": "An intestinal worm infection — known locally as \"ground worm\" — acquired when larvae in contaminated soil penetrate bare skin (often the feet) and travel to the intestines, where they feed on blood.",
+        "causes": "Caused by hookworm larvae in soil contaminated with human faeces, entering through bare skin, especially the feet. Walking barefoot in affected areas is the main risk factor.",
+        "treatment": "Treated with deworming medication (such as albendazole or mebendazole) prescribed by a health worker. Iron supplementation may be needed for associated anaemia.",
+        "prevention": ["Wear shoes, especially in farming or rural areas", "Use proper latrines — avoid open defecation", "Wash hands before eating", "Take periodic deworming as recommended"],
+        "severity": "Medium",
+    },
+    "Pinworm Infection": {
+        "description": "A common intestinal worm infection causing intense itching around the anus, especially at night — known locally as \"sweet belly\". Most common in children and spreads easily within households.",
+        "causes": "Caused by pinworm eggs swallowed after contact with contaminated hands, surfaces, bedding, or clothing. Eggs can survive on surfaces for up to two weeks.",
+        "treatment": "Treated with deworming medication, often given to the whole household at the same time to prevent reinfection. Wash bedding and clothing in hot water.",
+        "prevention": ["Wash hands often, especially after using the toilet and before eating", "Keep fingernails short and clean", "Wash bedding, towels, and sleepwear in hot water", "Treat the whole household together"],
+        "severity": "Low",
+    },
+    # ── Reproductive (local) ───────────────────────────────────────────────────
+    "Uterine Fibroids": {
+        "description": "Non-cancerous growths that develop in or around the womb (uterus) — known locally as \"belle-koko\". May cause heavy or prolonged periods, pelvic pain, and lower abdominal swelling, though many women have no symptoms at all.",
+        "causes": "Exact cause is unknown, but fibroid growth is influenced by hormones (oestrogen and progesterone). They are more common with increasing age, family history, and in women who have not had children.",
+        "treatment": "Treatment depends on symptoms and fibroid size — ranging from monitoring and pain relief to hormonal medication or surgery for large or symptomatic fibroids. Needs ultrasound evaluation by a clinician.",
+        "prevention": ["Seek evaluation for heavy or prolonged periods", "Maintain a healthy weight", "Attend routine gynaecological check-ups", "Seek care for pelvic pain or abdominal swelling"],
+        "severity": "Medium",
+    },
+    # ── Pediatric (local) ───────────────────────────────────────────────────────
+    "Infant Colic": {
+        "description": "Frequent, prolonged, and intense crying or fussiness in an otherwise healthy infant — known locally as \"gripe\". Usually starts in the first few weeks of life and resolves by 3-4 months of age.",
+        "causes": "The exact cause is unknown. May be related to digestive discomfort, gas, immature digestive system, or sensitivity to feeding. It is not caused by anything the parents did wrong.",
+        "treatment": "Comfort measures include gentle rocking, burping after feeds, warm baths, and gentle tummy massage. Persistent crying with fever, vomiting, poor feeding, or weight loss needs medical evaluation to rule out other causes.",
+        "prevention": ["Burp the baby during and after feeds", "Try smaller, more frequent feeds", "Hold and soothe the baby gently during crying spells", "Seek medical advice if crying is unusually severe or comes with fever or poor feeding"],
+        "severity": "Low",
     },
 }
 

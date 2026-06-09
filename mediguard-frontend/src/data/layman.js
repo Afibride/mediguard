@@ -1,54 +1,127 @@
 /**
  * Plain-language aliases for medical disease and symptom names.
- * Used everywhere a clinical term would confuse a community user.
+ * Uses Bamenda / Cameroonian Pidgin English (CPE) local names where available,
+ * so community users in Bamenda, NW Cameroon recognise the condition instantly.
  */
 
 export const DISEASE_COMMON_NAMES = {
-  // Complex / Latin disease names
-  'Helicobacteriosis PepticUlcer': 'Stomach Ulcer',
-  'Onchocerciasis':                'River Blindness',
-  'Filariasis':                    'Elephantiasis',
-  'Cystitis UTI':                  'Bladder / Urinary Infection',
-  'HIV AIDS':                      'HIV/AIDS',
-  'Benign Prostatic Hyperplasia':  'Enlarged Prostate',
-  'Septicemia':                    'Blood Poisoning',
-  'Herpes Zoster':                 'Shingles',
-  'Leptospirosis':                 "Weil's Disease",
-  'Brucellosis':                   'Undulant Fever',
-  'Iron Deficiency Anemia':        'Low Blood / Anaemia',
-  'Pelvic Inflammatory Disease':   'Pelvic Infection (PID)',
-  'Sickle Cell Crisis':            'Sickle Cell Disease Crisis',
-  'Whooping Cough':                'Pertussis',
-  'Diabetes Mellitus':             'Diabetes / High Blood Sugar',
-  'Hypertension':                  'High Blood Pressure',
-  'Dengue Fever':                  'Breakbone Fever',
-  'Conjunctivitis':                'Pink Eye',
-  'Appendicitis':                  'Inflamed Appendix',
-  'Typhus':                        'Rickettsial Fever',
-  'Gastroenteritis':               'Stomach Bug / Food Poisoning',
-  'Anaphylaxis':                   'Severe Allergic Reaction',
-  'Diphtheria':                    'Throat Membrane Infection',
-  'Rubella':                       'German Measles',
-  'Mumps':                         'Swollen Jaw Glands',
-  'Tonsillitis':                   'Inflamed Tonsils',
-  'Sinusitis':                     'Sinus Infection',
-  'Ringworm':                      'Fungal Ring Rash',
-  'Dysentery':                     'Bloody Diarrhoea',
-  'Skin Abscess':                  'Skin Boil',
-  'Skin Fungal Infection':         'Fungal Skin Rash',
-  'Ear Infection':                 'Middle Ear Infection',
-  'Kidney Stones':                 'Kidney Gravel',
-  'Meningitis':                    'Brain Lining Infection',
-  'Typhoid Fever':                 'Enteric Fever',
-  'Yellow Fever':                  'Yellow Jack',
-  'Epilepsy':                      'Seizure Disorder',
-  'Migraine':                      'Severe One-Sided Headache',
-  // STIs
-  'Gonorrhea':                     'The Clap / Gonorrhoea',
-  'Syphilis':                      'The Pox / Syphilis',
-  'Chlamydia':                     'Silent STI / Chlamydia',
-  'Genital Herpes':                'HSV-2 / Herpes',
-  'Trichomoniasis':                'Trich / Parasitic STI',
+  // ── Infectious / Parasitic / Vector-Borne ─────────────────────────────────
+  'Malaria':                       'Malaris / Fever',
+  'Typhoid Fever':                 'Typhoy',
+  'Cholera':                       'Bad running stomach',
+  'Dysentery':                     'Running stomach / Purging',
+  'Gastroenteritis':               'Running stomach / Belly bug',
+  'Intestinal Worms':              'Worm for belly',
+  'Scabies':                       'Craw-craw / Scratch-scratch',
+  'Skin Fungal Infection':         'Ringworm / Kanda disease',
+  'Ringworm':                      'Kanda disease / Ringworm',
+  'Herpes Zoster':                 'Fire for skin',
+  'Chickenpox':                    'Smallpox (Waterchicken)',
+  'Measles':                       'Red skin / Measles',
+  'Gonorrhea':                     'Fly-motto / Urinary tracking',
+  'Syphilis':                      'Bad disease / The pox',
+  'HIV AIDS':                      'Thin-thin sickness / Four letters',
+  'Filariasis':                    'Big-foot / Elephantiasis',
+  'Onchocerciasis':                'River blindness / Oncho',
+  'African Trypanosomiasis':       'Sleeping sickness',
+  'Schistosomiasis':               'Blood for urine / Bilharzia',
+  'Leptospirosis':                 'Rat fever',
+  'Brucellosis':                   'Animal fever / Undulant fever',
+  'Typhus':                        'Hard fever with rash',
+  'Mpox':                          'New smallpox / Monkeypox',
+  'Buruli Ulcer':                  'Big flesh wound',
+  'Rabies':                        'Mad dog sickness',
+  'Dengue Fever':                  'Bone-breaking fever',
+
+  // ── Respiratory / ENT ─────────────────────────────────────────────────────
+  'Common Cold':                   'Cold-head / Catarrh',
+  'Asthma':                        'Cough wey e dey choke person',
+  'Pneumonia':                     'Cold for chest / Chest pain',
+  'Sinusitis':                     'Block-nose',
+  'Ear Infection':                 'Ear dey pain / Water for ear',
+  'Conjunctivitis':                'Apollo',
+  'Tonsillitis':                   'Throat pain / Throat swelling',
+  'Whooping Cough':                'Cough wey no stop',
+  'Diphtheria':                    'Throat block sickness',
+  'Tuberculosis':                  'Bad cough / Cough wey e dey split blood',
+
+  // ── Gastrointestinal / Abdominal ──────────────────────────────────────────
+  'Helicobacteriosis PepticUlcer': 'Belly bite / Ulcer',
+  'Appendicitis':                  'Side-pain',
+  'Hemorrhoids (Piles)':           'Piles / Koko for anus',
+  'Kidney Stones':                 'Stone for kidney',
+
+  // ── Musculoskeletal / Neurological ────────────────────────────────────────
+  'Stroke':                        'Paralysis / One-side die',
+  'Epilepsy':                      'Falling sickness',
+  'Migraine':                      'Split-head',
+  'Arthritis':                     'Rheumatism / Joint pain',
+  'Tetanus':                       'Jaw lock / Lockjaw',
+  'Meningitis':                    'Stiff neck fever',
+
+  // ── Non-Communicable / Chronic ────────────────────────────────────────────
+  'Diabetes Mellitus':             'Sugar disease',
+  'Hypertension':                  'High BP / Blood pressure',
+  'Iron Deficiency Anemia':        'Lack of blood / No blood',
+  'Hepatitis A':                   'Yellow eye (A)',
+  'Hepatitis B':                   'Yellow eye (B)',
+  'Yellow Fever':                  'Yellow eye fever',
+  'Heart Failure':                 'Heart failure sickness',
+  'Hypothyroidism':                'Cold body / Slow thyroid sickness',
+  'Septicemia':                    'Bad blood / Blood poisoning',
+
+  // ── Skin / Dermatological ─────────────────────────────────────────────────
+  'Eczema':                        'White skin / Eczema',
+  'Acne':                          'Face pimples',
+  'Skin Abscess':                  'Boil / Koko for skin',
+  'Cellulitis':                    'Red skin fire / Skin swelling',
+
+  // ── Pediatric / Reproductive ──────────────────────────────────────────────
+  'Mumps':                         'Koko for jaw / Jaw swelling sickness',
+  'Rubella':                       'German measles / Small measles',
+  'Pelvic Inflammatory Disease':   'Womb pain / Inside pain',
+  'Benign Prostatic Hyperplasia':  'Old man pee problem / Prostate',
+  'Sickle Cell Crisis':            'Sickle cell crisis',
+  'Malnutrition':                  'Big-belly sickness / Lack of food',
+
+  // ── Urinary ───────────────────────────────────────────────────────────────
+  'Cystitis UTI':                  'Pee pain / Bladder pain',
+
+  // ── STIs ──────────────────────────────────────────────────────────────────
+  'Chlamydia':                     'Silent disease / Chlamydia',
+  'Genital Herpes':                'Fire for private part',
+  'Trichomoniasis':                'Discharge sickness',
+
+  // ── Allergic / Emergency ──────────────────────────────────────────────────
+  'Anaphylaxis':                   'Body react / Serious allergy',
+
+  // ── Fungal / Oral ─────────────────────────────────────────────────────────
+  'Candidiasis':                   'White tongue / Mouth thrush',
+
+  // ── Viral ─────────────────────────────────────────────────────────────────
+  'COVID-19':                      'Corona sickness / Covid',
+
+  // ── Endocrine (local) ─────────────────────────────────────────────────────
+  'Goiter':                        'Throat-swell / Koko for neck',
+
+  // ── Musculoskeletal / Neurological (local) ────────────────────────────────
+  'Sciatica':                      'Waist pain',
+  'Vertigo':                       'Giddy-giddy / Eye dey turn',
+
+  // ── Gastrointestinal (local) ──────────────────────────────────────────────
+  'Gastric Reflux GERD':           'Fire for chest / Heartburn',
+  'Severe Constipation':           'Hard-shitt / Belly lock',
+  'Inguinal Hernia':               'Belle-burst / Hernia',
+
+  // ── Parasitic / Worm infections (local) ───────────────────────────────────
+  'Hookworm':                      'Ground worm',
+  'Pinworm Infection':             'Sweet belly',
+
+  // ── Reproductive (local) ───────────────────────────────────────────────────
+  'Uterine Fibroids':              'Belle-koko',
+
+  // ── Pediatric (local) ──────────────────────────────────────────────────────
+  'Infant Colic':                  'Gripe',
 };
 
 /**
