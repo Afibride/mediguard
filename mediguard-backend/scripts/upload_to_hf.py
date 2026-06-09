@@ -53,6 +53,7 @@ BASE = Path(__file__).parent.parent
 UPLOAD_PLAN: list[tuple[Path, str]] = [
     # ── Models at repo root (matches existing .env MODEL_*_URL values) ────────
     (BASE / "models/random_forest.pkl",        "random_forest.pkl"),
+    (BASE / "models/gradient_boosting.pkl",    "gradient_boosting.pkl"),
     (BASE / "models/decision_tree.pkl",        "decision_tree.pkl"),
     (BASE / "models/naive_bayes.pkl",          "naive_bayes.pkl"),
     (BASE / "models/label_encoder.pkl",        "label_encoder.pkl"),

@@ -44,6 +44,7 @@ MODELS_DIR = Path("models")
 
 UPLOAD_FILES = [
     "random_forest.pkl",
+    "gradient_boosting.pkl",
     "decision_tree.pkl",
     "naive_bayes.pkl",
     "label_encoder.pkl",

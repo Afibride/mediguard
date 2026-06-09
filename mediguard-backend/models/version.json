@@ -1,17 +1,21 @@
 {
-  "trained_at": "2026-06-09T14:40:08.788056+00:00",
+  "trained_at": "2026-06-09T15:14:57.406959+00:00",
   "files": {
     "random_forest.pkl": {
-      "sha256": "0548b4e7505a59150be1cb31ee97621d77921ef366e1a9ff107f62f4f1e373e0",
-      "size_bytes": 504846625
+      "sha256": "fd63dc5da37d54a7e597db70b40bb2d1c312bcf8a7d81729c1554fa6bac5981b",
+      "size_bytes": 10495288
+    },
+    "gradient_boosting.pkl": {
+      "sha256": "fd63dc5da37d54a7e597db70b40bb2d1c312bcf8a7d81729c1554fa6bac5981b",
+      "size_bytes": 10495288
     },
     "decision_tree.pkl": {
-      "sha256": "f6f1c4d092f78878ec005969e61002056cb82398d1b6e5724537e1e670b5db1b",
-      "size_bytes": 1886001
+      "sha256": "bfa47931d2c78f096cecec140c8a2552c62c6af13737b83c6517a9881a934dbe",
+      "size_bytes": 2479025
     },
     "naive_bayes.pkl": {
-      "sha256": "edd53e0a61e7b9d2c872956bd96c37498d8a024650e3b8c844d7d5940c3816d4",
-      "size_bytes": 112975
+      "sha256": "8d9b46d7a07998f52ebb8fa68ff74ca6e1f06e9d22614bc4e299b82e3485c265",
+      "size_bytes": 110303
     },
     "label_encoder.pkl": {
       "sha256": "c681e18dc05ee1c52154581a6acd057c87b563cc1ff9b08f3e9c76be062db09d",

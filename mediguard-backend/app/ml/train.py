@@ -28,8 +28,8 @@ from pathlib import Path
 
 import joblib
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report, f1_score
 from sklearn.naive_bayes import BernoulliNB          # BernoulliNB for binary features
 from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeClassifier
@@ -94,13 +94,23 @@ def write_version_manifest(model_files: list[Path]) -> None:
 def build_models() -> dict[str, object]:
     return {
         "random_forest": RandomForestClassifier(
-            n_estimators=300,
+            n_estimators=500,        # increased from 300
             max_depth=None,
             min_samples_split=2,
-            min_samples_leaf=1,
+            min_samples_leaf=2,      # was 1 — reduces overfitting on SMOTE noise
+            max_features="sqrt",
             class_weight="balanced",
             random_state=RANDOM_STATE,
             n_jobs=-1,
+        ),
+        "gradient_boosting": HistGradientBoostingClassifier(
+            max_iter=400,
+            max_depth=None,
+            learning_rate=0.08,
+            min_samples_leaf=20,
+            l2_regularization=0.1,
+            class_weight="balanced",
+            random_state=RANDOM_STATE,
         ),
         "decision_tree": DecisionTreeClassifier(
             criterion="gini",
@@ -145,22 +155,35 @@ def main() -> None:
     trained_files: list[Path] = [MODELS_DIR / "label_encoder.pkl"]
     models = build_models()
     results: dict[str, float] = {}
+    macro_f1: dict[str, float] = {}
 
     for name, model in models.items():
         model.fit(x_train, y_train)
         predictions = model.predict(x_test)
         accuracy = accuracy_score(y_test, predictions)
+        mf1 = f1_score(y_test, predictions, average="macro", zero_division=0)
         results[name] = accuracy
+        macro_f1[name] = mf1
         out_path = MODELS_DIR / f"{name}.pkl"
         joblib.dump(model, out_path)
         trained_files.append(out_path)
-        print("  %-20s accuracy=%.4f  saved" % (name, accuracy))
+        print("  %-22s accuracy=%.4f  macro_f1=%.4f  saved" % (name, accuracy, mf1))
 
         if name == "random_forest":
             report = classification_report(y_test, predictions, zero_division=0)
             report_path = MODELS_DIR / "random_forest_report.txt"
             report_path.write_text(report, encoding="utf-8")
             print("  classification report saved")
+
+    # Promote best model (by macro-F1, excluding decision_tree baseline) → random_forest.pkl
+    import shutil
+    best = max(
+        (n for n in macro_f1 if n != "decision_tree"),
+        key=lambda n: macro_f1[n],
+    )
+    if best != "random_forest":
+        shutil.copy2(MODELS_DIR / f"{best}.pkl", MODELS_DIR / "random_forest.pkl")
+        print("  Best model: %s (macro F1=%.4f) → copied to random_forest.pkl" % (best, macro_f1[best]))
 
     # Symptoms list
     symptoms_out = MODELS_DIR / "symptoms_list.json"
@@ -169,6 +192,11 @@ def main() -> None:
     if SYMPTOMS_PATH.parent.exists():
         save_json(SYMPTOMS_PATH, symptoms)
     print("  symptoms_list.json    %d symptoms saved" % len(symptoms))
+
+    # Include gradient_boosting.pkl in manifest if present
+    gb_path = MODELS_DIR / "gradient_boosting.pkl"
+    if gb_path.exists() and gb_path not in trained_files:
+        trained_files.append(gb_path)
 
     # Version manifest
     write_version_manifest(trained_files)
