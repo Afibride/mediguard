@@ -140,16 +140,16 @@ async def _run_monthly_digest() -> None:
         tasks = []
         for user in registered:
             subject, html, plain = monthly_digest_email(
-                user.full_name, top_diseases, alerts, tips, month_year
+                str(user.full_name), top_diseases, alerts, tips, month_year
             )
-            tasks.append(send_email(user.email, subject, html, plain))
+            tasks.append(send_email(str(user.email), subject, html, plain))
 
         for sub in guests:
             unsub_url = f"{base_url}/newsletter/unsubscribe?token={sub.unsubscribe_token}"
             subject, html, plain = monthly_digest_email(
-                sub.name, top_diseases, alerts, tips, month_year, unsub_url
+                str(sub.name), top_diseases, alerts, tips, month_year, unsub_url
             )
-            tasks.append(send_email(sub.email, subject, html, plain))
+            tasks.append(send_email(str(sub.email), subject, html, plain))
 
         results = await asyncio.gather(*tasks, return_exceptions=True)
         sent = sum(1 for r in results if r is True)
@@ -193,15 +193,15 @@ async def _run_outbreak_alerts() -> None:
 
         tasks = []
         for user in registered:
-            subject, html, plain = outbreak_alert_email(user.full_name, alerts, tips)
+            subject, html, plain = outbreak_alert_email(str(user.full_name), alerts, tips)
             if subject:
-                tasks.append(send_email(user.email, subject, html, plain))
+                tasks.append(send_email(str(user.email), subject, html, plain))
 
         for sub in guests:
             unsub_url = f"{base_url}/newsletter/unsubscribe?token={sub.unsubscribe_token}"
-            subject, html, plain = outbreak_alert_email(sub.name, alerts, tips, unsubscribe_url=unsub_url)
+            subject, html, plain = outbreak_alert_email(str(sub.name), alerts, tips, unsubscribe_url=unsub_url)
             if subject:
-                tasks.append(send_email(sub.email, subject, html, plain))
+                tasks.append(send_email(str(sub.email), subject, html, plain))
 
         if not tasks:
             logger.info("Outbreak warning job: alerts found but no opted-in recipients.")
