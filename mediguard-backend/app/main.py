@@ -259,9 +259,9 @@ def _setup_scheduler() -> None:
 
         scheduler.add_job(
             _run_outbreak_alerts,
-            CronTrigger(hour=8, minute=30),
-            id="daily_outbreak_warnings",
-            name="Daily Outbreak Warning Emails",
+            CronTrigger(day_of_week="mon", hour=8, minute=30),
+            id="weekly_outbreak_warnings",
+            name="Weekly Outbreak Warning Emails",
             replace_existing=True,
         )
 
@@ -277,6 +277,7 @@ def _setup_scheduler() -> None:
         scheduler.start()
         logger.info(
             "APScheduler started — monthly digest on 1st of month at 08:00 UTC, "
+            "weekly outbreak warnings every Monday at 08:30 UTC, "
             "model update check every 6 hours."
         )
 
