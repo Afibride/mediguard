@@ -4,6 +4,7 @@ from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 
 from app.rag.retriever import generate_answer, _get_llm, DISCLAIMER
 from app.schemas.chat import ChatInput
+from app.utils.translate import translate_text
 
 router = APIRouter()
 
@@ -20,6 +21,7 @@ def chat(body: ChatInput):
         user_lat=body.user_lat,
         user_lng=body.user_lng,
         child_mode=body.child_mode,
+        lang=body.lang,
     )
 
 
@@ -27,6 +29,7 @@ def chat(body: ChatInput):
 async def analyze_image(
     file: UploadFile = File(...),
     context: str = Form(""),
+    lang: str = Form("en"),
 ):
     allowed = {"image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"}
     if file.content_type not in allowed:
@@ -91,6 +94,6 @@ async def analyze_image(
         )
 
     return {
-        "analysis": analysis,
-        "disclaimer": DISCLAIMER,
+        "analysis": translate_text(analysis, lang),
+        "disclaimer": translate_text(DISCLAIMER, lang),
     }

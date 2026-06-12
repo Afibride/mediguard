@@ -205,7 +205,7 @@ const isSymptomTestingRequest = (text) =>
 const ChatAI = () => {
   const { user } = useAuth();
   const { toast } = useToast();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const location = useLocation();
   const messagesScrollRef = useRef(null);
   const messagesEndRef = useRef(null);
@@ -525,6 +525,7 @@ const ChatAI = () => {
         ...pregnancyContext,
         ...(freshLocation ? { user_lat: freshLocation.lat, user_lng: freshLocation.lng } : {}),
         child_mode: childMode,
+        lang,
       });
       const rawAnswer = res.data.answer || '';
       const shouldNudgeSymptomChecker = isSymptomTestingRequest(textToSend)
@@ -683,7 +684,7 @@ const ChatAI = () => {
     setImageAnalyzing(true);
 
     try {
-      const res = await analyzeImage(imageFile, context);
+      const res = await analyzeImage(imageFile, context, lang);
       const fullAnswer = res.data.analysis || 'Image analysis is unavailable.';
       const aiMsgObj = {
         role: 'assistant',

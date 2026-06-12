@@ -16,6 +16,7 @@ from app.schemas.predict import (
 )
 from app.db.models import PredictionFeedback
 from app.utils.dependencies import optional_user
+from app.utils.translate import translate_list, translate_text
 
 router = APIRouter()
 predictor = DiseasePredictor()
@@ -182,14 +183,18 @@ def predict(
     db.commit()
     db.refresh(log)
 
+    translated_results = _translate_results(results, body.lang)
+
     return {
-        "predictions": results,
+        "predictions": translated_results,
         "normalized_symptoms": normalized,
         "prediction_log_id": log.id,
-        "pregnancy_note": pregnancy_note,
-        "fatigue_note": fatigue_note,
+        "pregnancy_note": translate_text(pregnancy_note, body.lang),
+        "fatigue_note": translate_text(fatigue_note, body.lang),
         "data_source": data_source,
-        "disclaimer": "MediGuard is not a medical diagnosis. Consult a qualified health professional.",
+        "disclaimer": translate_text(
+            "MediGuard is not a medical diagnosis. Consult a qualified health professional.", body.lang
+        ),
     }
 
 
@@ -289,7 +294,7 @@ def clarify(body: ClarifyInput):
             continue
 
         canonical = canonical_map.get(symptom_lower, symptom_lower.title())
-        question_text = _make_question(canonical)
+        question_text = translate_text(_make_question(canonical), body.lang)
         questions.append({
             "symptom": canonical,
             "question": question_text,
@@ -335,6 +340,31 @@ def submit_feedback(
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+def _translate_results(results: list[dict], lang: str | None) -> list[dict]:
+    """Translate the human-readable text fields of each prediction to French.
+
+    Identifiers used for lookups/styling (name, disease, slug, category,
+    severity, symptoms, matched_symptoms) are left untouched.
+    """
+    if lang != "fr" or not results:
+        return results
+
+    translated = []
+    for item in results:
+        new_item = dict(item)
+        new_item["description"] = translate_text(item.get("description"), lang)
+        new_item["causes"] = translate_text(item.get("causes"), lang)
+        new_item["treatment"] = translate_text(item.get("treatment"), lang)
+        if item.get("prevention"):
+            new_item["prevention"] = translate_list(item["prevention"], lang)
+        if item.get("fatigue_note"):
+            new_item["fatigue_note"] = translate_text(item["fatigue_note"], lang)
+        if item.get("pregnancy_warning"):
+            new_item["pregnancy_warning"] = translate_text(item["pregnancy_warning"], lang)
+        translated.append(new_item)
+    return translated
+
+
 def _make_question(symptom: str) -> str:
     """Convert a symptom name to a friendly yes/no question."""
     _Q_MAP = {

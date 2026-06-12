@@ -11,6 +11,7 @@ class ChatInput(BaseModel):
     user_lat: float | None = None
     user_lng: float | None = None
     child_mode: bool = False   # True when user is asking about a child/infant
+    lang: str | None = None    # UI language code, e.g. "en" or "fr"
 
 
 class ChatResponse(BaseModel):

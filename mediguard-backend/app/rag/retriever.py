@@ -30,6 +30,7 @@ from app.db.session import SessionLocal
 from app.ml.fuzzy_match import normalize_symptom_text
 from app.ml.predictor import DiseasePredictor
 from app.rag.embeddings import embed_text
+from app.utils.translate import translate_list, translate_text
 
 load_dotenv()
 
@@ -3647,7 +3648,7 @@ def _pidgin_conversational_response(query: str) -> dict | None:
     return None
 
 
-def generate_answer(
+def _generate_answer_impl(
     query: str,
     filter_disease: str | None = None,
     chat_history: list[dict] | None = None,
@@ -3895,4 +3896,45 @@ def generate_answer(
             sources.append(disease)
 
     return {"answer": answer, "sources": sources, "disclaimer": DISCLAIMER, "data_source": data_source}
+
+
+def generate_answer(
+    query: str,
+    filter_disease: str | None = None,
+    chat_history: list[dict] | None = None,
+    gender: str | None = None,
+    is_pregnant: bool = False,
+    pregnancy_weeks: int | None = None,
+    user_lat: float | None = None,
+    user_lng: float | None = None,
+    child_mode: bool = False,
+    lang: str | None = None,
+) -> dict:
+    """Generate the chat response, then translate it to French when requested.
+
+    `lang` (explicit UI language) takes priority; falls back to detecting
+    French from the query text itself, so this is a single chokepoint that
+    covers every response handler's output regardless of how it was produced.
+    """
+    result = _generate_answer_impl(
+        query,
+        filter_disease=filter_disease,
+        chat_history=chat_history,
+        gender=gender,
+        is_pregnant=is_pregnant,
+        pregnancy_weeks=pregnancy_weeks,
+        user_lat=user_lat,
+        user_lng=user_lng,
+        child_mode=child_mode,
+    )
+
+    target_lang = lang or ("fr" if _is_french(query) else "en")
+    if target_lang == "fr":
+        result = dict(result)
+        result["answer"] = translate_text(result.get("answer"), "fr")
+        result["disclaimer"] = translate_text(result.get("disclaimer"), "fr")
+        if result.get("follow_up_questions"):
+            result["follow_up_questions"] = translate_list(result["follow_up_questions"], "fr")
+
+    return result
 

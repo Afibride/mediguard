@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { AlertCircle, ArrowLeft, MessageCircle, Info, HeartPulse, Activity, Stethoscope, Clock, ShieldAlert, Save, Brain, ChevronDown, CheckCircle2, Pill, AlertTriangle, Baby, User, Heart, HelpCircle, ThumbsUp, ThumbsDown, Shield, Microscope, Printer, FlaskConical } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/components/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import DisclaimerBanner from '@/components/DisclaimerBanner';
 import NearbyFacilities from '@/components/NearbyFacilities';
 import SpeakButton from '@/components/SpeakButton';
@@ -48,6 +49,7 @@ const PredictionResults = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useAuth();
+  const { t } = useLanguage();
 
   const symptoms = location.state?.symptoms || [];
   const duration = location.state?.duration || 'Not specified';
@@ -101,7 +103,7 @@ const PredictionResults = () => {
 
   const handleSaveDiagnosis = () => {
     if (!user) {
-      toast({ title: 'Authentication Required', description: 'Please login to save this diagnosis to your profile.' });
+      toast({ title: t('results_auth_required_title'), description: t('results_auth_required_desc') });
       navigate('/login', { state: { from: location } });
       return;
     }
@@ -120,7 +122,7 @@ const PredictionResults = () => {
     };
     const existing = JSON.parse(localStorage.getItem(`symptom_checks_${user.id}`) || '[]');
     localStorage.setItem(`symptom_checks_${user.id}`, JSON.stringify([checkRecord, ...existing]));
-    toast({ title: 'Diagnosis Saved', description: 'Results successfully added to your health history.' });
+    toast({ title: t('results_saved_title'), description: t('results_saved_desc') });
   };
 
   const handleFeedback = async (wasHelpful) => {
@@ -221,15 +223,15 @@ const PredictionResults = () => {
           {/* Header Controls */}
           <div className="flex flex-wrap justify-between items-center mb-8 gap-3">
             <Button variant="outline" onClick={() => navigate('/symptom-checker')} className="hover:bg-muted">
-              <ArrowLeft className="mr-2 h-4 w-4" />New Diagnosis
+              <ArrowLeft className="mr-2 h-4 w-4" />{t('results_new')}
             </Button>
             <div className="flex gap-2 flex-wrap">
-              <SpeakButton text={buildReadAloudText()} label="Read Aloud" size="md" showSpeed />
+              <SpeakButton text={buildReadAloudText()} label={t('results_read_aloud')} size="md" showSpeed />
               <Button variant="outline" onClick={handlePrint} className="shadow-sm">
-                <Printer className="mr-2 h-4 w-4" />Download PDF
+                <Printer className="mr-2 h-4 w-4" />{t('results_download')}
               </Button>
               <Button onClick={handleSaveDiagnosis} variant="default" className="shadow-md">
-                <Save className="mr-2 h-4 w-4" />{user ? 'Save Diagnosis' : 'Login to Save'}
+                <Save className="mr-2 h-4 w-4" />{user ? t('results_save') : t('results_login_save')}
               </Button>
             </div>
           </div>
@@ -239,35 +241,35 @@ const PredictionResults = () => {
             <div className="inline-flex items-center justify-center p-3 bg-primary/10 rounded-full mb-4">
               <Activity className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Diagnosis Assessment</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">{t('results_title')}</h1>
 
             <div className="flex flex-wrap justify-center gap-3 mb-4">
               {gender !== 'Not specified' && (
                 <Badge variant="outline" className="bg-background px-3 py-1"><User className="h-3 w-3 mr-1" />{gender}</Badge>
               )}
               {age !== 'Not specified' && (
-                <Badge variant="outline" className="bg-background px-3 py-1"><Clock className="h-3 w-3 mr-1" />{age} years</Badge>
+                <Badge variant="outline" className="bg-background px-3 py-1"><Clock className="h-3 w-3 mr-1" />{t('results_years').replace('{age}', age)}</Badge>
               )}
               {isPregnant && (
                 <Badge variant="outline" className="bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300 border-pink-200">
-                  <Baby className="h-3 w-3 mr-1" />Pregnant{pregnancyWeeks !== 'Not specified' ? ` - ${pregnancyWeeks} weeks` : ''}
+                  <Baby className="h-3 w-3 mr-1" />{t('results_pregnant_badge')}{pregnancyWeeks !== 'Not specified' ? ` - ${t('results_pregnant_weeks').replace('{weeks}', pregnancyWeeks)}` : ''}
                 </Badge>
               )}
               {duration !== 'Not specified' && (
                 <Badge variant="outline" className="bg-background px-3 py-1"><Clock className="h-3 w-3 mr-1" />{duration}</Badge>
               )}
               {severity !== 'Not specified' && (
-                <Badge variant="outline" className="bg-background px-3 py-1"><Activity className="h-3 w-3 mr-1" />{severity} severity</Badge>
+                <Badge variant="outline" className="bg-background px-3 py-1"><Activity className="h-3 w-3 mr-1" />{t('results_severity_suffix').replace('{severity}', severity)}</Badge>
               )}
               {fatigueContext && (
                 <Badge variant="outline" className="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 border-amber-200">
-                  <Brain className="h-3 w-3 mr-1" />Fatigue context
+                  <Brain className="h-3 w-3 mr-1" />{t('results_fatigue_context')}
                 </Badge>
               )}
             </div>
 
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Based on your reported {symptoms.length} symptom{symptoms.length !== 1 ? 's' : ''}, our AI identified the following potential conditions.
+              {t('results_based_on').replace('{n}', symptoms.length)}
             </p>
 
             <div className="flex flex-wrap justify-center gap-2 mt-4">
@@ -295,7 +297,7 @@ const PredictionResults = () => {
             <Card className="bg-gradient-to-br from-primary/5 to-transparent">
               <CardContent className="p-2.5 sm:p-4 text-center min-h-[86px] sm:min-h-0 flex flex-col justify-center">
                 <div className="text-lg sm:text-2xl font-bold text-primary">{predictions.length}</div>
-                <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">Possible Conditions</p>
+                <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">{t('results_possible_conditions')}</p>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-yellow-500/5 to-transparent">
@@ -303,7 +305,7 @@ const PredictionResults = () => {
                 <div className="text-lg sm:text-2xl font-bold text-yellow-600">
                   {predictions.filter(p => p.severity === 'High').length}
                 </div>
-                <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">High Severity</p>
+                <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">{t('results_high_severity')}</p>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-green-500/5 to-transparent">
@@ -311,7 +313,7 @@ const PredictionResults = () => {
                 <div className="text-lg sm:text-2xl font-bold text-green-600">
                   {Math.max(...predictions.map(p => p.confidence))}%
                 </div>
-                <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">Top Match</p>
+                <p className="text-[10px] sm:text-sm text-muted-foreground leading-tight">{t('results_top_match')}</p>
               </CardContent>
             </Card>
           </motion.div>
@@ -321,7 +323,7 @@ const PredictionResults = () => {
             {displayedPredictions.map((disease, index) => {
               const isExpanded = expandedId === disease.id;
               const isTop = index === 0;
-              const confidenceLevel = disease.confidence >= 70 ? 'High' : disease.confidence >= 40 ? 'Medium' : 'Low';
+              const confidenceLevel = disease.confidence >= 70 ? t('results_confidence_high') : disease.confidence >= 40 ? t('results_confidence_medium') : t('results_confidence_low');
               const matchedSymptoms = disease.matched_symptoms || [];
               const causes = disease.causes || '';
               const treatment = disease.treatment || '';
@@ -338,13 +340,13 @@ const PredictionResults = () => {
                     >
                       <div className="flex-1 w-full">
                         <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          {isTop && <Badge className="bg-primary hover:bg-primary text-xs">Top Match</Badge>}
-                          <Badge className={getConfidenceBadgeColor(disease.confidence)}>{confidenceLevel} Confidence</Badge>
+                          {isTop && <Badge className="bg-primary hover:bg-primary text-xs">{t('results_top_match_badge')}</Badge>}
+                          <Badge className={getConfidenceBadgeColor(disease.confidence)}>{confidenceLevel}</Badge>
                           {disease.severity === 'High' && (
-                            <Badge variant="destructive" className="text-xs"><ShieldAlert className="h-3 w-3 mr-1" />Urgent</Badge>
+                            <Badge variant="destructive" className="text-xs"><ShieldAlert className="h-3 w-3 mr-1" />{t('results_urgent_badge')}</Badge>
                           )}
                           {isPregnant && disease.pregnancySafe === false && (
-                            <Badge variant="destructive" className="text-xs"><AlertTriangle className="h-3 w-3 mr-1" />Pregnancy Warning</Badge>
+                            <Badge variant="destructive" className="text-xs"><AlertTriangle className="h-3 w-3 mr-1" />{t('results_pregnancy_warning_badge')}</Badge>
                           )}
                         </div>
                         <h2 className="text-xl md:text-2xl font-bold text-foreground">{diseaseLabel(disease.name)}</h2>
@@ -353,7 +355,7 @@ const PredictionResults = () => {
                         {/* Matched symptoms explainability */}
                         {matchedSymptoms.length > 0 && (
                           <div className="flex flex-wrap gap-1 mt-2">
-                            <span className="text-xs text-muted-foreground mr-1">Matched:</span>
+                            <span className="text-xs text-muted-foreground mr-1">{t('results_matched_label')}</span>
                             {matchedSymptoms.map(s => (
                               <Badge key={s} variant="outline" className="text-xs bg-green-50 border-green-200 text-green-700 dark:bg-green-900/20 dark:text-green-400">
                                 <CheckCircle2 className="h-2.5 w-2.5 mr-1" />{s}
@@ -366,7 +368,7 @@ const PredictionResults = () => {
                       {/* Confidence Bar */}
                       <div className="w-full md:w-48 flex flex-col gap-1 shrink-0">
                         <div className="flex justify-between text-sm font-semibold">
-                          <span>Match</span>
+                          <span>{t('results_match_label')}</span>
                           <span className={isTop ? 'text-primary' : 'text-foreground'}>{disease.confidence}%</span>
                         </div>
                         <div className="h-2.5 w-full bg-muted rounded-full overflow-hidden">
@@ -376,7 +378,9 @@ const PredictionResults = () => {
                           />
                         </div>
                         <p className="text-xs text-muted-foreground">
-                          {matchedSymptoms.length > 0 ? matchedSymptoms.length : (disease.matchCount || 0)} of {disease.symptoms?.length || 0} symptoms match
+                          {t('results_symptoms_match')
+                            .replace('{matched}', matchedSymptoms.length > 0 ? matchedSymptoms.length : (disease.matchCount || 0))
+                            .replace('{total}', disease.symptoms?.length || 0)}
                         </p>
                       </div>
 
@@ -401,7 +405,7 @@ const PredictionResults = () => {
                               <div className="p-4 bg-orange-50 dark:bg-orange-950/30 rounded-lg border border-orange-200 dark:border-orange-800 flex items-start gap-3">
                                 <AlertTriangle className="h-5 w-5 text-orange-600 dark:text-orange-400 mt-0.5" />
                                 <div>
-                                  <h4 className="font-bold text-orange-800 dark:text-orange-300 mb-1">Pregnancy Consideration</h4>
+                                  <h4 className="font-bold text-orange-800 dark:text-orange-300 mb-1">{t('results_pregnancy_consideration')}</h4>
                                   <p className="text-sm text-orange-700 dark:text-orange-400">{disease.pregnancyWarning}</p>
                                 </div>
                               </div>
@@ -412,9 +416,9 @@ const PredictionResults = () => {
                               <Clock className={`h-6 w-6 mt-0.5 shrink-0 ${disease.whenToSeeDoctorUrgency === 'red' ? 'text-red-600' : 'text-foreground'}`} />
                               <div>
                                 <h4 className="font-bold text-base mb-1 flex items-center gap-2 flex-wrap">
-                                  When to Seek Medical Care
+                                  {t('results_when_to_seek_care')}
                                   <Badge className={getUrgencyColor(disease.whenToSeeDoctorUrgency)}>
-                                    {disease.whenToSeeDoctorUrgency === 'red' ? 'Seek Care Immediately' : disease.whenToSeeDoctorUrgency === 'yellow' ? 'See Doctor Soon' : 'Routine Care'}
+                                    {disease.whenToSeeDoctorUrgency === 'red' ? t('results_urgent') : disease.whenToSeeDoctorUrgency === 'yellow' ? t('results_see_soon') : t('results_routine')}
                                   </Badge>
                                 </h4>
                                 <p className="text-sm text-foreground/80">{disease.whenToSeeDoctorText}</p>
@@ -426,7 +430,7 @@ const PredictionResults = () => {
                               {causes && (
                                 <div>
                                   <h4 className="font-bold flex items-center gap-2 mb-3 border-b pb-2">
-                                    <Microscope className="h-5 w-5 text-blue-600" />Causes
+                                    <Microscope className="h-5 w-5 text-blue-600" />{t('results_causes')}
                                   </h4>
                                   <p className="text-sm text-foreground/90 leading-relaxed">{causes}</p>
                                 </div>
@@ -434,7 +438,7 @@ const PredictionResults = () => {
                               {treatment && (
                                 <div>
                                   <h4 className="font-bold flex items-center gap-2 mb-3 border-b pb-2">
-                                    <Pill className="h-5 w-5 text-primary" />Treatment
+                                    <Pill className="h-5 w-5 text-primary" />{t('results_treatment')}
                                   </h4>
                                   <p className="text-sm text-foreground/90 leading-relaxed">{treatment}</p>
                                 </div>
@@ -451,10 +455,10 @@ const PredictionResults = () => {
                                   className="p-4 rounded-lg border border-purple-200 bg-purple-50 dark:bg-purple-950/20 dark:border-purple-800"
                                 >
                                   <h4 className="font-bold flex items-center gap-2 mb-2 text-purple-800 dark:text-purple-300">
-                                    <FlaskConical className="h-4 w-4" />Recommended Tests at the Hospital
+                                    <FlaskConical className="h-4 w-4" />{t('results_recommended_tests')}
                                   </h4>
                                   <p className="text-xs text-purple-600 dark:text-purple-400 mb-3">
-                                    Show this list to your doctor or lab technician for confirmation:
+                                    {t('results_show_tests_hint')}
                                   </p>
                                   <div className="flex flex-wrap gap-2">
                                     {tests.map((test, i) => (
@@ -471,7 +475,7 @@ const PredictionResults = () => {
                             {prevention.length > 0 && (
                               <div>
                                 <h4 className="font-bold flex items-center gap-2 mb-3 border-b pb-2">
-                                  <Shield className="h-5 w-5 text-green-600" />Prevention
+                                  <Shield className="h-5 w-5 text-green-600" />{t('results_prevention')}
                                 </h4>
                                 <ul className="space-y-1.5">
                                   {prevention.map((tip, i) => (
@@ -489,7 +493,7 @@ const PredictionResults = () => {
                                 {disease.firstAidSteps && disease.firstAidSteps.length > 0 && (
                                   <div>
                                     <h4 className="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2 mb-3 border-b pb-2">
-                                      <HeartPulse className="h-5 w-5" />First Aid Steps
+                                      <HeartPulse className="h-5 w-5" />{t('results_first_aid')}
                                     </h4>
                                     <ol className="list-decimal list-outside ml-4 space-y-2 text-sm text-foreground/90">
                                       {disease.firstAidSteps.map((step, i) => <li key={i} className="pl-1">{step}</li>)}
@@ -499,7 +503,7 @@ const PredictionResults = () => {
                                 {disease.homeCareTips && disease.homeCareTips.length > 0 && (
                                   <div>
                                     <h4 className="font-bold flex items-center gap-2 mb-3 border-b pb-2">
-                                      <CheckCircle2 className="h-5 w-5 text-primary" />Home Care Recommendations
+                                      <CheckCircle2 className="h-5 w-5 text-primary" />{t('results_home_care')}
                                     </h4>
                                     <ul className="space-y-2 text-sm text-foreground/90">
                                       {disease.homeCareTips.map((tip, i) => (
@@ -515,9 +519,9 @@ const PredictionResults = () => {
                                 {disease.emergencySigns && disease.emergencySigns.length > 0 && (
                                   <div className="bg-destructive/10 p-4 rounded-lg border border-destructive/20">
                                     <h4 className="font-bold text-destructive flex items-center gap-2 mb-2">
-                                      <AlertCircle className="h-5 w-5" />Warning Signs
+                                      <AlertCircle className="h-5 w-5" />{t('results_warning_signs')}
                                     </h4>
-                                    <p className="text-xs text-destructive mb-2 font-medium">Go to ER if you experience:</p>
+                                    <p className="text-xs text-destructive mb-2 font-medium">{t('results_er_hint')}</p>
                                     <ul className="space-y-1 text-sm text-foreground/90">
                                       {disease.emergencySigns.map((sign, i) => (
                                         <li key={i} className="flex items-start gap-2">
@@ -530,7 +534,7 @@ const PredictionResults = () => {
                                 {disease.medicationsToAvoid && disease.medicationsToAvoid.length > 0 && (
                                   <div>
                                     <h4 className="font-bold flex items-center gap-2 mb-3 border-b pb-2 text-orange-600 dark:text-orange-400">
-                                      <Pill className="h-5 w-5" />Medications to Avoid
+                                      <Pill className="h-5 w-5" />{t('results_medications_avoid')}
                                     </h4>
                                     <div className="flex flex-wrap gap-2">
                                       {disease.medicationsToAvoid.map((med, i) => (
@@ -545,7 +549,7 @@ const PredictionResults = () => {
                             {/* Action Links */}
                             <div className="flex flex-wrap gap-3 pt-4 border-t border-border">
                               <Link to={`/disease/${disease.id}`} className="flex-1 sm:flex-none">
-                                <Button variant="outline" className="w-full"><Info className="mr-2 h-4 w-4" />Full Disease Info</Button>
+                                <Button variant="outline" className="w-full"><Info className="mr-2 h-4 w-4" />{t('results_full_info')}</Button>
                               </Link>
                               <Button
                                 className="flex-1 sm:flex-none bg-secondary hover:bg-secondary/90 text-white"
@@ -553,7 +557,7 @@ const PredictionResults = () => {
                                   state: { initialMessage: buildAiDiscussionPrompt(disease) }
                                 })}
                               >
-                                <MessageCircle className="mr-2 h-4 w-4" />Discuss with AI
+                                <MessageCircle className="mr-2 h-4 w-4" />{t('results_discuss_ai')}
                               </Button>
                             </div>
                           </div>
@@ -570,7 +574,7 @@ const PredictionResults = () => {
           {predictions.length > 3 && (
             <motion.div variants={itemVariants} className="text-center mt-6">
               <Button variant="outline" onClick={() => setShowAllConditions(!showAllConditions)} className="px-8">
-                {showAllConditions ? 'Show Less' : `Show ${predictions.length - 3} More Conditions`}
+                {showAllConditions ? t('results_show_less') : t('results_show_more').replace('{n}', predictions.length - 3)}
               </Button>
             </motion.div>
           )}
@@ -581,9 +585,9 @@ const PredictionResults = () => {
               <div className="flex items-start gap-3">
                 <Brain className="h-6 w-6 text-blue-600 dark:text-blue-400 mt-0.5" />
                 <div>
-                  <h3 className="font-bold text-blue-800 dark:text-blue-300 mb-2">Low Confidence Analysis</h3>
+                  <h3 className="font-bold text-blue-800 dark:text-blue-300 mb-2">{t('results_low_confidence_title')}</h3>
                   <p className="text-sm text-blue-700 dark:text-blue-400">
-                    Matches have lower confidence. Try adding more symptoms, or consult a health professional in Bamenda for a full assessment.
+                    {t('results_low_confidence_text')}
                   </p>
                 </div>
               </div>
@@ -618,40 +622,40 @@ const PredictionResults = () => {
             <Card className="border-primary/20">
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-lg">
-                  <Heart className="h-5 w-5 text-primary" />Help Improve MediGuard
+                  <Heart className="h-5 w-5 text-primary" />{t('results_help_improve')}
                 </CardTitle>
                 <CardDescription>
-                  After visiting a health professional, let us know if the assessment was accurate. Your feedback improves accuracy for the entire Bamenda community.
+                  {t('results_help_improve_desc')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 {feedbackSubmitted ? (
                   <div className="flex items-center gap-3 text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-950/30 p-4 rounded-lg">
                     <CheckCircle2 className="h-5 w-5 shrink-0" />
-                    <p className="text-sm font-medium">Feedback recorded. Thank you for helping improve MediGuard for Bamenda!</p>
+                    <p className="text-sm font-medium">{t('results_feedback_thanks')}</p>
                   </div>
                 ) : (
                   <div className="space-y-4">
                     <div>
                       <label className="text-sm font-medium text-foreground mb-1 block">
-                        Actual diagnosis (optional — what did the doctor say?)
+                        {t('results_actual_diagnosis_label')}
                       </label>
                       <input
                         type="text"
                         value={actualDiagnosis}
                         onChange={(e) => setActualDiagnosis(e.target.value)}
-                        placeholder="e.g. Malaria, Typhoid Fever…"
+                        placeholder={t('results_actual_diagnosis_placeholder')}
                         className="w-full px-3 py-2 text-sm border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/40"
                       />
                     </div>
                     <div>
                       <label className="text-sm font-medium text-foreground mb-1 block">
-                        Comment (optional)
+                        {t('results_comment_label')}
                       </label>
                       <textarea
                         value={feedbackComment}
                         onChange={(e) => setFeedbackComment(e.target.value)}
-                        placeholder="Any additional feedback…"
+                        placeholder={t('results_comment_placeholder')}
                         rows={2}
                         className="w-full px-3 py-2 text-sm border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none"
                       />
@@ -663,7 +667,7 @@ const PredictionResults = () => {
                         onClick={() => handleFeedback(true)}
                         disabled={feedbackLoading}
                       >
-                        <ThumbsUp className="mr-2 h-4 w-4" />Yes, it was helpful
+                        <ThumbsUp className="mr-2 h-4 w-4" />{t('results_yes_helpful')}
                       </Button>
                       <Button
                         variant="outline"
@@ -671,7 +675,7 @@ const PredictionResults = () => {
                         onClick={() => handleFeedback(false)}
                         disabled={feedbackLoading}
                       >
-                        <ThumbsDown className="mr-2 h-4 w-4" />Not helpful
+                        <ThumbsDown className="mr-2 h-4 w-4" />{t('results_not_helpful')}
                       </Button>
                     </div>
                   </div>
@@ -683,11 +687,9 @@ const PredictionResults = () => {
           {/* Footer Disclaimer */}
           <motion.div variants={itemVariants} className="text-center text-sm text-muted-foreground mt-10 pb-8 p-4 bg-muted/50 rounded-lg">
             <Stethoscope className="h-8 w-8 mx-auto mb-2 text-muted-foreground/50" />
-            <p className="font-semibold text-foreground mb-1">Medical Disclaimer</p>
+            <p className="font-semibold text-foreground mb-1">{t('results_disclaimer')}</p>
             <p>
-              These results are generated by an AI algorithm matching your symptoms against a database.
-              <strong> This is NOT a medical diagnosis.</strong> Do not disregard professional medical advice
-              or delay seeking it because of information provided here.
+              {t('results_disclaimer_text')}
             </p>
           </motion.div>
 

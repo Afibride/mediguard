@@ -8,6 +8,7 @@ class SymptomInput(BaseModel):
     is_pregnant: bool = False
     pregnancy_weeks: int | None = None
     fatigue_context: bool = False
+    lang: str | None = None   # UI language code, e.g. "en" or "fr"
 
 
 class FeedbackInput(BaseModel):
@@ -38,6 +39,7 @@ class ClarifyInput(BaseModel):
     current_symptoms: list[str]
     top_diseases: list[str] = Field(default_factory=list)
     already_asked: list[str] = Field(default_factory=list)
+    lang: str | None = None   # UI language code, e.g. "en" or "fr"
 
 
 class ClarifyQuestion(BaseModel):

@@ -73,8 +73,8 @@ export const predictDisease = (symptoms, context = {}) =>
   request('/predict', { method: 'POST', body: JSON.stringify({ symptoms, ...context }) });
 export const normalizeSymptoms = (text) =>
   request('/normalize-symptoms', { method: 'POST', body: JSON.stringify({ text }) });
-export const getClarifyQuestions = (current_symptoms, top_diseases = [], already_asked = []) =>
-  request('/predict/clarify', { method: 'POST', body: JSON.stringify({ current_symptoms, top_diseases, already_asked }) });
+export const getClarifyQuestions = (current_symptoms, top_diseases = [], already_asked = [], lang = 'en') =>
+  request('/predict/clarify', { method: 'POST', body: JSON.stringify({ current_symptoms, top_diseases, already_asked, lang }) });
 export const submitFeedback = (data) =>
   request('/predict/feedback', { method: 'POST', body: JSON.stringify(data) });
 
@@ -122,9 +122,10 @@ async function uploadFile(path, formData) {
   return { data };
 }
 
-export const analyzeImage = (file, context = '') => {
+export const analyzeImage = (file, context = '', lang = 'en') => {
   const fd = new FormData();
   fd.append('file', file);
   fd.append('context', context);
+  fd.append('lang', lang);
   return uploadFile('/chat/analyze-image', fd);
 };

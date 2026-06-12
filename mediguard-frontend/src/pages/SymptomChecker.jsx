@@ -173,7 +173,7 @@ const itemVariants = {
 const SymptomChecker = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   // Wizard steps: 1 = symptom zones, 2 = clarifying questions
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -329,7 +329,7 @@ const SymptomChecker = () => {
     setAnalyzingImage(true);
     setImageAnalysis(null);
     try {
-      const res = await analyzeImage(imageFile, freeText.trim());
+      const res = await analyzeImage(imageFile, freeText.trim(), lang);
       setImageAnalysis(res.data.analysis);
     } catch (err) {
       const raw = err?.response?.data?.detail || err?.message || '';
@@ -400,12 +400,13 @@ const SymptomChecker = () => {
         pregnancy_weeks: formData.pregnancyWeeks ? Number(formData.pregnancyWeeks) : null,
         fatigue_context: formData.fatigueContext,
         child_mode: childMode,
+        lang,
       });
       const apiPredictions = mapApiPredictions(res.data.predictions || [], selectedSymptoms);
       const normSymptoms = res.data.normalized_symptoms || selectedSymptoms;
       const topDiseases = (res.data.predictions || []).slice(0, 5).map(p => p.disease || p.name);
 
-      const clarifyRes = await getClarifyQuestions(normSymptoms, topDiseases, []);
+      const clarifyRes = await getClarifyQuestions(normSymptoms, topDiseases, [], lang);
       if (clarifyRes.data.should_ask && (clarifyRes.data.questions || []).length > 0) {
         setClarifyQuestions(clarifyRes.data.questions);
         setClarifyAnswers({});
@@ -436,6 +437,7 @@ const SymptomChecker = () => {
         pregnancy_weeks: formData.pregnancyWeeks ? Number(formData.pregnancyWeeks) : null,
         fatigue_context: formData.fatigueContext,
         child_mode: childMode,
+        lang,
       });
       const apiPredictions = mapApiPredictions(res.data.predictions || [], finalSymptoms);
       navigateToResults(res, apiPredictions, finalSymptoms);
