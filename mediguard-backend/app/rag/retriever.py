@@ -183,6 +183,16 @@ _PREGNANCY_SOFT_SYMPTOMS: list[str] = [
     "metallic taste", "taste in my mouth",
 ]
 
+# Symptoms of a febrile/infectious illness (e.g. malaria, typhoid, flu). These
+# overlap heavily with the "soft" pregnancy symptoms above (nausea, fatigue,
+# dizziness), so when they're present we don't suggest pregnancy from soft
+# symptoms alone — a strong, pregnancy-specific indicator is required instead.
+_FEBRILE_ILLNESS_INDICATORS: frozenset[str] = frozenset({
+    "fever", "chills", "shivering", "shiver", "sweating", "sweats",
+    "joint pain", "joint ache", "joint aches", "muscle pain", "muscle ache",
+    "muscle aches", "body aches", "body pain", "malaise", "rigors",
+})
+
 # Period-specific triggers — subset of strong indicators relating ONLY to menstrual
 # irregularity. When only these fire (no other pregnancy signals), the AI asks
 # clarifying questions before suggesting pregnancy, because a missed period has
@@ -222,8 +232,12 @@ def _has_unaware_pregnancy_symptoms(query: str) -> bool:
     for indicator in _PREGNANCY_STRONG_INDICATORS:
         if indicator in text:
             return True
-    # Two or more soft symptoms together
+    # Two or more soft symptoms together — but not if the message also describes
+    # a febrile/infectious illness (e.g. malaria), since "nausea" + "fatigue"
+    # are common to those too and a strong pregnancy-specific signal is needed.
     soft_hits = sum(1 for s in _PREGNANCY_SOFT_SYMPTOMS if s in text)
+    if soft_hits >= 2 and any(term in text for term in _FEBRILE_ILLNESS_INDICATORS):
+        return False
     return soft_hits >= 2
 
 
@@ -415,6 +429,18 @@ GREETING_PATTERNS = [
     r"^\s*comment\s+(allez.vous|vas.tu|Ã§a\s+va)\s*[?.!]*\s*$",
     r"^\s*(pouvez.vous|peux.tu)\s+m['']aider\s*[?.!]*\s*$",
 ]
+
+# Common single-word greetings, used for typo-tolerant matching (e.g. "gello", "helllo")
+_GREETING_WORDS = ["hi", "hello", "hey", "hiya", "bonjour", "salut", "bonsoir"]
+
+
+def _is_typo_greeting(text: str) -> bool:
+    """Return True if text is a single word that's a close misspelling of a greeting."""
+    word = text.strip().lower().rstrip("!.?")
+    if not word or " " in word:
+        return False
+    return any(SequenceMatcher(None, word, greeting).ratio() >= 0.75 for greeting in _GREETING_WORDS)
+
 
 THANKS_PATTERNS = [
     r"^\s*(thanks|thank you|thank u|appreciate it|much appreciated)\s*[!.?]*\s*$",
@@ -1750,7 +1776,7 @@ def _conversational_response(query: str) -> dict | None:
                   "I am here. Ask me about symptoms, diseases, prevention, or when to seek care.")
         return {"answer": answer, "sources": [], "disclaimer": DISCLAIMER}
 
-    if any(re.match(pattern, text) for pattern in GREETING_PATTERNS):
+    if any(re.match(pattern, text) for pattern in GREETING_PATTERNS) or _is_typo_greeting(text):
         if "how are you" in text:
             answer = (
                 "Je vais bien, merci. Je peux expliquer les symptÃ´mes, la prÃ©vention et les informations de santÃ© "
