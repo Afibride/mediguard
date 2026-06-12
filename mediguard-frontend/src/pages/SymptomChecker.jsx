@@ -863,6 +863,9 @@ const SymptomChecker = () => {
                           <em>"j'ai de la fièvre"</em>,&nbsp;
                           <em>"fever and body ache"</em>
                         </p>
+                        {/* Hidden file input for photo upload */}
+                        <input ref={imgInputRef} type="file" accept="image/jpeg,image/png,image/webp"
+                          className="hidden" onChange={handleImageFileChange} />
                         <div className="flex gap-2">
                           <Input
                             value={freeText}
@@ -880,6 +883,12 @@ const SymptomChecker = () => {
                             disabled={normalizing}
                             size="sm"
                           />
+                          {/* Photo upload (e.g. rash, skin lesion) */}
+                          <Button type="button" variant="outline" size="icon" onClick={() => imgInputRef.current?.click()}
+                            title={t('sc_upload_photo')}
+                            className="h-9 w-9 sm:h-10 sm:w-10 shrink-0 border-amber-300 text-amber-600 hover:bg-amber-50 dark:border-amber-700/50 dark:hover:bg-amber-950/20">
+                            <ImagePlus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                          </Button>
                           <Button type="button" onClick={() => handleNormalizeText()} disabled={normalizing || !freeText.trim()} className="h-9 sm:h-10 px-3 sm:px-5 shrink-0 text-xs sm:text-sm">
                             {normalizing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <><Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-1" />Add</>}
                           </Button>
@@ -890,49 +899,28 @@ const SymptomChecker = () => {
                             Listening… speak your symptoms now
                           </p>
                         )}
-                      </CardContent>
-                    </Card>
-                  </motion.div>
 
-                  {/* Image upload for visual symptoms */}
-                  <motion.div variants={itemVariants} className="mb-4 sm:mb-5">
-                    <Card className="border-amber-300/60 border shadow-sm dark:border-amber-700/40">
-                      <CardContent className="pt-3 sm:pt-4 pb-3 sm:pb-4">
-                        <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                          <ImagePlus className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-amber-600" />
-                          <span className="text-xs sm:text-sm font-semibold">{t('sc_upload_photo')}</span>
-                          <span className="text-[10px] text-muted-foreground hidden xs:inline">(rash, skin lesion, eye, swelling…)</span>
-                        </div>
-
-                        {/* Hidden file input */}
-                        <input ref={imgInputRef} type="file" accept="image/jpeg,image/png,image/webp"
-                          className="hidden" onChange={handleImageFileChange} />
-
-                        {!imagePreview ? (
-                          <button type="button" onClick={() => imgInputRef.current?.click()}
-                            className="w-full border-2 border-dashed border-amber-300 dark:border-amber-700/50 rounded-xl p-4 sm:p-6 flex flex-col items-center gap-2 text-muted-foreground hover:border-primary hover:text-primary transition-colors">
-                            <ImagePlus className="h-6 w-6 sm:h-8 sm:w-8" />
-                            <span className="text-xs sm:text-sm font-medium">Tap to upload photo</span>
-                            <span className="text-[9px] sm:text-xs">JPEG, PNG or WebP · max 10 MB</span>
-                          </button>
-                        ) : (
-                          <div className="space-y-3">
-                            <div className="flex flex-col xs:flex-row items-start gap-3">
-                              <img src={imagePreview} alt="symptom" className="h-24 w-24 sm:h-28 sm:w-28 rounded-lg object-cover border shadow-sm shrink-0" />
-                              <div className="flex-1 min-w-0 space-y-2">
+                        {/* Compact photo preview + analysis (shown after a photo is picked) */}
+                        {imagePreview && (
+                          <div className="mt-3 space-y-2">
+                            <div className="flex items-start gap-3">
+                              <img src={imagePreview} alt="symptom" className="h-16 w-16 sm:h-20 sm:w-20 rounded-lg object-cover border shadow-sm shrink-0" />
+                              <div className="flex-1 min-w-0 space-y-1.5">
                                 <p className="text-[10px] sm:text-xs text-muted-foreground truncate">{imageFile?.name}</p>
-                                <Button type="button" size="sm" onClick={handleAnalyzeImage}
-                                  disabled={analyzingImage}
-                                  className="gap-1.5 bg-amber-600 hover:bg-amber-700 text-white w-full sm:w-auto text-xs sm:text-sm">
-                                  {analyzingImage
-                                    ? <><Loader2 className="h-3 w-3 animate-spin" />{t('sc_analysing')}</>
-                                    : <><Sparkles className="h-3 w-3" />{t('sc_analyse')}</>
-                                  }
-                                </Button>
-                                <button type="button" onClick={clearImage}
-                                  className="flex items-center gap-1 text-[10px] sm:text-xs text-destructive hover:underline">
-                                  <X className="h-3 w-3" />Remove
-                                </button>
+                                <div className="flex items-center gap-2">
+                                  <Button type="button" size="sm" onClick={handleAnalyzeImage}
+                                    disabled={analyzingImage}
+                                    className="gap-1.5 bg-amber-600 hover:bg-amber-700 text-white text-xs sm:text-sm">
+                                    {analyzingImage
+                                      ? <><Loader2 className="h-3 w-3 animate-spin" />{t('sc_analysing')}</>
+                                      : <><Sparkles className="h-3 w-3" />{t('sc_analyse')}</>
+                                    }
+                                  </Button>
+                                  <button type="button" onClick={clearImage}
+                                    className="flex items-center gap-1 text-[10px] sm:text-xs text-destructive hover:underline">
+                                    <X className="h-3 w-3" />Remove
+                                  </button>
+                                </div>
                               </div>
                             </div>
 
@@ -1174,34 +1162,15 @@ const SymptomChecker = () => {
                                 </span>
                               )}
                             </div>
-                            {isLastZone && (
-                              <Button type="submit" size="sm" disabled={loading} className="shrink-0 gap-1 h-7 sm:h-9 text-[10px] sm:text-xs">
-                                {loading ? <Loader2 className="h-2.5 w-2.5 animate-spin" /> : <Sparkles className="h-2.5 w-2.5" />}
-                                {loading ? t('sc_scanning') : t('sc_launch')}
-                              </Button>
-                            )}
+                            <Button type="submit" size="sm" disabled={loading} className="shrink-0 gap-1 h-7 sm:h-9 text-[10px] sm:text-xs">
+                              {loading ? <Loader2 className="h-2.5 w-2.5 animate-spin" /> : <Sparkles className="h-2.5 w-2.5" />}
+                              {loading ? t('sc_scanning') : t('sc_launch')}
+                            </Button>
                           </div>
                         </Card>
                       </motion.div>
                     )}
                   </AnimatePresence>
-
-                  {/* Floating launch button (always available once symptoms selected, even mid-zones) */}
-                  {!isLastZone && selectedSymptoms.length >= 2 && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="mt-4 sm:mt-6 flex justify-center"
-                    >
-                      <Button type="submit" size="lg" disabled={loading}
-                        className="gap-2 h-10 sm:h-12 px-6 sm:px-10 text-sm sm:text-base font-bold shadow-xl bg-gradient-to-r from-primary to-primary/80">
-                        {loading
-                          ? <><Loader2 className="h-4 w-4 animate-spin" />Analyzing…</>
-                          : <><Sparkles className="h-4 w-4" />{t('sc_launch_full')}</>
-                        }
-                      </Button>
-                    </motion.div>
-                  )}
 
                 </form>
               </motion.div>

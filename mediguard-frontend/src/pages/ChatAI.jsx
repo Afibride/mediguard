@@ -210,6 +210,7 @@ const ChatAI = () => {
   const messagesScrollRef = useRef(null);
   const messagesEndRef = useRef(null);
   const shouldStickToBottomRef = useRef(true);
+  const programmaticScrollRef = useRef(false);
   
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -295,6 +296,13 @@ const ChatAI = () => {
   };
 
   const handleMessagesScroll = () => {
+    // Ignore scroll events caused by our own scrollToLatest() calls, so a
+    // user manually scrolling away from the bottom (e.g. while the AI is
+    // typing) isn't immediately snapped back by the next auto-scroll tick.
+    if (programmaticScrollRef.current) {
+      programmaticScrollRef.current = false;
+      return;
+    }
     shouldStickToBottomRef.current = isNearMessageBottom();
   };
 
@@ -302,6 +310,7 @@ const ChatAI = () => {
     window.requestAnimationFrame(() => {
       const node = messagesScrollRef.current;
       if (!node || (!force && !shouldStickToBottomRef.current)) return;
+      programmaticScrollRef.current = true;
       node.scrollTo({ top: node.scrollHeight, behavior });
     });
   };
